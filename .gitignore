@@ -1,7 +1,11 @@
 # 默认忽略根目录下的所有内容
 /*
 
-# 但保留这些
+# 允许跟踪 .gitignore 自身
 !/.gitignore
+
+# 允许跟踪 requirements.txt（如果需要）
 !/requirements.txt
+
+# 允许跟踪 05_analysis 及其所有内容
 !/05_analysis/**
