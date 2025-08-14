@@ -1,0 +1,7 @@
+# 默认忽略根目录下的所有内容
+/*
+
+# 但保留这些
+!/.gitignore
+!/requirements.txt
+!/05_analysis/**
