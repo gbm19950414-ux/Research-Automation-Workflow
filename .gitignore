@@ -8,4 +8,5 @@
 !/requirements.txt
 
 # 允许跟踪 05_analysis 及其所有内容
+!/05_analysis
 !/05_analysis/**
