@@ -5,7 +5,7 @@ ddct_analysis.py
 ────────────────────────────────────────────────────────
 · 读取固定路径的长格式 qPCR 数据
 · 保留空单元格行，但计算时跳过
-· 在 ΔCt 层面用 IQR 法标记离群值 (median ± 1.5×IQR)
+· 在 ΔCt 层面用 MAD-z（|z|>2.5） 标记离群值
 · 基线 ΔCt₀ 与 Fold-Change 只用“非离群 & 数据完整”行计算
 · 最终结果表包含所有原始行，新增 is_outlier 列
 """
@@ -61,18 +61,27 @@ refs = (work.groupby("plate_id").apply(get_ref)
 
 work = work.merge(refs, on=["plate_id","sample_id"], how="left")
 
-# ---------- 4. ΔCt ----------
+# ---------- 4. ΔCt及离群值判断 ----------
 work["delta_ct"] = work["mean_cp"] - work["ref_ct"]
+# === 新增 A1：为离群分组建立“样本大类”（WT_1/2/3/… 都算 WT；HO 同理）===
+work["sample_group"] = work["sample_id"].str.split("_", n=1, expand=True)[0].fillna(work["sample_id"])
 
-# ---------- 5. ΔCt 层面离群值检测 (IQR) ----------
-def flag_outliers(group):
-    q1, q3 = group["delta_ct"].quantile([0.25, 0.75])
-    iqr = q3 - q1
-    lo, hi = q1 - IQR_FACTOR*iqr, q3 + IQR_FACTOR*iqr
-    return (group["delta_ct"] < lo) | (group["delta_ct"] > hi)
+# === 新增 A2：定义离群判定的分组范围（按你的要求）===
+OUTLIER_KEYS = ["plate_id", "experimental_objective", "experiment_id", "batch_id",
+                "sample_group", "treatment", "component", "gene"]
 
-work["is_outlier"] = work.groupby(["plate_id", "gene"], group_keys=False)\
-                         .apply(flag_outliers)
+# === 新增 A3：按 Excel 同逻辑计算稳健 z-score，并据 |z|>2.5 标记离群 ===
+def _robust_z_numpy(arr: np.ndarray) -> np.ndarray:
+    med = np.nanmedian(arr)
+    mad = np.nanmedian(np.abs(arr - med))
+    sigma = max(1e-9, 1.4826 * mad)     # 对齐 IFERROR：mad=0 时兜底，避免除零
+    return (arr - med) / sigma
+
+work["robust_z"] = (
+    work.groupby(OUTLIER_KEYS, dropna=False)["delta_ct"]
+        .transform(lambda s: pd.Series(_robust_z_numpy(s.to_numpy()), index=s.index))
+)
+work["is_outlier"] = work["robust_z"].abs() > 2.5
 
 # ---------- 6. 基线 ΔCt₀ (仅 WT 且非离群) ----------
 mask_baseline = (~work["is_outlier"]) & work["sample_id"].str.startswith("WT_")
@@ -102,3 +111,4 @@ print(f"[✓]   原始行数: {orig_rows}")
 print(f"[✓]   结果行数: {len(df_out)}  （应与原始一致）")
 print(f"[✓]   输出文件: {out_path}")
 print("     列解释: is_outlier=True 表示 ΔCt 被判定为离群（fold_change 已置 NaN）")
+print("     MAD-z 离群比例：", round(work["is_outlier"].mean(), 3))

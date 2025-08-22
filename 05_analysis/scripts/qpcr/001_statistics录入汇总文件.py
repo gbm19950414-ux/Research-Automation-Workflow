@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
+import sys
 from pathlib import Path
 import pandas as pd
 from openpyxl import load_workbook
 
 # ======= 配置区 =======
-FOLDER = Path(r"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/raw/qpcr/E64")
+if len(sys.argv) < 2:
+    raise SystemExit("❌ 请在运行时指定数据源文件夹路径，例如：python qpcr_ingest.py /path/to/folder")
+
+FOLDER = Path(sys.argv[1]).expanduser().resolve()
 PATTERN = "*.txt"
 
-MAP_FILE = Path(r"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/raw/qpcr/E64/E64_qpcr_serial_number_to_gene_name.xlsx")
+MAP_FILE = FOLDER / "实验设计.xlsx"
 TARGET_FILE = Path(r"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/raw/qpcr/qpcr_original_data.xlsx")
 
 TXT_ENCODING = "utf-8-sig"
@@ -42,8 +46,12 @@ def read_txt(path: Path) -> pd.DataFrame:
     return df
 
 def load_mapping():
-    """读取映射表"""
-    mapping_df = pd.read_excel(MAP_FILE, dtype=str)
+    """读取实验设计.xlsx 里的 gene 页作为映射表"""
+    mapping_df = pd.read_excel(MAP_FILE, sheet_name="gene", dtype=str)
+
+    # 清洗列名，避免空格/大小写问题
+    mapping_df.columns = mapping_df.columns.str.strip().str.lower()
+
     mapping_df['serial_number'] = mapping_df['serial_number'].str.strip().str.lower()
     mapping_df['gene_name'] = mapping_df['gene_name'].str.strip()
     return dict(zip(mapping_df['serial_number'], mapping_df['gene_name']))
