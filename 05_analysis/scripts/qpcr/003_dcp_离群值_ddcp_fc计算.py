@@ -15,8 +15,10 @@ import pathlib, sys
 
 # -------- 用户一次性配置 ---------------------------------
 INPUT_FILE  = ("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/qpcr_original_data_long_format.csv")
+
+OUTPUT_FILE = ("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis.csv")
+
 OBJECTIVE   = "心磷脂代谢过程关键基因变化"
-OUTPUT_FILE = f"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis_{OBJECTIVE}.csv"
 IQR_FACTOR  = 1.5          # 离群阈值：median ± 1.5×IQR
 # ---------------------------------------------------------
 
@@ -39,31 +41,20 @@ work = df_all.dropna(subset=["mean_cp"]).copy()          # 仅保留可用 mean_
 if work.empty:
     sys.exit("数据中 mean_cp 全为空，无法计算。")
 
-# ---------- 3. 计算参考 Ct (GAPDH/HPRT1/HK2) ----------
+# ---------- 3. 计算参考 Ct (GAPDH/HPRT1) ----------
 def get_ref(s):
     pivot = s.pivot_table(index="sample_id", columns="gene",
                           values="mean_cp", aggfunc="mean")
-    g, h, k = "gapdh" in pivot, "hprt1" in pivot, "hk2" in pivot
-
-    if g and h and k:  # 三个都在 → 取几何平均
-        ref = np.exp(np.log(pivot[["gapdh", "hprt1", "hk2"]]).mean(axis=1))
-    elif g and h:      # gapdh + hprt1
+    g, h = "gapdh" in pivot, "hprt1" in pivot
+    if g and h:
         ref = np.exp(np.log(pivot[["gapdh", "hprt1"]]).mean(axis=1))
-    elif g and k:      # gapdh + hk2
-        ref = np.exp(np.log(pivot[["gapdh", "hk2"]]).mean(axis=1))
-    elif h and k:      # hprt1 + hk2
-        ref = np.exp(np.log(pivot[["hprt1", "hk2"]]).mean(axis=1))
     elif g:
         ref = pivot["gapdh"]
     elif h:
         ref = pivot["hprt1"]
-    elif k:
-        ref = pivot["hk2"]
     else:
         ref = pd.Series(np.nan, index=pivot.index)
-
-    ref.name = "ref_ct"
-    return ref
+    ref.name = "ref_ct";  return ref
 
 refs = (work.groupby("plate_id").apply(get_ref)
         .reset_index())                                # plate_id | sample_id | ref_ct
