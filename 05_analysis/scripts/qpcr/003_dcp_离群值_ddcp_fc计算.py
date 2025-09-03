@@ -15,7 +15,7 @@ import pathlib, sys
 
 # -------- 用户一次性配置 ---------------------------------
 INPUT_FILE  = ("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/qpcr_original_data_long_format.csv")
-OBJECTIVES  = ["心磷脂代谢过程关键基因变化", "线粒体数量"]
+OBJECTIVES  = ["心磷脂代谢过程关键基因变化", "线粒体总量变化"]
 OUTPUT_FILE = f"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
 
 
