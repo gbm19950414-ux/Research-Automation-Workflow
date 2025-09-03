@@ -9,7 +9,7 @@
 
 import warnings
 warnings.filterwarnings("ignore")
-
+import sys
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -18,7 +18,10 @@ from pathlib import Path
 from statannotations.Annotator import Annotator
 
 # ============== 用户可调参数 =========================
-INPUT_CSV             = '/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis.csv'
+
+if len(sys.argv) < 2:
+    sys.exit("❌ 请指定输入文件路径：python draw_ddct.py <ddct_analysis.csv>")
+INPUT_CSV = Path(sys.argv[1])
 MIN_SAMPLES_PER_GROUP = 2
 OUT_DIR = Path("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/processed/qpcr")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
