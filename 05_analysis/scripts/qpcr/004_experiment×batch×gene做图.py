@@ -91,7 +91,7 @@ pair = (df.groupby(["gene", "experiment_id", "batch_id"])["group"]
 df = df.merge(pair[["gene", "experiment_id", "batch_id"]],
               on=["gene","experiment_id","batch_id"])
 
-sns.set(style="whitegrid", rc={"grid.linewidth": 0.6})
+sns.set(style="ticks")
 
 # ---------- 2. 每个 gene × experiment × batch 单独出图 ----------
 for gene in sorted(df["gene"].unique()):
@@ -103,13 +103,19 @@ for gene in sorted(df["gene"].unique()):
 
             FIG_W = 3.54  # 90 mm 单栏宽（Nature 常用）
             fig, ax = plt.subplots(figsize=(FIG_W, 4))
-            
+            ax.grid(False)
+            sns.despine(ax=ax)      # 去掉上/右边框
             sns.boxplot(
                 data=sub,
                 x="group", y="log2fc",
-                order=["WT","HO"], palette={"WT":"#66c2a5","HO":"#fc8d62"},
+                order=["WT","HO"],
+                palette={"WT": "#66c2a5", "HO": "#fc8d62"},  # 蓝–橙对比，Nature 常用
                 width=0.6, showfliers=False, ax=ax,
-                linewidth=1.0
+                linewidth=1.0,
+                boxprops=dict(linewidth=1.0),
+                whiskerprops=dict(linewidth=0.9),
+                capprops=dict(linewidth=0.9),
+                medianprops=dict(linewidth=1.2, color="k")
             )
             sns.stripplot(
                 data=sub,
