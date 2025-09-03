@@ -16,7 +16,28 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from pathlib import Path
 from statannotations.Annotator import Annotator
+import matplotlib as mpl
 
+# —— Nature 单图规范：字体/字号/线宽/可编辑文字（TrueType）——
+mpl.rcParams.update({
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
+    "pdf.fonttype": 42,            # TrueType，AI 中可编辑；避免 Type 3
+    "ps.fonttype": 42,
+    "mathtext.fontset": "dejavusans",  # 数学文本无衬线，风格一致
+    "text.usetex": False,          # 避免因 LaTeX 导致文字转曲或缺字
+    # 字号：标题≈面板字母 8 pt；轴标签 7 pt；刻度 6 pt；图例 6 pt
+    "axes.titlesize": 8,
+    "axes.labelsize": 7,
+    "xtick.labelsize": 6,
+    "ytick.labelsize": 6,
+    "legend.fontsize": 6,
+    # 线宽：保持 0.8–1.0 pt 区间（最终尺寸可见）
+    "axes.linewidth": 0.8,
+    "lines.linewidth": 1.0,
+})
+
+# seaborn 风格但不覆盖上面的 rc（如需更细可在 sns.set 里传 rc=...）
 # ============== 用户可调参数 =========================
 
 if len(sys.argv) < 2:
@@ -70,7 +91,7 @@ pair = (df.groupby(["gene", "experiment_id", "batch_id"])["group"]
 df = df.merge(pair[["gene", "experiment_id", "batch_id"]],
               on=["gene","experiment_id","batch_id"])
 
-sns.set(style="whitegrid")
+sns.set(style="whitegrid", rc={"grid.linewidth": 0.6})
 
 # ---------- 2. 每个 gene × experiment × batch 单独出图 ----------
 for gene in sorted(df["gene"].unique()):
@@ -80,12 +101,15 @@ for gene in sorted(df["gene"].unique()):
             if sub.empty: 
                 continue
 
-            fig, ax = plt.subplots(figsize=(3,4))
+            FIG_W = 3.54  # 90 mm 单栏宽（Nature 常用）
+            fig, ax = plt.subplots(figsize=(FIG_W, 4))
+            
             sns.boxplot(
                 data=sub,
                 x="group", y="log2fc",
                 order=["WT","HO"], palette={"WT":"#66c2a5","HO":"#fc8d62"},
-                width=0.6, showfliers=False, ax=ax
+                width=0.6, showfliers=False, ax=ax,
+                linewidth=1.0
             )
             sns.stripplot(
                 data=sub,
@@ -101,7 +125,7 @@ for gene in sorted(df["gene"].unique()):
             annotator.apply_and_annotate()
 
             # 标题和坐标轴设置
-            ax.set_title(f"{gene} | exp={exp_id} | batch={batch_id}", fontsize=11, pad=TITLE_PAD)
+            ax.set_title(f"{gene} | exp={exp_id} | batch={batch_id}", fontsize=8, pad=TITLE_PAD)
             ax.set_ylabel(r"$\log_2(\mathrm{Fold\ Change})$")
             ax.set_xlabel("")
 
@@ -116,8 +140,9 @@ for gene in sorted(df["gene"].unique()):
                 head = max(TOP_HEAD, 0.10 * (ymax - ymin))  # 至少 TOP_HEAD，或相对 10%
                 ax.set_ylim(ymin - 0.05, ymax + head)
 
-            out_path = OUT_DIR / f"{gene}_exp{exp_id}_batch{batch_id}.png"
+            out_path = OUT_DIR / f"{gene}_exp{exp_id}_batch{batch_id}.pdf"
             plt.tight_layout()
-            plt.savefig(out_path, dpi=300)
+            plt.savefig(out_path, bbox_inches="tight")  # PDF 矢量不需要 dpi
             plt.close(fig)
             print(f"✅ Saved: {out_path}")
+            
