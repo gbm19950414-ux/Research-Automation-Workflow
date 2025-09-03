@@ -20,18 +20,17 @@ import matplotlib as mpl
 
 # —— Nature 单图规范：字体/字号/线宽/可编辑文字（TrueType）——
 mpl.rcParams.update({
-    "font.family": "sans-serif",
-    "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
+    "font.family": "Arial",
     "pdf.fonttype": 42,            # TrueType，AI 中可编辑；避免 Type 3
     "ps.fonttype": 42,
     "mathtext.fontset": "dejavusans",  # 数学文本无衬线，风格一致
     "text.usetex": False,          # 避免因 LaTeX 导致文字转曲或缺字
     # 字号：标题≈面板字母 8 pt；轴标签 7 pt；刻度 6 pt；图例 6 pt
-    "axes.titlesize": 8,
+    "axes.titlesize": 7,
     "axes.labelsize": 7,
-    "xtick.labelsize": 6,
-    "ytick.labelsize": 6,
-    "legend.fontsize": 6,
+    "xtick.labelsize": 7,
+    "ytick.labelsize": 7,
+    "legend.fontsize": 7,
     # 线宽：保持 0.8–1.0 pt 区间（最终尺寸可见）
     "axes.linewidth": 0.8,
     "lines.linewidth": 1.0,
@@ -132,7 +131,7 @@ for gene in sorted(df["gene"].unique()):
 
             # 标题和坐标轴设置
             ax.set_title(f"{gene} | exp={exp_id} | batch={batch_id}", fontsize=8, pad=TITLE_PAD)
-            ax.set_ylabel(r"$\log_2(\mathrm{Fold\ Change})$")
+            ax.set_ylabel("log2 (Fold Change)")
             ax.set_xlabel("")
 
             # —— 统一 y 轴，并在顶部为显著性标注留出空间 ——
