@@ -15,10 +15,10 @@ import pathlib, sys
 
 # -------- 用户一次性配置 ---------------------------------
 INPUT_FILE  = ("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/qpcr_original_data_long_format.csv")
+OBJECTIVES  = ["心磷脂代谢过程关键基因变化", "线粒体数量"]
+OUTPUT_FILE = f"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
 
-OUTPUT_FILE = ("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis.csv")
 
-OBJECTIVE   = "心磷脂代谢过程关键基因变化"
 IQR_FACTOR  = 1.5          # 离群阈值：median ± 1.5×IQR
 # ---------------------------------------------------------
 
@@ -30,7 +30,7 @@ try:
 except FileNotFoundError:
     sys.exit(f"[✗] 输入文件不存在：{INPUT_FILE}")
 
-df_all = df_all[df_all["experimental_objective"] == OBJECTIVE].copy()
+df_all = df_all[df_all["experimental_objective"].isin(OBJECTIVES)].copy()
 orig_rows = len(df_all)
 
 # ① mean_cp 转成数值，不可转换者设为 NaN（但不删除）
