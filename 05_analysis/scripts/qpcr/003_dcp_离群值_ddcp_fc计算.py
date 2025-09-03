@@ -41,12 +41,14 @@ work = df_all.dropna(subset=["mean_cp"]).copy()          # 仅保留可用 mean_
 if work.empty:
     sys.exit("数据中 mean_cp 全为空，无法计算。")
 
-# ---------- 3. 计算参考 Ct (GAPDH/HPRT1) ----------
+# ---------- 3. 计算参考 Ct (GAPDH/HPRT1/hk2) ----------
 def get_ref(s):
     pivot = s.pivot_table(index="sample_id", columns="gene",
                           values="mean_cp", aggfunc="mean")
-    g, h = "gapdh" in pivot, "hprt1" in pivot
-    if g and h:
+    g, h, k = "gapdh" in pivot, "hprt1" in pivot, "hk2" in pivot
+    if k:
+        ref = pivot["hk2"]                               # 新增 hk2 情况
+    elif g and h:
         ref = np.exp(np.log(pivot[["gapdh", "hprt1"]]).mean(axis=1))
     elif g:
         ref = pivot["gapdh"]
