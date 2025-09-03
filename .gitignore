@@ -11,4 +11,4 @@
 !/05_analysis
 !/05_analysis/**
 # 忽略 macOS Finder 产生的垃圾文件
-.DS_Store
+**/.DS_Store
