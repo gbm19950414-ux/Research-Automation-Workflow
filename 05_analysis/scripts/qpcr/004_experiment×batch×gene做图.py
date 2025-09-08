@@ -101,11 +101,17 @@ for gene in sorted(df["gene"].unique()):
             if sub.empty: 
                 continue
 
-            # —— 统计表信息（与图一致）：组内均值、样本量 ——（不重复做检验）
+            # —— 统计表信息：组内均值、标准差、样本量（与图一致）——
             means = (sub.groupby('group')['log2fc']
-                       .agg(mean='mean', n='size')
-                       .reindex(['WT','HO']))
+                    .agg(mean='mean', sd='std', n='size')
+                    .reindex(['WT', 'HO']))
 
+            # “均值 ± SD”字符串（保留 3 位小数，可按需改）
+            WT_mean_sd_str = f"{means.loc['WT','mean']:.3f} ± {means.loc['WT','sd']:.3f}"
+            HO_mean_sd_str = f"{means.loc['HO','mean']:.3f} ± {means.loc['HO','sd']:.3f}"
+
+            # HO 相比 WT 的变化程度（log2 差值；>0 表示 HO 更高）
+            delta_log2 = float(means.loc['HO','mean'] - means.loc['WT','mean'])            
             FIG_W = 3.54  # 90 mm 单栏宽（Nature 常用）
             fig, ax = plt.subplots(figsize=(FIG_W, 4))
             ax.grid(False)
@@ -181,16 +187,24 @@ for gene in sorted(df["gene"].unique()):
                 "gene": gene,
                 "experiment_id": exp_id,
                 "batch_id": batch_id,
+
+                # 原有数值列（建议保留，方便后续计算）
                 "WT_mean_log2FC": float(means.loc["WT","mean"]),
                 "HO_mean_log2FC": float(means.loc["HO","mean"]),
                 "WT_n": int(means.loc["WT","n"]),
                 "HO_n": int(means.loc["HO","n"]),
-                "p_value": pval
-            })
+                "p_value": pval,   # 你原先从 Annotator 取到的 p 值，保持不动
 
+                # 新增展示列（字符串）
+                "WT_mean±SD_log2FC": WT_mean_sd_str,
+                "HO_mean±SD_log2FC": HO_mean_sd_str,
+
+                # 新增“ho相比较于wt变化程度”
+                "HO_vs_WT_Δlog2FC": delta_log2
+            })
 # ---------- 3. 导出统计表 ----------
 if summary_rows:
     summary_df = pd.DataFrame(summary_rows)
     summary_path = OUT_DIR / "summary_stats.csv"
-    summary_df.to_csv(summary_path, index=False)
+    summary_df.to_csv(summary_path, index=False, encoding="utf-8-sig")
     print(f"📊 Summary table saved: {summary_path}")
