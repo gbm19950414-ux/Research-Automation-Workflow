@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 """
 按 experiment × batch × gene 单独出图
-- 每个组合单独一张 PNG
+- 每个组合单独一张 PDF
 - 图内横轴=group (WT vs HO)，纵轴=log2FC
 - 自动加显著性标注 (t-test)
+- 新增：从同一次检验中抽取 p 值，并导出 WT/HO 均值与样本量到 CSV
 """
 
 import warnings
@@ -36,9 +37,7 @@ mpl.rcParams.update({
     "lines.linewidth": 1.0,
 })
 
-# seaborn 风格但不覆盖上面的 rc（如需更细可在 sns.set 里传 rc=...）
 # ============== 用户可调参数 =========================
-
 if len(sys.argv) < 2:
     sys.exit("❌ 请指定输入文件路径：python draw_ddct.py <ddct_analysis.csv>")
 INPUT_CSV = Path(sys.argv[1])
@@ -93,12 +92,19 @@ df = df.merge(pair[["gene", "experiment_id", "batch_id"]],
 sns.set(style="ticks")
 
 # ---------- 2. 每个 gene × experiment × batch 单独出图 ----------
+summary_rows = []  # ← 新增：收集各子图对应的均值、样本量、p值
+
 for gene in sorted(df["gene"].unique()):
     for exp_id in sorted(df.loc[df["gene"]==gene, "experiment_id"].unique()):
         for batch_id in sorted(df.loc[(df["gene"]==gene)&(df["experiment_id"]==exp_id), "batch_id"].unique()):
             sub = df.query("gene == @gene and experiment_id == @exp_id and batch_id == @batch_id")
             if sub.empty: 
                 continue
+
+            # —— 统计表信息（与图一致）：组内均值、样本量 ——（不重复做检验）
+            means = (sub.groupby('group')['log2fc']
+                       .agg(mean='mean', n='size')
+                       .reindex(['WT','HO']))
 
             FIG_W = 3.54  # 90 mm 单栏宽（Nature 常用）
             fig, ax = plt.subplots(figsize=(FIG_W, 4))
@@ -123,11 +129,30 @@ for gene in sorted(df["gene"].unique()):
                 ax=ax, jitter=True, dodge=False
             )
 
-            # -------- 显著性标注 --------
+            # -------- 显著性标注（与原来完全一致）并提取同一次检验的 p 值 --------
             pairs = [("WT","HO")]
             annotator = Annotator(ax, pairs, data=sub, x="group", y="log2fc", order=["WT","HO"])
             annotator.configure(test='t-test_ind', text_format='star', loc='outside', verbose=0)
-            annotator.apply_and_annotate()
+
+            # 兼容不同版本 statannotations：优先 annotate(return_results=True)
+            try:
+                annotator.apply_test()
+                test_results = annotator.annotate(return_results=True)
+            except TypeError:
+                # 旧版可能返回二元组 (ax, results)
+                _, test_results = annotator.apply_test().annotate()
+
+            # 读取第一对比较的 p 值
+            # 一般为 test_results[0].data.pvalue；做些稳健性兜底
+            pval = None
+            if isinstance(test_results, (list, tuple)) and len(test_results) > 0:
+                first = test_results[0]
+                if hasattr(first, "data") and hasattr(first.data, "pvalue"):
+                    pval = float(first.data.pvalue)
+                elif hasattr(first, "pvalue"):
+                    pval = float(first.pvalue)
+            if pval is None:
+                pval = float("nan")  # 若异常，不阻塞作图与导出
 
             # 标题和坐标轴设置
             ax.set_title(f"{gene} | exp={exp_id} | batch={batch_id}", fontsize=8, pad=TITLE_PAD)
@@ -150,4 +175,22 @@ for gene in sorted(df["gene"].unique()):
             plt.savefig(out_path, bbox_inches="tight")  # PDF 矢量不需要 dpi
             plt.close(fig)
             print(f"✅ Saved: {out_path}")
-            
+
+            # —— 收集并暂存到列表（导出 CSV 用）——
+            summary_rows.append({
+                "gene": gene,
+                "experiment_id": exp_id,
+                "batch_id": batch_id,
+                "WT_mean_log2FC": float(means.loc["WT","mean"]),
+                "HO_mean_log2FC": float(means.loc["HO","mean"]),
+                "WT_n": int(means.loc["WT","n"]),
+                "HO_n": int(means.loc["HO","n"]),
+                "p_value": pval
+            })
+
+# ---------- 3. 导出统计表 ----------
+if summary_rows:
+    summary_df = pd.DataFrame(summary_rows)
+    summary_path = OUT_DIR / "summary_stats.csv"
+    summary_df.to_csv(summary_path, index=False)
+    print(f"📊 Summary table saved: {summary_path}")
