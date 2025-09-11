@@ -19,7 +19,6 @@ OBJECTIVES  = ["心磷脂代谢过程关键基因变化", "线粒体总量变化
 OUTPUT_FILE = f"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
 
 
-IQR_FACTOR  = 1.5          # 离群阈值：median ± 1.5×IQR
 # ---------------------------------------------------------
 
 KEYS = ["plate_id", "sample_id", "gene"]     # 主键列
