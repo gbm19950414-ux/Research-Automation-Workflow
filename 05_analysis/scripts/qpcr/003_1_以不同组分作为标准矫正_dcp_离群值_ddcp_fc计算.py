@@ -17,16 +17,11 @@ import pathlib, sys
 INPUT_FILE  = ("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/qpcr_original_data_long_format.csv")
 OBJECTIVES  = ["EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少"]
 OUTPUT_FILE = f"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
-
-
-IQR_FACTOR  = 1.5          # 离群阈值：median ± 1.5×IQR
 # === 本次 mtDNA 释放分析的处理条件（按需修改） ===
 TREATMENT = "lps_1ngul_4h+nigericin_10ngul_7.5min"
 ONLY_THIS_BATCH_ID = None  # 如果只想固定到某一个 batch_id，就把这里改成那个字符串
 # ---------------------------------------------------------
-
 KEYS = ["batch_id", "sample_id", "gene"]     # 主键列
-
 # ---------- 1. 读文件 & 基础过滤 ----------
 try:
     df_all = pd.read_csv(INPUT_FILE)
