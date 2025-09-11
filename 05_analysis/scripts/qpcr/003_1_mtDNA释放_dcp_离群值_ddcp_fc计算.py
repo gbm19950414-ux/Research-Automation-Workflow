@@ -122,7 +122,7 @@ def _robust_z_numpy(arr: np.ndarray) -> np.ndarray:
     return (arr - med) / sigma
 
 # 4.2 在 “batch_id + gene + group(WT/HO)” 内做稳健 z（|z|>2.5 判为离群）
-_grp_keys = ["batch_id", "gene", "group"]
+_grp_keys = ["batch_id", "gene", "group", "treatment", "component"]
 u["robust_z"] = (
     u.groupby(_grp_keys, dropna=False)["delta_ct"]
      .transform(lambda s: pd.Series(_robust_z_numpy(s.to_numpy()), index=s.index))
@@ -138,14 +138,13 @@ mask_wt = work["group"].str.lower().eq("wt")
 mask_ok = (~work["is_outlier"]) & work["delta_ct"].notna()
 
 baseline = (work[mask_wt & mask_ok]
-            .groupby(["batch_id","gene"], dropna=False)["delta_ct"]
+            .groupby(["batch_id", "gene", "treatment", "component"], dropna=False)["delta_ct"]
             .mean()
             .rename("baseline_ct")
             .reset_index())
 
 # 合并基线（注意此处用 batch_id+gene，而不是 plate_id）
-work = work.merge(baseline, on=["batch_id","gene"], how="left")
-
+work = work.merge(baseline, on=["batch_id","gene","treatment","component"], how="left")
 # ---------- 7. ΔΔCt & Fold-Change (仅非离群可参与运算) ----------
 work["deltadelta_ct"] = work["delta_ct"] - work["baseline_ct"]
 work.loc[work["is_outlier"], ["deltadelta_ct", "fold_change"]] = np.nan
