@@ -73,7 +73,10 @@ def clean_data(input_file: str,
     for keys, group in df_filtered.groupby(group_cols, dropna=False):
         # keys 顺序与 group_cols 对齐
         sb, dr, dy, conc, tm = keys
-
+        # === 新增：把原始 df 中“相同 sample_batch 且 group=blank”的行追加进来 ===
+        blank_rows = df[(df["sample_batch"] == sb) & (df["group"].astype(str).str.strip().str.lower() == "blank")].copy()
+        out_df = pd.concat([group, blank_rows], ignore_index=True).drop_duplicates()
+        # === 新增结束 ===
         # 文件名为值本身，给 NaN 指定占位符：drug 空→'null'，其余空→'NA'
         parts = [
             str(sb)   if pd.notna(sb)   else "NA",
@@ -87,8 +90,8 @@ def clean_data(input_file: str,
 
         try:
             print(f"开始写文件: {out_path}")   # 调试输出
-            group.to_excel(out_path, index=False)
-            print(f"写文件结束: {out_path}, 行数: {len(group)}")
+            out_df.to_excel(out_path, index=False)
+            print(f"写文件结束: {out_path}, 行数: {len(out_df)}")
         except Exception as e:
             print(f"写文件失败: {out_path}\n错误信息: {e}\n{traceback.format_exc()}")
 
