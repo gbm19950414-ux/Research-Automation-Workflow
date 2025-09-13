@@ -23,7 +23,23 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import yaml, math
 
+# 用你的绝对路径（注意：整段替换你现在的 _STYLE_PATH/_CFG/_PS/_STAT 代码）
+import yaml
+from pathlib import Path
+
+STYLE_PATH = Path("/Users/gongbaoming/Library/Mobile Documents/com~apple~CloudDocs/phd_thesis/方法/nature_bio_figure_requirements.yaml")
+
+if not STYLE_PATH.exists():
+    raise FileNotFoundError(f"找不到样式文件：{STYLE_PATH}")
+
+_CFG  = yaml.safe_load(STYLE_PATH.read_text(encoding="utf-8")).get("Nature_Figure_Requirements", {})
+_PS   = _CFG.get("plot_style", {})
+_STAT = _CFG.get("statistics", {})
+
+def _mm_to_in(mm):
+    return float(mm) / 25.4 if mm is not None else None
 # 固定列名（用于原始数据路径）
 TIME_COL  = "time_point"
 VALUE_COL = "value"
@@ -35,7 +51,62 @@ OUTPUT_DIR = Path(
     "博士课题/EphB1/04_data/processed/microplate_reader/线粒体完整性检测"
 )
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+# 全局 rcParams（字体/字号/线宽 等）
+plt.rcParams.update({
+    "font.family": _PS.get("font", {}).get("family", "Arial"),
+    "axes.labelsize": _PS.get("font", {}).get("axis_pt", 7),
+    "xtick.labelsize": _PS.get("font", {}).get("tick_pt", 6),
+    "ytick.labelsize": _PS.get("font", {}).get("tick_pt", 6),
+    "legend.fontsize": _PS.get("font", {}).get("legend_pt", 6),
+    "axes.linewidth": _PS.get("axes", {}).get("axis_w", 0.8),
+    "lines.linewidth": _PS.get("lines", {}).get("lw", 1.0),
+    "pdf.fonttype": 42,   # Illustrator 可编辑文字
+    "ps.fonttype": 42,
+})
 
+# —— 工具函数：自适应尺寸 & 横坐标标签管理 ——
+def _figure_size_inches(n_xlabels: int):
+    size = _PS.get("size", {})
+    width_mm  = size.get("width_mm", 89)
+    height_mm = size.get("height_mm")  # None/Null → 用比例
+    wr, hr = map(int, str(size.get("aspect_ratio", "4:3")).split(":"))
+    if height_mm is None:
+        height_mm = width_mm * hr / wr
+
+    # 自适应加宽
+    dyn = _PS.get("dynamic", {}).get("size_adaptive", {})
+    if dyn.get("enable", True):
+        th = dyn.get("threshold_labels", 10)
+        if n_xlabels > th:
+            extra = (n_xlabels - th) * dyn.get("mm_per_extra_label", 3)
+            width_mm = min(width_mm + extra, size.get("max_width_mm", 183))
+            if size.get("height_mm") is None:
+                height_mm = width_mm * hr / wr
+
+    return (_mm_to_in(width_mm), _mm_to_in(height_mm))
+
+def _manage_xticks(ax):
+    xt = _PS.get("dynamic", {}).get("x_ticks", {})
+    labels = ax.get_xticklabels()
+    N = len(labels)
+    max_labels = xt.get("max_labels", 10)
+    step = math.ceil(N / max_labels) if xt.get("step_auto", True) else max(1, int(xt.get("step", 1)))
+    for i, lab in enumerate(labels):
+        lab.set_visible(i % step == 0)
+
+    rot = xt.get("rotate_deg", 0)
+    if rot:
+        for lab in ax.get_xticklabels():
+            lab.set_rotation(rot)
+            lab.set_horizontalalignment("right")
+
+    wrap = xt.get("wrap_chars")  # None 表示不换行
+    if wrap:
+        new_texts = []
+        for lab in ax.get_xticklabels():
+            s = lab.get_text()
+            new_texts.append("\n".join([s[i:i+wrap] for i in range(0, len(s), wrap)]))
+        ax.set_xticklabels(new_texts)
 
 def _has_stats_columns(df: pd.DataFrame) -> bool:
     need = {"WT_mean", "WT_sd", "HO_mean", "HO_sd", TIME_COL}
@@ -99,6 +170,10 @@ def _compute_stats_from_raw(df: pd.DataFrame) -> pd.DataFrame:
 
 def _plot_one(stats_df: pd.DataFrame, title: str, out_png: Path, out_pdf: Path):
     # 统一数据类型并排序
+    def _p_to_star(p: float) -> str:
+        if p is None or (isinstance(p, float) and (np.isnan(p) or np.isinf(p))):
+            return "ns"
+        return "**" if p < 0.01 else ("*" if p < 0.05 else "ns")
     df = stats_df.copy()
     df["_t"] = pd.to_numeric(df[TIME_COL], errors="coerce")
     df = df.sort_values(["_t", TIME_COL], kind="mergesort")
@@ -109,18 +184,85 @@ def _plot_one(stats_df: pd.DataFrame, title: str, out_png: Path, out_pdf: Path):
     ho_y = df["HO_mean"].values
     ho_e = df["HO_sd"].values
 
-    plt.figure(figsize=(7, 4.5))  # 单图，简洁风格
+    fig_w, fig_h = _figure_size_inches(n_xlabels=len(x))
+    plt.figure(figsize=(fig_w, fig_h))
     # 误差棒点线图（不设颜色，使用默认色）
-    plt.errorbar(x, wt_y, yerr=wt_e, fmt='o-', capsize=3, label="WT")
-    plt.errorbar(x, ho_y, yerr=ho_e, fmt='s--', capsize=3, label="HO")
+    palette = {"WT": _PS.get("palette", {}).get("wt", "#1f77b4"),
+            "HO": _PS.get("palette", {}).get("ho", "#ff7f0e")}
+    capsz = _PS.get("errorbar", {}).get("capsize", 2.0)
+    lw    = _PS.get("lines", {}).get("lw", 1.0)
+    ms    = _PS.get("lines", {}).get("ms", 3.0)
+    plt.errorbar(x, wt_y, yerr=wt_e, fmt='o-', capsize=capsz, label="WT",
+                color=palette["WT"], linewidth=lw, markersize=ms)
+    plt.errorbar(x, ho_y, yerr=ho_e, fmt='s--', capsize=capsz, label="HO",
+                color=palette["HO"], linewidth=lw, markersize=ms)
+    # —— 显著性标记（仅当 stats_df 有 p_value 列时）——
+    if "p_value" in df.columns:
+        # 为了不遮挡，给上方多留一点空间
+        cur_ylim = plt.ylim()
+        ymin = np.nanmin([wt_y, ho_y])
+        ymax = np.nanmax([wt_y, ho_y])
+        pad = 0.05 * (ymax - ymin if np.isfinite(ymax - ymin) and (ymax - ymin) > 0 else 1.0)
+        plt.ylim(cur_ylim[0], max(cur_ylim[1], ymax + 2 * pad))
 
+        # 每个 time_point 的 y 位置：两组均值的更高者再加一点 padding
+        # df 已经按 time 排序，和 x、wt_y、ho_y 对齐
+        pvals = df["p_value"].values
+        for xi, w, h, p in zip(x, wt_y, ho_y, pvals):
+            star = _p_to_star(p)
+            if star == "ns":
+                continue  # 不标记不显著
+            y = np.nanmax([w, h]) + pad
+            plt.text(xi, y, star, ha="center", va="bottom")
     plt.title(title)
     plt.xlabel(TIME_COL)
     plt.ylabel(f"{VALUE_COL} (mean ± SD)")
     plt.grid(True, alpha=0.3)
+    ax = plt.gca()
+    # 去上/右脊
+    if not _PS.get("axes", {}).get("spine_top", False):
+        ax.spines["top"].set_visible(False)
+    if not _PS.get("axes", {}).get("spine_right", False):
+        ax.spines["right"].set_visible(False)
+    # 刻度样式
+    ax.tick_params(direction=_PS.get("axes", {}).get("tick_dir", "out"),
+                length=_PS.get("axes", {}).get("tick_len", 2),
+                width=_PS.get("axes", {}).get("tick_w", 0.6))
+    # 横坐标很多时自动降采样/旋转/换行
+    _manage_xticks(ax)
     plt.legend()
+    # —— 显著性标注（若有 p_value 且允许标注）——
+    if _STAT.get("annotate_on_plot", True) and ("p_value" in df.columns):
+        thresholds = [(s["p_lt"], s["label"]) for s in _STAT.get("stars", [])]  # 例如 [(0.01,"**"), (0.05,"*")]
+        show_ns = _STAT.get("show_ns", False)
+
+        y_min = float(np.nanmin([np.nanmin(wt_y), np.nanmin(ho_y)]))
+        y_max = float(np.nanmax([np.nanmax(wt_y), np.nanmax(ho_y)]))
+        pad = 0.05 * (y_max - y_min if y_max > y_min else 1.0)
+
+        cur_y0, cur_y1 = ax.get_ylim()
+        ax.set_ylim(cur_y0, max(cur_y1, y_max + 2*pad))
+
+        for xi, w, h, p in zip(x, wt_y, ho_y, df["p_value"].values):
+            lab = None
+            if p is not None and not np.isnan(p):
+                for thr, sym in thresholds:
+                    if p < thr:
+                        lab = sym
+                        break
+            if lab is None and not show_ns:
+                continue
+            if lab is None:
+                lab = "ns"
+            y = np.nanmax([w, h]) + pad
+            ax.text(xi, y, lab, ha="center", va="bottom")
     plt.tight_layout()
 
+    # 先 PDF（矢量），再 PNG（600 dpi）
+    plt.savefig(out_pdf, bbox_inches="tight")
+    exp = _PS.get("export", {})
+    plt.savefig(out_png, dpi=exp.get("dpi", 600),
+                bbox_inches="tight", transparent=exp.get("transparent", False))
     plt.savefig(out_png, dpi=300)
     plt.savefig(out_pdf)
     plt.close()
@@ -131,7 +273,10 @@ def process_file(in_path: Path):
     df = pd.read_excel(in_path)
 
     if _has_stats_columns(df):
-        stats_df = df[[TIME_COL, "WT_mean", "WT_sd", "WT_n", "HO_mean", "HO_sd", "HO_n"]].copy()
+        cols = [TIME_COL, "WT_mean", "WT_sd", "WT_n", "HO_mean", "HO_sd", "HO_n"]
+        if "p_value" in df.columns:
+            cols.append("p_value")
+        stats_df = df[cols].copy()
     else:
         stats_df = _compute_stats_from_raw(df)
 

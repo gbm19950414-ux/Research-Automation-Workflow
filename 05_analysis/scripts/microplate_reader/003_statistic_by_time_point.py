@@ -36,7 +36,7 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 TIME_COL = "time_point"
 VALUE_COL = "value"
 GENE_COL = "gene"
-
+MAD_Z_THRESHOLD = 2.5
 
 def label_group(df: pd.DataFrame) -> pd.Series:
     """根据 gene 列生成 WT/HO 标签"""
@@ -95,6 +95,24 @@ def process_file(in_file: Path):
 
     df["geno"] = label_group(df)           # 新列：geno
     df = df[df["geno"].isin(["WT", "HO"])] # 只保留 WT/HO
+    # === 异常值剔除（MAD-z，按每个 time_point 和 geno 分组） ===
+
+    def _mad_z_group(x: pd.Series) -> pd.Series:
+        x = pd.to_numeric(x, errors="coerce")
+        med = x.median()
+        mad = (x - med).abs().median()
+        if pd.isna(mad) or mad == 0:
+            # MAD 为 0（全部一样或样本太少）时不判为离群
+            return pd.Series(np.zeros(len(x)), index=x.index)
+        return 0.6745 * (x - med) / mad
+
+    # 对每个 (geno, time_point) 计算 robust z
+    df["robust_z"] = df.groupby(["geno", TIME_COL])[VALUE_COL].transform(_mad_z_group)
+
+    # 标记离群并剔除（|z| > 2.5）
+    df["is_outlier"] = df["robust_z"].abs() > MAD_Z_THRESHOLD
+    df = df.loc[~df["is_outlier"]].copy()
+    # 若不想保留辅助列，可再：df.drop(columns=["robust_z","is_outlier"], inplace=True)
     out_rows = []
     for tval, sub in df.groupby(TIME_COL, dropna=False):
         a = sub.loc[sub["geno"] == "WT", VALUE_COL]

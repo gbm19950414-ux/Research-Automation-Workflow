@@ -29,9 +29,9 @@ mpl.rcParams.update({
     # 字号：标题≈面板字母 8 pt；轴标签 7 pt；刻度 6 pt；图例 6 pt
     "axes.titlesize": 7,
     "axes.labelsize": 7,
-    "xtick.labelsize": 7,
-    "ytick.labelsize": 7,
-    "legend.fontsize": 7,
+    "xtick.labelsize": 6,
+    "ytick.labelsize": 6,
+    "legend.fontsize": 6,
     # 线宽：保持 0.8–1.0 pt 区间（最终尺寸可见）
     "axes.linewidth": 0.8,
     "lines.linewidth": 1.0,
@@ -116,6 +116,7 @@ for gene in sorted(df["gene"].unique()):
             fig, ax = plt.subplots(figsize=(FIG_W, 4))
             ax.grid(False)
             sns.despine(ax=ax)      # 去掉上/右边框
+            ax.tick_params(direction="out", length=2, width=0.6)
             sns.boxplot(
                 data=sub,
                 x="group", y="log2fc",
@@ -180,6 +181,8 @@ for gene in sorted(df["gene"].unique()):
             plt.tight_layout()
             plt.savefig(out_path, bbox_inches="tight")  # PDF 矢量不需要 dpi
             plt.close(fig)
+            png_path = out_path.with_suffix(".png")
+            plt.savefig(png_path, dpi=600, bbox_inches="tight", transparent=False)
             print(f"✅ Saved: {out_path}")
 
             # —— 收集并暂存到列表（导出 CSV 用）——
