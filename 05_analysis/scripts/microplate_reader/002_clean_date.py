@@ -75,7 +75,7 @@ def clean_data(input_file: str,
         sb, dr, dy, conc, tm = keys
         # === 新增：把原始 df 中“相同 sample_batch 且 group=blank”的行追加进来 ===
         blank_rows = df[(df["sample_batch"] == sb) & (df["group"].astype(str).str.strip().str.lower() == "blank")].copy()
-        out_df = pd.concat([group, blank_rows], ignore_index=True).drop_duplicates()
+        out_df = pd.concat([group, blank_rows], ignore_index=True)
         # === 新增结束 ===
         # 文件名为值本身，给 NaN 指定占位符：drug 空→'null'，其余空→'NA'
         parts = [

@@ -69,18 +69,36 @@ def welch_p(a: pd.Series, b: pd.Series) -> float:
 def process_file(in_file: Path):
     print(f"[信息] 处理文件: {in_file}")
     df = pd.read_excel(in_file)
+    # === 背景矫正（仅用 group=blank） ===
+    # 1) 找到 blank 行
+    lower_group = df["group"].astype(str).str.strip().str.lower()
+    blank_mask = lower_group.eq("blank")  # 只认 blank
 
+    # 新：按 (gene, time_point) 求背景值
+    bg = (df.loc[blank_mask]
+            .groupby([GENE_COL, TIME_COL])[VALUE_COL]
+            .mean()
+            .rename("__bg__")
+            .reset_index())
+
+    # 按 (gene, time_point) 合并回原表
+    df = df.merge(bg, on=[GENE_COL, TIME_COL], how="left")
+    df["__bg__"] = df["__bg__"].fillna(0)
+    # 4) 用背景做矫正（覆盖 value）
+    df[VALUE_COL] = pd.to_numeric(df[VALUE_COL], errors="coerce") - df["__bg__"]
+
+    # 5) 背景行不参与后续统计（仅剔除 blank；其它如 negative 保留）
+    df = df.loc[~blank_mask].copy()    
     for col in [TIME_COL, VALUE_COL, GENE_COL]:
         if col not in df.columns:
             raise KeyError(f"缺少列: {col}")
 
-    df["group"] = label_group(df)
-    df = df[df["group"].isin(["WT", "HO"])]
-
+    df["geno"] = label_group(df)           # 新列：geno
+    df = df[df["geno"].isin(["WT", "HO"])] # 只保留 WT/HO
     out_rows = []
     for tval, sub in df.groupby(TIME_COL, dropna=False):
-        a = sub.loc[sub["group"] == "WT", VALUE_COL]
-        b = sub.loc[sub["group"] == "HO", VALUE_COL]
+        a = sub.loc[sub["geno"] == "WT", VALUE_COL]
+        b = sub.loc[sub["geno"] == "HO", VALUE_COL]
 
         row = {
             TIME_COL: tval,
