@@ -27,7 +27,7 @@ OUTPUT_DIR = Path(
     "/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/"
     "博士课题/EphB1/04_data/processed/microplate_reader/线粒体完整性检测"
 )
-STYLE_PATH = Path("/Users/gongbaoming/Library/Mobile Documents/com~apple~CloudDocs/phd_thesis/方法/外观指南.yaml")
+STYLE_PATH = Path("/mnt/data/外观指南.yaml") if Path("/mnt/data/外观指南.yaml").exists() else Path("/Users/gongbaoming/Library/Mobile Documents/com~apple~CloudDocs/phd_thesis/方法/外观指南.yaml")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def _mm_to_in(mm: float) -> Optional[float]:
@@ -99,6 +99,7 @@ def load_style():
     return cfg, axes_cfg, export_cfg, panel_cfg, fig_cfg, stat_cfg, ptitle_cfg, use_cl
 
 CFG, AXES_CFG, EXPORT_CFG, PANEL_CFG, FIG_CFG, STAT_CFG, PTITLE_CFG, USE_CL = load_style()
+PALETTE = (CFG.get('color', {}) or {}).get('palette', {})
 
 def compute_panel_figsize() -> Tuple[float, float]:
     wmin, wmax = PANEL_CFG.get("width_mm_range", [40, 85])
@@ -147,20 +148,48 @@ def _find_p_col(df: pd.DataFrame) -> Optional[str]:
     return None
 
 def _draw_panel_title(ax: plt.Axes, text: str):
-    """在 figure 左上角或 axes 内部绘制标题，由 YAML panel_title 控制。"""
-    method = PTITLE_CFG.get("method", "suptitle")   # suptitle / axes-title
-    if method == "suptitle":
-        fig = ax.figure
+    fig = ax.figure
+    method = PTITLE_CFG.get('method', 'suptitle')
+    if method == 'suptitle':
+        # —— 标题锚定在 Axes 左上角，再用 pt 偏移；与 y 轴文字区域最左边对齐 —— #
+        from matplotlib.transforms import offset_copy
+
+        # 1 mm = 72/25.4 pt
         dx_mm, dy_mm = PTITLE_CFG.get("offset_mm", [2.0, 4.0])
-        W, H = fig.get_size_inches()
-        x = (dx_mm / 25.4) / W      # figure 左缘为 0
-        y = 1.0 - (dy_mm / 25.4) / H  # figure 上缘为 1
-        fig.suptitle(
-            text,
-            x=x, y=y,
-            ha="left", va="top",
+        dx_pt = dx_mm * 72.0 / 25.4
+        dy_pt = dy_mm * 72.0 / 25.4
+
+        # 作为基准的变换：Axes 坐标 (0,1) 左上角，向右/上偏移 dx_pt/dy_pt
+        trans = offset_copy(ax.transAxes, fig=fig, x=dx_pt, y=dy_pt, units='points')
+
+        # 计算 “y 轴文字区域（ylabel + yticklabels）最左边” 在当前 Axes 的归一化 x 坐标
+        fig.canvas.draw()
+        renderer = fig.canvas.get_renderer()
+        bxs = []
+        if ax.yaxis.label.get_text():
+            bxs.append(ax.yaxis.label.get_window_extent(renderer=renderer))
+        for tick in ax.yaxis.get_ticklabels():
+            if tick.get_text():
+                bxs.append(tick.get_window_extent(renderer=renderer))
+
+        if bxs:
+            # 屏幕坐标 -> Figure 坐标 -> Axes 坐标
+            x0_disp = min(b.x0 for b in bxs)
+            x0_fig = fig.transFigure.inverted().transform((x0_disp, 0))[0]
+            axpos = ax.get_position()
+            x_axes = (x0_fig - axpos.x0) / axpos.width
+        else:
+            # 没有任何文字时，退回到 Axes 左边界
+            x_axes = 0.0
+
+        ax.text(
+            x_axes, 1.0, text,
+            transform=trans,         # 关键：跟着 Axes 走
+            ha="left", va="bottom",  # 放在绘图区外侧（上方）
             fontsize=PTITLE_CFG.get("fontsize_pt", 8),
             fontweight=PTITLE_CFG.get("weight", "bold"),
+            zorder=10000,
+            clip_on=False,
         )
     else:
         ax.set_title(
@@ -170,7 +199,6 @@ def _draw_panel_title(ax: plt.Axes, text: str):
             fontsize=PTITLE_CFG.get("fontsize_pt", 8),
             fontweight=PTITLE_CFG.get("weight", "bold"),
         )
-
 def _plot_significance_if_any(ax: plt.Axes, x, wt_y, ho_y, df: pd.DataFrame):
     pcol = "p_value" if "p_value" in df.columns else _find_p_col(df)
     if not pcol or pcol not in df.columns or not STAT_CFG.get("enabled", True):
@@ -217,10 +245,19 @@ def process_file(in_path: Path, x_name: str, x_unit: str, y_name: str, y_unit: s
     fig, ax = plt.subplots(figsize=compute_panel_figsize(), constrained_layout=USE_CL)
     apply_axes_style(ax)
 
-    caplen = mpl.rcParams.get("errorbar.capsize", None)
-    ax.errorbar(x, wt_y, yerr=wt_e, fmt="o-", label="WT", capsize=caplen)
-    ax.errorbar(x, ho_y, yerr=ho_e, fmt="s--", label="HO", capsize=caplen)
+    caplen = 0.5
+    capthick = 0.25   # 新增：端帽的线宽，单位 pt
 
+    ax.errorbar(
+        x, wt_y, yerr=wt_e, fmt="o-", label="WT",
+        capsize=caplen, capthick=capthick,
+        color=PALETTE.get("WT"), linewidth=0.25
+    )
+    ax.errorbar(
+        x, ho_y, yerr=ho_e, fmt="s--", label="HO",
+        capsize=caplen, capthick=capthick,
+        color=PALETTE.get("HO"), linewidth=0.25
+    )
     xlabel(ax, x_name, x_unit)
     ylabel(ax, y_name, y_unit)
 
