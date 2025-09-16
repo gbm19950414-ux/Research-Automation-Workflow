@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+# 用法示例：python wide_to_long.py data.xlsx /Users/你/路径/out.xlsx 
+# 输出文件就会直接写到 /Users/你/路径/out.xlsx
 import sys
 import pandas as pd
 from pathlib import Path
