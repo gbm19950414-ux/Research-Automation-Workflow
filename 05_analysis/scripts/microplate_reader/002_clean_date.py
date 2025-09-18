@@ -175,7 +175,10 @@ def main():
     out_dir = Path(args.output_dir) if args.output_dir else in_path.parent / f"{in_path.stem}_split"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    df = pd.read_excel(in_path)
+    if in_path.suffix.lower() == ".csv":
+        df = pd.read_csv(in_path)
+    else:
+        df = pd.read_excel(in_path)
     if args.value_col not in df.columns:
         raise KeyError(f"未找到数据列 '{args.value_col}'；表头列为：{list(df.columns)}")
 
