@@ -6,6 +6,7 @@
 """
 
 import pandas as pd
+import os
 
 # 固定输入输出路径
 INPUT_PATH  = "/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/raw/microplate_reader/ELISA检测细胞因子/ELISA原始数据.xlsx"
@@ -120,8 +121,19 @@ def main():
     result = result[["matrix_index", "cell_index", "row", "col"] + param_names]
 
     result.columns = [str(c).replace('.0','') for c in result.columns]
-    result.to_excel(OUTPUT_PATH, index=False)
-    print(f"完成：{n_units} 个实验单元，每单元输出 96 行，参数列：{param_names}\n写入：{OUTPUT_PATH}")
+
+    # Group by 'batch' column and save each group to separate Excel files
+    if 'batch' not in result.columns:
+        raise SystemExit("数据中缺少 'batch' 列，无法按批次分组。")
+
+    output_dir = os.path.dirname(OUTPUT_PATH)
+    base_filename = os.path.splitext(os.path.basename(OUTPUT_PATH))[0]
+
+    for batch_value, group_df in result.groupby('batch'):
+        batch_str = str(batch_value)
+        batch_filename = f"{base_filename}_batch_{batch_str}.xlsx"
+        batch_path = os.path.join(output_dir, batch_filename)
+        group_df.to_excel(batch_path, index=False)
 
 if __name__ == "__main__":
     main()
