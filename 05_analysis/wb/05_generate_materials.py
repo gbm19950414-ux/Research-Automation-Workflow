@@ -236,13 +236,23 @@ def main():
                 margin = float(width_margin)
                 target_H = int(rectified_height)
                 roi_width_line = centerline_length
+                # 旧代码计算 target_W 已移除，保持原 crop 宽度为 roi_width_line * (1+2*margin)
                 target_W = max(1, int(round(roi_width_line * (1.0 + 2.0*margin))))
 
                 quad = oriented_rect_corners(center, theta, target_W, target_H)
                 cropped = crop_by_quad_upright(img2d, quad, target_W, target_H, bg=None)
 
+                # --- Force all patches to uniform display size 480×50 ---
+                display_W, display_H = 480, 50
+                cropped_disp = np.array(
+                    Image.fromarray(cropped.astype(np.float32)).resize((display_W, display_H), resample=Image.BILINEAR)
+                )
+                sx = display_W / cropped.shape[1]
+                sy = display_H / cropped.shape[0]
+                print(f"[DEBUG-RESIZE] {gel_name}: resized from {cropped.shape[1]}x{cropped.shape[0]} to {display_W}x{display_H} (sx={sx:.3f}, sy={sy:.3f})")
+
                 # 保存 patch（uint8 灰度）
-                patch_u8 = np.clip(percentile_stretch(cropped, 1, 99), 0, 255).astype(np.uint8)
+                patch_u8 = np.clip(percentile_stretch(cropped_disp, 1, 99), 0, 255).astype(np.uint8)
                 patch_path = out_dir / f"{gel_name}_patch.tif"
                 Image.fromarray(patch_u8).save(patch_path)
                 print(f"[OK] Saved patch → {patch_path}")
@@ -250,7 +260,7 @@ def main():
                 # 保存 overlay（核查）
                 overlay_path = out_dir / f"{gel_name}_02_rot_overlay.png"
                 try:
-                    debug_save_overlays(rot_img=cropped, target_W=target_W, target_H=target_H, out_path_png=overlay_path)
+                    debug_save_overlays(rot_img=cropped_disp, target_W=display_W, target_H=display_H, out_path_png=overlay_path)
                     print(f"[OK] Saved overlay → {overlay_path}")
                     used_overlay = True
                 except Exception as e:
@@ -258,7 +268,11 @@ def main():
             else:
                 # Fallback：没有 ROI，就把原图（灰度+拉伸）作为 patch
                 cropped = ensure_gray(img)
-                patch_u8 = np.clip(percentile_stretch(cropped, 1, 99), 0, 255).astype(np.uint8)
+                display_W, display_H = 480, 50
+                cropped_disp = np.array(
+                    Image.fromarray(cropped.astype(np.float32)).resize((display_W, display_H), resample=Image.BILINEAR)
+                )
+                patch_u8 = np.clip(percentile_stretch(cropped_disp, 1, 99), 0, 255).astype(np.uint8)
                 patch_path = out_dir / f"{gel_name}_patch.tif"
                 Image.fromarray(patch_u8).save(patch_path)
                 print(f"[FALLBACK] {gel_name}: saved full-image patch → {patch_path}")

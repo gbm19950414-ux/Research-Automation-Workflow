@@ -370,10 +370,13 @@ def main():
 
                     # --- 只保留 rect_crop_first 路径 ---
                     margin = float(width_margin)
-                    target_H = int(rectified_height)
-                    # 用“投影到中线方向”的长度作为条带长度（再加左右边距），比旋转后 bbox 更稳健
+                    # 显示尺寸
+                    display_W = 480
+                    display_H = int(rectified_height)
+                    # ROI中线长度
                     roi_width_line = width_along_direction(ordered_pts, center, theta)
-                    target_W = max(1, int(round(roi_width_line * (1.0 + 2.0*margin))))
+                    target_W = max(1, int(round(roi_width_line * (1.0 + 2.0 * margin))))
+                    target_H = max(1, int(round(target_W * (display_H / float(display_W)))))
 
                     # 在【原图坐标系】下构造要裁下的倾斜矩形四点（UL,LL,LR,UR）
                     quad = oriented_rect_corners(center, theta, target_W, target_H)
@@ -381,15 +384,22 @@ def main():
                     # 在【原图】上直接用 QUAD 方式裁取，并把结果“拉正”为 W×H 小图（这张 patch 就是水平的）
                     cropped = crop_by_quad_upright(ensure_gray(img), quad, target_W, target_H, bg=None)
 
-                    # ——以下仅用于 debug 画图（第二张叠加图就直接画这个 patch）——
-                    rot_img_dbg = cropped
-                    rot_pts_dbg = np.array([[0,0],[target_W,0],[target_W,target_H],[0,target_H]], dtype=float)
-                    center_rot_dbg = np.array([target_W/2.0, target_H/2.0])
-                    rot_m1_dbg = np.array([target_W*0.05, target_H/2.0])
-                    rot_m2_dbg = np.array([target_W*0.95, target_H/2.0])
+                    # 将裁下的原始 patch 等比例缩放到统一显示尺寸（480 x rectified_height）
+                    cropped_disp = np.array(
+                        Image.fromarray(cropped.astype(np.float32)).resize((int(display_W), int(display_H)), resample=Image.BILINEAR)
+                    )
+
+                    # ——以下仅用于 debug 画图（第二张叠加图就直接画这个“显示尺寸”的 patch）——
+                    rot_img_dbg = cropped_disp
+                    rot_pts_dbg = np.array([[0,0],[display_W,0],[display_W,display_H],[0,display_H]], dtype=float)
+                    center_rot_dbg = np.array([display_W/2.0, display_H/2.0])
+                    rot_m1_dbg = np.array([display_W*0.05, display_H/2.0])
+                    rot_m2_dbg = np.array([display_W*0.95, display_H/2.0])
 
                     print(f"[DEBUG-ROT] {gel_name}: MODE=rect-crop-first | quad={ [tuple(np.round(q,1)) for q in quad] }")
-                    print(f"[DEBUG-ROT] {gel_name}: patch size={target_W}x{target_H}; centerline angle=0.00° (by construction)")
+                    sx = display_W / float(target_W)
+                    sy = display_H / float(target_H)
+                    print(f"[DEBUG-ROT] {gel_name}: patch_in={target_W}x{target_H} -> display={display_W}x{display_H} (sx={sx:.3f}, sy={sy:.3f}, Δ={abs(sx-sy):.4f})")
 
                     if debug_dump:
                         dbg_root = root / '04_data/interim/wb/materials' / shot_id
@@ -405,8 +415,8 @@ def main():
                                 center=center,
                                 center_rot=center_rot_dbg,
                                 theta_norm=theta,
-                                crop_cx=target_W/2.0, crop_cy=target_H/2.0,
-                                target_W=target_W, target_H=target_H,
+                                crop_cx=display_W/2.0, crop_cy=display_H/2.0,
+                                target_W=display_W, target_H=display_H,
                                 out_dir=dbg_root, stem=stem,
                                 crop_quad=quad
                             )
@@ -415,9 +425,14 @@ def main():
                             print(f"[DEBUG-ROT] {gel_name}: failed to save debug overlays (rect-crop-first): {e}")
 
                     # 输出本 gel 的结果并继续下一个（保持与原来分支一致的后处理）
-                    cropped_out = percentile_stretch(cropped, pmin=1, pmax=99)
+                    cropped_out = percentile_stretch(cropped_disp, pmin=1, pmax=99)
                     imgs.append(cropped_out)
                     labels.append(gel_name)
+                    # 保存统一尺寸 patch TIFF 文件（480x50）
+                    patch_dir = root / '04_data/interim/wb/materials' / shot_id
+                    patch_dir.mkdir(parents=True, exist_ok=True)
+                    patch_path = patch_dir / f"{gel_name}_patch.tif"
+                    Image.fromarray(cropped_disp).save(patch_path)
                     continue
                 else:
                     warnings.warn(f"[FALLBACK] No valid ROI found in {roi_path}. Using FULL IMAGE (no rotation/crop).")
