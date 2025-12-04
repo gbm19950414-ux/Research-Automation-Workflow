@@ -178,20 +178,23 @@ def width_along_direction(pts, center, angle_deg):
 
 # ------------------ lane 检测 + 灰度积分 ------------------
 
-def detect_lane_centers(row_img, lane_count, central_frac=0.5, smooth_win=9):
+def detect_lane_centers(row_img, lane_count=None, central_frac=0.5, smooth_win=9,
+                        max_lanes=20, peak_thresh_frac=0.1):
     """
     在拉正后的 band 小图 row_img 上自动检测 lane 中心（沿 x 方向）。
+
     参数：
       - row_img: 2D numpy array，高度 H，宽度 W。
-      - lane_count: 预期泳道数（例如 6 或 12）。
+      - lane_count: 预期泳道数（例如 6 或 12）；若为 None，则自动估计。
       - central_frac: 只取 band 垂直方向中间部分做投影，例如 0.5 表示中间 50% 高度。
       - smooth_win: 1D 平滑窗口长度（奇数）。
+      - max_lanes: 自动检测模式下允许的最大泳道数量。
+      - peak_thresh_frac: 峰值相对于最大值的最小比例阈值，过滤很弱的峰。
+
     返回：
-      - centers: 长度为 lane_count 的 x 中心坐标列表（浮点）。
+      - centers: x 中心坐标列表（浮点），长度为自动或指定的 lane 数。
     """
     H, W = row_img.shape
-    if lane_count < 1:
-        raise ValueError("lane_count 必须 >= 1")
 
     # 只取垂直方向中间部分，避免上下边缘噪音
     h_frac = float(central_frac)
@@ -217,7 +220,37 @@ def detect_lane_centers(row_img, lane_count, central_frac=0.5, smooth_win=9):
     else:
         profile_smooth = profile
 
-    # 贪心找 lane_count 个 peak，保证峰之间有最小距离
+    # 自动估计泳道数
+    if lane_count is None:
+        centers = []
+        ps = profile_smooth
+        if W < 3:
+            return []
+        max_val = ps.max()
+        if max_val <= 0:
+            return []
+        thresh = max_val * float(peak_thresh_frac)
+
+        for i in range(1, W - 1):
+            if ps[i] >= ps[i-1] and ps[i] >= ps[i+1] and ps[i] >= thresh:
+                centers.append(float(i))
+
+        # 限制最大 lane 数
+        if len(centers) > max_lanes:
+            idx_sorted = sorted(
+                range(len(centers)),
+                key=lambda k: ps[int(centers[k])],
+                reverse=True
+            )
+            centers = [centers[k] for k in idx_sorted[:max_lanes]]
+            centers = sorted(centers)
+
+        return centers
+
+    # 固定 lane_count 的模式：贪心找 lane_count 个 peak，保证峰之间有最小距离
+    if lane_count < 1:
+        raise ValueError("lane_count 必须 >= 1")
+
     centers = []
     prof_copy = profile_smooth.copy()
     min_dist = max(1, W // (lane_count * 2))  # 粗略最小间距：总宽度 / (2*lane_count)
@@ -228,13 +261,9 @@ def detect_lane_centers(row_img, lane_count, central_frac=0.5, smooth_win=9):
         if peak_val <= 0:
             break
         centers.append(float(idx))
-        # 把附近的区间抹掉，避免重复选同一峰
         left = max(0, idx - min_dist)
         right = min(W, idx + min_dist + 1)
         prof_copy[left:right] = 0.0
-
-    if not centers:
-        return []
 
     centers = sorted(centers)
     return centers
@@ -311,117 +340,212 @@ def quantify_lanes(row_img, lane_count):
 # ------------------ 主流程 ------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="从 ROI 自动识别 lane 并计算 densitometry。")
-    parser.add_argument("--lanes", type=int, required=True,
-                        help="每个 gel 中的泳道数量（例如 6 或 12）")
-    parser.add_argument("--rectified_height", type=int, default=40,
-                        help="拉正 band 的高度（像素），需与 04_generate_materials.py 的 rectified_height 对应")
-    parser.add_argument("--width_margin", type=float, default=0.0,
-                        help="沿 band 中线方向的额外 margin（相对于 ROI 长度的比例）")
+    # 项目根目录（EphB1）
+    root = Path(__file__).resolve().parents[2]
+
+    parser = argparse.ArgumentParser(description="从 WB panel YAML 读取 bands 信息，对每个 lane 进行 densitometry。")
+
+    # 默认使用 figure_1_a.yaml 作为 panel 配置
+    default_cfg = root / "06_figures" / " script" / "figure_1_a.yaml"
+    parser.add_argument(
+        "--config",
+        type=str,
+        default=str(default_cfg),
+        help="WB panel 配置 YAML（例如 06_figures/ script/figure_1_a.yaml）"
+    )
+
+    parser.add_argument(
+        "--lanes",
+        type=int,
+        default=None,
+        help="每个 gel 中的泳道数量（例如 6 或 12）；若省略，则优先用 YAML 中的 lanes 配置，再自动估计"
+    )
+    parser.add_argument(
+        "--rectified_height",
+        type=int,
+        default=40,
+        help="拉正 band 的高度（像素），需与 04_generate_materials.py 的 rectified_height 对应"
+    )
+    parser.add_argument(
+        "--width_margin",
+        type=float,
+        default=0.0,
+        help="沿 band 中线方向的额外 margin（相对于 ROI 长度的比例）"
+    )
     args = parser.parse_args()
 
-    lane_count = args.lanes
+    lane_count_arg = args.lanes
     rectified_height = args.rectified_height
     width_margin = args.width_margin
 
-    root = Path(__file__).resolve().parents[2]
+    cfg_path = Path(args.config)
+    if not cfg_path.exists():
+        raise FileNotFoundError(f"Config YAML 不存在: {cfg_path}")
+    panel_cfg = load_yaml(cfg_path)
+
+    # 读取 bands 列表（必需）
+    bands_cfg = panel_cfg.get("bands")
+    if not bands_cfg:
+        raise ValueError("Config YAML 缺少必需字段: bands")
+
+    # 可选：读取 lanes 配置（例如 lanes: 6 或 lanes: {count: 6}）
+    lane_count_yaml = None
+    lanes_cfg = panel_cfg.get("lanes")
+    if isinstance(lanes_cfg, dict) and "count" in lanes_cfg:
+        try:
+            lane_count_yaml = int(lanes_cfg["count"])
+        except Exception:
+            lane_count_yaml = None
+    elif isinstance(lanes_cfg, int):
+        lane_count_yaml = lanes_cfg
+
+    # 组合 lane_count：命令行 > YAML > 自动（None）
+    lane_count_global = lane_count_arg if lane_count_arg is not None else lane_count_yaml
+
     gel_crops_root = root / "04_data/interim/wb/gel_crops"
     exposure_path = root / "04_data/interim/wb/exposure_selected/exposure_selected.yaml"
 
-    intensity_root = root / "04_data/interim/wb/intensity"
-    intensity_root.mkdir(parents=True, exist_ok=True)
-    out_path = intensity_root / "lane_intensity.tsv"
+    # 输出路径：06_figures/<figure_x>/<panel_name>.tsv，例如 figure_1_a.yaml → 06_figures/figure_1/figure_1_a.tsv
+    panel_name = cfg_path.stem  # figure_1_a
+    panel_group = panel_name.rsplit("_", 1)[0]  # figure_1
+    out_dir = root / "06_figures" / panel_group
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"{panel_name}.tsv"
 
-    exposure = load_yaml(exposure_path)
+    # exposure_selected.yaml 可选：有就读，没有就用空 dict
+    if exposure_path.exists():
+        exposure = load_yaml(exposure_path) or {}
+    else:
+        exposure = {}
 
     rows = []
 
-    for shot_id, gels in exposure.items():
-        print(f"[INFO] Lane intensity for {shot_id} ...")
+    # 遍历 panel YAML 中声明的 bands，而不是所有 gel_crops
+    for band_idx, band_cfg in enumerate(bands_cfg, start=1):
+        prefix = band_cfg.get("prefix")
+        shot_id = band_cfg.get("shot_id")
+        if not prefix or not shot_id:
+            print(f"[WARN] bands[{band_idx}] 缺少 prefix 或 shot_id，跳过。")
+            continue
+
+        # gel_name 由 prefix 的左半部分推断：Gx_xxx...
+        gel_name = prefix.split("__", 1)[0]
+
+        # ROI 中用于匹配的 band 名：优先显式 roi_band，其次 band 字段，其次 label，再次 prefix
+        band_label = band_cfg.get("roi_band") or band_cfg.get("band") or band_cfg.get("label") or prefix
+
         shot_dir = gel_crops_root / shot_id
+        gel_dir = shot_dir / gel_name
 
-        for gel_name, info in gels.items():
-            gel_dir = shot_dir / gel_name
+        if not gel_dir.exists():
+            print(f"[WARN] {shot_id}/{gel_name}: gel 目录不存在，跳过。")
+            continue
+
+        roi_path = gel_dir / "roi.yaml"
+        if not roi_path.exists():
+            print(f"[WARN] {shot_id}/{gel_name}: 缺少 roi.yaml，跳过。")
+            continue
+
+        # 1) 选择最佳曝光文件：优先 exposure_selected.yaml 中的 best_file
+        best_file = None
+        shot_expo = exposure.get(shot_id, {}) if isinstance(exposure, dict) else {}
+        info = shot_expo.get(gel_name) if isinstance(shot_expo, dict) else None
+        if isinstance(info, dict):
             best_file = info.get("best_file")
-            if not best_file:
-                print(f"[WARN] {gel_name} has no best_file, skipping.")
+
+        # 2) 如果 exposure_selected 没有记录，则自动从该 gel 目录中选择一张图像
+        if not best_file:
+            candidates = sorted(
+                p.name
+                for p in gel_dir.iterdir()
+                if p.is_file() and p.suffix.lower() in (".tif", ".tiff", ".png", ".jpg", ".jpeg")
+            )
+            if not candidates:
+                print(f"[WARN] {shot_id}/{gel_name}: 未找到图像文件，跳过。")
+                continue
+            best_file = candidates[0]
+
+        img_path = gel_dir / best_file
+        if not img_path.exists():
+            print(f"[WARN] 缺少图像文件: {img_path}，跳过。")
+            continue
+
+        img = np.array(Image.open(img_path))
+        img2d = ensure_gray(img)
+
+        roi_entries = read_roi_yaml(roi_path)
+        rois_all = [
+            r for r in (roi_entries or [])
+            if isinstance(r, dict) and "points" in r and isinstance(r["points"], list) and len(r["points"]) >= 4
+        ]
+        print(f"[DEBUG-ROI] {shot_id}/{gel_name}: parsed ROIs = {len(rois_all)}")
+
+        if not rois_all:
+            continue
+
+        # 尝试按 band_label 匹配 ROI（roi.yaml 中的 'band' 字段）
+        rois = [r for r in rois_all if str(r.get("band")) == str(band_label)]
+        if not rois:
+            # 如果没有匹配到，退回用全部 ROI，但打警告
+            print(f"[WARN] {shot_id}/{gel_name}: 未找到 band='{band_label}' 的 ROI，改用所有 ROI。")
+            rois = rois_all
+
+        for roi_idx, roi in enumerate(rois, start=1):
+            poly = roi.get("points", [])
+            if not poly or len(poly) < 4:
                 continue
 
-            img_path = gel_dir / best_file
-            if not img_path.exists():
-                print(f"[WARN] Missing {img_path}, skipping.")
+            center, theta, ordered_pts, centerline_length = centerline_from_quad(poly)
+
+            # 角度规范到 (-90°, 90°]
+            if theta > 90:
+                theta -= 180
+            elif theta <= -90:
+                theta += 180
+
+            # 沿中线方向的基准宽度
+            roi_width_line = width_along_direction(ordered_pts, center, theta)
+
+            margin = float(width_margin)
+            target_H = int(rectified_height)
+            target_W = max(1, int(round(roi_width_line * (1.0 + 2.0 * margin))))
+
+            quad = oriented_rect_corners(center, theta, target_W, target_H)
+            cropped = crop_by_quad_upright(img2d, quad, target_W, target_H, bg=None)
+
+            lane_stats = quantify_lanes(cropped, lane_count=lane_count_global)
+            if not lane_stats:
+                print(f"[WARN] {shot_id}/{gel_name} | band={band_label}: no lane detected.")
                 continue
 
-            img = np.array(Image.open(img_path))
-            img2d = ensure_gray(img)
-
-            roi_path = gel_dir / "roi.yaml"
-            if not roi_path.exists():
-                print(f"[WARN] {gel_name}: missing roi.yaml, skipping.")
-                continue
-
-            roi_entries = read_roi_yaml(roi_path)
-            rois = [
-                r for r in (roi_entries or [])
-                if isinstance(r, dict) and "points" in r and isinstance(r["points"], list) and len(r["points"]) >= 4
-            ]
-            print(f"[DEBUG-ROI] {shot_id}/{gel_name}: parsed ROIs = {len(rois)}")
-
-            if not rois:
-                continue
-
-            for idx, roi in enumerate(rois, start=1):
-                poly = roi.get("points", [])
-                if not poly or len(poly) < 4:
-                    continue
-
-                band_label = roi.get("band") or f"band{idx}"
-
-                center, theta, ordered_pts, centerline_length = centerline_from_quad(poly)
-
-                # 角度规范到 (-90°, 90°]
-                if theta > 90:
-                    theta -= 180
-                elif theta <= -90:
-                    theta += 180
-
-                # 沿中线方向的基准宽度
-                roi_width_line = width_along_direction(ordered_pts, center, theta)
-
-                margin = float(width_margin)
-                target_H = int(rectified_height)
-                target_W = max(1, int(round(roi_width_line * (1.0 + 2.0 * margin))))
-
-                quad = oriented_rect_corners(center, theta, target_W, target_H)
-                cropped = crop_by_quad_upright(img2d, quad, target_W, target_H, bg=None)
-
-                lane_stats = quantify_lanes(cropped, lane_count=lane_count)
-                if not lane_stats:
-                    print(f"[WARN] {shot_id}/{gel_name} | band={band_label}: no lane detected.")
-                    continue
-
-                for st in lane_stats:
-                    rows.append(
-                        dict(
-                            shot_id=shot_id,
-                            gel_name=gel_name,
-                            band=str(band_label),
-                            lane_index=st["lane_index"],
-                            x_center=st["x_center"],
-                            x_min=st["x_min"],
-                            x_max=st["x_max"],
-                            height_px=st["height_px"],
-                            signal_sum=st["signal_sum"],
-                            signal_mean=st["signal_mean"],
-                        )
+            for st in lane_stats:
+                rows.append(
+                    dict(
+                        panel=panel_name,
+                        shot_id=shot_id,
+                        gel_name=gel_name,
+                        band=str(band_label),
+                        band_prefix=prefix,
+                        roi_index=roi_idx,
+                        lane_index=st["lane_index"],
+                        x_center=st["x_center"],
+                        x_min=st["x_min"],
+                        x_max=st["x_max"],
+                        height_px=st["height_px"],
+                        signal_sum=st["signal_sum"],
+                        signal_mean=st["signal_mean"],
                     )
+                )
 
     # 写出 TSV
     if rows:
         cols = [
+            "panel",
             "shot_id",
             "gel_name",
             "band",
+            "band_prefix",
+            "roi_index",
             "lane_index",
             "x_center",
             "x_min",
@@ -430,11 +554,11 @@ def main():
             "signal_sum",
             "signal_mean",
         ]
-        with open(out_path, "w") as f:
+        with open(out_path, "w", encoding="utf-8") as f:
             f.write("\t".join(cols) + "\n")
             for r in rows:
                 f.write("\t".join(str(r[c]) for c in cols) + "\n")
-        print(f"[OK] lane intensity table saved → {out_path}")
+        print(f"[OK] lane intensity table for panel '{panel_name}' saved → {out_path}")
     else:
         print("[WARN] No lane intensity rows produced; nothing written.")
 
