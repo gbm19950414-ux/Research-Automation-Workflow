@@ -35,12 +35,12 @@ def ensure_gray(img):
 
 # ------------------ ROI 解析 ------------------
 def read_roi_yaml(roi_path):
-    """读取 roi.yaml，返回多边形点的列表（每个ROI条带为一个多边形点列表）。
+    """读取 roi.yaml，返回 ROI 列表（每个 ROI 为 {'points': [...], 'band': 可选条带名}）。
     兼容格式：
       - [[x,y], ...] x4
-      - [{"points":[[x,y],...]}]
+      - [{"points":[[x,y],...], "band": <str>}]
       - {"roi":[[x,y],...]}
-      - [{"rect":[x,y,w,h]}]  # 自动转四点
+      - [{"rect":[x,y,w,h], "band": <str>}]  # 自动转四点
     """
     try:
         data = load_yaml(roi_path)
@@ -48,27 +48,33 @@ def read_roi_yaml(roi_path):
         if isinstance(data, list):
             for item in data:
                 if isinstance(item, list) and len(item) >= 4 and isinstance(item[0], (list, tuple)):
-                    polys.append([[float(x), float(y)] for x, y in item[:4]])
+                    pts = [[float(x), float(y)] for x, y in item[:4]]
+                    polys.append({"points": pts, "band": None})
                 elif isinstance(item, dict) and "points" in item and isinstance(item["points"], list):
                     pts = item["points"]
                     if len(pts) >= 4:
-                        polys.append([[float(x), float(y)] for x, y in pts[:4]])
+                        ptsf = [[float(x), float(y)] for x, y in pts[:4]]
+                        polys.append({"points": ptsf, "band": item.get("band")})
                 elif isinstance(item, dict) and "rect" in item and isinstance(item["rect"], (list, tuple)) and len(item["rect"]) == 4:
                     x, y, w, h = item["rect"]
-                    polys.append([[float(x), float(y)], [float(x+w), float(y)], [float(x+w), float(y+h)], [float(x), float(y+h)]])
+                    pts = [[float(x), float(y)], [float(x+w), float(y)], [float(x+w), float(y+h)], [float(x), float(y+h)]]
+                    polys.append({"points": pts, "band": item.get("band") if "band" in item else None})
         elif isinstance(data, dict):
             if "points" in data and isinstance(data["points"], list) and len(data["points"]) >= 4:
                 pts = data["points"]
-                polys.append([[float(x), float(y)] for x, y in pts[:4]])
+                ptsf = [[float(x), float(y)] for x, y in pts[:4]]
+                polys.append({"points": ptsf, "band": None})
             else:
                 for v in data.values():
                     if isinstance(v, list):
                         if v and isinstance(v[0], (list, tuple)):
                             if len(v) >= 4:
-                                polys.append([[float(x), float(y)] for x, y in v[:4]])
+                                ptsf = [[float(x), float(y)] for x, y in v[:4]]
+                                polys.append({"points": ptsf, "band": None})
                         elif len(v) == 4 and all(isinstance(n, (int, float)) for n in v):
                             x, y, w, h = v
-                            polys.append([[float(x), float(y)], [float(x+w), float(y)], [float(x+w), float(y+h)], [float(x), float(y+h)]])
+                            pts = [[float(x), float(y)], [float(x+w), float(y)], [float(x+w), float(y+h)], [float(x), float(y+h)]]
+                            polys.append({"points": pts, "band": None})
         return polys
     except Exception as e:
         warnings.warn(f"Failed to read ROI yaml: {roi_path} ({e})")
@@ -209,68 +215,117 @@ def main():
                 print(f"[WARN] Missing {img_path}, skipping.")
                 continue
 
-            # Skip if this gel has already been processed (patch already exists).
-            patch_path = out_dir / f"{gel_name}_patch.tif"
-            if patch_path.exists():
-                print(f"[SKIP] {gel_name}: patch already exists at {patch_path} → skipping.")
-                continue
-
+            # 读取最佳曝光图像
             img = np.array(Image.open(img_path))
+
             roi_path = gel_dir / "roi.yaml"
 
             if roi_path.exists():
-                rois = read_roi_yaml(roi_path)
-                print(f"[DEBUG-ROI] ROI path: {roi_path} | parsed polygons: {len(rois)}")
+                roi_entries = read_roi_yaml(roi_path)
+                # 只保留包含 points 且点数 >=4 的 ROI
+                rois = [r for r in (roi_entries or []) if isinstance(r, dict) and "points" in r and isinstance(r["points"], list) and len(r["points"]) >= 4]
+                print(f"[DEBUG-ROI] ROI path: {roi_path} | parsed ROIs: {len(rois)}")
             else:
                 rois = []
                 print(f"[DEBUG-ROI] ROI path: {roi_path} | missing, fallback to full image")
 
             used_overlay = False
 
-            if rois and isinstance(rois[0], list) and len(rois[0]) >= 4:
-                poly = rois[0]
+            if rois:
                 img2d = ensure_gray(img)
-                center, theta, ordered_pts, centerline_length = centerline_from_quad(poly)
-
-                # 角度规范到 (-90°, 90°]
-                if theta > 90:
-                    theta -= 180
-                elif theta <= -90:
-                    theta += 180
-                print(f"[DEBUG-ROT] {gel_name}: theta_norm={theta:.2f}°, center=({center[0]:.1f},{center[1]:.1f}), centerline_length={centerline_length:.2f}")
-
-                margin = float(width_margin)
-                target_H = int(rectified_height)
-                roi_width_line = centerline_length
-                # 旧代码计算 target_W 已移除，保持原 crop 宽度为 roi_width_line * (1+2*margin)
-                target_W = max(1, int(round(roi_width_line * (1.0 + 2.0*margin))))
-
-                quad = oriented_rect_corners(center, theta, target_W, target_H)
-                cropped = crop_by_quad_upright(img2d, quad, target_W, target_H, bg=None)
-
-                # --- Force all patches to uniform display size 480×50 ---
                 display_W, display_H = 480, 50
-                cropped_disp = np.array(
-                    Image.fromarray(cropped.astype(np.float32)).resize((display_W, display_H), resample=Image.BILINEAR)
-                )
-                sx = display_W / cropped.shape[1]
-                sy = display_H / cropped.shape[0]
-                print(f"[DEBUG-RESIZE] {gel_name}: resized from {cropped.shape[1]}x{cropped.shape[0]} to {display_W}x{display_H} (sx={sx:.3f}, sy={sy:.3f})")
 
-                # 保存 patch（uint8 灰度）
-                patch_u8 = np.clip(percentile_stretch(cropped_disp, 1, 99), 0, 255).astype(np.uint8)
-                patch_path = out_dir / f"{gel_name}_patch.tif"
-                Image.fromarray(patch_u8).save(patch_path)
-                print(f"[OK] Saved patch → {patch_path}")
+                for idx, roi in enumerate(rois, start=1):
+                    poly = roi.get("points", [])
+                    if not poly or len(poly) < 4:
+                        continue
 
-                # 保存 overlay（核查）
-                overlay_path = out_dir / f"{gel_name}_02_rot_overlay.png"
-                try:
-                    debug_save_overlays(rot_img=cropped_disp, target_W=display_W, target_H=display_H, out_path_png=overlay_path)
-                    print(f"[OK] Saved overlay → {overlay_path}")
-                    used_overlay = True
-                except Exception as e:
-                    print(f"[WARN] Overlay save failed for {gel_name}: {e}")
+                    band_label = roi.get("band") or f"band{idx}"
+
+                    center, theta, ordered_pts, centerline_length = centerline_from_quad(poly)
+
+                    # 角度规范到 (-90°, 90°]
+                    if theta > 90:
+                        theta -= 180
+                    elif theta <= -90:
+                        theta += 180
+                    print(
+                        f"[DEBUG-ROT] {gel_name} | band={band_label}: "
+                        f"theta_norm={theta:.2f}°, center=({center[0]:.1f},{center[1]:.1f}), "
+                        f"centerline_length={centerline_length:.2f}"
+                    )
+
+                    margin = float(width_margin)
+                    target_H = int(rectified_height)
+                    roi_width_line = centerline_length
+                    target_W = max(1, int(round(roi_width_line * (1.0 + 2.0 * margin))))
+
+                    quad = oriented_rect_corners(center, theta, target_W, target_H)
+                    cropped = crop_by_quad_upright(img2d, quad, target_W, target_H, bg=None)
+
+                    # 统一输出大小 480×50
+                    cropped_disp = np.array(
+                        Image.fromarray(cropped.astype(np.float32)).resize(
+                            (display_W, display_H), resample=Image.BILINEAR
+                        )
+                    )
+                    sx = display_W / cropped.shape[1]
+                    sy = display_H / cropped.shape[0]
+                    print(
+                        f"[DEBUG-RESIZE] {gel_name} | band={band_label}: "
+                        f"resized from {cropped.shape[1]}x{cropped.shape[0]} to "
+                        f"{display_W}x{display_H} (sx={sx:.3f}, sy={sy:.3f})"
+                    )
+
+                    patch_u8 = np.clip(percentile_stretch(cropped_disp, 1, 99), 0, 255).astype(np.uint8)
+
+                    # 安全化 band 名用于文件名
+                    band_safe = "".join(
+                        ch if (ch.isalnum() or ch in ("-", "_")) else "_"
+                        for ch in str(band_label)
+                    )
+
+                    # 每个 band 独立一个 patch / overlay
+                    band_patch_path = out_dir / f"{gel_name}__{band_safe}_patch.tif"
+                    band_overlay_path = out_dir / f"{gel_name}__{band_safe}_02_rot_overlay.png"
+
+                    if band_patch_path.exists():
+                        print(
+                            f"[SKIP] {gel_name} | band={band_label}: "
+                            f"patch already exists at {band_patch_path} → skipping this band."
+                        )
+                    else:
+                        Image.fromarray(patch_u8).save(band_patch_path)
+                        print(f"[OK] Saved band patch → {band_patch_path}")
+                        try:
+                            debug_save_overlays(
+                                rot_img=cropped_disp,
+                                target_W=display_W,
+                                target_H=display_H,
+                                out_path_png=band_overlay_path,
+                            )
+                            print(f"[OK] Saved band overlay → {band_overlay_path}")
+                            used_overlay = True
+                        except Exception as e:
+                            print(f"[WARN] Band overlay save failed for {gel_name} | band={band_label}: {e}")
+
+                    # 兼容旧逻辑：第一条 ROI 也写一份主 patch/overlay（无 band 后缀）
+                    if idx == 1:
+                        main_patch_path = out_dir / f"{gel_name}_patch.tif"
+                        main_overlay_path = out_dir / f"{gel_name}_02_rot_overlay.png"
+                        Image.fromarray(patch_u8).save(main_patch_path)
+                        print(f"[OK] Saved main patch (first ROI) → {main_patch_path}")
+                        try:
+                            debug_save_overlays(
+                                rot_img=cropped_disp,
+                                target_W=display_W,
+                                target_H=display_H,
+                                out_path_png=main_overlay_path,
+                            )
+                            print(f"[OK] Saved main overlay (first ROI) → {main_overlay_path}")
+                        except Exception as e:
+                            print(f"[WARN] Main overlay save failed for {gel_name}: {e}")
+
             else:
                 # Fallback：没有 ROI，就把原图（灰度+拉伸）作为 patch
                 cropped = ensure_gray(img)

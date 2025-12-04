@@ -36,7 +36,7 @@
 输出：
 - 每个文件夹生成 roi.yaml，记录多边形坐标与对应样本名称
 
-本版本支持通过点击四个点定义倾斜矩形的 ROI。
+本版本支持通过点击四个点定义倾斜矩形的 ROI，且支持在同一张图像上标注多个 ROI。
 """
 
 import yaml
@@ -55,26 +55,91 @@ def save_yaml(data, path):
         yaml.safe_dump(data, f, sort_keys=False, allow_unicode=True)
 
 def annotate_roi(image_path, save_path):
-    """交互式绘制倾斜矩形 ROI（四点多边形）并保存坐标"""
+    """交互式绘制一个或多个倾斜矩形 ROI（四点多边形）并保存坐标
+
+    使用方式：
+    - 每次弹出一张图像窗口，使用 PolygonSelector 依次点击 4 个点定义一个 ROI；
+    - 关闭窗口后，终端会询问是否继续在同一张图上添加新的 ROI：
+        * 输入 y 回车：继续添加下一个 ROI（重新弹出同一张图）
+        * 直接回车或输入其他字符：结束本图的标注并保存所有 ROI
+    """
     img = np.array(Image.open(image_path))
-    fig, ax = plt.subplots()
-    ax.imshow(img, cmap="gray")
-    plt.title(f"ROI annotation (click 4 points): {image_path.name}")
     rois = []
-    current_points = []
+    roi_index = 1
 
-    def onselect(verts):
-        if len(verts) == 4:
-            polygon = np.array(verts)
-            rois.append({"points": polygon.tolist(), "sample": f"S{len(rois)+1}"})
-            ax.plot(*zip(*(list(polygon) + [polygon[0]])), color='r', linewidth=1.5)
-            fig.canvas.draw()
-            print(f"[ROI] Added polygon with points: {polygon.tolist()}")
-            polygon_selector.disconnect_events()
-            plt.close(fig)
+    while True:
+        fig, ax = plt.subplots()
+        ax.imshow(img, cmap="gray")
+        plt.title(f"ROI #{roi_index} (click 4 points): {image_path.name}")
 
-    polygon_selector = PolygonSelector(ax, onselect, useblit=False, props=dict(color='r', linewidth=1.5))
-    plt.show()
+        holder = {"verts": None}
+
+        def onselect(verts):
+            if len(verts) == 4:
+                holder["verts"] = verts
+                polygon = np.array(verts)
+                ax.plot(
+                    *zip(*(list(polygon) + [polygon[0]])),
+                    color="r",
+                    linewidth=1.5,
+                )
+                fig.canvas.draw()
+                print(f"[ROI] Candidate polygon with points: {polygon.tolist()}")
+
+        polygon_selector = PolygonSelector(
+            ax,
+            onselect,
+            useblit=False,
+            props=dict(color="r", linewidth=1.5),
+        )
+
+        plt.show()
+
+        verts = holder["verts"]
+        if verts is None:
+            print("[INFO] No polygon drawn in this round, stop adding ROIs.")
+            break
+
+        polygon = np.array(verts)
+
+        # ---- auto-detect target prefix from folder name ----
+        gel_name = image_path.parent.name
+        parts = gel_name.split("_")
+        if len(parts) >= 2:
+            target_prefix = parts[1]
+        else:
+            target_prefix = "band"
+
+        # ---- ask user for band label ----
+        user_band = input(
+            "Band name for this ROI (e.g., full, p19, p17): "
+        ).strip()
+        if not user_band:
+            user_band = f"band{len(rois)+1}"
+
+        full_band = f"{target_prefix}_{user_band}"
+
+        rois.append(
+            {
+                "points": polygon.tolist(),
+                "band": full_band,
+            }
+        )
+
+        print(f"[ROI] Added ROI #{len(rois)} with band: {full_band}")
+        print(f"[ROI] Points: {polygon.tolist()}")
+
+        cont = input(
+            "Add another ROI on this image? (y/[n]): "
+        ).strip().lower()
+        if cont != "y":
+            break
+
+        roi_index += 1
+
+    if not rois:
+        print(f"[WARN] No ROI saved for {image_path.name}")
+        return
 
     save_yaml(rois, save_path)
     print(f"[OK] ROI saved → {save_path}")
