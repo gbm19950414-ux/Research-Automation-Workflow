@@ -1,3 +1,24 @@
+# ============================
+# How to Run This Script
+# ============================
+# Example:
+#   python 02_select_exposure.py
+#
+# Description:
+#   This script scans:
+#       EphB1/04_data/interim/wb/gel_crops/
+#   It analyzes all cropped gel lanes under each shot folder and
+#   automatically selects the best exposure (.tif) based on image metrics.
+#
+# Output:
+#   Results will be saved to:
+#       EphB1/04_data/interim/wb/exposure_selected/exposure_selected.yaml
+#
+# Requirements:
+#   - Must run AFTER 00_split_shot.py (gel_crops must exist)
+#   - No arguments required
+#
+# ============================
 #!/usr/bin/env python3
 """
 03_select_exposure_from_crops.py

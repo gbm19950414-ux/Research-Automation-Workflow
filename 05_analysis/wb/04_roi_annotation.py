@@ -1,3 +1,29 @@
+# ============================
+# How to Run This Script
+# ============================
+# Example:
+#   python 04_roi_annotation.py
+#
+# Description:
+#   This script loads:
+#       EphB1/04_data/interim/wb/exposure_selected/exposure_selected.yaml
+#   and performs interactive ROI annotation on each best-exposure image:
+#       EphB1/04_data/interim/wb/gel_crops/<shot_id>/<gel_id>_<target>_<sample_batch>/best_exposure.tif
+#
+# Steps:
+#   1. Run 00_split_shot.py to generate gel_crops/
+#   2. Run 02_select_exposure.py to produce exposure_selected.yaml
+#   3. Then run this script:
+#         python 04_roi_annotation.py
+#
+# Output:
+#   Each gel directory will receive a roi.yaml file containing polygon ROI points.
+#
+# Requirements:
+#   - No arguments required
+#   - Requires matplotlib GUI (MacOSX/Qt/Tk)
+#
+# ============================
 #!/usr/bin/env python3
 """
 04_roi_annotation.py
@@ -81,6 +107,10 @@ def main():
                 continue
 
             roi_path = gel_dir / "roi.yaml"
+            if roi_path.exists():
+                print(f"[SKIP] roi.yaml already exists for {gel_name} → skipping annotation.")
+                continue
+
             print(f"[INFO] Launching ROI annotation for {gel_name}")
             annotate_roi(img_path, roi_path)
 

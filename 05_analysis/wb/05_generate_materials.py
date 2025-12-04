@@ -209,6 +209,12 @@ def main():
                 print(f"[WARN] Missing {img_path}, skipping.")
                 continue
 
+            # Skip if this gel has already been processed (patch already exists).
+            patch_path = out_dir / f"{gel_name}_patch.tif"
+            if patch_path.exists():
+                print(f"[SKIP] {gel_name}: patch already exists at {patch_path} → skipping.")
+                continue
+
             img = np.array(Image.open(img_path))
             roi_path = gel_dir / "roi.yaml"
 

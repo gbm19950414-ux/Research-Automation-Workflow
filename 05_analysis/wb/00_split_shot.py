@@ -1,3 +1,25 @@
+# ============================
+# How to Run This Script
+# ============================
+# Example:
+#   python 00_split_shot.py --shot SHOT_NAME
+#
+# Options:
+#   --shot           (required) Name of the shot folder under raw/wb/shots/
+#   --expect         Number of gels expected (default: 5)
+#   --interactive    Force manual drawing of gel boxes
+#   --reset-boxes    Clear existing gel_boxes in shot.yaml and redraw
+#
+# Typical workflow:
+#   1. Ensure shot.yaml exists at:
+#      EphB1/04_data/raw/wb/shots/<shot_name>/shot.yaml
+#   2. Ensure original TIFF exists at:
+#      EphB1/04_data/raw/wb/shots/<shot_name>/<file>
+#   3. Run:
+#         python 00_split_shot.py --shot <shot_name>
+#   4. If no gel_boxes exist, interactive mode will open automatically.
+#
+# ============================
 #!/usr/bin/env python3
 import matplotlib
 matplotlib.use('MacOSX')
@@ -36,7 +58,7 @@ def crop(arr, rect):
 def main(shot_name, expect=5, interactive=False, reset_boxes=False):
     root = Path(__file__).resolve().parents[2]  # EphB1/
     raw_shot = root / "04_data" / "raw" / "wb" / "shots" / shot_name
-    meta_path = root / "04_data" / "interim" / "wb" / "shots" / shot_name / "shot.yaml"
+    meta_path = root / "04_data" / "raw" / "wb" / "shots" / shot_name / "shot.yaml"
     assert raw_shot.exists(), f"raw shot not found: {raw_shot}"
     assert meta_path.exists(), f"shot.yaml not found: {meta_path}"
 
@@ -45,7 +67,8 @@ def main(shot_name, expect=5, interactive=False, reset_boxes=False):
     # Load white image early so it is available for both interactive and auto-detect branches
     white = load_arr(raw_shot / meta["white"])
 
-    seconds = meta.get("seconds", "s1")
+    # seconds can be a single string or a list aligned with multiple files
+    seconds_entry = meta.get("seconds", "s1")
 
     if reset_boxes:
         meta["gel_boxes"] = []
@@ -102,30 +125,68 @@ def main(shot_name, expect=5, interactive=False, reset_boxes=False):
 
     gel_root = root / "04_data" / "interim" / "wb" / "gel_crops" / shot_name
     shot_id = meta.get("shot_id", "UNKNOWN_SHOT")
-    # Get the file name from the top-level "file" key
-    file_name = meta.get("file")
-    if not file_name:
+
+    # Get the file name(s) from the top-level "file" key.
+    # Allow either a single string or a list of filenames to handle long exposures split into
+    # multiple TIFF files (e.g., 10min + 30min from the same run).
+    file_entry = meta.get("file")
+    if not file_entry:
         raise KeyError("No 'file' specified in shot.yaml")
-    file_path = raw_shot / file_name
-    if not file_path.exists():
-        raise FileNotFoundError(f"File not found: {file_path}")
+
+    if isinstance(file_entry, str):
+        file_list = [file_entry]
+    elif isinstance(file_entry, list):
+        if not file_entry:
+            raise ValueError("'file' list in shot.yaml is empty")
+        file_list = file_entry
+    else:
+        raise TypeError("'file' in shot.yaml must be a string or a list of strings")
+
+    # Normalize seconds: either a single label or a list aligned with file_list
+    if isinstance(seconds_entry, list):
+        seconds_list = seconds_entry
+        seconds_base = None
+    else:
+        seconds_list = None
+        seconds_base = str(seconds_entry)
+
     # 如果所有矩形都是空的，自动触发交互模式
     if not meta.get("gel_boxes") or all((not gb.get("rect") or len(gb["rect"]) != 4) for gb in meta["gel_boxes"]):
         print("[WARN] No valid rectangles found in shot.yaml → launching interactive mode.")
         main(shot_name, expect, interactive=True, reset_boxes=True)
         return
-    for entry in meta["gel_boxes"]:
-        target = str(entry["target"]).strip()
-        gel_id = entry["gel_id"]
-        rect = entry["rect"]
-        sample_batch = entry.get("sample_batch", "BATCH")
 
-        for i, arr, suffix in iter_pages(file_path):
-            out_name = f"{target}_{seconds}{suffix}.tif"
-            sub = crop(arr, rect)
-            dst_dir = gel_root / f"{gel_id}_{target}_{sample_batch}"
-            dst_dir.mkdir(parents=True, exist_ok=True)
-            save_arr(dst_dir / out_name, sub)
+    for file_idx, file_name in enumerate(file_list):
+        file_path = raw_shot / file_name
+        if not file_path.exists():
+            raise FileNotFoundError(f"File not found: {file_path}")
+
+        # Decide the seconds label for this file.
+        if seconds_list is not None:
+            if file_idx < len(seconds_list):
+                seconds_for_file = str(seconds_list[file_idx])
+            else:
+                seconds_for_file = f"s{file_idx+1}"
+        else:
+            # Single seconds string provided; if multiple files, append a file index suffix to
+            # avoid overwriting outputs.
+            if len(file_list) > 1:
+                seconds_for_file = f"{seconds_base}_f{file_idx+1}"
+            else:
+                seconds_for_file = seconds_base
+
+        for entry in meta["gel_boxes"]:
+            target = str(entry["target"]).strip()
+            gel_id = entry["gel_id"]
+            rect = entry["rect"]
+            sample_batch = entry.get("sample_batch", "BATCH")
+
+            for i, arr, suffix in iter_pages(file_path):
+                out_name = f"{target}_{seconds_for_file}{suffix}.tif"
+                sub = crop(arr, rect)
+                dst_dir = gel_root / f"{gel_id}_{target}_{sample_batch}"
+                dst_dir.mkdir(parents=True, exist_ok=True)
+                save_arr(dst_dir / out_name, sub)
     # Done
     print("[OK] Cropped all runs into gel_crops/<shot_name>/<gel_id>_<target>_<sample_batch>/")
 if __name__ == "__main__":
