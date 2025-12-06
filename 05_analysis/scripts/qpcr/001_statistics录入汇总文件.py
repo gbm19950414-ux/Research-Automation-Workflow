@@ -12,7 +12,7 @@ FOLDER = Path(sys.argv[1]).expanduser().resolve()
 PATTERN = "*.txt"
 
 MAP_FILE = FOLDER / "实验设计.xlsx"
-TARGET_FILE = Path(r"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/raw/qpcr/qpcr_original_data.xlsx")
+TARGET_FILE = Path(r"04_data/raw/qpcr/qpcr_original_data.xlsx")
 
 TXT_ENCODING = "utf-8-sig"
 

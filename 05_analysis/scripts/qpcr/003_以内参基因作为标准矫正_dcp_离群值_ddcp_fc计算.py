@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 ddct_analysis.py
@@ -14,9 +13,9 @@ import pandas as pd, numpy as np
 import pathlib, sys
 
 # -------- 用户一次性配置 ---------------------------------
-INPUT_FILE  = ("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/qpcr_original_data_long_format.csv")
-OBJECTIVES  = ["心磷脂代谢过程关键基因变化", "线粒体总量变化"]
-OUTPUT_FILE = f"/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/博士课题/EphB1/04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
+INPUT_FILE  = ("04_data/interim/qpcr/qpcr_original_data_long_format.csv")
+OBJECTIVES  = ["心磷脂代谢过程关键基因变化", "线粒体总量变化","细胞因子检测"]
+OUTPUT_FILE = f"04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
 
 
 # ---------------------------------------------------------
@@ -31,6 +30,9 @@ except FileNotFoundError:
 
 df_all = df_all[df_all["experimental_objective"].isin(OBJECTIVES)].copy()
 orig_rows = len(df_all)
+
+# === 新增：为每一行添加唯一行号 _row_id（用于最终一对一合并） ===
+df_all["_row_id"] = np.arange(len(df_all))
 
 # ① mean_cp 转成数值，不可转换者设为 NaN（但不删除）
 df_all["mean_cp"] = pd.to_numeric(df_all["mean_cp"], errors="coerce")
@@ -100,8 +102,11 @@ work.loc[work["is_outlier"], ["deltadelta_ct", "fold_change"]] = np.nan
 work.loc[~work["is_outlier"], "fold_change"] = 2 ** (-work.loc[~work["is_outlier"], "deltadelta_ct"])
 
 # ---------- 8. 合并回所有原始行 ----------
-cols_result = ["ref_ct","delta_ct","baseline_ct","deltadelta_ct","fold_change","is_outlier"]
-df_out = df_all.merge(work[KEYS + cols_result], on=KEYS, how="left")
+# === 按 _row_id 一对一合并，避免多对多行数膨胀 ===
+cols_result = ["_row_id", "ref_ct", "delta_ct", "baseline_ct", "deltadelta_ct", "fold_change", "is_outlier"]
+df_out = df_all.merge(work[cols_result], on="_row_id", how="left")
+
+df_out = df_out.drop(columns=["_row_id"])
 
 # ---------- 9. 保存 ----------
 out_path = pathlib.Path(OUTPUT_FILE)
