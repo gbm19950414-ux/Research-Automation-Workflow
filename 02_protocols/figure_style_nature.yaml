@@ -22,14 +22,14 @@ typography:
   font_family_primary: "Helvetica"     # 或 "Helvetica"
   font_family_monospace: "Courier New"
   sizes_pt:
-    axis_tick_default: 5.5
-    axis_label_default: 6.5
-    legend_text_default: 6
-    legend_title_default: 6.5
+    axis_tick_default: 5.5 #坐标轴刻度
+    axis_label_default: 6.5 #坐标轴标题
+    legend_text_default: 6  # 图例文字
+    legend_title_default: 6.5 # 图例标题
     panel_label_default: 8         # a, b, c 等，通常 8 pt 加粗
-    title_optional: 7
+    title_optional: 7 # 图标题
     table_body_default: 7          # 表格正文
-    table_header_default: 7
+    table_header_default: 7       # 表格标题
   panel_label:
     style: "bold"
     case: "lowercase_letter"       # a, b, c ...
