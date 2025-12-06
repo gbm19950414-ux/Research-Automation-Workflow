@@ -1,0 +1,25 @@
+shot_id: 2025-09-22_SHOT1
+white: white.tif
+file: run01.tif
+seconds: s1
+gel_boxes:
+  - gel_id: G1
+    rect: [0, 101, 506, 63]
+    target: GAPDH
+    sample_batch: E49
+  - gel_id: G2
+    rect: [3, 159, 493, 80]
+    target: GAPDH
+    sample_batch: E51
+  - gel_id: G3
+    rect: [4, 224, 506, 75]
+    target: GAPDH
+    sample_batch: E48
+  - gel_id: G4
+    rect: [3, 287, 502, 73]
+    target: GAPDH
+    sample_batch: E12
+  - gel_id: G5
+    rect: [17, 351, 492, 73]
+    target: GAPDH
+    sample_batch: E46

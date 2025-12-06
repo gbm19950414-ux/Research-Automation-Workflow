@@ -1,0 +1,148 @@
+version: 2
+spec_name: "单图出图要求（Nature风格·多面板/单面板分离）"
+
+scale_policy:
+  # 允许改变图像尺寸，但字体/线宽固定不随尺寸缩放
+  allow_figure_size_change: true
+  lock_font_sizes: true
+  lock_line_widths: true
+
+typography:
+  font_family: "Arial"
+  embed_font_type: "TrueType42"   # pdf.fonttype/ps.fonttype=42
+  sizes_pt:
+    panel_label: 8        # 面板标记（粗体）
+    axis_title: 7         # 轴标题
+    tick_label: 5         # 坐标轴刻度标签
+    legend: 5             # 图例
+    annotation: 5         # 备注/标注
+  weights:
+    panel_label: "bold"
+
+linework:
+  linewidth_pt_default: 0.5
+  linewidth_pt_range: [0.25, 1.0]   # 线宽 0.25–1 pt
+  spine_width_pt: 0.5
+
+axes:
+  # —— 强制不要网格线 —— #
+  grid: false
+  require_no_gridlines: true
+
+  show_spines: ["left", "bottom"]
+  hide_spines: ["right", "top"]
+
+  show_ticks: ["left", "bottom"]
+  tick_direction: "out"
+
+  # —— 刻度线规范 —— #
+  tick_major_length_pt: 2.5
+  tick_major_width_pt: 0.5
+  minor_ticks: false
+  tick_minor_length_pt: 1.5
+  tick_minor_width_pt: 0.5
+
+  require_units_in_parentheses: true      # 所有轴标题需带单位且置于括号内
+  axis_title_template: "{name}（{unit}）"   # 例：数据（单位）
+  shadow: false
+  avoid_text_overlap: true
+
+color:
+  mode: "RGB"
+  palette: {"WT": "#66c2a5", "HO": "#fc8d62"}
+
+legend:
+  frameon: false
+  fontsize_pt: 5
+  handlelength_pt: 6
+  markerscale: 1.0
+
+panel_label:
+  enabled: true
+  series: ["A","B","C","D","E","F","G","H","I","J"]
+  position: "upper_left"      # upper_left / upper_right / lower_left / lower_right
+  offset_mm: [2, 2]
+  bbox:
+    enabled: false
+    pad_mm: 1
+    linewidth_pt: 0.5
+    facecolor: null
+
+# —— 布局层级分离 —— #
+
+export:
+  format: "pdf"         # 矢量 PDF
+  dpi: 450              # 若含光栅元素时使用
+  vector: true
+  embed_fonts: true
+  transparent: false
+  color_mode: "RGB"
+
+safety_checks:
+  enforce_linewidth_range: true
+  enforce_font_sizes: true
+  assert_units_in_axis_titles: true
+  assert_no_gridlines: true                 # 与 axes.require_no_gridlines 联动
+  enforce_panel_width_range: true
+  enforce_figure_width_range: true
+panel_title:
+  method: suptitle        # 新增：告诉脚本用 suptitle（若不写，脚本默认用 suptitle）
+  offset_mm: [2.0, 4.0]   # 相对 figure 左上角的右移/下移距离，单位毫米
+  fontsize_pt: 8          # 标题字体大小（pt）
+  weight: bold            # 字体粗细，可为 normal 或 bold
+# —— 直用 rcParams（脚本里 rcParams.update(...)）—— #
+rcparams:
+  "figure.figsize": [1.65, 1.63]   # ★新增或修改：单面板的物理尺寸（inch）
+  "font.size": 7                   # 主字体大小保持 7 pt（Nature 推荐范围内）
+  "axes.labelsize": 7
+  "axes.titlesize": 7
+  "xtick.labelsize": 5
+  "ytick.labelsize": 5
+
+  # —— 标题靠左靠上 —— 
+  "axes.titlelocation": "left"   # 标题左对齐
+  "axes.titley": 1.0             # 标题竖直位置（1.0=紧贴上缘）
+  "axes.titlepad": 2.0           # 标题与绘图区的距离（pt，越小越靠上）
+  # —— 点、误差棒更精致 —— 
+  "lines.markersize": 1        # 默认 marker 大小（pt）
+  "lines.markeredgewidth": 0.5   # marker 边线宽（pt）
+  "errorbar.capsize": 2.5        # 误差棒端帽长度（pt）
+
+  "font.family": "sans-serif"
+  "font.sans-serif": ["Arial", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "Noto Sans CJK SC", "Arial Unicode MS", "DejaVu Sans"]
+  "pdf.fonttype": 42
+  "ps.fonttype": 42
+
+  "savefig.format": "pdf"
+  "savefig.dpi": 450
+
+  "figure.autolayout": false
+  "axes.grid": false                      # 明确禁用网格线
+  "axes.spines.right": false
+  "axes.spines.top": false
+
+  "legend.fontsize": 5
+
+  "lines.linewidth": 0.5
+  "axes.linewidth": 0.5
+
+  "xtick.direction": "out"
+  "ytick.direction": "out"
+  "xtick.major.size": 2.5
+  "ytick.major.size": 2.5
+  "xtick.major.width": 0.5
+  "ytick.major.width": 0.5
+  "xtick.minor.visible": false
+  "ytick.minor.visible": false
+  "xtick.minor.size": 1.5
+  "ytick.minor.size": 1.5
+  "xtick.minor.width": 0.5
+  "ytick.minor.width": 0.5
+
+statistics:
+  enabled: true
+  show_ns: false          # 不画 ns
+  p_thr1: 0.01            # ** 的阈值
+  p_thr2: 0.05            # *  的阈值
+  pad_frac: 0.06          # 星标距曲线顶的相对间距（占 y 轴范围的比例）
+  star_fontsize_pt: 4    # ← 新增：显著性星标的字体大小（pt）

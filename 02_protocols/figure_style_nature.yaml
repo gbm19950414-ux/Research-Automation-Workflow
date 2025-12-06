@@ -1,0 +1,61 @@
+# Nature-like figure style configuration
+# 适用于：R -> PDF (矢量) -> Illustrator -> Nature/子刊/博士论文
+
+journal_profile:
+  name: "Nature (generic)"
+  reference_docs:
+    - "https://www.nature.com/nature/for-authors/final-submission"
+    - "https://www.nature.com/nature/for-authors/formatting-guide"
+    - "https://www.nature.com/documents/Extended_Data_guide.pdf"
+    - "https://www.nature.com/documents/nature-extended-data.pdf"
+
+units:
+  # 外部统一采用 mm 作为尺寸单位
+  primary: "mm"
+  secondary: "pt"    # 字体、线宽仍然以 pt 为主
+  mm_per_inch: 25.4
+
+page_layout:
+  max_width_mm: 173
+
+typography:
+  font_family_primary: "Helvetica"     # 或 "Helvetica"
+  font_family_monospace: "Courier New"
+  sizes_pt:
+    axis_tick_default: 5.5
+    axis_label_default: 6.5
+    legend_text_default: 6
+    legend_title_default: 6.5
+    panel_label_default: 8         # a, b, c 等，通常 8 pt 加粗
+    title_optional: 7
+    table_body_default: 7          # 表格正文
+    table_header_default: 7
+  panel_label:
+    style: "bold"
+    case: "lowercase_letter"       # a, b, c ...
+    position: "top_left"
+
+lines:
+  line_width_pt: 0.5
+  axis_line_default_pt: 0.25
+  major_grid_default_pt: 0.35
+  minor_grid_default_pt: 0.25
+  errorbar_default_pt: 0.25
+  boxplot_default_pt: 0.25
+  r_lwd_scale:
+    pt_per_lwd: 0.75
+
+colors:
+  wt_ho:
+    WT: "#F08A4B"
+    HO: "#4DB6AC"
+
+layout:
+  axis_title_margin_pt:
+    x: 3
+    y: 3
+  plot_margin_pt:
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0

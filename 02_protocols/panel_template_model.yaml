@@ -1,0 +1,79 @@
+# ============================================================
+# schema.yaml v2 — Model Panel (Conceptual / Mechanistic Diagram)
+# 用于没有数据、仅用于说明假设与机制的图（如 Figure 6A）
+# ============================================================
+
+meta:
+  panel_type: "model"       # 必填： "model"
+  figure: ""                # 如 "Figure 6"
+  panel: ""                 # 如 "A"
+  short_title: ""           # 概念图一句话标题，如：“EphB1 regulates mitochondrial-ROS–CL–NLRP3 axis”
+  chapter: ""               # 属于哪一章
+  role_in_paper: ""         # 这张概念图在整篇论文中的作用（非常重要）
+
+# ---------- 1. Conceptual Goal（这张图要解释什么？） ----------
+concept_goal:
+  core_message: ""          # 本概念图的核心信息（一句话）
+                            # 如：“总结 EphB1 缺失如何影响 mtROS-CL-NLRP3 这条损伤链。”
+  problem_being_explained: "" # 这张图试图回答的问题（不是实验问题，而是“故事问题”）
+                              # 如：“在多组学中观察到的线粒体损伤、CL 氧化与炎性反应如何串联？”
+
+# ---------- 2. Mechanistic Elements（机制组成部分） ----------
+mechanism:
+  key_nodes:                # 列出机制图中的主要节点（蛋白、过程、状态）
+    - name: ""              # 如 “EphB1”
+      description: ""       # 如 “膜受体酪氨酸激酶，调控线粒体稳态”
+    - name: ""
+      description: ""
+  key_edges:                # 节点之间的因果/调控关系
+    - from: ""              # 如 "EphB1"
+      to: ""                # 如 "mtROS"
+      type: "promote|inhibit|associate|required_for"
+      evidence: ""          # “基于本论文的哪些结果/图支持”
+    - from: ""
+      to: ""
+      type: ""
+      evidence: ""
+
+# ---------- 3. Evidence Mapping（每条机制对应论文证据） ----------
+evidence_mapping:
+  supported_links:          # 哪些机制步骤是“有数据支持”的？
+    - mechanism_step: ""    # 如 “EphB1 → mtROS（inhibition）”
+      supported_by: ["Fig3A", "Fig3B", "Fig4A"]
+      confidence: "high|medium|low"
+  speculative_links:        # 哪些步骤是推断（discussion中的）？
+    - mechanism_step: ""
+      rationale: ""         # 为何推断成立？
+      boundary: ""          # 有哪些不能确定的地方？
+
+# ---------- 4. Graphical Logic（图要怎么讲故事） ----------
+visual_logic:
+  flow_direction: "left-to-right / top-down / circular"  # 选择一个故事流向
+  entry_point: ""           # 从哪里开始讲（如 “EphB1 deletion”）
+  exit_point: ""            # 图最终指向什么（如 “↓ IL-1β release”）
+  causal_chain:             # 主因果链
+    - ""
+    - ""
+  parallel_paths:           # 如果你的机制中有支路（如线粒体支路 + 细胞质支路）
+    - ""
+  feedback_loops:           # 若有反馈回路也可表达
+    - ""
+
+# ---------- 5. Message Strength & Boundaries（力度与边界） ----------
+interpretation:
+  what_is_certain: ""       # 明确写出“本文章中有数据支持的部分”
+  what_is_plausible: ""     # 逻辑推断但未直接测试的部分
+  what_is_unknown: ""       # 模型中仍未被实验解决的问题（常用于 Discussion）
+  why_model_needed: ""      # 这张图为何有助于读者理解整章逻辑？
+
+# ---------- 6. Transition（图在正文中的作用） ----------
+transition:
+  how_it_summarizes_previous: ""   # 这张图如何总结前面所有实验？
+  how_it_leads_next_section: ""    # 若之后有新章节，图如何作为桥？
+
+# ---------- 7. AI Writing Hints（写作提示，可选） ----------
+ai_hints:
+  target_section: ["Discussion_model", "Overall_mechanism"]
+  tone: "neutral"
+  language: "zh_en_mix"
+  target_journal_style: "Cell Metabolism"

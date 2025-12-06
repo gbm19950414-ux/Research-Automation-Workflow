@@ -1,0 +1,45 @@
+shot_id: 2025-09-22_SHOT1
+white: 20250924-2.TIF
+file: 20250924-2-pico-s1.TIF
+seconds: s1
+gel_boxes:
+- gel_id: G1
+  rect:
+  - 1
+  - 59
+  - 509
+  - 76
+  target: lycat
+  sample_batch: E49
+- gel_id: G2
+  rect:
+  - 16
+  - 122
+  - 490
+  - 82
+  target: lycat
+  sample_batch: E51
+- gel_id: G3
+  rect:
+  - 1
+  - 190
+  - 505
+  - 75
+  target: lycat
+  sample_batch: E48
+- gel_id: G4
+  rect:
+  - 0
+  - 253
+  - 505
+  - 71
+  target: lycat
+  sample_batch: E12
+- gel_id: G5
+  rect:
+  - 3
+  - 314
+  - 494
+  - 66
+  target: lycat
+  sample_batch: E46

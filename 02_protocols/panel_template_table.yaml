@@ -1,0 +1,115 @@
+# ============================================================
+# schema-table.yaml v3 —— 单个“表格 panel”的结构化写作模版
+# 目标：让 AI 在几乎不需要补充信息的前提下，生成：
+#   - 结果段中关于本表的描述（Results）
+#   - 简短讨论/过渡段（Mini Discussion / Transition）
+#   - Methods 中与本表相关的“差异性信息”（如筛选标准）
+# ============================================================
+
+# ---------- 0. Meta & Assets：基本信息 ----------
+meta:
+  figure: ""              # 如 "Table 2" 或 "Figure 6C-table"
+  panel: ""               # 若是某个 Figure 的子表，可填 "C-table"
+  panel_type: "table"     # 固定为 "table"，方便脚本识别
+  short_title: ""         # 1 句以内：本表在做什么（如："关键 EphB1 下游轴的基因与脂质指标汇总"）
+  chapter: ""             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
+  experiment_id: ""       # 可选：与实验记录/脚本对应的 ID
+  version: 3              # 当前 schema 版本
+
+assets:
+  main_table_file: ""     # 主表文件，如 "tables/T2_key_features.xlsx" 或 "results/figs/figure_6_c_table.csv"
+  raw_data_files:         # 支撑本表的原始/整理后数据
+    - ""
+  stats_files:            # 若本表包含统计量（例如 FC、p 值），写出对应统计结果文件
+    - ""
+  analysis_scripts:       # 生成本表/做筛选的脚本
+    - ""
+  supplementary_items:    # 若有对应的补充表/图，在此列出编号
+    - ""                  # 如 "Table S2", "Figure S3B"
+
+# ---------- 1. Scientific Question：本表服务的科学问题 ----------
+scientific_question:
+  context_from_previous: ""  # 与前一节/上一 panel 的衔接（1 句）
+                             # 例如：“前一节分析提示 EphB1 缺失影响多条线粒体相关信号通路。”
+  core_question: ""          # 本表要回答的核心问题（1 句）
+                             # 例如：“本表旨在系统归纳哪些通路/指标被选为 EphB1 下游机制轴中的‘关键证据’。”
+  importance_reason: ""      # 为什么需要用一张“表”单列出来，而不是埋在正文或者图里（1 句）
+                             # 例如：“通过列表形式明确筛选标准与每个 feature 的证据类型，便于读者评估结论的稳健性。”
+
+# ---------- 2. Rationale / Design Logic：为什么要这样设计这张表 ----------
+rationale:
+  why_table_instead_of_figure: ""  # 例如：“该信息以离散条目为主，精确文本说明比图形更合适。”
+  design_logic: ""                 # 表头与行的设计逻辑（写给未来的你 & AI）
+                                   # 例如：“每一行代表一个候选机制轴或 feature，通过列展示其功能分类、与 CL 的关系和数据支持。”
+  inclusion_criteria: ""           # 纳入哪些条目？核心纳入标准是什么？
+                                   # 例如：“仅纳入在至少一种组学中达到预设显著性阈值、且在文献中有功能支持的 feature。”
+  exclusion_criteria: ""           # 明确哪些东西被刻意排除，以及原因（可选）
+                                   # 例如：“未纳入仅出现在单批次实验、缺乏重复验证的候选基因。”
+  core_justification: ""           # 最关键的一句“设计理由摘要”
+                                   # 例如：“本表从多维证据中筛选出最能代表 EphB1–CL 轴的关键 readouts。”
+
+# ---------- 3. Table Structure：列结构与整体用途 ----------
+table_structure:
+  table_title: ""       # 接近最终 caption 的标题句
+                        # 例如：“Table 2. Key genes and lipid indicators defining the EphB1 downstream mechanistic axes.”
+  table_goal: ""        # 1–2 句说明读者看完本表应得到什么信息
+                        # 例如：“帮助读者快速了解每个机制轴中被选为‘主证据’或‘辅助证据’的 feature 及其数据支持。”
+  level_in_text: ""     # 本表在整章中的角色：
+                        #   "main_result" / "supportive" / "method_summary" / "supplementary_only"
+  related_figures:      # 与本表紧密关联的图/小节
+    - ""                # 如 "Figure 6C", "Figure 7B"
+
+  # 对每一列进行结构化定义，便于脚本和 AI 理解含义
+  column_definitions:
+    - key: ""           # 机器用 key，将在 entries[].values 中使用，如 "axis", "feature", "role", "evidence"
+      label: ""         # 实际表头显示的文字，如 "Mechanistic axis"
+      description: ""   # 该列所表达信息的含义
+      unit: ""          # 若为数值列，则填单位；否则留空
+      value_type: ""    # "string" / "numeric" / "boolean" / "category"
+      allowed_values: [] # 若为枚举型（如 primary/secondary/negative），在此列出
+      example_value: "" # 示例值，方便之后查阅/调试
+
+# ---------- 4. Entries：每一行代表一个最小“feature”实体 ----------
+entries:
+  - row_id: ""          # 机器可读、稳定的行 ID（不要随意改，方便脚本与其他文件引用）
+    display_label: ""   # 表的首列行名，用于读者阅读
+    category: ""        # 例如机制轴/功能类别："Synthesis", "Oxidation", "Transport" 等
+    priority: ""        # 建议枚举："primary" / "secondary" / "control" / "negative" / "reference"
+    key_message: ""     # 1 句话：这一行为什么在表里？它对整体故事贡献什么？
+                        # 例如：“CL_PG_ratio 被视为心磷脂合成轴的主 readout，用于评估 CL 合成是否受限。”
+    values:             # 真正单元格内容：使用 column_definitions 里定义的 key 作为字段名
+      # axis: "Synthesis"
+      # feature: "CL_PG_ratio"
+      # role_in_argument: "primary_positive"
+      # evidence_type: "RNA+lipid"
+      # ...
+    evidence_note: ""   # 关于本行的数据支持/来源的简短说明（可以提到 p 值区间、批次数等）
+                        # 例如：“在三批 RNA-seq 与两批脂质组学中表现一致，Stouffer Z_meta < -2。”
+    link_to_figures: [] # 若本行在某些图中也出现，写出对应编号，如 ["Figure 6E", "Figure 7C"]
+    notes_for_writing: "" # 写作提示：有哪些词/句子你希望在正文中出现？
+                          # 例如：“强调该指标与 CL 可用性高度相关，可作为‘合成轴瓶颈’的核心证据。”
+
+# ---------- 5. Summary for Writing：整张表的“写作摘要” ----------
+summary_for_writing:
+  main_take_home_message: "" # 1–2 句：本表整体要传达的 take-home message
+                             # 例如：“综合多组学证据，本表定义了 5 条 EphB1 下游机制轴及其关键 readouts。”
+  pattern_summary: ""        # 概括 across rows 的模式（哪些类别占主导、正/负证据如何分布）
+                             # 例如：“与合成轴相比，氧化与膜环境轴中负向证据比例更高，提示 EphB1 缺失主要抑制 CL 氧化相关程序。”
+  anomalies_or_limits: ""    # 特别需要在 Discussion 中提到的不一致/局限
+                             # 例如：“部分候选基因仅在单一批次中显著，因此被标记为 secondary 证据。”
+  link_to_previous: ""       # 与上一节结果的承接句
+                             # 例如：“在观察到多条线粒体相关通路受 EphB1 缺失影响后，我们进一步将这些信号整合为若干机制轴。”
+  transition_to_next: ""     # 引出下一节的过渡句
+                             # 例如：“基于本表定义的机制轴，我们随后计算跨组学综合机制得分，以定量比较其整体强弱。”
+
+# ---------- 6. AI Writing Hints：写作风格与输出偏好 ----------
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"]
+    # 希望从本 schema 主要生成哪些部分？
+    # 可选："Results" / "Discussion_mini" / "Methods_diff"
+  tone: "neutral"
+    # 写作语气："neutral"（默认科研语气）/ "cautious" / "confident"
+  target_journal_style: ""
+    # 可填目标期刊作为风格参考，如："Cell Metabolism", "Nature Immunology"
+  language: "zh_en_mix"
+    # 输出语言："zh" / "en" / "zh_en_mix"

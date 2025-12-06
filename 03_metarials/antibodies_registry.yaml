@@ -1,0 +1,13 @@
+gapdh:
+  vendor: 
+  catalog: 
+  lot: 
+  host: mouse
+  dilution: 1:2000
+  incubation: "4C overnight"
+lycat:
+  vendor: Abcam
+  catalog: ab153987
+  lot: 
+  host: rabbit
+  dilution: 1:500

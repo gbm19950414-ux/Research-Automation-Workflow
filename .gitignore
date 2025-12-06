@@ -1,16 +1,11 @@
-# 默认忽略根目录下的所有内容
-/*
+# Ignore everything by default
+*
 
-# 允许跟踪 .gitignore 自身
-!/.gitignore
+# Allow directory traversal
+!*/
 
-# 允许跟踪 requirements.txt（如果需要）
-!/requirements.txt
-
-# 允许跟踪 05_analysis 及其所有内容
-!/05_analysis
-!/05_analysis/**
-# 忽略 macOS Finder 产生的垃圾文件
-**/.DS_Store
-05_analysis/.DS_Store
-05_analysis/.DS_Store
+# Track YAML, Python, and R files anywhere in the repository
+!*.yaml
+!*.yml
+!*.py
+!*.R
