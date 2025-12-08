@@ -1,0 +1,9 @@
+# export placeholder
+# export.yaml
+export:
+  format: "pdf"
+  dpi: 450
+  vector: true
+  embed_fonts: true
+  transparent: false
+  color_mode: "RGB"

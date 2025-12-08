@@ -1,0 +1,91 @@
+# layout placeholder
+# layout.yaml
+scale_policy:
+  allow_figure_size_change: true
+  lock_font_sizes: true
+  lock_line_widths: true
+
+typography:
+  font_family: "Arial"
+  embed_font_type: "TrueType42"
+  sizes_pt:
+    panel_label: 8
+    axis_title: 7
+    tick_label: 5
+    legend: 5
+    annotation: 5
+  weights:
+    panel_label: "bold"
+
+linework:
+  linewidth_pt_default: 0.5
+  linewidth_pt_range: [0.25, 1.0]
+  spine_width_pt: 0.5
+
+axes:
+  grid: false
+  require_no_gridlines: true
+  show_spines: ["left", "bottom"]
+  hide_spines: ["right", "top"]
+  show_ticks: ["left", "bottom"]
+  tick_direction: "out"
+  tick_major_length_pt: 2.5
+  tick_major_width_pt: 0.5
+  minor_ticks: false
+  tick_minor_length_pt: 1.5
+  tick_minor_width_pt: 0.5
+  require_units_in_parentheses: true
+  axis_title_template: "{name}（{unit}）"
+  shadow: false
+  avoid_text_overlap: true
+
+legend:
+  frameon: false
+  fontsize_pt: 5
+  handlelength_pt: 6
+  markerscale: 1.0
+
+panel_label:
+  enabled: true
+  series: ["A","B","C","D","E","F","G","H","I","J"]
+  position: "upper_left"
+  offset_mm: [2, 2]
+  bbox:
+    enabled: false
+    pad_mm: 1
+    linewidth_pt: 0.5
+    facecolor: null
+
+panel_title:
+  method: suptitle
+  offset_mm: [2.0, 4.0]
+  fontsize_pt: 8
+  weight: bold
+
+safety_checks:
+  enforce_linewidth_range: true
+  enforce_font_sizes: true
+  assert_units_in_axis_titles: true
+  assert_no_gridlines: true
+  enforce_panel_width_range: true
+  enforce_figure_width_range: true
+
+statistics:
+  enabled: true
+  show_ns: false
+  p_thr1: 0.01
+  p_thr2: 0.05
+  pad_frac: 0.06
+  star_fontsize_pt: 4
+# 每种图型的默认外观
+boxplot:
+  dodge: true
+  box_width: 0.6
+  fliersize: 0
+
+strip:
+  enabled: true
+  size: 2.0
+  alpha: 0.6
+  jitter: 0.15
+  hue_colored: false   # true = 按 hue 上色；false = 统一黑色

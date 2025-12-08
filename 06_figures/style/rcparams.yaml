@@ -1,0 +1,44 @@
+# rcparams placeholder
+# rcparams.yaml
+rcparams:
+  "figure.figsize": [1.65, 1.63]  # 图形尺寸（宽inch, 高inch）
+  "font.size": 7                  # 全局字体大小（pt）
+  "axes.labelsize": 7             # 坐标轴标题字体大小（pt）
+  "axes.titlesize": 7             # 子图标题字体大小（pt）
+  "xtick.labelsize": 5            # x轴刻度标签字体大小（pt）
+  "ytick.labelsize": 5            # y轴刻度标签字体大小（pt）
+  "axes.titlelocation": "left"    # 子图标题左对齐
+  "axes.titley": 1.0              # 子图标题竖直位置（1.0=顶端）
+  "axes.titlepad": 2.0            # 子图标题与绘图区距离（pt）
+  "lines.markersize": 1           # 默认点标记大小（pt）
+  "lines.markeredgewidth": 0.5    # 点标记边线宽度（pt）
+  "font.family": "sans-serif"     # 字体族：无衬线
+  "font.sans-serif": ["Arial", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "Noto Sans CJK SC", "Arial Unicode MS", "DejaVu Sans"]  # 可选的无衬线字体列表
+  "pdf.fonttype": 42              # PDF 内嵌字体类型（42=TrueType）
+  "ps.fonttype": 42               # PS 输出字体类型（42=TrueType）
+  "savefig.format": "pdf"         # 保存图像的默认格式
+  "savefig.dpi": 450              # 保存图像的分辨率
+  "figure.autolayout": false      # 是否自动调整布局以适应文字
+  "axes.grid": false              # 是否显示坐标网格线
+  "axes.spines.right": false      # 隐藏右边框
+  "axes.spines.top": false        # 隐藏上边框
+  "legend.fontsize": 5            # 图例字体大小（pt）
+  "lines.linewidth": 0.5          # 线宽（pt）
+  "axes.linewidth": 0.5           # 坐标轴线宽（pt）
+  "xtick.direction": "out"        # x轴刻度朝外
+  "ytick.direction": "out"        # y轴刻度朝外
+  "xtick.major.size": 2.5         # x轴主刻度长度（pt）
+  "ytick.major.size": 2.5         # y轴主刻度长度（pt）
+  "xtick.major.width": 0.5        # x轴主刻度线宽（pt）
+  "ytick.major.width": 0.5        # y轴主刻度线宽（pt）
+  "xtick.minor.visible": false    # 是否显示 x轴次刻度
+  "ytick.minor.visible": false    # 是否显示 y轴次刻度
+  "xtick.minor.size": 1.5         # x轴次刻度长度（pt）
+  "ytick.minor.size": 1.5         # y轴次刻度长度（pt）
+  "xtick.minor.width": 0.5        # x轴次刻度线宽（pt）
+  "ytick.minor.width": 0.5        # y轴次刻度线宽（pt）
+  "legend.frameon": false         # 关闭图例外框
+errorbar:
+  linewidth: 0.5    # 误差棒竖线宽度
+  capsize: 1        # 端帽长度
+  capthick: 0.5     # 端帽线宽

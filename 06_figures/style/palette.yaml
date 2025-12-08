@@ -1,0 +1,7 @@
+# palette placeholder
+# palette.yaml
+color:
+  mode: "RGB"
+  palette:
+    WT: "#66c2a5"
+    HO: "#fc8d62"

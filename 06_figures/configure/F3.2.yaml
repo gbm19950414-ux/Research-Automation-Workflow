@@ -1,0 +1,57 @@
+title: "EphB1 缺失不改变线粒体数量"
+out: "F3.2"
+size:
+  width_mm: 44.5   # 多类别时建议双栏；如需单栏就 89
+  high_mm: 42.5
+constrained_layout: true
+panels:
+  - id: a
+    type: box
+    data: /Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_split/42_E62_线粒体总量变化_E62_Mito_Isolation_16S_stats.xlsx
+    mapping:
+      x: "gene"
+      y: "fold_change"
+      hue: "genetype"         # WT/HO
+    # 写“真实存在且拼写一致”的类别值；大小写/空格要与数据一致
+    order: 
+    - "16S"
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Fold Change"
+
+    ylim: [0, 2]        # ✅ y 轴范围从 0 到 2
+
+    x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
+      
+    strip: true            # 叠加散点
+    stats:                 # 可选：显著性标注
+      enabled: true
+      source: /Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_split/42_E62_线粒体总量变化_E62_Mito_Isolation_16S_stats.xlsx   # ✅ 指向存有 p 值的文件
+      sheet: "pair_stats"
+      column: p_value                 # ✅ 指明哪一列存 p 值
+      pairs: [["WT", "HO"]]           # ✅ 仍指明需要比较的组
+  - id: b
+    type: box
+    data: /Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx
+    mapping:
+      x: "gene"
+      y: "fold_change"
+      hue: "genetype"         # WT/HO
+    # 写“真实存在且拼写一致”的类别值；大小写/空格要与数据一致
+    order: 
+    - "nd1"
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Fold Change"
+
+    ylim: [0, 2]        # ✅ y 轴范围从 0 到 2
+
+    x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
+      
+    strip: true            # 叠加散点
+    stats:                 # 可选：显著性标注
+      enabled: true
+      source: /Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx   # ✅ 指向存有 p 值的文件
+      sheet: "pair_stats"
+      column: p_value                 # ✅ 指明哪一列存 p 值
+      pairs: [["WT", "HO"]]           # ✅ 仍指明需要比较的组

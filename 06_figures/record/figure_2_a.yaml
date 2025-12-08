@@ -1,0 +1,67 @@
+meta:
+  figure: "2"
+  panel: "a"
+  short_title: "EphB1 缺失不影响 TNF-α/IL-6 的经典分泌"
+  chapter: "3.2 EphB1 缺失不影响 NLRP3 炎症小体 priming–ASC–caspase-1 激活，差异集中在 GSDMD 膜孔形成/内容物外排环节"
+  experiment_id: "2025-03-21_TNF_IL6_ELISA"
+  version: 1
+
+assets:
+  main_figure_file: "figures/F3/F3_4_TNF_IL6_ELISA.pdf"
+  raw_data_files:
+    - "data/ELISA/TNF_IL6_raw.csv"
+  stats_files:
+    - "stats/TNF_IL6_stats.csv"
+  analysis_scripts:
+    - "scripts/figure_3_4_TNF_IL6_ELISA.R"
+  supplementary_items:
+    - ""
+
+question:
+  context_from_previous: "前一节结果提示 EphB1 缺失降低焦亡，但尚不清楚差异发生在炎症小体通路的哪个阶段。"
+  core_question: "EphB1 缺失是否会造成经典分泌（TNF-α/IL-6）能力的全局性削弱？"
+  hypothesis_or_expectation: "若 EphB1 缺失的作用点位于 GSDMD 执行端，而非上游 priming 或分泌机械，则经典分泌途径不应受影响。"
+  importance_reason: "排除普遍分泌缺陷是明确炎症小体/焦亡特异性差异的前提。"
+
+rationale:
+  model_and_system: "使用 WT 与 EphB1−/− 原代腹腔巨噬细胞，因为该系统 TLR4-NF-κB 经典炎症反应稳定、可重复。"
+  key_variables: "比较 WT vs KO 在 LPS 刺激下 TNF-α 与 IL-6 的经典分泌能力。"
+  control_logic: >
+    IL-1β 的成熟和分泌依赖 caspase-1 的切割及 GSDMD 形成的膜孔，因此在焦亡受抑制的条件下，其上清浓度预期会显著下降。
+    而IL-6（2h）与 TNF-α（4h）分别代表不同时间窗口的经典分泌，不依赖焦亡执行；
+    未见差异可排除普遍分泌不足。
+  core_justification: "若 EphB1 缺失不影响经典分泌，则炎症小体/焦亡相关的释放缺陷更可能源自 GSDMD 下游膜事件。"
+
+methods:
+  inherits_from_protocol: "default_TLR4_cytokine_release"
+  biological_material: "8–12 周龄 C57BL/6 WT 与 EphB1−/− 小鼠原代腹腔巨噬细胞。"
+  experimental_groups: "WT 与 KO，均接受单一 LPS 刺激。"
+  stimuli_and_treatment: "LPS（100 ng/mL），分别在 2h（检测 IL-6）与 4h（检测 TNF-α）收集上清。"
+  time_points: "IL-6：2h；TNF-α：4h。"
+  dose_info: ""
+  readout_and_assay: "使用商业 ELISA 试剂盒定量 TNF-α 与 IL-6；检测信号经空白孔与 480 nm 背景双重扣除，并以 MTT 结果对细胞数量归一化。"
+  replicates: "每组 n ≥ 3，≥3 次独立实验重复。"
+  analysis_notes: "双尾非配对 t 检验；数据表示为均值 ± SD。"
+  minimal_methods_summary: "原代巨噬细胞经 LPS 刺激后于不同时间点收集上清，通过 ELISA 测量 TNF-α/IL-6，并以 MTT 归一化细胞数量。"
+
+results:
+  data_direction: "LPS 刺激后 TNF-α 与 IL-6 在 WT 与 KO 中均上升；KO 略低但无显著性差异。"
+  stats_summary: "双尾 t 检验，均无显著性差异（ns）。"
+  key_numbers: ""
+  group_difference_statement: "EphB1 缺失不影响 LPS 诱导的 TNF-α/IL-6 分泌能力。"
+  robustness_and_qc: "趋势在 ≥3 次独立实验中均一致；数据经双重背景扣除与 MTT 校正。"
+  anomalies_or_limits: "KO 绝对值略低但趋势不稳定，与细胞密度轻微差异相关。"
+
+interpretation:
+  minimal_bio_interpretation: "结果表明 EphB1 缺失未造成经典分泌的普遍性缺陷。"
+  alternative_explanations: "不排除更长刺激时间或更强强度下可能出现轻微差异。"
+  summary_type: "negative, elimination"
+  claim_supported: "EphB1 缺失不影响 TLR4 介导的经典分泌途径。"
+  link_to_previous: "在明确焦亡受抑制后，本节排除了上游经典分泌不足的可能性。"
+  transition_to_next: "下一步对 inflammasome priming、ASC 聚集和 caspase-1 激活进行系统比对，以定位差异节点。"
+
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"]
+  tone: "neutral"
+  target_journal_style: "Cell Metabolism"
+  language: "zh_en_mix"

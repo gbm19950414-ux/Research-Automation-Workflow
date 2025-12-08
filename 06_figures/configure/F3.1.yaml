@@ -1,0 +1,36 @@
+title: "EphB1 缺失降低线粒体膜电位"
+out: "F3.1"
+size:
+  width_mm: 89   # 多类别时建议双栏；如需单栏就 89
+  high_mm: 42.5
+constrained_layout: true
+panels:
+  - id: a
+    type: timeseries
+    data: /Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/microplate_reader/线粒体完整性检测/E56_null_tmrm_200nm_30min_stats.xlsx
+    mapping:
+      x: time_point
+      y: value
+      hue: group
+    # 写“真实存在且拼写一致”的类别值；大小写/空格要与数据一致
+    order: 
+    - "16S"
+    hue_order: ["WT", "HO"]
+    x_label: "Time (min)"
+    y_label: "(a.u.)"
+
+    ylim: [60000, 120000]        # ✅ y 轴范围从 0 到 2
+
+    x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
+    ticks:
+      x:
+        major_locator: 20 #x轴刻度线长度
+        major_formatter: "{:.0f}" #小数点后的位数
+
+    strip: true            # 叠加散点
+    stats:                 # 可选：显著性标注
+      enabled: true
+      source: /Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/microplate_reader/线粒体完整性检测/E56_null_tmrm_200nm_30min_stats.xlsx   # ✅ 指向存有 p 值的文件
+      sheet: "Sheet1"
+      column: p_value                 # ✅ 指明哪一列存 p 值
+      pairs: [["WT", "HO"]]           # ✅ 仍指明需要比较的组

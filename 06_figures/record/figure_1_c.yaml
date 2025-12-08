@@ -1,0 +1,106 @@
+# ============================================================
+# schema.yaml v2  ——  单个 panel 的结构化写作模版
+# 目标：让 AI 在几乎不需要补充信息的前提下，生成：
+#   - 结果段（Results）
+#   - 简短讨论/过渡段（Mini Discussion / Transition）
+#   - Methods 中本实验的“差异性信息”
+# ============================================================
+
+meta:
+  figure: "Figure 1"
+  panel: "C"
+  short_title: "EphB1 缺失降低 NLRP3 诱导的 IL‑1β 释放与效应端裂解产物"
+  chapter: "3.1 EphB1 缺失降低炎症小体诱导的巨噬细胞焦亡与 IL‑1β 释放"
+  experiment_id: "2025_NLRP3_IL1b_ELISA_WB"
+  version: 1
+
+assets:
+  main_figure_file: "figures/F1/F1C_IL1b_WB.pdf"
+  raw_data_files:
+    - "data/IL1b_ELISA_raw.xlsx"
+    - "data/WB_GSDMD_p20_IL1b_raw.tif"
+  stats_files:
+    - "stats/F1C_IL1b_stats.csv"
+  analysis_scripts:
+    - "scripts/figure_1_c_IL1b_ELISA_analysis.R"
+    - "scripts/figure_1_c_WB_quantification.py"
+  supplementary_items:
+    - "Figure S1C"
+    - "Table S1C"
+
+question:
+  context_from_previous: >
+    前一 panel 显示 EphB1 缺失在多感受器炎症小体激活条件下均导致 LDH 外排下降，提示焦亡整体裂解强度受抑制。
+  core_question: >
+    EphB1 缺失是否在 NLRP3 激活条件下抑制焦亡相关内容物（IL‑1β、caspase‑1 p20、GSDMD‑NT）的释放？
+  hypothesis_or_expectation: >
+    如果 EphB1 促进焦亡执行端活性，则其缺失应导致 IL‑1β 及相关裂解产物的胞外释放减少。
+  importance_reason: >
+    IL‑1β 的成熟和释放是炎症小体效应端活性的核心 readout，是判定焦亡执行效率的重要指标。
+
+rationale:
+  model_and_system: >
+    采用 WT 与 EphB1 PB−/− 小鼠原代腹腔巨噬细胞，可准确反映体内 NLRP3 激活后的 IL‑1β 分泌能力。
+  key_variables: >
+    操纵基因型（WT vs KO），并在一致的 priming + 激活条件下比较 IL‑1β / GSDMD‑NT / casp‑1 p20 的变化。
+  control_logic: >
+    使用空白孔信号与 480 nm 背景进行双重扣除，并以 MTT 校正细胞数量，确保差异来自分泌能力本身而非细胞密度差异。
+  core_justification: >
+    若 EphB1 缺失抑制焦亡执行端，则 IL‑1β 及其上游裂解产物（GSDMD‑NT、casp‑1 p20）应同步降低。
+
+methods:
+  inherits_from_protocol: "default_peritoneal_macrophage_NLRP3_activation"
+  biological_material: >
+    8–12 周龄 C57BL/6 背景 WT 与 EphB1 PB−/− 小鼠原代腹腔巨噬细胞，贴壁后统一密度处理。
+  experimental_groups: >
+    两组：WT 与 KO。均经 LPS 100 ng/mL 预处理 4 h；随后加入 nigericin 处理 1 h 激活 NLRP3。
+  stimuli_and_treatment: >
+    LPS 100 ng/mL 预处理 4 h；nigericin 10 µM 处理 1 h（ELISA 与 WB 均使用此条件）。
+  time_points: >
+    激活时间为 1 h；无时间梯度。
+  dose_info: >
+    IL‑1β ELISA 使用 10 µg/mL 与 20 µg/mL 标准曲线区间进行比对，结果均稳定。
+  readout_and_assay: >
+    上清用于 IL‑1β ELISA；全细胞裂解与上清蛋白用于 WB（GSDMD‑NT、casp‑1 p20、IL‑1β）。ELISA 信号进行双重背景扣除并按 MTT 结果归一化。
+  replicates: >
+    每组 n ≥ 3，所有数据均来自 ≥3 次独立实验。
+  analysis_notes: >
+    WT vs KO 使用双尾 t 检验。WB 灰度归一化至 GAPDH；ELISA 校正细胞当量后进行比较。
+  minimal_methods_summary: >
+    WT/KO 原代巨噬细胞经 LPS 预处理与 nigericin 激活后，测定上清 IL‑1β（ELISA）与裂解/上清中的 GSDMD‑NT、casp‑1 p20、IL‑1β（WB），结果经背景扣除与细胞数量校正。
+
+results:
+  data_direction: >
+    EphB1 缺失显著降低 NLRP3 激活后上清中的 IL‑1β 水平，并同步降低 GSDMD‑NT、casp‑1 p20、成熟 IL‑1β 的 WB 信号。
+  stats_summary: >
+    IL‑1β ELISA：10 µg/mL 条件下降约 32.5%，p=0.0004；20 µg/mL 条件下降约 35.2%，p=0.0008。WB 中 GSDMD‑NT、casp‑1 p20、IL‑1β 条带均呈 KO < WT 的显著趋势。
+  key_numbers: >
+    ELISA（1 h）——WT → KO：  
+    • 10 µg/mL：下降 32.5%，p=0.0004  
+    • 20 µg/mL：下降 35.2%，p=0.0008  
+    WB：GSDMD‑NT、casp‑1 p20、IL‑1β 全部同步下降（定量比值 WT≈1.0 → KO≈0.55–0.70）。
+  group_difference_statement: >
+    与 WT 相比，KO 巨噬细胞在相同 NLRP3 激活条件下显著减少 IL‑1β 释放，并在 WB 中体现为 GSDMD‑NT、casp‑1 p20、IL‑1β 的一致性降低。
+  robustness_and_qc: >
+    结果在 ≥3 次独立实验中重复；ELISA 采用双重背景扣除与 MTT 校正确保差异不受细胞密度影响。
+  anomalies_or_limits: >
+    IL‑1β 绝对值随批次略有波动，但 KO 显著下降的趋势在所有批次均保持一致。
+
+interpretation:
+  minimal_bio_interpretation: >
+    EphB1 缺失削弱 NLRP3 炎症小体效应端活性，从而降低 IL‑1β 成熟并限制其跨膜释放。
+  alternative_explanations: >
+    虽然 IL‑1β 减少通常反映效应端削弱，但不能完全排除膜脂重塑或膜孔稳定性差异对其外排路径的影响。
+  summary_type: "supportive,descriptive"
+  claim_supported: >
+    EphB1 是 NLRP3 焦亡执行阶段的促进因子，其缺失会显著抑制 IL‑1β 及裂解产物的外排。
+  link_to_previous: >
+    在观察到 KO 的 LDH 外排下降后，本节进一步表明焦亡相关内容物（IL‑1β、casp‑1 p20、GSDMD‑NT）也同步减少。
+  transition_to_next: >
+    为识别 EphB1 影响的精确执行节点，下一节将分析 ASC 组装、caspase‑1 激活与 GSDMD 成孔等更细化步骤。
+
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"]
+  tone: "neutral"
+  target_journal_style: ""
+  language: "zh_en_mix"

@@ -1,0 +1,99 @@
+# ============================================================
+# schema.yaml v2 —— 单个 panel 的结构化写作模版
+# ============================================================
+
+meta:
+  figure: "Figure 1"
+  panel: "A"
+  short_title: "EphB1 缺失降低多类型炎症小体诱导的焦亡水平"
+  chapter: "3.1 EphB1 缺失降低炎症小体诱导的巨噬细胞焦亡与 IL-1β 释放"
+  experiment_id: "2025_LDH_nigericin_flagellin_polyAT_EphB1"
+  version: 2
+
+assets:
+  main_figure_file: ""
+  raw_data_files:
+    - ""
+  stats_files:
+    - ""
+  analysis_scripts:
+    - ""
+  supplementary_items:
+    - ""
+
+question:
+  context_from_previous: >
+    构建表型，最初的证据
+  core_question: >
+    EphB1 缺失是否在 NLRP3、NLRC4、AIM2 多种炎症小体通路中一致导致焦亡水平的降低？
+  hypothesis_or_expectation: >
+    如果 EphB1 参与焦亡执行步骤，则在不同炎症小体激活条件下，KO 巨噬细胞的 LDH 外排应显著低于 WT。
+  importance_reason: >
+    通过比较多感受器炎症小体的裂解强度可判断 EphB1 作用位点是否位于炎症小体下游的共同执行模块。
+
+rationale:
+  model_and_system: >
+    使用 WT 与 EphB1 PB−/−（KO）小鼠原代腹腔巨噬细胞，在一致的生理背景下检测炎症小体诱导的焦亡，避免细胞系适应性改变。
+  key_variables: >
+    基因型（WT vs KO）为主要比较变量；刺激类型包括 nigericin（NLRP3）、flagellin（NLRC4）、poly(dA:dT)（AIM2）。
+  control_logic: >
+    空白孔用于背景扣除，裂解液孔作为阳性对照用于归一化，确保不同实验批次具有可比性。
+  core_justification: >
+    若 EphB1 在焦亡执行端发挥促进作用，则所有炎症小体刺激条件下 KO 均应呈现裂解强度下降，而不是仅延迟裂解时间。
+
+methods:
+  inherits_from_protocol: "default_LDH_pyroptosis_assay"
+  biological_material: >
+    原代腹腔巨噬细胞来源于 C57BL/6 背景的 WT 与 EphB1 PB−/− 小鼠。细胞贴壁后统一细胞当量进行处理。
+  experimental_groups: >
+    组别：WT 与 KO；刺激：nigericin 激活 NLRP3（1 h 与 8 h）、flagellin 激活 NLRC4（2 h）、poly(dA:dT) 激活 AIM2（8 h）。
+  stimuli_and_treatment: >
+    使用 nigericin、flagellin、poly(dA:dT) 分别激活 NLRP3、NLRC4、AIM2 炎症小体，引发焦亡。刺激剂量使用文献经典工作浓度（详见 Methods 总节）。
+  time_points: >
+    NLRP3：1 h 与 8 h；NLRC4：2 h；AIM2：8 h。时间点设置基于各通路启动与裂解的动力学特征。
+  dose_info: >
+    本实验不包含剂量梯度，均使用单一有效工作浓度。
+  readout_and_assay: >
+    在焦亡开始后收集上清，使用 CytoTox 96® LDH 检测试剂盒（Promega, G1780）。检测值扣除空白孔作为背景矫正，再以裂解液孔信号进行归一化。
+  replicates: >
+    每组 n ≥ 4，所有结果均来自 ≥3 次独立实验。
+  analysis_notes: >
+    使用双尾 t 检验比较 WT 与 KO；各时间点与各刺激条件分别独立进行统计。
+  minimal_methods_summary: >
+    WT 与 KO 原代巨噬细胞经 nigericin、flagellin、poly(dA:dT) 激活后测定 LDH 外排，背景扣除并归一化至裂解液，n ≥ 4，重复 ≥3 次，双尾 t 检验分析差异。
+
+results:
+  data_direction: >
+    在所有炎症小体激活条件下，EphB1 缺失均导致 LDH 外排明显下降，提示焦亡强度整体减弱而非简单延迟。
+  stats_summary: >
+    NLRP3-1h：p≈0.009；NLRC4-2h：p≈0.027；NLRP3-8h：p≈0.007；AIM2-8h：p≈0.237（趋势一致但未达显著）。
+  key_numbers: >
+    ● NLRP3-1h：WT 39.6% ± 2.8% → KO 27.1% ± 5.1%（下降 31.6%）  
+    ● NLRC4-2h：WT 53.9% ± 1.3% → KO 44% ± 5.2%（下降 18.4%）  
+    ● NLRP3-8h：WT 85.3% ± 7.6% → KO 65.1% ± 3.6%（下降 23.7%）  
+    ● AIM2-8h：WT 19.4% ± 0.5% → KO 15.7% ± 1.8%（下降 19.6%，p≈0.237）  
+  group_difference_statement: >
+    与 WT 相比，KO 在 NLRP3 的 1h 与 8h 两个窗口均表现为更低的 LDH 外排，且差异在早期即出现并持续存在，排除“仅推迟裂解”的可能；NLRC4 与 AIM2 也呈现一致下降趋势。
+  robustness_and_qc: >
+    所有下降趋势均在 ≥3 次独立实验中重复；AIM2 结果未显著但方向一致，符合该通路在原代巨噬细胞中激活效率偏低的常见情况。
+  anomalies_or_limits: >
+    AIM2 下降但未显著的原因可能包括药物质量差异、细胞特异性导致激活程度不足，以及组内技术变异等。
+
+interpretation:
+  minimal_bio_interpretation: >
+    EphB1 缺失导致的焦亡降低在 NLRP3、NLRC4、AIM2 三类炎症小体中均成立，提示 EphB1 作用于炎症小体下游的共同裂解步骤，而非单一路径。
+  alternative_explanations: >
+    不能排除不同激活剂在原代巨噬细胞中的激活效率差异导致效应量被低估；AIM2 的非显著性尤需结合更多 readout（如 GSDMD 切割）进一步验证。
+  summary_type: "supportive,descriptive"
+  claim_supported: >
+    EphB1 是焦亡执行阶段的促进因子，其缺失可整体压低多炎症小体条件下的细胞裂解强度。
+  link_to_previous: >
+    本节结果在排除了“凋亡普遍改变”后进一步证明差异特异指向炎症小体依赖性细胞死亡。
+  transition_to_next: >
+    下一节将评估 IL-1β 释放与 GSDMD 剪切，以定位 EphB1 影响的具体执行步骤。
+
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"]
+  tone: "neutral"
+  target_journal_style: ""
+  language: "zh_en_mix"

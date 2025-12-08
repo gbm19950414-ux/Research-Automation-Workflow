@@ -1,0 +1,61 @@
+title: "EphB1 缺失焦亡水平降低"
+out: "figure_1_b"
+size:
+  width_mm: 84   # 多类别时建议双栏；如需单栏就 89
+  high_mm: 60
+constrained_layout: true
+layout:
+  # 以“画布整体 size” 为基准，用比例控制绘图区与四周留白的关系
+  # 下面这些值都是占总宽度/总高度的比例（0–1 之间）
+  axis_outer_frac:
+    left: 0.05    # 占总宽度的 20% 作为 y 轴标题 + 刻度标签 + 与轴线之间的空间
+    right: 0.00   # 占总宽度的 5% 作为右侧空白
+    bottom: 0.05  # 占总高度的 25% 作为 x 轴标题 + 刻度标签 + 与轴线之间的空间
+    top: 0.0     # 占总高度的 10% 作为顶部空白（panel 标识等）
+
+  # 剩余的区域 (1 - left - right, 1 - top - bottom) 将作为“坐标轴绘图区”
+  # 这样当整体 size 变化时，坐标轴与画布的比例保持不变
+
+  # 在“外边距内部”控制轴标题与刻度标签、刻度标签与坐标轴之间的距离（pt）
+  # 后续脚本将用这些值转成 theme(axis.title.margin, axis.text.margin) 等
+  axis_gap_pt:
+    x_title_to_ticks: 5   # x 轴标题与 x 轴刻度标签之间的距离
+    x_ticks_to_axis: 2    # x 轴刻度标签与 x 轴轴线之间的距离
+    y_title_to_ticks: 5   # y 轴标题与 y 轴刻度标签之间的距离
+    y_ticks_to_axis: 2    # y 轴刻度标签与 y 轴轴线之间的距离
+panels:
+  - id: a
+    type: box
+    data: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/microplate_reader/ldh检测焦亡水平/ldh原始数据_long_split/E18_stats.xlsx"
+    mapping:
+      x: "drug"
+      "y": "normalized"
+      hue: "genetype"         # WT/HO
+    # 写“真实存在且拼写一致”的类别值；大小写/空格要与数据一致
+    order:
+      - "medium"
+      - "lps4h+nigeiricin1h"
+      - "lps4h+Flagellin2h"
+      - "lps4h+Poly (dA:dT)8h"
+      - "lps4h+nigeiricin8h"
+    rename_x:
+      - "Control"
+      - "NIG 1h"
+      - "FLA 1h"
+      - "Poly (dA:dT) 8h"
+      - "NIG 8h"
+    hue_order: 
+      - "WT"
+      - "HO"
+    x_label: ""
+    y_label: "Normalized to positive"
+
+    x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
+      
+    strip: true            # 叠加散点
+    stats:                 # 可选：显著性标注
+      enabled: true
+      source: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/microplate_reader/ldh检测焦亡水平/ldh原始数据_long_split/E18_stats.xlsx"   # ✅ 指向存有 p 值的文件
+      sheet: "pair_stats"
+      column: "p_value"                 # ✅ 指明哪一列存 p 值
+      pairs: [["WT", "HO"]]           # ✅ 仍指明需要比较的组

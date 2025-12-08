@@ -1,0 +1,104 @@
+title: "EphB1 细胞因子 mRNA 表达变化（qPCR）"
+out: "figure_2_cytokine_qpcr"
+
+size:
+  width_mm: 84
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  # a: Il1b
+  - id: a
+    type: box
+    data: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/60_E17_细胞因子检测_E17_il1b_stats.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "ctrl"
+      - "lps_4h"
+    rename_x:
+      "ctrl": "Control"
+      "lps_4h": "LPS"
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Il1b mRNA (2^-ΔΔCt)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/60_E17_细胞因子检测_E17_il1b_stats.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  # b: Il6
+  - id: b
+    type: box
+    data: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/60_E17_细胞因子检测_E17_il6_stats.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order:
+      - "ctrl"
+      - "lps_4h"
+    rename_x:
+      "ctrl": "Control"
+      "lps_4h": "LPS"
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Il6 mRNA (2^-ΔΔCt)"
+    x_tick_rotation: 0
+    strip: true
+    stats:
+      enabled: true
+      source: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/60_E17_细胞因子检测_E17_il6_stats.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  # c: Tnfa
+  - id: c
+    type: box
+    data: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/59_E16_细胞因子检测_E16_tnfa_stats.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order:
+      - "ctrl"
+      - "lps"
+    rename_x:
+      "ctrl": "Control"
+      "lps": "LPS"
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Tnfa mRNA (2^-ΔΔCt)"
+    x_tick_rotation: 0
+    strip: true
+    stats:
+      enabled: true
+      source: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/59_E16_细胞因子检测_E16_tnfa_stats.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
