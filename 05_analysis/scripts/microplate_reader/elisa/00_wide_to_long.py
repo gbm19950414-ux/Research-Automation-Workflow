@@ -9,8 +9,8 @@ import pandas as pd
 import os
 
 # 固定输入输出路径
-INPUT_PATH  = "/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/raw/microplate_reader/ELISA检测细胞因子/ELISA原始数据.xlsx"
-OUTPUT_PATH = "/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA原始数据_long.xlsx"
+INPUT_PATH  = "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/raw/microplate_reader/ELISA检测细胞因子/ELISA原始数据.xlsx"
+OUTPUT_PATH = "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA原始数据_long.xlsx"
 
 # 单元结构
 BLOCK_ROWS = 8     # 每个数据块的行数

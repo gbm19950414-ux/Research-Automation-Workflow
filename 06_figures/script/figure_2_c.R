@@ -19,5 +19,3 @@ wb_panel_from_yaml(
   style_rel  = style_rel,
   out_pdf    = out_pdf
 )
-
-

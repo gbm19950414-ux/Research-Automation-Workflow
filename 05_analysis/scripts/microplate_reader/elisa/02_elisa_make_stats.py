@@ -24,7 +24,7 @@ def robust_z(x):
     return (x - med) / mad
 
 def main():
-    pattern = "/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_*.xlsx"
+    pattern = "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_*.xlsx"
     input_files = glob.glob(pattern)
     if not input_files:
         raise SystemExit("未找到匹配的输入文件")
@@ -54,7 +54,7 @@ def main():
             d.groupby(["batch","antibody","group","drug","genotype"], dropna=False)["final_value"]
              .transform(robust_z)
         )
-        d["outlier"] = d["zscore"].abs() > 2.5
+        d["outlier"] = d["zscore"].abs() > 2.5     # zscore threshold
 
         full_df = d.copy()
         full_df.loc[full_df["outlier"], "final_value"] = np.nan

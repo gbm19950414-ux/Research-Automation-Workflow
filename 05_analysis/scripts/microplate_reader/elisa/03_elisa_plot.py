@@ -9,8 +9,8 @@ from statannotations.Annotator import Annotator
 
 from pathlib import Path
 # === 路径 ===
-INPUT_DIR = Path("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子")
-OUT_DIR = Path("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/processed/microplate_reader/ELISA检测细胞因子/figures")
+INPUT_DIR = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子")
+OUT_DIR = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/processed/microplate_reader/ELISA检测细胞因子/figures")
 OUT_DIR.mkdir(exist_ok=True)
 
 def main():

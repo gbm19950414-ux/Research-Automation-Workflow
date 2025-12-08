@@ -24,7 +24,7 @@ VALUE_COL = "value"
 
 # ==== 路径 ====
 OUTPUT_DIR = Path(
-    "/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/"
+    "/Volumes/Samsung_SSD_990_PRO_2TB_Media/发育生物所/"
     "博士课题/EphB1/04_data/processed/microplate_reader/线粒体完整性检测"
 )
 STYLE_PATH = Path("/mnt/data/外观指南.yaml") if Path("/mnt/data/外观指南.yaml").exists() else Path("/Users/gongbaoming/Library/Mobile Documents/com~apple~CloudDocs/phd_thesis/方法/外观指南.yaml")

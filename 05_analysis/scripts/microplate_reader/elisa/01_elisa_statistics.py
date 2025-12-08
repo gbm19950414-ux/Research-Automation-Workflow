@@ -136,8 +136,8 @@ def process_file(file_path, output_dir):
     print(f"处理完成，结果已保存到 {out_path}")
 
 def main():
-    input_dir = Path("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子/")
-    output_dir = Path("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子/")
+    input_dir = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子/")
+    output_dir = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/microplate_reader/ELISA检测细胞因子/")
 
     files = sorted(input_dir.glob("ELISA原始数据_long_batch_*.xlsx"))
     if not files:

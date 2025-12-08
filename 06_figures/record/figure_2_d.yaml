@@ -8,11 +8,11 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: ""              # 如 "Figure 3"
-  panel: ""               # 如 "A"
-  short_title: ""         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
-  chapter: ""             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: ""       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
+  figure: "Figure 3"              # 如 "Figure 3"
+  panel: "D"               # 如 "A"
+  short_title: "EphB1 缺失在多感受器第二信号触发下均降低 IL-1β 释放"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
+  chapter: "3.2 NLRP3 inflammasome activation"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
+  experiment_id: "2025-03-21_cross_sensor_IL1b_ELISA"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
 
 assets:
@@ -28,79 +28,79 @@ assets:
 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
-  context_from_previous: ""  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
+  context_from_previous: "上一节结果显示 EphB1 缺失不影响第一信号 priming 阶段的转录、蛋白丰度与细胞因子分泌。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
                              # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
-  core_question: ""          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
+  core_question: "EphB1 缺失是否影响第二信号阶段的炎症小体激活与焦亡终末表型？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
                              # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”
-  hypothesis_or_expectation: ""  # 你的假设或预期结果（1 句）
+  hypothesis_or_expectation: "若 EphB1 在执行阶段发挥作用，则其缺失应导致多种第二信号通路下 IL-1β 释放下降。"  # 你的假设或预期结果（1 句）
                              # 例如：“如果 EphB1 促进 NLRP3 炎性小体的效应端活性，则 EphB1 缺失应降低 IL-1β 的释放。”
-  importance_reason: ""      # 为什么这个问题重要/值得单列一节（1 句即可）
+  importance_reason: "通过跨感受器检测可以判断 EphB1 作用是否为通路特异性，或定位于炎症小体下游的共同执行步骤。"      # 为什么这个问题重要/值得单列一节（1 句即可）
                              # 例如：“IL-1β 是 NLRP3 炎性小体的关键功能 readout，用于评估效应端活性。”
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: ""       # 使用的模型/系统 + 选择理由
+  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，因其对各类炎症小体第二信号均具备典型反应特性。"       # 使用的模型/系统 + 选择理由
                              # 例如：“选用原代腹腔巨噬细胞，因为其对 NLRP3 激活高度敏感，且能反映体内炎症状态。”
-  key_variables: ""          # 本实验关注的关键变量 + 操纵方式
+  key_variables: "操纵基因型（WT vs Ephb1−/−）并分别给予三类炎症小体激活剂：nigericin（NLRP3 通路）、flagellin 胞质递送（NLRC4 通路）、poly(dA:dT）胞质递送（AIM2 通路）。"          # 本实验关注的关键变量 + 操纵方式
                              # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
-  control_logic: ""          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
+  control_logic: "通过在不同感受器通路下比较 IL-1β 释放，判断差异是否为感受器特异性。WT 为阳性对照。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
                              # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1−/− 的参照组。”
-  core_justification: ""     # 最关键的一句“设计理由”（可直接当自动摘要用）
+  core_justification: "若 EphB1 缺失在所有感受器通路中均降低焦亡，则说明其作用点位于执行端的共同步骤。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
                              # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1−/− 细胞在相同刺激下应释放更少 IL-1β。”
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
-  inherits_from_protocol: ""   # 引用全章或整篇论文的通用 protocol 名称，如 "default_peritoneal_macrophage_NLRP3_activation"
+  inherits_from_protocol: "default_peritoneal_macrophage_NLRP3_activation"   # 引用全章或整篇论文的通用 protocol 名称，如 "default_peritoneal_macrophage_NLRP3_activation"
                                # 之后可在 Methods 总节详细描述该 protocol。
-  biological_material: ""      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
+  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1−/− 小鼠原代腹腔巨噬细胞。"      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
                                # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1−/− 小鼠来源的原代腹腔巨噬细胞。”
-  experimental_groups: ""      # 组别及核心差异：基因型、处理、时间点
+  experimental_groups: "WT vs Ephb1−/−；分别接受 nigericin、flagellin 胞质递送、poly(dA:dT) 胞质递送。"      # 组别及核心差异：基因型、处理、时间点
                                # 例如：“按基因型分为 WT 和 Ephb1−/−，均接受 LPS 预处理 + ATP 激活。”
-  stimuli_and_treatment: ""    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
+  stimuli_and_treatment: "LPS 预激 4 h 后，分别用 nigericin（10 μM, 45–60 min）、flagellin/LFn 递送体系（30–45 min）、或 poly(dA:dT)（1 μg/mL, 30–45 min）激活各通路。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
                                # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
-  time_points: ""              # 关键测定时间点（如果不在上面已写清）
-  dose_info: ""                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
-  readout_and_assay: ""        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
+  time_points: "所有第二信号处理均在 LPS 4 h 后进行，处理 30–60 min 后采集上清用于 IL-1β ELISA。"              # 关键测定时间点（如果不在上面已写清）
+  dose_info: "无剂量梯度，使用标准激活剂浓度。"                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
+  readout_and_assay: "IL-1β ELISA；信号经空白孔与 480 nm 背景双重扣除，并根据 MTT 结果对细胞数量进行标准化矫正。"        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
                                # 例如：“使用 IL-1β ELISA 测定上清中 IL-1β，按厂商说明书操作。”
-  replicates: ""               # 生物学重复数 n，以及是否合并多次实验
+  replicates: "每组 n ≥ 3，数据来自 ≥3 次独立实验。"               # 生物学重复数 n，以及是否合并多次实验
                                # 例如：“每组 n = 4 生物学重复，结果合并自两次独立实验。”
-  analysis_notes: ""           # 本 panel 特有的分析方法/统计模型（如 normalization、配对 vs 非配对）
+  analysis_notes: "采用非配对双尾 t 检验统计显著性；ELISA 信号经背景扣除与 MTT 修正。"           # 本 panel 特有的分析方法/统计模型（如 normalization、配对 vs 非配对）
                                # 例如：“采用非配对双尾 t 检验；ELISA 结果按蛋白浓度归一化。”
-  minimal_methods_summary: ""  # 1–2 句，把上面内容压缩成将来写 Methods 时可以直接用的一小段。
+  minimal_methods_summary: "WT 与 Ephb1−/− 原代巨噬细胞 LPS 预激后分别给予 nigericin、flagellin 或 poly(dA:dT) 激活不同炎症小体通路，通过 IL-1β ELISA（含背景扣除与 MTT 标准化）比较组间差异。"
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
-  data_direction: ""           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
+  data_direction: "Ephb1−/− 巨噬细胞在 NLRP3、NLRC4 与 AIM2 三条炎症小体通路下的 IL-1β 释放均显著下降。"           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
                                # 例如：“在 LPS+ATP 刺激下，Ephb1−/− 巨噬细胞释放的 IL-1β 显著低于 WT。”
-  stats_summary: ""            # 统计显著性信息（检验方法、p 值区间即可）
+  stats_summary: "nigericin: ~50% ↓, p=0.005；flagellin: ~50% ↓, p=0.005；poly(dA:dT): ~50% ↓, p=0.005。"            # 统计显著性信息（检验方法、p 值区间即可）
                                # 例如：“非配对 t 检验，p < 0.01。”
-  key_numbers: ""              # 可选：fold change、均值±SEM、效应量（方便你之后查）
+  key_numbers: "三类激活剂均呈约 50% 的稳定下降趋势，均值 ± SD 差异显著。"              # 可选：fold change、均值±SEM、效应量（方便你之后查）
                                # 例如：“WT: 850 ± 120 pg/mL；Ephb1−/−: 410 ± 90 pg/mL；约下降 50%。”
-  group_difference_statement: "" # 用一两句把组间差异说清楚（可直接作为结果段主句）
+  group_difference_statement: "无论激活 NLRP3、NLRC4 或 AIM2，EphB1−/− 细胞的 IL-1β 释放均显著低于 WT。" # 用一两句把组间差异说清楚（可直接作为结果段主句）
                                  # 例如：“与 WT 相比，Ephb1−/− 巨噬细胞在相同刺激强度下产生的 IL-1β 减少。”
-  robustness_and_qc: ""        # 是否在多批次实验中重复、是否排除了明显 outlier 等
+  robustness_and_qc: "结果在 ≥3 次独立实验中一致；ELISA 信号经双背景扣除与 MTT 校正后仍保持稳固趋势。"        # 是否在多批次实验中重复、是否排除了明显 outlier 等
                                # 例如：“该趋势在两批独立实验中均一致，排除 1 个基于预设准则的 outlier 后结果不变。”
-  anomalies_or_limits: ""      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
+  anomalies_or_limits: "未观察到单一感受器通路中特殊的逆转或偏离。"      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
                                # 例如：“一批实验中 WT 绝对值略低，可能与细胞密度偏低有关。”
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
-  minimal_bio_interpretation: "" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
+  minimal_bio_interpretation: "EphB1 缺失在多种炎症小体第二信号刺激下均降低 IL-1β 分泌，提示其调控位点位于执行端的共同步骤。" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
                                  # 例如：“这些结果提示 EphB1 对 NLRP3 介导的 IL-1β 释放是促进性的。”
-  alternative_explanations: ""   # 可能的其他解释/局限（方便之后写 Discussion）
+  alternative_explanations: "不能排除 EphB1 影响膜脂微环境、GSDMD 打孔效率、ASC 聚集或 caspase-1 激活的可能。"   # 可能的其他解释/局限（方便之后写 Discussion）
                                  # 例如：“不能排除 EphB1 缺失影响前炎性细胞因子转录的可能。”
-  summary_type: ""               # 从下列类型中选一个或多个，用逗号分隔：
+  summary_type: "supportive, elimination"               # 从下列类型中选一个或多个，用逗号分隔：
                                  #   "supportive"   支持前一节/主假设
                                  #   "descriptive"  纯描述现象
                                  #   "elimination"  排除某种机制或可能性
                                  #   "negative"     未见显著差异/阴性结果
                                  #   "exploratory"  探索性发现
                                  # 例如："supportive"
-  claim_supported: ""            # 本 panel 主要想支持/反驳的“文字命题”
+  claim_supported: "EphB1 的作用不是感受器特异性的，而是影响炎症小体执行端的共有机制。"            # 本 panel 主要想支持/反驳的“文字命题”
                                  # 例如：“EphB1 是 NLRP3 炎性小体效应端活性的正调控因子。”
-  link_to_previous: ""           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
+  link_to_previous: "在确认第一信号 priming 无差异后，本节进一步证明第二信号执行阶段存在基因型依赖性差异。"           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
                                  # 例如：“在观察到 EphB1 缺失缓解线粒体损伤后，我们进一步评估其对下游 IL-1β 释放的影响。”
-  transition_to_next: ""         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
+  transition_to_next: "下一节将直接检测 ASC speck、caspase-1 p20、GSDMD-NT 与成熟 IL-1β p17，以定位差异所在的具体执行环节。"         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
                                  # 例如：“为了明确这种效应是否依赖于线粒体 ROS，我们随后检测了 NLRP3 激活过程中 mtROS 的变化。”
 
 # ---------- 6. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------

@@ -27,7 +27,7 @@ except ImportError:
 
 # 固定输出目录
 OUTPUT_DIR = Path(
-    "/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/发育生物所/"
+    "/Volumes/Samsung_SSD_990_PRO_2TB_Media/发育生物所/"
     "博士课题/EphB1/04_data/interim/microplate_reader/线粒体完整性检测"
 )
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
