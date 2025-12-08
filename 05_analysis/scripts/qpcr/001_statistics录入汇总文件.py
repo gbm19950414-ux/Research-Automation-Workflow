@@ -33,15 +33,14 @@ def read_txt(path: Path) -> pd.DataFrame:
     )
     df = df[['Samples', 'MeanCp', 'STD Cp']]
 
-    # 补齐到固定行数（BLOCK_HEIGHT - 1 表头行 + 数据行）
+    # 补齐到至少 BLOCK_HEIGHT - 1 行（BLOCK_HEIGHT - 1 表头行 + 数据行）
+    # 注意：如果原始行数多于 BLOCK_HEIGHT - 1，则不再截断，全部保留。
     if len(df) < (BLOCK_HEIGHT - 1):
         empty_rows = pd.DataFrame(
             [[""] * BLOCK_WIDTH] * ((BLOCK_HEIGHT - 1) - len(df)),
             columns=df.columns
         )
         df = pd.concat([df, empty_rows], ignore_index=True)
-    elif len(df) > (BLOCK_HEIGHT - 1):
-        df = df.iloc[:(BLOCK_HEIGHT - 1)]
 
     return df
 
