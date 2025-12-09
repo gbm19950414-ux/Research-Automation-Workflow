@@ -1,0 +1,48 @@
+white: "gsdmd\uFF0Csting\uFF0Cc-casp3\uFF0Ccgas\uFF0Cgapdh 2.tif"
+file:
+- "gsdmd\uFF0Csting\uFF0Cc-casp3\uFF0Ccgas\uFF0Cgapdh 2025-07-10-10-06-02 femoto s1.TIF"
+- "gsdmd\uFF0Csting\uFF0Cc-casp3\uFF0Ccgas\uFF0Cgapdh 2025-07-10-10-20-11 femoto s2.TIF"
+seconds:
+- femoto_S1
+- femoto_S2
+gel_boxes:
+- gel_id: G1
+  rect:
+  - 1
+  - 43
+  - 261
+  - 171
+  target: gsdmd
+  sample_batch: E63,wt:ho=3:3,l+n,7min,total
+- gel_id: G2
+  rect:
+  - 0
+  - 208
+  - 265
+  - 58
+  target: cgas
+  sample_batch: E63,wt:ho=3:3,l+n,7min,total
+- gel_id: G3
+  rect:
+  - 1
+  - 260
+  - 263
+  - 196
+  target: gsdmd
+  sample_batch: E63,wt:ho=3:3,l+n,7min,cyto
+- gel_id: G4
+  rect:
+  - 268
+  - 33
+  - 242
+  - 159
+  target: casp3
+  sample_batch: E63,wt:ho=3:3,l+n,7min,total
+- gel_id: G5
+  rect:
+  - 266
+  - 182
+  - 243
+  - 184
+  target: gsdmd
+  sample_batch: E63,wt:ho=3:3,l+n,7min,mito

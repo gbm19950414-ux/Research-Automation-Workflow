@@ -54,7 +54,7 @@ def main():
             d.groupby(["batch","antibody","group","drug","genotype"], dropna=False)["final_value"]
              .transform(robust_z)
         )
-        d["outlier"] = d["zscore"].abs() > 2.5     # zscore threshold
+        d["outlier"] = d["zscore"].abs() > 2     # zscore threshold
 
         full_df = d.copy()
         full_df.loc[full_df["outlier"], "final_value"] = np.nan

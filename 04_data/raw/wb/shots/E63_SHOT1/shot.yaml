@@ -1,0 +1,56 @@
+white: "gsdmd\uFF0Csting\uFF0Ccaspase3\uFF0Ccgas\uFF0Cgapdh 1 PICO S1 1.tif"
+file:
+- "gsdmd\uFF0Csting\uFF0Ccaspase3\uFF0Ccgas\uFF0Cgapdh 2025-07-04-10-22-09 PICO S1.TIF"
+- "gsdmd\uFF0Csting\uFF0Ccaspase3\uFF0Ccgas\uFF0Cgapdh 2025-07-04-10-36-38 PICO S1.TIF"
+seconds:
+- S1
+- S2
+gel_boxes:
+- gel_id: G1
+  rect:
+  - 0
+  - 18
+  - 263
+  - 174
+  target: gsdmd
+  sample_batch: E63,time_grand,total
+- gel_id: G2
+  rect:
+  - 0
+  - 187
+  - 262
+  - 83
+  target: gapdh
+  sample_batch: E63,time_grand,total
+- gel_id: G3
+  rect:
+  - 1
+  - 265
+  - 256
+  - 62
+  target: cgas
+  sample_batch: E63,time_grand,total
+- gel_id: G4
+  rect:
+  - 262
+  - 10
+  - 245
+  - 143
+  target: sting
+  sample_batch: E63,time_grand,total
+- gel_id: G5
+  rect:
+  - 264
+  - 134
+  - 246
+  - 158
+  target: casp3
+  sample_batch: E63,time_grand,total
+- gel_id: G6
+  rect:
+  - 255
+  - 291
+  - 248
+  - 182
+  target: gsdmd
+  sample_batch: E63,time_grand,mito

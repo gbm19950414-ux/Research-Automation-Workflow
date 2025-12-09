@@ -1,0 +1,40 @@
+white: 1,2,7,9.tif
+file:
+- 2024-02-03-08-58-04.TIF
+- 2024-02-03-09-06-26.TIF
+seconds:
+- S1
+- 10min
+gel_boxes:
+- gel_id: G1
+  rect:
+  - 7
+  - 96
+  - 489
+  - 96
+  target: gapdh
+  sample_batch: E12_lys.l(1-12)
+- gel_id: G2
+  rect:
+  - 3
+  - 182
+  - 507
+  - 105
+  target: gapdh
+  sample_batch: E12_lys.l(13-24)
+- gel_id: G3
+  rect:
+  - 6
+  - 281
+  - 486
+  - 81
+  target: gapdh
+  sample_batch: E12_slys(1-12)
+- gel_id: G4
+  rect:
+  - 4
+  - 353
+  - 501
+  - 68
+  target: gapdh
+  sample_batch: E12_slys(13-24)

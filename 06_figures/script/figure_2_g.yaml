@@ -1,0 +1,118 @@
+
+
+# materials 目录相对 root 的路径
+materials_rel_dir: "04_data/interim/wb/materials"
+
+page:
+  width_mm: 84          # 单栏宽度（推荐 84 mm）
+  height_mm: 100         # 整个 panel 高度，比如 50–60 mm
+
+  top_margin_mm: 0      # panel 顶部空白
+  bottom_margin_mm: 0   # 底部空白
+  left_margin_mm: 0     # 左侧空白
+  right_margin_mm: 0    # 右侧空白
+  # 垂直方向：条带行间距 & 条带与上下标签的距离
+  band_spacing_mm: 8        # 每行条带之间的垂直间距
+  label_gap_mm: 1           # 左侧标签与条带之间的水平间距
+  band_label_gap_mm: 2      # 条带与 genotype / treatment 行之间的参考距离
+
+
+  # grid.layout 行高设置：1 行 genotype + N 行 band + M 行 treatment
+  genotype_row_height_mm: 6     # 顶部 genotype 行高度
+  band_row_height_mm: 9         # 每一行条带的高度
+  treatment_row_height_mm: 6    # 每一行处理方式矩阵的高度
+
+  # ===== Panel layout configuration（列比例）=====
+  layout:
+    # 中间区域内的左右分布（sample_type : 抗体标签 : 条带 = 10% : 20% : 70%）
+    band_width_ratio: 0.65        # 条带区域宽度比例（最右列）
+    antibody_label_ratio: 0.25    # 抗体名称标签区域宽度比例（中间列）
+    sample_type_ratio: 0.1       # 样本类型标签区域宽度比例（最左列，可暂时留空用作占位）
+    
+bands:
+  - prefix: "G3_gapdh_E14_lys_n__gapdh_37kda"  # materials 中的文件前缀（不带 _patch.tif）
+    label: "GAPDH"                     # 左侧标签显示内容
+    sample_type: "lys"
+    shot_id: "E14_SHOT1"
+  - prefix: "G1_gsdmd_E14,lys,l+n,1-12__gsdmd_full"
+    label: "GSDMD"
+    sample_type: "lys"
+    shot_id: "E14_SHOT3"
+  - prefix: "G1_gsdmd_E14,lys,l+n,1-12__gsdmd_nt_22kda_"
+    label: "GSDMD-NT"
+    sample_type: "lys"
+    shot_id: "E14_SHOT3"
+  - prefix: "G1_gsdmd_E14_sup_l+n__gsdmd_full_53kda_"
+    label: "GSDMD"
+    sample_type: "sup"
+    shot_id: "E15_SHOT2"
+  - prefix: "G1_gsdmd_E14_sup_l+n__gsdmd_nt_31kda_"
+    label: "GSDMD-NT"
+    sample_type: "sup"
+    shot_id: "E15_SHOT2"
+  - prefix: "G1_pro_il1b_&_il1b_E14_lys__pro_pro"
+    label: "Pro-IL1β"
+    sample_type: "lys"
+    shot_id: "E15_SHOT1"
+  - prefix: "G1_pro_il1b_&_il1b_E14_lys__pro_cleavage"
+    label: "IL1β"
+    sample_type: "lys"
+    shot_id: "E15_SHOT1"
+  - prefix: "G2_il1b_E14_sup__il1b__sup"
+    label: "IL1β"
+    sample_type: "sup"
+    shot_id: "E15_SHOT1"
+lanes:
+  count: 8
+
+  # 每种处理方式一行的顺序
+  treatment_rows:
+
+    - "LPS"
+    - "Nigericin"
+
+  items:
+    - lane: 1
+      genotype: "WT"
+      treatments:
+        LPS: "+"
+        Nigericin: "+"
+    - lane: 2
+      genotype: "WT"
+      treatments:
+
+        LPS: "+"
+        Nigericin: "+"
+    - lane: 3
+      genotype: "WT"
+      treatments:
+
+        LPS: "+"
+        Nigericin: "+"
+    - lane: 4
+      genotype: "WT"
+      treatments:
+
+        LPS: "+"
+        Nigericin: "+"
+
+    - lane: 5
+      genotype: "KO"
+      treatments:
+        LPS: "+"
+        Nigericin: "+"
+    - lane: 6
+      genotype: "KO"
+      treatments:
+        LPS: "+"
+        Nigericin: "+"
+    - lane: 7
+      genotype: "KO"
+      treatments:
+        LPS: "+"
+        Nigericin: "+"
+    - lane: 8
+      genotype: "KO"
+      treatments:
+        LPS: "+"
+        Nigericin: "+"

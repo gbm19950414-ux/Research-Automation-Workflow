@@ -1,0 +1,32 @@
+white: 3,4,7.tif
+file:
+- 3,4,7-1 pico S1.TIF
+- 3,4,7-2 pico S1.TIF
+seconds:
+- pico_s1
+- pico_s2
+gel_boxes:
+- gel_id: G1
+  rect:
+  - 43
+  - 127
+  - 424
+  - 156
+  target: gsdmd
+  sample_batch: E19,l+n,lys
+- gel_id: G2
+  rect:
+  - 44
+  - 275
+  - 419
+  - 64
+  target: p-akt
+  sample_batch: E19,l+n,lys
+- gel_id: G3
+  rect:
+  - 85
+  - 326
+  - 365
+  - 66
+  target: p-akt
+  sample_batch: E14,l+n,lys

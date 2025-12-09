@@ -400,6 +400,355 @@
       contrast: 0.08882230869001284
       snr: 2.964532141673934
       file: lycat_s1_p005.tif
+E12_SHOT1:
+  G1_gapdh_E12_lys.l(1-12):
+    best_file: gapdh_S1_p003.tif
+    metrics:
+      mean: 0.8865345811484303
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.488009613183795
+      snr: 4.455619896958612
+      file: gapdh_S1_p003.tif
+    all_files:
+    - mean: 0.6066084082385405
+      sat_ratio: 0.02828902522154056
+      dark_ratio: 0.14487474437627812
+      contrast: 0.98124666208896
+      snr: 2.6130479223013086
+      file: gapdh_10min_p001.tif
+    - mean: 0.3911788782138145
+      sat_ratio: 0.0
+      dark_ratio: 0.45032379004771644
+      contrast: 0.9593804837109942
+      snr: 2.2462166231432446
+      file: gapdh_10min_p002.tif
+    - mean: 0.9797109223418241
+      sat_ratio: 0.6628962167689162
+      dark_ratio: 0.0
+      contrast: 0.03501503013656837
+      snr: 2.0457140825046918
+      file: gapdh_S1_p001.tif
+    - mean: 0.9498314714102151
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.13961348897535664
+      snr: 3.6289308743864
+      file: gapdh_S1_p002.tif
+    - mean: 0.8865345811484303
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.488009613183795
+      snr: 4.455619896958612
+      file: gapdh_S1_p003.tif
+    - mean: 0.747173809672774
+      sat_ratio: 0.0
+      dark_ratio: 0.03825835037491479
+      contrast: 0.9377126726176852
+      snr: 3.655505539071967
+      file: gapdh_S1_p004.tif
+    - mean: 0.5828442862972163
+      sat_ratio: 0.0
+      dark_ratio: 0.1356509884117246
+      contrast: 0.9203936827649347
+      snr: 2.640003218738143
+      file: gapdh_S1_p005.tif
+  G2_gapdh_E12_lys.l(13-24):
+    best_file: gapdh_S1_p003.tif
+    metrics:
+      mean: 0.8967455263724434
+      sat_ratio: 0.0
+      dark_ratio: 0.000338123415046492
+      contrast: 0.6520091554131381
+      snr: 5.270784531791857
+      file: gapdh_S1_p003.tif
+    all_files:
+    - mean: 0.6747893563112677
+      sat_ratio: 0.01515919977458439
+      dark_ratio: 0.11329012867474406
+      contrast: 0.9810025177386129
+      snr: 2.9220269914544796
+      file: gapdh_10min_p001.tif
+    - mean: 0.4257489110963766
+      sat_ratio: 0.0
+      dark_ratio: 0.33508030431107355
+      contrast: 0.9585412375066759
+      snr: 2.448512578323617
+      file: gapdh_10min_p002.tif
+    - mean: 0.9805033088121985
+      sat_ratio: 0.7965060580445196
+      dark_ratio: 0.0
+      contrast: 0.04679942015716798
+      snr: 2.5912047615983007
+      file: gapdh_S1_p001.tif
+    - mean: 0.9529097947951057
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.1861188677805753
+      snr: 4.392781067439489
+      file: gapdh_S1_p002.tif
+    - mean: 0.8967455263724434
+      sat_ratio: 0.0
+      dark_ratio: 0.000338123415046492
+      contrast: 0.6520091554131381
+      snr: 5.270784531791857
+      file: gapdh_S1_p003.tif
+    - mean: 0.78696141329872
+      sat_ratio: 0.0
+      dark_ratio: 0.03835822297360759
+      contrast: 0.9373922331578546
+      snr: 3.941932654571478
+      file: gapdh_S1_p004.tif
+    - mean: 0.6514126952812095
+      sat_ratio: 0.0
+      dark_ratio: 0.1033342725650418
+      contrast: 0.9193102922102693
+      snr: 2.977294137586654
+      file: gapdh_S1_p005.tif
+  G3_gapdh_E12_slys(1-12):
+    best_file: gapdh_S1_p005.tif
+    metrics:
+      mean: 0.8632925192290481
+      sat_ratio: 0.0
+      dark_ratio: 0.005842605293908449
+      contrast: 0.7551949340047301
+      snr: 5.80778857294034
+      file: gapdh_S1_p005.tif
+    all_files:
+    - mean: 0.9159711332299872
+      sat_ratio: 0.045902555504750295
+      dark_ratio: 0.006757100035563684
+      contrast: 0.8579385061417562
+      snr: 5.897455920326555
+      file: gapdh_10min_p001.tif
+    - mean: 0.8041684867816059
+      sat_ratio: 0.0
+      dark_ratio: 0.033658487019255195
+      contrast: 0.9623102159151599
+      snr: 4.128688447353669
+      file: gapdh_10min_p002.tif
+    - mean: 0.9838664255938117
+      sat_ratio: 0.9784077630442514
+      dark_ratio: 0.0
+      contrast: 0.008178835736629364
+      snr: 0.7097383703763955
+      file: gapdh_S1_p001.tif
+    - mean: 0.9665266601210943
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.031190203707942343
+      snr: 1.9475239965578814
+      file: gapdh_S1_p002.tif
+    - mean: 0.9449535932661162
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.10543602655069817
+      snr: 3.39193291721053
+      file: gapdh_S1_p003.tif
+    - mean: 0.9112700617753939
+      sat_ratio: 0.0
+      dark_ratio: 0.00015241579027587258
+      contrast: 0.32695048447394515
+      snr: 4.304778355290793
+      file: gapdh_S1_p004.tif
+    - mean: 0.8632925192290481
+      sat_ratio: 0.0
+      dark_ratio: 0.005842605293908449
+      contrast: 0.7551949340047301
+      snr: 5.80778857294034
+      file: gapdh_S1_p005.tif
+  G4_gapdh_E12_slys(13-24):
+    best_file: gapdh_10min_p002.tif
+    metrics:
+      mean: 0.891179340724795
+      sat_ratio: 0.0
+      dark_ratio: 0.008659152283667959
+      contrast: 0.9265471885252156
+      snr: 5.803914891665659
+      file: gapdh_10min_p002.tif
+    all_files:
+    - mean: 0.9575070638817419
+      sat_ratio: 0.1621462956440061
+      dark_ratio: 0.0
+      contrast: 0.3384873731593804
+      snr: 5.189352628905718
+      file: gapdh_10min_p001.tif
+    - mean: 0.891179340724795
+      sat_ratio: 0.0
+      dark_ratio: 0.008659152283667959
+      contrast: 0.9265471885252156
+      snr: 5.803914891665659
+      file: gapdh_10min_p002.tif
+    - mean: 0.9842382070375157
+      sat_ratio: 0.9997064694141129
+      dark_ratio: 0.0
+      contrast: 0.003402761882963401
+      snr: 0.3227201689847184
+      file: gapdh_S1_p001.tif
+    - mean: 0.9680155305203325
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.01193255512321656
+      snr: 1.0059212238356579
+      file: gapdh_S1_p002.tif
+    - mean: 0.9502016902470691
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03946990157930885
+      snr: 2.420884372644687
+      file: gapdh_S1_p003.tif
+    - mean: 0.9279590890698958
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.12043427176318
+      snr: 4.065512533082156
+      file: gapdh_S1_p004.tif
+    - mean: 0.8991480961709667
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2830141145952545
+      snr: 5.030412870440979
+      file: gapdh_S1_p005.tif
+E12_SHOT2:
+  G1_asc_E12_slys(1-12):
+    best_file: asc_S1_p005.tif
+    metrics:
+      mean: 0.8728303814791751
+      sat_ratio: 0.0
+      dark_ratio: 0.00315059861373661
+      contrast: 0.7221286335545892
+      snr: 5.320011255641236
+      file: asc_S1_p005.tif
+    all_files:
+    - mean: 0.9839577817294598
+      sat_ratio: 0.9706421492810907
+      dark_ratio: 0.0
+      contrast: 0.0077190814068819336
+      snr: 0.6818869855848566
+      file: asc_S1_p001.tif
+    - mean: 0.9669205724380502
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.029337148088807496
+      snr: 1.9381199735377783
+      file: asc_S1_p002.tif
+    - mean: 0.9464654392659789
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.10025314717326628
+      snr: 3.5995952101889945
+      file: asc_S1_p003.tif
+    - mean: 0.916384203658093
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.31068497749294266
+      snr: 4.732932661996125
+      file: asc_S1_p004.tif
+    - mean: 0.8728303814791751
+      sat_ratio: 0.0
+      dark_ratio: 0.00315059861373661
+      contrast: 0.7221286335545892
+      snr: 5.320011255641236
+      file: asc_S1_p005.tif
+  G2_asc_E12_slys(13-24):
+    best_file: asc_S1_p005.tif
+    metrics:
+      mean: 0.867587906967497
+      sat_ratio: 0.0
+      dark_ratio: 0.0007974481658692185
+      contrast: 0.6851898985275043
+      snr: 4.9167332718804655
+      file: asc_S1_p005.tif
+    all_files:
+    - mean: 0.9839148133279924
+      sat_ratio: 0.9648429373829831
+      dark_ratio: 0.0
+      contrast: 0.007461661707484635
+      snr: 0.6589910057553425
+      file: asc_S1_p001.tif
+    - mean: 0.9667274757893968
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.028116121156633866
+      snr: 1.854907886062745
+      file: asc_S1_p002.tif
+    - mean: 0.9457655867705244
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09575158312352183
+      snr: 3.428560226575697
+      file: asc_S1_p003.tif
+    - mean: 0.914268707037345
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2950266269932097
+      snr: 4.487560821137155
+      file: asc_S1_p004.tif
+    - mean: 0.867587906967497
+      sat_ratio: 0.0
+      dark_ratio: 0.0007974481658692185
+      contrast: 0.6851898985275043
+      snr: 4.9167332718804655
+      file: asc_S1_p005.tif
+E12_SHOT3:
+  G1_asc_E12_pel(13-24):
+    best_file: asc_S1_p005.tif
+    metrics:
+      mean: 0.8607647083853703
+      sat_ratio: 0.0
+      dark_ratio: 0.008861672650959947
+      contrast: 0.8687563897154191
+      snr: 6.488027623818153
+      file: asc_S1_p005.tif
+    all_files:
+    - mean: 0.9838367477743359
+      sat_ratio: 0.977948289147935
+      dark_ratio: 0.0
+      contrast: 0.00936903944457168
+      snr: 0.8178698290734963
+      file: asc_S1_p001.tif
+    - mean: 0.9664762571246687
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03570840009155407
+      snr: 2.2723017058224677
+      file: asc_S1_p002.tif
+    - mean: 0.9449017580286811
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.124189364461738
+      snr: 4.131655796129331
+      file: asc_S1_p003.tif
+    - mean: 0.9109174412675481
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.39108033875028614
+      snr: 5.314111916642488
+      file: asc_S1_p004.tif
+    - mean: 0.8607647083853703
+      sat_ratio: 0.0
+      dark_ratio: 0.008861672650959947
+      contrast: 0.8687563897154191
+      snr: 6.488027623818153
+      file: asc_S1_p005.tif
+    - mean: 0.9102492206714063
+      sat_ratio: 0.002779007427081796
+      dark_ratio: 0.009869985080255111
+      contrast: 0.9549042496375981
+      snr: 6.4420932180764
+      file: asc_S2_p001.tif
+    - mean: 0.7858269642402849
+      sat_ratio: 0.0
+      dark_ratio: 0.039299591756431065
+      contrast: 0.9481040665293354
+      snr: 4.348240298807846
+      file: asc_S2_p002.tif
+    - mean: 0.6022628980867895
+      sat_ratio: 0.0
+      dark_ratio: 0.08974800386929647
+      contrast: 0.9051346608682383
+      snr: 3.4715799168690187
+      file: asc_S2_p003.tif
 E14_SHOT1:
   G1_gapdh_E14_lys_l:
     best_file: gapdh_S1_p005.tif
@@ -521,6 +870,146 @@ E14_SHOT1:
       contrast: 0.8933882658121615
       snr: 6.022279165264237
       file: gapdh_S1_p005.tif
+E14_SHOT2:
+  G1_casp1_E14_sup_(1-12):
+    best_file: casp1_10min.tif
+    metrics:
+      mean: 0.8529380160550181
+      sat_ratio: 0.01839171974522293
+      dark_ratio: 0.013503184713375796
+      contrast: 0.9820859082932784
+      snr: 6.026962972440874
+      file: casp1_10min.tif
+    all_files:
+    - mean: 0.8529380160550181
+      sat_ratio: 0.01839171974522293
+      dark_ratio: 0.013503184713375796
+      contrast: 0.9820859082932784
+      snr: 6.026962972440874
+      file: casp1_10min.tif
+    - mean: 0.9843029003318594
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0018768596932937642
+      snr: 0.18103060669954021
+      file: casp1_S1_p001.tif
+    - mean: 0.9684003661193343
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.00573754482337685
+      snr: 0.5247956834921326
+      file: casp1_S1_p002.tif
+    - mean: 0.9517832285854937
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.018249790188448967
+      snr: 1.412845784069243
+      file: casp1_S1_p003.tif
+    - mean: 0.9332427999527653
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.05583306630045015
+      snr: 2.919115082230106
+      file: casp1_S1_p004.tif
+    - mean: 0.9116082207251537
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.13295262073701086
+      snr: 4.166710510183498
+      file: casp1_S1_p005.tif
+  G2_casp1_E14_lys_n_(1-12):
+    best_file: casp1_S1_p005.tif
+    metrics:
+      mean: 0.9190348064398387
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.008178835736629364
+      snr: 0.6909939968644158
+      file: casp1_S1_p005.tif
+    all_files:
+    - mean: 0.9298518753185682
+      sat_ratio: 0.022160977339393352
+      dark_ratio: 0.0
+      contrast: 0.09213397421225289
+      snr: 2.813017748330463
+      file: casp1_10min.tif
+    - mean: 0.9843720767513309
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0014190890363928732
+      snr: 0.13776754972993555
+      file: casp1_S1_p001.tif
+    - mean: 0.9686734931594756
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0022125581750209733
+      snr: 0.21111478195109934
+      file: casp1_S1_p002.tif
+    - mean: 0.9527414177095123
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0031280994888228664
+      snr: 0.2929649904788054
+      file: casp1_S1_p003.tif
+    - mean: 0.9363175596200981
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.00474555580987257
+      snr: 0.43033349597272336
+      file: casp1_S1_p004.tif
+    - mean: 0.9190348064398387
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.008178835736629364
+      snr: 0.6909939968644158
+      file: casp1_S1_p005.tif
+E14_SHOT3:
+  G1_gsdmd_E14,lys,l+n,1-12:
+    best_file: gsdmd_10min.tif
+    metrics:
+      mean: 0.9224981241713429
+      sat_ratio: 0.004773754507135239
+      dark_ratio: 0.00016505002285308008
+      contrast: 0.2198095674067292
+      snr: 4.19723737794041
+      file: gsdmd_10min.tif
+    all_files:
+    - mean: 0.9224981241713429
+      sat_ratio: 0.004773754507135239
+      dark_ratio: 0.00016505002285308008
+      contrast: 0.2198095674067292
+      snr: 4.19723737794041
+      file: gsdmd_10min.tif
+    - mean: 0.9843341422102792
+      sat_ratio: 0.9997714691991265
+      dark_ratio: 0.0
+      contrast: 0.001495384145876355
+      snr: 0.14409556984713218
+      file: gsdmd_S1_p001.tif
+    - mean: 0.9685106924567927
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.002410925459678026
+      snr: 0.21651688714645206
+      file: gsdmd_S1_p002.tif
+    - mean: 0.9522061648610501
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.004226749065385005
+      snr: 0.3067702465387614
+      file: gsdmd_S1_p003.tif
+    - mean: 0.9347179555086644
+      sat_ratio: 0.0
+      dark_ratio: 1.2696155604083084e-05
+      contrast: 0.010315098802166744
+      snr: 0.5413022479375736
+      file: gsdmd_S1_p004.tif
+    - mean: 0.9155249127361367
+      sat_ratio: 0.0
+      dark_ratio: 1.2696155604083084e-05
+      contrast: 0.02284840161745627
+      snr: 0.9886732559240257
+      file: gsdmd_S1_p005.tif
 E15_SHOT1:
   G1_pro_il1b_&_il1b_E14_lys:
     best_file: pro_il1b_&_il1b_10min.tif
@@ -677,6 +1166,355 @@ E15_SHOT2:
       contrast: 0.6916694895857175
       snr: 5.096563393687468
       file: gsdmd_10min.tif
+E19_SHOT1:
+  G1_akt_E19,l+n,lys:
+    best_file: akt_pico_s1_p004.tif
+    metrics:
+      mean: 0.8501454374650709
+      sat_ratio: 0.0
+      dark_ratio: 0.008383727322704784
+      contrast: 0.8989358358129244
+      snr: 5.194660031685308
+      file: akt_pico_s1_p004.tif
+    all_files:
+    - mean: 0.9824727889514392
+      sat_ratio: 0.8723199560197911
+      dark_ratio: 0.0
+      contrast: 0.02308278019378962
+      snr: 1.6291469060511012
+      file: akt_pico_s1_p001.tif
+    - mean: 0.9608820237551121
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09106050202182037
+      snr: 3.4023725294481584
+      file: akt_pico_s1_p002.tif
+    - mean: 0.9247732555344119
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.32186358434424356
+      snr: 4.636862847724835
+      file: akt_pico_s1_p003.tif
+    - mean: 0.8501454374650709
+      sat_ratio: 0.0
+      dark_ratio: 0.008383727322704784
+      contrast: 0.8989358358129244
+      snr: 5.194660031685308
+      file: akt_pico_s1_p004.tif
+  G2_akt_E14,l+n,lys:
+    best_file: akt_pico_s1_p004.tif
+    metrics:
+      mean: 0.915657148022464
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2532275883115892
+      snr: 4.704313708379044
+      file: akt_pico_s1_p004.tif
+    all_files:
+    - mean: 0.983985304069183
+      sat_ratio: 0.9808695652173913
+      dark_ratio: 0.0
+      contrast: 0.006042572671091873
+      snr: 0.550386871606771
+      file: akt_pico_s1_p001.tif
+    - mean: 0.967062047827082
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.022919356069275976
+      snr: 1.665084589135708
+      file: akt_pico_s1_p002.tif
+    - mean: 0.9467423165848983
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.07882871747920961
+      snr: 3.369296583122987
+      file: akt_pico_s1_p003.tif
+    - mean: 0.915657148022464
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2532275883115892
+      snr: 4.704313708379044
+      file: akt_pico_s1_p004.tif
+E19_SHOT2:
+  G1_gapdh_E19,l+n,lys:
+    best_file: gapdh_pico_s1_p003.tif
+    metrics:
+      mean: 0.8990379230632909
+      sat_ratio: 0.0
+      dark_ratio: 0.002952612038471658
+      contrast: 0.7892942702372778
+      snr: 5.6312514387314865
+      file: gapdh_pico_s1_p003.tif
+    all_files:
+    - mean: 0.9805489286255848
+      sat_ratio: 0.8145701172274681
+      dark_ratio: 0.0
+      contrast: 0.056882887006942884
+      snr: 2.880234506581023
+      file: gapdh_pico_s1_p001.tif
+    - mean: 0.9531850937667611
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.22705149919890133
+      snr: 4.609943797145171
+      file: gapdh_pico_s1_p002.tif
+    - mean: 0.8990379230632909
+      sat_ratio: 0.0
+      dark_ratio: 0.002952612038471658
+      contrast: 0.7892942702372778
+      snr: 5.6312514387314865
+      file: gapdh_pico_s1_p003.tif
+    - mean: 0.8066326360635692
+      sat_ratio: 0.0
+      dark_ratio: 0.03639605928611103
+      contrast: 0.9378957808804456
+      snr: 3.9113872248239447
+      file: gapdh_pico_s1_p004.tif
+  G2_gapdh_E14,l+n,lys:
+    best_file: gapdh_pico_s1_p004.tif
+    metrics:
+      mean: 0.8955834218509463
+      sat_ratio: 0.0
+      dark_ratio: 0.002773608301246492
+      contrast: 0.710794232089723
+      snr: 5.918322269791067
+      file: gapdh_pico_s1_p004.tif
+    all_files:
+    - mean: 0.9835663077669632
+      sat_ratio: 0.9638452000261045
+      dark_ratio: 0.0
+      contrast: 0.015984588387884413
+      snr: 1.2860619895351848
+      file: gapdh_pico_s1_p001.tif
+    - mean: 0.9653006705221314
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.06292133974212255
+      snr: 3.184663266266585
+      file: gapdh_pico_s1_p002.tif
+    - mean: 0.9404202826368588
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2220851453421837
+      snr: 4.966178461223809
+      file: gapdh_pico_s1_p003.tif
+    - mean: 0.8955834218509463
+      sat_ratio: 0.0
+      dark_ratio: 0.002773608301246492
+      contrast: 0.710794232089723
+      snr: 5.918322269791067
+      file: gapdh_pico_s1_p004.tif
+E19_SHOT3:
+  G1_gsdmd_E19,l+n,lys:
+    best_file: gsdmd_pico_s2_p005.tif
+    metrics:
+      mean: 0.9053998615799276
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09572198062104231
+      snr: 3.4530138384967493
+      file: gsdmd_pico_s2_p005.tif
+    all_files:
+    - mean: 0.9842266941140816
+      sat_ratio: 0.9984125544267054
+      dark_ratio: 0.0
+      contrast: 0.0018158236057069788
+      snr: 0.17203853430990773
+      file: gsdmd_pico_s1_p001.tif
+    - mean: 0.9680010746371027
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0049373617151140525
+      snr: 0.4135428531978569
+      file: gsdmd_pico_s1_p002.tif
+    - mean: 0.9500590784185645
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.01554894331273371
+      snr: 0.9285322778646139
+      file: gsdmd_pico_s1_p003.tif
+    - mean: 0.9264843463622275
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.048166170748455084
+      snr: 1.5491094601486004
+      file: gsdmd_pico_s1_p004.tif
+    - mean: 0.8938042107758152
+      sat_ratio: 0.0
+      dark_ratio: 0.0005442670537010159
+      contrast: 0.11560448615243768
+      snr: 2.3667055261612675
+      file: gsdmd_pico_s1_p005.tif
+    - mean: 0.9843589915687445
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0015716792553598369
+      snr: 0.15217675173182196
+      file: gsdmd_pico_s2_p001.tif
+    - mean: 0.9685276453871228
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0032501716639963263
+      snr: 0.30551375412195786
+      file: gsdmd_pico_s2_p002.tif
+    - mean: 0.9519962555877309
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.01008621347371641
+      snr: 0.8580485947869356
+      file: gsdmd_pico_s2_p003.tif
+    - mean: 0.9326845213094603
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03527000839246197
+      snr: 2.1700371095233324
+      file: gsdmd_pico_s2_p004.tif
+    - mean: 0.9053998615799276
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09572198062104231
+      snr: 3.4530138384967493
+      file: gsdmd_pico_s2_p005.tif
+  G2_p-akt_E19,l+n,lys:
+    best_file: p-akt_pico_s2_p005.tif
+    metrics:
+      mean: 0.9085033004918397
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.07376821545738921
+      snr: 3.0639762898156206
+      file: p-akt_pico_s2_p005.tif
+    all_files:
+    - mean: 0.9841333918019721
+      sat_ratio: 0.9995897971360382
+      dark_ratio: 0.0
+      contrast: 0.001785305561913586
+      snr: 0.1715686318362728
+      file: p-akt_pico_s1_p001.tif
+    - mean: 0.9676437243266502
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.004867627985046141
+      snr: 0.4341687898607097
+      file: p-akt_pico_s1_p002.tif
+    - mean: 0.9489121881073225
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.01566643778133825
+      snr: 1.1132504533864147
+      file: p-akt_pico_s1_p003.tif
+    - mean: 0.9235533421855691
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.04777294575417723
+      snr: 2.0868542550221623
+      file: p-akt_pico_s1_p004.tif
+    - mean: 0.88765463757729
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.11362706950484469
+      snr: 2.9945130396822472
+      file: p-akt_pico_s1_p005.tif
+    - mean: 0.9843732724347227
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0014648661020829623
+      snr: 0.14208210146359534
+      file: p-akt_pico_s2_p001.tif
+    - mean: 0.9685913285919292
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.00273136491950865
+      snr: 0.2587897036474454
+      file: p-akt_pico_s2_p002.tif
+    - mean: 0.9522767773983659
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.007598992904554902
+      snr: 0.6726574582480209
+      file: p-akt_pico_s2_p003.tif
+    - mean: 0.9338329308720786
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.025981536583504994
+      snr: 1.775077614751054
+      file: p-akt_pico_s2_p004.tif
+    - mean: 0.9085033004918397
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.07376821545738921
+      snr: 3.0639762898156206
+      file: p-akt_pico_s2_p005.tif
+  G3_p-akt_E14,l+n,lys:
+    best_file: p-akt_pico_s1_p005.tif
+    metrics:
+      mean: 0.9015996629966789
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.046616311894407625
+      snr: 1.9130837350693988
+      file: p-akt_pico_s1_p005.tif
+    all_files:
+    - mean: 0.9842657593344407
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0015564202334631405
+      snr: 0.15068766198126987
+      file: p-akt_pico_s1_p001.tif
+    - mean: 0.9681398584052714
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0031738765545128445
+      snr: 0.2958749875807304
+      file: p-akt_pico_s1_p002.tif
+    - mean: 0.9506705180970004
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.007570153353170128
+      snr: 0.629936828443458
+      file: p-akt_pico_s1_p003.tif
+    - mean: 0.9292549185563166
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.020553902494850118
+      snr: 1.2782803696588816
+      file: p-akt_pico_s1_p004.tif
+    - mean: 0.9015996629966789
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.046616311894407625
+      snr: 1.9130837350693988
+      file: p-akt_pico_s1_p005.tif
+    - mean: 0.984397513292499
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0013885709925994805
+      snr: 0.13488417619546061
+      file: p-akt_pico_s2_p001.tif
+    - mean: 0.9686777607800254
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0022583352407110624
+      snr: 0.21533068943658615
+      file: p-akt_pico_s2_p002.tif
+    - mean: 0.9526302015315206
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.003738460364690721
+      snr: 0.3451423954979798
+      file: p-akt_pico_s2_p003.tif
+    - mean: 0.9354474666999085
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.008346684977492913
+      snr: 0.6900801847766971
+      file: p-akt_pico_s2_p004.tif
+    - mean: 0.9144492188270741
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.024689097428854834
+      snr: 1.4625649887876517
+      file: p-akt_pico_s2_p005.tif
 E26_SHOT1:
   G1_il1b_E23_lys:
     best_file: il1b_30min.tif
@@ -909,3 +1747,1108 @@ E26_SHOT2:
       contrast: 0.9203021286335545
       snr: 4.416149582108305
       file: gapdh_S1_p005.tif
+E63_SHOT1:
+  G1_gsdmd_E63,time_grand,total:
+    best_file: gsdmd_S2_p003.tif
+    metrics:
+      mean: 0.8752144768364719
+      sat_ratio: 0.0
+      dark_ratio: 0.005026004108212054
+      contrast: 0.7145590905622949
+      snr: 5.664388532692215
+      file: gsdmd_S2_p003.tif
+    all_files:
+    - mean: 0.9841274178411524
+      sat_ratio: 0.9999781478082251
+      dark_ratio: 0.0
+      contrast: 0.001495384145876355
+      snr: 0.1450214792231743
+      file: gsdmd_S1_p001.tif
+    - mean: 0.9680865362932928
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.003997863736934448
+      snr: 0.3692697737510845
+      file: gsdmd_S1_p002.tif
+    - mean: 0.9514784467382728
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.012518348973830862
+      snr: 0.9859145106317748
+      file: gsdmd_S1_p003.tif
+    - mean: 0.93325754605765
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03848920424200808
+      snr: 2.074519747735926
+      file: gsdmd_S1_p004.tif
+    - mean: 0.9123556717084493
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0915288014038299
+      snr: 2.9959748201600314
+      file: gsdmd_S1_p005.tif
+    - mean: 0.9729937836508039
+      sat_ratio: 0.40015733578077883
+      dark_ratio: 0.0
+      contrast: 0.10769741359578844
+      snr: 3.141771630940999
+      file: gsdmd_S2_p001.tif
+    - mean: 0.9338582810988926
+      sat_ratio: 0.0
+      dark_ratio: 0.0009177920545430706
+      contrast: 0.32072220950637065
+      snr: 4.079594091962748
+      file: gsdmd_S2_p002.tif
+    - mean: 0.8752144768364719
+      sat_ratio: 0.0
+      dark_ratio: 0.005026004108212054
+      contrast: 0.7145590905622949
+      snr: 5.664388532692215
+      file: gsdmd_S2_p003.tif
+  G2_gapdh_E63,time_grand,total:
+    best_file: gapdh_S1_p005.tif
+    metrics:
+      mean: 0.8785981032908075
+      sat_ratio: 0.0
+      dark_ratio: 0.015497102915478709
+      contrast: 0.9209582665751125
+      snr: 5.84182834568307
+      file: gapdh_S1_p005.tif
+    all_files:
+    - mean: 0.9837462528088168
+      sat_ratio: 0.9688678377632668
+      dark_ratio: 0.0
+      contrast: 0.012529182879377543
+      snr: 1.0510026664340242
+      file: gapdh_S1_p001.tif
+    - mean: 0.9665338606895088
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.048745708400091625
+      snr: 2.755111149820388
+      file: gapdh_S1_p002.tif
+    - mean: 0.9459926616496581
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.17023270008392466
+      snr: 4.578319783730713
+      file: gapdh_S1_p003.tif
+    - mean: 0.9156439069717234
+      sat_ratio: 0.0
+      dark_ratio: 0.00013795640577577486
+      contrast: 0.5441794460975051
+      snr: 5.616418536738849
+      file: gapdh_S1_p004.tif
+    - mean: 0.8785981032908075
+      sat_ratio: 0.0
+      dark_ratio: 0.015497102915478709
+      contrast: 0.9209582665751125
+      snr: 5.84182834568307
+      file: gapdh_S1_p005.tif
+    - mean: 0.9334933397484939
+      sat_ratio: 0.4053159201692265
+      dark_ratio: 0.01706060884760416
+      contrast: 0.9839017318989852
+      snr: 5.5961700442074775
+      file: gapdh_S2_p001.tif
+    - mean: 0.8730504769861763
+      sat_ratio: 0.0
+      dark_ratio: 0.04101903798399706
+      contrast: 0.9672236209658961
+      snr: 4.154399928048676
+      file: gapdh_S2_p002.tif
+    - mean: 0.8023240705681417
+      sat_ratio: 0.0
+      dark_ratio: 0.06787455164168123
+      contrast: 0.9495078965438315
+      snr: 3.5563712203222275
+      file: gapdh_S2_p003.tif
+  G3_cgas_E63,time_grand,total:
+    best_file: cgas_S2_p003.tif
+    metrics:
+      mean: 0.9320196384534737
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.06428427557793548
+      snr: 2.7280786847032643
+      file: cgas_S2_p003.tif
+    all_files:
+    - mean: 0.9841798139214578
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0013580529488060877
+      snr: 0.132118828578227
+      file: cgas_S1_p001.tif
+    - mean: 0.9683081401805732
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.001998931868467224
+      snr: 0.19199517469567792
+      file: cgas_S1_p002.tif
+    - mean: 0.9522995765159963
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0028076600289922427
+      snr: 0.26407253423524946
+      file: cgas_S1_p003.tif
+    - mean: 0.935982728117763
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.004699778744182481
+      snr: 0.4246962937176039
+      file: cgas_S1_p004.tif
+    - mean: 0.9192010813755025
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.007801785305561859
+      snr: 0.6596620657942489
+      file: cgas_S1_p005.tif
+    - mean: 0.9819707417099827
+      sat_ratio: 0.9317036290322581
+      dark_ratio: 0.0
+      contrast: 0.007740749217975074
+      snr: 0.6682539044934127
+      file: cgas_S2_p001.tif
+    - mean: 0.9607329289307979
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.025266956588082756
+      snr: 1.6587110156630096
+      file: cgas_S2_p002.tif
+    - mean: 0.9320196384534737
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.06428427557793548
+      snr: 2.7280786847032643
+      file: cgas_S2_p003.tif
+  G4_sting_E63,time_grand,total:
+    best_file: sting_S1_p004.tif
+    metrics:
+      mean: 0.876176879175931
+      sat_ratio: 0.0
+      dark_ratio: 0.0007135721421435707
+      contrast: 0.7013983367666132
+      snr: 5.0207415111119085
+      file: sting_S1_p004.tif
+    all_files:
+    - mean: 0.9831574335265928
+      sat_ratio: 0.9240473811902383
+      dark_ratio: 0.0
+      contrast: 0.016286259250782087
+      snr: 1.2587572705881962
+      file: sting_S1_p001.tif
+    - mean: 0.9635239725669049
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.06413366903181505
+      snr: 2.9459547573939124
+      file: sting_S1_p002.tif
+    - mean: 0.9340107237148078
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2231677729457543
+      snr: 4.3457245509603855
+      file: sting_S1_p003.tif
+    - mean: 0.876176879175931
+      sat_ratio: 0.0
+      dark_ratio: 0.0007135721421435707
+      contrast: 0.7013983367666132
+      snr: 5.0207415111119085
+      file: sting_S1_p004.tif
+    - mean: 0.7967288245874389
+      sat_ratio: 0.0
+      dark_ratio: 0.038161838161838164
+      contrast: 0.9211361867704279
+      snr: 4.126800749597813
+      file: sting_S1_p005.tif
+    - mean: 0.8406490186616402
+      sat_ratio: 0.035450264021692594
+      dark_ratio: 0.040331097473954615
+      contrast: 0.9831235217822537
+      snr: 4.084728555034222
+      file: sting_S2_p001.tif
+    - mean: 0.6721241613567416
+      sat_ratio: 0.0
+      dark_ratio: 0.10118452975595833
+      contrast: 0.9647821774624247
+      snr: 3.295176081075676
+      file: sting_S2_p002.tif
+    - mean: 0.43837039090349755
+      sat_ratio: 0.0
+      dark_ratio: 0.2021978021978022
+      contrast: 0.9436179140917067
+      snr: 2.8931269455303807
+      file: sting_S2_p003.tif
+  G5_casp3_E63,time_grand,total:
+    best_file: casp3_S2_p002.tif
+    metrics:
+      mean: 0.9136888438891428
+      sat_ratio: 0.0
+      dark_ratio: 0.005917464237933518
+      contrast: 0.8010727092393377
+      snr: 5.186511220299588
+      file: casp3_S2_p002.tif
+    all_files:
+    - mean: 0.9843944285521817
+      sat_ratio: 0.9998456313677061
+      dark_ratio: 0.0
+      contrast: 0.0028534370946823318
+      snr: 0.27132061927028694
+      file: casp3_S1_p001.tif
+    - mean: 0.9684883951542389
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.009506370641641837
+      snr: 0.8121947818958157
+      file: casp3_S1_p002.tif
+    - mean: 0.9515669768635652
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.031438620584420485
+      snr: 1.9932780903205964
+      file: casp3_S1_p003.tif
+    - mean: 0.9317727422691453
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0972251468680857
+      snr: 3.449316662924146
+      file: casp3_S1_p004.tif
+    - mean: 0.9075227417646725
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.23134630350194563
+      snr: 4.373081384601013
+      file: casp3_S1_p005.tif
+    - mean: 0.9660985908064793
+      sat_ratio: 0.5923124421117629
+      dark_ratio: 0.0
+      contrast: 0.27132967116807805
+      snr: 4.471669534973559
+      file: casp3_S2_p001.tif
+    - mean: 0.9136888438891428
+      sat_ratio: 0.0
+      dark_ratio: 0.005917464237933518
+      contrast: 0.8010727092393377
+      snr: 5.186511220299588
+      file: casp3_S2_p002.tif
+    - mean: 0.8459218988077479
+      sat_ratio: 0.0
+      dark_ratio: 0.04587321189667593
+      contrast: 0.9464153505760281
+      snr: 3.914929508336085
+      file: casp3_S2_p003.tif
+  G6_gsdmd_E63,time_grand,mito:
+    best_file: gsdmd_S2_p003.tif
+    metrics:
+      mean: 0.8807766172095317
+      sat_ratio: 0.0
+      dark_ratio: 0.004652605459057072
+      contrast: 0.6152384222171359
+      snr: 5.5939493052538465
+      file: gsdmd_S2_p003.tif
+    all_files:
+    - mean: 0.9844458423316803
+      sat_ratio: 0.9997119815668203
+      dark_ratio: 0.0
+      contrast: 0.0015564202334631405
+      snr: 0.15025694106901197
+      file: gsdmd_S1_p001.tif
+    - mean: 0.9687481526292726
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0036316472114137355
+      snr: 0.33178334902942513
+      file: gsdmd_S1_p002.tif
+    - mean: 0.9525769498113136
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.010370794232089753
+      snr: 0.7993316106031577
+      file: gsdmd_S1_p003.tif
+    - mean: 0.9350047334205334
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03133669031815056
+      snr: 1.6149516968121531
+      file: gsdmd_S1_p004.tif
+    - mean: 0.9149556345696307
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.07627374685282684
+      snr: 2.3202835368969685
+      file: gsdmd_S1_p005.tif
+    - mean: 0.9741323584787247
+      sat_ratio: 0.3347660404112017
+      dark_ratio: 0.0
+      contrast: 0.0914755474174106
+      snr: 2.4237323159179534
+      file: gsdmd_S2_p001.tif
+    - mean: 0.9371977465518655
+      sat_ratio: 0.0
+      dark_ratio: 0.001794576391350585
+      contrast: 0.27269626916914624
+      snr: 3.7310400580514753
+      file: gsdmd_S2_p002.tif
+    - mean: 0.8807766172095317
+      sat_ratio: 0.0
+      dark_ratio: 0.004652605459057072
+      contrast: 0.6152384222171359
+      snr: 5.5939493052538465
+      file: gsdmd_S2_p003.tif
+E63_SHOT2:
+  G1_gsdmd_E63,wt:ho=3:3,l+n,7min,total:
+    best_file: gsdmd_S2_p003.tif
+    metrics:
+      mean: 0.8324920626861384
+      sat_ratio: 0.0
+      dark_ratio: 0.002102527758091188
+      contrast: 0.4483901731898985
+      snr: 4.536819021668452
+      file: gsdmd_S2_p003.tif
+    all_files:
+    - mean: 0.9841477802926506
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.001281757839322606
+      snr: 0.12483352584401365
+      file: gsdmd_S1_p001.tif
+    - mean: 0.9681125363138497
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0023149462119478326
+      snr: 0.22111755287254084
+      file: gsdmd_S1_p002.tif
+    - mean: 0.9514387907659524
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.005626153963530944
+      snr: 0.5049613814898063
+      file: gsdmd_S1_p003.tif
+    - mean: 0.9328792673059633
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.016385748073548534
+      snr: 1.2231241604746268
+      file: gsdmd_S1_p004.tif
+    - mean: 0.9110462056556757
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03964492256046381
+      snr: 2.168856073971196
+      file: gsdmd_S1_p005.tif
+    - mean: 0.9702834557074086
+      sat_ratio: 0.10387432081266242
+      dark_ratio: 0.0
+      contrast: 0.050657511253528575
+      snr: 2.446394403175012
+      file: gsdmd_S2_p001.tif
+    - mean: 0.9225334457086578
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.16091721980621043
+      snr: 3.704081674038982
+      file: gsdmd_S2_p002.tif
+    - mean: 0.8324920626861384
+      sat_ratio: 0.0
+      dark_ratio: 0.002102527758091188
+      contrast: 0.4483901731898985
+      snr: 4.536819021668452
+      file: gsdmd_S2_p003.tif
+  G2_cgas_E63,wt:ho=3:3,l+n,7min,total:
+    best_file: cgas_S2_p003.tif
+    metrics:
+      mean: 0.8875302437447095
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.16460044251163497
+      snr: 4.1146124218511275
+      file: cgas_S2_p003.tif
+    all_files:
+    - mean: 0.9841880940876133
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.001281757839322606
+      snr: 0.12483574837355464
+      file: cgas_S1_p001.tif
+    - mean: 0.9682874169987926
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0019226367589837423
+      snr: 0.18488650697330472
+      file: cgas_S1_p002.tif
+    - mean: 0.9520704179639864
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0029451438162815258
+      snr: 0.2764372466075541
+      file: cgas_S1_p003.tif
+    - mean: 0.9349062526869807
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.005661097123674352
+      snr: 0.5010704032853559
+      file: cgas_S1_p004.tif
+    - mean: 0.9158967545513669
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0111396963454643
+      snr: 0.8806972822373055
+      file: cgas_S1_p005.tif
+    - mean: 0.9763171139618839
+      sat_ratio: 0.15158730158730158
+      dark_ratio: 0.0
+      contrast: 0.016541084916456783
+      snr: 1.2199485002868153
+      file: cgas_S2_p001.tif
+    - mean: 0.9426753691532818
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.06094621194781413
+      snr: 2.8274600652233843
+      file: cgas_S2_p002.tif
+    - mean: 0.8875302437447095
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.16460044251163497
+      snr: 4.1146124218511275
+      file: cgas_S2_p003.tif
+  G3_gapdh_E63,wt:ho=3:3,l+n,7min,total:
+    best_file: gapdh_S1_p004.tif
+    metrics:
+      mean: 0.896404706540141
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.5443054856183719
+      snr: 5.050059034363823
+      file: gapdh_S1_p004.tif
+    all_files:
+    - mean: 0.983376883438246
+      sat_ratio: 0.9445230515269426
+      dark_ratio: 0.0
+      contrast: 0.01260990310521104
+      snr: 1.0362961192132125
+      file: gapdh_S1_p001.tif
+    - mean: 0.9649829277885276
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.04873243305104147
+      snr: 2.609821757918044
+      file: gapdh_S1_p002.tif
+    - mean: 0.9402251404719271
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.1713676661326008
+      snr: 4.216171476768278
+      file: gapdh_S1_p003.tif
+    - mean: 0.896404706540141
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.5443054856183719
+      snr: 5.050059034363823
+      file: gapdh_S1_p004.tif
+    - mean: 0.831351212297444
+      sat_ratio: 0.0
+      dark_ratio: 0.02552765004126872
+      contrast: 0.9182269016556038
+      snr: 4.673254793914203
+      file: gapdh_S1_p005.tif
+    - mean: 0.8784421812477632
+      sat_ratio: 0.0007074637424831977
+      dark_ratio: 0.030067209055535903
+      contrast: 0.9783474479285877
+      snr: 4.531510968074868
+      file: gapdh_S2_p001.tif
+    - mean: 0.7538052543446045
+      sat_ratio: 0.0
+      dark_ratio: 0.07764414573753095
+      contrast: 0.9482227817196918
+      snr: 3.4407130231793714
+      file: gapdh_S2_p002.tif
+    - mean: 0.5945966311926342
+      sat_ratio: 0.0
+      dark_ratio: 0.13583303855677398
+      contrast: 0.9001721217669948
+      snr: 3.0321458440060765
+      file: gapdh_S2_p003.tif
+  G4_gapdh_E63,wt:ho=3:3,l+n,7min,cyto:
+    best_file: gapdh_S2_p003.tif
+    metrics:
+      mean: 0.7954567702450515
+      sat_ratio: 0.0
+      dark_ratio: 0.001018876018876019
+      contrast: 0.5149680323491265
+      snr: 4.931205049843391
+      file: gapdh_S2_p003.tif
+    all_files:
+    - mean: 0.984142691558576
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0014038300144961768
+      snr: 0.13642044500336187
+      file: gapdh_S1_p001.tif
+    - mean: 0.9680891089565843
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0029297322041657026
+      snr: 0.2774380961620323
+      file: gapdh_S1_p002.tif
+    - mean: 0.9512894642672626
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.008326085297932329
+      snr: 0.7232662847846074
+      file: gapdh_S1_p003.tif
+    - mean: 0.9319200196174333
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.025313954375524528
+      snr: 1.7259305289868723
+      file: gapdh_S1_p004.tif
+    - mean: 0.9072744203838279
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.06072220950637064
+      snr: 2.8409156507406403
+      file: gapdh_S1_p005.tif
+    - mean: 0.9631980605658793
+      sat_ratio: 0.03673316173316173
+      dark_ratio: 0.0
+      contrast: 0.07461249713893336
+      snr: 3.091681100799333
+      file: gapdh_S2_p001.tif
+    - mean: 0.9023687209427654
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2248436713206683
+      snr: 4.266624653736997
+      file: gapdh_S2_p002.tif
+    - mean: 0.7954567702450515
+      sat_ratio: 0.0
+      dark_ratio: 0.001018876018876019
+      contrast: 0.5149680323491265
+      snr: 4.931205049843391
+      file: gapdh_S2_p003.tif
+  G5_gsdmd_E63,wt:ho=3:3,l+n,7min,cyto:
+    best_file: gsdmd_S2_p003.tif
+    metrics:
+      mean: 0.8603932310399842
+      sat_ratio: 0.0
+      dark_ratio: 0.00013950892857142856
+      contrast: 0.29040650034332793
+      snr: 3.4248524508984577
+      file: gsdmd_S2_p003.tif
+    all_files:
+    - mean: 0.9841695084324262
+      sat_ratio: 0.9998139880952381
+      dark_ratio: 0.0
+      contrast: 0.0012806897077898283
+      snr: 0.12434986480050163
+      file: gsdmd_S1_p001.tif
+    - mean: 0.9681940458677799
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0019684138246738314
+      snr: 0.18433742995024494
+      file: gsdmd_S1_p002.tif
+    - mean: 0.9516997999751133
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0036610971236744616
+      snr: 0.3068334391161895
+      file: gsdmd_S1_p003.tif
+    - mean: 0.9336051676568002
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.009261158159761917
+      snr: 0.6106265440398135
+      file: gsdmd_S1_p004.tif
+    - mean: 0.9124541949055078
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.022368657969024097
+      snr: 1.1345134705434514
+      file: gsdmd_S1_p005.tif
+    - mean: 0.9716204179365489
+      sat_ratio: 0.04820033482142857
+      dark_ratio: 0.0
+      contrast: 0.035812924391546486
+      snr: 1.6793008013027586
+      file: gsdmd_S2_p001.tif
+    - mean: 0.92903326163069
+      sat_ratio: 0.0
+      dark_ratio: 2.3251488095238094e-05
+      contrast: 0.11753810940718701
+      snr: 2.850643841464284
+      file: gsdmd_S2_p002.tif
+    - mean: 0.8603932310399842
+      sat_ratio: 0.0
+      dark_ratio: 0.00013950892857142856
+      contrast: 0.29040650034332793
+      snr: 3.4248524508984577
+      file: gsdmd_S2_p003.tif
+  G6_sting_E63,wt:ho=3:3,l+n,7min,total:
+    best_file: sting_S1_p003.tif
+    metrics:
+      mean: 0.8906138210908497
+      sat_ratio: 0.0
+      dark_ratio: 0.007772304324028462
+      contrast: 0.8917604333562219
+      snr: 5.045072276673628
+      file: sting_S1_p003.tif
+    all_files:
+    - mean: 0.9800053794942549
+      sat_ratio: 0.8581554460864805
+      dark_ratio: 0.0
+      contrast: 0.06523048752574967
+      snr: 2.9210533317748473
+      file: sting_S1_p001.tif
+    - mean: 0.9508174104354086
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.25971938658731974
+      snr: 4.367469407382007
+      file: sting_S1_p002.tif
+    - mean: 0.8906138210908497
+      sat_ratio: 0.0
+      dark_ratio: 0.007772304324028462
+      contrast: 0.8917604333562219
+      snr: 5.045072276673628
+      file: sting_S1_p003.tif
+    - mean: 0.8109506065795283
+      sat_ratio: 0.0
+      dark_ratio: 0.07219485495347565
+      contrast: 0.9373311970702678
+      snr: 3.4384771201148867
+      file: sting_S1_p004.tif
+    - mean: 0.73881781166333
+      sat_ratio: 0.0
+      dark_ratio: 0.10410509031198686
+      contrast: 0.9196002136263065
+      snr: 3.102210340939723
+      file: sting_S1_p005.tif
+    - mean: 0.7785885325401983
+      sat_ratio: 0.0185823754789272
+      dark_ratio: 0.10503557744937056
+      contrast: 0.9807431143663691
+      snr: 3.1094272514141155
+      file: sting_S2_p001.tif
+    - mean: 0.6109375111315901
+      sat_ratio: 0.0
+      dark_ratio: 0.17558839627805145
+      contrast: 0.9575646601052873
+      snr: 2.8066832993799324
+      file: sting_S2_p002.tif
+    - mean: 0.40225889440410234
+      sat_ratio: 0.0
+      dark_ratio: 0.28423645320197044
+      contrast: 0.9279562066071565
+      snr: 2.861673747307924
+      file: sting_S2_p003.tif
+  G7_casp3_E63,wt:ho=3:3,l+n,7min,total:
+    best_file: casp3_S2_p002.tif
+    metrics:
+      mean: 0.9062519119191127
+      sat_ratio: 0.0
+      dark_ratio: 0.004220463695682354
+      contrast: 0.7942000457770657
+      snr: 5.985858697807611
+      file: casp3_S2_p002.tif
+    all_files:
+    - mean: 0.9844016583843099
+      sat_ratio: 0.9991114813272247
+      dark_ratio: 0.0
+      contrast: 0.0029428549629969547
+      snr: 0.2800728989390513
+      file: casp3_S1_p001.tif
+    - mean: 0.9684943172324383
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.009778896772716816
+      snr: 0.8390535750223603
+      file: casp3_S1_p002.tif
+    - mean: 0.9515067686726878
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03195025558861675
+      snr: 2.0586346153422057
+      file: casp3_S1_p003.tif
+    - mean: 0.9314753297491474
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09937163347829403
+      snr: 3.652813744340714
+      file: casp3_S1_p004.tif
+    - mean: 0.9063922224703961
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.23533134966048685
+      snr: 4.655319362301687
+      file: casp3_S1_p005.tif
+    - mean: 0.9638271063209689
+      sat_ratio: 0.044481466055810076
+      dark_ratio: 0.0
+      contrast: 0.26994338902876314
+      snr: 4.808428960180351
+      file: casp3_S2_p001.tif
+    - mean: 0.9062519119191127
+      sat_ratio: 0.0
+      dark_ratio: 0.004220463695682354
+      contrast: 0.7942000457770657
+      snr: 5.985858697807611
+      file: casp3_S2_p002.tif
+    - mean: 0.8206778571032958
+      sat_ratio: 0.0
+      dark_ratio: 0.030376232125503264
+      contrast: 0.9186388952468146
+      snr: 4.9757691617654345
+      file: casp3_S2_p003.tif
+  G8_gsdmd_E63,wt:ho=3:3,l+n,7min,mito:
+    best_file: gsdmd_S2_p003.tif
+    metrics:
+      mean: 0.8831907913485324
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.22074235141527432
+      snr: 3.6717671855995726
+      file: gsdmd_S2_p003.tif
+    all_files:
+    - mean: 0.9844932282632737
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0014190890363928732
+      snr: 0.13775088727035867
+      file: gsdmd_S1_p001.tif
+    - mean: 0.9688795648116943
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0023956664377813297
+      snr: 0.22784183085934614
+      file: gsdmd_S1_p002.tif
+    - mean: 0.9528576363152153
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.004364843213550129
+      snr: 0.399159863497182
+      file: gsdmd_S1_p003.tif
+    - mean: 0.9356721795897055
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.010315861753261601
+      snr: 0.8487579280375295
+      file: gsdmd_S1_p004.tif
+    - mean: 0.9163753405279331
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.02348363469901582
+      snr: 1.5785409883650727
+      file: gsdmd_S1_p005.tif
+    - mean: 0.9755924717792566
+      sat_ratio: 0.1545471113541097
+      dark_ratio: 0.0
+      contrast: 0.030045777065690116
+      snr: 1.83610292273548
+      file: gsdmd_S2_p001.tif
+    - mean: 0.9404390332343139
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09123369192034791
+      snr: 3.028969445658004
+      file: gsdmd_S2_p002.tif
+    - mean: 0.8831907913485324
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.22074235141527432
+      snr: 3.6717671855995726
+      file: gsdmd_S2_p003.tif
+E63_SHOT3:
+  G1_gsdmd_E63,wt:ho=3:3,l+n,7min,total:
+    best_file: gsdmd_femoto_S2_p002.tif
+    metrics:
+      mean: 0.8213873423320948
+      sat_ratio: 0.0
+      dark_ratio: 0.01765588940422576
+      contrast: 0.9669947356374456
+      snr: 4.9849258448025395
+      file: gsdmd_femoto_S2_p002.tif
+    all_files:
+    - mean: 0.9837711483001349
+      sat_ratio: 0.9910376195917636
+      dark_ratio: 0.0
+      contrast: 0.004486152437628843
+      snr: 0.41172959278025967
+      file: gsdmd_femoto_S1_p001.tif
+    - mean: 0.9666434338476741
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.01651026169222558
+      snr: 1.226679668494607
+      file: gsdmd_femoto_S1_p002.tif
+    - mean: 0.9463454368188363
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0567483024338139
+      snr: 2.561591828737936
+      file: gsdmd_femoto_S1_p003.tif
+    - mean: 0.9170405945010115
+      sat_ratio: 0.0
+      dark_ratio: 4.481190204118214e-05
+      contrast: 0.17881284809643705
+      snr: 3.7933112246329825
+      file: gsdmd_femoto_S1_p004.tif
+    - mean: 0.8747710042828807
+      sat_ratio: 0.0
+      dark_ratio: 0.0013443570612354642
+      contrast: 0.4230792706187533
+      snr: 4.653420499558076
+      file: gsdmd_femoto_S1_p005.tif
+    - mean: 0.930761714109238
+      sat_ratio: 0.10880329815599023
+      dark_ratio: 0.0013667630122560551
+      contrast: 0.481066605630579
+      snr: 4.837255098100537
+      file: gsdmd_femoto_S2_p001.tif
+    - mean: 0.8213873423320948
+      sat_ratio: 0.0
+      dark_ratio: 0.01765588940422576
+      contrast: 0.9669947356374456
+      snr: 4.9849258448025395
+      file: gsdmd_femoto_S2_p002.tif
+    - mean: 0.6638856626593007
+      sat_ratio: 0.0
+      dark_ratio: 0.06208689027805785
+      contrast: 0.9492942702372777
+      snr: 3.533112587816389
+      file: gsdmd_femoto_S2_p003.tif
+  G2_cgas_E63,wt:ho=3:3,l+n,7min,total:
+    best_file: cgas_femoto_S2_p003.tif
+    metrics:
+      mean: 0.796313463992059
+      sat_ratio: 0.0
+      dark_ratio: 0.0003903708523096942
+      contrast: 0.34252552071412223
+      snr: 3.991595723123737
+      file: cgas_femoto_S2_p003.tif
+    all_files:
+    - mean: 0.9840624023508225
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0015106431677730514
+      snr: 0.14647025686238416
+      file: cgas_femoto_S1_p001.tif
+    - mean: 0.9678112610886652
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0027161058976119534
+      snr: 0.2564717945382632
+      file: cgas_femoto_S1_p002.tif
+    - mean: 0.9504189951690851
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.007191729610131925
+      snr: 0.6209622603746042
+      file: cgas_femoto_S1_p003.tif
+    - mean: 0.9293193677046526
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.02170778973067833
+      snr: 1.4635395116587173
+      file: cgas_femoto_S1_p004.tif
+    - mean: 0.9020746124474008
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.05172701609826802
+      snr: 2.4159778376469814
+      file: cgas_femoto_S1_p005.tif
+    - mean: 0.9605360771377808
+      sat_ratio: 0.021600520494469748
+      dark_ratio: 0.0
+      contrast: 0.056829785610742256
+      snr: 2.4987045972994966
+      file: cgas_femoto_S2_p001.tif
+    - mean: 0.8981606187280222
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.16157030594338906
+      snr: 3.4860776607585984
+      file: cgas_femoto_S2_p002.tif
+    - mean: 0.796313463992059
+      sat_ratio: 0.0
+      dark_ratio: 0.0003903708523096942
+      contrast: 0.34252552071412223
+      snr: 3.991595723123737
+      file: cgas_femoto_S2_p003.tif
+  G3_gsdmd_E63,wt:ho=3:3,l+n,7min,cyto:
+    best_file: gsdmd_femoto_S2_p003.tif
+    metrics:
+      mean: 0.7961890338239422
+      sat_ratio: 0.0
+      dark_ratio: 0.0015519515791107318
+      contrast: 0.6184168764782177
+      snr: 4.183681773648801
+      file: gsdmd_femoto_S2_p003.tif
+    all_files:
+    - mean: 0.9840463965912148
+      sat_ratio: 0.9999418018157833
+      dark_ratio: 0.0
+      contrast: 0.001495384145876355
+      snr: 0.14501835668940782
+      file: gsdmd_femoto_S1_p001.tif
+    - mean: 0.9677418501835792
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0035553521019302536
+      snr: 0.33120043972107926
+      file: gsdmd_femoto_S1_p002.tif
+    - mean: 0.9502265912060849
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.01071183337148085
+      snr: 0.8713436634249853
+      file: gsdmd_femoto_S1_p003.tif
+    - mean: 0.9290026244108628
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03311299305714499
+      snr: 1.9173841203700803
+      file: gsdmd_femoto_S1_p004.tif
+    - mean: 0.9018640200084415
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0792796215762569
+      snr: 2.8607524818627548
+      file: gsdmd_femoto_S1_p005.tif
+    - mean: 0.9609054108246544
+      sat_ratio: 0.040408939241095676
+      dark_ratio: 0.0
+      contrast: 0.09216632333867392
+      snr: 2.910902314202875
+      file: gsdmd_femoto_S2_p001.tif
+    - mean: 0.8986242621799057
+      sat_ratio: 0.0
+      dark_ratio: 1.9399394738884146e-05
+      contrast: 0.2788148317692837
+      snr: 3.7842590118293207
+      file: gsdmd_femoto_S2_p002.tif
+    - mean: 0.7961890338239422
+      sat_ratio: 0.0
+      dark_ratio: 0.0015519515791107318
+      contrast: 0.6184168764782177
+      snr: 4.183681773648801
+      file: gsdmd_femoto_S2_p003.tif
+  G4_casp3_E63,wt:ho=3:3,l+n,7min,total:
+    best_file: casp3_femoto_S2_p003.tif
+    metrics:
+      mean: 0.8050711069904851
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.37508903639276725
+      snr: 3.8868168321604397
+      file: casp3_femoto_S2_p003.tif
+    all_files:
+    - mean: 0.9844337771675122
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0014190890363928732
+      snr: 0.13772032527402
+      file: casp3_femoto_S1_p001.tif
+    - mean: 0.9686467858957098
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.002609292744335079
+      snr: 0.24685994040605788
+      file: casp3_femoto_S1_p002.tif
+    - mean: 0.9520384557014846
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.005752651255054642
+      snr: 0.510021156036536
+      file: casp3_femoto_S1_p003.tif
+    - mean: 0.932647755211216
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.016144045166704757
+      snr: 1.180814447157332
+      file: casp3_femoto_S1_p004.tif
+    - mean: 0.9081740131116155
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0398365758754865
+      snr: 2.087964753533419
+      file: casp3_femoto_S1_p005.tif
+    - mean: 0.9647174549080891
+      sat_ratio: 0.11344144706065803
+      dark_ratio: 0.0
+      contrast: 0.05339131761654081
+      snr: 2.411330219085035
+      file: casp3_femoto_S2_p001.tif
+    - mean: 0.9067498551834434
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.16285481040665295
+      snr: 3.4530162738817487
+      file: casp3_femoto_S2_p002.tif
+    - mean: 0.8050711069904851
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.37508903639276725
+      snr: 3.8868168321604397
+      file: casp3_femoto_S2_p003.tif
+  G5_gsdmd_E63,wt:ho=3:3,l+n,7min,mito:
+    best_file: gsdmd_femoto_S2_p002.tif
+    metrics:
+      mean: 0.8276950285033698
+      sat_ratio: 0.0
+      dark_ratio: 0.006866165682590804
+      contrast: 0.7693524071107042
+      snr: 5.642677559237768
+      file: gsdmd_femoto_S2_p002.tif
+    all_files:
+    - mean: 0.9842098824404164
+      sat_ratio: 0.9966675612810878
+      dark_ratio: 0.0
+      contrast: 0.002700846875715368
+      snr: 0.2549852584609298
+      file: gsdmd_femoto_S1_p001.tif
+    - mean: 0.9677270915606703
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.009028305485618393
+      snr: 0.7474133413322331
+      file: gsdmd_femoto_S1_p002.tif
+    - mean: 0.948707290351953
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.02971786068513005
+      snr: 1.7311084928752045
+      file: gsdmd_femoto_S1_p003.tif
+    - mean: 0.9217985768702851
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09490608072022588
+      snr: 2.8945370839447477
+      file: gsdmd_femoto_S1_p004.tif
+    - mean: 0.8821384282412964
+      sat_ratio: 0.0
+      dark_ratio: 0.000424941850062623
+      contrast: 0.22687815671015488
+      snr: 3.569352410633073
+      file: gsdmd_femoto_S1_p005.tif
+    - mean: 0.9349810254649705
+      sat_ratio: 2.2365360529611736e-05
+      dark_ratio: 0.0006038647342995169
+      contrast: 0.26058365758754864
+      snr: 3.680243168939756
+      file: gsdmd_femoto_S2_p001.tif
+    - mean: 0.8276950285033698
+      sat_ratio: 0.0
+      dark_ratio: 0.006866165682590804
+      contrast: 0.7693524071107042
+      snr: 5.642677559237768
+      file: gsdmd_femoto_S2_p002.tif
+    - mean: 0.6565437854002175
+      sat_ratio: 0.0
+      dark_ratio: 0.02654768294864913
+      contrast: 0.9008621347371634
+      snr: 4.371175102747931
+      file: gsdmd_femoto_S2_p003.tif

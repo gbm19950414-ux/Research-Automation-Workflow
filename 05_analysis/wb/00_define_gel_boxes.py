@@ -12,7 +12,7 @@
 #
 # 参数：
 #   --shot         必填，shots 下的 shot 目录名
-#   --expect       预期胶块数量，用来提示（默认 5）
+#   --expect       预期胶块数量，用来提示（默认 10）
 #   --reset-boxes  若已存在 gel_boxes，清空后重画
 #
 # 后续：
@@ -165,7 +165,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--shot", help="shots 下的 shot 目录名")
     ap.add_argument(
-        "--expect", type=int, default=5, help="number of gels expected (for UI hint only)"
+        "--expect", type=int, default=10, help="number of gels expected (for UI hint only)"
     )
     ap.add_argument(
         "--reset-boxes",

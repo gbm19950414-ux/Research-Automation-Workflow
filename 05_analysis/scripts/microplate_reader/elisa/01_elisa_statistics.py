@@ -31,6 +31,11 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
+# 配置项：是否让所有批次的 IL-1β 使用 batch1 的标准曲线
+USE_BATCH1_STD_FOR_IL1B = True  # 需要启用时改为 True
+IL1B_STD_BATCH_NAME = "E1"   # 作为“标准曲线来源”的 batch 名称
+IL1B_ANTIBODY_NAME = "il1b"      # il1b 对应的 antibody 名称（区分大小写与否在后面处理）
+
 def four_pl(x, A, B, C, D):
     return D + (A - D) / (1 + (x / C)**B)
 
@@ -56,8 +61,17 @@ def std_curve_correct(batch_df, full_df):
     antibodies = batch_df['antibody'].dropna().unique()
     std_conc = np.array([1000,500,250,125,62.5,31.25,15.625,7.8125])
     for ab in antibodies:
-        # 在同一 batch + antibody 内收集标准点（sc_*）
-        std_rows = full_df[(full_df['batch'] == batch_val)
+        # 根据配置决定本抗体标准曲线的来源 batch：
+        # - 默认：使用当前 batch 的标准点
+        # - 如果启用 USE_BATCH1_STD_FOR_IL1B 且抗体为 IL1B_ANTIBODY_NAME：统一使用 IL1B_STD_BATCH_NAME 的标准点
+        ab_str = str(ab)
+        if USE_BATCH1_STD_FOR_IL1B and ab_str.lower() == IL1B_ANTIBODY_NAME.lower():
+            std_source_batch = IL1B_STD_BATCH_NAME
+        else:
+            std_source_batch = batch_val
+
+        # 在指定标准来源 batch + antibody 内收集标准点（sc_*）
+        std_rows = full_df[(full_df['batch'] == std_source_batch)
                       & (full_df['antibody'] == ab)
                       & (full_df['group'].str.contains('sc', case=False, na=False))]
         if std_rows.empty:
@@ -124,9 +138,43 @@ def process_file(file_path, output_dir):
     if missing:
         raise SystemExit(f"缺少必要列: {missing} in file {file_path}")
 
+    # 先在当前文件内按 matrix_index 做背景矫正
     df = df.groupby('matrix_index', group_keys=False).apply(bg_correct)
-    df = df.groupby('batch', group_keys=False).apply(lambda x: std_curve_correct(x, df))
+
+    # 默认情况下，标准曲线只基于当前文件数据
+    full_df_for_std = df
+
+    # 如果启用“所有批次 il1b 共用某个 batch 的标准曲线”模式，
+    # 且当前文件不是该标准来源 batch，则额外加载标准来源 batch 的 il1b 标准孔行
+    if USE_BATCH1_STD_FOR_IL1B:
+        # 当前文件对应的 batch 名称（从文件名中提取，例如 ELISA原始数据_long_batch_E1.xlsx → E1）
+        batchname = file_path.stem.replace("ELISA原始数据_long_batch_", "")
+        # 只有当当前文件的 batch 与标准来源 batch 不同的时候才需要额外加载
+        if batchname != IL1B_STD_BATCH_NAME:
+            std_file = file_path.with_name(f"ELISA原始数据_long_batch_{IL1B_STD_BATCH_NAME}.xlsx")
+            if std_file.exists():
+                std_df = pd.read_excel(std_file)
+                # 做最基本的列检查，防止格式错误
+                missing_std = required - set(std_df.columns)
+                if not missing_std:
+                    # 对标准来源文件也先做背景矫正
+                    std_df = std_df.groupby("matrix_index", group_keys=False).apply(bg_correct)
+                    # 只保留 il1b 且 group 中包含 sc 的标准孔行
+                    il1b_mask = std_df["antibody"].astype(str).str.strip().str.lower().eq(IL1B_ANTIBODY_NAME.lower())
+                    sc_mask = std_df["group"].astype(str).str.contains("sc", case=False, na=False)
+                    std_il1b_rows = std_df[il1b_mask & sc_mask].copy()
+                    # 仅在确实存在标准孔时才拼接到 full_df_for_std
+                    if not std_il1b_rows.empty:
+                        full_df_for_std = pd.concat([df, std_il1b_rows], ignore_index=True)
+            # 如果 std_file 不存在或缺列，保持 full_df_for_std=当前 df，不做额外处理
+
+    # 在当前文件内按 batch 分组，使用 full_df_for_std 作为查找标准点的全集
+    df = df.groupby('batch', group_keys=False).apply(lambda x: std_curve_correct(x, full_df_for_std))
+
+    # 再按 matrix_index 做 MTT 矫正
     df = df.groupby('matrix_index', group_keys=False).apply(mtt_correct)
+
+    # 最终值
     df['final_value'] = df['std_curve_correct'] / df['mtt_factor']
 
     batchname = file_path.stem.replace("ELISA原始数据_long_batch_", "")

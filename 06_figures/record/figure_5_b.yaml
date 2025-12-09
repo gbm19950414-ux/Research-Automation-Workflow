@@ -1,0 +1,85 @@
+# ============================================================
+# schema.yaml v2  ——  单个 panel 的结构化写作模版
+# 目标：让 AI 在几乎不需要补充信息的前提下，生成：
+#   - 结果段（Results）
+#   - 简短讨论/过渡段（Mini Discussion / Transition）
+#   - Methods 中本实验的“差异性信息”
+# ============================================================
+
+# ---------- 0. Meta & Assets：基本信息 ----------
+meta:
+  figure: "Figure 5"              # 如 "Figure 3"
+  panel: "B"               # 如 "A"
+  short_title: "BEL 降低 IL-1β 释放并部分遮蔽 EphB1 缺失表型"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
+  chapter: "3.5 线粒体心磷脂可及性与重塑的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
+  experiment_id: "2025-03-21_BEL_IL1b_ELISA"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
+  version: 1              # 整数，用来追踪修改
+
+assets:
+  main_figure_file: ""    # 主图文件路径，如 "figures/F3/F3A_IL1b_ELISA.pdf"
+  raw_data_files:         # 原始数据/整理后数据的文件路径列表
+    - ""
+  stats_files:            # 统计分析结果文件（R/Python 脚本输出）
+    - ""
+  analysis_scripts:       # 用于生成图/做统计的脚本
+    - ""
+  supplementary_items:    # 对应的补充图/表（若有）
+    - ""                  # 如 "Figure S3B", "Table S2"
+
+# ---------- 1. Scientific Question：本节要回答什么 ----------
+question:
+  context_from_previous: "上一节显示 BEL 可降低 NAO 可染 CL 池，并抹除 WT–KO 的差异。"
+  core_question: "降低 CL 可及性是否能够复现 EphB1 缺失造成的 IL-1β 释放下降？"
+  hypothesis_or_expectation: "若 CL 可及性限制 IL-1β 释放，则 BEL 应下降 IL-1β 释放，并部分遮蔽基因型差异。"
+  importance_reason: "这是验证 CL 可达性 → 孔功能 → IL-1β 释放的因果链条所必需的实验。"
+
+# ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
+rationale:
+  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞评估 BEL 对 IL-1β 释放的影响。"
+  key_variables: "BEL 处理时间（4/16 h）、剂量（1, 2, 4 μM）、基因型（WT vs KO）、IL-1β 释放量。"
+  control_logic: "DMSO vehicle 作为基线；剂量/时间双梯度用于识别依赖性；KO 作为缺失控制用于检测遮蔽效应。"
+  core_justification: "若 EphB1→CL 可及性→孔功能→IL-1β 释放成立，则 BEL 应模拟 KO 表型并产生 genotype×dose 交互。"
+
+# ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
+methods:
+  inherits_from_protocol: "default_peritoneal_macrophage_NLRP3_activation"
+  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1−/− 原代腹腔巨噬细胞。"
+  experimental_groups: "WT vs KO × BEL 0/1/2/4 μM；BEL 预处理 4 h 或 16 h。"
+  stimuli_and_treatment: "LPS 100 ng/mL 预激 4 h；Nigericin 10 μM 激活 1 h；BEL 预处理按剂量梯度。"
+  time_points: "BEL 预处理 4 h 与 16 h；Nigericin 激活 1 h。"
+  dose_info: "BEL 1、2、4 μM；DMSO 0.1% vehicle 对照。"
+  readout_and_assay: "收集上清进行 IL-1β ELISA；480 nm 背景与空白孔双重背景扣除；MTT 校正细胞数量。"
+  replicates: "每组 n ≥ 3，≥3 次独立实验重复。"
+  analysis_notes: "使用双尾 t 检验；交互效应以 two-way ANOVA 评估 genotype×dose。"
+  minimal_methods_summary: "WT 与 KO 巨噬细胞在 BEL 预处理后进行 LPS+Nigericin 激活，并以 ELISA 定量 IL-1β 释放，评估 BEL 对基因型差异的遮蔽效应。"
+
+# ---------- 4. Results：把图变成结构化文字 ----------
+results:
+  data_direction: "WT 中 IL-1β 释放随 BEL 剂量/时间依赖性下降；KO 对 BEL 的敏感性降低。"
+  stats_summary: "genotype×dose 交互项显著；多数 BEL 剂量对 WT p < 0.05，而对 KO 多为 ns。"
+  key_numbers: "WT 在 4 μM BEL、16 h 时 IL-1β 下降约 50%；KO 在相同条件下降幅 <20%。"
+  group_difference_statement: "BEL 对 WT 的抑制强于 KO，使 WT–KO 在高剂量/长处理时间下差异显著收敛。"
+  robustness_and_qc: "趋势在 ≥3 批实验重复；MTT 显示 BEL 无细胞毒性。"
+  anomalies_or_limits: "低剂量 BEL 在部分批次中的效果略弱，但遮蔽趋势一致。"
+
+# ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
+interpretation:
+  minimal_bio_interpretation: "BEL 下调 IL-1β 释放，并部分遮蔽 EphB1 缺失表型，提示 CL 可及性是其关键调控点。"
+  alternative_explanations: "BEL 可能影响多个 iPLA₂ 相关途径，但 NAO 信号与 IL-1β 释放均下降支持同一膜脂路径。"
+  summary_type: "supportive, exploratory"
+  claim_supported: "降低 CL 可及性可复现并遮蔽 EphB1 缺失导致的 IL-1β 释放下降。"
+  link_to_previous: "在 BEL 降低 NAO 信号后，本节进一步确认其可调控 IL-1β 释放。"
+  transition_to_next: "为定位 CL 重塑参与程度，下一节将考察 MLCL/CL 与重塑酶（如 TAZ）相关指标。"
+
+# ---------- 6. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"] 
+    # 你希望从这个 schema 主要生成哪些部分的正文？
+    # 可选值： "Results" / "Discussion_mini" / "Methods_diff"
+  tone: "neutral"     
+    # 写作语气： "neutral"（默认科研语气）/ "cautious"（更谨慎）/ "confident"（偏肯定）
+  target_journal_style: "" 
+    # 若有心仪期刊的写作风格，可以在此填入名称，仅作为“风格参考”
+    # 例如："Cell Metabolism", "Nature Immunology"
+  language: "zh_en_mix"
+    # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
