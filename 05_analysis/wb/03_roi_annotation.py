@@ -54,6 +54,47 @@ def save_yaml(data, path):
     with open(path, "w") as f:
         yaml.safe_dump(data, f, sort_keys=False, allow_unicode=True)
 
+def select_polygon_on_image(img, image_path, roi_index):
+    """Open an interactive window to select a 4-point polygon ROI.
+
+    Returns
+    -------
+    polygon : np.ndarray or None
+        (4, 2) array of points if a polygon was drawn, otherwise None.
+    """
+    fig, ax = plt.subplots()
+    ax.imshow(img, cmap="gray")
+    plt.title(f"ROI #{roi_index} (click 4 points): {image_path.name}")
+
+    holder = {"verts": None}
+
+    def onselect(verts):
+        if len(verts) == 4:
+            holder["verts"] = verts
+            polygon = np.array(verts)
+            ax.plot(
+                *zip(*(list(polygon) + [polygon[0]])),
+                color="r",
+                linewidth=1.5,
+            )
+            fig.canvas.draw()
+            print(f"[ROI] Candidate polygon with points: {polygon.tolist()}")
+
+    polygon_selector = PolygonSelector(
+        ax,
+        onselect,
+        useblit=False,
+        props=dict(color="r", linewidth=1.5),
+    )
+
+    plt.show()
+
+    if holder["verts"] is None:
+        print("[INFO] No polygon drawn in this round.")
+        return None
+
+    return np.array(holder["verts"])
+
 def annotate_roi(image_path, save_path):
     """交互式绘制一个或多个倾斜矩形 ROI（四点多边形）并保存坐标
 
@@ -68,39 +109,9 @@ def annotate_roi(image_path, save_path):
     roi_index = 1
 
     while True:
-        fig, ax = plt.subplots()
-        ax.imshow(img, cmap="gray")
-        plt.title(f"ROI #{roi_index} (click 4 points): {image_path.name}")
-
-        holder = {"verts": None}
-
-        def onselect(verts):
-            if len(verts) == 4:
-                holder["verts"] = verts
-                polygon = np.array(verts)
-                ax.plot(
-                    *zip(*(list(polygon) + [polygon[0]])),
-                    color="r",
-                    linewidth=1.5,
-                )
-                fig.canvas.draw()
-                print(f"[ROI] Candidate polygon with points: {polygon.tolist()}")
-
-        polygon_selector = PolygonSelector(
-            ax,
-            onselect,
-            useblit=False,
-            props=dict(color="r", linewidth=1.5),
-        )
-
-        plt.show()
-
-        verts = holder["verts"]
-        if verts is None:
-            print("[INFO] No polygon drawn in this round, stop adding ROIs.")
+        polygon = select_polygon_on_image(img, image_path, roi_index)
+        if polygon is None:
             break
-
-        polygon = np.array(verts)
 
         # ---- auto-detect target prefix from folder name ----
         gel_name = image_path.parent.name
@@ -144,6 +155,75 @@ def annotate_roi(image_path, save_path):
     save_yaml(rois, save_path)
     print(f"[OK] ROI saved → {save_path}")
 
+def roi_has_valid_points(roi):
+    """Return True if roi["points"] exists and looks like a 4-point polygon."""
+    pts = roi.get("points")
+    if not isinstance(pts, (list, tuple)) or len(pts) != 4:
+        return False
+    for p in pts:
+        if not isinstance(p, (list, tuple)) or len(p) != 2:
+            return False
+    return True
+
+def infer_target_prefix_from_folder(image_path):
+    gel_name = image_path.parent.name
+    parts = gel_name.split("_")
+    if len(parts) >= 2:
+        return parts[1]
+    return "band"
+
+def fix_incomplete_roi_yaml(image_path, roi_path):
+    """Check an existing roi.yaml and interactively fill in missing parts.
+
+    - If the file is empty/invalid, fall back to full annotation.
+    - If points are missing for an ROI, reopen the GUI to select a polygon.
+    - If band is missing, ask for a band name in the terminal.
+    """
+    try:
+        rois = load_yaml(roi_path)
+    except Exception as e:
+        print(f"[WARN] Failed to load {roi_path}: {e}. Re-annotating from scratch.")
+        annotate_roi(image_path, roi_path)
+        return
+
+    if not isinstance(rois, list) or not rois:
+        print(f"[INFO] {roi_path} is empty or not a list. Re-annotating from scratch.")
+        annotate_roi(image_path, roi_path)
+        return
+
+    img = np.array(Image.open(image_path))
+    target_prefix = infer_target_prefix_from_folder(image_path)
+
+    modified = False
+    for idx, roi in enumerate(rois):
+        # Fix missing / invalid points
+        if not roi_has_valid_points(roi):
+            print(f"[INFO] ROI #{idx+1} in {roi_path.name} has missing/invalid points. Please re-select.")
+            polygon = select_polygon_on_image(img, image_path, idx + 1)
+            if polygon is not None:
+                roi["points"] = polygon.tolist()
+                modified = True
+            else:
+                print(f"[WARN] ROI #{idx+1} not updated because no polygon was drawn.")
+
+        # Fix missing band label
+        band = roi.get("band")
+        if not band:
+            user_band = input(
+                f"Band name for ROI #{idx+1} (e.g., full, p19, p17): "
+            ).strip()
+            if not user_band:
+                user_band = f"band{idx+1}"
+            full_band = f"{target_prefix}_{user_band}"
+            roi["band"] = full_band
+            modified = True
+
+    if modified:
+        save_yaml(rois, roi_path)
+        print(f"[OK] Updated ROI file → {roi_path}")
+    else:
+        print(f"[OK] Existing roi.yaml for {image_path.name} is already complete. No changes made.")
+
 def main():
     root = Path(__file__).resolve().parents[2]
     gel_crops_root = root / "04_data/interim/wb/gel_crops"
@@ -173,11 +253,11 @@ def main():
 
             roi_path = gel_dir / "roi.yaml"
             if roi_path.exists():
-                print(f"[SKIP] roi.yaml already exists for {gel_name} → skipping annotation.")
-                continue
-
-            print(f"[INFO] Launching ROI annotation for {gel_name}")
-            annotate_roi(img_path, roi_path)
+                print(f"[INFO] roi.yaml already exists for {gel_name} → checking completeness.")
+                fix_incomplete_roi_yaml(img_path, roi_path)
+            else:
+                print(f"[INFO] Launching ROI annotation for {gel_name}")
+                annotate_roi(img_path, roi_path)
 
     print("[ALL DONE] ROI annotation complete for all gels.")
 

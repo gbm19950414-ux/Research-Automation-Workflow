@@ -286,23 +286,22 @@ wb_panel_from_yaml <- function(root,
     layout.pos.col = band_col_index
   ))
 
-  if (length(unique_geno) == 2) {
+  if (length(unique_geno) > 0L) {
+    # 对每一种非空 genotype 画一段水平线，并把文字放在该 genotype block 的几何中心
     for (g in unique_geno) {
       idx <- which(geno_vec == g)
-      if (length(idx) == 0) next
+      if (length(idx) == 0L) next
 
       # 覆盖该 genotype 的 lane 范围（在 band 列内的 npc 坐标）
       full_start <- (min(idx) - 1) * lane_width_npc
       full_end   <- max(idx) * lane_width_npc
 
-      # 在线段两端各留出 10% 的水平 padding，
-      # 这样相邻 genotype 之间就不会“无缝拼接成一整条线”，
-      # 与 sample_type 竖线的 0.1–0.9 逻辑保持一致。
+      # 在线段两端各留出 10% 的水平 padding
       pad_frac   <- 0.10
       line_start <- full_start + (full_end - full_start) * pad_frac
       line_end   <- full_end   - (full_end - full_start) * pad_frac
 
-      # 文本仍然用整个 genotype block 的中点
+      # 文本位置使用整个 genotype block 的中点
       x_mid <- (full_start + full_end) / 2
 
       grid::grid.lines(
@@ -322,8 +321,10 @@ wb_panel_from_yaml <- function(root,
       )
     }
   } else {
+    # 所有 genotype 都是空字符串的 fallback：逐 lane 打标签（不画横线）
     for (k in seq_len(lane_count)) {
       geno_label <- geno_vec[k]
+      if (!nzchar(geno_label)) next
       x_mid <- (k - 0.5) * lane_width_npc
       grid::grid.text(
         label = geno_label,

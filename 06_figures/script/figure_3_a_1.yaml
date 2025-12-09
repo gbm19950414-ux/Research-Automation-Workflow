@@ -30,67 +30,56 @@ page:
     sample_type_ratio: 0.1       # 样本类型标签区域宽度比例（最左列，可暂时留空用作占位）
     
 bands:
-  - prefix: "G3_gapdh_E14_lys_n__gapdh_37kda"  # materials 中的文件前缀（不带 _patch.tif）
+  - prefix: "G2_gapdh_E63,time_grand,total__gapdh_37kda"  # materials 中的文件前缀（不带 _patch.tif）
     label: "GAPDH"                     # 左侧标签显示内容
-    sample_type: "lys"
-    shot_id: "E14_SHOT1"
-  - prefix: "G1_pro_il1b_&_il1b_E14_lys__pro_pro"
-    label: "pro-IL1β"
-    sample_type: "lys"
-    shot_id: "E15_SHOT1"
-
+    sample_type: "total"
+    shot_id: "E63_SHOT1"
+  - prefix: "G1_gsdmd_E63,time_grand,total__gsdmd_ful_53kda"
+    label: "GSDMD-FL"
+    sample_type: "total"
+    shot_id: "E63_SHOT1"
+  - prefix: "G6_gsdmd_E63,time_grand,mito__gsdmd_nt_31kda"
+    label: "GSDMD-NT"
+    sample_type: "total"
+    shot_id: "E63_SHOT1"
 
 
 
 lanes:
-  count: 8
+  count: 5
 
   # 每种处理方式一行的顺序
   treatment_rows:
-  - "LPS"
+  - "Time_grand(min)"
 
   items:
     - lane: 1
       genotype: "WT"
       treatments:
-        LPS: "+"
+        Time_grand(min): "0"
         
     - lane: 2
       genotype: "WT"
       treatments:
-        LPS: "+"
+        Time_grand(min): "7.5"
         
         
     - lane: 3
       genotype: "WT"
       treatments:
-        LPS: "+"
+        Time_grand(min): "15"
         
         
     - lane: 4
       genotype: "WT"
       treatments:
-        LPS: "+"
+        Time_grand(min): "30"
         
         
    
     - lane: 5
-      genotype: "KO"
+      genotype: "WT"
       treatments:
-        LPS: "+"
+        Time_grand(min): "60"
         
-    - lane: 6
-      genotype: "KO"
-      treatments:
-        LPS: "+"
-        
-    - lane: 7
-      genotype: "KO"
-      treatments:
-        LPS: "+"
-        
-    - lane: 8
-      genotype: "KO"
-      treatments:
-        LPS: "+"
         
