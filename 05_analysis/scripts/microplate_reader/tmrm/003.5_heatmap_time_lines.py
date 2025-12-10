@@ -388,12 +388,17 @@ def plot_heatmap_single(mat: pd.DataFrame, out_path: Path, title_suffix: str):
             cbar_kws={"label": "value_t0_ratio (WT/HO)"},
             linewidths=0.1,
             linecolor="white",
+            yticklabels=mat.index,  # 显式指定每一行的标签，避免自动抽稀
         )
     else:
         im = ax.imshow(mat.values, aspect="auto", vmin=vmin, vmax=vmax)
         fig.colorbar(im, ax=ax, label="value_t0_ratio (WT/HO)")
         ax.set_yticks(np.arange(n_rows))
         ax.set_yticklabels(mat.index)
+
+    # 确保每一行都有一个 y 轴刻度和标签（避免 seaborn / matplotlib 自动抽稀）
+    ax.set_yticks(np.arange(n_rows) + 0.5)
+    ax.set_yticklabels(mat.index)
 
     ax.set_xlabel("time_point")
     ax.set_ylabel("时间线名称 + 基因型（...|WT / ...|HO）")
