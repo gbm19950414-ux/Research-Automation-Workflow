@@ -1,0 +1,7 @@
+E63_SHOT3:
+  G1_gsdmd_E63,wt:ho=3:3,l+n,7min,total:
+
+    gsdmd_nt,31kda: "gsdmd_femoto_S2_p003.tif"
+
+  G5_gsdmd_E63,wt:ho=3:3,l+n,7min,mito:
+    gsdmd_nt,31kda: "gsdmd_femoto_S2_p003.tif"

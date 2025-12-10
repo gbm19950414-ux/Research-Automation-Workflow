@@ -30,58 +30,66 @@ page:
     sample_type_ratio: 0.1       # 样本类型标签区域宽度比例（最左列，可暂时留空用作占位）
     
 bands:
-  - prefix: "G2_gapdh_E63,time_grand,total__gapdh_37kda"  # materials 中的文件前缀（不带 _patch.tif）
+  - prefix: "G3_gapdh_E63,wt:ho=3:3,l+n,7min,total__gapdh_37kda"  # materials 中的文件前缀（不带 _patch.tif）
     label: "GAPDH"                     # 左侧标签显示内容
     sample_type: "total"
-    shot_id: "E63_SHOT1"
-  - prefix: "G1_gsdmd_E63,time_grand,total__gsdmd_ful_53kda"
+    shot_id: "E63_SHOT2"
+  - prefix: "G1_gsdmd_E63,wt:ho=3:3,l+n,7min,total__gsdmd_full_53kda"
     label: "GSDMD-FL"
     sample_type: "total"
-    shot_id: "E63_SHOT1"
-  - prefix: "G1_gsdmd_E63,time_grand,total__gsdmd_nt_31kda"
+    shot_id: "E63_SHOT3"
+  - prefix: "G1_gsdmd_E63,wt:ho=3:3,l+n,7min,total__gsdmd_nt_31kda"
     label: "GSDMD-NT"
     sample_type: "total"
-    shot_id: "E63_SHOT1"
-  - prefix: "G6_gsdmd_E63,time_grand,mito__gsdmd_nt_31kda"
+    shot_id: "E63_SHOT3"
+  - prefix: "G5_gsdmd_E63,wt:ho=3:3,l+n,7min,mito__gsdmd_nt_31kda"
     label: "GSDMD-NT"
     sample_type: "mito"
-    shot_id: "E63_SHOT1"
+    shot_id: "E63_SHOT3"
 
 lanes:
-  count: 5
+  count: 6
 
   # 每种处理方式一行的顺序
   treatment_rows:
-  - "Time (min)"
+
+    - "LPS"
+    - "Nigericin"
 
   items:
     - lane: 1
       genotype: "WT"
       treatments:
-        Time (min): "0"
-        
+        LPS: "+"
+        Nigericin: "+"
+
     - lane: 2
       genotype: "WT"
       treatments:
-        Time (min): "7.5"
-        
-        
+        LPS: "+"
+        Nigericin: "+"
+
     - lane: 3
       genotype: "WT"
       treatments:
-        Time (min): "15"
-        
-        
+        LPS: "+"
+        Nigericin: "+"
+
     - lane: 4
-      genotype: "WT"
+      genotype: "KO"
       treatments:
-        Time (min): "30"
-        
-        
-   
+        LPS: "+"
+        Nigericin: "+"
+
     - lane: 5
-      genotype: "WT"
+      genotype: "KO"
       treatments:
-        Time (min): "60"
-        
+        LPS: "+"
+        Nigericin: "+"
+
+    - lane: 6
+      genotype: "KO"
+      treatments:
+        LPS: "+"
+        Nigericin: "+"   
         

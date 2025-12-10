@@ -1,0 +1,126 @@
+# 06_figures/script/figure_3_b.yaml
+# Figure 3B: 线粒体完整性检测 / TMRM 时间序列折线图（WT vs HO）
+
+out: "figure_3_b"
+
+size:
+  width_mm: 84      # 单栏图典型宽度
+  high_mm: 60       # 高度，可按需要改
+
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.08
+    right: 0.02
+    bottom: 0.08
+    top: 0.04
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  - id: "a"
+    type: "line"
+
+    # 统计结果文件（003_statistic_by_time_point.py 的输出）
+    data: "04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E51-2_dye-h2dcha_stats.xlsx"
+    sheet: "Sheet1"      # 如果有特定 sheet，可以改
+    # AUC分析的数据
+    auc_data: "04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E51-2_dye-h2dcha.xlsx"
+    auc_sheet: 1        # 可省略，默认 1
+    # 过滤条件：限定某个 dye / drug / 浓度 / groupdrug
+    filter:
+      drug: ["lps+nigericin"]  # 可选
+    mapping:
+      x: "time_point"
+      # 统计文件是 WT_mean / WT_sd / HO_mean / HO_sd，需先 pivot 成长表
+      genotype_cols:
+        WT:
+          mean: "value_t0_ratio_WT_mean"
+          sd: "value_t0_ratio_WT_sd"
+        HO:
+          mean: "value_t0_ratio_HO_mean"
+          sd: "value_t0_ratio_HO_sd"
+      hue: "genotype"    # 最终长表中的列（WT / HO）
+      group: "genotype"
+      p_value: "value_t0_ratio_p"
+      x_label: "Time (min)"
+      y_label: h2dcha fluorescence (a.u.)
+      x_breaks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+
+  - id: "b"
+    type: "line"
+
+    # 统计结果文件（003_statistic_by_time_point.py 的输出）
+    data: "04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E52_dye-mitosox_stats.xlsx"
+    sheet: "Sheet1"      # 如果有特定 sheet，可以改
+    # AUC分析的数据
+    auc_data: "04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E52_dye-mitosox.xlsx"
+    auc_sheet: 1        # 可省略，默认 1
+    # 过滤条件：限定某个 dye / drug / 浓度 / groupdrug
+    filter:
+      drug: ["lps+nigericin"]  # 可选
+    mapping:
+      x: "time_point"
+      # 统计文件是 WT_mean / WT_sd / HO_mean / HO_sd，需先 pivot 成长表
+      genotype_cols:
+        WT:
+          mean: "value_t0_ratio_WT_mean"
+          sd: "value_t0_ratio_WT_sd"
+        HO:
+          mean: "value_t0_ratio_HO_mean"
+          sd: "value_t0_ratio_HO_sd"
+      hue: "genotype"    # 最终长表中的列（WT / HO）
+      group: "genotype"
+      p_value: "value_t0_ratio_p"
+      x_label: "Time (min)"
+      y_label: mitosox fluorescence (a.u.)
+      x_breaks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+
+      #AUC图数据源
+      auc_value_col: "value_t0_ratio"
+      # auc_curve_group_cols: ["sample_batch", "gene", "drug", "group", "dye", "Dye_concentration", "Dye_time"]
+    legend:
+      title: "Genotype"
+      order: ["WT", "HO"]
+
+  - id: "c"
+    type: "line"
+
+    # 统计结果文件（003_statistic_by_time_point.py 的输出）
+    data: "04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E56_dye-tmrm_stats.xlsx"
+    sheet: "Sheet1"      # 如果有特定 sheet，可以改
+    # AUC分析的数据
+    auc_data: "04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E56_dye-tmrm.xlsx"
+    auc_sheet: 1        # 可省略，默认 1
+    # 过滤条件：限定某个 dye / drug / 浓度 / groupdrug
+    filter:
+      drug: ["lps+nigericin"]  # 可选
+      Dye_concentration: ["200nm"]  # 可选
+    mapping:
+      x: "time_point"
+      # 统计文件是 WT_mean / WT_sd / HO_mean / HO_sd，需先 pivot 成长表
+      genotype_cols:
+        WT:
+          mean: "value_t0_ratio_WT_mean"
+          sd: "value_t0_ratio_WT_sd"
+        HO:
+          mean: "value_t0_ratio_HO_mean"
+          sd: "value_t0_ratio_HO_sd"
+      hue: "genotype"    # 最终长表中的列（WT / HO）
+      group: "genotype"
+      p_value: "value_t0_ratio_p"
+      x_label: "Time (min)"
+      y_label: tmrm fluorescence (a.u.)
+      x_breaks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+
+      #AUC图数据源
+      auc_value_col: "value_t0_ratio"
+      # auc_curve_group_cols: ["sample_batch", "gene", "drug", "group", "dye", "Dye_concentration", "Dye_time"]
+    legend:
+      title: "Genotype"
+      order: ["WT", "HO"]
+

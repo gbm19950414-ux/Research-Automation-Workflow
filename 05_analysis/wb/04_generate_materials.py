@@ -197,6 +197,18 @@ def main():
 
     exposure = load_yaml(exposure_path)
 
+    # 可选：条带级曝光覆盖
+    band_override_path = root / "04_data/interim/wb/exposure_selected/exposure_band_override.yaml"
+    if band_override_path.exists():
+        try:
+            band_overrides = load_yaml(band_override_path) or {}
+            print(f"[INFO] Loaded band-level overrides from {band_override_path}")
+        except Exception as e:
+            print(f"[WARN] Failed to load band-level overrides: {e}")
+            band_overrides = {}
+    else:
+        band_overrides = {}
+
     for shot_id, gels in exposure.items():
         print(f"[INFO] Generating materials for {shot_id} ...")
         shot_dir = gel_crops_root / shot_id
@@ -210,13 +222,19 @@ def main():
                 print(f"[WARN] {gel_name} has no best_file, skipping.")
                 continue
 
-            img_path = gel_dir / best_file
-            if not img_path.exists():
-                print(f"[WARN] Missing {img_path}, skipping.")
-                continue
+            # 图像缓存：避免多次打开同一 gel 里的不同曝光文件
+            img_cache = {}
 
-            # 读取最佳曝光图像
-            img = np.array(Image.open(img_path))
+            def get_img(fname):
+                path = gel_dir / fname
+                if not path.exists():
+                    raise FileNotFoundError(f"Exposure file not found: {path}")
+                if fname not in img_cache:
+                    img_cache[fname] = np.array(Image.open(path))
+                return img_cache[fname]
+
+            # 默认使用 exposure_selected.yaml 中该 gel 的 best_file
+            default_img = get_img(best_file)
 
             roi_path = gel_dir / "roi.yaml"
 
@@ -232,7 +250,6 @@ def main():
             used_overlay = False
 
             if rois:
-                img2d = ensure_gray(img)
                 display_W, display_H = 480, 50
 
                 for idx, roi in enumerate(rois, start=1):
@@ -241,6 +258,30 @@ def main():
                         continue
 
                     band_label = roi.get("band") or f"band{idx}"
+
+                    # 默认使用该 gel 的 best_file，如有条带级覆盖则替换
+                    src_file = best_file
+                    if isinstance(band_overrides, dict):
+                        shot_over = band_overrides.get(shot_id)
+                        if isinstance(shot_over, dict):
+                            gel_over = shot_over.get(gel_name)
+                            if isinstance(gel_over, dict):
+                                override_name = gel_over.get(str(band_label))
+                                if override_name:
+                                    src_file = override_name
+                                    print(
+                                        f"[INFO] {shot_id}/{gel_name} | band={band_label}: "
+                                        f"using override exposure '{src_file}'"
+                                    )
+
+                    # 加载对应曝光文件的图像，若失败则退回默认 best_file
+                    try:
+                        img_for_band = get_img(src_file)
+                    except FileNotFoundError as e:
+                        print(f"[WARN] {e}; fallback to best_file='{best_file}' for band={band_label}")
+                        img_for_band = default_img
+
+                    img2d = ensure_gray(img_for_band)
 
                     center, theta, ordered_pts, centerline_length = centerline_from_quad(poly)
 
@@ -328,7 +369,7 @@ def main():
 
             else:
                 # Fallback：没有 ROI，就把原图（灰度+拉伸）作为 patch
-                cropped = ensure_gray(img)
+                cropped = ensure_gray(default_img)
                 display_W, display_H = 480, 50
                 cropped_disp = np.array(
                     Image.fromarray(cropped.astype(np.float32)).resize((display_W, display_H), resample=Image.BILINEAR)

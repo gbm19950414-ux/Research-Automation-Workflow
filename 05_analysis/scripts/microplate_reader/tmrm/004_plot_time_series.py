@@ -24,26 +24,42 @@ VALUE_COL = "value"
 
 # ==== 路径 ====
 OUTPUT_DIR = Path(
-    "/Volumes/Samsung_SSD_990_PRO_2TB_Media/发育生物所/"
-    "博士课题/EphB1/04_data/processed/microplate_reader/线粒体完整性检测"
+    "04_data/processed/microplate_reader/线粒体完整性检测"
 )
-STYLE_PATH = Path("/mnt/data/外观指南.yaml") if Path("/mnt/data/外观指南.yaml").exists() else Path("/Users/gongbaoming/Library/Mobile Documents/com~apple~CloudDocs/phd_thesis/方法/外观指南.yaml")
+# 优先使用 /mnt/data 下的外观指南，其次是 iCloud 路径；若都不存在，则不强制依赖
+_style_path_1 = Path("/mnt/data/外观指南.yaml")
+_style_path_2 = Path("/Users/gongbaoming/Library/Mobile Documents/com~apple~CloudDocs/phd_thesis/方法/外观指南.yaml")
+if _style_path_1.exists():
+    STYLE_PATH = _style_path_1
+elif _style_path_2.exists():
+    STYLE_PATH = _style_path_2
+else:
+    STYLE_PATH = None  # 不依赖外部 YAML，使用脚本内置默认外观
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def _mm_to_in(mm: float) -> Optional[float]:
     return float(mm) / 25.4 if mm is not None else None
 
 def load_style():
-    """读取 YAML；逐项安全更新 rcParams；返回配置及 constrained_layout 开关。"""
-    cfg = yaml.safe_load(STYLE_PATH.read_text(encoding="utf-8"))
-    if not isinstance(cfg, dict):
-        raise ValueError("外观指南.yaml 内容不是字典结构")
-
-    # 1) rcParams：清空后逐项设置；对未知键静默跳过（避免 KeyError）
+    """读取 YAML（若存在）；逐项安全更新 rcParams；返回配置及 constrained_layout 开关。"""
+    # 1) 先给出一个空的 cfg 和 rc，保证不依赖外部 YAML 也能运行
+    cfg: dict = {}
     mpl.rcParams.clear()
-    rc = cfg.get("rcparams", {})
+    rc = {}
 
-    # 一些稳妥的默认值（若 YAML 未给出）
+    # 2) 若 STYLE_PATH 存在，则尝试读取外观指南.yaml
+    if STYLE_PATH is not None and STYLE_PATH.exists():
+        try:
+            _cfg_loaded = yaml.safe_load(STYLE_PATH.read_text(encoding="utf-8"))
+            if isinstance(_cfg_loaded, dict):
+                cfg = _cfg_loaded
+                rc = cfg.get("rcparams", {}) or {}
+            else:
+                print("[警告] 外观指南.yaml 内容不是字典结构，已忽略，使用内置默认样式。")
+        except Exception as e:
+            print(f"[警告] 读取外观指南.yaml 失败（{e}），已忽略，使用内置默认样式。")
+
+    # 3) 一些稳妥的默认值（若 YAML 未给出）
     rc.setdefault("font.family", "sans-serif")
     rc.setdefault("font.sans-serif",
                   ["Arial", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", "DejaVu Sans"])
@@ -66,15 +82,15 @@ def load_style():
             # 忽略未知或旧版本不存在的 rc 参数（如误写 constrained_layout.use）
             pass
 
-    # 2) 其它配置块
-    axes_cfg   = cfg.get("axes", {})
-    export_cfg = cfg.get("export", {})
-    panel_cfg  = cfg.get("panel_layout", cfg.get("layout", {}))
-    fig_cfg    = cfg.get("figure_layout", cfg.get("layout", {}))
-    stat_cfg   = cfg.get("statistics", {})
-    ptitle_cfg = cfg.get("panel_title", {})
+    # 4) 其它配置块
+    axes_cfg   = cfg.get("axes", {}) if isinstance(cfg, dict) else {}
+    export_cfg = cfg.get("export", {}) if isinstance(cfg, dict) else {}
+    panel_cfg  = cfg.get("panel_layout", cfg.get("layout", {})) if isinstance(cfg, dict) else {}
+    fig_cfg    = cfg.get("figure_layout", cfg.get("layout", {})) if isinstance(cfg, dict) else {}
+    stat_cfg   = cfg.get("statistics", {}) if isinstance(cfg, dict) else {}
+    ptitle_cfg = cfg.get("panel_title", {}) if isinstance(cfg, dict) else {}
 
-    # 3) constrained_layout 开关（不要放进 rcParams）
+    # 5) constrained_layout 开关（不要放进 rcParams）
     # 优先读 figure.constrained_layout.use（若用户在 YAML rcparams 中写了正确键名）
     use_cl = False
     try:
@@ -82,13 +98,14 @@ def load_style():
     except Exception:
         pass
     # 也允许在 YAML 顶层提供显式开关（可选）
-    use_cl = bool(cfg.get("constrained_layout", use_cl))
+    if isinstance(cfg, dict):
+        use_cl = bool(cfg.get("constrained_layout", use_cl))
     # 如果使用 suptitle，一般推荐打开
     if ptitle_cfg.get("method", "suptitle") == "suptitle":
         use_cl = True
 
-    # 4) v1 兼容：panel_layout 缺失则给出安全默认
-    if "width_mm_range" not in panel_cfg:
+    # 6) v1 兼容：panel_layout 缺失则给出安全默认
+    if not panel_cfg or "width_mm_range" not in panel_cfg:
         panel_cfg = {
             "width_mm_range": [40, 85],
             "default_width_mm": 55,
@@ -107,7 +124,9 @@ def compute_panel_figsize() -> Tuple[float, float]:
     w = min(max(w, wmin), wmax)
     ar = float(PANEL_CFG.get("aspect_ratio", 0.75))
     h = w * ar
-    return _mm_to_in(w), _mm_to_in(h)
+    # —— 放大画布尺寸（全面展示）——
+    scale = 1.8  # 放大倍率，可按需调整，例如 1.5～2.5
+    return _mm_to_in(w * scale), _mm_to_in(h * scale)
 
 def apply_axes_style(ax: plt.Axes):
     ax.grid(False)
@@ -274,15 +293,30 @@ def process_file(in_path: Path, x_name: str, x_unit: str, y_name: str, y_unit: s
 
 def main():
     ap = argparse.ArgumentParser(description="绘制时间序列点线图 (WT vs HO, mean ± SD)，支持 figure 顶左标题与显著性标注。")
-    ap.add_argument("inputs", nargs="+", help="输入 *_stats.xlsx 文件路径（可多个）")
+    ap.add_argument("inputs", nargs="*", help="输入 *_stats.xlsx 文件路径（可 0 个或多个）")
     ap.add_argument("--x-name", default="时间", help="横轴名称")
     ap.add_argument("--x-unit", default="min", help="横轴单位")
     ap.add_argument("--y-name", default="信号", help="纵轴名称")
     ap.add_argument("--y-unit", default="a.u.", help="纵轴单位")
     args = ap.parse_args()
 
-    for f in args.inputs:
-        process_file(Path(f), args.x_name, args.x_unit, args.y_name, args.y_unit)
+    # 若未提供任何输入文件，则自动扫描默认目录中的 *_stats.xlsx
+    if not args.inputs:
+        scan_dir = Path("04_data/interim/microplate_reader/线粒体完整性检测")
+        files = []
+        if scan_dir.exists():
+            for p in scan_dir.iterdir():
+                name = p.name.lower()
+                if name.endswith(".xlsx") and "stats" in name:
+                    files.append(p)
+        print(f"[信息] 未提供输入参数，自动在 {scan_dir} 中找到 {len(files)} 个 *_stats.xlsx 文件:")
+        for p in files:
+            print("   -", p)
+        for p in files:
+            process_file(p, args.x_name, args.x_unit, args.y_name, args.y_unit)
+    else:
+        for f in args.inputs:
+            process_file(Path(f), args.x_name, args.x_unit, args.y_name, args.y_unit)
 
 if __name__ == "__main__":
     main()
