@@ -136,7 +136,10 @@ def process_file(in_file: Path):
     for vcol in VALUE_COLS:
         if vcol not in df.columns:
             continue
-        df[f"robust_z_{vcol}"] = df.groupby(z_group_keys)[vcol].transform(_mad_z_group)
+        df[f"robust_z_{vcol}"] = (
+            df.groupby(z_group_keys, dropna=False)[vcol]
+            .transform(_mad_z_group)
+        )
         df[f"is_outlier_{vcol}"] = df[f"robust_z_{vcol}"].abs() > MAD_Z_THRESHOLD
         df = df.loc[~df[f"is_outlier_{vcol}"]].copy()
 
