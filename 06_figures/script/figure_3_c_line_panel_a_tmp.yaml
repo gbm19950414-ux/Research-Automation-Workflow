@@ -1,0 +1,49 @@
+out: figure_3_c_line
+size:
+  width_mm: 84
+  high_mm: 50
+constrained_layout: yes
+layout:
+  axis_outer_frac:
+    left: 0.08
+    right: 0.02
+    bottom: 0.08
+    top: 0.04
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+panels:
+- id: a
+  type: line
+  data: 04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_NLRP3炎症小体引发mtDNA释放峰值_split/线粒体完整性检测_blank_mtDNA释放峰值手动输入数据_stats.xlsx
+  sheet: Sheet1
+  filter:
+    drug: lps+nigericin
+  mapping:
+    x: time_point
+    genotype_cols:
+      16sRNA:
+        mean: value_t0_ratio_16sRNA_mean
+        sd: value_t0_ratio_16sRNA_sd
+      ND1:
+        mean: value_t0_ratio_ND1_mean
+        sd: value_t0_ratio_ND1_sd
+    hue: genotype
+    group: genotype
+    x_label: Time (min)
+    y_label: Relative mtDNA (to 0 min)
+    x_breaks:
+    - 0
+    - 7.5
+    - 15
+    - 30
+    - 60
+  legend:
+    show: yes
+    position: right
+  palette:
+    genotype:
+      16sRNA: '#1f77b4'
+      ND1: '#d62728'

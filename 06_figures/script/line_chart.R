@@ -45,6 +45,13 @@ load_style_nature <- function(style_path = DEFAULT_STYLE_PATH) {
   sizes <- style$typography$sizes_pt
   cols  <- style$colors
 
+  l_cfg <- style$lines
+  pt_per_lwd <- l_cfg$r_lwd_scale$pt_per_lwd %||% 0.75
+
+  line_lwd   <- l_cfg$line_width_pt        / pt_per_lwd
+  err_lwd    <- l_cfg$errorbar_default_pt  / pt_per_lwd
+  axis_lwd   <- l_cfg$axis_line_default_pt / pt_per_lwd
+
   theme_base <- theme_classic(base_family = style$typography$font_family_primary) +
     theme(
       axis.text  = element_text(size = sizes$axis_tick_default),
@@ -61,13 +68,19 @@ load_style_nature <- function(style_path = DEFAULT_STYLE_PATH) {
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       panel.border     = element_blank(),
-      axis.line        = element_line()
+      axis.line        = element_line(linewidth = axis_lwd)
     )
 
   list(
-    style = style,
-    theme = theme_base,
-    colors = cols
+    style  = style,
+    theme  = theme_base,
+    colors = cols,
+    line_widths = list(
+      line     = line_lwd,
+      errorbar = err_lwd,
+      axis     = axis_lwd
+    ),
+    pt_per_lwd = pt_per_lwd
   )
 }
 
@@ -166,6 +179,11 @@ plot_panel_line <- function(panel_cfg, style_env) {
     }
   }
 
+  line_lwd <- style_env$line_widths$line     %||% 0.4
+  err_lwd  <- style_env$line_widths$errorbar %||% 0.3
+  # 点大小可以按线宽的倍数设定，若未来需要可以改为从 YAML 读取
+  pt_size  <- panel_cfg$mapping$point_size %||% (line_lwd * 2.5)
+
   # 坐标轴 breaks / limits
   x_breaks <- panel_cfg$mapping$x_breaks %||% sort(unique(df_long[[x_var]]))
   x_breaks <- as.numeric(unlist(x_breaks))
@@ -175,6 +193,7 @@ plot_panel_line <- function(panel_cfg, style_env) {
 
   y_limits <- panel_cfg$mapping$y_limits %||% c(NA, NA)
   y_limits <- as.numeric(unlist(y_limits))
+
   p <- ggplot(
     df_long,
     aes(
@@ -184,12 +203,12 @@ plot_panel_line <- function(panel_cfg, style_env) {
       group = .data[[group_var]]
     )
   ) +
-    geom_line(size = 0.4) +
-    geom_point(size = 1.0) +
+    geom_line(linewidth = line_lwd) +
+    geom_point(size = pt_size) +
     geom_errorbar(
       aes(ymin = mean - sd, ymax = mean + sd),
       width = 0.4,
-      size = 0.3
+      linewidth = err_lwd
     ) +
     # 显著性星号（若 ann_df 非空）
     { if (!is.null(ann_df) && nrow(ann_df) > 0) {
@@ -217,8 +236,41 @@ plot_panel_line <- function(panel_cfg, style_env) {
     ) +
     style_env$theme
 
-  legend_order <- panel_cfg$legend$order %||% NULL
-  p <- apply_wt_ho_colors(p, style_env$colors, legend_order)
+  # ---------- 颜色与图例设置 ----------
+  # legend 基本配置
+  legend_cfg   <- panel_cfg$legend %||% list()
+  legend_order <- legend_cfg$order %||% NULL
+
+  # 1) 优先使用 panel 级 palette（如 palette$genotype），键名需与映射到 color 的列值一致
+  pal <- NULL
+  if (!is.null(panel_cfg$palette)) {
+    pal_cfg <- panel_cfg$palette[[hue_var]]
+    if (!is.null(pal_cfg)) {
+      pal <- unlist(pal_cfg)
+    }
+  }
+
+  if (!is.null(pal)) {
+    # 若 legend_order 未显式给出，则使用 palette 中名称顺序
+    if (is.null(legend_order)) {
+      legend_order <- names(pal)
+    }
+    p <- p + scale_color_manual(values = pal, breaks = legend_order)
+  } else {
+    # 否则回退到 WT/HO 专用颜色逻辑，兼容旧图
+    p <- apply_wt_ho_colors(p, style_env$colors, legend_order)
+  }
+
+  # 2) 图例显示与位置控制
+  if (!is.null(legend_cfg)) {
+    show_legend <- legend_cfg$show %||% TRUE
+    if (isFALSE(show_legend)) {
+      p <- p + theme(legend.position = "none")
+    } else if (!is.null(legend_cfg$position)) {
+      p <- p + theme(legend.position = legend_cfg$position)
+    }
+    # legend$title 已在 labs(color = ...) 中处理
+  }
 
   p
 }

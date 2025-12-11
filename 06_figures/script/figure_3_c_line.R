@@ -7,7 +7,7 @@ SRC  <- file.path(ROOT, "06_figures/script")
 source(file.path(SRC, "line_chart.R"))
 
 # 配置文件路径
-cfg_file <- file.path(SRC, "figure_3_b.yaml")
+cfg_file <- file.path(SRC, "figure_3_c_line.yaml")
 
 # 输出目录
 out_dir <- file.path(ROOT, "06_figures/figure_3")
@@ -17,7 +17,7 @@ if (!dir.exists(out_dir)) {
 }
 
 # 从 YAML 中按 panel 拆分，然后分别绘制 line 图
-draw_all_panels <- function(cfg_path, out_dir, base_prefix = "figure_3_b") {
+draw_all_panels <- function(cfg_path, out_dir, base_prefix = "figure_3_c_line") {
   cfg <- yaml::read_yaml(cfg_path)
 
   if (is.null(cfg$panels) || length(cfg$panels) == 0) {
@@ -36,7 +36,7 @@ draw_all_panels <- function(cfg_path, out_dir, base_prefix = "figure_3_b") {
 
     tmp_cfg_path <- file.path(
       dirname(cfg_path),
-      paste0("figure_3_b_panel_", panel_id, "_tmp.yaml")
+      paste0("figure_3_c_line_panel_", panel_id, "_tmp.yaml")
     )
     yaml::write_yaml(tmp_cfg, tmp_cfg_path)
 
@@ -56,5 +56,5 @@ draw_all_panels <- function(cfg_path, out_dir, base_prefix = "figure_3_b") {
 draw_all_panels(
   cfg_path = cfg_file,
   out_dir  = out_dir,
-  base_prefix = "figure_3_b"
+  base_prefix = "figure_3_c_line"
 )

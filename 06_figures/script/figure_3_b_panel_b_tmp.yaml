@@ -1,7 +1,7 @@
 out: figure_3_b
 size:
-  width_mm: 84
-  high_mm: 60
+  width_mm: 126
+  high_mm: 50
 constrained_layout: yes
 layout:
   axis_outer_frac:
@@ -17,12 +17,11 @@ layout:
 panels:
 - id: b
   type: line
-  data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E52_dye-mitosox_stats.xlsx
+  data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E53_dye-mitosox_stats.xlsx
   sheet: Sheet1
-  auc_data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E52_dye-mitosox.xlsx
-  auc_sheet: 1
   filter:
     drug: lps+nigericin
+    Dye_concentration: 10µm
   mapping:
     x: time_point
     genotype_cols:
@@ -51,7 +50,6 @@ panels:
     - 100
     - 110
     - 120
-    auc_value_col: value_t0_ratio
   legend:
     title: Genotype
     order:

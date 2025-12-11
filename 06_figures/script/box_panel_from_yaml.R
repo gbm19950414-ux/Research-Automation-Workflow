@@ -493,6 +493,16 @@ if (length(hue_levels) == 2 &&
 
   y_min <- y_min_fixed
   y_max <- nice_ceiling(raw_max)
+  
+  # ---- 允许 YAML 定义 y 轴范围 ----
+  yaml_ylim <- panel$ylim %||% NULL
+  if (!is.null(yaml_ylim)) {
+    if (length(yaml_ylim) != 2)
+      stop("panel ", panel$id, " 的 ylim 必须为长度 2 的数值数组，如 [0, 20000]")
+
+    y_min <- yaml_ylim[1]
+    y_max <- yaml_ylim[2]
+  }
 
   # 固定 5 个 y 轴刻度标签（包含 0 和顶部），数字更“规整”
   p <- p +

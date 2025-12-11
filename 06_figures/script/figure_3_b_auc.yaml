@@ -1,0 +1,111 @@
+title: figure_3_b AUC
+out: figure_3_b_auc
+size:
+  width_mm: 42
+  high_mm: 50
+constrained_layout: yes
+layout:
+  axis_outer_frac:
+    left: 0.08
+    right: 0.02
+    bottom: 0.08
+    top: 0.04
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  # panel a：E53, h2dcha
+  - id: a
+    type: box
+    data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E53_dye-h2dcha_auc.xlsx
+    sheet: 1
+
+    mapping:
+      x: drug
+      "y": auc
+      hue: geno
+    order: ["lps+nigericin"]
+
+    rename_x:
+
+      - "LPS+Nigericin"
+    hue_order:
+      - WT
+      - HO
+    x_label: ''
+    y_label: AUC (a.u. × min)
+    strip: yes
+    stats:
+      enabled: yes
+      source: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E53_dye-h2dcha_auc_stats.xlsx
+      sheet: 1
+      column: auc_p
+      pairs:
+        - - WT
+          - HO
+
+  # panel b：E53, mitosox
+  - id: b
+    type: box
+    data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E53_dye-mitosox_auc.xlsx
+    sheet: 1
+    mapping:
+      x: "drug + '|' + Dye_concentration"
+      "y": auc
+      hue: geno
+
+    order: ["lps+nigericin|10µm"]
+
+    rename_x:
+
+      - "LPS+Nigericin"
+    hue_order:
+      - WT
+      - HO
+    x_label: ''
+    y_label: AUC (a.u. × min)
+    strip: yes
+    stats:
+      enabled: yes
+      source: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E53_dye-mitosox_auc_stats.xlsx
+      sheet: 1
+      column: auc_p
+      pairs:
+        - - WT
+          - HO
+
+  # panel c：E56, tmrm
+  - id: c
+    type: box
+    data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E56_dye-tmrm_auc.xlsx
+    sheet: 1
+    ylim: [60, 100]
+    mapping:
+      x: drug
+      "y": auc
+      hue: geno
+
+    order: [lps+nigericin]
+
+
+    rename_x:
+
+      - "LPS+Nigericin"
+
+    hue_order:
+      - WT
+      - HO
+    x_label: ''
+    y_label: AUC (a.u. × min)
+    strip: yes
+    stats:
+      enabled: yes
+      source: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E56_dye-tmrm_auc_stats.xlsx
+      sheet: 1
+      column: auc_p
+      pairs:
+        - - WT
+          - HO

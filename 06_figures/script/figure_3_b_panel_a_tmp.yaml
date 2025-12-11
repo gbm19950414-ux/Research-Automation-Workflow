@@ -1,7 +1,7 @@
 out: figure_3_b
 size:
-  width_mm: 84
-  high_mm: 60
+  width_mm: 126
+  high_mm: 50
 constrained_layout: yes
 layout:
   axis_outer_frac:
@@ -17,10 +17,8 @@ layout:
 panels:
 - id: a
   type: line
-  data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E52_dye-h2dcha_stats.xlsx
+  data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E53_dye-h2dcha_stats.xlsx
   sheet: Sheet1
-  auc_data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E52_dye-h2dcha.xlsx
-  auc_sheet: 1
   filter:
     drug: lps+nigericin
   mapping:
@@ -51,3 +49,8 @@ panels:
     - 100
     - 110
     - 120
+  legend:
+    title: Genotype
+    order:
+    - WT
+    - HO

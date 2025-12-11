@@ -1,0 +1,56 @@
+out: "figure_3_c_line"
+
+size:
+  width_mm: 84      # 单栏图典型宽度
+  high_mm: 50       # 高度，可按需要改
+
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.08
+    right: 0.02
+    bottom: 0.08
+    top: 0.04
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  - id: "a"
+    type: "line"
+
+    # 统计结果文件（003_statistic_by_time_point.py 的输出）
+    data: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_NLRP3炎症小体引发mtDNA释放峰值_split/线粒体完整性检测_blank_mtDNA释放峰值手动输入数据_stats.xlsx"
+    sheet: "Sheet1"      # 如果有特定 sheet，可以改
+    # 过滤条件：限定某个 dye / drug / 浓度 / groupdrug
+    filter:
+      drug: ["lps+nigericin"]  # 可选
+    mapping:
+      x: "time_point"
+      # 统计文件含有 16sRNA / ND1 在各时间点的 t0 归一化均值
+      # line_chart.R 需要把宽表 pivot 成 long：genotype 列表示 16sRNA / ND1
+      genotype_cols:
+        "16sRNA":
+          mean: "value_t0_ratio_16sRNA_mean"
+          sd: "value_t0_ratio_16sRNA_sd"
+        "ND1":
+          mean: "value_t0_ratio_ND1_mean"
+          sd: "value_t0_ratio_ND1_sd"
+      hue: "genotype"      # 映射到颜色（16sRNA / ND1）
+      group: "genotype"    # 分组，同上
+      x_label: "Time (min)"
+      y_label: "Relative mtDNA (to 0 min)"
+      # 可按需要调整 x 轴刻度
+      x_breaks: [0, 7.5, 15, 30, 60]
+
+    legend:
+      show: true
+      position: "right"
+
+    palette:
+      genotype:
+        "16sRNA": "#1f77b4"   # 蓝色
+        "ND1": "#d62728"      # 红色

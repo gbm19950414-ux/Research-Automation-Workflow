@@ -15,7 +15,7 @@ import pathlib, sys
 
 # -------- 用户一次性配置 ---------------------------------
 INPUT_FILE  = ("04_data/interim/qpcr/qpcr_original_data_long_format.csv")
-OBJECTIVES  = ["EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少"]
+OBJECTIVES  = ["EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_NLRP3炎症小体引发mtDNA释放峰值"]
 OUTPUT_FILE = f"04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
 # === 本次 mtDNA 释放分析的处理条件（按需修改） ===
 TREATMENT = "lps_1ngul_4h+nigericin_10ngul_7.5min"

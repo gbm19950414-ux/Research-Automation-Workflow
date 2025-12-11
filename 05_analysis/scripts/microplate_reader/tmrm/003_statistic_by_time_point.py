@@ -186,8 +186,19 @@ def main():
         files = []
         for p in scan_dir.iterdir():
             name = p.name.lower()
-            if name.endswith(".xlsx") and ("blank_corrected" in name) and ("stats" not in name) and ("long" not in name):
-                files.append(p)
+            if not name.endswith(".xlsx"):
+                continue
+            if name.startswith("~$"):
+                # 忽略 Excel 临时文件
+                continue
+            if "blank_corrected" not in name:
+                continue
+            if "stats" in name or "long" in name:
+                continue
+            if name.endswith("_auc.xlsx"):
+                # AUC 文件由 003.1 / 003.2 专门处理，这里忽略
+                continue
+            files.append(p)
         print(f"[信息] 未提供输入参数，自动找到 {len(files)} 个 blank_corrected 文件:")
         for p in files:
             print("   -", p)
