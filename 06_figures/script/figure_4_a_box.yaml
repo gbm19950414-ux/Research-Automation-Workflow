@@ -1,0 +1,78 @@
+title: "EphB1 细胞因子 mRNA 表达变化（qPCR）"
+out: "figure_4"
+
+size:
+  width_mm: 84
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  # a: Il1b
+  - id: a
+    type: box
+    data: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_16S_stats.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "ctrl"
+
+    rename_x:
+      "ctrl": "untreated"
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "16sRNA mRNA (2^-ΔΔCt)"
+    x_tick_rotation: 0
+    strip: true
+    stats:
+      enabled: true
+      source: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_16S_stats.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: b
+    type: box
+    data: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "ctrl"
+
+    rename_x:
+      "ctrl": "untreated"
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "ND1 mRNA (2^-ΔΔCt)"
+    x_tick_rotation: 0
+    strip: true
+    stats:
+      enabled: true
+      source: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+

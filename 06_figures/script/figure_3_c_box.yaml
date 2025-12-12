@@ -2,7 +2,7 @@ title: "EphB1 细胞因子 mRNA 表达变化（qPCR）"
 out: "figure_3_c"
 
 size:
-  width_mm: 84
+  width_mm: 42
   high_mm: 60
 constrained_layout: true
 
@@ -22,7 +22,7 @@ panels:
   # a: Il1b
   - id: a
     type: box
-    data: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/44_E62_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E62_Mito_Isolation_16S_stats.xlsx"
+    data: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
     sheet: "data"
     mapping:
       x: "treatment"
@@ -34,7 +34,7 @@ panels:
       - "lps_1ngul_4h+nigericin_10ngul_7.5min"
 
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin"
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin(7.5min)"
 
     hue_order: ["WT", "HO"]
     x_label: ""
@@ -44,7 +44,7 @@ panels:
 
     stats:
       enabled: true
-      source: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/44_E62_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E62_Mito_Isolation_16S_stats.xlsx"
+      source: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
@@ -63,7 +63,7 @@ panels:
       - "lps_1ngul_4h+nigericin_10ngul_7.5min"
 
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin"
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin(7.5min)"
 
     hue_order: ["WT", "HO"]
     x_label: ""
@@ -92,7 +92,7 @@ panels:
       - "lps_1ngul_4h+nigericin_10ngul_7.5min"
 
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin"
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin(7.5min)"
 
     hue_order: ["WT", "HO"]
     x_label: ""
@@ -121,7 +121,7 @@ panels:
       - "lps_1ngul_4h+nigericin_10ngul_7.5min"
 
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin"
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin(7.5min)"
 
     hue_order: ["WT", "HO"]
     x_label: ""

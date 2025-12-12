@@ -15,13 +15,13 @@ import pathlib, sys
 
 # -------- 用户一次性配置 ---------------------------------
 INPUT_FILE  = ("04_data/interim/qpcr/qpcr_original_data_long_format.csv")
-OBJECTIVES  = ["EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_NLRP3炎症小体引发mtDNA释放峰值"]
+OBJECTIVES  = ["EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少"]
 OUTPUT_FILE = f"04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
 # === 本次 mtDNA 释放分析的处理条件（按需修改） ===
 TREATMENT = "lps_1ngul_4h+nigericin_10ngul_7.5min"
 ONLY_THIS_BATCH_ID = None  # 如果只想固定到某一个 batch_id，就把这里改成那个字符串
 # ---------------------------------------------------------
-KEYS = ["batch_id", "sample_id", "gene"]     # 主键列
+KEYS = ["batch_id", "sample_id", "component", "gene"]     # 主键列（按组分区分）
 # ---------- 1. 读文件 & 基础过滤 ----------
 try:
     df_all = pd.read_csv(INPUT_FILE)
@@ -78,28 +78,60 @@ work["group"] = work["group"].astype("string").str.lower()
 # 规范 component：把 "-DNA" 后缀去掉，统一成 {'cyto','total'}
 work["_component_norm"] = work["component"].str.lower().str.replace("-dna","", regex=False)
 
-# 用 batch_id + sample_id + gene 做 cyto/total 配对（不含 plate_id）
-_pivot_keys = ["batch_id","sample_id","gene"]
+# 用 batch_id + sample_id + gene 作为键，按 component 类型选择不同的参考 Ct
+_pivot_keys = ["batch_id", "sample_id", "gene"]
 
-_delta = (work.pivot_table(index=_pivot_keys,
-                           columns="_component_norm",
-                           values="mean_cp",
-                           aggfunc="mean")
-               .reset_index())
+# 3.1 在 total 组件中，计算每个 (batch_id, sample_id, gene) 的 Ct(total, gene)
+_total_gene = (
+    work[work["_component_norm"] == "total"]
+    .groupby(_pivot_keys, dropna=False)["mean_cp"]
+    .mean()
+    .rename("ct_total_gene")
+    .reset_index()
+)
 
-# 缺失保护
-for _c in ["cyto","total"]:
-    if _c not in _delta.columns:
-        _delta[_c] = np.nan
+# 3.2 在 total 组件中，计算每个 (batch_id, sample_id) 下 hk2 的 Ct(total, hk2) 作为 total 组分的参考
+_hk2_mask = (
+    (work["_component_norm"] == "total") &
+    (work["gene"].astype("string").str.lower() == "hk2")
+)
+_hk2_ref = (
+    work[_hk2_mask]
+    .groupby(["batch_id", "sample_id"], dropna=False)["mean_cp"]
+    .mean()
+    .rename("ref_ct_hk2")
+    .reset_index()
+)
 
-# 计算 ΔCt；把 total 当作“ref_ct”留给下游兼容使用
-_delta["delta_ct"] = _delta["cyto"] - _delta["total"]
-_delta = _delta.rename(columns={"total":"ref_ct"})
+# 3.3 合并到 work，每一行都带上 ct_total_gene 和 ref_ct_hk2（若存在）
+work = work.merge(_total_gene, on=_pivot_keys, how="left")
+work = work.merge(_hk2_ref, on=["batch_id", "sample_id"], how="left")
 
-# 合并回 work，后续离群/基线/ΔΔCt 直接复用你原来的流程
-work = work.drop(columns=["_component_norm"], errors="ignore")
-work = work.merge(_delta[_pivot_keys + ["delta_ct","ref_ct"]],
-                  on=_pivot_keys, how="left")
+# 3.4 按 component 类型选择 ref_ct 并计算 ΔCt
+is_cyto  = work["_component_norm"] == "cyto"
+is_total = work["_component_norm"] == "total"
+
+# cyto 行：ref_ct = Ct(total, 同一 gene)
+# total 行：ref_ct = Ct(total, hk2)
+work["ref_ct"] = np.where(
+    is_cyto,
+    work["ct_total_gene"],
+    work["ref_ct_hk2"]
+)
+
+# ΔCt = Ct(当前行) - ref_ct
+work["delta_ct"] = work["mean_cp"] - work["ref_ct"]
+
+# 清理临时列
+work = work.drop(columns=["_component_norm", "ct_total_gene", "ref_ct_hk2"], errors="ignore")
+
+# …… 3.4 按 component 类型选择 ref_ct 并计算 ΔCt 后
+
+# DEBUG: 导出一个只含某个 batch 的几行，看明白 cyto / total / hk2 的 ΔCt/ ref_ct 逻辑
+debug_batch = work["batch_id"].iloc[0]   # 或者直接写成你关心的某个 batch_id
+debug = work.query("batch_id == @debug_batch and gene in ['16s','16S','hk2','HK2']").copy()
+debug = debug.sort_values(["sample_id","component","gene"])
+debug.to_csv("04_data/interim/qpcr/zz_debug_delta_ct_component_check.csv", index=False)
 # ---------- 4. ΔCt及离群值判断 ----------
 # （ΔCt 已在上一步由 cyto-total 得到）
 
@@ -107,7 +139,7 @@ work = work.merge(_delta[_pivot_keys + ["delta_ct","ref_ct"]],
 work["group"] = work["group"].str.lower()
 
 # 4.1 在“每个样本的一条 ΔCt”层面判定离群，避免同一样本因多行记录（cyto/total重复）被重复计权
-_u_keys = ["batch_id", "sample_id", "gene", "group"]  # 一条样本的唯一ΔCt标识（不含 plate_id）
+_u_keys = ["batch_id", "sample_id", "gene", "group", "component"]  # 按组分区分 ΔCt
 u = work.drop_duplicates(subset=_u_keys).copy()
 
 def _robust_z_numpy(arr: np.ndarray) -> np.ndarray:
