@@ -1,0 +1,54 @@
+# figure_4_b_violin.yaml
+
+title: "Figure 4b — NAO intensity violin plot"
+out: "figure_4_b_violin"
+
+size:
+  width_mm: 84
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  - id: "b"
+    type: "violin"
+    data: "04_data/interim/imaging_if/E32_statistic_IntDen_stats.xlsx"
+    sheet: 2
+
+    mapping:
+      x: "genotype"
+      "y": "IntDen"
+      hue: "genotype"
+
+    order: ["WT", "HO"]
+    hue_order: ["WT", "HO"]
+
+    rename_x:
+      WT: "WT"
+      HO: "HO"
+
+    x_label: ""
+    y_label: "NAO intensity (IntDen)"
+
+    strip: true
+
+    stats:
+      enabled: true
+      source: "04_data/interim/imaging_if/E32_statistic_IntDen_stats.xlsx"
+      sheet: 6
+      column: "p_value"
+      pairs:
+        - ["WT", "HO"]
+
+    ylim: [0, null]

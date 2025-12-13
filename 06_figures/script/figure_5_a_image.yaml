@@ -1,0 +1,119 @@
+# figure_4_b_image.yaml
+title: "Figure 4b — Representative NAO staining images"
+out: "figure_4_b_image"
+
+size:
+  width_mm: 84
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+grid:
+  n_rows: 1        # 例如：上行 WT，下行 HO（后面可以改）
+  n_cols: 2        # 比如三种处理 / 部位
+
+  image_size_mm:
+    width: 35
+    height: 35
+
+  label_height_mm: 4   # 列标题那一行有多高
+  gap_mm: 2
+
+  # 行标题（左侧）
+  row_labels:
+    - "NAO"
+
+
+  # 列标题（上方）
+  col_labels:
+    - "WT"
+    - "HO"
+
+  # 每个单元格的配置：
+  # row / col 为 1-based 索引
+  # images 是相对于 project_root 的路径
+  # blend: "single" | "lighten"
+  cells:
+    - row: 1
+      col: 1
+      images:
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_1.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_2.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_3.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_4.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_5.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_11.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_12.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_13.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_14.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_15.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_21.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_22.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_23.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_24.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_25.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_31.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_32.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_33.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_34.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_35.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_41.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_42.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_43.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_44.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_45.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_51.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_52.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_53.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_54.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/WT_55.tif
+      blend: "lighten"
+
+    - row: 1
+      col: 2
+      images:
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_6.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_7.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_8.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_9.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_10.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_16.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_17.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_18.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_19.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_20.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_26.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_27.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_28.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_29.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_30.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_36.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_37.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_38.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_39.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_40.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_46.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_47.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_48.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_49.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_50.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_56.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_57.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_58.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_59.tif
+      - 04_data/raw/imaging_if/E32_NAO/raw/HO_60.tif
+
+      blend: "lighten"
+
+

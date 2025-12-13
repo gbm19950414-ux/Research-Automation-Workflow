@@ -1,0 +1,51 @@
+title: "Lipidomics volcano (HO vs WT)"
+style_yaml: "02_protocols/figure_style_nature.yaml"
+
+# 绝对路径源数据
+source_csv: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/multiomics_mech/data/interim/lipid/batch1_volcano.csv"
+
+out_pdf: "06_figures/figure_4/figure_4_volcano.pdf"
+
+size:
+  width_mm: 84
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+columns:
+  name: "lipidName"
+  class: "class"
+  log2fc: "log2FC"
+  p: "p_value"
+  padj: "padj"
+  y: "neglog10p"   # 可改成 neglog10p
+
+
+
+thresholds:
+  use_padj: true
+  p_cutoff: 0.05
+  log2fc_cutoff: 1.0
+
+highlight:
+  class_equals: "CL"      # 高亮 CL
+  label_top_n: 10         # 标注 top 10（按 y 值排序）；不标注设为 0
+
+plot:
+  width_mm: 173
+  height_mm: 90
+  x_label: "log2FC (HO/WT)"
+  y_label: "-log10(p value)"
+  point_size: 1.2
+  alpha: 0.75

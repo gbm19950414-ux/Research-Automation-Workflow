@@ -49,7 +49,8 @@ colors:
   wt_ho:
     WT: "#F08A4B"
     HO: "#4DB6AC"
-
+    wt: "#F08A4B"
+    ho: "#4DB6AC"
 layout:
   axis_title_margin_pt:
     x: 3

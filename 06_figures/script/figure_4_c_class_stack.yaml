@@ -1,0 +1,23 @@
+title: "CL species (mean±SD): WT vs HO"
+style_yaml: "02_protocols/figure_style_nature.yaml"
+
+# 只用这一份统计结果作为源文件
+source_csv: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/multiomics_mech/data/interim/lipid/batch1_clean_cl_stats.csv"
+
+out_pdf: "06_figures/figure_4/figure_4_c_CL_species_mean_sd.pdf"
+
+columns:
+  x: "lipidName"
+  mean_wt: "mean_WT"
+  sd_wt: "sd_WT"
+  mean_ho: "mean_HO"
+  sd_ho: "sd_HO"
+  p: "p_value"
+
+plot:
+  width_mm: 173
+  height_mm: 70
+  x_tick_rotation: 45
+  y_label: "Intensity (a.u.)"
+  show_p_stars: true
+  top_n: 12          # 只画前 12 个（按 WT+HO 总均值排序）；想全画就删掉或设为 0

@@ -1,0 +1,106 @@
+title: "EphB1 细胞因子 mRNA 表达变化（qPCR）"
+out: "figure_4"
+
+size:
+  width_mm: 84
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  # a: Il1b
+  - id: a
+    type: box
+    data: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/multiomics_mech/data/interim/lipid/lipid_batch1_boxdata.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "value"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "Total CL"
+
+    rename_x:
+      "Total CL": "Total CL"
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Summed intensity (a.u.)"
+    x_tick_rotation: 0
+    strip: true
+    stats:
+      enabled: true
+      source: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/multiomics_mech/data/interim/lipid/lipid_batch1_boxdata.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+  - id: b
+    type: box
+    data: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/multiomics_mech/data/interim/lipid/lipid_batch1_boxdata.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "value"
+      hue: "genetype"
+
+    order:
+      - "Total PG"
+
+    rename_x:
+      "Total PG": "Total PG"
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Summed intensity (a.u.)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/multiomics_mech/data/interim/lipid/lipid_batch1_boxdata.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  # c: CL/PG ratio
+  - id: c
+    type: box
+    data: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/multiomics_mech/data/interim/lipid/lipid_batch1_boxdata.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "value"
+      hue: "genetype"
+
+    order:
+      - "CL/PG"
+
+    rename_x:
+      "CL/PG": "CL/PG"
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Ratio (CL / PG)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/multiomics_mech/data/interim/lipid/lipid_batch1_boxdata.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
