@@ -1,0 +1,195 @@
+# figure_4_b_image.yaml
+title: "Figure 4b — Representative NAO staining images"
+out: "figure_5_a_image_ad"
+out_dir: "06_figures/figure_5"
+
+size:
+  width_mm: 84
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+curve:
+  enable: true
+  type: sigmoid
+  strength: 0.75   # 0..1, 越大曲线越“弯”
+  mid: 0.5        # 0..1, 曲线拐点（类似把中灰往哪边推）
+
+grid:
+  n_rows: 2        # 例如：上行 WT，下行 HO（后面可以改）
+  n_cols: 2        # 比如三种处理 / 部位
+
+  image_size_mm:
+    width: 35
+    height: 35
+
+  label_height_mm: 4   # 列标题那一行有多高
+  gap_mm: 2
+
+  # 行标题（左侧）
+  row_labels:
+    - "Control"
+    - "AD"
+
+
+  # 列标题（上方）
+  col_labels:
+    - "WT"
+    - "HO"
+
+  # 每个单元格的配置：
+  # row / col 为 1-based 索引
+  # images 是相对于 project_root 的路径
+  # blend: "single" | "lighten"
+  cells:
+    - row: 1
+      col: 1
+      images:
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-1.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-2.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-3.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-4.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-5.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-21.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-22.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-23.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-24.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-25.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-41.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-42.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-43.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-44.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-45.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-61.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-62.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-63.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-64.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-65.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-81.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-82.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-83.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-84.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-85.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-101.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-102.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-103.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-104.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-105.tif
+      blend: "lighten"
+
+    - row: 2
+      col: 1
+      images:
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-131.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-132.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-133.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-134.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-135.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-151.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-152.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-153.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-154.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-155.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-171.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-172.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-173.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-174.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-175.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-191.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-192.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-193.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-194.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-195.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-211.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-212.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-213.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-214.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-215.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-231.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-232.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-233.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-234.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/WT-AD-235.tif
+      blend: "lighten"
+
+    - row: 1
+      col: 2
+      images:
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-6.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-7.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-8.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-9.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-10.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-26.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-27.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-28.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-29.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-30.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-46.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-47.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-48.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-49.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-50.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-66.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-67.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-68.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-69.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-70.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-86.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-87.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-88.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-89.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-90.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-106.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-107.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-108.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-109.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-110.tif
+      blend: "lighten"
+
+    - row: 2
+      col: 2
+      images:
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-136.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-137.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-138.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-139.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-140.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-156.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-157.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-158.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-159.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-160.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-176.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-177.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-178.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-179.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-180.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-196.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-197.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-198.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-199.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-200.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-216.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-217.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-218.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-219.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-220.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-236.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-237.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-238.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-239.tif
+        - 04_data/raw/imaging_if/E39_NAO/raw/HO-AD-240.tif
+      blend: "lighten"
+

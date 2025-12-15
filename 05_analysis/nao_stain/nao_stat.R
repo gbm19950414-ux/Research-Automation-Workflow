@@ -23,7 +23,8 @@ input_files <- c(
   "04_data/raw/imaging_if/E29_NAO/E29_statistic.xlsx",
   "04_data/raw/imaging_if/E30_NAO/E30_statistic.xlsx",
   "04_data/raw/imaging_if/E33_NAO/E33_statistic.xlsx",
-  "04_data/raw/imaging_if/E36_NAO/E36_statistic.xlsx"
+  "04_data/raw/imaging_if/E36_NAO/E36_statistic.xlsx",
+  "04_data/raw/imaging_if/E39_NAO/E39_statistic.xlsx"
 )
 metrics <- c("norm_intden", "Mean", "IntDen")
 output_dir <- "04_data/interim/imaging_if"
@@ -105,16 +106,23 @@ for (input_file in input_files) {
         genotype = factor(genotype, levels = c("WT", "HO")),
         # treatment normalization:
         # - keep the original (normalized) label in `treatment_detail` for traceability
-        # - collapse into two groups: control vs treated
+        # - do NOT collapse to 2 groups; support 3+ treatments
         treatment_detail = tolower(trimws(as.character(treatment))),
         treatment_detail = ifelse(is.na(treatment_detail) | treatment_detail == "", "control", treatment_detail),
         treatment = dplyr::case_when(
           treatment_detail %in% c("control", "ctrl", "vehicle", "veh", "untreated", "untreatment", "baseline") ~ "control",
+          # allow a few generic names
           treatment_detail %in% c("treated", "treat") ~ "treated",
-          TRUE ~ "treated"  # any other non-control label is treated (e.g., ephb1_fc(500ng/ml)+anti_fc)
-        ),
-        treatment = factor(treatment, levels = c("control", "treated"))
+          TRUE ~ treatment_detail
+        )
       )
+    
+    # Set treatment factor levels dynamically (control first if present)
+    trt_levels <- sort(unique(as.character(df$treatment)))
+    if ("control" %in% trt_levels) {
+      trt_levels <- c("control", setdiff(trt_levels, "control"))
+    }
+    df <- df %>% mutate(treatment = factor(as.character(treatment), levels = trt_levels))
     
     df <- df %>%
       mutate(
@@ -150,20 +158,51 @@ for (input_file in input_files) {
       group_by(treatment) %>%
       summarise(
         contrast = "WT_vs_HO",
-        p_value = tryCatch(wilcox.test(metric_value ~ genotype, data = dplyr::pick(everything()))$p.value,
+        p_value = tryCatch(wilcox.test(metric_value ~ genotype, data = dplyr::pick(everything()), exact = FALSE)$p.value,
                            error = function(e) NA_real_),
         .groups = "drop"
       )
 
-    # control vs treated within each genotype
+    # treatment comparisons within each genotype
+    # - if 2 treatments: Wilcoxon (same as before)
+    # - if 3+ treatments: pairwise Wilcoxon with BH adjustment
     cell_p_treatment_within_genotype <- cell_metric %>%
       group_by(genotype) %>%
-      summarise(
-        contrast = "control_vs_treated",
-        p_value = tryCatch(wilcox.test(metric_value ~ treatment, data = dplyr::pick(everything()))$p.value,
-                           error = function(e) NA_real_),
-        .groups = "drop"
-      )
+      group_modify(~{
+        d <- .x %>% filter(!is.na(treatment), !is.na(metric_value))
+        trt <- droplevels(d$treatment)
+        k <- nlevels(trt)
+        if (k < 2) {
+          return(tibble(contrast = "treatment_pairwise", group1 = NA_character_, group2 = NA_character_, p_value = NA_real_, p_adj = NA_real_))
+        }
+        if (k == 2) {
+          pv <- tryCatch(wilcox.test(metric_value ~ treatment, data = d, exact = FALSE)$p.value, error = function(e) NA_real_)
+          levs <- levels(trt)
+          return(tibble(contrast = "treatment_pairwise", group1 = levs[1], group2 = levs[2], p_value = pv, p_adj = pv))
+        }
+        pw <- tryCatch(stats::pairwise.wilcox.test(d$metric_value, d$treatment, p.adjust.method = "BH"),
+                       error = function(e) NULL)
+        if (is.null(pw)) {
+          return(tibble(contrast = "treatment_pairwise", group1 = NA_character_, group2 = NA_character_, p_value = NA_real_, p_adj = NA_real_))
+        }
+        m_p   <- pw$p.value
+        m_adj <- pw$p.value  # pairwise.wilcox.test already returns adjusted p-values when p.adjust.method is set
+        rn <- rownames(m_p)
+        cn <- colnames(m_p)
+        out <- list()
+        idx <- 1
+        for (i in seq_along(rn)) {
+          for (j in seq_along(cn)) {
+            pv <- m_p[i, j]
+            if (!is.na(pv)) {
+              out[[idx]] <- tibble(contrast = "treatment_pairwise", group1 = rn[i], group2 = cn[j], p_value = pv, p_adj = pv)
+              idx <- idx + 1
+            }
+          }
+        }
+        bind_rows(out)
+      }) %>%
+      ungroup()
     
     well_metric <- cell_metric %>%
       group_by(treatment, genotype, well) %>%
@@ -187,20 +226,47 @@ for (input_file in input_files) {
       group_by(treatment) %>%
       summarise(
         contrast = "WT_vs_HO",
-        p_value = tryCatch(wilcox.test(mean_metric ~ genotype, data = dplyr::pick(everything()))$p.value,
+        p_value = tryCatch(wilcox.test(mean_metric ~ genotype, data = dplyr::pick(everything()), exact = FALSE)$p.value,
                            error = function(e) NA_real_),
         .groups = "drop"
       )
 
-    # control vs treated within each genotype (well-level)
+    # treatment comparisons within each genotype (well-level)
     well_p_treatment_within_genotype <- well_metric %>%
       group_by(genotype) %>%
-      summarise(
-        contrast = "control_vs_treated",
-        p_value = tryCatch(wilcox.test(mean_metric ~ treatment, data = dplyr::pick(everything()))$p.value,
-                           error = function(e) NA_real_),
-        .groups = "drop"
-      )
+      group_modify(~{
+        d <- .x %>% filter(!is.na(treatment), !is.na(mean_metric))
+        trt <- droplevels(d$treatment)
+        k <- nlevels(trt)
+        if (k < 2) {
+          return(tibble(contrast = "treatment_pairwise", group1 = NA_character_, group2 = NA_character_, p_value = NA_real_, p_adj = NA_real_))
+        }
+        if (k == 2) {
+          pv <- tryCatch(wilcox.test(mean_metric ~ treatment, data = d, exact = FALSE)$p.value, error = function(e) NA_real_)
+          levs <- levels(trt)
+          return(tibble(contrast = "treatment_pairwise", group1 = levs[1], group2 = levs[2], p_value = pv, p_adj = pv))
+        }
+        pw <- tryCatch(stats::pairwise.wilcox.test(d$mean_metric, d$treatment, p.adjust.method = "BH"),
+                       error = function(e) NULL)
+        if (is.null(pw)) {
+          return(tibble(contrast = "treatment_pairwise", group1 = NA_character_, group2 = NA_character_, p_value = NA_real_, p_adj = NA_real_))
+        }
+        m_p <- pw$p.value
+        rn <- rownames(m_p)
+        cn <- colnames(m_p)
+        out <- list(); idx <- 1
+        for (i in seq_along(rn)) {
+          for (j in seq_along(cn)) {
+            pv <- m_p[i, j]
+            if (!is.na(pv)) {
+              out[[idx]] <- tibble(contrast = "treatment_pairwise", group1 = rn[i], group2 = cn[j], p_value = pv, p_adj = pv)
+              idx <- idx + 1
+            }
+          }
+        }
+        bind_rows(out)
+      }) %>%
+      ungroup()
     
     area_df <- cell_metric %>%
       select(treatment, genotype, Area, metric_value)
@@ -263,12 +329,22 @@ for (input_file in input_files) {
     
     # 汇总 p 值信息（单细胞层面与 well 层面，多重比较）
     p_values <- dplyr::bind_rows(
-      cell_p_genotype_within_treatment %>% mutate(metric = metric_col, level = "cell", group = treatment),
-      cell_p_treatment_within_genotype %>% mutate(metric = metric_col, level = "cell", group = genotype),
-      well_p_genotype_within_treatment %>% mutate(metric = metric_col, level = "well", group = treatment),
-      well_p_treatment_within_genotype %>% mutate(metric = metric_col, level = "well", group = genotype)
+      # genotype test within each treatment
+      cell_p_genotype_within_treatment %>% mutate(metric = metric_col, level = "cell", group = as.character(treatment), group1 = "WT", group2 = "HO", p_adj = p_value),
+      # treatment pairwise within each genotype
+      cell_p_treatment_within_genotype %>% mutate(metric = metric_col, level = "cell", group = as.character(genotype)),
+      # genotype test within each treatment (well-level)
+      well_p_genotype_within_treatment %>% mutate(metric = metric_col, level = "well", group = as.character(treatment), group1 = "WT", group2 = "HO", p_adj = p_value),
+      # treatment pairwise within each genotype (well-level)
+      well_p_treatment_within_genotype %>% mutate(metric = metric_col, level = "well", group = as.character(genotype))
     ) %>%
-      dplyr::select(metric, level, contrast, group, p_value)
+      dplyr::mutate(
+        group1 = as.character(group1),
+        group2 = as.character(group2),
+        p_adj  = as.numeric(p_adj)
+      ) %>%
+      dplyr::select(metric, level, contrast, group, group1, group2, p_value, p_adj)
+    
     output_excel <- paste0(output_prefix, "_stats.xlsx")
     write_xlsx(
       list(

@@ -14,6 +14,7 @@ if (length(args) < 1) stop("Usage: Rscript image_panel.R <panel_yaml>")
 
 panel_yaml_path <- args[1]
 panel_cfg <- yaml::read_yaml(panel_yaml_path)
+# panel YAML can optionally include a global `curve:` block, and each cell can override via `cells: - curve:`
 
 # project root: 和之前脚本保持一致的定位方式
 project_root <- normalizePath(file.path(dirname(panel_yaml_path), "..", ".."))
@@ -78,14 +79,60 @@ label_col_width_mm <- 10
 
 # 把 cell 配置整理成 data.frame，方便操作
 cells_df <- tibble::tibble(
-  row   = purrr::map_int(cells_cfg, "row"),
-  col   = purrr::map_int(cells_cfg, "col"),
+  row    = purrr::map_int(cells_cfg, "row"),
+  col    = purrr::map_int(cells_cfg, "col"),
   images = purrr::map(cells_cfg, "images"),
-  blend  = purrr::map_chr(cells_cfg, ~ .x$blend %||% "single")
+  blend  = purrr::map_chr(cells_cfg, ~ .x$blend %||% "single"),
+  curve  = purrr::map(cells_cfg, ~ .x$curve %||% NULL)
 )
 
 # ---- 辅助函数：读取并合成单元格图像 ----
-build_cell_image <- function(img_paths, blend, project_root, img_width_mm, img_height_mm) {
+# curve adjustment (Photoshop-like): implemented as an S-curve (sigmoid) in [0,1]
+# YAML examples:
+# curve:
+#   enable: true
+#   type: sigmoid        # currently supported: sigmoid, gamma
+#   strength: 0.6        # 0..1 (0 = no change)
+#   mid: 0.5             # sigmoid midpoint (0..1)
+#   gamma: 0.85          # only used when type: gamma
+apply_curve_adjustment <- function(img, curve_cfg) {
+  if (is.null(curve_cfg)) return(img)
+  if (isFALSE(curve_cfg$enable %||% TRUE)) return(img)
+
+  type <- (curve_cfg$type %||% "sigmoid")
+
+  # no-op fast path
+  strength <- suppressWarnings(as.numeric(curve_cfg$strength %||% 0))
+  if (is.na(strength) || strength <= 0) return(img)
+
+  if (type == "sigmoid") {
+    # strength in [0,1] -> steepness in [0, ~12]
+    a   <- max(0, min(1, strength)) * 12
+    mid <- suppressWarnings(as.numeric(curve_cfg$mid %||% 0.5))
+    if (is.na(mid)) mid <- 0.5
+    mid <- max(0, min(1, mid))
+
+    # Magick FX language: u is the pixel value in [0,1]
+    expr <- sprintf("1/(1+exp(-%0.6f*(u-%0.6f)))", a, mid)
+    return(magick::image_fx(img, expression = expr))
+  }
+
+  if (type == "gamma") {
+    # gamma curve: out = u^gamma ; gamma < 1 brightens shadows, > 1 darkens
+    gamma <- suppressWarnings(as.numeric(curve_cfg$gamma %||% 1))
+    if (is.na(gamma) || gamma <= 0) return(img)
+
+    # blend gamma effect by strength: effective gamma moves from 1 -> gamma
+    g_eff <- 1 + (gamma - 1) * max(0, min(1, strength))
+    expr  <- sprintf("pow(u,%0.6f)", g_eff)
+    return(magick::image_fx(img, expression = expr))
+  }
+
+  # unknown type -> no-op
+  img
+}
+
+build_cell_image <- function(img_paths, blend, curve_cfg, project_root, img_width_mm, img_height_mm) {
   if (length(img_paths) == 0) {
     return(NULL)
   }
@@ -114,6 +161,9 @@ build_cell_image <- function(img_paths, blend, project_root, img_width_mm, img_h
     img <- imgs[[1]]
   }
 
+  # Apply optional curves adjustment AFTER blending and BEFORE rasterizing
+  img <- apply_curve_adjustment(img, curve_cfg)
+
   grid::rasterGrob(
     as.raster(img),
     interpolate = TRUE,
@@ -124,7 +174,9 @@ build_cell_image <- function(img_paths, blend, project_root, img_width_mm, img_h
 
 
 # ---- 输出 PDF ----
-out_dir <- file.path(project_root, "06_figures/figure_4")
+# Allow output directory to be configured in panel YAML via `out_dir`
+out_dir_cfg <- panel_cfg$out_dir %||% "06_figures/figure_4"
+out_dir <- file.path(project_root, out_dir_cfg)
 if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 
 out_file <- file.path(out_dir, paste0(panel_cfg$out, ".pdf"))
@@ -205,10 +257,12 @@ for (i in seq_len(n_rows)) {
 for (k in seq_len(nrow(cells_df))) {
   row_idx <- cells_df$row[k]
   col_idx <- cells_df$col[k]
-  imgs    <- cells_df$images[[k]]
-  blend   <- cells_df$blend[k]
+  imgs       <- cells_df$images[[k]]
+  blend      <- cells_df$blend[k]
+  curve_cell <- cells_df$curve[[k]]
+  curve_cfg  <- curve_cell %||% (panel_cfg$curve %||% NULL)
 
-  g <- build_cell_image(imgs, blend, project_root, img_width_mm, img_height_mm)
+  g <- build_cell_image(imgs, blend, curve_cfg, project_root, img_width_mm, img_height_mm)
   if (is.null(g)) next
 
   grid::pushViewport(
