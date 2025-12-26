@@ -821,3 +821,32 @@ figures:
           - PI3K–AKT–mTOR几乎不跨0，这说明其为显著中介，EphB1 缺失 确实 是通过该通路影响 membrane context
           - 但是cl很宽，这说明该实验样本量较小，结果不稳定，需要更多样本验证（cl是什么？如何计算得来？）
 
+      - figure_id: "6g/h"
+        experiment_id: 1
+        story_role: "ephb1-fc处理心磷脂nao染色/量化统计"
+        micro_question: >
+          鉴于ephb1具有双向激活、成簇化激活的特点，
+          所以使用可溶性ephb1胞外结构域（ephb1-fc）+anti-fc处理，
+          模拟ephb1成簇化反应，富集到细胞表面ephrinb，
+          通过占位，抑制细胞内的ephb1下游信号通路，激活ephrin下游信号通路
+          通过观察wt细胞nao表型是否与ephb1敲除相似，
+          可以验证心磷脂含量减少的上游是ephb1还是ephrin下游信号通路
+
+        micro_answer: >
+          ephb1预处理显著降低 WT 巨噬细胞的 NAO 染色强度，并使 WT 与 KO 之间原本存在的 NAO 差异被抹平，
+          说明ephb1下游信号通路 确实决定了“可达/可复合” CL 池的大小
+        focuses_on_axes: []
+        depends_on_panels: []
+
+      - figure_id: "4i"
+        experiment_id: 2
+        story_role: "ephb1-fc处理后il1b释放"
+        micro_question: >
+          原理同上
+          通过观察wt细胞il1b释放表型是否与ephb1敲除相似，
+          可以验证il1b释放减少的上游是ephb1还是ephrin下游信号通路
+        micro_answer: >
+          在 WT 巨噬细胞中，ephb1fc降低 NLRP3 诱导的 IL-1β 释放，
+          进一步说明ephb1下游信号通路 确实决定了“可达/可复合” CL 池的大小
+        focuses_on_axes: []
+        depends_on_panels: []
