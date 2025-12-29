@@ -582,12 +582,11 @@ if (length(hue_levels) == 2 &&
     )
 
   # ---- 导出 PDF ----
-  grDevices::pdf(
+  grDevices::cairo_pdf(
     file   = out_pdf,
     width  = width_in,
     height = height_in,
-    family = font_family,
-    useDingbats = FALSE
+    family = font_family
   )
   print(p)
   dev.off()
