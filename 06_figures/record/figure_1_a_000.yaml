@@ -1,0 +1,128 @@
+# ============================================================
+# schema.yaml v2 — Model Panel (Conceptual / Mechanistic Diagram)
+# Figure 1a：遗传筛选流程示意图
+# ============================================================
+
+meta:
+  panel_type: "model"
+  figure_id: "1a"
+  experiment_id: "000"
+  short_title: "炎症小体遗传筛选流程示意图"
+  chapter: "S1"
+  role_in_paper: >
+    用于说明 Ephb1 表型的发现路径，建立 Figure 1b 遗传筛选结果的实验与逻辑合法性，
+    而非用于展示数据或提出机制结论。
+
+# ---------- 1. Conceptual Goal ----------
+concept_goal:
+  core_message: >
+    通过“输入–流程–输出”的三段式结构，概述炎症小体相关遗传筛选的整体设计逻辑。
+  problem_being_explained: >
+    Figure 1b 中遗传筛选结果是如何在统一条件下、通过标准化流程获得的？
+
+# ---------- 2. Mechanistic Elements ----------
+mechanism:
+  key_nodes:
+    - name: "pb genetic backgrounds"
+      description: >
+        多个独立的 pb 遗传背景品系（约 10 个），每个品系分别包含 WT 与 HO 两种基因型。
+    - name: "within-strain comparison"
+      description: >
+        在同一遗传背景内比较 WT 与 HO 的炎症小体相关表型。
+    - name: "primary macrophages"
+      description: >
+        从各 pb 品系获得的原代巨噬细胞，作为统一的功能检测体系。
+    - name: "NLRP3 activation"
+      description: >
+        通过 LPS 预处理联合 Nigericin 刺激激活 NLRP3 炎症小体通路。
+    - name: "pyroptosis output"
+      description: >
+        炎症小体激活后的效应端读出，主要以 IL-1β 释放作为定量指标。
+    - name: "significance and effect size"
+      description: >
+        基于 WT 与 HO 在同一品系内的差异幅度及统计显著性，对候选品系进行筛选与排序。
+
+  key_edges:
+    - from: "pb genetic backgrounds"
+      to: "WT vs HO comparison"
+      type: "required_for"
+      evidence: "Figure 1a"
+    - from: "WT vs HO comparison"
+      to: "inflammasome activation"
+      type: "associate"
+      evidence: "Figure 1a"
+    - from: "inflammasome activation"
+      to: "pyroptotic outputs"
+      type: "promote"
+      evidence: "Figure 1a"
+    - from: "pyroptotic outputs"
+      to: "candidate prioritization"
+      type: "required_for"
+      evidence: "Figure 1b"
+
+# ---------- 3. Evidence Mapping ----------
+evidence_mapping:
+  supported_links:
+    - mechanism_step: "WT vs HO comparison → pyroptotic outputs"
+      supported_by: ["Figure 1b"]
+      confidence: "high"
+  speculative_links:
+    - mechanism_step: "Ephb1 regulates inflammasome-dependent pyroptosis"
+      rationale: >
+        Ephb1 在筛选中表现出显著且可重复的炎症输出差异。
+      boundary: >
+        该流程图本身不用于阐明具体分子机制，相关调控关系将在后续实验中验证。
+
+# ---------- 4. Graphical Logic ----------
+visual_logic:
+  flow_direction: "left-to-right"
+  entry_point: "pb genetic backgrounds (WT and HO pairs)"
+  exit_point: "significance and effect size"
+  causal_chain:
+    - "multiple pb genetic backgrounds"
+    - "primary macrophages from each strain"
+    - "NLRP3 inflammasome activation (LPS + Nigericin)"
+    - "pyroptosis output (IL-1β release)"
+    - "within-strain WT vs HO comparison"
+    - "candidate prioritization"
+  parallel_paths: []
+  feedback_loops: []
+
+# ---------- 5. Message Strength & Boundaries ----------
+interpretation:
+  what_is_certain: >
+    该流程在多个 pb 遗传背景中，以原代巨噬细胞为体系，统一诱导 NLRP3 炎症小体激活并检测 IL-1β 释放。
+  what_is_plausible: >
+    通过在同一遗传背景内比较 WT 与 HO 的差异，可识别在炎症小体效应端具有显著表型差异的候选品系。
+  what_is_unknown: >
+    筛选结果本身不用于解释 Ephb1 或其他候选基因影响炎症小体功能的分子机制。
+  why_model_needed: >
+    该流程示意图用于帮助读者理解遗传筛选结果的来源与判定逻辑，而非展示具体实验数据。
+
+# ---------- 6. Transition ----------
+transition:
+  how_it_summarizes_previous: >
+    本图概括了遗传筛选的整体设计思想，为理解后续数据面板提供实验背景。
+  how_it_leads_next_section: >
+    基于该筛选流程，Figure 1b 展示了 Ephb1 在筛选中的具体表型结果，
+    并为后续机制研究章节确定研究对象。
+
+# ---------- 7. AI Writing Hints ----------
+ai_hints:
+  target_section: ["Results_intro", "Figure_legend", "Discussion_transition"]
+  tone: "neutral"
+  language: "zh"
+  target_journal_style: "中国生物学博士论文"
+
+figure_legend:
+  title: "炎症小体遗传筛选流程示意图"
+  panels:
+    description: >
+      (A) 炎症小体相关遗传筛选的整体流程示意。左侧为筛选输入，
+      包括多个 pb 遗传背景下的 WT 与 HO 配对；中间为统一的实验流程，
+      以原代巨噬细胞为研究对象，经 LPS 预处理和 Nigericin 刺激激活 NLRP3 炎症小体，
+      并检测 IL-1β 释放作为焦亡相关效应端读出；右侧为筛选输出，
+      在同一遗传背景内比较 WT 与 HO 的差异，并根据差异幅度与统计显著性筛选候选品系。
+  notes:
+    description: >
+      本流程图用于说明遗传筛选的设计与判定逻辑，不包含具体定量数据。

@@ -45,7 +45,7 @@ panels:
       "lps+poly_(da:dt)": "Poly(dA:dT)"
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "IL-1β (pg/ml)"
+    y_label: "IL-1β release (pg/ml)"
 
     x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
       

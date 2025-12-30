@@ -1,9 +1,8 @@
 meta:
-  figure: "2"
-  panel: "b"
+  figure: "2a/b"
   short_title: "EphB1 缺失不影响炎症小体第一信号（priming）的转录程序"
   chapter: "3.2 EphB1 缺失不影响 NLRP3 炎症小体 priming–ASC–caspase-1 激活，差异集中在 GSDMD 膜孔形成/内容物外排环节"
-  experiment_id: "2025-03-21_TLR4_priming_qPCR"
+  experiment_id: "figure_2_b"
   version: 1
 
 assets:
@@ -18,7 +17,8 @@ assets:
     - ""
 
 question:
-  context_from_previous: "上一节排除了 EphB1 缺失造成普遍分泌缺陷的可能性，将差异定位到炎症小体/焦亡相关释放途径。"
+
+  context_from_previous: "为了定位 EphB1 在炎症小体通路中的作用节点，需首先排除其对第一信号 priming 的影响。"
   core_question: "EphB1 缺失是否影响第一信号（TLR4-NF-κB 介导的 priming）相关基因的转录水平？"
   hypothesis_or_expectation: "若 EphB1 缺失的效应点位于 priming 之后，则 TNF-α、IL-6、IL-1β 等基因的转录水平应保持正常。"
   importance_reason: "判定第一信号是否完好是进一步定位 EphB1 在炎症小体通路中作用节点的关键步骤。"

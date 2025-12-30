@@ -38,7 +38,7 @@ panels:
       "lps_4h": "LPS"
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "Il1b mRNA (2^-ΔΔCt)"
+    y_label: "Relative IL-1β expression (2^-ΔΔCt)"
     x_tick_rotation: 0
     strip: true
 
@@ -66,7 +66,7 @@ panels:
       "lps_4h": "LPS"
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "Il6 mRNA (2^-ΔΔCt)"
+    y_label: "Relative IL-6 expression (2^-ΔΔCt)"
     x_tick_rotation: 0
     strip: true
     stats:
@@ -93,7 +93,7 @@ panels:
       "lps": "LPS"
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "Tnfa mRNA (2^-ΔΔCt)"
+    y_label: "Relative TNF-α expression (2^-ΔΔCt)"
     x_tick_rotation: 0
     strip: true
     stats:

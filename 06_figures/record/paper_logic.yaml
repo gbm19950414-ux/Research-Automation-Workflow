@@ -143,7 +143,7 @@ figures:
     panels:
       - figure_id: "1a"
         experiment_id: "000"
-        story_role: "遗传筛选流程示意图"
+        story_role: "炎症小体遗传筛选流程示意图"
         micro_question: >
           我们是如何发现ephb1表型的？
         micro_answer: >
@@ -153,7 +153,7 @@ figures:
       
       - figure_id: "1b"
         experiment_id: "001"
-        story_role: "遗传筛选结果"
+        story_role: "EphB1 在多品系中表现为显著候选基因"
         micro_question: >
           ephb1在遗传筛选中的表现如何？
         micro_answer: >
@@ -162,18 +162,18 @@ figures:
         depends_on_panels: []
 
       - figure_id: "1c"
-        experiment_id: "002"
-        story_role: "il1b炎症小体激活特异性验证"
+        experiment_id: "figure_2_d"
+        story_role: "EphB1 表型不依赖单一 NLRP3 激动剂"
         micro_question: >
           ephb1的nlrp3炎症小体表型，是否与nigericin特异相关？
         micro_answer: >
-          ephb1的nlrp3炎症小体表型，在多种nlrp3激活条件下均表现出一致性
+          ephb1的nlrp3炎症小体表型，在多种炎症小体激活条件下均表现出一致性
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "1d"
         experiment_id: 2
-        story_role: "ephb1焦亡表型"
+        story_role: "EphB1 缺失一致降低炎症小体相关膜裂解（LDH）"
         micro_question: >
           在不同炎症小体感受器被激活的条件下，EphB1 缺失是否一致降低焦亡相关的膜裂解/
           LDH 外排，确立其在炎症小体依赖性细胞裂解中的功能表型？
@@ -184,34 +184,37 @@ figures:
         focuses_on_axes: ["AX3"]
         depends_on_panels: ["1A_apoptosis_control"]
 
-      - figure_id: "原 1A_apoptosis_control"
+      - figure_id: "s1a"
         experiment_id: 1
-        story_role: "specificity_control"
+        story_role: "EphB1 缺失不改变经典凋亡敏感性（Staurosporine）"
         micro_question: >
-          在进入炎症小体相关实验之前，EphB1 缺失是否已经导致巨噬细胞对非炎性死亡
-          （如经典凋亡）的广泛耐受或易感，从而干扰后续焦亡表型的解读？
+          在解释炎症小体依赖性焦亡表型之前，是否需要排除 EphB1 缺失引起的“广义细胞死亡敏感性改变”
+          （例如经典凋亡通路的普遍耐受或易感），以避免将非特异性的存活差异误判为焦亡特异表型？
         micro_answer: >
-          Staurosporine 诱导的 cleaved caspase-3 在 WT 与 KO 巨噬细胞中水平相近，说明 EphB1
-          缺失并未普遍改变经典凋亡通路的敏感性，为后续将差异归因于炎症小体依赖性焦亡
-          提供了阴性对照。
+          设置一个与炎症小体无关的经典凋亡刺激作为阴性对照通路，用于检验 EphB1 缺失是否存在
+          “全局性死亡通路敏感性偏移”。该对照的逻辑目的在于：若凋亡通路并未显示系统性差异，
+          则主文中观察到的差异更有理由被定位为炎症小体/焦亡相关执行环节的特异改变。
         focuses_on_axes: []
         depends_on_panels: []
 
-      - figure_id: "原 1C_IL1b_release_and_pore_products"
+      - figure_id: "s1b"
         experiment_id: 3
-        story_role: "cytokine_readout"
+        story_role: "炎症输出与孔形成相关标记提供补充证据"
         micro_question: >
-          EphB1 缺失导致的焦亡减弱，是否同时体现在 NLRP3 依赖的 IL-1β 释放和与之相关的
-          GSDMD/caspase-1 裂解产物上，从而把细胞裂解与炎症输出联系起来？
+          为了将“膜裂解/细胞死亡”与“炎症因子外排”在同一执行层级上对齐，是否需要同时评估
+          NLRP3 依赖的 IL-1β 释放读出以及与之对应的执行器加工/孔形成相关分子标记，
+          从而验证该表型属于“输出端环节”而非单一 readout 的偶然偏差？
         micro_answer: >
-          在相同 LPS+Nigericin 条件下，KO 巨噬细胞上清中的 IL-1β 水平及与焦亡执行相关的
-          GSDMD-NT、caspase-1 p20 条带均低于 WT，说明 EphB1 缺失不仅减弱膜裂解，还同步压低了
-          依赖 GSDMD 孔形成的炎症因子外排，确立了“焦亡输出被限幅”的起点表型。
+          在相同的 NLRP3 激活条件下，采用两类互补证据对“执行层输出”进行并行刻画：
+          （1）功能读出：上清 IL-1β 释放（反映依赖孔形成的外排输出）；（2）分子标记：与
+          caspase-1 激活及 GSDMD 孔形成相关的加工产物（用于表征执行器链路是否被触发并进入输出阶段）。
+          该面板的逻辑目的在于：将细胞裂解性表型与炎症输出表型建立同层级对应关系，
+          并为后续定位瓶颈发生在“上游激活”还是“末端外排/孔功能”提供方向性依据。
         focuses_on_axes: []
         depends_on_panels: []
 
   - id: "Figure 2"
-    title: "EphB1 缺失不影响 NLRP3 priming、ASC 装配和 caspase-1 激活/切割，差异集中在执行层外排环节"
+    title: "EphB1 缺失不影响 NLRP3 上游激活，差异集中于 GSDMD 执行层外排"
     section: "S1"
     role_in_story: "机制轴"
     one_sentence_purpose: >
@@ -223,33 +226,21 @@ figures:
       GSDMD/IL-1β 的切割基本保留，但成熟片段的胞外释放受限，提示瓶颈位于 GSDMD 孔与膜裂解
       步骤，而非炎症小体的组装或酶活本身。
     panels:
-      - figure_id: "2a"
-        experiment_id: 2
-        story_role: "tnfa转录"
+      - figure_id: "2a/b"
+        experiment_id: 2 
+        story_role: "EphB1 缺失未影响转录性 priming"
         micro_question: >
           在 TLR4–NF-κB 介导的第一信号阶段，EphB1 缺失是否改变了炎症小体相关细胞因子和
           Nlrp3 本身的转录性 priming？
         micro_answer: >
-          LPS 诱导下 TNF-α mRNA 随时间上升，但 WT 与 KO 之间上升幅度一致，
-          表明 EphB1 缺失未明显影响第一信号驱动的转录性 priming。
-        focuses_on_axes: []
-        depends_on_panels: []
-
-      - figure_id: "2b"
-        experiment_id: 2
-        story_role: "il1b转录"
-        micro_question: >
-          在 TLR4–NF-κB 介导的第一信号阶段，EphB1 缺失是否改变了炎症小体相关细胞因子和
-          Nlrp3 本身的转录性 priming？
-        micro_answer: >
-          LPS 诱导下 IL-1β mRNA 随时间上升，但 WT 与 KO 之间上升幅度一致，
+          LPS 诱导下 TNF-α、IL-1β mRNA 随时间上升，但 WT 与 KO 之间上升幅度一致，
           表明 EphB1 缺失未明显影响第一信号驱动的转录性 priming。
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "2c"
         experiment_id: 1
-        story_role: "tnfa释放"
+        story_role: "EphB1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷"
         micro_question: >
           EphB1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（TNF-α/IL-6）的普遍释放缺陷，
           从而混淆对 IL-1β 变化的解读？
@@ -262,20 +253,18 @@ figures:
 
       - figure_id: "2d"
         experiment_id: 1
-        story_role: "il1b释放"
+        story_role: "EphB1 缺失造成 炎症小体诱导的IL-1β 释放缺陷"
         micro_question: >
-          EphB1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（TNF-α/IL-6）的普遍释放缺陷，
-          从而混淆对 IL-1β 变化的解读？
+          EphB1 缺失导致的 IL-1β 释放是否具有浓度依赖特性？
         micro_answer: >
-          在 LPS 单独刺激下，WT 与 KO 巨噬细胞释放的 il1b 上升，ko幅度小于wt，
-          提示 EphB1 缺失并未普遍削弱细胞因子分泌途径，为后续将分泌差异特异性归因于炎症小体/
-          焦亡相关释放提供了基础。
+          在 LPS nigericin 刺激下，WT 与 KO 巨噬细胞释放的 IL-1β 上升，KO 幅度小于 WT，且具有浓度依赖特性，
+          提示 EphB1 缺失造成的分泌差异集中于炎症小体特异性通路。
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "2e"
         experiment_id: 4
-        story_role: "asc交联检测"
+        story_role: "EphB1 缺失未在炎症小体装配层面影响 ASC 寡聚化"
         micro_question: >
           在第二信号触发后，EphB1 缺失是否影响 ASC 的寡聚化和 speck 形成，从而在装配层面阻断
           炎症小体？
@@ -287,7 +276,7 @@ figures:
 
       - figure_id: "2f"
         experiment_id: 5
-        story_role: "casp1活化"
+        story_role: "EphB1 缺失未在炎症小体功能层面影响 caspase-1 的激活及其成熟片段生成"
         micro_question: >
           在 ASC 平台完好组装的前提下，EphB1 缺失对 caspase-1 的激活产生了怎样的影响，
           从而帮助定位差异所在的执行层级
@@ -300,7 +289,7 @@ figures:
 
       - figure_id: "2g"
         experiment_id: 5
-        story_role: "casp1底物切割能力"
+        story_role: "EphB1 缺失未在炎症小体功能层面影响IL—1β 与 GSDMD 的切割"
         micro_question: >
           在完成转录后，关键 priming 蛋白（pro-IL-1β）的胞内丰度是否受到 EphB1 缺失影响，
           从而在蛋白层面限制炎症小体装配？
@@ -322,23 +311,8 @@ figures:
         depends_on_panels: []
 
       - figure_id: "s2a"
-        experiment_id: 1
-        story_role: "il6释放"
-        micro_question: >
-          EphB1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（TNF-α/IL-6）的普遍释放缺陷，
-          从而混淆对 IL-1β 变化的解读？
-        micro_answer: >
-          在 LPS 单独刺激下，WT 与 KO 巨噬细胞释放的 il6 上升且幅度相近，
-          提示 EphB1 缺失并未普遍削弱细胞因子分泌途径，为后续将分泌差异特异性归因于炎症小体/
-          焦亡相关释放提供了基础。
-
-
-        focuses_on_axes: []
-        depends_on_panels: []
-
-      - figure_id: "s2b"
         experiment_id: 2
-        story_role: "il6转录"
+        story_role: "EphB1 缺失未影响转录性 priming的补充分析"
         micro_question: >
           在 TLR4–NF-κB 介导的第一信号阶段，EphB1 缺失是否改变了炎症小体相关细胞因子和
           Nlrp3 本身的转录性 priming？
@@ -348,8 +322,23 @@ figures:
         focuses_on_axes: []
         depends_on_panels: []
 
+      - figure_id: "s2b"
+        experiment_id: 1
+        story_role: "EphB1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷的补充分析"
+        micro_question: >
+          EphB1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（IL-6）的普遍释放缺陷，
+          从而混淆对 IL-1β 变化的解读？
+        micro_answer: >
+          在 LPS 单独刺激下，WT 与 KO 巨噬细胞释放的 IL-6 上升且幅度相近，
+          提示 EphB1 缺失并未普遍削弱细胞因子分泌途径，为后续将分泌差异特异性归因于炎症小体/
+          焦亡相关释放提供了基础.
+
+
+        focuses_on_axes: []
+        depends_on_panels: []
+
   - id: "Figure 3"
-    title: "EphB1 缺失降低 GSDMD 的线粒体结合"
+    title: "EphB1 缺失降低 GSDMD 与线粒体膜的结合"
     section: "S2"
     role_in_story: "机制轴"
     one_sentence_purpose: >
@@ -589,7 +578,7 @@ figures:
 
   - id: "Figure 5"
 
-    title: "EphB1 缺失后心磷脂含量下降主要关联于 membrane context 机制轴"
+    title: "多组学机制轴分析指向 membrane context 与心磷脂含量下降相关"
     section: ""   # 若你之后重新划分章节，可再改
     role_in_story: "机制轴"
 
@@ -713,7 +702,7 @@ figures:
 
     
   - id: "Figure 6"
-    title: "EphB1 依赖的下游信号通路中介 membrane context 机制轴改变的因果模型"
+    title: "EphB1 下游信号通路中介 membrane context 机制轴改变的因果模型"
     section: ""
     role_in_story: "机制"
 

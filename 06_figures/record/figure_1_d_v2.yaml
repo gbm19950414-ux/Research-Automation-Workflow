@@ -3,11 +3,10 @@
 # ============================================================
 
 meta:
-  figure: "Figure 1"
-  panel: "A"
+  figure_id: "1d"
+  experiment_id: "figure_1_b"
   short_title: "EphB1 缺失降低多类型炎症小体诱导的焦亡水平"
   chapter: "3.1 EphB1 缺失降低炎症小体诱导的巨噬细胞焦亡与 IL-1β 释放"
-  experiment_id: "2025_LDH_nigericin_flagellin_polyAT_EphB1"
   version: 2
 
 assets:

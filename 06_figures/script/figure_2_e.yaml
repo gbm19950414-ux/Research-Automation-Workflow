@@ -5,7 +5,7 @@ materials_rel_dir: "04_data/interim/wb/materials"
 
 page:
   width_mm: 84          # 单栏宽度（推荐 84 mm）
-  height_mm: 100         # 整个 panel 高度，比如 50–60 mm
+  height_mm: 70         # 整个 panel 高度，比如 50–60 mm
 
   top_margin_mm: 0      # panel 顶部空白
   bottom_margin_mm: 0   # 底部空白

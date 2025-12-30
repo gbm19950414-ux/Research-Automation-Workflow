@@ -8,11 +8,10 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "Figure 1"              # 如 "Figure 3"
-  panel: "A"                      # 如 "A"
-  short_title: "EphB1 缺失不影响 staurosporine 诱导的细胞凋亡"         
-  chapter: "3.1 EphB1 缺失降低炎症小体诱导的巨噬细胞焦亡与 IL-1β 释放"
-  experiment_id: "EphB1_STS_apoptosis_WB"
+  figure_id: "s1"              # 如 "Figure 3"
+  experiment_id: "figure_1_a"                      # 如 "A"
+  short_title: "EphB1 缺失对 staurosporine 诱导凋亡的影响评估"     
+  chapter: "EphB1 缺失降低炎症小体诱导的巨噬细胞焦亡与 IL-1β 释放"
   version: 1
 
 assets:
@@ -29,8 +28,8 @@ assets:
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
   context_from_previous: >
-    前一小节提出 EphB1 可能参与炎症小体依赖性细胞死亡的调控，但尚需排除其通过
-    广泛改变细胞死亡敏感性而非特异性调节焦亡的可能。
+    在 Figure 1 中已观察到 EphB1 缺失与炎症小体依赖性焦亡输出减弱相关，
+    因此有必要进一步排除该表型是否源于对非炎性细胞死亡通路的普遍影响。
   core_question: >
     EphB1 缺失是否改变原代腹腔巨噬细胞对 staurosporine 诱导经典程序性凋亡的敏感性？
   hypothesis_or_expectation: >

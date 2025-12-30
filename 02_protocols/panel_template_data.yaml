@@ -8,12 +8,9 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: ""              # 如 "Figure 3"
-  panel: ""               # 如 "A"
+  figure_id: ""
+  experiment_id: ""
   short_title: ""         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
-  chapter: ""             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: ""       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
-  version: 1              # 整数，用来追踪修改
 
 assets:
   main_figure_file: ""    # 主图文件路径，如 "figures/F3/F3A_IL1b_ELISA.pdf"
@@ -103,7 +100,45 @@ interpretation:
   transition_to_next: ""         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
                                  # 例如：“为了明确这种效应是否依赖于线粒体 ROS，我们随后检测了 NLRP3 激活过程中 mtROS 的变化。”
 
-# ---------- 6. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
+# ---------- 6. figure_legend ----------
+
+figure_legend:
+
+  title: "EphB1 缺失在多通路炎症小体激活下均降低 IL-1β 释放" 
+    # 简短、结论式标题
+      # (A–C) 或单 panel 展示的对象
+      # 告诉读者“这个 panel 在比较什么现象”。
+      # 不包含基因型信息
+
+  panels:
+    description: ""
+      # (A–C) 或单 panel 展示的对象
+      # 例："WT 与 Ephb1 pb/pb 巨噬细胞在不同炎症小体第二信号刺激下的 IL-1β 释放"
+
+  groups:
+    definition: ""
+      # 对照与突变组的明确说明
+      # 例："WT 为同窝野生型对照，Ephb1 pb/pb 为敲除组"
+
+  sample_size:
+    n_per_group: "n ≥ 3"
+    replicates: "结果在 ≥3 次独立实验中重复获得"
+
+  statistics:
+    test: "非配对双尾 t 检验"
+    multiple_comparison: "未进行多重比较校正"
+      # 若使用 ANOVA / mixed model / FDR，这里写；否则可以省略
+
+  normalization:
+    description: ""
+      # 仅在“影响 y 轴数值含义”时填写
+      # 例："ELISA 信号按细胞数量进行标准化"
+      # 若只是背景扣除、技术校正，可不写
+
+  significance:
+    symbols: "* p < 0.05, ** p < 0.01, *** p < 0.001; ns, 不显著"
+
+# ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
 ai_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"] 
     # 你希望从这个 schema 主要生成哪些部分的正文？

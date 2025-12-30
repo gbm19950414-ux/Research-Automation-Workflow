@@ -40,15 +40,15 @@ panels:
       - "lps4h+nigeiricin8h"
     rename_x:
       - "Control"
-      - "NIG 1h"
-      - "FLA 1h"
-      - "Poly (dA:dT) 8h"
-      - "NIG 8h"
+      - "Nigericin"
+      - "Flagellin"
+      - "Poly (dA:dT)"
+      - "Nigericin"
     hue_order: 
       - "WT"
       - "HO"
     x_label: ""
-    y_label: "Normalized to positive"
+    y_label: "LDH release (Normalized to positive control)"
 
     x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
       

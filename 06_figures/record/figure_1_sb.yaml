@@ -7,11 +7,10 @@
 # ============================================================
 
 meta:
-  figure: "Figure 1"
-  panel: "C"
-  short_title: "EphB1 缺失降低 NLRP3 诱导的 IL‑1β 释放与效应端裂解产物"
+  figure_id: "s1b"
+  short_title: "NLRP3 激活条件下炎症输出与裂解产物的补充分析"
   chapter: "3.1 EphB1 缺失降低炎症小体诱导的巨噬细胞焦亡与 IL‑1β 释放"
-  experiment_id: "2025_NLRP3_IL1b_ELISA_WB"
+  experiment_id: "figure_1_c"
   version: 1
 
 assets:
@@ -30,7 +29,8 @@ assets:
 
 question:
   context_from_previous: >
-    前一 panel 显示 EphB1 缺失在多感受器炎症小体激活条件下均导致 LDH 外排下降，提示焦亡整体裂解强度受抑制。
+    Figure 1 主文中已基于 LDH 外排读出建立 EphB1 缺失与炎症小体依赖性焦亡输出减弱之间的关联，
+    因此有必要进一步评估该表型是否在其他执行端相关 readout 中保持一致。
   core_question: >
     EphB1 缺失是否在 NLRP3 激活条件下抑制焦亡相关内容物（IL‑1β、caspase‑1 p20、GSDMD‑NT）的释放？
   hypothesis_or_expectation: >
@@ -93,11 +93,12 @@ interpretation:
     虽然 IL‑1β 减少通常反映效应端削弱，但不能完全排除膜脂重塑或膜孔稳定性差异对其外排路径的影响。
   summary_type: "supportive,descriptive"
   claim_supported: >
-    EphB1 是 NLRP3 焦亡执行阶段的促进因子，其缺失会显著抑制 IL‑1β 及裂解产物的外排。
+    本补充结果支持主文中基于 LDH 外排建立的表型，即 EphB1 缺失所对应的变化
+    同样体现在多种炎症小体执行端相关 readout 中。
   link_to_previous: >
     在观察到 KO 的 LDH 外排下降后，本节进一步表明焦亡相关内容物（IL‑1β、casp‑1 p20、GSDMD‑NT）也同步减少。
   transition_to_next: >
-    为识别 EphB1 影响的精确执行节点，下一节将分析 ASC 组装、caspase‑1 激活与 GSDMD 成孔等更细化步骤。
+    相关机制层面的分析已在主文后续章节中展开讨论。
 
 ai_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"]

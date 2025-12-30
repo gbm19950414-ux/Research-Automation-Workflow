@@ -39,12 +39,11 @@ panels:
       - "lps+nigericin(20µg/ml)"
     rename_x:
       "medium": "control"
-      "lps+nigericin(10µg/ml)": "NIG (10µg/ml)"
-      "lps+nigericin(20µg/ml)": "NIG (20µg/ml)"
+      "lps+nigericin(10µg/ml)": "Nigericin (10µM)"
+      "lps+nigericin(20µg/ml)": "Nigericin (20µM)"
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "IL-1β in sup. (pg/ml)"
-
+    y_label: "IL-1β release (pg/ml)"
     x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
       
     strip: true            # 叠加散点
@@ -69,10 +68,10 @@ panels:
       - "tnfa|lps(10ng/ml)"
     rename_x:
       "tnfa|untreated": "Control"
-      "tnfa|lps(10ng/ml)": "LPS (10ng/ml)"
+      "tnfa|lps(10ng/ml)": "LPS"
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "TNF-a in sup. (pg/ml)"
+    y_label: "TNF-α release (pg/ml)"
 
     x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
       
@@ -98,10 +97,10 @@ panels:
       - "il6|lps"
     rename_x:
       "il6|untreated": "Control"
-      "il6|lps": "LPS (10ng/ml)"
+      "il6|lps": "LPS"
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "IL-6 in sup. (pg/ml)"
+    y_label: "IL-6 release (pg/ml)"
 
     x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
       

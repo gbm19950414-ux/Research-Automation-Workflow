@@ -4,9 +4,10 @@
 # ============================================================
 
 meta:
+
   panel_type: "model"       # 必填： "model"
-  figure: ""                # 如 "Figure 6"
-  panel: ""                 # 如 "A"
+  figure_id: ""
+  experiment_id: ""
   short_title: ""           # 概念图一句话标题，如：“EphB1 regulates mitochondrial-ROS–CL–NLRP3 axis”
   chapter: ""               # 属于哪一章
   role_in_paper: ""         # 这张概念图在整篇论文中的作用（非常重要）

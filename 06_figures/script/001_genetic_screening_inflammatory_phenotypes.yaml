@@ -1,0 +1,99 @@
+# ============================================================
+# 001_genetic_screening_inflammatory_phenotypes.yaml
+# Screening-style normalized dot plot configuration
+# - Layout fields follow your panel-yaml convention (see figure_2_d.yaml)
+# - Plot script: 06_figures/scripts/screening-style dot plot.R
+# ============================================================
+
+title: "Genetic screening of inflammatory phenotypes"
+out: "001_genetic_screening_inflammatory_phenotypes"
+
+style:
+  style_yaml: "02_protocols/figure_style_nature.yaml"
+
+# Canvas size (mm)
+size:
+  width_mm: 173
+  height_mm: 60
+
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.0
+
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  - id: a
+    type: screening_dotplot
+
+    data:
+      xlsx: "04_data/raw/炎症表型遗传筛选/raw_data.xlsx"
+      sheet: "Sheet1"
+      columns:
+        strain: "name"
+        treatment: "treatment"
+        concentration: "concentration"
+      replicate_columns:
+        wt_prefix: "wt_"
+        ho_prefix: "ho_"
+
+      # Keep only the design conditions you described
+      keep_conditions:
+
+        - {treatment: "nigericin", concentration: 10}
+
+      # Optional: map stimulus -> cytokine readout (used for facet labels)
+      analyte_map:
+        lps: "TNFα"
+        r848: "TNFα"
+        nigericin: "IL-1β"
+
+      # Units used only for facet labels
+      concentration_unit:
+        lps: "ng/mL"
+        r848: "ng/mL"
+        nigericin: "μM"
+
+    normalization:
+      # value_norm = value_raw / mean(WT replicates) for the SAME (strain, condition)
+      method: "within_strain_by_wt_mean"
+      wt_baseline_label: "WT mean = 1"
+
+    plot:
+      # Output directories (relative to project root)
+      interim_dir: "04_data/interim/炎症表型遗传筛选"
+      figure_dir: "06_figures/figure_1"
+      stem: "001_genetic_screening_dotplot_nigericin_10"
+
+      # Facet layout
+      facet:
+        nrow: 1
+
+      # Which genotypes to show (WT points can be kept for transparency)
+      show_genotypes: ["WT", "HO"]
+
+      # X axis
+      x:
+        rotate_deg: 45
+        hjust: 1
+        order: "as_in_file"  # as_in_file | by_HO_mean
+
+      # Y axis
+      y:
+        label: "Normalized IL-1β release (WT mean = 1)"
+        limits: [0, null]
+
+      aesthetics:
+        point_alpha: 1
+        point_size: 1.2
+        jitter_width: 0.18
+        mean_marker: "dash"  # dash | point

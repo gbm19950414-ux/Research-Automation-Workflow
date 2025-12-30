@@ -8,12 +8,11 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: ""              # 如 "Table 2" 或 "Figure 6C-table"
-  panel: ""               # 若是某个 Figure 的子表，可填 "C-table"
+  figure_id: ""
+  experiment_id: ""
   panel_type: "table"     # 固定为 "table"，方便脚本识别
   short_title: ""         # 1 句以内：本表在做什么（如："关键 EphB1 下游轴的基因与脂质指标汇总"）
   chapter: ""             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: ""       # 可选：与实验记录/脚本对应的 ID
   version: 3              # 当前 schema 版本
 
 assets:
