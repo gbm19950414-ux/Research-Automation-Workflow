@@ -8,11 +8,10 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "Figure 3"              # 如 "Figure 3"
-  panel: "E"               # 如 "A"
+  figure: "2e"              # 如 "Figure 3"
   short_title: "EphB1 缺失不影响 ASC 组装"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.2 NLRP3 inflammasome activation"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: "2025-03-21_ASC_DSS_crosslinking_WB"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
+  experiment_id: "figure_2_e"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
 
 assets:
@@ -28,7 +27,7 @@ assets:
 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
-  context_from_previous: "上一节结果显示 EphB1 缺失在多感受器第二信号下 IL-1β 释放一致下降，提示差异可能位于执行端步骤。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
+  context_from_previous: “在确认 LPS 诱导的经典分泌与转录性 priming 未受影响、且在 NLRP3 激活条件下 IL-1β 释放在 HO 中显著降低后，本节进一步检验差异是否发生在炎症小体装配层（ASC 寡聚化/speck）。”  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
                              # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
   core_question: "EphB1 缺失是否影响感受器下游的 ASC 聚集与斑点形成？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
                              # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”

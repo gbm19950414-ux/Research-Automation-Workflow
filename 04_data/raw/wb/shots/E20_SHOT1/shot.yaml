@@ -1,0 +1,32 @@
+white: 3,6,8 FEMTO.tif
+file:
+- 3,6,8 FEMOT-1 S1.TIF
+- 3,6,8 FEMOT-2  5, 10, 20 min.TIF
+seconds:
+- FEMOT_s1
+- FEMOT_2,5,10.20_min
+gel_boxes:
+- gel_id: G1
+  rect:
+  - 91
+  - 10
+  - 389
+  - 147
+  target: gsdmd
+  sample_batch: E19_l+n_lys
+- gel_id: G2
+  rect:
+  - 71
+  - 157
+  - 383
+  - 161
+  target: gapdh
+  sample_batch: E14_l+n_lys
+- gel_id: G3
+  rect:
+  - 60
+  - 306
+  - 372
+  - 171
+  target: p-akt
+  sample_batch: E14_l+n_lys

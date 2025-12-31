@@ -64,6 +64,28 @@ wb_panel_from_yaml <- function(root,
     stop("Config 缺少必需字段: bands")
   }
 
+  # ---- 可选：过滤不参与做图的 band（YAML: include: false）----
+  band_use <- vapply(bands, function(b) {
+    inc <- b$include %||% TRUE
+    if (is.logical(inc)) return(isTRUE(inc))
+    if (is.numeric(inc)) return(!is.na(inc) && inc != 0)
+    if (is.character(inc)) {
+      v <- tolower(trimws(inc))
+      return(!(v %in% c("false", "f", "0", "no", "n")))
+    }
+    TRUE
+  }, logical(1))
+
+  if (any(!band_use)) {
+    skipped <- vapply(bands[!band_use], function(b) b$prefix %||% "<no_prefix>", character(1))
+    message("[INFO] Skip bands (include: false): ", paste(skipped, collapse = ", "))
+  }
+
+  bands <- bands[band_use]
+  if (length(bands) == 0) {
+    stop("所有 bands 都被标记为不参与做图（include: false）")
+  }
+
   band_prefixes      <- character(length(bands))
   band_display_names <- character(length(bands))
   band_shot_ids      <- character(length(bands))

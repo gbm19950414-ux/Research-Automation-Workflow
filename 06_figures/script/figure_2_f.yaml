@@ -46,6 +46,7 @@ bands:
     label: "Casp1_p20"
     sample_type: "sup"
     shot_id: "E15_SHOT1"
+    include: false
 
 
 

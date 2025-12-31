@@ -227,7 +227,7 @@ figures:
       步骤，而非炎症小体的组装或酶活本身。
     panels:
       - figure_id: "2a/b"
-        experiment_id: 2 
+        experiment_id: "figure_2_b"
         story_role: "EphB1 缺失未影响转录性 priming"
         micro_question: >
           在 TLR4–NF-κB 介导的第一信号阶段，EphB1 缺失是否改变了炎症小体相关细胞因子和
@@ -239,7 +239,7 @@ figures:
         depends_on_panels: []
 
       - figure_id: "2c"
-        experiment_id: 1
+        experiment_id: "figure_2_a"
         story_role: "EphB1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷"
         micro_question: >
           EphB1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（TNF-α/IL-6）的普遍释放缺陷，
@@ -252,7 +252,7 @@ figures:
         depends_on_panels: []
 
       - figure_id: "2d"
-        experiment_id: 1
+        experiment_id: "figure_1_c_a"
         story_role: "EphB1 缺失造成 炎症小体诱导的IL-1β 释放缺陷"
         micro_question: >
           EphB1 缺失导致的 IL-1β 释放是否具有浓度依赖特性？
@@ -263,7 +263,7 @@ figures:
         depends_on_panels: []
 
       - figure_id: "2e"
-        experiment_id: 4
+        experiment_id: "figure_2_e"
         story_role: "EphB1 缺失未在炎症小体装配层面影响 ASC 寡聚化"
         micro_question: >
           在第二信号触发后，EphB1 缺失是否影响 ASC 的寡聚化和 speck 形成，从而在装配层面阻断
@@ -275,7 +275,7 @@ figures:
         depends_on_panels: []
 
       - figure_id: "2f"
-        experiment_id: 5
+        experiment_id: "figure_2_f"
         story_role: "EphB1 缺失未在炎症小体功能层面影响 caspase-1 的激活及其成熟片段生成"
         micro_question: >
           在 ASC 平台完好组装的前提下，EphB1 缺失对 caspase-1 的激活产生了怎样的影响，
@@ -288,7 +288,7 @@ figures:
         depends_on_panels: []
 
       - figure_id: "2g"
-        experiment_id: 5
+        experiment_id: "figure_2_g"
         story_role: "EphB1 缺失未在炎症小体功能层面影响IL—1β 与 GSDMD 的切割"
         micro_question: >
           在完成转录后，关键 priming 蛋白（pro-IL-1β）的胞内丰度是否受到 EphB1 缺失影响，

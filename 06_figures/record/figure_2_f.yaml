@@ -8,11 +8,10 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "Figure 3"              # 如 "Figure 3"
-  panel: "F"               # 如 "A"
+  figure: "2f"              # 如 "Figure 3"
   short_title: "EphB1 缺失不影响 caspase-1 激活但降低其胞外释放"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.2 NLRP3 inflammasome activation"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: "2025-03-21_caspase1_activation_release_WB"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
+  experiment_id: "figure_2_f"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
 
 assets:

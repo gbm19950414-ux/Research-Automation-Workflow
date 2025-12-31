@@ -1,9 +1,8 @@
 meta:
-  figure: "2"
-  panel: "a"
+  figure_id: "2c"
   short_title: "EphB1 缺失不影响 TNF-α/IL-6 的经典分泌"
-  chapter: "3.2 EphB1 缺失不影响 NLRP3 炎症小体 priming–ASC–caspase-1 激活，差异集中在 GSDMD 膜孔形成/内容物外排环节"
-  experiment_id: "2025-03-21_TNF_IL6_ELISA"
+  chapter: "EphB1 缺失不影响 NLRP3 炎症小体 priming–ASC–caspase-1 激活，差异集中在 GSDMD 膜孔形成/内容物外排环节"
+  experiment_id: "figure_2_a"
   version: 1
 
 assets:
@@ -18,7 +17,7 @@ assets:
     - ""
 
 question:
-  context_from_previous: "前一节结果提示 EphB1 缺失降低焦亡，但尚不清楚差异发生在炎症小体通路的哪个阶段。"
+  context_from_previous: “在确认转录性 priming 未受影响后，需要进一步排除 EphB1 缺失导致的‘普遍分泌能力下降’，以避免将 IL-1β 的变化误判为经典分泌缺陷。”
   core_question: "EphB1 缺失是否会造成经典分泌（TNF-α/IL-6）能力的全局性削弱？"
   hypothesis_or_expectation: "若 EphB1 缺失的作用点位于 GSDMD 执行端，而非上游 priming 或分泌机械，则经典分泌途径不应受影响。"
   importance_reason: "排除普遍分泌缺陷是明确炎症小体/焦亡特异性差异的前提。"
@@ -38,7 +37,7 @@ methods:
   experimental_groups: "WT 与 KO，均接受单一 LPS 刺激。"
   stimuli_and_treatment: "LPS（100 ng/mL），分别在 2h（检测 IL-6）与 4h（检测 TNF-α）收集上清。"
   time_points: "IL-6：2h；TNF-α：4h。"
-  dose_info: ""
+  dose_info:  "LPS 100 ng/mL"
   readout_and_assay: "使用商业 ELISA 试剂盒定量 TNF-α 与 IL-6；检测信号经空白孔与 480 nm 背景双重扣除，并以 MTT 结果对细胞数量归一化。"
   replicates: "每组 n ≥ 3，≥3 次独立实验重复。"
   analysis_notes: "双尾非配对 t 检验；数据表示为均值 ± SD。"
@@ -58,7 +57,7 @@ interpretation:
   summary_type: "negative, elimination"
   claim_supported: "EphB1 缺失不影响 TLR4 介导的经典分泌途径。"
   link_to_previous: "在明确焦亡受抑制后，本节排除了上游经典分泌不足的可能性。"
-  transition_to_next: "下一步对 inflammasome priming、ASC 聚集和 caspase-1 激活进行系统比对，以定位差异节点。"
+  transition_to_next: “下一步在炎症小体特异条件下比较 IL-1β 释放，并结合 ASC 寡聚化、caspase-1/GSDMD 加工与上清释放等 readout，逐层定位瓶颈是否位于 GSDMD 孔介导外排的执行层。”
 
 ai_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"]
