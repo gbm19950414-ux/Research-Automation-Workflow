@@ -51,7 +51,7 @@ DYE_COL = "dye"
 GROUP_COL = "group"
 AUC_COL = "auc"
 
-MAD_Z_THRESHOLD = 2.5
+MAD_Z_THRESHOLD = 1.5
 
 
 def label_group(df: pd.DataFrame) -> pd.Series:

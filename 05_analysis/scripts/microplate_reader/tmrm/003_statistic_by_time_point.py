@@ -46,6 +46,10 @@ DYE_COL = "dye"
 group_COL = "group"
 MAD_Z_THRESHOLD = 2.5
 
+# 可选：时间降采样（binning）。0 表示不启用。
+# 例如设为 5，则把 time_point 变成 0,5,10,...，并在每个 gene 内对同一 bin 求均值。
+DEFAULT_BIN_MIN = 0
+
 def label_group(df: pd.DataFrame) -> pd.Series:
     """根据 gene 列生成 WT/HO 标签"""
     if GENE_COL not in df.columns:
@@ -74,7 +78,7 @@ def welch_p(a: pd.Series, b: pd.Series) -> float:
     return float(ttest_ind(a, b, equal_var=False, nan_policy="omit").pvalue)
 
 
-def process_file(in_file: Path):
+def process_file(in_file: Path, bin_min: int = DEFAULT_BIN_MIN):
     print(f"[信息] 处理文件: {in_file}")
     df = pd.read_excel(in_file)
     # === 背景矫正（仅用 group=blank） ===
@@ -118,6 +122,33 @@ def process_file(in_file: Path):
 
     df["geno"] = label_group(df)           # 新列：geno
     df = df[df["geno"].isin(["WT", "HO"])] # 只保留 WT/HO
+    # === 可选：时间降采样 + 轨迹内平均（推荐用于降低高频噪声） ===
+    # 重要：先在同一条轨迹（gene）内部对每个时间 bin 求均值，避免一个孔在统计时“重复计数”。
+    try:
+        bin_min = int(bin_min)
+    except Exception:
+        bin_min = 0
+
+    if bin_min and bin_min > 0:
+        # time_point -> floor bin，例如 2.5min 采样在 5min bin 下会变成 0,5,10...
+        df[TIME_COL] = pd.to_numeric(df[TIME_COL], errors="coerce")
+        df = df.dropna(subset=[TIME_COL]).copy()
+        df[TIME_COL] = (df[TIME_COL] // bin_min) * bin_min
+        df[TIME_COL] = df[TIME_COL].astype(int)
+
+        # 在每条轨迹（gene）内，对同一 bin 求均值（对三个指标分别 mean）
+        traj_keys = [
+            GENE_COL,
+            "geno",
+            DYE_CONC_COL,
+            DYE_TIME_COL,
+            DRUG_COL,
+            TIME_COL,
+            DYE_COL,
+            group_COL,
+        ]
+        agg_dict = {v: "mean" for v in VALUE_COLS if v in df.columns}
+        df = df.groupby(traj_keys, dropna=False, as_index=False).agg(agg_dict)
     # === 异常值剔除（MAD-z，按每个 time_point 和 geno 分组） ===
 
     def _mad_z_group(x: pd.Series) -> pd.Series:
@@ -176,6 +207,12 @@ def process_file(in_file: Path):
 def main():
     parser = argparse.ArgumentParser(description="WT vs HO 按 time_point 统计")
     parser.add_argument("inputs", nargs="*", help="输入 Excel 文件路径，可为 0 个或多个")
+    parser.add_argument(
+        "--bin-min",
+        type=int,
+        default=DEFAULT_BIN_MIN,
+        help="时间降采样分钟数（0=不启用；例如 5 表示按 5min bin 并在每个 gene 内求均值）",
+    )
     args = parser.parse_args()
 
     # 若用户未提供任何输入文件 → 自动扫描默认目录
@@ -203,10 +240,10 @@ def main():
         for p in files:
             print("   -", p)
         for p in files:
-            process_file(p)
+            process_file(p, bin_min=args.bin_min)
     else:
         for f in args.inputs:
-            process_file(Path(f))
+            process_file(Path(f), bin_min=args.bin_min)
 
 
 if __name__ == "__main__":

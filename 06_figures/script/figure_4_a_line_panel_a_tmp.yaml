@@ -21,7 +21,7 @@ panels:
   sheet: Sheet1
   filter:
     drug: medium
-    Dye_concentration: 400nm
+    Dye_concentration: 200nm
   mapping:
     x: time_point
     genotype_cols:

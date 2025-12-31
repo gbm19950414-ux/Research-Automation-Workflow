@@ -51,11 +51,20 @@ CURVE_KEYS = [
 TIME_COL = "time_point"
 VALUE_COL = "value_t0_ratio"
 
+# AUC 计算方式：
+# - "ratio": 直接对 value_t0_ratio 积分（Option A，默认；输出列名为 auc）
+# - "delta": 对 (value_t0_ratio - 1) 积分（可选；仍会同时输出 auc）
+AUC_MODE = "ratio"
+
+# 可选：时间降采样（binning）。0 表示不启用。
+# 例如设为 5，则把 time_point 变成 0,5,10,...，并在每条曲线（同一 gene）内对同一 bin 求均值。
+DEFAULT_BIN_MIN = 0
+
 
 def compute_auc_for_curve(df_curve: pd.DataFrame) -> float:
-    """
-    对单条曲线（同一 sample_batch + ... + gene）计算 AUC。
-    使用 time_point vs value_t0_ratio 的梯形积分。
+    """对单条曲线计算 AUC（梯形积分）。
+
+    默认 Option A：对 value_t0_ratio 直接积分（AUC_MODE="ratio"）。
     """
     # 按时间排序
     df_curve = df_curve.sort_values(TIME_COL)
@@ -72,10 +81,57 @@ def compute_auc_for_curve(df_curve: pd.DataFrame) -> float:
     if x.size < 2:
         return np.nan
 
+    if AUC_MODE == "delta":
+        y = y - 1.0
+
     return float(np.trapz(y, x))
 
 
-def process_file(in_file: Path) -> None:
+def compute_auc_ratio_for_curve(df_curve: pd.DataFrame) -> float:
+    """始终对 value_t0_ratio 本身做 AUC（不受 AUC_MODE 影响）。"""
+    df_curve = df_curve.sort_values(TIME_COL)
+
+    x = df_curve[TIME_COL].to_numpy(dtype=float)
+    y = df_curve[VALUE_COL].to_numpy(dtype=float)
+
+    mask = np.isfinite(x) & np.isfinite(y)
+    x = x[mask]
+    y = y[mask]
+
+    if x.size < 2:
+        return np.nan
+
+    return float(np.trapz(y, x))
+
+
+def bin_curve_within_trajectory(df_curve: pd.DataFrame, bin_min: int) -> pd.DataFrame:
+    """对单条曲线做时间降采样：time_point floor 到 bin，并在该曲线内对同一 bin 求均值。"""
+    try:
+        bin_min = int(bin_min)
+    except Exception:
+        bin_min = 0
+
+    if not bin_min or bin_min <= 0:
+        return df_curve
+
+    out = df_curve.copy()
+    out[TIME_COL] = pd.to_numeric(out[TIME_COL], errors="coerce")
+    out[VALUE_COL] = pd.to_numeric(out[VALUE_COL], errors="coerce")
+    out = out.dropna(subset=[TIME_COL, VALUE_COL])
+    if out.empty:
+        return out
+
+    out[TIME_COL] = (out[TIME_COL] // bin_min) * bin_min
+    out[TIME_COL] = out[TIME_COL].astype(int)
+
+    out = (
+        out.groupby(TIME_COL, as_index=False, dropna=False)[VALUE_COL]
+        .mean()
+    )
+    return out
+
+
+def process_file(in_file: Path, bin_min: int = DEFAULT_BIN_MIN) -> None:
     """
     对单个 *_t0_corrected_*.xlsx 文件计算所有曲线的 AUC，并写出 *_auc.xlsx。
     """
@@ -98,8 +154,9 @@ def process_file(in_file: Path) -> None:
 
     rows = []
     for keys, sub in groups:
-        auc = compute_auc_for_curve(sub)
-        n_points = sub[VALUE_COL].notna().sum()
+        sub2 = bin_curve_within_trajectory(sub, bin_min=bin_min)
+        auc = compute_auc_for_curve(sub2)
+        n_points = sub2[VALUE_COL].notna().sum()
 
         # keys 是一个 tuple，对应 CURVE_KEYS 顺序
         row = dict(zip(CURVE_KEYS, keys))
@@ -113,13 +170,15 @@ def process_file(in_file: Path) -> None:
         else:
             geno = None
 
-        row.update(
-            {
-                "geno": geno,
-                "n_points": int(n_points),
-                "auc": auc,
-            }
-        )
+        out_row = {
+            "geno": geno,
+            "n_points": int(n_points),
+            "auc": compute_auc_ratio_for_curve(sub2),
+        }
+        if AUC_MODE == "delta":
+            out_row["auc_delta"] = auc
+
+        row.update(out_row)
         rows.append(row)
     if not rows:
         print(f"[WARN] 文件 {in_file.name} 未找到任何曲线，跳过。")
@@ -164,6 +223,12 @@ def main():
         nargs="*",
         help="可选：一个或多个输入 Excel 文件；若不提供则自动扫描默认目录。",
     )
+    parser.add_argument(
+        "--bin-min",
+        type=int,
+        default=DEFAULT_BIN_MIN,
+        help="时间降采样分钟数（0=不启用；例如 5 表示按 5min bin 并在每条曲线内求均值）",
+    )
     args = parser.parse_args()
 
     if args.inputs:
@@ -179,7 +244,7 @@ def main():
             return
 
     for f in files:
-        process_file(f)
+        process_file(f, bin_min=args.bin_min)
 
 
 if __name__ == "__main__":

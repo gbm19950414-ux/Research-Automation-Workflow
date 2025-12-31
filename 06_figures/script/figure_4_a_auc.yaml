@@ -46,5 +46,5 @@ panels:
       pairs:
         - - WT
           - HO
-    ylimits: [60,100]
+    ylimits: [70,110]
 

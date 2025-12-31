@@ -82,7 +82,7 @@ panels:
     type: box
     data: 04_data/interim/microplate_reader/线粒体完整性检测/线粒体完整性检测_blank_corrected_t0_corrected_batch-E56_dye-tmrm_auc.xlsx
     sheet: 1
-    ylim: [60, 100]
+    ylim: [70, 110]
     mapping:
       x: drug
       "y": auc
