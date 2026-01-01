@@ -46,6 +46,59 @@ resolve_path <- function(path, project_root) {
   file.path(project_root, path)
 }
 
+# ---- 多文件数据源支持 ----
+resolve_paths_multi <- function(data_spec, project_root) {
+  # returns list entries describing each source
+  # each entry: list(path=..., sheet=NULL, keep_x=NULL)
+  if (is.null(data_spec)) return(list())
+
+  # single string
+  if (is.character(data_spec) && length(data_spec) == 1) {
+    return(list(list(path = resolve_path(data_spec, project_root), sheet = NULL, keep_x = NULL)))
+  }
+
+  # list of objects with $path
+  if (is.list(data_spec) && length(data_spec) > 0 && !is.null(data_spec[[1]]$path)) {
+    out <- lapply(data_spec, function(item) {
+      list(
+        path   = resolve_path(item$path, project_root),
+        sheet  = item$sheet %||% NULL,
+        keep_x = item$keep_x %||% NULL
+      )
+    })
+    return(out)
+  }
+
+  # list/vector of strings
+  if (is.list(data_spec)) data_spec <- unlist(data_spec)
+  if (is.character(data_spec)) {
+    out <- lapply(data_spec, function(p) {
+      list(path = resolve_path(p, project_root), sheet = NULL, keep_x = NULL)
+    })
+    return(out)
+  }
+
+  stop("Unsupported data spec type for multi-file input")
+}
+
+read_excel_multi <- function(data_spec, project_root, default_sheet = 1) {
+  specs <- resolve_paths_multi(data_spec, project_root)
+  if (length(specs) == 0) stop("Empty data spec")
+
+  # existence check
+  for (s in specs) {
+    if (is.null(s$path) || !file.exists(s$path)) {
+      stop("Data file not found: ", s$path)
+    }
+  }
+
+  dfs <- lapply(specs, function(s) {
+    sh <- s$sheet %||% default_sheet
+    readxl::read_excel(s$path, sheet = sh)
+  })
+  dplyr::bind_rows(dfs)
+}
+
 p_to_symbol <- function(p) {
   if (is.na(p)) return("ns")
   if (p < 0.0001) return("****")
@@ -80,16 +133,24 @@ plot_box_panel <- function(panel,
   strip_dots <- panel$strip %||% TRUE
   stats_cfg  <- panel$stats
 
-  # 数据路径（允许相对 / 绝对）
-  data_path <- resolve_path(panel$data, project_root)
-  if (is.null(data_path) || !file.exists(data_path)) {
-    stop("Data file not found for panel ", panel$id, ": ", data_path)
-  }
-  message("[INFO] panel ", panel$id, " data: ", data_path)
-
-  # ---- 读数据 ----
+  # 数据来源：支持单文件 / 多文件（列表） / 多文件（对象列表带 keep_x）
   data_sheet <- panel$sheet %||% 1
-  df <- readxl::read_excel(data_path, sheet = data_sheet)
+  data_specs <- resolve_paths_multi(panel$data, project_root)
+  if (length(data_specs) == 0) stop("Empty data spec for panel ", panel$id)
+
+  # existence check + message
+  msg_paths <- vapply(data_specs, function(s) s$path, character(1))
+  message("[INFO] panel ", panel$id, " data sources: ", paste(msg_paths, collapse = " | "))
+
+  # read and bind
+  df_list <- lapply(data_specs, function(s) {
+    sh <- s$sheet %||% data_sheet
+    d <- readxl::read_excel(s$path, sheet = sh)
+    d$.source_path <- basename(s$path)
+    d$.keep_x <- if (is.null(s$keep_x)) NA_character_ else paste(s$keep_x, collapse = "||")
+    d
+  })
+  df <- dplyr::bind_rows(df_list)
 
   # 如果 mapping$x 不是现有列名，则尝试按简单拼接表达式解析（例如 "antibody + '|' + drug"）
   # 语法约定：用 "+" 连接列名和带引号的常量字符串，最终结果为字符向量
@@ -144,6 +205,28 @@ plot_box_panel <- function(panel,
     df[[x_var]] <- res
   }
 
+  # ---- keep_x: 若 data 以对象列表形式提供，可按每个文件条目指定仅保留哪些 x 水平 ----
+  if (length(data_specs) > 0) {
+    # build map from source basename -> keep_x vector (NULL means keep all)
+    keep_map <- list()
+    for (s in data_specs) {
+      bn <- basename(s$path)
+      keep_map[[bn]] <- s$keep_x %||% NULL
+    }
+
+    if (".source_path" %in% colnames(df) && x_var %in% colnames(df)) {
+      df <- df %>%
+        rowwise() %>%
+        mutate(.keep_flag = {
+          k <- keep_map[[.source_path]]
+          if (is.null(k)) TRUE else (.data[[x_var]] %in% k)
+        }) %>%
+        ungroup() %>%
+        filter(.keep_flag) %>%
+        select(-.keep_flag)
+    }
+  }
+
   # 检查 order 中是否有在数据里不存在的 x 水平，方便排查（例如拼写错误）
   if (!is.null(x_order)) {
     missing_x <- setdiff(x_order, unique(df[[x_var]]))
@@ -190,19 +273,35 @@ plot_box_panel <- function(panel,
   stats_df_plot <- NULL
 
   if (!is.null(stats_cfg) && isTRUE(stats_cfg$enabled)) {
-    stats_path  <- resolve_path(stats_cfg$source %||% panel$data, project_root)
     stats_sheet <- stats_cfg$sheet  %||% 1
+    stats_specs <- resolve_paths_multi(stats_cfg$source %||% panel$data, project_root)
+    stats_path  <- vapply(stats_specs, function(s) s$path, character(1))
     p_col       <- stats_cfg$column %||% "p_value"
     pairs_list  <- stats_cfg$pairs  %||% list(c("WT", "HO"))
 
     message("[INFO] panel ", panel$id,
-            " stats: ", stats_path, " (sheet=", stats_sheet, ")")
+            " stats sources: ", paste(stats_path, collapse = " | "),
+            " (sheet=", stats_sheet, ")")
 
-    if (!file.exists(stats_path)) {
-      warning("Stats file not found: ", stats_path,
+    missing_stats <- stats_path[!file.exists(stats_path)]
+    if (length(missing_stats) > 0) {
+      warning("Stats file not found: ", paste(missing_stats, collapse = " | "),
               "，该 panel 不画显著性括号。")
     } else {
-      raw_stats <- readxl::read_excel(stats_path, sheet = stats_sheet)
+      raw_list <- lapply(stats_specs, function(s) {
+        sh <- s$sheet %||% stats_sheet
+        d <- readxl::read_excel(s$path, sheet = sh)
+        d$.source_path <- basename(s$path)
+        d
+      })
+      raw_stats <- dplyr::bind_rows(raw_list)
+
+      # stats keep_x: 若 stats.source 以对象列表形式提供，可按文件条目指定仅保留哪些 x 水平
+      keep_map_s <- list()
+      for (s in stats_specs) {
+        bn <- basename(s$path)
+        keep_map_s[[bn]] <- s$keep_x %||% NULL
+      }
 
       # 这里允许两种风格：
       #   1) ELISA 风格：stats 里有 drug 列，x 轴也是 drug
@@ -210,6 +309,18 @@ plot_box_panel <- function(panel,
       key_candidates <- c("drug", "treatment")
       key_col <- intersect(key_candidates, colnames(raw_stats))
       key_col <- if (length(key_col) > 0) key_col[[1]] else NA_character_
+
+      if (!is.na(key_col) && ".source_path" %in% colnames(raw_stats)) {
+        raw_stats <- raw_stats %>%
+          rowwise() %>%
+          mutate(.keep_flag = {
+            k <- keep_map_s[[.source_path]]
+            if (is.null(k)) TRUE else (.data[[key_col]] %in% k)
+          }) %>%
+          ungroup() %>%
+          filter(.keep_flag) %>%
+          select(-.keep_flag)
+      }
 
       if (is.na(key_col) || !p_col %in% colnames(raw_stats)) {
         warning("Stats sheet for panel ", panel$id,

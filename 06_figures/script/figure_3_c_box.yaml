@@ -23,8 +23,10 @@ panels:
   - id: a
     type: box
     data: 
-      - "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
-      - "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_16S_stats.xlsx"
+      - path: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
+        keep_x: ["lps_1ngul_4h+nigericin_10ngul_7.5min"]
+      - path: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_16S_stats.xlsx"
+        keep_x: ["ctrl"]
     sheet: "data"
     mapping:
       x: "treatment"
@@ -33,10 +35,11 @@ panels:
 
     # 只画 ctrl 与 lps，跳过 "-" 那些占位行
     order:
-      - "lps_1ngul_4h+nigericin_10ngul_7.5min"
       - "ctrl"
+      - "lps_1ngul_4h+nigericin_10ngul_7.5min"
+
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": "Nigericin(7.5min)"
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
       "ctrl": "Control"
 
     hue_order: ["WT", "HO"]
@@ -47,14 +50,22 @@ panels:
 
     stats:
       enabled: true
-      source: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
+          keep_x: ["lps_1ngul_4h+nigericin_10ngul_7.5min"]
+        - path: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_16S_stats.xlsx"
+          keep_x: ["ctrl"]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
 
   - id: b
     type: box
-    data: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+    data: 
+      - path: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+        keep_x: ["lps_1ngul_4h+nigericin_10ngul_7.5min"]
+      - path: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx"
+        keep_x: ["ctrl"]
     sheet: "data"
     mapping:
       x: "treatment"
@@ -63,10 +74,12 @@ panels:
 
     # 只画 ctrl 与 lps，跳过 "-" 那些占位行
     order:
+      - "ctrl"
       - "lps_1ngul_4h+nigericin_10ngul_7.5min"
 
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin(7.5min)"
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
+      "ctrl": "Control"
 
     hue_order: ["WT", "HO"]
     x_label: ""
@@ -76,7 +89,11 @@ panels:
 
     stats:
       enabled: true
-      source: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+      source: 
+        - path: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+          keep_x: ["lps_1ngul_4h+nigericin_10ngul_7.5min"]
+        - path: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx"
+          keep_x: ["ctrl"]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
@@ -95,7 +112,7 @@ panels:
       - "lps_1ngul_4h+nigericin_10ngul_7.5min"
 
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin(7.5min)"
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
 
     hue_order: ["WT", "HO"]
     x_label: ""
@@ -124,7 +141,7 @@ panels:
       - "lps_1ngul_4h+nigericin_10ngul_7.5min"
 
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": "LPS+Nigericin(7.5min)"
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
 
     hue_order: ["WT", "HO"]
     x_label: ""
