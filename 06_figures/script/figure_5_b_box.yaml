@@ -99,32 +99,29 @@ panels:
     data: "04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_E39_summary.xlsx"
     sheet: "final_values"
     mapping:
-      x: "drug"
+      x: "genotype"          # 只保留 WT（HO 会被 x 过滤掉）
       "y": "final_value"
-      hue: "genotype"         # WT/HO
-    # 写“真实存在且拼写一致”的类别值；大小写/空格要与数据一致
-    order:
-      - "untreated"
-      - "lps+nigeiricin"
-      - "lps+nigeiricin_1h+ad(2µm)"
+      hue: "drug"            # 组间比较：drug vs drug
 
+    order: ["WT"]
 
-    rename_x:
+    hue_order: ["untreated", "lps+nigeiricin", "lps+nigeiricin_1h+ad(2µm)"]
+    rename_hue:
       "untreated": "control"
       "lps+nigeiricin": "lps+nigeiricin"
       "lps+nigeiricin_1h+ad(2µm)": "AD(2µm)"
 
-    hue_order: ["WT", "HO"]
     x_label: ""
     y_label: "IL-1β release after AD treated"
 
-    x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
-      
-    strip: true            # 叠加散点
-    stats:                 # 可选：显著性标注
+    x_tick_rotation: 0
+
+    strip: true
+    stats:
       enabled: true
-      source: "04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_E39_summary.xlsx"   # ✅ 指向存有 p 值的文件
-      sheet: "pair_stats"
-      column: p_value                 # ✅ 指明哪一列存 p 值
-      pairs: [["WT", "HO"]]           # ✅ 仍指明需要比较的组
+      source: "04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_E39_summary.xlsx"
+      sheet: "drug_pair_stats"
+      column: p_value
+      pairs:
+        - ["lps+nigeiricin", "lps+nigeiricin_1h+ad(2µm)"]
 

@@ -11,7 +11,7 @@ suppressPackageStartupMessages({
   library(rlang)
   library(grid)
 })
-
+hue_pal <- scales::hue_pal
 `%||%` <- function(x, y) if (!is.null(x)) x else y
 
 message("[INFO] ==== box_panel_from_yaml.R ====")

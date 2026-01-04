@@ -7,6 +7,7 @@ from pathlib import Path
 from scipy import stats
 from scipy.stats import median_abs_deviation
 import glob
+import itertools
 
 def p_to_star(p):
     if pd.isna(p):
@@ -98,9 +99,52 @@ def main():
 
         pair_stats = pd.DataFrame(out_rows).sort_values(pair_keys, ignore_index=True)
 
+        # ---- drug vs drug comparisons (within each genotype) ----
+        # This table is designed for plotting "group vs group" significance (e.g., Control vs AD) when hue/drug is the grouping variable.
+        drug_pair_keys = ["batch", "antibody", "group", "genotype"]
+        drug_rows = []
+        for keys, sub in d.groupby(drug_pair_keys, dropna=False):
+            # collect non-empty drug levels present in this stratum
+            drugs = (
+                sub["drug"].dropna().astype(str).str.strip()
+                  .replace({"": np.nan}).dropna().unique().tolist()
+            )
+            if len(drugs) < 2:
+                continue
+
+            for drug1, drug2 in itertools.combinations(drugs, 2):
+                v1 = sub.loc[sub["drug"] == drug1, "final_value"].to_numpy(dtype=float)
+                v2 = sub.loc[sub["drug"] == drug2, "final_value"].to_numpy(dtype=float)
+
+                n1, n2 = int(v1.size), int(v2.size)
+                mean1 = float(np.mean(v1)) if n1 > 0 else np.nan
+                mean2 = float(np.mean(v2)) if n2 > 0 else np.nan
+                sd1 = float(np.std(v1, ddof=1)) if n1 > 1 else 0.0
+                sd2 = float(np.std(v2, ddof=1)) if n2 > 1 else 0.0
+
+                if n1 > 0 and n2 > 0:
+                    t_stat, p_val = stats.ttest_ind(v1, v2, equal_var=False, nan_policy="omit")
+                else:
+                    t_stat, p_val = np.nan, np.nan
+
+                drug_rows.append({
+                    "batch": keys[0], "antibody": keys[1], "group": keys[2], "genotype": keys[3],
+                    "drug1": drug1, "drug2": drug2,
+                    "drug1_n": n1, "drug1_mean": mean1, "drug1_sd": sd1,
+                    "drug2_n": n2, "drug2_mean": mean2, "drug2_sd": sd2,
+                    "delta(drug2-drug1)": (mean2 - mean1) if np.isfinite(mean2) and np.isfinite(mean1) else np.nan,
+                    "t_stat": t_stat, "p_value": p_val, "p_star": p_to_star(p_val),
+                })
+
+        drug_pair_stats = pd.DataFrame(drug_rows)
+        if not drug_pair_stats.empty:
+            drug_pair_stats = drug_pair_stats.sort_values(["batch", "antibody", "group", "genotype", "drug1", "drug2"], ignore_index=True)
+
         with pd.ExcelWriter(OUTPUT_PATH, engine="openpyxl") as w:
             cell_stats.to_excel(w, sheet_name="cell_stats", index=False)
             pair_stats.to_excel(w, sheet_name="pair_stats", index=False)
+            if not drug_pair_stats.empty:
+                drug_pair_stats.to_excel(w, sheet_name="drug_pair_stats", index=False)
             full_df[["batch","antibody","group","drug","genotype","final_value","zscore","outlier"]].to_excel(w, sheet_name="final_values", index=False)
 
         print(f"完成：{OUTPUT_PATH.name}")
