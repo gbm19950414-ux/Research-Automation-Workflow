@@ -101,7 +101,7 @@ def main():
 
         # ---- drug vs drug comparisons (within each genotype) ----
         # This table is designed for plotting "group vs group" significance (e.g., Control vs AD) when hue/drug is the grouping variable.
-        drug_pair_keys = ["batch", "antibody", "group", "genotype"]
+        drug_pair_keys = ["batch", "antibody", "genotype"]
         drug_rows = []
         for keys, sub in d.groupby(drug_pair_keys, dropna=False):
             # collect non-empty drug levels present in this stratum
@@ -128,7 +128,7 @@ def main():
                     t_stat, p_val = np.nan, np.nan
 
                 drug_rows.append({
-                    "batch": keys[0], "antibody": keys[1], "group": keys[2], "genotype": keys[3],
+                    "batch": keys[0], "antibody": keys[1], "genotype": keys[2],
                     "drug1": drug1, "drug2": drug2,
                     "drug1_n": n1, "drug1_mean": mean1, "drug1_sd": sd1,
                     "drug2_n": n2, "drug2_mean": mean2, "drug2_sd": sd2,
@@ -138,7 +138,7 @@ def main():
 
         drug_pair_stats = pd.DataFrame(drug_rows)
         if not drug_pair_stats.empty:
-            drug_pair_stats = drug_pair_stats.sort_values(["batch", "antibody", "group", "genotype", "drug1", "drug2"], ignore_index=True)
+            drug_pair_stats = drug_pair_stats.sort_values(["batch", "antibody", "genotype", "drug1", "drug2"], ignore_index=True)
 
         with pd.ExcelWriter(OUTPUT_PATH, engine="openpyxl") as w:
             cell_stats.to_excel(w, sheet_name="cell_stats", index=False)
