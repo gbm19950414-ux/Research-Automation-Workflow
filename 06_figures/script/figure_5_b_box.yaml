@@ -99,29 +99,26 @@ panels:
     data: "04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_E39_summary.xlsx"
     sheet: "final_values"
     mapping:
-      x: "genotype"          # 只保留 WT（HO 会被 x 过滤掉）
+      x: "drug"
       "y": "final_value"
-      hue: "drug"            # 组间比较：drug vs drug
+      hue: "genotype"   # 可有可无；你说不需要过滤 hue，这里保持原样即可
+    hue_order: ["WT", "HO"]
+    keep_hue: ["WT"]
+    order:
+      - "untreated"
+      - "lps+nigeiricin"
+      - "lps+nigeiricin_1h+ad(2µm)"
 
-    order: ["WT"]
-
-    hue_order: ["untreated", "lps+nigeiricin", "lps+nigeiricin_1h+ad(2µm)"]
-    rename_hue:
+    rename_x:
       "untreated": "control"
       "lps+nigeiricin": "lps+nigeiricin"
       "lps+nigeiricin_1h+ad(2µm)": "AD(2µm)"
 
-    x_label: ""
-    y_label: "IL-1β release after AD treated"
-
-    x_tick_rotation: 0
-
-    strip: true
     stats:
       enabled: true
       source: "04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_E39_summary.xlsx"
-      sheet: "drug_pair_stats"
-      column: p_value
+      sheet: "drug_pair_stats"     # 这里必须是包含 drug1/drug2 的表
+      column: "p_value"
       pairs:
         - ["lps+nigeiricin", "lps+nigeiricin_1h+ad(2µm)"]
-
+        - ["untreated", "lps+nigeiricin"]

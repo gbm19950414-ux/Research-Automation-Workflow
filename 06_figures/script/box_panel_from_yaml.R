@@ -132,7 +132,7 @@ plot_box_panel <- function(panel,
   x_rot      <- panel$x_tick_rotation %||% 0
   strip_dots <- panel$strip %||% TRUE
   stats_cfg  <- panel$stats
-
+  keep_hue   <- panel$keep_hue %||% NULL
   # 数据来源：支持单文件 / 多文件（列表） / 多文件（对象列表带 keep_x）
   data_sheet <- panel$sheet %||% 1
   data_specs <- resolve_paths_multi(panel$data, project_root)
@@ -244,7 +244,9 @@ plot_box_panel <- function(panel,
   if (length(miss) > 0) {
     stop("Panel ", panel$id, " 缺少列: ", paste(miss, collapse = ", "))
   }
-
+  if (!is.null(keep_hue)) {
+    df <- df %>% filter(.data[[hue_var]] %in% keep_hue)
+  }
   df <- df %>%
     mutate(
       !!sym(x_var)   := factor(.data[[x_var]], levels = x_order),
@@ -255,7 +257,17 @@ plot_box_panel <- function(panel,
     mutate(
       x_pos = as.numeric(.data[[x_var]])
     )
+  # ---- DEBUG for panel c: locate empty hue palette problem ----
+  if (nrow(df) == 0) {
+    stop("After filtering x_var to x_order, df has 0 rows. ",
+        "Check panel$order vs data[[", x_var, "]] exact strings.")
+  }
 
+  message("[DEBUG] panel ", panel$id,
+          " nrow(df)=", nrow(df),
+          " | class(hue)=", paste(class(df[[hue_var]]), collapse=","),
+          " | uniq(hue)=", paste(unique(as.character(df[[hue_var]])), collapse=" | "),
+          " | uniq(x)=", paste(unique(as.character(df[[x_var]])), collapse=" | "))
   # 固定纵坐标从 0 开始
   y_min_fixed <- 0
 
@@ -310,6 +322,13 @@ plot_box_panel <- function(panel,
       key_col <- intersect(key_candidates, colnames(raw_stats))
       key_col <- if (length(key_col) > 0) key_col[[1]] else NA_character_
 
+      # NEW: pairwise stats (between x levels), e.g. drug1/drug2 + p_value
+      pair1_col <- intersect(c("drug1", "treatment1", "x1"), colnames(raw_stats))
+      pair2_col <- intersect(c("drug2", "treatment2", "x2"), colnames(raw_stats))
+      pair1_col <- if (length(pair1_col) > 0) pair1_col[[1]] else NA_character_
+      pair2_col <- if (length(pair2_col) > 0) pair2_col[[1]] else NA_character_
+      has_pairwise <- !is.na(pair1_col) && !is.na(pair2_col)
+
       if (!is.na(key_col) && ".source_path" %in% colnames(raw_stats)) {
         raw_stats <- raw_stats %>%
           rowwise() %>%
@@ -322,53 +341,105 @@ plot_box_panel <- function(panel,
           select(-.keep_flag)
       }
 
-      if (is.na(key_col) || !p_col %in% colnames(raw_stats)) {
-        warning("Stats sheet for panel ", panel$id,
-                " 缺少 {drug/treatment, ", p_col,
-                "}，跳过显著性括号。")
+      if (!has_pairwise) {
+        # -------- old behavior: per-x single-row stats (one p per x_level) --------
+        if (is.na(key_col) || !p_col %in% colnames(raw_stats)) {
+          warning("Stats sheet for panel ", panel$id,
+                  " 缺少 {drug/treatment, ", p_col,
+                  "}，跳过显著性括号。")
+        } else {
+          stats_list <- list()
+
+          for (x_level in x_order) {
+            df_x <- df %>% filter(.data[[x_var]] == x_level)
+            if (nrow(df_x) == 0) next
+
+            top_y   <- max(df_x[[y_var]], na.rm = TRUE)
+            base_y  <- top_y + 0.05 * y_span
+            label_y <- base_y + 0.05 * y_span
+
+            x_index <- as.numeric(df_x$x_pos[1])
+            x_min   <- x_index - 0.25
+            x_max   <- x_index + 0.25
+
+            for (pair in pairs_list) {
+              row_p <- raw_stats %>%
+                filter(.data[[key_col]] == x_level) %>%
+                slice_head(n = 1)
+
+              p_val <- if (nrow(row_p) == 0) NA_real_ else row_p[[p_col]][[1]]
+
+              stats_list[[length(stats_list) + 1]] <- tibble(
+                x_level   = x_level,
+                p_value   = p_val,
+                label     = p_to_symbol(p_val),
+                x_center  = x_index,
+                x_min     = x_min,
+                x_max     = x_max,
+                y_bracket = base_y,
+                y_label   = label_y
+              )
+            }
+          }
+
+          stats_df_plot <- bind_rows(stats_list)
+        }
+
       } else {
-        stats_list <- list()
+        # -------- new behavior: pairwise stats between x levels (e.g. drug vs drug) --------
+        if (!p_col %in% colnames(raw_stats)) {
+          warning("Stats sheet for panel ", panel$id,
+                  " 缺少 {", pair1_col, "/", pair2_col, ", ", p_col,
+                  "}，跳过显著性括号。")
+        } else if (is.null(stats_cfg$pairs) || length(stats_cfg$pairs) == 0) {
+          warning("Stats sheet for panel ", panel$id,
+                  " 为 pairwise 格式，但 YAML 未提供 stats.pairs，跳过显著性括号。")
+        } else {
+          stats_list <- list()
 
-        for (x_level in x_order) {
-          df_x <- df %>% filter(.data[[x_var]] == x_level)
-          if (nrow(df_x) == 0) next
+          for (i in seq_along(stats_cfg$pairs)) {
+            pair <- stats_cfg$pairs[[i]]
+            if (length(pair) < 2) next
 
-          top_y   <- max(df_x[[y_var]], na.rm = TRUE)
-          base_y  <- top_y + 0.05 * y_span
-          # 让显著性标记距离横线稍微远一点（原来是 0.03 * y_span）
-          label_y <- base_y + 0.05 * y_span
+            a <- as.character(pair[[1]])
+            b <- as.character(pair[[2]])
 
-          x_index <- as.numeric(df_x$x_pos[1])
-          x_min   <- x_index - 0.25
-          x_max   <- x_index + 0.25
+            ia <- match(a, x_order)
+            ib <- match(b, x_order)
+            if (is.na(ia) || is.na(ib)) next
 
-          for (pair in pairs_list) {
-            # 当前 stats.xlsx 的 pair_stats sheet 是每个 x 水平一行，
-            # 隐含比较 WT vs HO，因此这里只按 key_col 取第一行 p 值
+            df_a <- df %>% filter(.data[[x_var]] == a)
+            df_b <- df %>% filter(.data[[x_var]] == b)
+            if (nrow(df_a) == 0 || nrow(df_b) == 0) next
+
+            top_y <- max(max(df_a[[y_var]], na.rm = TRUE), max(df_b[[y_var]], na.rm = TRUE))
+            base_y <- top_y + (0.06 + 0.06 * (i - 1)) * y_span
+            label_y <- base_y + 0.05 * y_span
+
             row_p <- raw_stats %>%
-              filter(.data[[key_col]] == x_level) %>%
+              filter((as.character(.data[[pair1_col]]) == a & as.character(.data[[pair2_col]]) == b) |
+                     (as.character(.data[[pair1_col]]) == b & as.character(.data[[pair2_col]]) == a)) %>%
               slice_head(n = 1)
 
-            if (nrow(row_p) == 0) {
-              p_val <- NA_real_
-            } else {
-              p_val <- row_p[[p_col]][[1]]
-            }
+            p_val <- if (nrow(row_p) == 0) NA_real_ else row_p[[p_col]][[1]]
+
+            x_min <- min(ia, ib)
+            x_max <- max(ia, ib)
 
             stats_list[[length(stats_list) + 1]] <- tibble(
-              x_level   = x_level,
+              x_level   = NA_character_,
               p_value   = p_val,
               label     = p_to_symbol(p_val),
-              x_center  = x_index,
+              x_center  = (x_min + x_max) / 2,
               x_min     = x_min,
               x_max     = x_max,
               y_bracket = base_y,
               y_label   = label_y
             )
           }
-        }
 
-        stats_df_plot <- bind_rows(stats_list)
+          stats_df_plot <- bind_rows(stats_list)
+        }
       }
     }
   }
@@ -506,6 +577,10 @@ if (length(hue_levels) == 2 &&
     )
   }
   fill_pal <- tmp[hue_levels]
+}
+# support single-level hue (e.g. only WT) using style palette
+if (is.null(fill_pal) && !is.null(wt_ho_pal) && all(hue_levels %in% names(wt_ho_pal))) {
+  fill_pal <- wt_ho_pal[hue_levels]
 }
   ## ---- 作图 ----
   p <- ggplot(
