@@ -142,6 +142,23 @@ for (input_file in input_files) {
       dplyr::select(treatment, treatment_detail, genotype, well, Area, Mean, IntDen, norm_intden, log_norm_intden) %>%
       mutate(metric_value = .data[[metric_col]])
     
+    # ---------- Robust Z-score outlier detection ----------
+    cell_metric <- cell_metric %>%
+      group_by(treatment, genotype) %>%
+      mutate(
+        median_val = median(metric_value, na.rm = TRUE),
+        mad_val    = mad(metric_value, constant = 1.4826, na.rm = TRUE),
+        z_robust   = ifelse(mad_val > 0,
+                            (metric_value - median_val) / mad_val,
+                            NA_real_),
+        is_outlier = abs(z_robust) > 3
+      ) %>%
+      ungroup()
+
+    # Option A: 剔除离群值（最常用）
+    cell_metric <- cell_metric %>%
+      filter(!is_outlier | is.na(is_outlier))
+
     cell_summary <- cell_metric %>%
       group_by(treatment, genotype) %>%
       summarise(

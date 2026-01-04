@@ -41,6 +41,13 @@ mm_per_inch <- style_cfg$units$mm_per_inch %||% 25.4
 mm_to_pt <- function(mm) (72/mm_per_inch) * mm
 pt_to_mm <- function(pt) pt * mm_per_inch / 72
 
+# ggplot linewidth is not in pt; box_panel_from_yaml.R uses an empirical pt->linewidth scale
+pt_per_lwd <- style_cfg$lines$r_lwd_scale$pt_per_lwd %||% 0.75
+pt_to_lwd  <- function(pt) pt / pt_per_lwd
+
+# ggplot text/point size is also not pt; box_panel_from_yaml.R uses pt/2.5
+pt_to_text_size <- function(pt) pt / 2.5
+
 # fallbacks for sizes
 axis_label_size   <- sizes_pt$axis_label_default   %||% 6.5
 axis_tick_size    <- sizes_pt$axis_tick_default    %||% 5.5
@@ -249,14 +256,15 @@ for (panel in panel_cfg$panels){
         aes(fill = .data[[hue_var]], group = x_pos),
         trim = FALSE,
         alpha = (violin_cfg$alpha %||% 0.85),
-        linewidth = pt_to_mm(violin_cfg$line_width_pt %||% line_cfg$boxplot_default_pt %||% line_cfg$line_width_pt %||% 0.25),
+        linewidth = pt_to_lwd(violin_cfg$line_width_pt %||% line_cfg$boxplot_default_pt %||% line_cfg$line_width_pt %||% 0.25),
         color = (violin_cfg$edge_color %||% "black")
       ) +
       geom_jitter(
         aes(color = .data[[hue_var]]),
         width = (jitter_cfg$width %||% 0.1),
-        size = pt_to_mm(jitter_cfg$size_pt %||% (sizes_pt$axis_tick_default %||% 5.5)),
-        alpha = (jitter_cfg$alpha %||% 0.85)
+        size   = (jitter_cfg$size_mm %||% 1.4),
+        shape = (jitter_cfg$shape %||% 16),
+        alpha = (jitter_cfg$alpha %||% 1)
       ) +
       scale_fill_manual(values = fill_pal) +
       scale_color_manual(values = fill_pal)
@@ -266,14 +274,15 @@ for (panel in panel_cfg$panels){
         aes(group = x_pos),
         trim = FALSE,
         alpha = (violin_cfg$alpha %||% 0.85),
-        linewidth = pt_to_mm(violin_cfg$line_width_pt %||% line_cfg$boxplot_default_pt %||% line_cfg$line_width_pt %||% 0.25),
+        linewidth = pt_to_lwd(violin_cfg$line_width_pt %||% line_cfg$boxplot_default_pt %||% line_cfg$line_width_pt %||% 0.25),
         color = (violin_cfg$edge_color %||% "black"),
         fill = (violin_cfg$fill_no_hue %||% "grey80")
       ) +
       geom_jitter(
         width = (jitter_cfg$width %||% 0.1),
-        size = pt_to_mm(jitter_cfg$size_pt %||% (sizes_pt$axis_tick_default %||% 5.5)),
-        alpha = (jitter_cfg$alpha %||% 0.85)
+        size   = (jitter_cfg$size_mm %||% 1.4),
+        shape = (jitter_cfg$shape %||% 16),
+        alpha = (jitter_cfg$alpha %||% 1)
       )
   }
 
@@ -283,7 +292,7 @@ for (panel in panel_cfg$panels){
       labels = x_labels
     ) +
     labs(x = panel$x_label, y = panel$y_label) +
-    theme_classic() +
+    theme_classic(base_size = axis_tick_size, base_family = font_family) +
     theme(
       text = element_text(family = font_family),
       axis.title.x = element_text(
@@ -302,19 +311,41 @@ for (panel in panel_cfg$panels){
         size = axis_tick_size,
         margin = margin(r = gap_pt$y_ticks_to_axis %||% 0)
       ),
-      axis.line = element_line(linewidth = (line_cfg$axis_line_default_pt %||% 0.25)),
-      axis.ticks = element_line(linewidth = (line_cfg$axis_line_default_pt %||% 0.25)),
-      legend.text = element_text(size = legend_text_size),
+      axis.line  = element_line(linewidth = pt_to_lwd(line_cfg$axis_line_default_pt %||% 0.25), colour = "black"),
+      axis.ticks = element_line(linewidth = pt_to_lwd(line_cfg$axis_line_default_pt %||% 0.25), colour = "black"),
+      legend.text  = element_text(size = legend_text_size),
       legend.title = element_text(size = legend_title_size),
+
       plot.margin = margin(
         plot_margin_pt$top,
         plot_margin_pt$right,
         plot_margin_pt$bottom,
         plot_margin_pt$left
       ),
-      legend.position = (legend_cfg$position %||% "right"),
-      legend.direction = (legend_cfg$direction %||% "vertical")
+
+      legend.position      = (legend_cfg$position %||% c(0.1, 0.95)),
+      legend.justification = (legend_cfg$justification %||% c(0, 1)),
+      legend.background    = element_rect(fill = "white", colour = NA),
+      legend.key.size      = unit((legend_cfg$key_size_mm %||% 3), "mm"),
+      legend.direction     = (legend_cfg$direction %||% "vertical")
     )
+
+  # ---- y limits (panel yaml) ----
+  if (!is.null(panel$ylim)) {
+    y_raw <- panel$ylim
+    # yaml::read_yaml parses `[0, null]` as a list(0, NULL); unlist() would drop NULL.
+    if (is.atomic(y_raw)) {
+      if (length(y_raw) != 2) stop("panel$ylim must be length-2: [lower, upper]")
+      ylims <- as.numeric(y_raw)
+    } else {
+      y_raw <- as.list(y_raw)
+      if (length(y_raw) != 2) stop("panel$ylim must be length-2: [lower, upper]")
+      ylims <- vapply(y_raw, function(v) {
+        if (is.null(v)) NA_real_ else as.numeric(v)
+      }, numeric(1))
+    }
+    p <- p + coord_cartesian(ylim = ylims)
+  }
 
   if (!is.null(facet_var)) {
     p <- p + facet_wrap(as.formula(paste0("~", facet_var)))
@@ -326,7 +357,7 @@ for (panel in panel_cfg$panels){
         data = brackets_df,
         inherit.aes = FALSE,
         aes(x = x1, xend = x2, y = y, yend = y),
-        linewidth = pt_to_mm(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
+        linewidth = pt_to_lwd(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
         color = "black"
       ) +
       geom_segment(
@@ -334,7 +365,7 @@ for (panel in panel_cfg$panels){
         inherit.aes = FALSE,
         aes(x = x1, xend = x1, y = y,
             yend = y - (bracket_cfg$tick_height_frac %||% 0.02) * max(df[[y_var]], na.rm = TRUE)),
-        linewidth = pt_to_mm(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
+        linewidth = pt_to_lwd(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
         color = "black"
       ) +
       geom_segment(
@@ -342,7 +373,7 @@ for (panel in panel_cfg$panels){
         inherit.aes = FALSE,
         aes(x = x2, xend = x2, y = y,
             yend = y - (bracket_cfg$tick_height_frac %||% 0.02) * max(df[[y_var]], na.rm = TRUE)),
-        linewidth = pt_to_mm(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
+        linewidth = pt_to_lwd(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
         color = "black"
       ) +
       geom_text(
@@ -351,7 +382,7 @@ for (panel in panel_cfg$panels){
         aes(x = x_center,
             y = y + (bracket_cfg$tick_height_frac %||% 0.02) * max(df[[y_var]], na.rm = TRUE),
             label = label),
-        size = pt_to_mm(bracket_cfg$label_size_pt %||% (sizes_pt$legend_text_default %||% 6)),
+        size = pt_to_text_size(bracket_cfg$label_size_pt %||% (sizes_pt$legend_text_default %||% 6)),
         color = "black"
       )
   }

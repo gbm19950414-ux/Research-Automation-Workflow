@@ -51,4 +51,4 @@ panels:
       pairs:
         - ["WT", "HO"]
 
-    ylim: [0, null]
+    ylim: [0, 40]

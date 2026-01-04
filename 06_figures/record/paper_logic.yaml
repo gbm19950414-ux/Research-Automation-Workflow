@@ -342,16 +342,17 @@ figures:
     section: "S2"
     role_in_story: "机制轴"
     one_sentence_purpose: >
-      将 EphB1 的作用具体定位到 GSDMD–线粒体界面，检验焦亡执行瓶颈是否体现在 GSDMD-NT 对
-      线粒体膜的结合及其引发的线粒体损伤与 mtDNA 释放上。
+      将 EphB1 的作用具体定位到 GSDMD–线粒体界面，检验焦亡执行瓶颈是否发生在
+      GSDMD-NT 对线粒体膜的早期结合及其所触发的线粒体损伤与线粒体内容物外泄阶段。
     key_message: >
-      EphB1 缺失并不削弱 GSDMD 的剪切，但显著降低炎症小体激活早期 GSDMD-NT 在线粒体分级中的
-      富集，并伴随 ROS、ΔΨm 与胞质 mtDNA 脉冲释放的减弱，说明“线粒体阶段”的 GSDMD 孔形成与
-      损伤被限幅，为后续聚焦线粒体膜脂环境提供依据。
+      本图旨在区分 GSDMD 执行过程中的“剪切激活”与“线粒体结合/孔化”两个阶段，
+      并检验 EphB1 缺失是否将焦亡执行瓶颈定位于 GSDMD-NT 与线粒体膜的早期相互作用。
+      通过并行评估线粒体功能状态与线粒体内容物外泄读数，
+      为后续追问“线粒体膜环境因素如何决定该界面效率”提供逻辑依据。
     panels:
 
-      - figure_id: "3a/b/c/d/e/f/h/i"
-        experiment_id: 2
+      - figure_id: "3a/b/c/d/e/f/g/h"
+        experiment_id: figure_3_b
         story_role: "炎症小体激活过程中，线粒体功能监测"
         micro_question: >
           在上个figure中我们将问题定位到了gsdmd执行功能环节。
@@ -359,58 +360,25 @@ figures:
           于是提出假设：
           EphB1 缺失是否伴随炎症小体激活过程中更轻的线粒体损伤与 ROS 应激？
         micro_answer: >
-          H2DCFDA/MitoSOX/TMRM 动力学检测表明，
-          在相同 NLRP3 激活条件下，KO 细胞质 ROS 上升较缓、
-          ΔΨm 更为稳定，而线粒体 ROS 更高，并且在炎症小体未激活时候，线粒体膜电位ko略高于wt，统计学无显著差异
-          整体模式与“线粒体损伤减少 → ROS 外泄减弱”的假设相符。
+          通过对细胞质 ROS、线粒体 ROS 及线粒体膜电位的动力学监测，
+          用于判别 EphB1 缺失条件下线粒体在炎症小体激活过程中的应激响应方式，
+          以及这些变化是否更符合“线粒体内容物外泄受限”而非“上游激活不足”的模型。
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "s3a/b/c"
-        experiment_id: 2
+        experiment_id: figure_3_b
         story_role: "炎症小体激活过程中，线粒体功能监测"
         micro_question: >
-          在上个figure中我们将问题定位到了gsdmd执行功能环节。
-          gsdmd切割后的第一步是与线粒体结合
-          于是提出假设：
-          EphB1 缺失是否伴随炎症小体激活过程中更轻的线粒体损伤与 ROS 应激？
+          H2DCFDA/MitoSOX/TMRM 动力学检测是否具有批次间可重复性？
         micro_answer: >
-          H2DCFDA/MitoSOX/TMRM 动力学检测表明，在相同 NLRP3 激活条件下，KO 细胞质 ROS 上升较缓、
-          ΔΨm 更为稳定，而线粒体 ROS 更高，
-          整体模式与“线粒体损伤减少 → ROS 外泄减弱”的假设相符。
-          supplement图采用多批次聚合热图形式，更直观地展示线粒体、细胞质ros与线粒体膜电位变化趋势。
+          通过多批次聚合展示线粒体与细胞质 ROS 及线粒体膜电位的变化模式，
+          用于评估上述判别逻辑在不同实验批次中的可重复性。
         focuses_on_axes: []
-        depends_on_panels: []
-
-      - figure_id: "3i/j"
-        experiment_id: 3
-        story_role: "mtRNA释放"
-        micro_question: >
-          在线粒体损伤更直接的 readout——胞质 mtRNA 脉冲释放上，EphB1 缺失是否同样表现为损伤减弱，
-          并且这一减弱来自炎症小体激活而非细胞固有差异，
-          从而进一步支持“线粒体阶段被限幅”的模型？
-        micro_answer: >
-          分离胞质与线粒体组分后定量 mtRNA 显示，炎症小体激活7.5min时 WT 细胞胞质 mtRNA 标志物16sRNA 迅速出现峰值，
-          而在 KO 中该脉冲明显减弱；与此同时，全细胞 mtRNA 总量在两组间相当，
-          说明差异源自线粒体向胞质的外泄过程，而非 mtRNA 储量改变。
-        focuses_on_axes: []
-        depends_on_panels: []
-
-      - figure_id: "3k"
-        experiment_id: 1
-        story_role: "gsdmd线粒体结合读数"
-        micro_question: >
-          在炎症小体激活早期，EphB1 缺失是否削弱 GSDMD-NT 对线粒体的快速富集，从而在
-          “GSDMD–线粒体界面”层面解释执行瓶颈？
-        micro_answer: >
-          Western blot 显示，Nigericin 刺激后 GSDMD-NT 在 WT 线粒体组分中
-          短时间（7.5min）内出现明显峰值，而在 KO 中该线粒体富集峰显著减弱；与此同时，总裂解物中的
-          GSDMD 裂解程度相近，说明差异主要来自膜结合/定位，而非剪切不足。
-        focuses_on_axes: ["AX2"]
         depends_on_panels: []
 
       - figure_id: "s3d"
-        experiment_id: 1
+        experiment_id: figure_3_a
         story_role: "gsdmd线粒体结合峰值时间点 mRNA释放读数"
         micro_question: >
           在小鼠原代腹腔巨噬细胞中，GSDMD-NT 对线粒体的快速富集峰值发生在哪个时间点？
@@ -420,19 +388,23 @@ figures:
         focuses_on_axes: []
         depends_on_panels: []
 
-      - figure_id: "s3e"
-        experiment_id: 1
-        story_role: "gsdmd线粒体结合峰值时间点 wb读数"
+      - figure_id: "3i/j"
+        experiment_id: figure_3_a
+        story_role: "mtRNA释放"
         micro_question: >
-          在小鼠原代腹腔巨噬细胞中，GSDMD-NT 对线粒体的快速富集峰值发生在哪个时间点？
+          在线粒体损伤更直接的 readout——胞质 mtRNA 脉冲释放上，EphB1 缺失是否同样表现为损伤减弱，
+          并且这一减弱来自炎症小体激活而非细胞固有差异，
+          从而进一步支持“线粒体阶段被限幅”的模型？
         micro_answer: >
-          时间梯度的线粒体分级 Western blot 显示，Nigericin 刺激后 GSDMD-NT 在 WT 线粒体组分中
-          7.5min内出现明显峰值。
+          通过分离胞质与线粒体组分并定量 mtRNA，
+          用于评估炎症小体激活早期线粒体内容物向胞质外泄的动态特征，
+          从而作为“线粒体膜损伤/孔化程度”的直接功能性 readout，
+          并排除全细胞线粒体含量差异造成的干扰。
         focuses_on_axes: []
         depends_on_panels: []
-      
+
       - figure_id: "s3f/g"
-        experiment_id: 3
+        experiment_id: figure_3_a
         story_role: "mtRNA释放"
         micro_question: >
           在线粒体损伤更直接的 readout——胞质 mtRNA 脉冲释放上，EphB1 缺失是否同样表现为损伤减弱，
@@ -442,6 +414,31 @@ figures:
           而在 KO 中该脉冲明显减弱；与此同时，全细胞 mtRNA 总量在两组间相当，说明差异源自线粒体向胞质的
           外泄过程，而非 mtRNA 储量改变。
         focuses_on_axes: []
+        depends_on_panels: []
+
+      - figure_id: "s3e"
+        experiment_id: figure_3_c
+        story_role: "gsdmd线粒体结合峰值时间点 wb读数"
+        micro_question: >
+          在小鼠原代腹腔巨噬细胞中，GSDMD-NT 对线粒体的快速富集峰值发生在哪个时间点？
+        micro_answer: >
+          时间梯度的线粒体分级 Western blot 显示，Nigericin 刺激后 GSDMD-NT 在 WT 线粒体组分中
+          7.5min内出现明显峰值。
+        focuses_on_axes: []
+        depends_on_panels: []
+
+      - figure_id: "3k"
+        experiment_id: figure_3_c
+        story_role: "gsdmd线粒体结合读数"
+        micro_question: >
+          在炎症小体激活早期，EphB1 缺失是否削弱 GSDMD-NT 对线粒体的快速富集，从而在
+          “GSDMD–线粒体界面”层面解释执行瓶颈？
+        micro_answer: >
+          通过时间梯度的线粒体分级与 Western blot，
+          用于区分 GSDMD 的“剪切激活”与“线粒体定位/富集”两个阶段，
+          并检验 EphB1 缺失是否主要影响 GSDMD-NT 的线粒体结合效率，
+          而非其上游剪切过程。
+        focuses_on_axes: ["AX2"]
         depends_on_panels: []
 
   - id: "Figure 4"

@@ -8,11 +8,10 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "Figure 3"              # 如 "Figure 3"
-  panel: "C"               # 如 "A"
+  figure: "3_i+j+s3_d+f+g"              # 如 "Figure 3"
   short_title: "EphB1 缺失减少炎症小体激活诱导的胞质 mtDNA 释放"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.3 EphB1 缺失降低 GSDMD 的线粒体结合"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: "2025-03-21_mtDNA_release_fractionation"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
+  experiment_id: "figure_3_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
 
 assets:
@@ -56,9 +55,9 @@ methods:
                                # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1−/− 小鼠来源的原代腹腔巨噬细胞。”
   experimental_groups: "WT vs Ephb1−/−；均进行 LPS priming + Nigericin 激活。"      # 组别及核心差异：基因型、处理、时间点
                                # 例如：“按基因型分为 WT 和 Ephb1−/−，均接受 LPS 预处理 + ATP 激活。”
-  stimuli_and_treatment: "LPS 100 ng/mL 4 h；随后 Nigericin 10 μM；按 0–15 min 进行时间梯度分级取样。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
+  stimuli_and_treatment: "LPS 100 ng/mL 4 h；随后 Nigericin 10 μM；按 0、7.5、15、30、60 min 进行时间梯度分级取样。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
                                # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
-  time_points: "0, 2.5, 5, 7.5, 10, 15 min；7.5 min 为峰值对比时间。"              # 关键测定时间点（如果不在上面已写清）
+  time_points: "0、7.5、15、30、60 min 为峰值对比时间。"              # 关键测定时间点（如果不在上面已写清）
   dose_info: "Nigericin 10 μM；qPCR 引物针对 16S、ND1。"                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
   readout_and_assay: "分离细胞核、线粒体与细胞质组分；提取 DNA；qPCR 计算 ΔCt，并以 total 组分 mtGene 作为最终内参；输出 log2FC。"        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
                                # 例如：“使用 IL-1β ELISA 测定上清中 IL-1β，按厂商说明书操作。”
@@ -70,16 +69,27 @@ methods:
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
-  data_direction: "WT 在 nigericin 激活后出现典型的胞质 mtDNA 快速脉冲释放，而 KO 的峰值显著降低；total mtDNA 无差异。"           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
-                               # 例如：“在 LPS+ATP 刺激下，Ephb1−/− 巨噬细胞释放的 IL-1β 显著低于 WT。”
+  data_direction: >
+    在 nigericin 激活后，WT 细胞中 胞质 mtRNA（16S、ND1）出现
+    短暂而显著的脉冲式升高，升高峰值出现在7.5min时间点
+    在7.5min时间点，Ephb1−/− 细胞中该峰值明显降低。
+    相比之下，total 组分中 mtRNA 整体保持相对稳定，
+    其中 16S 未见显著差异，ND1 在激活条件下出现轻度增加。
   stats_summary: "胞质 16S/ND1：KO 7.5 min 显著降低（p < 0.05）；total 16S/ND1：ns。"            # 统计显著性信息（检验方法、p 值区间即可）
                                # 例如：“非配对 t 检验，p < 0.01。”
   key_numbers: "KO 胞质 mtDNA 峰值较 WT 约下降 30–50%；total mtDNA 波动 <5%。"              # 可选：fold change、均值±SEM、效应量（方便你之后查）
                                # 例如：“WT: 850 ± 120 pg/mL；Ephb1−/−: 410 ± 90 pg/mL；约下降 50%。”
-  group_difference_statement: "KO 细胞在相同激活窗口内的胞质 mtDNA 脉冲释放减弱，而 total mtDNA 含量相同，表明差异来自外泄过程。" # 用一两句把组间差异说清楚（可直接作为结果段主句）
-                                 # 例如：“与 WT 相比，Ephb1−/− 巨噬细胞在相同刺激强度下产生的 IL-1β 减少。”
-  robustness_and_qc: "该趋势在 ≥3 次独立实验中一致；分级纯度和内参校正均稳定。"        # 是否在多批次实验中重复、是否排除了明显 outlier 等
-                               # 例如：“该趋势在两批独立实验中均一致，排除 1 个基于预设准则的 outlier 后结果不变。”
+  group_difference_statement: >
+    在相同炎症小体激活条件下，
+    Ephb1−/− 细胞中胞质 mtRNA 的显著下降
+    并未伴随 total mtRNA 的同步降低，
+    且两种线粒体标记（16S、ND1）在胞质中呈一致变化，
+    支持差异主要来源于线粒体内容物外泄过程的改变。
+  robustness_and_qc: >
+    胞质 mtRNA 的瞬时峰值在多个独立实验中
+    均稳定出现在激活早期时间窗，
+    支持其作为炎症小体激活诱导的
+    短暂性外泄事件的功能 readout。
   anomalies_or_limits: "15 min 后下降阶段存在轻微批间变异，但峰值时间点差异稳定。"      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
                                # 例如：“一批实验中 WT 绝对值略低，可能与细胞密度偏低有关。”
 
@@ -87,8 +97,11 @@ results:
 interpretation:
   minimal_bio_interpretation: "EphB1 缺失降低炎症小体激活引发的线粒体到胞质的 mtDNA 外泄，提示线粒体膜破损程度下降。" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
                                  # 例如：“这些结果提示 EphB1 对 NLRP3 介导的 IL-1β 释放是促进性的。”
-  alternative_explanations: "虽然分级可能带来技术 variability，但 total mtDNA 不变且多个标记一致下调支持外泄减少而非 mtDNA 数量不同。"   # 可能的其他解释/局限（方便之后写 Discussion）
-                                 # 例如：“不能排除 EphB1 缺失影响前炎性细胞因子转录的可能。”
+  alternative_explanations: >
+    虽然 ND1 在 total 组分中于 nigericin 条件下出现轻度差异，
+    但该变化方向相反，并且幅度明显小于胞质组分中的下降，
+    且 16S 在 total 中保持稳定，
+    因此不足以解释胞质 mtRNA 的显著减少。
   summary_type: "supportive, elimination"               # 从下列类型中选一个或多个，用逗号分隔：
                                  #   "supportive"   支持前一节/主假设
                                  #   "descriptive"  纯描述现象

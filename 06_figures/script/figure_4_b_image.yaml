@@ -19,6 +19,12 @@ layout:
     y_title_to_ticks: 5
     y_ticks_to_axis: 2
 
+curve:
+  enable: true
+  type: sigmoid
+  strength: 0.75   # 0..1, 越大曲线越“弯”
+  mid: 0.5        # 0..1, 曲线拐点（类似把中灰往哪边推）
+
 grid:
   n_rows: 1        # 例如：上行 WT，下行 HO（后面可以改）
   n_cols: 2        # 比如三种处理 / 部位

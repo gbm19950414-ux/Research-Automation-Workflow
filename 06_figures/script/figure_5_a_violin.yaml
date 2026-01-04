@@ -59,7 +59,7 @@ panels:
       pair_groups: ["control", "ephb1_fc(500ng/ml)+anti_fc"]
       level: "cell"
       contrast: "WT_vs_HO"
-    ylim: [0, null]
+    ylim: [50, 200]
 
 
   - id: "b"
@@ -99,7 +99,7 @@ panels:
       pair_groups: ["control", "bel(2µm)"]
       level: "cell"
       contrast: "WT_vs_HO"
-    ylim: [0, null]
+    ylim: [50, 200]
 
   - id: "c"
     type: "violin"
@@ -138,4 +138,4 @@ panels:
       pair_groups: ["control", "ad(2µm)"]
       level: "cell"
       contrast: "WT_vs_HO"
-    ylim: [0, null]
+    ylim: [50, 200]
