@@ -74,14 +74,12 @@ panels:
       "y": "Mean"
       hue: "genotype"
 
-    order: ["control_WT", "control_HO", "bel(2µm)_WT", "bel(2µm)_HO"]
+    order: ["control_WT", "bel(2µm)_WT"]
     hue_order: ["WT", "HO"]
-
+    keep_hue: ["WT"]
     rename_x:
       control_WT: "Ctrl WT"
-      control_HO: "Ctrl HO"
       bel(2µm)_WT: "Trt WT"
-      bel(2µm)_HO: "Trt HO"
 
     x_label: ""
     y_label: "NAO intensity after BEL treated (mean)"
@@ -91,14 +89,13 @@ panels:
     stats:
       enabled: true
       source: "04_data/interim/imaging_if/E39_statistic_Mean_stats.xlsx"
-      sheet: 6
+      sheet: "treatment_pair_stats"
       column: "p_value"
       pairs:
-        - ["control_WT", "control_HO"]
-        - ["bel(2µm)_WT", "bel(2µm)_HO"]
-      pair_groups: ["control", "bel(2µm)"]
+        - ["control_WT", "bel(2µm)_WT"]
+
       level: "cell"
-      contrast: "WT_vs_HO"
+
     ylim: [50, 200]
 
   - id: "c"
@@ -113,29 +110,25 @@ panels:
       "y": "Mean"
       hue: "genotype"
 
-    order: ["control_WT", "control_HO", "ad(2µm)_WT", "ad(2µm)_HO"]
+    order: ["control_WT", "ad(2µm)_WT"]
     hue_order: ["WT", "HO"]
+    keep_hue: ["WT"]
 
     rename_x:
       control_WT: "Ctrl WT"
-      control_HO: "Ctrl HO"
       ad(2µm)_WT: "Trt WT"
-      ad(2µm)_HO: "Trt HO"
 
     x_label: ""
-    y_label: "NAO intensity after BEL treated (Mean)"
+    y_label: "NAO intensity after AD treated (Mean)"
 
     strip: true
 
     stats:
       enabled: true
       source: "04_data/interim/imaging_if/E39_statistic_Mean_stats.xlsx"
-      sheet: 6
+      sheet: "treatment_pair_stats"
       column: "p_value"
       pairs:
-        - ["control_WT", "control_HO"]
-        - ["ad(2µm)_WT", "ad(2µm)_HO"]
-      pair_groups: ["control", "ad(2µm)"]
+        - ["control_WT", "ad(2µm)_WT"]
       level: "cell"
-      contrast: "WT_vs_HO"
     ylim: [50, 200]

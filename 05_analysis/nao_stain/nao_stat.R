@@ -363,6 +363,20 @@ for (input_file in input_files) {
       dplyr::select(metric, level, contrast, group, group1, group2, p_value, p_adj)
     
     output_excel <- paste0(output_prefix, "_stats.xlsx")
+
+    # ---- NEW: pairwise treatment stats formatted for x-vs-x plotting (all genotypes) ----
+    # For violin/box panels where x is an interaction like "<treatment>_<genotype>",
+    # this sheet provides x1/x2 + p_value per genotype.
+    treatment_pair_stats <- p_values %>%
+      filter(contrast == "treatment_pairwise") %>%
+      mutate(
+        # here `group` is genotype (WT/HO) for treatment_pairwise rows
+        genotype = as.character(group),
+        x1 = paste0(group1, "_", genotype),
+        x2 = paste0(group2, "_", genotype)
+      ) %>%
+      select(metric, level, genotype, group1, group2, x1, x2, p_value, p_adj)
+
     write_xlsx(
       list(
         cell_summary    = cell_summary,
@@ -370,6 +384,7 @@ for (input_file in input_files) {
         well_summary    = well_summary,
         well_data       = well_metric,
         area_correlation = area_cor,
+        treatment_pair_stats = treatment_pair_stats,
         p_values        = p_values
       ),
       path = output_excel

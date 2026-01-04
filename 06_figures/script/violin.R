@@ -152,6 +152,7 @@ for (panel in panel_cfg$panels){
   x_var <- panel$mapping$x
   y_var <- panel$mapping$y
   hue_var <- panel$mapping$hue
+  keep_hue <- panel$keep_hue %||% NULL
 
   # Optional: build an interaction x variable from multiple columns
   x_interaction <- panel$mapping$x_interaction %||% NULL
@@ -168,6 +169,12 @@ for (panel in panel_cfg$panels){
            "Please set mapping$x to a new column name like 'group' and keep mapping$hue = 'genotype'.")
     }
     df[[x_var]] <- do.call(paste, c(df[x_interaction], sep = x_sep))
+  }
+
+  # Optional: filter hue levels (e.g., keep WT only)
+  if (!is.null(keep_hue) && !is.null(hue_var) && hue_var %in% names(df)) {
+    keep_hue <- as.character(unlist(keep_hue))
+    df <- df %>% filter(as.character(.data[[hue_var]]) %in% keep_hue)
   }
 
   # Optional: facet
@@ -214,7 +221,34 @@ for (panel in panel_cfg$panels){
 
     p_vals <- rep(NA_real_, length(pairs))
 
-    if (all(c("p_value") %in% names(stats_raw))) {
+    # Preferred: pairwise stats for x-vs-x brackets (x1/x2 or treatment1/treatment2, etc.)
+    col1 <- intersect(c("x1", "treatment1", "drug1", "group1"), names(stats_raw))
+    col2 <- intersect(c("x2", "treatment2", "drug2", "group2"), names(stats_raw))
+    col1 <- if (length(col1) > 0) col1[[1]] else NA_character_
+    col2 <- if (length(col2) > 0) col2[[1]] else NA_character_
+
+    if (!is.na(col1) && !is.na(col2) && (panel$stats$column %||% "p_value") %in% names(stats_raw)) {
+      lvl <- panel$stats$level %||% NULL
+      met <- panel$stats$metric %||% NULL
+      st <- stats_raw
+      if (!is.null(lvl) && "level" %in% names(st)) {
+        st <- st %>% filter(as.character(.data[["level"]]) == as.character(lvl))
+      }
+      if (!is.null(met) && "metric" %in% names(st)) {
+        st <- st %>% filter(as.character(.data[["metric"]]) == as.character(met))
+      }
+
+      for (i in seq_along(pairs)) {
+        a <- as.character(pairs[[i]][1])
+        b <- as.character(pairs[[i]][2])
+        r <- st %>%
+          filter((as.character(.data[[col1]]) == a & as.character(.data[[col2]]) == b) |
+                 (as.character(.data[[col1]]) == b & as.character(.data[[col2]]) == a))
+        if (nrow(r) >= 1) p_vals[[i]] <- r[[panel$stats$column %||% "p_value"]][1]
+      }
+
+    } else if ("p_value" %in% names(stats_raw)) {
+      # Backward-compatible: per-group (e.g., WT_vs_HO) stats with pair_groups
       if (all(c("level", "contrast", "group") %in% names(stats_raw)) && !is.null(panel$stats$pair_groups)) {
         lvl <- panel$stats$level %||% "cell"
         ctr <- panel$stats$contrast %||% "WT_vs_HO"
@@ -228,14 +262,15 @@ for (panel in panel_cfg$panels){
           if (nrow(r) >= 1) p_vals[[i]] <- r[["p_value"]][1]
         }
       } else {
-        p_vals[] <- stats_raw[[panel$stats$column]][1]
+        # Fallback: use first p-value
+        p_vals[] <- stats_raw[[panel$stats$column %||% "p_value"]][1]
       }
     }
 
     brackets_df <- make_brackets(
       df, y_var, panel$order, pairs, p_vals,
-      y_start_mult = (bracket_cfg$y_start_mult %||% 1.05),
-      y_step_mult  = (bracket_cfg$y_step_mult %||% 0.08)
+      y_start_mult = (bracket_cfg$y_start_mult %||% 1.12),
+      y_step_mult  = (bracket_cfg$y_step_mult %||% 0.10)
     )
   }
 
@@ -314,7 +349,7 @@ for (panel in panel_cfg$panels){
       axis.line  = element_line(linewidth = pt_to_lwd(line_cfg$axis_line_default_pt %||% 0.25), colour = "black"),
       axis.ticks = element_line(linewidth = pt_to_lwd(line_cfg$axis_line_default_pt %||% 0.25), colour = "black"),
       legend.text  = element_text(size = legend_text_size),
-      legend.title = element_text(size = legend_title_size),
+      legend.title = element_blank(),
 
       plot.margin = margin(
         plot_margin_pt$top,
@@ -357,7 +392,7 @@ for (panel in panel_cfg$panels){
         data = brackets_df,
         inherit.aes = FALSE,
         aes(x = x1, xend = x2, y = y, yend = y),
-        linewidth = pt_to_lwd(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
+        linewidth = pt_to_lwd(line_cfg$errorbar_default_pt %||% line_cfg$line_width_pt %||% 0.5),
         color = "black"
       ) +
       geom_segment(
@@ -365,7 +400,7 @@ for (panel in panel_cfg$panels){
         inherit.aes = FALSE,
         aes(x = x1, xend = x1, y = y,
             yend = y - (bracket_cfg$tick_height_frac %||% 0.02) * max(df[[y_var]], na.rm = TRUE)),
-        linewidth = pt_to_lwd(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
+        linewidth = pt_to_lwd(line_cfg$errorbar_default_pt %||% line_cfg$line_width_pt %||% 0.5),
         color = "black"
       ) +
       geom_segment(
@@ -373,7 +408,7 @@ for (panel in panel_cfg$panels){
         inherit.aes = FALSE,
         aes(x = x2, xend = x2, y = y,
             yend = y - (bracket_cfg$tick_height_frac %||% 0.02) * max(df[[y_var]], na.rm = TRUE)),
-        linewidth = pt_to_lwd(bracket_cfg$line_width_pt %||% line_cfg$line_width_pt %||% 0.5),
+        linewidth = pt_to_lwd(line_cfg$errorbar_default_pt %||% line_cfg$line_width_pt %||% 0.5),
         color = "black"
       ) +
       geom_text(

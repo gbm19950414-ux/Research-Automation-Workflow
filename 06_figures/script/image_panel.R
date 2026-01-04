@@ -79,11 +79,12 @@ label_col_width_mm <- 10
 
 # 把 cell 配置整理成 data.frame，方便操作
 cells_df <- tibble::tibble(
-  row    = purrr::map_int(cells_cfg, "row"),
-  col    = purrr::map_int(cells_cfg, "col"),
-  images = purrr::map(cells_cfg, "images"),
-  blend  = purrr::map_chr(cells_cfg, ~ .x$blend %||% "single"),
-  curve  = purrr::map(cells_cfg, ~ .x$curve %||% NULL)
+  row     = purrr::map_int(cells_cfg, "row"),
+  col     = purrr::map_int(cells_cfg, "col"),
+  enabled = purrr::map_lgl(cells_cfg, ~ .x$enabled %||% TRUE),
+  images  = purrr::map(cells_cfg, "images"),
+  blend   = purrr::map_chr(cells_cfg, ~ .x$blend %||% "single"),
+  curve   = purrr::map(cells_cfg, ~ .x$curve %||% NULL)
 )
 
 # ---- 辅助函数：读取并合成单元格图像 ----
@@ -257,6 +258,10 @@ for (i in seq_len(n_rows)) {
 for (k in seq_len(nrow(cells_df))) {
   row_idx <- cells_df$row[k]
   col_idx <- cells_df$col[k]
+
+  # allow disabling a specific cell from YAML
+  if (isFALSE(cells_df$enabled[k])) next
+
   imgs       <- cells_df$images[[k]]
   blend      <- cells_df$blend[k]
   curve_cell <- cells_df$curve[[k]]

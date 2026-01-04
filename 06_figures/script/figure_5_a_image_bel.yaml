@@ -27,7 +27,7 @@ curve:
   mid: 0.5        # 0..1, 曲线拐点（类似把中灰往哪边推）
 
 grid:
-  n_rows: 2        # 例如：上行 WT，下行 HO（后面可以改）
+  n_rows: 1        # 例如：上行 WT，下行 HO（后面可以改）
   n_cols: 2        # 比如三种处理 / 部位
 
   image_size_mm:
@@ -39,15 +39,14 @@ grid:
 
   # 行标题（左侧）
   row_labels:
-    - "Control"
-    - "BEL"
+    - "WT"
+
 
 
   # 列标题（上方）
   col_labels:
-    - "WT"
-    - "HO"
-
+    - "Control"
+    - "BEL"
   # 每个单元格的配置：
   # row / col 为 1-based 索引
   # images 是相对于 project_root 的路径
@@ -88,8 +87,8 @@ grid:
         - 04_data/raw/imaging_if/E39_NAO/raw/WT-DMSO-105.tif
       blend: "lighten"
 
-    - row: 2
-      col: 1
+    - row: 1
+      col: 2
       images:
         - 04_data/raw/imaging_if/E39_NAO/raw/WT-BEL-121.tif
         - 04_data/raw/imaging_if/E39_NAO/raw/WT-BEL-122.tif
@@ -125,6 +124,7 @@ grid:
 
     - row: 1
       col: 2
+      enable: false
       images:
         - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-6.tif
         - 04_data/raw/imaging_if/E39_NAO/raw/HO-DMSO-7.tif
@@ -160,6 +160,7 @@ grid:
 
     - row: 2
       col: 2
+      enable: false
       images:
         - 04_data/raw/imaging_if/E39_NAO/raw/HO-BEL-126.tif
         - 04_data/raw/imaging_if/E39_NAO/raw/HO-BEL-127.tif

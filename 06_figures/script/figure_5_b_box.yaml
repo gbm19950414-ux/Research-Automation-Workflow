@@ -46,18 +46,23 @@ panels:
       "lps+nigeiricin+bel(2µm,4h)": "2µm"
       "lps+nigeiricin+bel(4µm,4h)": "4µm"
     hue_order: ["WT", "HO"]
+    keep_hue: ["WT"]
     x_label: ""
     y_label: "IL-1β release after BEL treated"
 
     x_tick_rotation: 0    # 只针对这一张图，将 x 轴刻度标签旋转 30°
       
     strip: true            # 叠加散点
-    stats:                 # 可选：显著性标注
+    stats:
       enabled: true
-      source: "04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_E42_summary.xlsx"   # ✅ 指向存有 p 值的文件
-      sheet: "pair_stats"
-      column: p_value                 # ✅ 指明哪一列存 p 值
-      pairs: [["WT", "HO"]]           # ✅ 仍指明需要比较的组
+      source: "04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_E42_summary.xlsx"
+      sheet: "drug_pair_stats"
+      column: "p_value"
+      pairs:
+        - ["untreated", "lps+nigeiricin"]
+        - ["lps+nigeiricin", "lps+nigeiricin+bel(1µm,4h)"]
+        - ["lps+nigeiricin", "lps+nigeiricin+bel(2µm,4h)"]
+        - ["lps+nigeiricin", "lps+nigeiricin+bel(4µm,4h)"]
   - id: b
     type: box
     data: "04_data/interim/microplate_reader/ELISA检测细胞因子/ELISA_statistic_E38_summary.xlsx"
