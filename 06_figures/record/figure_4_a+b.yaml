@@ -8,11 +8,10 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "Figure 4"              # 如 "Figure 3"
-  panel: "C"               # 如 "A"
+  figure: "4a/b"              # 如 "Figure 3"
   short_title: "EphB1 缺失降低 NAO 标记的心磷脂池"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.4 EphB1 缺失影响线粒体心磷脂环境"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: "2025-03-21_NAO_CL_pool_assay"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
+  experiment_id: "figure_4_c"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
 
 assets:
@@ -32,8 +31,9 @@ question:
                              # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
   core_question: "EphB1 缺失是否降低在线粒体膜中可被 NAO 标记的心磷脂（CL）池容量？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
                              # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”
-  hypothesis_or_expectation: "若 EphB1 缺失影响 CL 可及性或膜脂环境，则 NAO 荧光强度应显著下降。"  # 你的假设或预期结果（1 句）
-                             # 例如：“如果 EphB1 促进 NLRP3 炎性小体的效应端活性，则 EphB1 缺失应降低 IL-1β 的释放。”
+  hypothesis_or_expectation: >
+    NAO（10-N-nonyl acridine orange）在线粒体内膜与阴离子脂质（对 CL 亲和最高）形成复合后荧光增强/谱移。NAO的染色强度受到多种因素影响，包括CL的丰度、分布、氧化/重塑状态及线粒体膜电位。NAO 信号提示在当下刺激条件下可染/可达/可复合的 CL 池容量。在控制ΔΨm与线粒体质量后，该读数与 GSDMD 的膜结合正相关。在上一小节中，我们对线粒体膜电位进行监测，发现KO的线粒体膜电位未发生显著改变，这使得NAO可以用来检测线粒体膜中CL的含量。
+    "若 EphB1 缺失影响 CL 可及性或膜脂环境，则 NAO 荧光强度应显著下降。" 
   importance_reason: "CL 是 GSDMD-NT 膜结合的关键脂质，其可染性变化可直接反映孔形成阶段的膜脂环境。"      # 为什么这个问题重要/值得单列一节（1 句即可）
                              # 例如：“IL-1β 是 NLRP3 炎性小体的关键功能 readout，用于评估效应端活性。”
 

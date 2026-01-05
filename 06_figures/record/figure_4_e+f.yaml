@@ -8,11 +8,11 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "Figure 5"              # 如 "Figure 3"
+  figure: "s4a/b"              # 如 "Figure 3"
   panel: "A"               # 如 "A"
-  short_title: "BEL 处理降低 NAO 信号并抹除基因型差异"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
+  short_title: "AD 处理降低 NAO 信号并抹除基因型差异"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.5 线粒体心磷脂可及性与重塑的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: "2025-03-21_BEL_NAO_assay"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
+  experiment_id: "figure_5_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
 
 assets:
@@ -30,22 +30,22 @@ assets:
 question:
   context_from_previous: "上一节发现 EphB1 缺失导致 NAO 可染 CL 池减少，提示 CL 可及性受限。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
                              # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
-  core_question: "BEL 抑制 iPLA₂ 是否会降低 NAO 信号并抹除 WT 与 KO 的差异？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
+  core_question: "AD 抑制 iPLA₂ 是否会降低 NAO 信号并抹除 WT 与 KO 的差异？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
                              # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”
-  hypothesis_or_expectation: "若 CL 重塑/外翻微环境限制 NAO 可达性，则 BEL 处理应降低 NAO 信号并收敛基因型差异。"  # 你的假设或预期结果（1 句）
+  hypothesis_or_expectation: "若 CL 重塑/外翻微环境限制 NAO 可达性，则 AD 处理应降低 NAO 信号并收敛基因型差异。"  # 你的假设或预期结果（1 句）
                              # 例如：“如果 EphB1 促进 NLRP3 炎性小体的效应端活性，则 EphB1 缺失应降低 IL-1β 的释放。”
   importance_reason: "通过药理学抑制验证 CL 池可及性与 GSDMD 结合限制之间的因果性。"      # 为什么这个问题重要/值得单列一节（1 句即可）
                              # 例如：“IL-1β 是 NLRP3 炎性小体的关键功能 readout，用于评估效应端活性。”
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，以 BEL 抑制 iPLA₂β/γ，模拟 CL 重塑受阻状态。"       # 使用的模型/系统 + 选择理由
+  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，以 AD 抑制 iPLA₂β/γ，模拟 CL 重塑受阻状态。"       # 使用的模型/系统 + 选择理由
                              # 例如：“选用原代腹腔巨噬细胞，因为其对 NLRP3 激活高度敏感，且能反映体内炎症状态。”
-  key_variables: "BEL 处理（+BEL vs −BEL）、基因型（WT vs KO）、NAO 荧光强度。"          # 本实验关注的关键变量 + 操纵方式
+  key_variables: "AD 处理（+AD vs −AD）、基因型（WT vs KO）、NAO 荧光强度。"          # 本实验关注的关键变量 + 操纵方式
                              # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
-  control_logic: "未处理组建立基线差异；BEL 处理组用于检测 NAO 信号变化是否具有因果性。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
+  control_logic: "未处理组建立基线差异；AD 处理组用于检测 NAO 信号变化是否具有因果性。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
                              # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1−/− 的参照组。”
-  core_justification: "若 EphB1 缺失的表型源于 CL 可及性降低，则 BEL 处理应再现并收敛 NAO 信号差异。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
+  core_justification: "若 EphB1 缺失的表型源于 CL 可及性降低，则 AD 处理应再现并收敛 NAO 信号差异。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
                              # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1−/− 细胞在相同刺激下应释放更少 IL-1β。”
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
@@ -54,40 +54,45 @@ methods:
                                # 之后可在 Methods 总节详细描述该 protocol。
   biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1−/− 原代腹腔巨噬细胞。"      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
                                # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1−/− 小鼠来源的原代腹腔巨噬细胞。”
-  experimental_groups: "WT/KO × ±BEL（16 h 预处理）。"      # 组别及核心差异：基因型、处理、时间点
+  experimental_groups: "WT/KO × ±AD（16 h 预处理）。"      # 组别及核心差异：基因型、处理、时间点
                                # 例如：“按基因型分为 WT 和 Ephb1−/−，均接受 LPS 预处理 + ATP 激活。”
-  stimuli_and_treatment: "BEL 10 µM 预处理 16 h；随后 LPS 预激 + Nigericin 激活；最后 NAO 染色。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
+  stimuli_and_treatment: "AD 10 µM 预处理 16 h；随后 LPS 预激 + Nigericin 激活；最后 NAO 染色。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
                                # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
-  time_points: "BEL 预处理 16 h；NAO 染色 30 min。"              # 关键测定时间点（如果不在上面已写清）
-  dose_info: "BEL 10 µM（不可逆 iPLA₂ 抑制剂）。"                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
+  time_points: "AD 预处理 16 h；NAO 染色 30 min。"              # 关键测定时间点（如果不在上面已写清）
+  dose_info: "AD 10 µM（不可逆 iPLA₂ 抑制剂）。"                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
   readout_and_assay: "荧光显微镜拍摄；统一曝光；ImageJ 统一阈值定量；背景扣除。"        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
                                # 例如：“使用 IL-1β ELISA 测定上清中 IL-1β，按厂商说明书操作。”
   replicates: "每组 n ≥ 3；≥3 批独立实验重复。"               # 生物学重复数 n，以及是否合并多次实验
                                # 例如：“每组 n = 4 生物学重复，结果合并自两次独立实验。”
   analysis_notes: "双尾 t 检验；荧光强度按未加染料孔背景扣除。"           # 本 panel 特有的分析方法/统计模型（如 normalization、配对 vs 非配对）
                                # 例如：“采用非配对双尾 t 检验；ELISA 结果按蛋白浓度归一化。”
-  minimal_methods_summary: "采用 BEL 抑制 iPLA₂β/γ 后进行 NAO 染色，通过显微定量检测 CL 可达性的变化及基因型差异是否被抹除。"  # 1–2 句，把上面内容压缩成将来写 Methods 时可以直接用的一小段。
+  minimal_methods_summary: "采用 AD 抑制 iPLA₂β/γ 后进行 NAO 染色，通过显微定量检测 CL 可达性的变化及基因型差异是否被抹除。"  # 1–2 句，把上面内容压缩成将来写 Methods 时可以直接用的一小段。
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
-  data_direction: "BEL 处理显著降低 NAO 信号，并消除了 WT 与 KO 之间的差异。"           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
-                               # 例如：“在 LPS+ATP 刺激下，Ephb1−/− 巨噬细胞释放的 IL-1β 显著低于 WT。”
-  stats_summary: "BEL 处理组 NAO 显著下降（p < 0.05）；WT 与 KO 在 +BEL 条件下差异为 ns。"            # 统计显著性信息（检验方法、p 值区间即可）
-                               # 例如：“非配对 t 检验，p < 0.01。”
-  key_numbers: "BEL 处理可使 NAO 信号下降约 40–50%。"              # 可选：fold change、均值±SEM、效应量（方便你之后查）
+  data_direction: >
+    在 WT 巨噬细胞中，AD 处理显著降低 NAO 荧光信号。
+    与对照组相比，AD 处理后 NAO 染色的整体强度与点状分布均明显下降，
+    表明 NAO 可染的心磷脂池在药理抑制条件下显著减少。
+  stats_summary: >
+    在 WT 细胞中，AD 处理组 NAO 平均荧光强度显著低于对照组（****，双尾 t 检验）。  
+  key_numbers: "AD 处理可使 NAO 信号下降约 40–50%。"              # 可选：fold change、均值±SEM、效应量（方便你之后查）
                                # 例如：“WT: 850 ± 120 pg/mL；Ephb1−/−: 410 ± 90 pg/mL；约下降 50%。”
-  group_difference_statement: "在 BEL 处理后，WT 的 NAO 染色下降显著，KO 亦呈相似下降，使两者 NAO 信号趋于一致。" # 用一两句把组间差异说清楚（可直接作为结果段主句）
+  group_difference_statement: "在 AD 处理后，WT 的 NAO 染色下降显著，KO 亦呈相似下降，使两者 NAO 信号趋于一致。" # 用一两句把组间差异说清楚（可直接作为结果段主句）
                                  # 例如：“与 WT 相比，Ephb1−/− 巨噬细胞在相同刺激强度下产生的 IL-1β 减少。”
   robustness_and_qc: "趋势在 ≥3 批实验中一致；显微与定量结果相互支持。"        # 是否在多批次实验中重复、是否排除了明显 outlier 等
                                # 例如：“该趋势在两批独立实验中均一致，排除 1 个基于预设准则的 outlier 后结果不变。”
-  anomalies_or_limits: "个别样本 BEL 处理后荧光降低幅度略有差异，但不影响总体趋势。"      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
+  anomalies_or_limits: "个别样本 AD 处理后荧光降低幅度略有差异，但不影响总体趋势。"      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
                                # 例如：“一批实验中 WT 绝对值略低，可能与细胞密度偏低有关。”
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
-  minimal_bio_interpretation: "BEL 抑制 CL 重塑可降低 NAO 可染 CL 池，并使 WT 与 KO 差异收敛，提示 CL 可及性受限是 EphB1 缺失的关键表型之一。" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
-                                 # 例如：“这些结果提示 EphB1 对 NLRP3 介导的 IL-1β 释放是促进性的。”
-  alternative_explanations: "BEL 可能影响其他脂质重塑，但 NAO 与 CL 总量一致下降支持 CL 池本身变化。"   # 可能的其他解释/局限（方便之后写 Discussion）
+  minimal_bio_interpretation: >
+    AD 处理本身即可显著降低 NAO 可染的心磷脂池，
+    表明 NAO 信号下降可由心磷脂重塑/可及性受限直接诱导。
+    该结果支持将 EphB1 缺失条件下观察到的 NAO 降低，
+    解释为一种功能性 CL 可达性受限状态，而非基因型特异的间接效应。
+  alternative_explanations: "AD 可能影响其他脂质重塑，但 NAO 与 CL 总量一致下降支持 CL 池本身变化。"   # 可能的其他解释/局限（方便之后写 Discussion）
                                  # 例如：“不能排除 EphB1 缺失影响前炎性细胞因子转录的可能。”
   summary_type: "supportive, exploratory"               # 从下列类型中选一个或多个，用逗号分隔：
                                  #   "supportive"   支持前一节/主假设
@@ -96,9 +101,10 @@ interpretation:
                                  #   "negative"     未见显著差异/阴性结果
                                  #   "exploratory"  探索性发现
                                  # 例如："supportive"
-  claim_supported: "CL 可达性下降是 EphB1 缺失导致 GSDMD-NT 结合减少的关键脂质基础。"            # 本 panel 主要想支持/反驳的“文字命题”
-                                 # 例如：“EphB1 是 NLRP3 炎性小体效应端活性的正调控因子。”
-  link_to_previous: "在观察到 NAO 信号下降后，本节通过 BEL 因果实验验证这一变化的可调控性。"           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
+  claim_supported: >
+    心磷脂可达性降低本身即可重现 NAO 信号下降，
+    为 EphB1 缺失条件下 GSDMD-NT 线粒体结合受限提供了脂质层面的因果支持。
+  link_to_previous: "在观察到 NAO 信号下降后，本节通过 AD 因果实验验证这一变化的可调控性。"           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
                                  # 例如：“在观察到 EphB1 缺失缓解线粒体损伤后，我们进一步评估其对下游 IL-1β 释放的影响。”
   transition_to_next: "为确认脂质变化的来源，下一节将进一步评估 CL 重塑与氧化相关指标。"         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
                                  # 例如：“为了明确这种效应是否依赖于线粒体 ROS，我们随后检测了 NLRP3 激活过程中 mtROS 的变化。”

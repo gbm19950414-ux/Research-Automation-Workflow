@@ -7,7 +7,35 @@ suppressPackageStartupMessages({
   library(stringr)
 })
 
+
 `%||%` <- function(a, b) if (!is.null(a)) a else b
+
+# --- path helpers (copy from box_panel_from_yaml.R) ---
+get_script_path <- function() {
+  args <- commandArgs(trailingOnly = FALSE)
+  file_arg <- "--file="
+  path_idx <- grep(file_arg, args)
+  if (length(path_idx) > 0) {
+    return(normalizePath(sub(file_arg, "", args[path_idx])))
+  }
+  if (!is.null(sys.frames()[[1]]$ofile)) {
+    return(normalizePath(sys.frames()[[1]]$ofile))
+  }
+  normalizePath(".")
+}
+
+is_absolute_path <- function(path) {
+  if (is.null(path) || path == "") return(FALSE)
+  if (startsWith(path, "/")) return(TRUE)
+  if (grepl("^[A-Za-z]:", path)) return(TRUE)
+  FALSE
+}
+
+resolve_path <- function(path, project_root) {
+  if (is.null(path) || path == "") return(NULL)
+  if (is_absolute_path(path)) return(path)
+  file.path(project_root, path)
+}
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 1) stop("Usage: Rscript volcano_from_yaml.R <yaml>")
@@ -20,26 +48,31 @@ mm_safe <- function(x, default = NA_real_) {
   as.numeric(x)
 }
 
-# find project root (expects 02_protocols under root)
-project_root <- function() {
-  wd <- normalizePath(getwd())
-  p <- wd
-  for (i in 1:12) {
-    if (dir.exists(file.path(p, "02_protocols"))) return(p)
-    p2 <- dirname(p)
-    if (p2 == p) break
-    p <- p2
-  }
-  wd
-}
-root <- project_root()
+
+# script path & project root (assumes script under 06_figures/script)
+script_path  <- get_script_path()
+script_dir   <- dirname(script_path)
+root <- normalizePath(file.path(script_dir, "..", ".."))
+message("[INFO] Project root: ", root)
+
 
 # style
-style_cfg <- yaml::read_yaml(file.path(root, cfg$style_yaml))
+style_yaml_rel  <- "02_protocols/figure_style_nature.yaml"
+style_yaml_path <- file.path(root, style_yaml_rel)
+message("[INFO] Style yaml: ", style_yaml_path)
+if (!file.exists(style_yaml_path)) stop("Style yaml not found: ", style_yaml_path)
+style_cfg <- yaml::read_yaml(style_yaml_path)
 font_family <- style_cfg$typography$font_family_primary %||% "Helvetica"
 sizes <- style_cfg$typography$sizes_pt %||% list(axis_tick_default=5.5, axis_label_default=6.5, legend_text_default=6, legend_title_default=6.5, title_optional=7)
 axis_w <- style_cfg$lines$axis_line_default_pt %||% 0.25
 line_w <- style_cfg$lines$line_width_pt %||% axis_w
+
+# Match box_panel_from_yaml.R: convert pt -> ggplot2 linewidth via pt_per_lwd
+# (In this project, style yaml defines widths in pt; ggplot2 uses `linewidth`.
+#  We keep the same conversion as box script to ensure identical appearance.)
+pt_per_lwd  <- style_cfg$lines$r_lwd_scale$pt_per_lwd %||% 0.75
+axis_w_lwd  <- axis_w / pt_per_lwd
+line_w_lwd  <- line_w / pt_per_lwd
 
 # style-driven default layout (pt)
 style_axis_title_margin_x_pt <- style_cfg$layout$axis_title_margin_pt$x %||% 0
@@ -51,12 +84,13 @@ wt_ho_cols <- style_cfg$colors$wt_ho %||% list(WT="#F08A4B", HO="#4DB6AC")
 col_bg <- "grey70"
 col_hl <- wt_ho_cols$HO %||% "#4DB6AC"
 
-# IO (absolute path supported)
-src <- cfg$source_csv
-if (!file.exists(src)) src <- file.path(root, cfg$source_csv)
-if (!file.exists(src)) stop("Source CSV not found: ", src)
 
-out_pdf <- file.path(root, cfg$out_pdf)
+# IO (absolute path supported)
+src <- resolve_path(cfg$source_csv, root)
+if (is.null(src) || !file.exists(src)) stop("Source CSV not found: ", src)
+
+out_pdf <- resolve_path(cfg$out_pdf, root)
+if (is.null(out_pdf)) stop("out_pdf is empty in yaml")
 dir.create(dirname(out_pdf), recursive = TRUE, showWarnings = FALSE)
 
 # columns
@@ -151,8 +185,8 @@ p <- ggplot(df, aes(x = log2FC, y = y)) +
              size = (cfg$plot$point_size %||% 1.2) + 0.2,
              alpha = 0.95,
              color = col_hl) +
-  geom_vline(xintercept = c(-lfc_cut, lfc_cut), linewidth = line_w, linetype = "dashed") +
-  geom_hline(yintercept = y_cut, linewidth = line_w, linetype = "dashed") +
+  geom_vline(xintercept = c(-lfc_cut, lfc_cut), linewidth = line_w_lwd, linetype = "dashed") +
+  geom_hline(yintercept = y_cut, linewidth = line_w_lwd, linetype = "dashed") +
   labs(
     x = cfg$plot$x_label %||% "log2FC",
     y = cfg$plot$y_label %||% "-log10(p)"
@@ -168,7 +202,7 @@ p <- ggplot(df, aes(x = log2FC, y = y)) +
     axis.title.y = element_text(margin = margin(r = y_title_to_ticks_pt, unit = "pt")),
     axis.text.x  = element_text(margin = margin(t = x_ticks_to_axis_pt, unit = "pt")),
     axis.text.y  = element_text(margin = margin(r = y_ticks_to_axis_pt, unit = "pt")),
-    axis.line = element_line(linewidth = axis_w),
+    axis.line = element_line(linewidth = axis_w_lwd),
     plot.margin = if (!is.na(m_left_mm)) {
       unit(c(m_top_mm, m_right_mm, m_bottom_mm, m_left_mm), "mm")
     } else {

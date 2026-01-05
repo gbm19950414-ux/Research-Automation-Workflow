@@ -115,9 +115,9 @@ panels:
       - "lps+nigeiricin_1h+ad(2µm)"
 
     rename_x:
-      "untreated": "control"
-      "lps+nigeiricin": "lps+nigeiricin"
-      "lps+nigeiricin_1h+ad(2µm)": "AD(2µm)"
+      "untreated": "Control"
+      "lps+nigeiricin": "Nigericin"
+      "lps+nigeiricin_1h+ad(2µm)": "AD"
 
     stats:
       enabled: true

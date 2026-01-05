@@ -8,11 +8,11 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "Figure 5"              # 如 "Figure 3"
+  figure: "S4c"              # 如 "Figure 3"
   panel: "B"               # 如 "A"
-  short_title: "BEL 降低 IL-1β 释放并部分遮蔽 EphB1 缺失表型"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
+  short_title: "降低心磷脂可及性抑制炎症小体介导的 IL-1β 释放"
   chapter: "3.5 线粒体心磷脂可及性与重塑的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
-  experiment_id: "2025-03-21_BEL_IL1b_ELISA"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
+  experiment_id: "figure_5_b"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
 
 assets:
@@ -28,17 +28,17 @@ assets:
 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
-  context_from_previous: "上一节显示 BEL 可降低 NAO 可染 CL 池，并抹除 WT–KO 的差异。"
-  core_question: "降低 CL 可及性是否能够复现 EphB1 缺失造成的 IL-1β 释放下降？"
+  context_from_previous: "上一节表明 BEL 可显著降低 NAO 可染的心磷脂池，为药理学操控 CL 可及性提供了上游手段。"
+  core_question: "在降低心磷脂可及性的条件下，炎症小体通路激活及其 IL-1β 释放是否受到功能性抑制？"
   hypothesis_or_expectation: "若 CL 可及性限制 IL-1β 释放，则 BEL 应下降 IL-1β 释放，并部分遮蔽基因型差异。"
-  importance_reason: "这是验证 CL 可达性 → 孔功能 → IL-1β 释放的因果链条所必需的实验。"
+  importance_reason: "该实验用于检验‘CL 可及性下降’是否在功能层面足以限制炎症小体通路激活，而非仅作为相关表型出现。"
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
   model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞评估 BEL 对 IL-1β 释放的影响。"
   key_variables: "BEL 处理时间（4/16 h）、剂量（1, 2, 4 μM）、基因型（WT vs KO）、IL-1β 释放量。"
-  control_logic: "DMSO vehicle 作为基线；剂量/时间双梯度用于识别依赖性；KO 作为缺失控制用于检测遮蔽效应。"
-  core_justification: "若 EphB1→CL 可及性→孔功能→IL-1β 释放成立，则 BEL 应模拟 KO 表型并产生 genotype×dose 交互。"
+  control_logic: "DMSO vehicle 作为基线对照；BEL 剂量与时间梯度用于评估功能抑制的依赖性；KO 组用于判断在 CL 可及性已受限背景下是否出现遮蔽效应。"
+  core_justification: "若心磷脂可及性是炎症小体孔功能与 IL-1β 释放的必要脂质条件，则 BEL 诱导的 CL 可及性下降应直接抑制炎症小体激活，并在功能层面部分遮蔽 EphB1 缺失表型。"
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
@@ -55,20 +55,20 @@ methods:
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
-  data_direction: "WT 中 IL-1β 释放随 BEL 剂量/时间依赖性下降；KO 对 BEL 的敏感性降低。"
+  data_direction: "在 WT 巨噬细胞中，BEL 处理以剂量和时间依赖方式显著抑制 LPS+nigericin 诱导的 IL-1β 释放；在 KO 细胞中，该抑制效应进一步增强的幅度有限。"
   stats_summary: "genotype×dose 交互项显著；多数 BEL 剂量对 WT p < 0.05，而对 KO 多为 ns。"
   key_numbers: "WT 在 4 μM BEL、16 h 时 IL-1β 下降约 50%；KO 在相同条件下降幅 <20%。"
-  group_difference_statement: "BEL 对 WT 的抑制强于 KO，使 WT–KO 在高剂量/长处理时间下差异显著收敛。"
+  group_difference_statement: "BEL 在 WT 细胞中显著降低 IL-1β 释放，并在高剂量或长时间处理条件下使 WT 与 KO 间的差异明显收敛。"
   robustness_and_qc: "趋势在 ≥3 批实验重复；MTT 显示 BEL 无细胞毒性。"
   anomalies_or_limits: "低剂量 BEL 在部分批次中的效果略弱，但遮蔽趋势一致。"
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
-  minimal_bio_interpretation: "BEL 下调 IL-1β 释放，并部分遮蔽 EphB1 缺失表型，提示 CL 可及性是其关键调控点。"
-  alternative_explanations: "BEL 可能影响多个 iPLA₂ 相关途径，但 NAO 信号与 IL-1β 释放均下降支持同一膜脂路径。"
-  summary_type: "supportive, exploratory"
-  claim_supported: "降低 CL 可及性可复现并遮蔽 EphB1 缺失导致的 IL-1β 释放下降。"
-  link_to_previous: "在 BEL 降低 NAO 信号后，本节进一步确认其可调控 IL-1β 释放。"
+  minimal_bio_interpretation: "通过药理学方式降低心磷脂可及性即可显著抑制炎症小体介导的 IL-1β 释放，并在功能层面部分复现并遮蔽 EphB1 缺失表型。"
+  alternative_explanations: "BEL 可能同时影响多种 iPLA₂ 相关脂质通路；此外，BEL 的作用被限定为降低 NAO 可染/可达的心磷脂池，而不直接等同于 CL 总量变化。"
+  summary_type: "supportive, elimination"
+  claim_supported: "降低心磷脂可及性本身即可在功能层面限制炎症小体通路激活并减少 IL-1β 释放。"
+  link_to_previous: "在确认 BEL 可作为上游手段降低 NAO 可染心磷脂池之后，本节进一步证明该脂质状态改变在功能上足以抑制炎症小体通路激活。"
   transition_to_next: "为定位 CL 重塑参与程度，下一节将考察 MLCL/CL 与重塑酶（如 TAZ）相关指标。"
 
 # ---------- 6. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------

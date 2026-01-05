@@ -38,9 +38,9 @@ panels:
     hue_order: ["WT", "HO"]
 
     rename_x:
-      control_WT: "Ctrl WT"
+      control_WT: "Control"
       control_HO: "Ctrl HO"
-      ephb1_fc(500ng/ml)+anti_fc_WT: "Trt WT"
+      ephb1_fc(500ng/ml)+anti_fc_WT: "EpHB1_FC"
       ephb1_fc(500ng/ml)+anti_fc_HO: "Trt HO"
 
     x_label: ""
@@ -78,8 +78,8 @@ panels:
     hue_order: ["WT", "HO"]
     keep_hue: ["WT"]
     rename_x:
-      control_WT: "Ctrl WT"
-      bel(2µm)_WT: "Trt WT"
+      control_WT: "Control"
+      bel(2µm)_WT: "BEL"
 
     x_label: ""
     y_label: "NAO intensity after BEL treated (mean)"
@@ -115,8 +115,8 @@ panels:
     keep_hue: ["WT"]
 
     rename_x:
-      control_WT: "Ctrl WT"
-      ad(2µm)_WT: "Trt WT"
+      control_WT: "Control"
+      ad(2µm)_WT: "AD"
 
     x_label: ""
     y_label: "NAO intensity after AD treated (Mean)"

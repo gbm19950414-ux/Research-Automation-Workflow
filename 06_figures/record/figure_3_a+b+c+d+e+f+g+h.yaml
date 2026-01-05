@@ -9,7 +9,7 @@
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
   figure: "3a+b+c+d+e+f+g+h"
-  short_title: "EphB1 缺失减缓细胞质 ROS 上升并维持线粒体膜电位"
+  short_title: "EphB1 缺失减缓炎症小体激活期 ROS 上升并在基线条件下对线粒体膜电位影响有限"
   chapter: "3.3 EphB1 缺失降低 GSDMD 的线粒体结合"
   experiment_id: "figure_3_b"
   version: 1              # 整数，用来追踪修改
@@ -28,7 +28,9 @@ assets:
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
   context_from_previous: "上一节显示 EphB1 缺失削弱 GSDMD-NT 在线粒体的早期富集，提示线粒体膜事件可能受影响。"
-  core_question: "EphB1 缺失是否影响炎症小体激活过程中细胞质 ROS 上升与线粒体膜电位变化？"
+  core_question: >
+    "EphB1 缺失是否影响炎症小体激活过程中细胞质 ROS 上升与线粒体膜电位变化？"
+    "在未激活炎症小体的静息条件下，EphB1 缺失是否已造成线粒体膜电位（ΔΨm）的固有差异？"
   hypothesis_or_expectation: "若 EphB1 缺失降低 GSDMD 介导的线粒体损伤，则应观察到更少的细胞质 ROS 上升与更稳定的膜电位。"
   importance_reason: "ROS 与膜电位是反映线粒体损伤与炎症小体执行端状态的关键 readouts。"
 
@@ -36,7 +38,9 @@ question:
 rationale:
   model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，其对 LPS+nigericin 的响应可稳定诱导 ROS 动力学与 Δψm 改变。"
   key_variables: "比较基因型差异下的细胞质 ROS（H2DCHA）、线粒体 ROS（MitoSOX）、线粒体膜电位（TMRM）。"
-  control_logic: "统一使用 LPS priming + nigericin 的时间梯度；所有指标归一化到加药前基线以比较动力学差异。"
+  control_logic: >
+    "统一使用 LPS priming + nigericin 的时间梯度；所有指标归一化到加药前基线以比较动力学差异。"
+    "通过在未激活炎症小体条件下单独检测 TMRM（对应原 Figure 4A / 本图 G-H），用于判定 ΔΨm 是否在刺激前已存在基因型差异。"
   core_justification: "若 KO 出现更弱的胞质 ROS 上升与更稳定 ΔΨm，将支持（support）线粒体损伤/外泄过程受限的模型，但仍需与后续 mtRNA 外泄、分级富集等证据合并判断。"
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
@@ -47,8 +51,14 @@ methods:
   stimuli_and_treatment: "LPS 100 ng/mL 4 h；刺激结束前 30 min 加入 H2DCHA 或 MitoSOX 或 TMRM；随后加入 nigericin 并连续读数 120 min。"
   time_points: "0–120 min，间隔 1–2.5 min（根据 plate reader 设置），结果最终求平均聚合为5分钟间隔。"
   dose_info: "Nigericin 10 μM；荧光探针按说明书标准浓度使用。"
-  readout_and_assay: "96 孔板即时荧光读数；H2DCHA 检测细胞质 ROS；MitoSOX 检测线粒体 ROS；TMRM 检测 Δψm。H2DCHA 在胞质中被氧化生成荧光，主要反映细胞质层面的 ROS 累积，不能区分 ROS 的具体来源；MitoSOX 定位于线粒体内环境，主要报告线粒体内超氧阴离子相关的氧化应激状态，其信号不等同于膜损伤或孔化程度；TMRM 为膜电位依赖性染料，其荧光变化反映线粒体内膜电位（Δψm）的相对变化，可作为线粒体功能完整性的功能性 readout。本图中 G/H 面板为未激活炎症小体条件下的基线 TMRM，用于排除基因型导致的固有膜电位差异，从而支持将激活期 Δψm 的变化解释为刺激诱导的动态响应。"
-  replicates: "每组 n ≥ 3；≥3 批次独立实验。"
+  readout_and_assay: >
+    "96 孔板即时荧光读数；H2DCHA 检测细胞质 ROS；
+    MitoSOX 检测线粒体 ROS；
+    TMRM 检测 Δψm。
+    H2DCHA 在胞质中被氧化生成荧光，主要反映细胞质层面的 ROS 累积，不能区分 ROS 的具体来源；
+    MitoSOX 定位于线粒体内环境，主要报告线粒体内超氧阴离子相关的氧化应激状态，其信号不等同于膜损伤或孔化程度；
+    TMRM 为膜电位依赖性染料，其荧光变化反映线粒体内膜电位（Δψm）的相对变化，可作为线粒体功能完整性的功能性 readout。
+    本图中 G/H 面板为未激活炎症小体条件下的基线 TMRM，用于排除基因型导致的固有膜电位差异，从而支持将激活期 Δψm 的变化解释为刺激诱导的动态响应。其中基线 TMRM 测定对应未进行 LPS 或 nigericin 处理的静息条件，用于评估 EphB1 缺失是否导致固有 Δψm 改变（原 Figure 4A）。"
   analysis_notes: "所有时间序列数据归一化至加药时第一个时间点；比较曲线下面积（AUC）与关键时间点差异；双尾 t 检验。"
   minimal_methods_summary: "LPS priming 后以多探针实时监测 WT 与 KO 巨噬细胞在 nigericin 激活后的细胞质 ROS、线粒体 ROS 与膜电位变化。"
 
@@ -63,10 +73,10 @@ results:
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
-  minimal_bio_interpretation: "EphB1 缺失减弱炎症小体激活时的细胞质 ROS 上升并维持 Δψm，提示线粒体损伤程度降低。"
+  minimal_bio_interpretation: "EphB1 缺失并未显著改变静息条件下的线粒体膜电位，因此激活期 Δψm 的分叉更可能反映刺激诱导的线粒体损伤差异，而非基础功能缺陷。"
   alternative_explanations: "不排除 KO 细胞基础代谢或抗氧化能力差异影响 ROS 动态；但基线 TMRM（G/H）差异不大，支持将激活期 ΔΨm 的分叉视为刺激过程中的动态响应差异。MitoSOX 的 ns 结果提示需要结合 mtRNA 外泄与 GSDMD-NT 分级富集等更直接 readout 综合定位瓶颈。"
-  summary_type: "supportive, descriptive"
-  claim_supported: "EphB1 缺失减弱炎症小体激活时的 ROS 增加并稳定线粒体膜电位。"
+  summary_type: "supportive, elimination"
+  claim_supported: "EphB1 缺失不显著影响原代巨噬细胞的基础线粒体膜电位，但在炎症小体激活过程中有助于维持 Δψm 稳定。"
   link_to_previous: "结合上一节 GSDMD-NT 线粒体富集减少，本节进一步支持 KO 线粒体膜损伤受限。"
   transition_to_next: "下一节将检测胞质 mtRNA 脉冲释放，以更直接评估线粒体内容物外泄/膜损伤程度。"
 

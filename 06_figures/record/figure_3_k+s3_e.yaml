@@ -27,7 +27,7 @@ assets:
 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
-  context_from_previous: "上一节显示 EphB1 缺失减缓细胞质 ROS 上升并维持线粒体膜电位、减少炎症小体激活过程中的胞质 mtDNA 释放，提示更好的线粒体膜完整性。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
+  context_from_previous: "上一节显示 EphB1 缺失减缓细胞质 ROS 上升并维持线粒体膜电位、减少炎症小体激活过程中的胞质 mtDNA 释放，提示更好的线粒体膜完整性。同时需要进一步排除 EphB1 缺失是否通过改变线粒体数量而间接影响上述膜相关 readouts。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
                              # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
   core_question: "炎症小体激活过程中，线粒体膜完整性取决于GSDMD-NT与线粒体的结合。EphB1 缺失是否影响炎症小体激活早期 GSDMD-NT 与线粒体膜的结合与富集？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
                              # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”
@@ -44,7 +44,7 @@ rationale:
                              # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
   control_logic: "Total lysate 中 pro-GSDMD/NT 比例用于排除切割不足；线粒体分级用于检测定位差异。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
                              # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1−/− 的参照组。”
-  core_justification: "若 KO 组在线粒体中的 NT 峰值降低，则说明差异定位于‘GSDMD 与膜结合/稳定’步骤。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
+  core_justification: "若 KO 组在线粒体中的 NT 峰值降低，则说明差异定位于‘GSDMD 与膜结合/稳定’步骤，并结合线粒体数量评估，以避免将丰度变化误判为膜结合效率差异。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
                              # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1−/− 细胞在相同刺激下应释放更少 IL-1β。”
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
@@ -59,7 +59,7 @@ methods:
                                # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
   time_points: "0、7.5、15、30、60 min ；7.5 min 为 WT 峰值时间。"              # 关键测定时间点（如果不在上面已写清）
   dose_info: "Nigericin 10 μM；无剂量梯度。"                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
-  readout_and_assay: "WB 检测 GSDMD-NT 在total/线粒体分级中的含量。"        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
+  readout_and_assay: "WB 检测 GSDMD-NT 在total/线粒体分级中的含量。作为补充对照（Figure 4B / Figure S3E），在相同细胞来源下通过 HK2 与线粒体 16S rRNA 的 qPCR 表达量评估线粒体数量。"        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
                                # 例如：“使用 IL-1β ELISA 测定上清中 IL-1β，按厂商说明书操作。”
   replicates: "每组 n ≥ 3；≥3 批次独立重复。"               # 生物学重复数 n，以及是否合并多次实验
                                # 例如：“每组 n = 4 生物学重复，结果合并自两次独立实验。”
@@ -76,10 +76,12 @@ results:
     相比之下，Ephb1−/− 细胞在相同刺激条件下，
     线粒体分级中的 GSDMD-NT 水平显著降低，
     而 total lysate 中 GSDMD 的切割程度与 WT 相当。
+    与此一致，线粒体数量相关的 HK2 与 16S rRNA 在 KO 与 WT 间未见显著差异（Figure 4B / S3E）。
   stats_summary: >
     在 7.5 min 时间点，
     mito-GSDMD-NT 在 KO 中显著低于 WT
     而 total lysate 中 GSDMD-NT / GSDMD-FL 比例无显著差异。
+    HK2 与 16S rRNA 的基因型比较均为 ns（双尾 t 检验）。
 
   key_numbers: >
     KO 的线粒体 GSDMD-NT 富集水平相较 WT 下降约 30–50%，
@@ -92,12 +94,13 @@ results:
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
-  minimal_bio_interpretation: "EphB1 缺失削弱 GSDMD-NT 在线粒体水平的早期富集，提示膜结合/稳定性是主要受影响环节。" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
+  minimal_bio_interpretation: "EphB1 缺失削弱 GSDMD-NT 在线粒体水平的早期富集，提示膜结合/稳定性是主要受影响环节。该结论不依赖于线粒体总量变化。" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
                                  # 例如：“这些结果提示 EphB1 对 NLRP3 介导的 IL-1β 释放是促进性的。”
   alternative_explanations: >
     虽不能排除极早期（<2–3 min）瞬态定位差异未被捕获，
     但 total lysate 中切割指数正常，
     排除了 GSDMD 生成不足作为主要原因。
+    因此，GSDMD-NT 在线粒体富集降低不太可能由线粒体数量减少所致。
   summary_type: "supportive, elimination"               # 从下列类型中选一个或多个，用逗号分隔：
                                  #   "supportive"   支持前一节/主假设
                                  #   "descriptive"  纯描述现象
@@ -107,7 +110,7 @@ interpretation:
                                  # 例如："supportive"
   claim_supported: "EphB1 缺失降低 GSDMD-NT 在线粒体分级中的富集，而不影响其切割。"            # 本 panel 主要想支持/反驳的“文字命题”
                                  # 例如：“EphB1 是 NLRP3 炎性小体效应端活性的正调控因子。”
-  link_to_previous: "前文显示执行端产物外排受限，本节将差异进一步定位至 GSDMD 与膜结合的早期步骤。"           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
+  link_to_previous: "前文显示执行端产物外排受限，本节将差异进一步定位至 GSDMD 与膜结合的早期步骤。结合 Figure 4B 中线粒体数量未变的结果，进一步将差异限定于膜结合/稳定性层面。"           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
                                  # 例如：“在观察到 EphB1 缺失缓解线粒体损伤后，我们进一步评估其对下游 IL-1β 释放的影响。”
   transition_to_next: "下一节将检测GSDMD 与膜结合早期步骤异常的具体机制。"         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
                                  # 例如：“为了明确这种效应是否依赖于线粒体 ROS，我们随后检测了 NLRP3 激活过程中 mtROS 的变化。”
