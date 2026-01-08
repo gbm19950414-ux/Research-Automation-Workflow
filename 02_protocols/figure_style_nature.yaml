@@ -45,12 +45,6 @@ lines:
   r_lwd_scale:
     pt_per_lwd: 0.75
 
-colors:
-  wt_ho:
-    WT: "#F08A4B"
-    HO: "#4DB6AC"
-    wt: "#F08A4B"
-    ho: "#4DB6AC"
 layout:
   axis_title_margin_pt:
     x: 3
@@ -60,3 +54,29 @@ layout:
     right: 0
     bottom: 0
     left: 0
+    
+colors:
+  wt_ho:
+    WT: "#F08A4B"
+    HO: "#4DB6AC"
+    wt: "#F08A4B"
+    ho: "#4DB6AC"
+
+  # Figure 6F: direction match colors
+  dir_match:
+    match: "#B2182B"
+    mismatch: "grey40"
+    unknown: "black"
+
+  # Figure 6F: facet & grid
+  strip_background: "grey90"
+  grid_major: "grey85"
+  grid_minor: "grey92"
+
+marks:
+  point_size: 1.6          # ggplot2 point size (mm)
+  smooth_line_width_pt: 0.5
+  smooth_se_alpha: 0.15
+  facet_strip_text_pt: 6
+  stat_label_text_pt: 6
+

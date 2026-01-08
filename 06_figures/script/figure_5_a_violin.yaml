@@ -59,7 +59,7 @@ panels:
       pair_groups: ["control", "ephb1_fc(500ng/ml)+anti_fc"]
       level: "cell"
       contrast: "WT_vs_HO"
-    ylim: [50, 200]
+    ylim: [0, null]
 
 
   - id: "b"
