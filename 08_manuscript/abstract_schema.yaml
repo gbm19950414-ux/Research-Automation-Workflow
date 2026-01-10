@@ -1,0 +1,173 @@
+abstract:
+  metadata:
+    document_type: "PhD dissertation abstract"
+    discipline: "Biology"
+    language_support:
+      - zh
+      - en
+    version: "v1.0"
+    last_updated: "YYYY-MM-DD"
+
+  global_principles:
+    independence: true              # 摘要需独立可读
+    completeness: true              # 包含完整科学闭环
+    mechanism_oriented: true        # 以机制为核心
+    avoid_experimental_details: true # 机制清晰度
+    avoid_numeric_results: true    # 避免数据堆砌
+
+  logical_structure:
+    - section: background
+      order: 1
+      purpose: "提出领域级未解决的科学问题或核心矛盾"
+      required: true
+      length_guideline:
+        sentences: "1-2"
+      content_rules:
+        include:
+          - field_level_problem
+          - biological_significance
+        exclude:
+          - literature_review
+          - historical_background
+          - specific_references
+      guiding_questions:
+        - "当前研究领域中尚未解决的关键问题是什么？"
+        - "该问题在生物学中的重要性体现在哪里？"
+
+    - section: research_question
+      order: 2
+      purpose: "明确提出本论文所要解决的科学问题或研究目标"
+      required: true
+      length_guideline:
+        sentences: "1"
+      content_rules:
+        include:
+          - clear_scientific_question
+          - mechanistic_focus
+        exclude:
+          - vague_objectives
+          - broad_descriptions
+      guiding_questions:
+        - "本研究试图阐明什么具体机制或因果关系？"
+
+    - section: methodology_framework
+      order: 3
+      purpose: "概括研究采用的方法体系与整体研究策略"
+      required: true
+      length_guideline:
+        sentences: "2-3"
+      content_rules:
+        include:
+          - experimental_model_level        # 动物 / 细胞 / 组织
+          - analysis_strategy_level         # 多组学 / 功能实验 / 干预
+          - integration_logic               # 数据整合或因果验证逻辑
+        exclude:
+          - experimental_steps
+          - reagent_names
+          - protocol_details
+      abstraction_level: "method_system"
+      guiding_questions:
+        - "研究对象和模型是什么？"
+        - "采用了哪些类型的方法体系？"
+        - "这些方法如何共同服务于科学问题？"
+
+    - section: core_results
+      order: 4
+      purpose: "呈现论文最核心、最具原创性的研究发现"
+      required: true
+      length_guideline:
+        proportion_of_abstract: "40-50%"
+      content_rules:
+        include:
+          - directional_findings
+          - causal_relationships
+          - mechanistic_links
+        exclude:
+          - raw_data
+          - statistical_values
+          - exhaustive_results
+      organization_principle:
+        type: "causal_chain"
+        description: "结果应按因果或机制逻辑排列，而非实验顺序"
+      guiding_questions:
+        - "最重要的发现是什么？"
+        - "这些发现之间的因果或机制关系如何？"
+        - "它们共同指向怎样的生物学过程？"
+
+    - section: conclusion_and_significance
+      order: 5
+      purpose: "总结研究结论并阐明其生物学意义"
+      required: true
+      length_guideline:
+        sentences: "1-2"
+      content_rules:
+        include:
+          - direct_answer_to_research_question
+          - mechanistic_model_summary
+          - theoretical_or_potential_application_significance
+        exclude:
+          - overgeneralization
+          - unsupported_speculation
+      guiding_questions:
+        - "本研究最终回答了什么问题？"
+        - "对现有生物学理论或机制有何补充？"
+
+  writing_methodology:
+    preparation_steps:
+      - step: extract_core_logic
+        description: "从引言、结果和讨论中提炼核心科学逻辑"
+      - step: mechanism_merging
+        description: "将多个实验结果整合为一条或多条机制路径"
+      - step: abstraction
+        description: "将实验行为词转化为科学结论词"
+      - step: independence_check
+        description: "确保摘要可在无正文情况下被理解"
+
+    compression_rules:
+      remove:
+        - experimental_verbs
+        - procedural_descriptions
+        - redundant_transitions
+      retain:
+        - scientific_actions
+        - causal_verbs
+        - mechanistic_terms
+
+  quality_control:
+    self_check_questions:
+      - "摘要是否可以独立理解整篇论文的科学逻辑？"
+      - "是否形成了清晰的机制或因果链？"
+      - "是否避免了方法细节和数据堆砌？"
+      - "结论是否直接回应研究问题？"
+
+  extensibility:
+    supports_auto_generation: true
+    supports_bilingual_alignment: true
+    compatible_with:
+      - manuscript_generation_pipeline
+      - thesis_quality_checklist
+      - abstract_to_graphical_model
+
+ephb1:
+  background: |-
+    炎症小体介导的 IL-1β 外排与裂解性焦亡是多种急慢性炎症病理的关键效应端，但“炎症小体被激活”并不必然等价于“裂解性输出有多强”。
+    越来越多证据提示末端执行层（GSDMD 成孔）的效率受膜环境约束，尤其与线粒体富集的心磷脂（CL）状态密切相关，从而提出“上游信号如何重塑膜脂环境以限幅输出”的领域缺口。
+
+  research_question: |-
+    本研究聚焦于受体信号 EphB1：其缺失是否通过重塑线粒体膜环境/心磷脂代谢状态，平移 GSDMD 执行端阈值并降低炎症小体诱导的裂解性外排与焦亡强度。
+
+  methodology_framework: |-
+    本研究以原代小鼠腹腔巨噬细胞为核心体系，结合多遗传背景的功能筛选锁定 EphB1，并在多种炎症小体刺激条件下以 IL-1β 释放与细胞裂解为主要输出读出。
+    通过分层定位（转录性 priming、ASC 装配、caspase-1 激活与底物切割、GSDMD-NT 线粒体分级富集）明确差异发生的环节；同时以 NAO 染色、靶向 CL panel 与脂质组学刻画心磷脂“总量/可及池”表型，并用 AD 与 BEL 两条独立药理轴操控 CL 状态验证充分性。
+    在机制层面，整合多批次 RNA-seq 与脂质组数据构建 CL 机制轴并进行跨组学合并与表型回归，同时采用因果中介分析在通路层级优先级化 EphB1 的下游信号模块。
+
+  core_results: |-
+    多遗传背景筛选提示 EphB1 是炎症小体输出差异的稳定候选基因，在后续验证中，EphB1 缺失在多条炎症小体通路激活条件下均表现为 IL-1β 裂解性外排下降并伴随细胞裂解降低。
+    分层定位显示 EphB1 缺失不影响 TLR4–NF-κB 依赖的转录性 priming，亦不阻断 ASC 寡聚化与 caspase-1 激活；caspase-1 对 GSDMD 与 pro-IL-1β 的切割生成总体保留，但成熟产物的跨膜外排受限，提示瓶颈集中于末端执行层。
+    在时序与亚细胞层面，炎症小体激活早期 WT 细胞中 GSDMD-NT 在线粒体分级出现瞬态富集，而 EphB1 缺失显著削弱该线粒体富集；与之对应，EphB1 缺失伴随线粒体心磷脂表型下移，包括 NAO 可染/可及的 CL 功能池降低及心磷脂总量下降。
+    通过 AD 降低 CL 可及性与 BEL 抑制 CL 重塑均可在 WT 细胞中重现“CL 可及池下降→IL-1β 外排受限”的功能效应，并在遗传学层面与 EphB1 缺失呈现趋同/遮蔽关系，支持 CL 状态变化对输出限幅的因果贡献。
+    多组学整合进一步将 EphB1 缺失关联到以 membrane context 为代表的机制轴扰动，并显示该轴级综合效应可预测跨批次的心磷脂含量变化；因果中介分析在通路层面指向 PI3K–AKT–mTOR 作为最可能连接 EphB1 与膜环境轴的中介模块。
+
+  conclusion_and_significance: |-
+    综上，本研究提出并支持一个可证伪的工作模型：EphB1 作为上游信号输入，经由下游通路网络重塑以心磷脂为核心代理的膜环境，从而平移 GSDMD 孔功能阈值并限幅裂解性输出，最终降低 IL-1β 外排与焦亡程度。
+    该模型为解释“活化 ≠ 输出强度”的分叉提供了膜环境中介框架，并为在保留宿主防御前提下实现炎症小体输出限幅调控提供了新的机制入口。
