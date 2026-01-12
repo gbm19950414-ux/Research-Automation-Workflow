@@ -38,7 +38,7 @@ panels:
 
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "16sRNA mRNA (2^-ΔΔCt)"
+    y_label: "16sRNA mRNA expression (fold change)"
     x_tick_rotation: 0
     strip: true
     stats:
@@ -66,7 +66,7 @@ panels:
 
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "ND1 mRNA (2^-ΔΔCt)"
+    y_label: "ND1 mRNA expression (fold change)"
     x_tick_rotation: 0
     strip: true
     stats:

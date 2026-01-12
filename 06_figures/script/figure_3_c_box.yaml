@@ -44,7 +44,7 @@ panels:
 
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "16sRNA in total component mRNA (2^-ΔΔCt)"
+    y_label: "total 16sRNA mRNA expression (fold change)"
     x_tick_rotation: 0
     strip: true
 
@@ -83,7 +83,7 @@ panels:
 
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "ND1 in total component mRNA (2^-ΔΔCt)"
+    y_label: "total ND1 mRNA expression (fold change)"
     x_tick_rotation: 0
     strip: true
 
@@ -116,7 +116,7 @@ panels:
 
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "16sRNA in cyto component mRNA (2^-ΔΔCt)"
+    y_label: "cyto 16sRNA mRNA expression (fold change)"
     x_tick_rotation: 0
     strip: true
 
@@ -145,7 +145,7 @@ panels:
 
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "ND1 in total component mRNA (2^-ΔΔCt)"
+    y_label: "cyto ND1 mRNA expression (fold change)"
     x_tick_rotation: 0
     strip: true
 
