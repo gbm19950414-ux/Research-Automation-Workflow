@@ -5,7 +5,6 @@
 import re
 import sys
 import time
-import textwrap
 from collections import OrderedDict
 from pathlib import Path
 
@@ -14,10 +13,14 @@ from docx import Document
 from tqdm import tqdm
 
 # ------------ 设置：当前目录为目标 ------------
-FOLDER = Path("/Users/gongbaoming/Library/CloudStorage/OneDrive-个人/EphB1/08_manuscript")
+FOLDER = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript")
 OUT_RIS = FOLDER / "references_out.ris"
 OUT_SKIP = FOLDER / "skipped_files.txt"
-REGEX_DOI = re.compile(r"\{(10\.\d{4,9}/[^\}\s]+)\}", flags=re.IGNORECASE)
+# More tolerant DOI extraction:
+# Matches {10.xxxx/...} and {doi:10.xxxx/...} (case-insensitive)
+DOI_CORE = r"10\.\d{4,9}/[-._;()/:A-Z0-9]+"
+REGEX_DOI = re.compile(r"\{\s*(?:doi\s*:\s*)?(" + DOI_CORE + r")\s*\}", flags=re.IGNORECASE)
+REGEX_DOI_BARE = re.compile(r"(?<!\{)(?<!\w)(" + DOI_CORE + r")(?!\w)", flags=re.IGNORECASE)
 
 HEADERS = {
     "User-Agent": "doi-ris-extractor/0.2 (mailto:your_email@example.com)",
@@ -28,8 +31,50 @@ HEADERS = {
 def extract_dois_from_doc(doc_path: Path, skipped_list: list[str]) -> list[str]:
     try:
         doc = Document(doc_path)
-        full_text = "\n".join(p.text for p in doc.paragraphs)
-        return REGEX_DOI.findall(full_text)
+
+        def iter_text():
+            # Main body paragraphs
+            for p in doc.paragraphs:
+                if p.text:
+                    yield p.text
+
+            # Tables (all cells)
+            for tbl in doc.tables:
+                for row in tbl.rows:
+                    for cell in row.cells:
+                        for p in cell.paragraphs:
+                            if p.text:
+                                yield p.text
+
+            # Headers / footers
+            for section in doc.sections:
+                hdr = section.header
+                ftr = section.footer
+                for p in getattr(hdr, "paragraphs", []):
+                    if p.text:
+                        yield p.text
+                for tbl in getattr(hdr, "tables", []):
+                    for row in tbl.rows:
+                        for cell in row.cells:
+                            for p in cell.paragraphs:
+                                if p.text:
+                                    yield p.text
+                for p in getattr(ftr, "paragraphs", []):
+                    if p.text:
+                        yield p.text
+                for tbl in getattr(ftr, "tables", []):
+                    for row in tbl.rows:
+                        for cell in row.cells:
+                            for p in cell.paragraphs:
+                                if p.text:
+                                    yield p.text
+
+        found: list[str] = []
+        for chunk in iter_text():
+            found.extend(REGEX_DOI.findall(chunk))
+            found.extend(REGEX_DOI_BARE.findall(chunk))
+
+        return found
     except Exception as e:
         skipped_list.append(f"{doc_path.name} - {e}")
         return []
@@ -45,7 +90,14 @@ def fetch_ris(doi: str) -> str:
     return f"TY  - GEN\nDO  - {doi}\nER  -"
 
 def main():
-    docx_files = [FOLDER / "EphB1调控线粒体心磷脂含量减轻NLRP3炎症小体引发的焦亡.docx"]
+    # Prefer command-line provided docx paths; fallback to scanning FOLDER
+    if len(sys.argv) > 1:
+        docx_files = [Path(p) for p in sys.argv[1:]]
+    else:
+        docx_files = sorted(FOLDER.rglob("*.docx"))
+
+    OUT_RIS.parent.mkdir(parents=True, exist_ok=True)
+
     if not docx_files:
         print("❌ 当前目录没有找到 .docx 文件")
         sys.exit(1)
@@ -56,7 +108,8 @@ def main():
     print(f"🔍 正在扫描 {len(docx_files)} 个 Word 文件 …")
     for docx in docx_files:
         for doi in extract_dois_from_doc(docx, skipped):
-            all_dois[doi.lower()] = None  # 去重 + 保顺序
+            norm = doi.strip().strip(". ;,)]}>\"")
+            all_dois[norm.lower()] = None  # 去重 + 保顺序
 
     if not all_dois:
         print("⚠ 没有发现任何 {DOI} 引用")

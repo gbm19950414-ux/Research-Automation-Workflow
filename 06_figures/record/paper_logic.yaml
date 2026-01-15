@@ -14,36 +14,65 @@
 #
 # 5. 简而言之：logic = purpose，不写 facts。
 meta:
-  paper_title: "EphB1调控线粒体心磷脂含量减轻NLRP3炎症小体引发的焦亡"
+  paper_title: "EphB1 通过重塑线粒体心磷脂介导的膜环境限幅炎症小体焦亡输出"
 
 main_question:
   one_sentence: >
-    在 LPS 激活的小鼠腹腔巨噬细胞中，EphB1 是否通过调控线粒体心磷脂
-    含量及其可结合池，改变线粒体–膜脂环境，从而限幅 NLRP3 炎症小体
-    介导的 GSDMD 焦亡输出？
+    在 LPS 预激的原代小鼠腹腔巨噬细胞中，EphB1 是否通过调控线粒体心磷脂（CL）的
+    总量与可及池，重塑膜环境并平移 GSDMD 成孔阈值，从而限幅 NLRP3 炎症小体介导的
+    IL-1β 裂解性外排与焦亡？
   background_gap: >
-    系统性炎症和焦亡相关疾病负担持续攀升，临床真正需求是“在不削弱抗感染
-    能力的前提下，对孔形成–裂解性外排环节做限幅”，但目前多数策略仍停留在
-    抑制 NLRP3 激活而非精细调节输出。已有研究提示 GSDMD-NT 对带负电膜脂、
-    尤其是线粒体心磷脂（CL）具有高亲和力，线粒体状态与 CL 动态被视为
-    焦亡执行效率的关键阀门；然而，“质膜受体/外源信号 → CL 含量/重塑 →
-    线粒体炎症平台 → GSDMD 成孔”这一链条的上游模块仍然几乎空白，尤其缺乏
-    将 Eph 受体家族与 CL–焦亡轴直接相连的实验证据。
+    炎症小体相关疾病的治疗需求更偏向“保留抗感染能力前提下，对末端孔形成—裂解性外排
+    做精细限幅”，但现有策略多聚焦于抑制 NLRP3 的上游激活。已有证据提示 GSDMD 成孔
+    依赖膜脂环境，尤其受线粒体富集心磷脂（CL）状态影响；然而，“受体/外源信号 → CL
+    代谢与膜环境 → 线粒体炎症平台 → GSDMD 成孔/外排”这一可检验链条的上游调控模块
+    仍缺乏系统阐明。
   central_claim: >
-    本研究在巨噬细胞–线粒体–炎症小体轴上证明：EphB1 通过维持线粒体心磷脂
-    含量及其可结合池，决定 GSDMD-NT 早期线粒体对接与孔功能，从而调节
-    NLRP3 诱导焦亡和 IL-1β 释放的阈值。EphB1 缺失降低 CL 可及性，限制
-    GSDMD-NT 线粒体结合并削弱裂解性外排；药理性抑制 CL 可结合池（BEL）
-    在 IL-1β 释放上与 EphB1 缺失呈遮蔽关系，而上游 LYCAT 下调将 EphB1
-    与 CL 生物合成直接连接，构成 “EphB1–LYCAT–CL–GSDMD–焦亡” 的可逆调控轴，
-    将受体酪氨酸激酶信号与膜脂重塑–线粒体孔化置于同一因果序列之中。
+    EphB1 作为上游信号输入，通过下游网络调控线粒体 CL 的总量与可及池，进而改变
+    GSDMD-NT 的线粒体对接与成孔效率，最终限幅炎症小体的裂解性外排与焦亡强度；
+    多组学机制轴与通路级中介分析指向 PI3K–AKT–mTOR 为连接 EphB1 与膜环境重塑的
+    关键中介模块。
 
 hypotheses:
-
+  - id: H1
+    one_sentence: >
+      EphB1 缺失通过降低线粒体 CL 总量/可及池，削弱 GSDMD-NT 的早期线粒体对接，导致
+      IL-1β 裂解性外排与焦亡被限幅。
+  - id: H2
+    one_sentence: >
+      EphB1 对 CL–膜环境的调控主要经由 PI3K–AKT–mTOR 等下游信号模块中介。
 
 mechanistic_axes:
+  - id: AX1
+    name: baseline_mito_state
+    one_sentence: >
+      排除线粒体数量与基础膜电位等背景差异对后续 CL/输出读数的混杂。
+  - id: AX2
+    name: gsdmd_mito_interface
+    one_sentence: >
+      将执行瓶颈定位到 GSDMD-NT 与线粒体膜的早期相互作用与孔功能。
+  - id: AX3
+    name: inflammasome_output
+    one_sentence: >
+      用 IL-1β 裂解性外排与膜裂解读出刻画“输出端强度”，并与上游激活步骤区分。
+  - id: AX4
+    name: cl_accessibility
+    one_sentence: >
+      以 NAO/脂质组学与药理操控刻画并验证“CL 可及性/可结合池”作为膜环境阀门。
+  - id: AX5
+    name: membrane_context
+    one_sentence: >
+      通过多组学轴级整合与中介分析，将膜环境变化回溯到可解释的上游信号网络。
 
 sections:
+  - id: S1
+    title: 表型与层级定位：输出端限幅而非上游激活缺陷
+  - id: S2
+    title: 执行界面：GSDMD-NT 的线粒体对接与早期损伤读出
+  - id: S3
+    title: 膜脂阀门：CL 总量/可及池变化及其因果验证
+  - id: S4
+    title: 多组学机制轴与通路中介：连接 EphB1 信号与膜环境重塑
 figures:
   - id: "Figure 1"
     title: "EphB1 缺失降低炎症小体激活诱导的巨噬细胞焦亡与 IL-1β 释放"
@@ -483,7 +512,7 @@ figures:
   - id: "Figure 5"
 
     title: "多组学机制轴分析指向 membrane context 与心磷脂含量下降相关"
-    section: ""   # 若你之后重新划分章节，可再改
+    section: ""   
     role_in_story: "机制轴"
 
     one_sentence_purpose: >
@@ -505,6 +534,8 @@ figures:
 
       具体分析membrane_context轴指标 total mito mass 和cl fraction，可以发现pc、pe、cl都呈现下降趋势，其中pc下降量级最大
       这说明，HO 更像发生了“整体膜磷脂供给/膜生物发生能力下降（global phospholipid depletion）”，CL 的下降很可能是这个全局缺口中的一部分
+
+      # 
 
     panels:
       - figure_id: "5A"

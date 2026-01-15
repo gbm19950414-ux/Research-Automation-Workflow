@@ -1,0 +1,208 @@
+journal_selection_workflow:
+  meta:
+    template_name: journal_selection_decision
+    version: v1.0
+    last_updated: 2026-01-13
+    author: gbm
+    notes: >
+      YAML-based workflow for rapid journal selection,
+      prioritizing scope-fit, acceptance probability, and decision speed.
+
+  ############################################################
+  # STEP 1. Manuscript parameterization（文章定型）
+  ############################################################
+  manuscript_profile:
+    title: ""
+    short_core_claim: ""  # 一句话核心结论（编辑视角）
+
+    field_and_audience:
+      primary_field: ""    # e.g. mitochondrial biology / immunology
+      secondary_fields: [] # e.g. lipid metabolism, inflammasome
+      target_readers: ""   # e.g. basic researchers / mechanism-oriented audience
+
+    contribution_type:
+      category: ""         # mechanism / phenomenon / method / resource
+      novelty_level:       # subjective but honest
+        self_assessment: ""  # incremental / moderate / strong
+        rationale: ""
+
+    evidence_strength:
+      model_systems:
+        in_vivo: true
+        in_vitro: true
+        omics: [RNA-seq, lipidomics]
+      causality_level: ""  # correlation / partial causality / strong causality
+      known_limitations: "" # editors care a lot about this
+
+    manuscript_format:
+      article_type: ""     # Article / Short report / Communication / Resource
+      length_flexibility:  # how much trimming you can do
+        text: medium
+        figures: medium
+
+    constraints:
+      open_access_required: false
+      apc_upper_limit: ""  # numeric or "no limit"
+      ethical_constraints: "" # e.g. animal use already approved
+
+  ############################################################
+  # STEP 2. Reference-based reverse engineering（反向工程）
+  ############################################################
+  reference_anchor_papers:
+    selection_rule:
+      total_papers: 10
+      breakdown:
+        mechanism_similar: 5
+        method_similar: 3
+        model_similar: 2
+
+    papers:
+      - doi: ""
+        journal: ""
+        year: ""
+        similarity_type: [mechanism]
+      - doi: ""
+        journal: ""
+        year: ""
+        similarity_type: [method]
+
+    journal_frequency_summary:
+      auto_extract: false   # future automation hook
+      notes: ""
+
+  ############################################################
+  # STEP 3. Candidate journal pool
+  ############################################################
+  candidate_journals:
+    initial_pool: []  # filled after step 2
+    filtered_pool: [] # after quick exclusion
+
+  ############################################################
+  # STEP 4. Scoring system（核心决策表）
+  ############################################################
+  scoring_schema:
+    score_range: [0, 2]
+    dimensions:
+      scope_fit:
+        description: "How well the journal scope matches the manuscript"
+        weight: 1.5
+      article_type_match:
+        description: "Match between manuscript format and journal preference"
+        weight: 1.0
+      evidence_threshold:
+        description: "Likelihood that evidence meets review standards"
+        weight: 1.5
+      decision_speed:
+        description: "Transparency and speed of first decision"
+        weight: 1.2
+      acceptance_predictability:
+        description: "Stability and predictability of outcomes"
+        weight: 1.2
+      layout_flexibility:
+        description: "Figure, length, and structure friendliness"
+        weight: 0.8
+      cost_and_oa:
+        description: "OA policy and APC compatibility"
+        weight: 0.8
+      transfer_convenience:
+        description: "Publisher-level transfer options"
+        weight: 0.5
+      journal_reputation:
+        description: "Editorial ethics and community trust"
+        weight: 1.0
+      narrative_alignment:
+        description: "How naturally your story fits the journal's style"
+        weight: 1.5
+
+  ############################################################
+  # STEP 5. Journal-level evaluation
+  ############################################################
+  journal_evaluations:
+    - journal_name: ""
+      publisher: ""
+      tier: ""  # Stretch / Match / Safety
+      estimated_if: ""
+      typical_decision_time_weeks: ""
+
+      scores:
+        scope_fit: 0
+        article_type_match: 0
+        evidence_threshold: 0
+        decision_speed: 0
+        acceptance_predictability: 0
+        layout_flexibility: 0
+        cost_and_oa: 0
+        transfer_convenience: 0
+        journal_reputation: 0
+        narrative_alignment: 0
+
+      total_score: ""  # can be computed later
+      qualitative_risk: "" # desk reject risk / reviewer risk
+      comments: ""
+
+  ############################################################
+  # STEP 6. Tier strategy（Stretch / Match / Safety）
+  ############################################################
+  tier_strategy:
+    stretch:
+      max_number: 2
+      selection_logic: >
+        Higher impact, higher risk, but still within plausible scope.
+    match:
+      max_number: 4
+      selection_logic: >
+        Best balance of scope fit, evidence threshold, and speed.
+    safety:
+      max_number: 2
+      selection_logic: >
+        Broad scope, predictable review, acceptable prestige.
+
+  ############################################################
+  # STEP 7. Submission acceleration package（提速）
+  ############################################################
+  acceleration_package:
+    cover_letter:
+      core_message: ""   # one-paragraph editor-facing summary
+      journal_specific_customization: true
+
+    reviewer_suggestions:
+      target_number: 4-6
+      exclusion_rules:
+        - same_institution
+        - recent_collaborators
+
+    citation_alignment:
+      cite_recent_journal_papers: true
+      years: 2-3
+
+    data_readiness:
+      raw_data_available: true
+      code_or_pipeline_ready: true
+      statistics_checked: true
+
+  ############################################################
+  # STEP 8. Transfer & fallback plan（防时间浪费）
+  ############################################################
+  transfer_plan:
+    preferred_publishers: []  # e.g. Nature / Elsevier / Wiley
+    format_reuse_level: high
+    alternative_abstract_versions:
+      - focus: mechanism
+        text: ""
+      - focus: resource_or_method
+        text: ""
+
+  ############################################################
+  # STEP 9. Risk control & red flags
+  ############################################################
+  risk_control:
+    avoid_journals_with:
+      - unclear_peer_review
+      - aggressive_acceptance_promises
+      - poor_retraction_policy
+
+    final_go_no_go_checklist:
+      - scope_fit >= 1
+      - evidence_threshold >= 1
+      - decision_speed_known: true
+      - ethical_compliance_confirmed: true

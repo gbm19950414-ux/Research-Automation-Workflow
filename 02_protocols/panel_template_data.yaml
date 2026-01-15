@@ -104,7 +104,7 @@ interpretation:
 
 figure_legend:
 
-  title: "EphB1 缺失在多通路炎症小体激活下均降低 IL-1β 释放" 
+  title: "" 
     # 简短、结论式标题
       # (A–C) 或单 panel 展示的对象
       # 告诉读者“这个 panel 在比较什么现象”。
@@ -113,12 +113,10 @@ figure_legend:
   panels:
     description: ""
       # (A–C) 或单 panel 展示的对象
-      # 例："WT 与 Ephb1 pb/pb 巨噬细胞在不同炎症小体第二信号刺激下的 IL-1β 释放"
 
   groups:
     definition: ""
       # 对照与突变组的明确说明
-      # 例："WT 为同窝野生型对照，Ephb1 pb/pb 为敲除组"
 
   sample_size:
     n_per_group: "n ≥ 3"
@@ -132,7 +130,6 @@ figure_legend:
   normalization:
     description: ""
       # 仅在“影响 y 轴数值含义”时填写
-      # 例："ELISA 信号按细胞数量进行标准化"
       # 若只是背景扣除、技术校正，可不写
 
   significance:
