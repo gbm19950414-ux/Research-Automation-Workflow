@@ -1,0 +1,148 @@
+# ============================================================
+# schema.yaml v2  ——  单个 panel 的结构化写作模版
+# 目标：让 AI 在几乎不需要补充信息的前提下，生成：
+#   - 结果段（Results）
+#   - 简短讨论/过渡段（Mini Discussion / Transition）
+#   - Methods 中本实验的“差异性信息”
+# ============================================================
+
+# ---------- 0. Meta & Assets：基本信息 ----------
+meta:
+  figure_id: "Figure 7C"
+  experiment_id: "RNAseq_EphB1_downstream_state"
+  short_title: "EphB1 缺失重塑下游信号通路的转录响应状态"
+
+assets:
+  main_figure_file: "figures/F7/F7C_EphB1_downstream_pathway_scores.pdf"
+  raw_data_files:
+    - "results/rna/deseq2/interaction/interaction_summary_with_perBatchLFC.tsv"
+  stats_files:
+    - "results/multiomics/tables/ephb1_downstream_signaling_scores_per_batch.tsv"
+    - "results/multiomics/tables/ephb1_downstream_signaling_top5_contributors_per_batch.tsv"
+  analysis_scripts:
+    - "scripts/multi/04_EphB1下游通路活性评估_rna_ephb1_downstream_scores.R"
+    - "scripts/multi/ephb1_downstream_signaling_sets.yaml"
+  supplementary_items:
+    - "Figure S7"
+
+# ---------- 1. Scientific Question：本节要回答什么 ----------
+question:
+  context_from_previous: "前述结果表明 EphB1 缺失改变了线粒体膜脂环境与炎症小体效应端输出。"
+  core_question: "在收样时刻，EphB1 缺失是否系统性重塑其已知下游信号通路的转录响应状态？"
+  hypothesis_or_expectation: "若 EphB1 作为上游信号节点参与多条细胞内信号调控，其缺失应在转录层面留下可检测的下游通路响应差异。"
+  importance_reason: "明确 EphB1 下游信号通路的整体状态，有助于理解其如何通过多通路整合影响炎症与代谢表型。"
+
+# ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
+rationale:
+  model_and_system: >
+   "采用 WT 与 Ephb1−/− 原代小鼠腹腔巨噬细胞的 RNA-seq 数据，以反映在炎症刺激背景下的稳态转录状态。"
+    信号通路模块选择：
+      EphB1–ephrin-B 介导的细胞接触信号具有典型的双向性（bidirectional signaling）：Eph 受体细胞内触发“forward signaling”，同时在配体细胞内诱发 ephrin-B 的“reverse signaling”。综述与系统性总结指出，这两侧信号尽管在不同细胞类型与情境下呈现高度可塑性，但其下游效应往往收敛于一组反复出现的保守模块。在 forward 侧，Eph 受体的自磷酸化位点可招募 SH2/SH3 适配蛋白与非受体酪氨酸激酶，最常被归纳为以 Src/FAK 平台、Rho 家族小 GTPases 介导的细胞骨架重排、以及向 MAPK 与 PI3K–AKT–mTOR 等枢纽通路的分流为核心的信号模块集合。 ￼
+      在 reverse 侧，ephrin-B 缺乏酶活域，其信号传递依赖两类保守机制：一是由 Src 家族激酶介导的 ephrin-B 胞质尾部酪氨酸磷酸化及其对 Grb4 等适配蛋白的招募；二是由 ephrin-B C 端 PDZ-binding motif 介导的 PDZ 蛋白复合体（如 PDZ-RGS3 等）相互作用，进而影响 细胞骨架/黏附、迁移与极性等细胞行为，并可在部分情境下耦联到 JNK/p38 等应激 MAPK 分支。 ￼
+      基于上述文献共识，我们采用“模块化覆盖”的策略：以这些跨系统反复验证的保守模块作为 EphB1 下游信号网络的最小框架，用于刻画样品在收样时刻的“信号响应状态”（transcriptional response state），而非穷举所有可能的情境分支。 ￼
+    模块基因集建立：
+      
+  key_variables: "关键变量为基因型（WT vs Ephb1−/−），通过比较两者的转录差异评估下游信号响应。"
+  control_logic: "WT 细胞作为同背景对照，用于界定 Ephb1 缺失引起的特异性转录改变。"
+  core_justification: "若 EphB1 缺失改变其下游信号网络，则相关信号通路的转录足迹在 Ephb1−/− 细胞中应系统性偏移。"
+
+# ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
+methods:
+  inherits_from_protocol: "default_bulk_rna_seq_analysis"
+  biological_material: "来源于 8–12 周龄 C57BL/6 WT 与 Ephb1−/− 小鼠的原代腹腔巨噬细胞。"
+  experimental_groups: "实验分为 WT 与 Ephb1−/− 两组，RNA-seq 数据来自多批次独立实验。"
+  stimuli_and_treatment: "细胞未经过任何处理（与前述 RNA-seq 实验一致）。"
+  time_points: "在统一时间点收集样品用于 RNA 提取。"
+  dose_info: "不适用。"
+  readout_and_assay: "基于 RNA-seq 的差异表达分析，进一步通过预定义的 EphB1 下游信号通路转录足迹基因集计算通路响应分数。"
+  replicates: "每个基因型包含 ≥3 个生物学重复，合并多个实验批次分析。"
+  analysis_notes: >
+   "我们基于文献中 EphB1 的已知下游信号模块，构建其“转录足迹”基因集，用以表征收样时刻细胞在转录层面反映出的信号响应强度（response state），并与结构平台（capacity）指标联合解读，以避免将转录响应等同于即时激酶活性。"
+   "使用 DESeq2 计算每批次 log2 fold change，并基于通路基因集汇总为通路级转录响应分数。"
+  minimal_methods_summary: "对 WT 与 Ephb1−/− 原代腹腔巨噬细胞进行 RNA-seq 分析，并利用下游信号通路转录足迹基因集评估收样时刻的通路响应状态。"
+
+# ---------- 4. Results：把图变成结构化文字 ----------
+results:
+  data_direction: ""           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
+                               # 例如：“在 LPS+ATP 刺激下，Ephb1−/− 巨噬细胞释放的 IL-1β 显著低于 WT。”
+  stats_summary: ""            # 统计显著性信息（检验方法、p 值区间即可）
+                               # 例如：“非配对 t 检验，p < 0.01。”
+  key_numbers: ""              # 可选：fold change、均值±SEM、效应量（方便你之后查）
+                               # 例如：“WT: 850 ± 120 pg/mL；Ephb1−/−: 410 ± 90 pg/mL；约下降 50%。”
+  group_difference_statement: "" # 用一两句把组间差异说清楚（可直接作为结果段主句）
+                                 # 例如：“与 WT 相比，Ephb1−/− 巨噬细胞在相同刺激强度下产生的 IL-1β 减少。”
+  robustness_and_qc: ""        # 是否在多批次实验中重复、是否排除了明显 outlier 等
+                               # 例如：“该趋势在两批独立实验中均一致，排除 1 个基于预设准则的 outlier 后结果不变。”
+  anomalies_or_limits: ""      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
+                               # 例如：“一批实验中 WT 绝对值略低，可能与细胞密度偏低有关。”
+
+# ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
+interpretation:
+  minimal_bio_interpretation: "" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
+                                 # 例如：“这些结果提示 EphB1 对 NLRP3 介导的 IL-1β 释放是促进性的。”
+  alternative_explanations: ""   # 可能的其他解释/局限（方便之后写 Discussion）
+                                 # 例如：“不能排除 EphB1 缺失影响前炎性细胞因子转录的可能。”
+  summary_type: ""               # 从下列类型中选一个或多个，用逗号分隔：
+                                 #   "supportive"   支持前一节/主假设
+                                 #   "descriptive"  纯描述现象
+                                 #   "elimination"  排除某种机制或可能性
+                                 #   "negative"     未见显著差异/阴性结果
+                                 #   "exploratory"  探索性发现
+                                 # 例如："supportive"
+  claim_supported: ""            # 本 panel 主要想支持/反驳的“文字命题”
+                                 # 例如：“EphB1 是 NLRP3 炎性小体效应端活性的正调控因子。”
+  link_to_previous: ""           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
+                                 # 例如：“在观察到 EphB1 缺失缓解线粒体损伤后，我们进一步评估其对下游 IL-1β 释放的影响。”
+  transition_to_next: ""         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
+                                 # 例如：“为了明确这种效应是否依赖于线粒体 ROS，我们随后检测了 NLRP3 激活过程中 mtROS 的变化。”
+
+# ---------- 6. figure_legend ----------
+
+figure_legend:
+
+  title: "EphB1 缺失在多通路炎症小体激活下均降低 IL-1β 释放" 
+    # 简短、结论式标题
+      # (A–C) 或单 panel 展示的对象
+      # 告诉读者“这个 panel 在比较什么现象”。
+      # 不包含基因型信息
+
+  panels:
+    description: ""
+      # (A–C) 或单 panel 展示的对象
+      # 例："WT 与 Ephb1 pb/pb 巨噬细胞在不同炎症小体第二信号刺激下的 IL-1β 释放"
+
+  groups:
+    definition: ""
+      # 对照与突变组的明确说明
+      # 例："WT 为同窝野生型对照，Ephb1 pb/pb 为敲除组"
+
+  sample_size:
+    n_per_group: "n ≥ 3"
+    replicates: "结果在 ≥3 次独立实验中重复获得"
+
+  statistics:
+    test: "非配对双尾 t 检验"
+    multiple_comparison: "未进行多重比较校正"
+      # 若使用 ANOVA / mixed model / FDR，这里写；否则可以省略
+
+  normalization:
+    description: ""
+      # 仅在“影响 y 轴数值含义”时填写
+      # 例："ELISA 信号按细胞数量进行标准化"
+      # 若只是背景扣除、技术校正，可不写
+
+  significance:
+    symbols: "* p < 0.05, ** p < 0.01, *** p < 0.001; ns, 不显著"
+
+# ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"] 
+    # 你希望从这个 schema 主要生成哪些部分的正文？
+    # 可选值： "Results" / "Discussion_mini" / "Methods_diff"
+  tone: "neutral"     
+    # 写作语气： "neutral"（默认科研语气）/ "cautious"（更谨慎）/ "confident"（偏肯定）
+  target_journal_style: "" 
+    # 若有心仪期刊的写作风格，可以在此填入名称，仅作为“风格参考”
+    # 例如："Cell Metabolism", "Nature Immunology"
+  language: "zh_en_mix"
+    # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
