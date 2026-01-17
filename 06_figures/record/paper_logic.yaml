@@ -627,123 +627,109 @@ figures:
 
     
   - id: "Figure 6"
-    title: "候选通路优先级排序/机制路径分析"
+    title: "候选通路优先级排序：RNA 机制路径（X–M–Z）与 lipid 表型一致性验证"
     section: ""
     role_in_story: "机制"
 
     one_sentence_purpose: >
-      在确定用于表征 CL/膜环境变化的优先机制轴后，
-      本图通过通路级候选集与中介分析框架，
-      探索 EphB1 缺失可能通过哪些下游信号通路影响该机制轴，
-      并对候选通路进行基于多证据的优先级排序，以指导后续功能验证。
+      在 Figure 5 已确定“优先机制轴”（Z；以 RNA 轴为主、并与 lipid 表型方向一致）后，
+      本图以 EphB1 已知下游通路的转录足迹作为候选中介（M），在多批次 RNA 数据内评估
+      EphB1 缺失（X）对 M 的一致效应及 M 与 Z 的机制耦合，从而对候选通路进行可辩护的
+      优先级排序；配对组学仅作为方向性 sanity check，而非主推断依据。
 
     key_message: >
       本图的逻辑任务是：
-      （1）构建一组具有文献依据的 EphB1 下游信号通路作为中介候选；
-      （2）评估这些通路在转录层面的稳定性与可重复性；
-      （3）在配对组学样本中，使用中介模型分解 EphB1 缺失、通路变化与机制轴分数之间的关系；
-      （4）基于效应方向、稳健性与一致性，对通路进行探索式优先级排序，
-      为后续独立实验验证提供候选路径。
+      （1）将“EphB1 下游信号通路状态”操作化为一组有文献依据的转录足迹基因集（M），并明确计分方向；
+      （2）在多批次 RNA 中检验候选通路分数对 EphB1 缺失（X）的效应是否方向一致、可重复；
+      （3）在 RNA 内部检验候选通路（M）与优先机制轴（Z；membrane context 的 RNA 代理）之间的耦合关系；
+      （4）综合一致性、效应量与稳健性（如 LOO）形成候选通路排序，输出少数优先验证对象；
+      （5）将 Z 与 lipid 表型作为独立重复的一致性对齐，用于支撑“RNA 机制轴可作为 lipid 表型的转录代理层”。
 
     panels:
       - figure_id: "6a"
         experiment_id: 1
-        story_role: "将 EphB1 效应分解为‘通路中介’"
+        story_role: "分析框架示意：X–M–Z（RNA-only） + lipid 一致性验证"
         micro_question: >
-          我们在 Figure 5 已经看到 EphB1 缺失与 membrane context 轴的变化相关，
-          Figure 6 想回答哪些 EphB1 下游信号通路（M）在多大程度上
-          中介了 EphB1 缺失 (X) 对 membrane context 轴分数及其关键脂质成分 (Y) 的影响
-          在这里展示一个概念图，说明我们的 X–M–Y 中介模型设计思路：
+          在配对组学样本量受限的前提下，如何以可辩护、可复现的方式连接 EphB1 缺失（X）、
+          下游通路状态（M）与 membrane context 机制轴（Z），并将其与 lipid 表型建立一致性对齐？
         micro_answer: >
-          将因素分解为 基因敲除（x）；信号通路转录水平变化（m）；机制轴z分数/脂质组学指标（y）
-          将 membrane context 轴的变化分解为“EphB1 缺失对下游通路的效应 (a)” 与 “下游通路对机制轴z分数 / 脂质组学指标的效应 (b)”。
+          采用分层证据链：主分析在 RNA 内部进行，定义 X=EphB1 缺失、M=候选下游通路分数、
+          Z=membrane context 的 RNA 机制轴分数，评估 X→M 的跨批次一致效应及 M↔Z 的机制耦合；
+          lipidomics 层面不作为回归中介的主要因果推断输入，而用于验证 Z 与 lipid 表型（如 CL/磷脂库）
+          在独立重复中的方向一致性。
 
       - figure_id: "6b"
         experiment_id: 2
-        story_role: "EphB1 下游信号通路库"
+        story_role: "EphB1 下游信号通路候选集与计分原则"
         micro_question: >
-          如何从转录组中构建“Eph 下游通路”这一系列中介候选？
-          通过赋予方向与权重，让最终分数反应 通路活化的转录足迹（transcriptional footprint），越高说明通路活性越高
-          但是PI3K–AKT–mTOR、Rho GTPases、FAK/Src、很多代谢酶通路的转录组件常常与通路活性解耦（因为活性来自磷酸化/定位/GTP 状态/脂质二级信使）
-          
+          如何从文献与通路知识中构建一组最小但可辩护的 EphB1 下游候选模块（M），并确保
+          这些模块的转录足迹计分具有明确方向与可解释性？
         micro_answer: >
-          展示基于文献与通路数据库整理的 Eph 下游信号通路设定集：
-          列出每个通路的核心基因、上下游定位以及其对膜脂组成与线粒体膜环境的预期影响（figure中只展示基因数量，因为篇幅太大），
-          并标注哪些通路在 Figure 6 中已被 membrane context 轴富集或提示关联，
-          为后续中介分析提供有生物学指向、与 membrane context 明确相关的一组候选 M。
+          展示候选通路模块清单（例如 PI3K–AKT–mTOR、Rho/FAK/Src、Integrin/microdomain 等），
+          说明每个模块的 footprint 与 capacity 子模块的生物学含义、与信号活性可能解耦的部分
+          及其在计分中如何处理（例如更偏向足迹/响应与阀门型节点），并给出统一的计分规则：
+          分数越高表示通路状态越“激活/更强”的转录证据（在必要时通过 gene_effect_sign 处理刹车基因）。
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "6c"
         experiment_id: 3
-        story_role: "跨批次通路活性一致性评估"
+        story_role: "跨批次候选通路分数的一致性与稳健性评估（X→M）"
         micro_question: >
-          这些 Eph 下游通路作为中介候选，其活化模式在不同实验批次之间是否一致、可重复？
+          作为候选中介的 EphB1 下游通路分数（M），在不同 RNA 批次中对 EphB1 缺失（X）的
+          方向与效应量是否一致，从而具备进入机制链条推断的基本可重复性？
         micro_answer: >
-          通过该分析步骤，对候选通路在不同批次/样本中的变化模式或中介参数进行评估，
-          并依据预先定义的方向一致性与稳健性判据，对通路进行排序，
-          而不在逻辑层中预设或陈述具体结果。
+          对每个批次分别计算候选通路分数，并以批内标准化后的组间差异（KO−WT）作为效应量；
+          通过方向投票、效应量汇总与 LOO 等稳健性指标，对候选通路进行初筛与排序，输出可重复的候选集合。
         focuses_on_axes: []
         depends_on_panels: []
-
-      - figure_id: "6c"
-        experiment_id: 4
-        story_role: "候选通路的综合效应评估"
-        micro_question: >
-          综合看所有批次rnaseq数据
-          Eph 下游通路候选中，哪些通路显著中介了 EphB1 对 membrane context 这一机制轴整体 score 的影响？
-        micro_answer: >
-          通过该分析步骤，对候选通路在不同批次/样本中的变化模式或中介参数进行评估，
-          并依据预先定义的方向一致性与稳健性判据，对通路进行排序，
-          而不在逻辑层中预设或陈述具体结果。
-        focuses_on_axes: ["membrane_context"]
-        depends_on_panels: ["7C_pathway_batch_heatmap"]
 
       - figure_id: "6d"
-        experiment_id: 5
-        story_role: "中介分析"
+        experiment_id: 4
+        story_role: "RNA 内部机制耦合：候选通路与 membrane context 轴（M↔Z）"
         micro_question: >
-          membrane context 机制轴的改变主要是通过哪些 Eph 下游通路驱动的？
+          在 RNA 内部，哪些 EphB1 下游候选通路（M）与优先机制轴（Z；membrane context 的 RNA 代理）
+          表现出方向一致、稳健的耦合关系，从而更可能位于“EphB1 → 膜环境障碍”的上游解释链条中？
         micro_answer: >
-          由于样本量过小，该分析只做通路可能性排序，不做严格统计推断
-          
+          在每个批次内，以样本层面的相关/回归与稳健性检查刻画 M 与 Z 的耦合方向与强度，并与 X→M 的
+          方向一致性共同用于优先级排序；该步骤强调“候选排序与机制连贯性”，而非在小样本条件下做严格中介推断。
+        focuses_on_axes: ["membrane_context"]
+        depends_on_panels: []
+
       - figure_id: "6e"
         experiment_id: 5
-        story_role: "更换y为脂质组学指标进行的中介分析"
+        story_role: "RNA 机制轴与 lipid 表型的一致性对齐（Z ↔ lipid-Y）"
         micro_question: >
-          为了把“轴级相关的因果推断”，转化为“可生物学解释、可干预、可验证的脂质层面因果路径定位”，
-          回答：这些通路，究竟是通过“改变哪一类脂质事件”，才把轴分数拉低的？
+          在不依赖配对样本回归的前提下，如何将 RNA 层面的 membrane context 机制轴（Z）与 lipid 表型
+          建立最小但可辩护的连接，从而支持“Z 可作为 lipid 表型的转录代理层”？
         micro_answer: >
-          通过该分析步骤，对候选通路在不同批次/样本中的变化模式或中介参数进行评估，
-          并依据预先定义的方向一致性与稳健性判据，对通路进行排序，
-          而不在逻辑层中预设或陈述具体结果。
+          在各自独立重复中分别估计 Z（RNA）与 lipid 表型指标（lipid-Y）的组间效应方向与大小，并进行
+          方向一致性/等级一致性对齐；若存在配对样本，则仅以方向性散点/LOO 检查作为 sanity check，
+          不将其作为主要统计推断来源。
+        focuses_on_axes: ["membrane_context"]
+        depends_on_panels: []
 
       - figure_id: "6g/h"
-        experiment_id: 1
-        story_role: "ephb1-fc处理心磷脂nao染色/量化统计"
+        experiment_id: 6
+        story_role: "反向/正向信号区分的功能验证设计（EphB1–Fc 聚簇化）"
         micro_question: >
-          鉴于ephb1具有双向激活、成簇化激活的特点，
-          所以使用可溶性ephb1胞外结构域（ephb1-fc）+anti-fc处理，
-          模拟ephb1成簇化反应，富集到细胞表面ephrinb，
-          通过占位，抑制细胞内的ephb1下游信号通路，激活ephrin下游信号通路
-          通过观察wt细胞nao表型是否与ephb1敲除相似，
-          可以验证心磷脂含量减少的上游是ephb1还是ephrin下游信号通路
-
+          考虑 Eph–ephrin 具备正向（Eph 受体）与反向（ephrin 配体）信号的双向特性，如何通过
+          外源操控设计区分“EphB1 受体下游”与“ephrin-B 反向信号”对 CL 可及性表型的贡献？
         micro_answer: >
-          ephb1预处理显著降低 WT 巨噬细胞的 NAO 染色强度，并使 WT 与 KO 之间原本存在的 NAO 差异被抹平，
-          说明ephb1下游信号通路 确实决定了“可达/可复合” CL 池的大小
+          使用可溶性 EphB1 胞外结构域融合蛋白（EphB1–Fc）并配合二抗聚簇化，在细胞表面富集/占位 ephrin-B，
+          作为操控 Eph–ephrin 交互构型的手段；通过比较该操控对 NAO（CL 可及池代理）与炎症小体输出 readout 的影响方向，
+          为区分正向/反向信号在膜脂阀门中的相对贡献提供可检验的实验设计。
         focuses_on_axes: []
         depends_on_panels: []
 
-      - figure_id: "4i"
-        experiment_id: 2
-        story_role: "ephb1-fc处理后il1b释放"
+      - figure_id: "6i"
+        experiment_id: 7
+        story_role: "配套功能 readout：操控后 IL-1β 外排"
         micro_question: >
-          原理同上
-          通过观察wt细胞il1b释放表型是否与ephb1敲除相似，
-          可以验证il1b释放减少的上游是ephb1还是ephrin下游信号通路
+          在上述正向/反向信号区分的操控设计下，如何用与主线一致的功能 readout 将膜脂表型变化
+          投影回炎症小体输出端，从而形成可检验的因果链条？
         micro_answer: >
-          在 WT 巨噬细胞中，ephb1fc降低 NLRP3 诱导的 IL-1β 释放，
-          进一步说明ephb1下游信号通路 确实决定了“可达/可复合” CL 池的大小
+          在同一操控条件下并行评估 IL-1β 裂解性外排等输出端 readout，作为膜脂阀门变化的功能后果检验；
+          该面板的逻辑角色是为后续“候选通路 → 膜环境/CL → 输出端限幅”的实验验证链条提供一致的功能映射。
         focuses_on_axes: []
         depends_on_panels: []
