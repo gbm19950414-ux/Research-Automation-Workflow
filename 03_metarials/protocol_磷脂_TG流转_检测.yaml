@@ -1,0 +1,138 @@
+experiment: qPCR_validate_membrane_environment_modules
+
+objective: >
+  在不引入额外处理混杂的前提下，以 qPCR 独立验证组学中定义的
+  “membrane environment 改变”是否在 WT vs EphB1_KO 原代腹腔巨噬细胞中可复现。
+  membrane environment 采用三类机制维度拆解检测：
+  (1) inner membrane structural capacity（membrane_context_capacity）
+  (2) phospholipid synthesis/supply limitation（phospholipid_flux_limitation）
+  (3) phospholipid turnover & rerouting to TG（phospholipid_turnover_rerouting）
+
+rationale: >
+  该 qPCR 设计以“复现 RNA-seq 收样状态下的方向性转录重编程”为主目标；
+  capacity/结构背景与合成供给属于慢变量，适合基线检测；
+  turnover/rerouting 属于适应性变量，基线亦可检测，但更易受培养状态影响，
+  因此设置可选的轻度标准化条件作为补充而非主结论依据。
+
+cell_system:
+  species: mouse
+  cell_type: primary peritoneal macrophages
+  genotypes:
+    - WT
+    - EphB1_KO
+  culture_alignment_principle: >
+    所有关键培养条件（贴壁时间、密度、培养基成分、血清/CSF-1、刺激）
+    尽可能与 RNA-seq 收样条件一致，以保证“对齐验证”。
+
+experimental_groups:
+
+  main_basal_validation:
+    label: "Basal (no additional treatment; aligned to RNA-seq collection state)"
+    purpose: >
+      作为主结论依据：验证三类模块在 KO vs WT 的方向性是否与组学一致。
+    conditions:
+      treatment: none
+      timing: "按 RNA-seq 收样流程直接裂解取 RNA"
+    expected_strength:
+      strong_for:
+        - membrane_context_capacity
+        - phospholipid_flux_limitation
+      moderate_for:
+        - phospholipid_turnover_rerouting
+
+  optional_standardization_condition:
+    label: "Optional mild standardization (only if basal turnover module is noisy)"
+    trigger_to_use: >
+      若 phospholipid_turnover_rerouting 模块在基线中波动大、重复间不稳定，
+      或 KO/WT 差异方向不一致，则启用该条件作为补充证据。
+    option_A_low_serum:
+      description: "Low-serum / serum-free incubation to standardize upstream inputs"
+      duration: "2–4 hours"
+      caution: "避免过夜饥饿以减少原代巨噬细胞应激/死亡"
+    option_B_LPS_short:
+      description: "Short LPS priming to align inflammatory context (if needed)"
+      duration: "2–4 hours"
+      caution: >
+        LPS 会引入 NF-κB/MAPK 等混杂；仅作为补充，
+        不替代 basal 主结论。
+
+gene_sets_for_qpcr:
+  source_file: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/03_metarials/primer.yaml"
+  module: "Membrane_environment"
+  submodules:
+    - membrane_context_capacity
+    - phospholipid_flux_limitation
+    - phospholipid_turnover_rerouting
+
+qpcr_panels:
+  default_use_recommended_panels: true
+  panels:
+    membrane_context_capacity:
+      from_primer_yaml: "Membrane_environment.submodules.membrane_context_capacity.recommended_qpcr_panel.P1_minimal_4_to_5"
+      interpretation_rule: >
+        支持/容量基因（Immt/Chchd3/Opa1/Mic10）整体下降 +
+        破坏/应激因子 Oma1 上升（或相对上升）→ 结构背景障碍增强。
+    phospholipid_flux_limitation:
+      from_primer_yaml: "Membrane_environment.submodules.phospholipid_flux_limitation.recommended_qpcr_panel.P1_minimal_5_to_6"
+      interpretation_rule: >
+        合成与供给瓶颈节点（Acly/Acaca/Fasn/Gpam/Pcyt1a/Crls1）整体下降 →
+        phospholipid supply limitation 增强。
+    phospholipid_turnover_rerouting:
+      from_primer_yaml: "Membrane_environment.submodules.phospholipid_turnover_rerouting.recommended_qpcr_panel.P1_minimal_4_to_5"
+      interpretation_rule: >
+        脂解/周转与 TG 重分配相关基因（Pnpla2/Mgll/Lpcat3/Dgat1/Dgat2）整体上升 →
+        turnover/rerouting 程序增强（与 TG↑、PL↓ 表型一致）。
+
+reference_genes:
+  strategy: >
+    优先使用你在体系中已验证稳定的 housekeeping；
+    若 primer 设计阶段尚未固定，可先准备 2 个候选并在本次实验中评估稳定性。
+  candidates:
+    - Gapdh
+    - Hprt1
+  note: >
+    不建议只用单一内参；建议至少两者交叉验证稳定性。
+
+replicates:
+  biological_replicates: "≥3 independent mice per genotype (recommended)"
+  technical_replicates: "qPCR technical replicate per primer pair as standard"
+  note: >
+    原代巨噬细胞个体差异较大；主结论以生物重复为准。
+
+workflow:
+  steps:
+    - "Isolate peritoneal macrophages from WT and EphB1_KO"
+    - "Plate and culture under RNA-seq-aligned conditions"
+    - "Collect RNA under basal condition (main)"
+    - "Optional: apply mild standardization condition if needed (secondary)"
+    - "cDNA synthesis"
+    - "qPCR with three module panels"
+    - "Compute ΔCt / ΔΔCt and summarize KO vs WT direction per module"
+    - "Report per-gene and per-module aggregated directionality"
+
+analysis_plan:
+  per_gene: "ΔΔCt (KO vs WT) with confidence intervals if possible"
+  per_module_summary: >
+    以模块内基因的方向一致性（majority vote）+ 平均效应量（mean ΔΔCt 或 mean log2FC）
+    作为模块级 readout；不强行追求每个基因均显著。
+  decision_rules:
+    pass_if:
+      - "membrane_context_capacity panel shows net downshift of capacity genes and/or Oma1 up"
+      - "phospholipid_flux_limitation panel shows net downshift of key synthesis/supply genes"
+      - "turnover/rerouting panel shows net upshift (or consistent direction) if included"
+    fail_if:
+      - "directions are inconsistent across ≥3 biological replicates and not explainable by culture variability"
+
+reporting_in_paper:
+  positioning: >
+    将 qPCR 作为“独立验证：与组学一致的方向性转录重编程”证据；
+    不将其表述为单独证明 lipid pool 变化，而是支持机制轴的 RNA 层面可复现性。
+  suggested_sentence_template: >
+    qPCR validation in independently prepared primary macrophages confirmed coordinated
+    transcriptional changes consistent with reduced inner-membrane structural capacity and
+    limited phospholipid supply, with optional evidence of enhanced turnover/rerouting,
+    mirroring the multi-omics–defined membrane environment defect.
+
+notes:
+  - "保持所有条件与 RNA-seq 尽量一致是该设计的核心；处理条件仅作为补充。"
+  - "若未来需要 link_validation（例如 PI3K 抑制剂 → flux/turnover 转录变化），应另立实验，不混入本次 basal 验证。"

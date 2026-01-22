@@ -1,0 +1,105 @@
+# Treatment plan for PI3K–AKT–mTOR protein-level output validation
+# Context: EphB1 KO vs WT primary murine peritoneal macrophages
+# Purpose: test whether PI3K signaling OUTPUT differs at protein/phosphorylation level,
+# under basal conditions and upon minimal standardized stimulation.
+
+experiment: PI3K_output_protein_validation
+
+biological_question: >
+  在 EphB1 缺失背景下，PI3K–AKT–mTOR 通路的蛋白层面活化输出
+  （尤其是 AKT/mTOR 磷酸化读出）是否在基线或受控刺激条件下发生改变？
+  该实验用于检验 RNA 层面“capacity 下降”是否转化为
+  蛋白输出阈值/动态范围的变化。
+
+cell_system:
+  cell_type: Primary murine peritoneal macrophages
+  genotypes:
+    - WT
+    - EphB1_KO
+  notes: >
+    原代巨噬细胞在生理条件下维持低水平 PI3K–AKT 基础活性，
+    需要通过统一培养与最小刺激将信号输出拉入可比较的动态范围。
+treatment_schemes:
+  scheme_A_basal:
+    label: "Basal PI3K output (no stimulation)"
+    purpose: >
+      评估在收样状态/稳态条件下，
+      PI3K–AKT–mTOR 蛋白输出是否已存在明显差异。
+      该条件作为参考与阴性对照，不作为唯一结论依据。
+    procedure:
+      - culture cells under standard conditions (matching RNA-seq experiments)
+      - no additional stimulation
+      - collect lysates directly
+    expected_interpretation:
+      - no or subtle difference is acceptable
+      - lack of difference does NOT falsify PI3K capacity reduction hypothesis
+
+  scheme_B_minimal_stimulation:
+    label: "Minimal growth-factor challenge (dynamic test)"
+    purpose: >
+      通过短时、标准化刺激测试 PI3K 输出的动态范围、
+      峰值强度与响应速度，检验 EphB1 KO 是否降低信号阈值或上限。
+    baseline_normalization:
+      method: "low-serum or serum-free incubation"
+      duration: "2–4 hours"
+      caution: >
+        避免过夜饥饿以防原代巨噬细胞应激或非特异性死亡。
+    stimulation:
+      primary_option:
+        reagent: CSF-1
+        rationale: "巨噬细胞生理相关的主要 PI3K 上游输入"
+      alternative_option:
+        reagent: IGF-1 or insulin
+        rationale: "通用 PI3K 激活输入，用于机制验证"
+    timepoints_minutes:
+      - 0
+      - 2
+      - 5
+      - 10
+      - 20
+    expected_interpretation:
+      - EphB1_KO may show:
+          - reduced peak phosphorylation
+          - delayed activation kinetics
+          - faster signal decay
+      - any of the above supports reduced PI3K signaling capacity
+
+  scheme_C_positive_control:
+    label: "PI3K inhibitor control"
+    purpose: >
+      验证抗体、流程与检测体系对 PI3K 输出变化的灵敏性，
+      排除技术性“检测不到差异”的可能。
+    treatment:
+      reagent: PI3K inhibitor (e.g. LY294002 or class I–selective inhibitor)
+      pretreatment_duration: "15–30 minutes"
+      followed_by: "CSF-1 stimulation"
+    expected_interpretation:
+      - clear suppression of p-AKT / p-S6 confirms assay validity
+
+readouts:
+  primary:
+    - p-AKT_S473
+    - p-AKT_T308
+  secondary:
+    - p-S6_S235_236
+    - p-4EBP1_T37_46
+  normalization:
+    - total_AKT
+    - total_S6
+  notes: >
+    建议至少同时检测 AKT 与 mTORC1 层级读出，
+    以避免单一节点受其他通路补偿影响。
+
+replicates_and_controls:
+  biological_replicates: "≥3 independent mice per genotype (if feasible)"
+  technical_notes: >
+    原代细胞个体差异较大，需严格统一贴壁时间、密度与培养条件。
+
+decision_logic:
+  if_dynamic_difference_detected: >
+    支持“EphB1 缺失降低 PI3K 信号输出阈值/动态范围”，
+    与 RNA 层面 capacity 下降一致。
+  if_no_dynamic_difference_detected: >
+    表明 PI3K 网络在蛋白磷酸化层面存在补偿稳态，
+    机制更可能通过转录重编程影响下游代谢/膜维护程序，
+    不否定组学链条结论。

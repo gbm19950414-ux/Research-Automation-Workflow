@@ -126,3 +126,15 @@ figure_legend:
   notes:
     description: >
       本流程图用于说明遗传筛选的设计与判定逻辑，不包含具体定量数据。
+
+# ---------- 8. English ----------
+
+
+english_projection:
+  results_skeleton:
+    - ""
+    - ""
+    - ""
+  notes:
+    - "不追求语言润色"
+    - "只保证因果与事实对应"

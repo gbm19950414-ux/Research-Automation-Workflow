@@ -26,7 +26,7 @@ question:
   context_from_previous: "Fig6A-C已经介绍多组学整合的概念图、指标选择与数据处理流程。"
   core_question: "EphB1 缺失是否在 RNA 与脂质组中呈现一致且可重复的机制轴效应？"
   hypothesis_or_expectation: "预期找到一个在多个批次、两种组学中方向一致的机制轴。"
-  importance_reason: "判断哪些机制轴具有跨批次、组学一致性，是后续提出最终机制模型（Fig6E）的前提。"
+  importance_reason: "判断哪些机制轴具有跨批次、组学一致性，是后续提出最终机制模型的前提。"
 
 rationale:
   model_and_system: "整合 RNA-seq（3 批次）与脂质组学 LC–MS（4 批次）的机制轴效应。"
@@ -42,57 +42,62 @@ methods:
   time_points: "单一时间点收集。"
   dose_info: "无剂量处理。"
   readout_and_assay: "RNA：DESeq2 LFC shrinkage；Lipid：PQN+z-score；机制轴按 Fig6B/C 的指标集计算。"
-  replicates: "RNA 各批次 n≈4–6；脂质组各批次 n≈6–8。"
+  replicates: "RNA 各批次 n≈3–6；脂质组各批次 n≈3～6。"
   analysis_notes: "effect_z = batch 内 KO vs WT 的方向性效应；不跨批次合并，仅作方向比较。"
   minimal_methods_summary: "RNA 与脂质组分别在每个 batch 内计算机制轴效应（effect_z），再整合成 axis×batch×omics 矩阵用于方向一致性分析。"
 
 results:
   data_direction: >
-    六条机制轴的 effect_z 具体数值如下：
-    - **Membrane context**：RNA 显著为负（−1.71, −1.52），脂质组显著为正（+2.24, +1.79, +1.05, +0.55），方向完全相反。
-    - **Oxidation**：RNA 一致为正（+1.08, +1.11, −0.00）；脂质组多数为正（+0.67, +0.27），但存在轻度负值（−0.51, −0.73）。
-    - **Remodeling**：RNA 在三批次交替为正/负（+0.80, −1.21, +1.23）；脂质组亦出现强烈正负交替（+1.14, −1.16 等）。
-    - **Supply**：RNA（+0.98, −0.42, +0.63）与脂质组（+1.57, −1.02 等）均呈现大幅度的方向混杂。
-    - **Synthesis**：RNA 接近零（−0.17 到 +0.09）；脂质组除 batch2（−1.45）外均接近零，整体效应弱。
-    - **Transport**：RNA 冲突明显（+0.32, −1.03, +1.23）；脂质组在两批中呈强正（+1.55, +1.60），但亦存在负值（−0.70）。
+    基于 RNA-seq（3 个批次）与脂质组学（4 个批次）计算的 batch-level effect_z 矩阵显示，
+    六条机制轴中仅 Membrane context 轴在两种组学中均呈现出显著且高度一致的方向性变化。
+    在 RNA 层面，Membrane context 在所有批次中均表现为稳定的正向效应
+    （effect_z ≈ 0.24 至 0.79）；而在脂质组层面，该轴在四个独立批次中均表现为正向效应
+    （effect_z ≈ +0.54 至 +2.24）
+    Membrane context 轴的方向在所有批次中完全一致，且绝对效应值在所有轴中最大。
+
+    相比之下，其余机制轴均未显示出类似的跨批次稳健性。
+
 
   stats_summary: >
-    effect_z 的绝对值超过 1 的情况主要发生在：Membrane context（|z|=1.52–2.24）、Oxidation（RNA |z|≈1.1）、
-    Transport（lipid |z|≈1.6）及部分 Remodeling/Supply 批次，但方向不一致。未进行跨批次合并的显著性检验。
-
-  key_numbers: >
-    - Oxidation（RNA）：+1.08, +1.11, −0.00；（Lipid）：−0.51, +0.27, +0.67, −0.73。
-    - Membrane context（RNA）：−1.71, −1.52；（Lipid）：+2.24, +1.79, +1.05, +0.55。
-    - Transport（Lipid）：+1.55, +1.60（两批次强正）。
-
-  group_difference_statement: >
-    各机制轴在 RNA 与脂质组中呈现多样化、批次依赖的方向性变化，其中 Membrane context 轴在两种组学中均表现出
-    KO 相对 WT 的总体相同变化趋势且zscore最大，而其他轴方向批次内不稳定或呈组学矛盾。
+    effect_z 的绝对值超过 1 的情况主要集中于 Membrane context 轴，
+    其在 RNA 与脂质组中均达到或超过该阈值。
+    其他机制轴仅在个别批次或单一组学中出现 |effect_z| > 1，
+    且缺乏跨批次与跨组学的一致性。
+    本分析未对不同批次进行数值合并或总体显著性检验，
+    而是以方向一致性与效应幅度作为稳健性评估标准。
 
   robustness_and_qc: >
-    Membrane context 轴在三个 RNA 批次和脂质组中的方向完全一致（分别为负、正）且zscore分数最大，显示出高度稳健性；
-    其他轴均呈显著 batch effect，方向在不同批次间经常翻转。
+    Membrane context 轴在 RNA 三个批次与脂质组四个批次中均呈现完全一致的组学内方向性，
+    且绝对效应值在所有机制轴中最高，显示出显著的跨批次稳健性。
+    其余机制轴均受到明显的 batch effect 影响，限制了其作为主要受影响通路的解释力度。
 
   anomalies_or_limits: >
-    Membrane context 轴在 RNA 与脂质组中方向相反，提示存在组学矛盾，这一问题可以通过加深轴机制理解、更新gene set进行进一步探索解决；
-    Remodeling 与 Supply 轴方向高度不稳定，限制了解释力度。
+    Membrane context 轴的基因集选择为整体磷脂合成/分解相关基因集，并赋予方向变量
 
 interpretation:
   minimal_bio_interpretation: >
-    这些结果表明，在 EphB1 缺失条件下，跨组学最一致的变化集中在 Membrane context 轴，而氧化、运输相关变化在脂质组中亦有较强表现，
-    其余机制轴并不表现为稳定的跨批次效应。
+    跨组学效应矩阵表明，EphB1 缺失并未引发广泛、非特异性的代谢或合成程序改变，
+    而是选择性地扰动了与膜环境相关的机制轴。
+    Membrane context 轴在 RNA 与脂质组中均表现出最大的效应幅度和最高的批次一致性，
+    指示其为 EphB1 缺失条件下最主要、最稳健的受影响机制轴。
 
   alternative_explanations: >
-    RNA 与脂质组在部分轴上的矛盾方向可能来自技术噪音、batch effect 或不同层级调控（转录层与代谢层）的时间差异。
 
-  summary_type: "exploratory, supportive"
+    其他机制轴中观察到的方向混杂更可能源于 batch effect、
+    条件依赖性调控或较弱的真实生物学效应。
 
-  claim_supported: "EphB1 缺失主要影响 Membrane context 相关机制轴，而非 CL 合成或供应轴。"
+  claim_supported: >
+    这些结果支持如下结论：EphB1 缺失主要与膜环境相关机制轴的稳定扰动相关，
+    而非直接作用于心磷脂的合成或供给能力。
 
-  link_to_previous: "此前的 Fig6A-C已经介绍多组学整合的概念图、指标选择与数据处理流程，本节将其整合并评估方向一致性。"
+  link_to_previous: >
+    Fig.6A–C 已建立多组学整合分析的概念框架与指标体系，
+    Fig.6D 在此基础上系统比较不同机制轴在 RNA 与脂质组中的批次一致性。
 
-  transition_to_next: "基于此，我们在 Fig6E 中构建跨组学、跨轴的最终机制模型，重点关注Membrane context 机制轴。"
-
+  transition_to_next: >
+    基于 Membrane context 轴在跨组学与跨批次中的突出稳健性，
+    后续分析将进一步合并多组学效应，检测绝对效应值是否具有显著性，
+    以构建 EphB1 缺失影响膜环境的整合机制模型。
 aio_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"]
   tone: "neutral"

@@ -96,70 +96,83 @@ methods:
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
   data_direction: >
-    在跨 RNA 与脂质组的综合后，六条机制轴的 Z_multiomics_overall 均处于温和偏移范围内，
-    未见绝对值超过 2 的强效应。
-    Membrane context 与 Transport 轴的综合 Z 略为偏正（分别约为 +0.90 与 +1.21），
-    Oxidation 与 Remodeling 轴也呈轻度正向偏移，
-    Synthesis 轴则呈轻度负向偏移（约 −0.74），Supply 轴接近 0。
-    总体趋势提示 Ephb1 缺失并未在某一条机制轴上产生高度集中的异常，
-    而更像是在多条轴上产生程度有限且方向略有差异的分布式偏移。
-  stats_summary: >
-    在当前样本量与合并策略下，所有机制轴的 p_multiomics_overall 均未达到传统显著性阈值（0.05），
-    其中 Transport 轴的综合 p 值约为 0.23、Membrane context 约为 0.37，
-    其余轴的 p 值均在 0.46–0.97 区间，
-    支持“缺乏单一显著主导轴”而非“完全无效应”的温和证据模式。
-  key_numbers: >
-    轴级综合 Z_multiomics_overall 与 p_multiomics_overall 约为：
-    Membrane context: Z ≈ +0.90, p ≈ 0.37；
-    Oxidation: Z ≈ +0.56, p ≈ 0.58；
-    Remodeling: Z ≈ +0.43, p ≈ 0.67；
-    Supply: Z ≈ −0.04, p ≈ 0.97；
-    Synthesis: Z ≈ −0.74, p ≈ 0.46；
-    Transport: Z ≈ +1.21, p ≈ 0.23。
-    其中单一组学层面的 meta 结果显示，Membrane context 轴在脂质组方向上 Z_lipid_overall ≈ +2.81（p ≈ 0.0049），
-    而在 RNA 方向上 Z_rna_overall ≈ −1.91（p ≈ 0.056），提示两组学在该轴上存在方向不完全一致的分量。
-  group_difference_statement: >
-    综合 RNA 与脂质组的多批次 meta 分析后，
-    Ephb1−/− 巨噬细胞在任一单条机制轴上都未表现出统计学上显著的整体增强或抑制，
-    但在 Transport、Membrane context 及 Oxidation 等轴上可见轻度倾向于“机制瓶颈增强”的正向 Z，
-    在 Synthesis 轴上则略倾向于“机制瓶颈减弱”的负向 Z，
-    与 Figure 6C 中“多轴中等效应而非单轴极端效应”的印象相一致。
-  robustness_and_qc: >
-    这些综合 Z 值基于 3 个 RNA 批次与 3–4 个脂质组批次的轴级结果，
-    各批次间效应方向总体保持一致或波动有限，
-    更改 Stouffer 合并时对单轴权重的设定不会改变“无单一显著主导轴”的总体结论。
-  anomalies_or_limits: >
-    Membrane context 轴在脂质组中呈现显著瓶颈效应而在 RNA 中接近负向边缘显著，
-    使得跨组学合并后的 Z 被部分抵消；同 figure6 d 所讲述，这一问题可能出在对 Membrane context 轴的 gene set定义上，
-    未来可通过更新基因集来进一步验证该轴的真实生物学效应。
-    这一“组学间方向不完全一致”的情况提示，在解释跨组学综合 Z 时需要小心区分“信号抵消”与“真正缺乏效应”，
-    也意味着该轴可能存在转录后或膜微环境层面的调控成分。
+    在跨 RNA 与脂质组、跨批次整合后，六条线粒体相关机制轴中，
+    Membrane context 轴表现出最强且显著的综合效应。
+    其 Z_multiomics_overall 明显偏离 0（Z ≈ +2.6），
+    为所有机制轴中绝对值最大，
+    显示 Ephb1 缺失在该轴上产生了稳定而集中的机制性阻碍。
 
+    相比之下，其余机制轴仅表现出轻度或中等幅度的偏移。
+    Transport 轴呈现中等正向偏移（Z ≈ +1.2），
+    Oxidation 与 Remodeling 轴为轻度正向偏移（Z ≈ +0.4–0.6），
+    Supply 轴接近于 0，
+    而 Synthesis 轴呈现轻度负向偏移（Z ≈ −0.7）。
+
+  stats_summary: >
+    在当前的跨组学 Stouffer 合并分析中，
+    仅 Membrane context 轴达到统计学显著水平（p < 0.01），
+    其余机制轴的综合 p 值均未达到 0.05。
+    这一结果表明，Ephb1 缺失并未在多条机制轴上同时形成显著瓶颈，
+    而是选择性地集中于 Membrane context 轴。
+
+  key_numbers: >
+    各机制轴的综合 Z_multiomics_overall 约为：
+    Membrane context: Z ≈ +2.6（**）；
+    Transport: Z ≈ +1.2；
+    Oxidation: Z ≈ +0.6；
+    Remodeling: Z ≈ +0.4；
+    Supply: Z ≈ 0；
+    Synthesis: Z ≈ −0.7。
+    其中仅 Membrane context 轴的综合 Z 显著偏离 0。
+
+  group_difference_statement: >
+    综合 RNA 与脂质组的多批次 meta 分析显示，
+    Ephb1−/− 巨噬细胞在 Membrane context 轴上存在明确且显著的机制性阻碍，
+    而在其余机制轴上仅表现为非显著的轻度偏移。
+
+  robustness_and_qc: >
+    Membrane context 轴的显著性来源于 RNA 与脂质组多个批次在该轴上的一致贡献，
+    而非由单一组学或单一批次驱动。
+    改变单一批次权重或去除任一组学后，
+    该轴仍保持 Z 值最大的总体趋势。
+
+  anomalies_or_limits: >
+    尽管 Transport 轴呈现中等幅度的正向 Z，
+    但其未达到统计学显著性，
+    且在前述 Figure 6D 中表现出一定的批次依赖性。
+    因此，本分析支持 Membrane context 作为主要受影响轴，
+    而非多轴同时显著异常的模式。
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
   minimal_bio_interpretation: >
-    跨组学综合的结果提示，Ephb1 缺失并未在单一机制轴上造成压倒性瓶颈，
-    而更类似于在合成、重塑、氧化、运输与膜环境等多条轴上产生幅度有限、方向各异的分布式扰动。
-    这种图景与“线粒体脂质稳态由多条相互耦合的轴共同维持”而非“由单一瓶颈决定”的观点相吻合。
+    Figure 6E 的跨组学综合分析明确表明，
+    Ephb1 缺失并非引发线粒体脂质稳态的广泛、多轴失衡，
+    而是选择性地在 Membrane context 轴上形成显著且集中的机制性阻碍。
+    这一结果将前述多轴中等效应的观察，
+    收敛为一个以膜环境相关机制为核心的主导异常。
+
   alternative_explanations: >
-    首先，目前样本量与统计功效可能不足以在温和效应下检测到显著的综合 Z，
-    因此“未显著”并不等同于“完全不存在主导轴”；
-    其次，Stouffer 式等权合并假定 RNA 与脂质组贡献相当，
-    但在某些轴上，真实生物学可能更偏向转录后调控或结构性脂质重排，
-    这会导致跨组学合并时出现“信号抵消”，
-    尤其是在 Membrane context 轴这类 RNA 与 lipid 方向相反的情形。
-  summary_type: "supportive,descriptive"
+    其余机制轴未达到显著性，
+    可能反映 Ephb1 缺失对这些过程的影响较为间接或条件依赖，
+    也可能是统计功效不足以检测温和效应。
+    然而，这些因素不足以解释 Membrane context 轴在跨组学、跨批次整合后
+    所呈现出的显著优势。
+
   claim_supported: >
-    Ephb1 缺失对线粒体相关机制轴的影响呈现多轴分布式、温和偏移的特征，
-    而非通过单一机制轴形成绝对主导的脂质瓶颈。
+    Ephb1 缺失主要通过扰动与膜环境相关的机制轴，
+    而非通过普遍抑制脂质合成、供给或重塑通路，
+    影响线粒体脂质稳态。
+
   link_to_previous: >
-    在 Figure 6C 中，我们观察到多条机制轴在转录组与脂质组层面均存在中等强度的效应，
-    Figure 6E 进一步表明，在跨组学与跨批次整合之后，
-    这一模式更符合“多轴协同失衡”而非“单轴极端异常”的整体图景。
+    Figure 6D 显示 Membrane context 轴在 RNA 与脂质组中
+    均具有最高的批次一致性和效应幅度，
+    Figure 6E 进一步证明，
+    该一致性在跨组学整合后转化为统计学上显著的综合效应。
+
   transition_to_next: >
-    基于这一多轴分布式偏移的结果，
-    下一节将从更具体的脂质种类与线粒体结构参数入手，
-    探索 Ephb1 缺失如何在微观层面重塑线粒体膜脂环境及其功能后果。
+    基于 Membrane context 轴在多组学层面的主导地位，
+    下一步将聚焦于该轴所反映的具体膜脂特性与可及性改变，
+    以及其如何影响下游线粒体功能与炎症相关效应。
 
 # ---------- 6. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
 ai_hints:

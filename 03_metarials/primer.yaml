@@ -1,0 +1,343 @@
+
+
+# Primer design candidate list (mouse gene symbols)
+# Module: EphB1_PI3K_AKT_mTOR
+# Goal: provide a complete, defensible set of genes for primer/qPCR panel design,
+# split into (1) capacity (core components + valves) and (2) footprint (transcriptional outputs).
+# Notes:
+# - capacity: reflects pathway “hardware/threshold” availability; not a direct activity readout.
+# - footprint: reflects downstream transcriptional programs consistent with PI3K–AKT output states.
+# - For qPCR efficiency, prioritize genes marked tier: P1 first, then P2 if you need more coverage.
+
+modules:
+  EphB1_PI3K_AKT_mTOR:
+
+    capacity:
+      label: "PI3K–AKT–mTOR capacity (core components + valves)"
+      description: >
+        组件/阀门层：用于评估 PI3K–AKT–mTOR 信号系统的“可用硬件与阈值”。
+        包含：PI3K catalytic/regulatory、AKT、mTORC1/2 核心复合体，以及关键刹车/阀门（PTEN/INPP4B/PHLPP/TSC/DEPTOR 等）。
+        该集合适合在基线/收样状态下做 qPCR 验证“capacity 背景是否整体下移”。
+      genes:
+        # --- PI3K core ---
+        - symbol: Pik3ca
+          tier: P1
+          role: "PI3K class IA catalytic (p110α)"
+        - symbol: Pik3cb
+          tier: P2
+          role: "PI3K class IA catalytic (p110β)"
+        - symbol: Pik3cd
+          tier: P1
+          role: "PI3K class IA catalytic (p110δ; immune-enriched)"
+        - symbol: Pik3cg
+          tier: P2
+          role: "PI3K class IB catalytic (p110γ; GPCR-linked)"
+        - symbol: Pik3r1
+          tier: P1
+          role: "PI3K regulatory (p85α)"
+        - symbol: Pik3r2
+          tier: P2
+          role: "PI3K regulatory (p85β)"
+        - symbol: Pik3r5
+          tier: P2
+          role: "PI3Kγ regulatory (p101)"
+
+        # --- PIP3 generation / removal (valves) ---
+        - symbol: Pten
+          tier: P1
+          role: "PIP3 phosphatase (brake)"
+          effect_on_activity: -1
+        - symbol: Inpp4b
+          tier: P1
+          role: "PI(3,4)P2 phosphatase (brake/valve)"
+          effect_on_activity: -1
+        - symbol: Ship1
+          tier: P2
+          role: "PIP3 5-phosphatase (Inpp5d; immune brake)"
+          effect_on_activity: -1
+        - symbol: Inpp5d
+          tier: P2
+          role: "PIP3 5-phosphatase (SHIP1; immune brake)"
+          effect_on_activity: -1
+        - symbol: Pik3ip1
+          tier: P2
+          role: "PI3K inhibitory protein 1 (brake)"
+          effect_on_activity: -1
+
+        # --- AKT module ---
+        - symbol: Akt1
+          tier: P2
+          role: "AKT kinase"
+        - symbol: Akt2
+          tier: P1
+          role: "AKT kinase (metabolic/immune contexts)"
+        - symbol: Akt3
+          tier: P2
+          role: "AKT kinase"
+        - symbol: Pdk1
+          tier: P1
+          role: "PDK1 (Pdpkl; activates AKT Thr308)"
+        - symbol: Pdpk1
+          tier: P1
+          role: "PDK1 (alias)"
+        - symbol: Mtor
+          tier: P1
+          role: "mTOR kinase"
+
+        # --- mTORC1 core & valves ---
+        - symbol: Rptor
+          tier: P1
+          role: "mTORC1 scaffold (Raptor)"
+        - symbol: Mlst8
+          tier: P2
+          role: "mTOR complex subunit (GβL)"
+        - symbol: Rheb
+          tier: P1
+          role: "mTORC1 activator GTPase"
+          effect_on_activity: 1
+        - symbol: Tsc1
+          tier: P1
+          role: "TSC complex (brake upstream of Rheb)"
+          effect_on_activity: -1
+        - symbol: Tsc2
+          tier: P1
+          role: "TSC complex (brake upstream of Rheb)"
+          effect_on_activity: -1
+        - symbol: Akt1s1
+          tier: P1
+          role: "PRAS40 (mTORC1 brake/valve; AKT target)"
+          effect_on_activity: -1
+        - symbol: Deptor
+          tier: P1
+          role: "DEPTOR (mTORC1/2 inhibitor; brake/valve)"
+          effect_on_activity: -1
+
+        # --- mTORC2 core ---
+        - symbol: Rictor
+          tier: P1
+          role: "mTORC2 scaffold (Rictor)"
+        - symbol: Mapkap1
+          tier: P2
+          role: "mTORC2 component (mSIN1)"
+        - symbol: Prkab1
+          tier: P2
+          role: "(optional) AMPK β1 subunit; context valve (only if cross-talk panel needed)"
+
+        # --- AKT negative feedback / dephosphorylation (valves) ---
+        - symbol: Phlpp1
+          tier: P1
+          role: "AKT phosphatase (brake)"
+          effect_on_activity: -1
+        - symbol: Phlpp2
+          tier: P1
+          role: "AKT phosphatase (brake)"
+          effect_on_activity: -1
+
+      # Practical qPCR panel suggestion (minimal)
+      recommended_qpcr_panel:
+        P1_minimal_8_to_10:
+          - Pik3cd
+          - Pik3r1
+          - Pten
+          - Inpp4b
+          - Pdpk1
+          - Akt2
+          - Rptor
+          - Rictor
+          - Tsc2
+          - Deptor
+
+
+    footprint:
+      label: "PI3K–AKT–mTOR footprint (transcriptional outputs)"
+      description: >
+        转录足迹层：用于评估 PI3K–AKT 输出状态在转录组层面的“痕迹”。
+        由两部分组成：
+        (1) AKT→FOXO 抑制模块：当 AKT 活性高时，FOXO 核内转录被抑制（FOXO targets ↓）；当 AKT 低时，FOXO targets ↑。
+        (2) mTORC1→生长/脂合成输出模块：反映 mTORC1 对生物合成与脂代谢程序的支持（更情景依赖，作为辅助）。
+        该集合更适合用来回答“活性/输出是否改变”，但需要与蛋白磷酸化（p-AKT/p-S6/p-4EBP1）交叉验证。
+      submodules:
+
+        AKT_FOXO_suppression:
+          label: "AKT–FOXO repression footprint"
+          notes: >
+            qPCR 设计时建议选择跨细胞类型较稳的 FOXO 靶基因作为 readout。
+            方向理解：AKT 下降 → FOXO 去抑制 → 这些基因更可能上升。
+          genes:
+            - symbol: Bcl2l11
+              tier: P1
+              role: "FOXO target (apoptosis program)"
+              expected_if_AKT_low: up
+            - symbol: Gadd45a
+              tier: P1
+              role: "FOXO/stress-responsive target"
+              expected_if_AKT_low: up
+            - symbol: Sesn3
+              tier: P1
+              role: "FOXO target; metabolic stress"
+              expected_if_AKT_low: up
+            - symbol: Pck1
+              tier: P2
+              role: "gluconeogenesis-related FOXO target (context-dependent)"
+              expected_if_AKT_low: up
+            - symbol: Igfbp1
+              tier: P2
+              role: "FOXO-associated target (context-dependent)"
+              expected_if_AKT_low: up
+            - symbol: Ddit4
+              tier: P1
+              role: "REDD1; often increases when mTORC1 is constrained"
+              expected_if_AKT_low: up
+
+          recommended_qpcr_panel:
+            P1_minimal_3_to_4:
+              - Bcl2l11
+              - Gadd45a
+              - Sesn3
+              - Ddit4
+
+        mTORC1_biosynthesis_lipogenesis_support:
+          label: "mTORC1 anabolic / lipogenesis support footprint (auxiliary)"
+          notes: >
+            该模块更依赖营养/刺激背景，作为“辅助 footprint”。
+            如果你主要比较收样基线状态，建议把这组作为可选扩展，而不是核心结论。
+          genes:
+            - symbol: Srebf1
+              tier: P2
+              role: "lipogenesis TF program (downstream output; context-dependent)"
+              expected_if_mTORC1_low: down
+            - symbol: Fasn
+              tier: P2
+              role: "lipogenesis enzyme (output; context-dependent)"
+              expected_if_mTORC1_low: down
+            - symbol: Acaca
+              tier: P2
+              role: "lipogenesis enzyme (output; context-dependent)"
+              expected_if_mTORC1_low: down
+            - symbol: Hmgcr
+              tier: P2
+              role: "sterol synthesis (output; context-dependent)"
+              expected_if_mTORC1_low: down
+
+      # Practical footprint qPCR panel suggestion (minimal)
+      recommended_qpcr_panel:
+        P1_minimal_3_to_4:
+          - Bcl2l11
+          - Gadd45a
+          - Sesn3
+          - Ddit4
+
+
+# End of primer candidate list
+
+  Membrane_environment:
+
+    description: >
+      用于 qPCR 层面验证“膜环境（membrane environment）改变”的分解式检测模块。
+      该模块不将 membrane environment 视为单一通路，而是拆分为三类机制维度：
+      (1) 线粒体内膜结构/嵴组织的 capacity 背景，
+      (2) 膜磷脂合成/供给通量是否受限，
+      (3) 膜磷脂周转增强及向中性脂（TG）重分配。
+      三个子模块共同用于解释多类膜磷脂下降、TG 上升及 CL 可及性变化。
+
+    submodules:
+
+      membrane_context_capacity:
+        label: "Mitochondrial inner membrane context / structural capacity"
+        description: >
+          反映线粒体内膜嵴结构、MICOS 复合体与 OPA1–OMA1 轴的转录容量背景。
+          该集合用于区分“膜结构组织受损”与“线粒体数量减少”的差异。
+        genes:
+          - symbol: Immt
+            tier: P1
+            role: "MICOS core (Mic60); cristae junction organization"
+          - symbol: Chchd3
+            tier: P1
+            role: "MICOS subunit (Mic19)"
+          - symbol: Chchd2
+            tier: P2
+            role: "Cristae-associated regulator"
+          - symbol: Opa1
+            tier: P1
+            role: "Inner membrane fusion / cristae maintenance"
+          - symbol: Oma1
+            tier: P1
+            role: "Stress-activated OPA1 protease (disruptive regulator)"
+          - symbol: Mic10
+            tier: P2
+            role: "MICOS subunit (Minos1); cristae curvature"
+        recommended_qpcr_panel:
+          P1_minimal_4_to_5:
+            - Immt
+            - Chchd3
+            - Opa1
+            - Oma1
+            - Mic10
+
+      phospholipid_flux_limitation:
+        label: "Membrane phospholipid synthesis / supply limitation"
+        description: >
+          覆盖 de novo 脂肪酸合成、甘油骨架供给以及 Kennedy pathway 与 CDP-DAG
+          分支的关键瓶颈节点，用于检测膜磷脂合成/供给通量是否整体下移。
+        genes:
+          - symbol: Acly
+            tier: P1
+            role: "Acetyl-CoA supply for lipogenesis"
+          - symbol: Acaca
+            tier: P1
+            role: "Malonyl-CoA production"
+          - symbol: Fasn
+            tier: P1
+            role: "Fatty acid synthesis"
+          - symbol: Gpam
+            tier: P1
+            role: "Glycerol-3-P acyltransferase; PA backbone entry"
+          - symbol: Pcyt1a
+            tier: P1
+            role: "Kennedy pathway rate-limiting enzyme (PC)"
+          - symbol: Pcyt2
+            tier: P2
+            role: "Kennedy pathway (PE)"
+          - symbol: Crls1
+            tier: P1
+            role: "Cardiolipin synthase"
+        recommended_qpcr_panel:
+          P1_minimal_5_to_6:
+            - Acly
+            - Acaca
+            - Fasn
+            - Gpam
+            - Pcyt1a
+            - Crls1
+
+      phospholipid_turnover_rerouting:
+        label: "Phospholipid turnover & rerouting to neutral lipids"
+        description: >
+          用于检测膜磷脂分解、脂酶活化及脂质向 TG 储存池重分配的转录程序，
+          与“多类膜磷脂下降 + TG 上升”的表型相匹配。
+        genes:
+          - symbol: Pnpla2
+            tier: P1
+            role: "ATGL; neutral lipid lipolysis"
+          - symbol: Lipe
+            tier: P2
+            role: "Hormone-sensitive lipase"
+          - symbol: Mgll
+            tier: P1
+            role: "Monoacylglycerol lipase"
+          - symbol: Lpcat3
+            tier: P1
+            role: "Phospholipid remodeling / Lands cycle"
+          - symbol: Dgat1
+            tier: P1
+            role: "Triglyceride synthesis (rerouting)"
+          - symbol: Dgat2
+            tier: P2
+            role: "Triglyceride synthesis (rerouting)"
+        recommended_qpcr_panel:
+          P1_minimal_4_to_5:
+            - Pnpla2
+            - Mgll
+            - Lpcat3
+            - Dgat1
+            - Dgat2

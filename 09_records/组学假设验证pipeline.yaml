@@ -1,0 +1,341 @@
+pipeline:
+  name: "EphB1→PI3K→flux/turnover→lipid pool→CL accessibility | wet-lab validation"
+  version: "v1.0"
+  source_hypothesis_file: "组学-湿实验验证假设.yaml"
+
+  shared_metadata:
+    cell_system:
+      cell_type: "原代小鼠腹腔巨噬细胞"
+      genotypes: ["WT", "EphB1_KO"]
+
+    general_controls:
+      - "每个 run 同时包含 WT 与 KO（同日分离、同板培养）"
+      - "记录每孔细胞数/活性（用于解释总量偏移/技术性缩水）"
+
+
+runs:
+
+  - run_id: RUN01_basal_core_validation
+    goal: "在“基线（无额外处理）”条件下，复现关键转录轴与 NAO readout（node 为主）"
+    shared_condition: "无额外处理（基线）；WT vs EphB1_KO"
+    branches:
+
+      - branch_id: RUN01_A_RNA_qPCR_PI3K_capacity_and_flux_turnover
+        sample_type: "RNA"
+        assay: "qPCR"
+        materials_ref:
+          primer_panels:
+            - "primer_panels.PI3K_capacity_v1"  
+            - "primer_panels.FOXO_targets_v1"
+            - "primer_panels.flux_turnover_v1"
+          reagents:
+            - "reagents.TRIzol_or_QIAzol"
+            - "reagents.RT_kit"
+            - "reagents.qPCR_SYBR_mastermix"
+          consumables:
+            - "consumables.RNase_free_tips_tubes"
+        protocol_ref:
+          extraction: "protocols.RNA_TRIzol_v1"
+          cdna: "protocols.cDNA_RT_v1"
+          qpcr: "protocols.qPCR_SYBR_v1"
+          analysis: "protocols.qPCR_DCt_DDct_Zscore_v1"
+        purpose: >
+          node_validation：验证 PI3K capacity（A）与 flux/turnover（C）在独立样本中是否复现组学方向。
+        linked_EVs:
+          - EV002   # PI3K capacity qPCR
+          - EV008   # flux/turnover 关键节点 qPCR
+          - EV005   # FOXO 靶基因 qPCR（作为 AKT 抑制解除迹象）
+        minimal_readouts:
+          - "PI3K capacity gene set：总体下调方向"
+          - "FOXO 靶基因：作为AKT抑制解除/输出变化的转录足迹"
+          - "flux/turnover 瓶颈节点：合成受限 + 周转增强方向"
+        notes:
+          - "该分支不做 growth factor 脉冲，不做抑制剂，保持纯基线复现。"
+
+      - branch_id: RUN01_B_STAIN_NAO_with_DeltaPsi_control
+        sample_type: "细胞染色"
+        assay: "NAO +（TMRM/JC-1）"
+        materials_ref:
+          dyes:
+            - "dyes.NAO"
+            - "dyes.TMRM_or_JC1"
+          reagents:
+            - "reagents.PBS"
+            - "reagents.live_cell_buffer"
+          instruments:
+            - "instruments.fluorescence_microscope_or_flow"
+        protocol_ref:
+          staining: "protocols.NAO_stain_live_v1"
+          delta_psi_control: "protocols.DeltaPsi_TMRM_or_JC1_v1"
+          imaging: "protocols.imaging_fixed_settings_v1"
+          analysis: "protocols.image_quantification_per_cell_v1"
+        purpose: "node_validation：验证 E（CL可及性/功能池）readout，并排除ΔΨm混杂。"
+        linked_EVs:
+          - EV015
+        minimal_readouts:
+          - "NAO 信号（CL相关 readout）"
+          - "ΔΨm 对照（TMRM/JC-1）用于解释边界"
+        notes:
+          - "建议同批次留取线粒体数量/质量 proxy（如 MitoTracker Green 或 mtDNA copy）可选，但不强制。"
+
+      - branch_id: RUN01_C_OPTIONAL_total_phospholipid_and_lipid_droplet_proxy
+        sample_type: "脂质; 细胞染色"
+        assay: "Bartlett 磷测定; BODIPY 染色"
+        materials_ref:
+          assays:
+            - "assays.Bartlett_total_phosphate"  # 需要联系公司是否能完成
+            - "assays.BODIPY_493_503_lipid_droplet" # 需要联系公司是否能完成
+          reagents:
+            - "reagents.Bartlett_reagents_set"
+            - "dyes.BODIPY_493_503"
+          instruments:
+            - "instruments.plate_reader_or_microscope"
+        protocol_ref:
+          bartlett: "protocols.Bartlett_total_phosphate_v1" # 首先了解实验方案
+          bodipy: "protocols.BODIPY_lipid_droplet_stain_v1" # 首先了解实验方案
+          analysis: "protocols.plate_or_image_quantification_v1" # 首先了解实验方案
+        purpose: "node_validation：补强 D 的‘总磷脂↓ + 脂滴/TG proxy↑’。"
+        linked_EVs:
+          - EV013
+        minimal_readouts:
+          - "总磷脂量（Bartlett）"
+          - "脂滴信号（BODIPY 493/503）"
+
+  - run_id: RUN02_PI3K_output_dynamic_WB
+    goal: "验证 B（PI3K–AKT–mTOR 即时活性/输出）在蛋白磷酸化层的差异（动态范围）"
+    shared_condition: "WT vs EphB1_KO；统一预处理后做短时脉冲（避免解释混乱）"
+    branches:
+
+      - branch_id: RUN02_A_WB_phospho_PI3K_outputs
+        sample_type: "蛋白"
+        assay: "WB"
+        materials_ref:
+          antibodies: # 确定抗体位置、表格
+            - "antibodies.pAKT_T308" 
+            - "antibodies.pAKT_S473" 
+            - "antibodies.pS6_S235_236" 
+            - "antibodies.p4EBP1"
+            - "antibodies.total_AKT"
+            - "antibodies.total_S6"
+            - "antibodies.total_4EBP1"
+            - "antibodies.loading_control_betaActin_or_GAPDH"
+          reagents:
+            - "reagents.RIPA_or_Laemmli_lysis_with_inhibitors"
+            - "reagents.phosphatase_inhibitor_cocktail"
+            - "reagents.protease_inhibitor_cocktail"
+            - "reagents.ECL_substrate"
+          stimuli:
+            - "stimuli.CSF1_or_IGF1"  # 需确认是否存在，如果没有，要买
+          inhibitors:
+            - "inhibitors.PI3K_inhibitor_LY294002_or_isoform" #需要确认位置、用法
+        protocol_ref:
+          preconditioning: "protocols.low_serum_starvation_v1"
+          stimulation: "protocols.growth_factor_pulse_timecourse_v1"
+          wb: "protocols.WB_phospho_signaling_v1"
+          analysis: "protocols.WB_normalize_and_timecourse_plot_v1"
+        purpose: "node_validation：测 p-AKT/p-S6/p-4EBP1 动态输出差异。"
+        linked_EVs:
+          - EV004
+        minimal_design:
+          preconditioning: "低血清/无血清 2–4h（标准化输入）"
+          stimulation: "CSF-1/IGF-1 脉冲"
+          timepoints: ["0", "2", "5", "10", "20 min"]
+          controls:
+            - "WT + PI3K 抑制剂 + 脉冲（正控，确保体系可响应）" 
+        minimal_readouts:
+          - "p-AKT(T308/S473), p-S6(S235/236), p-4EBP1"
+          - "total AKT/S6/4EBP1 作为 loading 与归一化"
+        notes:
+          - "该 run 不做 qPCR/NAO 解释，避免把短时磷酸化处理带来的二次效应混入转录/膜环境解读。"
+
+  - run_id: RUN03_link_tests_PI3K_to_flux_turnover
+    goal: "link_validation：检验 ‘操纵 PI3K 输出’ 是否能牵引 flux/turnover 轴方向（B→C）"
+    shared_condition: >
+      以 WT 为主做药理复制；必要时在 KO 背景做补救（rescue）作为增强证据。
+    branches:
+
+      - branch_id: RUN03_A_PI3K_inhibition_recapitulates_flux_turnover_qPCR
+        sample_type: "RNA"
+        assay: "qPCR"
+        materials_ref:
+          inhibitors:
+            - "inhibitors.PI3K_inhibitor_LY294002_or_isoform"
+          primer_panels:
+            - "primer_panels.flux_turnover_v1"
+          reagents:
+            - "reagents.TRIzol_or_QIAzol"
+            - "reagents.RT_kit"
+            - "reagents.qPCR_SYBR_mastermix"
+        protocol_ref:
+          treatment: "protocols.drug_treatment_PI3K_inhibition_v1"
+          extraction: "protocols.RNA_TRIzol_v1"
+          cdna: "protocols.cDNA_RT_v1"
+          qpcr: "protocols.qPCR_SYBR_v1"
+          analysis: "protocols.qPCR_DCt_DDct_Zscore_v1"
+        purpose: "link_validation：PI3K 抑制是否复制 C 的转录方向。"
+        linked_EVs:
+          - EV009
+        minimal_design:
+          treatment: "PI3K 抑制剂处理（如 LY294002/isoform inhibitor）"
+          controls:
+            - "vehicle 对照"
+            - "（可选）加入短时/中时两个时间窗以区分即时/适应性转录"
+        readouts:
+          - "flux/turnover 关键节点 qPCR（与 EV008 同 panel）"
+
+      - branch_id: RUN03_B_AKT_mTOR_modulation_rescues_flux_turnover_direction
+        sample_type: "RNA"
+        assay: "qPCR"
+        materials_ref:
+          modulators:
+            - "modulators.AKT_mTOR_modulation_set" # akt/mtor 激动剂/抑制剂
+          primer_panels:
+            - "primer_panels.flux_turnover_v1"
+          reagents:
+            - "reagents.TRIzol_or_QIAzol"
+            - "reagents.RT_kit"
+            - "reagents.qPCR_SYBR_mastermix"
+        protocol_ref:
+          treatment: "protocols.drug_treatment_AKT_mTOR_modulation_v1"
+          extraction: "protocols.RNA_TRIzol_v1"
+          cdna: "protocols.cDNA_RT_v1"
+          qpcr: "protocols.qPCR_SYBR_v1"
+          analysis: "protocols.qPCR_DCt_DDct_Zscore_v1"
+        purpose: "link_validation：AKT/mTOR 调控能否部分逆转 C 的方向（救援）。"
+        linked_EVs:
+          - EV010
+        minimal_design:
+          treatment: "AKT/mTOR 通路调控处理（激活或抑制刹车）"
+          controls: ["vehicle 对照", "必要时与 PI3K 抑制并列以校准方向"]
+        readouts:
+          - "flux/turnover 关键节点 qPCR（方向是否回拉）"
+
+  - run_id: RUN04_link_tests_flux_turnover_to_lipid_pool_and_NAO
+    goal: "link_validation：制造/救回 D（膜磷脂库缩水）并观察 E（NAO）是否随之变化（D→E）"
+    shared_condition: >
+      该 run 主要服务于 D→E 的因果支撑；尽量采用“改变膜磷脂库”的手段，
+      在不显著改变总线粒体数量/ΔΨm 的情况下观察 NAO 变化。
+    branches:
+
+      - branch_id: RUN04_A_PI3K_inhibition_changes_NAO
+        sample_type: "细胞染色"
+        assay: "NAO 染色"
+        materials_ref:
+          inhibitors:
+            - "inhibitors.PI3K_inhibitor_LY294002_or_isoform"
+          dyes:
+            - "dyes.NAO"
+            - "dyes.TMRM_or_JC1"
+          reagents:
+            - "reagents.PBS"
+            - "reagents.live_cell_buffer"
+        protocol_ref:
+          treatment: "protocols.drug_treatment_PI3K_inhibition_v1"
+          staining: "protocols.NAO_stain_live_v1"
+          delta_psi_control: "protocols.DeltaPsi_TMRM_or_JC1_v1"
+          imaging: "protocols.imaging_fixed_settings_v1"
+          analysis: "protocols.image_quantification_per_cell_v1"
+        purpose: "link_validation：膜环境操控（PI3K 抑制）对 NAO readout 的影响。"
+        linked_EVs:
+          - EV017
+        minimal_design:
+          treatment: "PI3K 抑制剂处理"
+          controls:
+            - "ΔΨm 对照（TMRM/JC-1）"
+            - "（可选）线粒体数量 proxy"
+        readouts:
+          - "NAO 信号变化（方向与 D/E 假设一致）"
+
+      - branch_id: RUN04_B_limit_PC_PE_synthesis_induces_D_and_decreases_NAO
+        sample_type: "细胞染色"
+        assay: "NAO 染色"
+        materials_ref:
+          supplements_or_constraints:
+            - "constraints.PC_PE_synthesis_limitation_set"
+          dyes:
+            - "dyes.NAO"
+            - "dyes.TMRM_or_JC1"
+        protocol_ref:
+          treatment: "protocols.treatment_limit_PC_PE_synthesis_v1"
+          staining: "protocols.NAO_stain_live_v1"
+          delta_psi_control: "protocols.DeltaPsi_TMRM_or_JC1_v1"
+          imaging: "protocols.imaging_fixed_settings_v1"
+          analysis: "protocols.image_quantification_per_cell_v1"
+        purpose: "link_validation：限制膜磷脂合成是否诱导 D，并使 NAO 随之下降。"
+        linked_EVs:
+          - EV018
+        minimal_design:
+          treatment: "限制膜磷脂合成（原料供给/合成酶限制）"
+          controls: ["ΔΨm 对照（TMRM/JC-1）"]
+        readouts:
+          - "NAO 信号随 D 表型方向下降"
+
+      - branch_id: RUN04_C_precursor_supplement_rescues_D_and_restores_NAO
+        sample_type: "细胞染色"
+        assay: "NAO 染色"
+        materials_ref:
+          supplements:
+            - "supplements.choline" # 需要确认存在
+            - "supplements.ethanolamine" # 需要确认存在
+          dyes:
+            - "dyes.NAO"
+            - "dyes.TMRM_or_JC1"
+        protocol_ref:
+          treatment: "protocols.treatment_precursor_supplement_v1"
+          staining: "protocols.NAO_stain_live_v1"
+          delta_psi_control: "protocols.DeltaPsi_TMRM_or_JC1_v1"
+          imaging: "protocols.imaging_fixed_settings_v1"
+          analysis: "protocols.image_quantification_per_cell_v1"
+        purpose: "link_validation：补充前体（choline/ethanolamine）是否救回 D，并使 NAO 回升。"
+        linked_EVs:
+          - EV019
+        minimal_design:
+          treatment: "补充胆碱/乙醇胺（或相关前体）" 
+          controls: ["与限制合成/KO 条件配对作为 rescue 语境"]
+        readouts:
+          - "NAO 信号回拉（与 D 被救回一致）"
+
+  - run_id: RUN05_optional_PI3K_to_lipid_pool_direct
+    enabled_by_default: false
+    goal: "可选增强：B→D 的直接证据（PI3K 抑制是否导致总磷脂↓/TG↑）"
+    branches:
+      - branch_id: RUN05_A_PI3K_inhibition_lipidomics_or_proxy
+        sample_type: "脂质"
+        assay: "脂质组（或 proxy：Bartlett+BODIPY）"
+        materials_ref:
+          inhibitors:
+            - "PI3K_inhibitor"
+          assays:
+            - "assays.Bartlett_total_phosphate"
+            - "assays.BODIPY_493_503_lipid_droplet"
+          reagents:
+            - "reagents.Bartlett_reagents_set"
+            - "dyes.BODIPY_493_503"
+        protocol_ref:
+          treatment: "protocols.drug_treatment_PI3K_inhibition_v1"
+          bartlett: "protocols.Bartlett_total_phosphate_v1"
+          bodipy: "protocols.BODIPY_lipid_droplet_stain_v1"
+          lipidomics_optional: "protocols.lipidomics_targeted_panel_optional_v1"
+        linked_EVs:
+          - EV014
+        minimal_design:
+          treatment: "PI3K 抑制剂处理"
+          note: "脂质组成本高时可先用 proxy；需要时再做 targeted lipid panel"
+
+outputs:
+  expected_files_or_products:
+    - "qPCR：PI3K capacity / FOXO靶 / flux-turnover panels（WT vs KO；+药理复制/救援）"
+    - "WB：p-AKT/p-S6/p-4EBP1 动态曲线（WT vs KO；+正控）"
+    - "染色：NAO ± ΔΨm 对照（Basal；+操纵D的link实验）"
+    - "（可选）总磷脂量与脂滴 proxy 结果（Bartlett + BODIPY）"
+  mapping_to_hypothesis_nodes:
+    A: ["EV001", "EV002"]
+    B: ["EV004", "EV005"]
+    C: ["EV007", "EV008", "EV009", "EV010"]
+    D: ["EV011", "EV013", "EV014"]
+    E: ["EV015", "EV017", "EV018", "EV019"]
+
+notes_on_complexity_control:
+  - "优先完成 RUN01 + RUN02（最核心、最少混杂）"
+  - "RUN03/RUN04 属于 link_validation，按审稿压力与时间预算逐步追加"
+  - "RUN05 为可选增强，不作为主线必须"

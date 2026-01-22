@@ -1,0 +1,240 @@
+mechanistic_chain:
+
+    nodes:
+      X: "EphB1 缺失（KO）"
+      A: "PI3K–AKT–mTOR capacity signature 下降（转录层）"
+      B: "PI3K–AKT–mTOR 即时活性/输出下降（蛋白/磷酸化层）"
+      C: "磷脂通量失衡：合成受限 + 分解/周转增强（RNA flux/turnover 轴）"
+      D: "膜磷脂库净缩水（PC/PE/PI/PS/PG/CL 下降；TG 上升）"
+      E: "CL 可及性/功能池下降（NAO 等 readout），影响膜相关执行阈值/效应强度"
+
+    links:
+      - id: L_X_to_A
+        from: X
+        to: A
+        question: "EphB1 缺失是否会牵引 PI3K 轴的 capacity（转录）下降？"
+        scientific_consensus: "部分共识（Eph 前向信号可调制 PI3K–AKT；方向依赖受体/细胞类型/配体语境）"
+        key_references:
+          - "Lisabeth et al., 2013, Eph receptor signalling review (PMCID: PMC3753714)"
+          - "Liang et al., 2019, Eph receptor signalling review (Oncogene)"
+        in_this_paper_validation:
+          node_validation:
+            - id: EV001
+              status: "组学"
+              condition: "多批次 RNA"
+              readout: "PI3K capacity gene set 一致性检验"
+              minimal_details: "检验 PI3K capacity 基因集在多批次 RNA 数据中的表达一致性"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "RNA"
+              assay_type: "RNA-seq"
+            - id: EV002
+              status: "qPCR"
+              condition: "多批次 mRNA"
+              readout: "PI3K capacity gene set 表达下调"
+              minimal_details: "使用 qPCR 验证 PI3K capacity 基因集在多批次样本中的下调趋势"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "RNA"
+              assay_type: "qPCR"
+          link_validation:
+            - id: EV003
+              status: "无需"
+              condition: "EphB1 缺失小鼠"
+              readout: "现象必由 EphB1 缺失引起"
+              minimal_details: "该现象发生在 EphB1 缺失小鼠中，无需额外验证"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "无"
+              assay_type: "无"
+            
+        expected_if_true: "KO 的 PI3K capacity 分数在多数批次（方向投票）为下降，qPCR验证成功"
+        alternative_explanations:
+          - "样本代谢状态/分化状态差异导致的二级转录变化"
+          - "PI3K 仅为并行下游（非 EphB1 主导），capacity 下降不反映信号输入"
+        falsified_if: "PI3K capacity 在多批次不稳定或方向不一致（投票不通过）"
+
+      - id: L_A_to_B
+        from: A
+        to: B
+        question: "capacity 转录下降是否足以推出通路即时输出下降？"
+        scientific_consensus: "非共识（capacity 与输出可解耦；需要蛋白/磷酸化 readout）"
+        key_references:
+          - "Lisabeth et al., 2013, notes context-dependent Akt modulation in Eph signalling (PMCID: PMC3753714)"
+        in_this_paper_validation:
+          node_validation:
+            - id: EV004
+              status: "WB"
+              condition: "WT vs KO"
+              readout: "p-AKT(T308/S473)、p-S6(S235/236)、p-4EBP1 水平"
+              minimal_details: "检测蛋白磷酸化水平以评估 PI3K–AKT–mTOR 通路即时活性"
+              treatment: >
+                "EphB1 KO vs WT"
+                "饥饿处理，生长因子脉冲"
+              sample_type: "蛋白"
+              assay_type: "WB"
+            - id: EV005
+              status: "qPCR"
+              condition: "WT vs KO"
+              readout: "FOXO 子模块经典靶基因转录水平（Bim / Cdkn1a / Gadd45a / Sod2）"
+              minimal_details: "检测 FOXO 靶基因表达，作为 AKT 抑制解除的标志"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "RNA"
+              assay_type: "qPCR"
+          link_validation:
+            - id: EV006
+              status: "无需"
+              condition: "capacity-活性下降假设"
+              readout: "活性下降即链条打通"
+              minimal_details: "capacity 下降必然导致活性下降，存在干扰时链条可能不完整"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "无"
+              assay_type: "无"
+        expected_if_true: "KO 中 p-AKT/p-S6 下移（在匹配条件下可复现）"
+        alternative_explanations:
+          - "翻译后调控补偿（capacity 低但输出保持）"
+        falsified_if: "KO 中 PI3K 输出不下降或与 capacity 方向持续不一致"
+
+      - id: L_B_to_C
+        from: B
+        to: C
+        question: "PI3K 输出下降能否驱动磷脂合成/分解轴的转录重编程？"
+        scientific_consensus: "部分共识（PI3K–AKT–mTOR 可通过 SREBP/Lipin 等调控脂质合成网络，但对‘磷脂分解/周转’方向依赖情景）"
+        key_references:
+          - "Porstmann et al., 2008, Akt-dependent lipogenesis requires mTORC1/SREBP (PMID: 18762023)"
+          - "Peterson et al., 2011, mTORC1 controls SREBP via Lipin-1 localization (Cell)"
+        in_this_paper_validation:
+          node_validation:
+            - id: EV007
+              status: "RNA-seq"
+              condition: "多批次"
+              readout: "flux/turnover 轴 一致性（固定 gene set + 方向投票/效应量）"
+              minimal_details: "分析多批次 RNA-seq 数据中脂质代谢通量相关基因表达方向和效应量"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "RNA"
+              assay_type: "RNA-seq"
+            - id: EV008
+              status: "qPCR"
+              condition: "4–6 个瓶颈节点"
+              readout: "关键节点表达验证"
+              minimal_details: "对关键瓶颈基因进行 qPCR 验证，作为转录重编程的正交证据"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "RNA"
+              assay_type: "qPCR"
+          link_validation:
+            - id: EV009
+              status: "药理复制"
+              condition: "PI3K 抑制（如 LY294002/PI3K isoform inhibitor）"
+              readout: "flux/turnover 轴方向 qPCR 结果复制"
+              minimal_details: "通过 PI3K 抑制剂检测是否复制转录轴方向变化"
+              treatment: "PI3K 抑制剂处理"
+              sample_type: "RNA"
+              assay_type: "qPCR"
+            - id: EV010
+              status: "药理救援"
+              condition: "AKT/mTOR 激活或抑制刹车"
+              readout: "qPCR 结果部分逆转"
+              minimal_details: "通过激活或抑制 AKT/mTOR 通路观察转录变化的可逆性"
+              treatment: "AKT/mTOR 通路调控处理"
+              sample_type: "RNA"
+              assay_type: "qPCR"
+        expected_if_true: "抑制 PI3K 输出 → 合成轴下移；并出现周转增强相关转录迹象"
+        alternative_explanations:
+          - "AMPK/ISR/炎症应激作为主驱动；PI3K 仅伴随"
+          - "细胞周期/生长速率变化导致膜需求下降（表观为合成下降）"
+        falsified_if: "操纵 PI3K 输出不能改变 flux/turnover 轴及关键节点方向"
+
+      - id: L_C_to_D
+        from: C
+        to: D
+        question: "通量转录迹象是否足以解释脂质组的膜磷脂库缩水表型？"
+        scientific_consensus: "部分共识（通量与稳态含量相关但非一一对应；需要脂质组/通量证据闭环）"
+        key_references:
+          - "He et al., 2017, lipin-1 regulates phospholipid synthesis (PMCID: PMC6137500)"
+        in_this_paper_validation:
+          node_validation:
+            - id: EV011
+              status: "脂质组"
+              condition: "跨批次"
+              readout: "HO−WT 脂质组效应方向与 flux/turnover 轴方向一致"
+              minimal_details: "比较不同批次脂质组数据中膜磷脂含量变化与转录通量轴方向是否一致"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "脂质"
+              assay_type: "脂质组"
+            - id: EV012
+              status: "转录与脂质对照"
+              condition: "关键合成酶/供给节点"
+              readout: "转录变化与对应脂质类群方向匹配"
+              minimal_details: "检测关键合成酶基因表达变化与对应脂质组分变化的方向性关系"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "RNA"
+              assay_type: "qPCR"
+            - id: EV013
+              status: "Bartlett 磷测定 + BODIPY 493/503 染色"
+              condition: "总磷脂量和总 TG 量"
+              readout: "磷脂含量和脂滴染色结合证据"
+              minimal_details: "结合总磷脂测定和脂滴染色验证脂质周转变化"
+              treatment: "EphB1 KO vs WT"
+              sample_type: "脂质; 细胞染色"
+              assay_type: "Bartlett 磷测定; BODIPY 染色"
+          link_validation:
+            - id: EV014
+              status: "PI3K 抑制"
+              condition: "前述假设成立"
+              readout: "总磷脂/TG 含量下降"
+              minimal_details: "抑制 PI3K 后检测膜磷脂和 TG 含量变化"
+              treatment: "PI3K 抑制剂处理"
+              sample_type: "脂质"
+              assay_type: "脂质组"
+
+        expected_if_true: "合成受限/周转增强 → 多类膜磷脂净下降，TG 代偿上升"
+        alternative_explanations:
+          - "提取/归一化/细胞数差异导致的‘总量’偏移（技术性缩水）"
+          - "膜转运/接触位点异常导致的分布变化（不等于净通量不足）"
+        falsified_if: "在控制技术因素后，脂质组不显示膜磷脂净下降或方向不一致"
+
+      - id: L_D_to_E
+        from: D
+        to: E
+        question: "膜磷脂库缩水如何转化为 CL 可及性/功能池下降？"
+        scientific_consensus: "部分共识（NAO 常用于 CL 相关 readout，但特异性/解释边界需声明；可及性与总量可分离）"
+        key_references:
+          - "Mileykovskaya et al., 2001, NAO binding to cardiolipin (FEBS Lett.)"
+          - "Fernandez et al., 2004, NAO specificity limitations (PMID: 15113694)"
+        in_this_paper_validation:
+          node_validation:
+            - id: EV015
+              status: "NAO 染色"
+              condition: "与膜电位无关对照（配合 TMRM/JC-1）"
+              readout: "NAO 信号排除 ΔΨm 干扰"
+              minimal_details: "通过膜电位染色对照排除 NAO 信号受膜电位影响"
+              treatment: "无额外处理（基线）"
+              sample_type: "细胞染色"
+              assay_type: "NAO 染色"
+          link_validation:
+            - id: EV017
+              status: "PI3K 抑制剂处理"
+              condition: "总量变化不显著"
+              readout: "膜环境操控改变 NAO/效应端 readout"
+              minimal_details: "在总量无显著变化条件下，检测膜环境操控对 NAO 信号的影响"
+              treatment: "PI3K 抑制剂处理"
+              sample_type: "细胞染色"
+              assay_type: "NAO 染色"
+            - id: EV018
+              status: "限制 PC/PE 合成"
+              condition: "原料供给/合成酶限制"
+              readout: "D 表型出现，E（NAO）随之下降"
+              minimal_details: "通过限制膜磷脂合成观察膜磷脂缩水及 NAO 信号变化"
+              treatment: "限制膜磷脂合成"
+              sample: "细胞染色"
+              assay_type: "NAO 染色"
+            - id: EV019
+              status: "补充实验"
+              condition: "补 choline / ethanolamine（或 CDP-choline/相关前体）"
+              readout: "D 被救回，E（NAO）随 D 回升"
+              minimal_details: "补充膜磷脂合成前体，观察膜磷脂及 NAO 信号恢复"
+              treatment: "补充胆碱/乙醇胺"
+              sample_type: "细胞染色"
+              assay_type: "NAO 染色"
+        expected_if_true: "膜磷脂库缩水伴随 NAO 可及性下降；二者可非线性但方向一致"
+        alternative_explanations:
+          - "ΔΨm/线粒体数量/聚集状态影响 NAO 信号"
+          - "NAO 反映的是 CL 微域/暴露度而非总量"
+        falsified_if: "在控制线粒体数量与 ΔΨm 后，NAO 与脂质组表型仍无一致方向"

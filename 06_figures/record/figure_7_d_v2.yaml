@@ -8,117 +8,82 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure_id: ""
-  experiment_id: ""
-  short_title: ""         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
+  figure_id: "Figure7D"
+  experiment_id: "RNA_only_XMZ_ranking_MembraneContext"
+  short_title: "EphB1 状态驱动的下游通路变化（ΔM）及其与 Membrane context 轴（Z）的耦合与稳健性"
 
 assets:
-  main_figure_file: ""    # 主图文件路径，如 "figures/F3/F3A_IL1b_ELISA.pdf"
-  raw_data_files:         # 原始数据/整理后数据的文件路径列表
-    - ""
-  stats_files:            # 统计分析结果文件（R/Python 脚本输出）
-    - ""
-  analysis_scripts:       # 用于生成图/做统计的脚本
-    - ""
-  supplementary_items:    # 对应的补充图/表（若有）
-    - ""                  # 如 "Figure S3B", "Table S2"
+  main_figure_file: "results/multiomics/figures/fig6_XMZ_panels_ABC_Membrane_context.png"
+  raw_data_files:
+    - "results/multiomics/tables/sample_scores/sample_scores_rna_only.tsv"
+    - "results/multiomics/tables/mediation/rank_X_to_M__Membrane context.tsv"
+    - "results/multiomics/tables/mediation/loo_matrix_M_to_Z__Membrane context.tsv"
+  stats_files:
+    - "results/multiomics/tables/mediation/rank_M_to_Z__Membrane context.tsv"
+    - "results/multiomics/tables/mediation/rank_combined_M_for_Z__Membrane context.tsv"
+  analysis_scripts:
+    - "scripts/multi/05b_rna_axis_scores_per_sample.R"
+    - "scripts/multi/06_rna_path_rank_XMZ.R"
+    - "scripts/plot/figure_7_c_v2.R"
+  supplementary_items:
+    - "N/A"
 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
-  context_from_previous: ""  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
-                             # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
-  core_question: ""          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
-                             # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”
-  hypothesis_or_expectation: ""  # 你的假设或预期结果（1 句）
-                             # 例如：“如果 EphB1 促进 NLRP3 炎性小体的效应端活性，则 EphB1 缺失应降低 IL-1β 的释放。”
-  importance_reason: ""      # 为什么这个问题重要/值得单列一节（1 句即可）
-                             # 例如：“IL-1β 是 NLRP3 炎性小体的关键功能 readout，用于评估效应端活性。”
+  context_from_previous: "前述多组学一致性分析指向 membrane context 相关机制轴存在显著障碍，需要进一步定位可能的上游信号输入。"
+  core_question: "EphB1 缺失关联的下游信号模块（M）中，哪些在跨批次上呈现一致变化，并与 membrane context 轴分数（Z）在样本层面耦合？"
+  hypothesis_or_expectation: "若某下游通路参与驱动 membrane context 障碍，则其在 KO 中应出现跨批次一致的ΔM，并与 Z 在批内呈可重复的方向性耦合。"
+  importance_reason: "在缺乏同一样本跨组学配对的情况下，跨批次RNA足迹提供了可复现的候选通路优先级排序依据，用于后续湿实验验证。"
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: ""       # 使用的模型/系统 + 选择理由
-                             # 例如：“选用原代腹腔巨噬细胞，因为其对 NLRP3 激活高度敏感，且能反映体内炎症状态。”
-  key_variables: ""          # 本实验关注的关键变量 + 操纵方式
-                             # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
-  control_logic: ""          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
-                             # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1−/− 的参照组。”
-  core_justification: ""     # 最关键的一句“设计理由”（可直接当自动摘要用）
-                             # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1−/− 细胞在相同刺激下应释放更少 IL-1β。”
+  model_and_system: "使用三批次转录组样本（WT vs Ephb1 KO）计算EphB1已知下游通路的转录足迹分数（M），并在同一RNA数据内计算机制轴分数（Z=Membrane context）。"
+  key_variables: "X：基因型（WT/KO）；M：EphB1 下游信号模块分数；Z：Membrane context 轴分数（障碍强度，分数越高=障碍越重）。"
+  control_logic: "在每个批次内分别比较 HO−WT 得到ΔM，并在批内拟合 Z 与 M 的耦合（控制 X），以降低批次间基线差异带来的偏移。"
+  core_justification: "用“跨批次ΔM一致性 + 批内M↔Z耦合 + LOO稳健性”合成证据链，对候选下游通路进行优先级排序（用于机制筛选，而非严格因果中介检验）。"
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
-  inherits_from_protocol: ""   # 引用全章或整篇论文的通用 protocol 名称，如 "default_peritoneal_macrophage_NLRP3_activation"
-                               # 之后可在 Methods 总节详细描述该 protocol。
-  biological_material: ""      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
-                               # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1−/− 小鼠来源的原代腹腔巨噬细胞。”
-  experimental_groups: ""      # 组别及核心差异：基因型、处理、时间点
-                               # 例如：“按基因型分为 WT 和 Ephb1−/−，均接受 LPS 预处理 + ATP 激活。”
-  stimuli_and_treatment: ""    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
-                               # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
-  time_points: ""              # 关键测定时间点（如果不在上面已写清）
-  dose_info: ""                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
-  readout_and_assay: ""        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
-                               # 例如：“使用 IL-1β ELISA 测定上清中 IL-1β，按厂商说明书操作。”
-  replicates: ""               # 生物学重复数 n，以及是否合并多次实验
-                               # 例如：“每组 n = 4 生物学重复，结果合并自两次独立实验。”
-  analysis_notes: ""           # 本 panel 特有的分析方法/统计模型（如 normalization、配对 vs 非配对）
-                               # 例如：“采用非配对双尾 t 检验；ELISA 结果按蛋白浓度归一化。”
-  minimal_methods_summary: ""  # 1–2 句，把上面内容压缩成将来写 Methods 时可以直接用的一小段。
+  inherits_from_protocol: "default_bulk_RNAseq_processing_and_scoring"
+  biological_material: "原代小鼠腹腔巨噬细胞（WT 与 Ephb1 KO），三批独立RNA-seq。"
+  experimental_groups: "每批次均包含 WT 与 KO；以批次为分层单位进行统计汇总。"
+  stimuli_and_treatment: "未额外引入刺激变量；分析基于收样时的转录状态。"
+  time_points: "收样单一时间点；批次作为重复维度。"
+  dose_info: "N/A"
+  readout_and_assay: "从 RNA-seq 计算通路足迹：对预定义基因集按gene_effect_sign聚合得到每样本的 M 分数；对机制轴基因集同法得到 Z（Membrane context）。"
+  replicates: "RNA-seq 共 3 个批次（总 n≈19；每批 WT/KO 数量不等）。"
+  analysis_notes: "(A) 计算每批ΔM=mean(KO)−mean(WT)，再对批次取中位数汇总；(B) 在批内拟合 Z ~ M + X（X为组别）得到 β_M；(C) 对 pooled 数据做 leave-one-out（逐样本剔除）重复拟合，输出 β_M_loo 矩阵评估稳健性。"
+  minimal_methods_summary: "基于三批 RNA-seq 数据计算 EphB1 下游通路分数（M）与 Membrane context 轴分数（Z）。用跨批次ΔM评估X→M一致性；在批内以 Z ~ M + X 回归刻画M↔Z耦合；通过 pooled LOO 重复拟合评估耦合稳健性。"
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
-  data_direction: ""           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
-                               # 例如：“在 LPS+ATP 刺激下，Ephb1−/− 巨噬细胞释放的 IL-1β 显著低于 WT。”
-  stats_summary: ""            # 统计显著性信息（检验方法、p 值区间即可）
-                               # 例如：“非配对 t 检验，p < 0.01。”
-  key_numbers: ""              # 可选：fold change、均值±SEM、效应量（方便你之后查）
-                               # 例如：“WT: 850 ± 120 pg/mL；Ephb1−/−: 410 ± 90 pg/mL；约下降 50%。”
-  group_difference_statement: "" # 用一两句把组间差异说清楚（可直接作为结果段主句）
-                                 # 例如：“与 WT 相比，Ephb1−/− 巨噬细胞在相同刺激强度下产生的 IL-1β 减少。”
-  robustness_and_qc: ""        # 是否在多批次实验中重复、是否排除了明显 outlier 等
-                               # 例如：“该趋势在两批独立实验中均一致，排除 1 个基于预设准则的 outlier 后结果不变。”
-  anomalies_or_limits: ""      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
-                               # 例如：“一批实验中 WT 绝对值略低，可能与细胞密度偏低有关。”
+  data_direction: "跨批次汇总显示，多数 EphB1 下游模块在 KO 中呈负向ΔM（HO−WT<0），其中 PI3K–AKT–mTOR 与 JAK–STAT 的下降幅度最大；细胞骨架/黏附模块（FAK–Src–Rho）呈正向ΔM。以 Z=Membrane context 为结局时，PI3K–AKT–mTOR 与 JAK–STAT 的 M 分数与 Z 呈负向耦合，而 FAK–Src–Rho 与 Z 呈正向耦合。"
+  stats_summary: "M↔Z 采用批内线性回归 Z ~ M + X；稳健性通过 pooled LOO 逐样本剔除重复拟合评估（报告 β_M_loo 的符号一致性与波动范围）。"
+  key_numbers: "ΔM（跨批次中位数，约值）：PI3K≈−1.1，JAK–STAT≈−1.0，MAPK≈−0.8；FAK–Src–Rho≈+0.7。LOO：PI3K/JAK 的 β_M_loo 多为负值区间；FAK–Src–Rho 多为正值区间。"
+  group_difference_statement: "EphB1 缺失在转录足迹层面系统性降低 PI3K–AKT–mTOR 与 JAK–STAT 等模块分数，并且这些模块在批内与 Membrane context 轴呈方向一致的耦合；相对地，骨架/黏附模块虽在 KO 中上调，但其与 Membrane context 的耦合方向相反。"
+  robustness_and_qc: "X→M 的方向在多个批次间一致（以ΔM符号投票）；M↔Z 的耦合通过 pooled LOO 检验，优先关注在多数剔除情形下 β_M_loo 符号保持一致的模块。"
+  anomalies_or_limits: "不同批次的效应大小存在波动，且样本量有限导致单样本对回归斜率的影响仍不可忽视；因此该分析用于候选通路排序而非严格因果证明。"
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
-  minimal_bio_interpretation: "" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
-                                 # 例如：“这些结果提示 EphB1 对 NLRP3 介导的 IL-1β 释放是促进性的。”
-  alternative_explanations: ""   # 可能的其他解释/局限（方便之后写 Discussion）
-                                 # 例如：“不能排除 EphB1 缺失影响前炎性细胞因子转录的可能。”
-  summary_type: ""               # 从下列类型中选一个或多个，用逗号分隔：
-                                 #   "supportive"   支持前一节/主假设
-                                 #   "descriptive"  纯描述现象
-                                 #   "elimination"  排除某种机制或可能性
-                                 #   "negative"     未见显著差异/阴性结果
-                                 #   "exploratory"  探索性发现
-                                 # 例如："supportive"
-  claim_supported: ""            # 本 panel 主要想支持/反驳的“文字命题”
-                                 # 例如：“EphB1 是 NLRP3 炎性小体效应端活性的正调控因子。”
-  link_to_previous: ""           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
-                                 # 例如：“在观察到 EphB1 缺失缓解线粒体损伤后，我们进一步评估其对下游 IL-1β 释放的影响。”
-  transition_to_next: ""         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
-                                 # 例如：“为了明确这种效应是否依赖于线粒体 ROS，我们随后检测了 NLRP3 激活过程中 mtROS 的变化。”
+  minimal_bio_interpretation: "这些结果支持：在收样状态下，EphB1 缺失与 PI3K–AKT–mTOR、JAK–STAT 等下游信号足迹的降低相伴，并与 membrane context 障碍分数的升高呈一致的方向性关系（通路越弱，障碍越重）。"
+  alternative_explanations: "M 分数为转录足迹，未直接测量蛋白磷酸化/瞬时活性；M 与 Z 的耦合可能反映共同上游因素或细胞状态差异，而非单一路径驱动。"
+  summary_type: "supportive, exploratory"
+  claim_supported: "PI3K–AKT–mTOR 与 JAK–STAT 等模块为解释 membrane context 障碍的优先候选通路（用于后续功能验证）。"
+  link_to_previous: "在确定 membrane context 相关机制轴存在稳定障碍后，本节进一步利用 RNA-only 的跨批次足迹在 EphB1 已知下游通路中进行候选排序。"
+  transition_to_next: "下一步将把该候选排序与脂质表型方向一致性（concordance）整合，并在关键候选通路上进行靶向生化/药理验证以测试其对 membrane context 与 CL 可及性的因果贡献。"
 
 # ---------- 6. figure_legend ----------
 
 figure_legend:
 
-  title: "EphB1 缺失在多通路炎症小体激活下均降低 IL-1β 释放" 
-    # 简短、结论式标题
-      # (A–C) 或单 panel 展示的对象
-      # 告诉读者“这个 panel 在比较什么现象”。
-      # 不包含基因型信息
+  title: "EphB1 缺失相关的下游通路变化（ΔM）及其与 Membrane context 轴（Z）的耦合与稳健性"
 
   panels:
-    description: ""
-      # (A–C) 或单 panel 展示的对象
-      # 例："WT 与 Ephb1 pb/pb 巨噬细胞在不同炎症小体第二信号刺激下的 IL-1β 释放"
+    description: "(A) 各 EphB1 下游模块在 KO 相对 WT 的跨批次 ΔM（HO−WT）汇总；(B) Z=Membrane context 与 top 模块 M 的样本层面散点关系（按批次分层显示）；(C) pooled leave-one-out（逐样本剔除）回归得到的 β_M_loo 热图，用于评估 M↔Z 耦合的稳健性。"
 
   groups:
-    definition: ""
-      # 对照与突变组的明确说明
-      # 例："WT 为同窝野生型对照，Ephb1 pb/pb 为敲除组"
+    definition: "WT 为野生型对照；KO（HO）为 Ephb1 缺失组。"
 
   sample_size:
     n_per_group: "n ≥ 3"
@@ -127,13 +92,9 @@ figure_legend:
   statistics:
     test: "非配对双尾 t 检验"
     multiple_comparison: "未进行多重比较校正"
-      # 若使用 ANOVA / mixed model / FDR，这里写；否则可以省略
 
   normalization:
-    description: ""
-      # 仅在“影响 y 轴数值含义”时填写
-      # 例："ELISA 信号按细胞数量进行标准化"
-      # 若只是背景扣除、技术校正，可不写
+    description: "通路/机制轴分数基于预定义基因集按 gene_effect_sign 聚合得到；ΔM 在每个批次内按 KO−WT 计算后跨批次汇总。"
 
   significance:
     symbols: "* p < 0.05, ** p < 0.01, *** p < 0.001; ns, 不显著"
