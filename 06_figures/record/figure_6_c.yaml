@@ -230,3 +230,38 @@ ai_hints:
   tone: "neutral"
   language: "zh_en_mix"
   target_journal_style: "Cell Metabolism"
+
+
+  # ---------- 8. English ----------
+
+results_skeleton_en:
+  stage: T3
+  purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
+  panel_level: framework | results
+  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+
+  modules:
+    M1_motivation:
+      en: ""
+      cn: ""
+      logic_source: "question.context_from_previous + question.core_question"
+
+    M2_level_definition:
+      en: ""
+      cn: ""
+      logic_source: "methods.readout_and_assay + question.core_question"
+
+    M3_directional_result:
+      en: ""
+      cn: ""
+      logic_source: "results.data_direction"
+
+    M4_robustness:
+      en: ""
+      cn: ""
+      logic_source: "results.robustness_and_qc + results.stats_summary"
+
+    M5_panel_conclusion:
+      en: ""
+      cn: ""
+      logic_source: "results.group_difference_statement"

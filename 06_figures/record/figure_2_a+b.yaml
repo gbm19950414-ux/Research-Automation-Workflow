@@ -66,7 +66,8 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_type: elimination
+  panel_level: framework | results
+  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
 
   modules:
     M1_motivation:
@@ -93,3 +94,5 @@ results_skeleton_en:
       en: "Thus, Ephb1 deficiency does not impair transcriptional priming during inflammasome activation."
       cn: "因此，EphB1 缺失并不损伤炎症小体激活过程中的转录性 priming。"
       logic_source: "results.group_difference_statement"
+
+      

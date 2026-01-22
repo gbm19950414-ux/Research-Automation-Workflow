@@ -129,12 +129,31 @@ figure_legend:
 
 # ---------- 8. English ----------
 
+results_skeleton_en:
+  stage: T3
+  purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
+  panel_level: framework
+  results_logic_type: null
+  modules:
+    M1_motivation:
+      en: "To establish the experimental and logical framework underlying the genetic screening strategy used to identify regulators of inflammasome-associated outputs."
+      cn: "为建立用于鉴定炎症小体相关输出调控因子的遗传筛选实验与逻辑框架。"
+      logic_source: "meta.role_in_paper + concept_goal.core_message"
 
-english_projection:
-  results_skeleton:
-    - ""
-    - ""
-    - ""
-  notes:
-    - "不追求语言润色"
-    - "只保证因果与事实对应"
+    M2_level_definition:
+      en: "A standardized workflow was designed in which primary macrophages from multiple genetic backgrounds were subjected to uniform NLRP3 inflammasome activation and assessed using IL-1β release as the functional readout."
+      cn: "构建了一套标准化实验流程，在多个遗传背景来源的原代巨噬细胞中统一诱导 NLRP3 炎症小体激活，并以 IL-1β 释放作为功能性读出。"
+      logic_source: "mechanism.key_nodes + visual_logic.causal_chain"
+    M3_directional_result:
+      en: "Within each genetic background, WT and HO macrophages were directly compared to quantify genotype-dependent differences in inflammasome-associated outputs."
+      cn: "在每一遗传背景内，直接比较 WT 与 HO 巨噬细胞，以量化基因型依赖的炎症小体相关输出差异。"
+      logic_source: "mechanism.key_nodes.within-strain comparison"
+    M4_robustness:
+      en: "This within-strain comparison strategy controls for background-specific variability and enables consistent prioritization of candidate genes based on effect size and statistical significance."
+      cn: "该同背景内比较策略有效控制了遗传背景差异带来的变异性，并支持基于效应大小与统计显著性对候选基因进行一致性排序。"
+      logic_source: "mechanism.key_nodes.significance and effect size"
+
+    M5_panel_conclusion:
+      en: "Together, this framework provides the experimental basis for the screening results presented in Figure 1b, without implying any mechanistic interpretation at this stage."
+      cn: "综上，该框架为 Figure 1b 所示的筛选结果提供了实验基础，但本图并不涉及任何机制层面的解释。"
+      logic_source: "evidence_mapping.speculative_links.boundary + transition.how_it_leads_next_section"
