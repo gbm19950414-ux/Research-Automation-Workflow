@@ -106,36 +106,34 @@ ai_hints:
   target_journal_style: ""
   language: "zh_en_mix"
 
-  # ---------- 8. English ----------
-
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: perturbation_response
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Following the observation that EphB1 deficiency attenuates inflammasome-dependent pyroptotic lysis as measured by LDH release, we next examined whether this phenotype is reflected in additional execution-associated readouts under NLRP3 activation."
+      cn: "在基于 LDH 外排观察到 EphB1 缺失削弱炎症小体依赖性焦亡后，我们进一步检验该表型是否同样体现在 NLRP3 激活条件下的其他执行端相关读出中。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and EphB1-deficient primary peritoneal macrophages were primed and activated via the NLRP3 inflammasome, and IL-1β release as well as the presence of execution-related cleavage products (GSDMD-NT and caspase-1 p20) were assessed by ELISA and immunoblotting."
+      cn: "在 WT 与 EphB1 缺失原代腹腔巨噬细胞中诱导 NLRP3 炎症小体激活后，分别通过 ELISA 与免疫印迹检测 IL-1β 的释放以及执行端相关裂解产物（GSDMD-NT 与 caspase-1 p20）。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Upon NLRP3 activation, EphB1-deficient macrophages released significantly less IL-1β into the supernatant and exhibited concomitantly reduced levels of GSDMD-NT, caspase-1 p20, and mature IL-1β by immunoblot analysis."
+      cn: "在 NLRP3 激活条件下，EphB1 缺失巨噬细胞上清中 IL-1β 释放显著降低，同时在免疫印迹中表现为 GSDMD-NT、caspase-1 p20 及成熟 IL-1β 水平均同步下降。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "These reductions were consistently observed across independent experiments and remained significant after background subtraction and normalization to cell number, indicating that the effect is not attributable to differences in cell density or assay variability."
+      cn: "上述下降趋势在多次独立实验中均可重复，并在完成背景扣除与细胞数量归一化后仍保持显著性，提示该效应并非由细胞密度差异或检测波动所致。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these supplemental analyses demonstrate that EphB1 deficiency suppresses multiple NLRP3 inflammasome execution-associated outputs, extending the LDH-based phenotype to IL-1β release and its upstream cleavage events."
+      cn: "综上，这些补充分析表明 EphB1 缺失可抑制多项 NLRP3 炎症小体执行端相关输出，将基于 LDH 的表型进一步扩展至 IL-1β 释放及其上游裂解事件。"
       logic_source: "results.group_difference_statement"

@@ -11,7 +11,7 @@ meta:
   figure: "s4a/b"              # 如 "Figure 3"
   panel: "A"               # 如 "A"
   short_title: "AD 处理降低 NAO 信号并抹除基因型差异"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
-  chapter: "3.5 线粒体心磷脂可及性与重塑的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
+  chapter: "3.5 线粒体心磷脂可及性与含量的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_5_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
 
@@ -30,16 +30,16 @@ assets:
 question:
   context_from_previous: "上一节发现 EphB1 缺失导致 NAO 可染 CL 池减少，提示 CL 可及性受限。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
                              # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
-  core_question: "AD 抑制 iPLA₂ 是否会降低 NAO 信号并抹除 WT 与 KO 的差异？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
+  core_question: "AD 抑制 PTPMT1 是否会降低 NAO 信号并抹除 WT 与 KO 的差异？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
                              # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”
-  hypothesis_or_expectation: "若 CL 重塑/外翻微环境限制 NAO 可达性，则 AD 处理应降低 NAO 信号并收敛基因型差异。"  # 你的假设或预期结果（1 句）
+  hypothesis_or_expectation: "若 CL 含量/外翻微环境限制 NAO 可达性，则 AD 处理应降低 NAO 信号并收敛基因型差异。"  # 你的假设或预期结果（1 句）
                              # 例如：“如果 EphB1 促进 NLRP3 炎性小体的效应端活性，则 EphB1 缺失应降低 IL-1β 的释放。”
   importance_reason: "通过药理学抑制验证 CL 池可及性与 GSDMD 结合限制之间的因果性。"      # 为什么这个问题重要/值得单列一节（1 句即可）
                              # 例如：“IL-1β 是 NLRP3 炎性小体的关键功能 readout，用于评估效应端活性。”
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，以 AD 抑制 iPLA₂β/γ，模拟 CL 重塑受阻状态。"       # 使用的模型/系统 + 选择理由
+  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，以 AD 抑制 PTPMT1，模拟 CL 含量减少状态。"       # 使用的模型/系统 + 选择理由
                              # 例如：“选用原代腹腔巨噬细胞，因为其对 NLRP3 激活高度敏感，且能反映体内炎症状态。”
   key_variables: "AD 处理（+AD vs −AD）、基因型（WT vs KO）、NAO 荧光强度。"          # 本实验关注的关键变量 + 操纵方式
                              # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
@@ -89,10 +89,10 @@ results:
 interpretation:
   minimal_bio_interpretation: >
     AD 处理本身即可显著降低 NAO 可染的心磷脂池，
-    表明 NAO 信号下降可由心磷脂重塑/可及性受限直接诱导。
+    表明 NAO 信号下降可由心磷脂含量/可及性受限直接诱导。
     该结果支持将 EphB1 缺失条件下观察到的 NAO 降低，
     解释为一种功能性 CL 可达性受限状态，而非基因型特异的间接效应。
-  alternative_explanations: "AD 可能影响其他脂质重塑，但 NAO 与 CL 总量一致下降支持 CL 池本身变化。"   # 可能的其他解释/局限（方便之后写 Discussion）
+  alternative_explanations: "AD 可能影响其他脂质含量，但 NAO 与 CL 总量一致下降支持 CL 池本身变化。"   # 可能的其他解释/局限（方便之后写 Discussion）
                                  # 例如：“不能排除 EphB1 缺失影响前炎性细胞因子转录的可能。”
   summary_type: "supportive, exploratory"               # 从下列类型中选一个或多个，用逗号分隔：
                                  #   "supportive"   支持前一节/主假设
@@ -106,7 +106,7 @@ interpretation:
     为 EphB1 缺失条件下 GSDMD-NT 线粒体结合受限提供了脂质层面的因果支持。
   link_to_previous: "在观察到 NAO 信号下降后，本节通过 AD 因果实验验证这一变化的可调控性。"           # 承接上一节的句子（1 句）：上一节结果如何被本节进一步验证/延伸/修正？
                                  # 例如：“在观察到 EphB1 缺失缓解线粒体损伤后，我们进一步评估其对下游 IL-1β 释放的影响。”
-  transition_to_next: "为确认脂质变化的来源，下一节将进一步评估 CL 重塑与氧化相关指标。"         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
+  transition_to_next: "为确认脂质变化的来源，下一节将进一步评估 CL 含量与氧化相关指标。"         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
                                  # 例如：“为了明确这种效应是否依赖于线粒体 ROS，我们随后检测了 NLRP3 激活过程中 mtROS 的变化。”
 
 # ---------- 6. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
@@ -127,31 +127,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: perturbation_response
 
-  modules:
-    M1_motivation:
-      en: ""
-      cn: ""
-      logic_source: "question.context_from_previous + question.core_question"
+modules:
+  M1_motivation:
+    en: "We next asked whether an independent pharmacological inhibition of cardiolipin biosynthesis is sufficient to reduce NAO signals in WT macrophages."
+    cn: "我们进一步检验，一种独立的、针对心磷脂合成通路的药理学抑制，是否足以在 WT 巨噬细胞中降低 NAO 信号。"
+    logic_source: "question.context_from_previous + question.core_question"
 
-    M2_level_definition:
-      en: ""
-      cn: ""
-      logic_source: "methods.readout_and_assay + question.core_question"
+  M2_level_definition:
+    en: "WT primary peritoneal macrophages were pretreated with the cardiolipin biosynthesis inhibitor alexidine dihydrochloride (AD) prior to NAO staining, and cardiolipin-associated fluorescence was quantified by confocal microscopy under fixed exposure conditions."
+    cn: "在 NAO 染色前对 WT 原代腹腔巨噬细胞进行心磷脂合成通路抑制剂 alexidine dihydrochloride（AD）预处理，并在固定曝光条件下通过共聚焦显微镜定量心磷脂相关荧光信号。"
+    logic_source: "methods.readout_and_assay + question.core_question"
 
-    M3_directional_result:
-      en: ""
-      cn: ""
-      logic_source: "results.data_direction"
+  M3_directional_result:
+    en: "AD treatment markedly reduced NAO fluorescence in WT macrophages, indicating that pharmacological inhibition of cardiolipin biosynthesis decreases the NAO-accessible cardiolipin pool."
+    cn: "AD 处理在 WT 巨噬细胞中显著降低 NAO 荧光信号，提示药理学抑制心磷脂合成可减少 NAO 可及的心磷脂池。"
+    logic_source: "results.data_direction"
 
-    M4_robustness:
-      en: ""
-      cn: ""
-      logic_source: "results.robustness_and_qc + results.stats_summary"
+  M4_robustness:
+    en: "This reduction in NAO signal was reproducible across independent experimental batches and reached statistical significance."
+    cn: "该 NAO 信号下降在多批次独立实验中稳定复现，并达到统计学显著性。"
+    logic_source: "results.robustness_and_qc + results.stats_summary"
 
-    M5_panel_conclusion:
-      en: ""
-      cn: ""
-      logic_source: "results.group_difference_statement"
+  M5_panel_conclusion:
+    en: "Together, these results demonstrate that pharmacological inhibition of cardiolipin biosynthesis alone is sufficient to reduce the NAO-accessible cardiolipin pool in WT macrophages, supporting cardiolipin abundance as a key determinant of NAO-detectable cardiolipin availability."
+    cn: "综上，这些结果表明，仅通过药理学抑制心磷脂合成即可在 WT 巨噬细胞中降低 NAO 可及的心磷脂池，支持心磷脂含量本身是决定 NAO 可检测心磷脂可用性的关键因素。"
+    logic_source: "results.group_difference_statement"

@@ -27,7 +27,7 @@ assets:
 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
-  context_from_previous: "上一节显示 EphB1 缺失削弱 GSDMD-NT 在线粒体的早期富集，提示线粒体膜事件可能受影响。"
+  context_from_previous: "在将瓶颈定位到炎症小体装配与 caspase-1 激活之后的执行阶段后"
   core_question: >
     "EphB1 缺失是否影响炎症小体激活过程中细胞质 ROS 上升与线粒体膜电位变化？"
     "在未激活炎症小体的静息条件下，EphB1 缺失是否已造成线粒体膜电位（ΔΨm）的固有差异？"
@@ -98,31 +98,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: elimination
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "After localizing the functional bottleneck to the execution stage downstream of inflammasome assembly and caspase-1 activation, we next asked whether mitochondrial functional readouts—including cytosolic and mitochondrial ROS dynamics as well as mitochondrial membrane potential—are altered during NLRP3 activation."
+      cn: "在将功能瓶颈定位到炎性小体组装和caspase-1激活的下游执行阶段后，我们接下来要问的是，在NLRP3激活过程中，线粒体功能数据（包括胞质和线粒体ROS动力学以及线粒体膜电位）是否会发生改变。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and Ephb1−/− primary peritoneal macrophages were LPS-primed and activated with Nigericin, and time-resolved changes in cytosolic ROS (H2DCHA), mitochondrial ROS (MitoSOX), and mitochondrial membrane potential (TMRM) were continuously monitored and normalized to pre-stimulation baselines."
+      cn: "在 WT 与 Ephb1−/− 原代腹腔巨噬细胞中进行 LPS 预激并以 Nigericin 激活后，连续监测并归一化分析细胞质 ROS（H2DCHA）、线粒体 ROS（MitoSOX）及线粒体膜电位（TMRM）的时间动态变化。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Upon inflammasome activation, Ephb1−/− macrophages exhibited attenuated accumulation of cytosolic ROS and a smaller loss of mitochondrial membrane potential compared with WT cells, whereas mitochondrial ROS signals measured by MitoSOX showed no significant genotype-dependent difference in overall magnitude."
+      cn: "在炎症小体激活过程中，与 WT 相比，Ephb1−/− 巨噬细胞表现出更弱的细胞质 ROS 累积以及更小幅度的线粒体膜电位下降；而以 MitoSOX 检测的线粒体 ROS 整体强度未显示显著的基因型差异。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "These patterns were consistent across independent experimental batches and were supported by area-under-the-curve analyses, while baseline TMRM measurements obtained under unstimulated conditions remained comparable between genotypes."
+      cn: "上述模式在多批次独立实验中保持一致，并得到曲线下面积分析的支持；同时，在未激活条件下测得的基线 TMRM 信号在不同基因型之间保持相当。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these results indicate that EphB1 deficiency does not cause an intrinsic alteration in mitochondrial membrane potential at baseline but limits ROS accumulation and membrane depolarization during inflammasome activation, supporting a model in which mitochondrial damage is attenuated during the execution phase."
+      cn: "综上，这些结果表明 EphB1 缺失并未在静息条件下引起线粒体膜电位的固有改变，但在炎症小体激活过程中可限制 ROS 累积与膜去极化，支持执行阶段线粒体损伤受限的模型。"
       logic_source: "results.group_difference_statement"

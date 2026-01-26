@@ -163,31 +163,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: elimination
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "To determine whether the ROS and mitochondrial membrane potential (Δψm) dynamics observed in Figure 3A–H represent a reproducible biological pattern rather than batch-specific fluctuations, we next examined their temporal structures across multiple independent experiments."
+      cn: "为判断 Figure 3A–H 中观察到的 ROS 与线粒体膜电位（Δψm）动态变化是否反映可重复的生物学模式而非批次特异性波动，我们进一步对多次独立实验中的时间结构进行整体分析。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "Time-resolved plate-reader data for cytosolic ROS (H2DCFDA), mitochondrial ROS (MitoSOX), and Δψm (TMRM) were compiled from multiple experimental batches, normalized to baseline values, and visualized as WT/HO ratio heatmaps under different stimulation conditions."
+      cn: "汇总多批次实验中的 plate reader 时间序列数据，对细胞质 ROS（H2DCFDA）、线粒体 ROS（MitoSOX）及 Δψm（TMRM）信号进行基线归一化，并在不同刺激条件下以 WT/HO 比值热图形式进行展示。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Under LPS plus Nigericin stimulation, most batches exhibited a consistent temporal pattern in which cytosolic ROS and Δψm WT/HO ratios increased over time, whereas mitochondrial ROS WT/HO ratios displayed a distinct but similarly structured dynamic profile."
+      cn: "在 LPS 加 Nigericin 刺激条件下，多数实验批次均呈现一致的时间演化模式：细胞质 ROS 与 Δψm 的 WT/HO 比值随时间升高，而线粒体 ROS 的 WT/HO 比值则表现出不同但结构相似的动态特征。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "Despite variability in absolute signal amplitudes between batches, the overall temporal structures of ROS and Δψm dynamics were preserved across experiments, with no single batch dominating the observed patterns."
+      cn: "尽管不同批次之间的绝对信号幅度存在差异，ROS 与 Δψm 动态的整体时间结构在各实验中保持一致，且未出现由单一批次主导整体模式的情况。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these multi-batch analyses exclude batch-specific noise as the primary driver of the ROS and Δψm differences observed in Figure 3, supporting the robustness of EphB1-associated mitochondrial stress phenotypes during inflammasome activation."
+      cn: "综上，这些多批次分析排除了批次噪音作为 Figure 3 中 ROS 与 Δψm 差异主要来源的可能性，支持 EphB1 缺失相关的炎症小体激活期线粒体应激表型具有稳健性。"
       logic_source: "results.group_difference_statement"

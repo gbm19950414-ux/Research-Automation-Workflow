@@ -71,8 +71,9 @@ results:
                                # 例如：“一批实验中 WT 绝对值略低，可能与细胞密度偏低有关。”
 
 interpretation:
-  minimal_bio_interpretation: "BEL 抑制 iPLA₂ 所介导的脂质重塑可显著降低 NAO 可染的心磷脂池，并使 WT 与 KO 的 NAO 差异收敛，表明‘CL 可及性/NAO 可达性受限’可被药理学操控，并为 EphB1 缺失表型提供脂质层面的因果支持。" # 在不过度拔高的前提下，用 1–2 句解释结果“生物学含义”
-                                 # 例如：“这些结果提示 EphB1 对 NLRP3 介导的 IL-1β 释放是促进性的。”
+  minimal_bio_interpretation: >
+    BEL 抑制 iPLA₂ 所介导的脂质重塑可显著降低 NAO 可染的心磷脂池，并使 WT 与 KO 的 NAO 差异收敛，表明‘CL 可及性/NAO 可达性受限’可被药理学操控，并为 EphB1 缺失表型提供脂质层面的因果支持。
+    这些数据表明，无论是改变心磷脂含量，还是干预心磷脂重塑过程，均可导致 NAO 染色水平下降，提示 NAO 可及心磷脂池的变化并不等同于心磷脂总量改变，而可由多种机制共同决定。
   alternative_explanations: "BEL 可能同时影响多种磷脂重塑过程；此外 NAO 信号主要报告‘可达/可染’的 CL 池而非 CL 总量。因此，本节结论限定为：BEL 诱导的 NAO 下降反映 CL 可及性降低，但不直接等同于 CL 总量减少。"   # 可能的其他解释/局限（方便之后写 Discussion）
                                  # 例如：“不能排除 EphB1 缺失影响前炎性细胞因子转录的可能。”
   summary_type: "supportive, elimination"               # 从下列类型中选一个或多个，用逗号分隔：
@@ -106,31 +107,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: perturbation_response
 
-  modules:
-    M1_motivation:
-      en: ""
-      cn: ""
-      logic_source: "question.context_from_previous + question.core_question"
+modules:
+  M1_motivation:
+    en: "To further probe the determinants of the NAO-accessible cardiolipin pool, we next tested whether pharmacological perturbation of cardiolipin remodeling represents an alternative route to reduce NAO staining intensity."
+    cn: "为进一步解析决定 NAO 可及心磷脂池的因素，我们进一步检验，针对心磷脂重塑过程的药理学干预是否构成另一条降低 NAO 染色强度的途径。"
+    logic_source: "question.context_from_previous + question.core_question"
 
-    M2_level_definition:
-      en: ""
-      cn: ""
-      logic_source: "methods.readout_and_assay + question.core_question"
+  M2_level_definition:
+    en: "WT and Ephb1−/− primary peritoneal macrophages were pretreated with BEL, followed by NAO staining under identical imaging conditions, and cardiolipin-associated fluorescence intensity was quantified using uniform exposure and thresholding parameters."
+    cn: "对 WT 与 Ephb1−/− 原代腹腔巨噬细胞进行 BEL 预处理后实施 NAO 染色，并在统一曝光与阈值条件下定量分析心磷脂相关荧光强度。"
+    logic_source: "methods.readout_and_assay + question.core_question"
 
-    M3_directional_result:
-      en: ""
-      cn: ""
-      logic_source: "results.data_direction"
+  M3_directional_result:
+    en: "BEL treatment led to a marked reduction in NAO fluorescence intensity, indicating that pharmacological interference with cardiolipin remodeling is sufficient to decrease the NAO-accessible cardiolipin pool."
+    cn: "BEL 处理显著降低 NAO 荧光强度，表明通过药理学干预心磷脂重塑过程即可减少 NAO 可及的心磷脂池。"
+    logic_source: "results.data_direction"
 
-    M4_robustness:
-      en: ""
-      cn: ""
-      logic_source: "results.robustness_and_qc + results.stats_summary"
+  M4_robustness:
+    en: "This reduction in NAO staining was consistently observed across independent experimental batches and reached statistical significance relative to untreated controls."
+    cn: "该 NAO 染色下降在多批次独立实验中稳定复现，并相对于未处理对照达到统计学显著性。"
+    logic_source: "results.robustness_and_qc + results.stats_summary"
 
-    M5_panel_conclusion:
-      en: ""
-      cn: ""
-      logic_source: "results.group_difference_statement"
+  M5_panel_conclusion:
+    en: "Together with perturbations targeting cardiolipin abundance, these results show that both manipulation of cardiolipin content and interference with cardiolipin remodeling can reduce NAO staining, indicating that changes in the NAO-accessible cardiolipin pool can arise through multiple mechanisms beyond alterations in total cardiolipin levels."
+    cn: "结合针对心磷脂含量的操控结果，这些数据表明，无论是改变心磷脂含量，还是干预心磷脂重塑过程，均可导致 NAO 染色水平下降，提示 NAO 可及心磷脂池的变化并不等同于心磷脂总量改变，而可由多种机制共同决定。"
+    logic_source: "results.group_difference_statement"

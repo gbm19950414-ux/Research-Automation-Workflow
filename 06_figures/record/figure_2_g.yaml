@@ -119,31 +119,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: localization
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Following the observation that caspase-1 activation is preserved, we next examined whether caspase-1 substrate cleavage are differentially affected."
+      cn: "在观察到 EphB1 缺失条件下 caspase-1 激活保留后，我们进一步检验 caspase-1 的底物切割功能是否受到差异性影响。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and EphB1-deficient primary peritoneal macrophages were primed and activated via the NLRP3 inflammasome, after which GSDMD and IL-1β processing was analyzed in total cell lysates by immunoblotting."
+      cn: "在 WT 与 EphB1 缺失原代腹腔巨噬细胞中诱导 NLRP3 炎症小体激活后，通过免疫印迹分别检测全细胞裂解液中的 GSDMD 与 IL-1β。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Caspase-1–dependent cleavage of GSDMD and pro–IL-1β occurred efficiently in EphB1-deficient macrophages, yielding cleavage and maturation degree comparable to those in WT cells."
+      cn: "在 EphB1 缺失巨噬细胞中，caspase-1 依赖的 GSDMD 与 pro–IL-1β 切割可有效发生。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "This intracellular processing was reproducible across independent experiments, with statistically significant reductions was not observed specifically in the total fractions."
+      cn: "这种细胞内处理保留的现象在多次独立实验中均可重复观察到，且统计学显著性未在总裂解组分中体现。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these results demonstrate that EphB1 deficiency does not compromise caspase-1 substrate cleavage per se but selectively limits the extracellular release of mature inflammasome products, thereby localizing the defect to a late execution or export step."
+      cn: "综上，这些结果表明 EphB1 缺失并未削弱 caspase-1 对底物的切割本身，而是选择性限制成熟炎症小体产物的胞外释放，从而将缺陷定位于执行端后期或外排步骤。"
       logic_source: "results.group_difference_statement"

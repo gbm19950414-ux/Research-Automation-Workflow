@@ -89,31 +89,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: perturbation_response
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "We next asked whether perturbations that alter cardiolipin availability through distinct mechanisms are sufficient to attenuate the terminal functional output of inflammasome signaling, as measured by IL-1β release."
+      cn: "我们进一步检验，通过不同机制改变心磷脂可及性的操作，是否均足以削弱炎症小体信号通路的终端功能输出，即 IL-1β 的释放。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "Primary peritoneal macrophages were subjected to pharmacological manipulations targeting cardiolipin regulation via distinct mechanisms, followed by LPS priming and Nigericin activation, and IL-1β released into the supernatant was quantified by ELISA with normalization to cell number."
+      cn: "通过不同药理学手段从不同机制层面干预心磷脂调控后，对原代腹腔巨噬细胞进行 LPS 预激与 Nigericin 激活，并通过 ELISA 定量检测上清中 IL-1β 的释放量并校正细胞数量。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Across these perturbations, reduction of cardiolipin availability consistently led to a marked decrease in LPS- and Nigericin-induced IL-1β release, indicating convergent suppression of inflammasome terminal output."
+      cn: "在上述多种干预条件下，心磷脂可及性的降低均伴随 LPS+nigericin 诱导的 IL-1β 释放显著下降，提示炎症小体终端输出出现一致性的抑制。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "The inhibitory effects on IL-1β release were dose- and/or time-dependent, reproducible across independent experimental batches, and occurred in the absence of detectable cytotoxicity."
+      cn: "IL-1β 释放的抑制效应呈剂量和/或时间依赖性，在多批次独立实验中稳定复现，且未检测到明显的细胞毒性。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these results demonstrate that diverse perturbations of cardiolipin regulation—whether affecting cardiolipin abundance or remodeling—converge on attenuation of inflammasome-mediated IL-1β release, supporting cardiolipin availability as a common limiting factor for terminal inflammasome output."
+      cn: "综上，这些结果表明，无论是影响心磷脂含量还是干预心磷脂重塑，不同机制层面的心磷脂调控均汇聚于炎症小体介导的 IL-1β 释放减弱，支持心磷脂可及性作为限制炎症小体终端输出的共同关键因素。"
       logic_source: "results.group_difference_statement"

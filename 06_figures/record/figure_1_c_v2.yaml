@@ -142,31 +142,30 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
-
+  panel_level: results
+  results_logic_type: perturbation_response
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Having identified Ephb1 as a candidate strain with reduced IL-1β output upon Nigericin stimulation, we next asked whether this phenotype generalizes across distinct inflammasome receptor pathways rather than reflecting a Nigericin-specific effect."
+      cn: "在观察到 Ephb1 pb/pb 细胞在 Nigericin 刺激下 IL-1β 释放降低后，我们进一步检验该表型是否可推广至不同炎症小体感受器通路，而非 Nigericin 特异性效应。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and Ephb1 pb/pb primary peritoneal macrophages were LPS-primed and then activated via NLRP3 (Nigericin), NLRC4 (cytosolic flagellin delivery), or AIM2 (cytosolic poly(dA:dT) delivery), and IL-1β release was quantified by ELISA with background subtraction and MTT-based normalization."
+      cn: "采用 WT 与 Ephb1 pb/pb 原代腹腔巨噬细胞经 LPS 预激后分别通过 NLRP3（Nigericin）、NLRC4（胞质递送 flagellin）或 AIM2（胞质递送 poly(dA:dT)）激活通路，并以 IL-1β ELISA（含背景扣除与 MTT 标准化）量化释放水平。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Across all three activation routes, Ephb1 pb/pb macrophages released significantly less IL-1β than WT controls."
+      cn: "在三种通路的第二信号激活条件下，Ephb1 pb/pb 巨噬细胞的 IL-1β 释放均显著低于 WT 对照。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "The reduction was statistically significant for each stimulus and remained consistent across independent experiments after dual background correction and cell-number normalization."
+      cn: "该下降在各刺激条件下均达到统计学显著性，并在经双背景扣除与细胞数标准化后于多次独立实验中保持一致。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "These data indicate that the diminished IL-1β output in Ephb1 pb/pb macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 in a shared downstream execution process."
+      cn: "综上，Ephb1 pb/pb 细胞 IL-1β 输出受限并非局限于单一感受器通路，支持 EphB1 作用于炎症小体下游的共同执行过程。"
       logic_source: "results.group_difference_statement"

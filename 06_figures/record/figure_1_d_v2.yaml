@@ -97,36 +97,36 @@ ai_hints:
   target_journal_style: ""
   language: "zh_en_mix"
 
-  # ---------- 8. English ----------
+# ---------- 8. English ----------
 
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: perturbation_response
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "To test whether the reduced inflammasome output observed upon EphB1 deficiency extends to pyroptotic cell lysis across multiple inflammasome pathways, we next examined cell death responses under distinct activation conditions."
+      cn: "为检验 EphB1 缺失所致的炎症小体输出降低是否同样体现在多通路诱导的焦亡裂解中，我们进一步比较了不同炎症小体激活条件下的细胞死亡反应。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "Pyroptotic cell lysis was quantified by measuring LDH release from WT and EphB1-deficient primary peritoneal macrophages following activation of NLRP3, NLRC4, or AIM2 inflammasomes."
+      cn: "通过检测 WT 与 EphB1 缺失原代腹腔巨噬细胞在 NLRP3、NLRC4 或 AIM2 炎症小体激活后的 LDH 外排水平，对焦亡裂解强度进行量化。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Across all inflammasome activation conditions, EphB1-deficient macrophages exhibited consistently reduced LDH release compared with WT controls."
+      cn: "在所有炎症小体激活条件下，EphB1 缺失巨噬细胞的 LDH 外排均持续低于 WT 对照。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "This reduction was reproducible across independent experiments and was evident at multiple time points, with statistically significant differences observed for NLRP3 and NLRC4 activation."
+      cn: "该下降趋势在多次独立实验中可重复，并在多个时间点观察到，其中 NLRP3 与 NLRC4 激活条件下的差异达到统计学显著性。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "These findings indicate that EphB1 deficiency broadly attenuates pyroptotic cell lysis downstream of distinct inflammasome receptors, consistent with a role in a shared execution step rather than pathway-specific signaling."
+      cn: "上述结果表明，EphB1 缺失可在不同炎症小体感受器下普遍减弱焦亡裂解强度，符合其作用于共同执行步骤而非特异通路信号的模型。"
       logic_source: "results.group_difference_statement"

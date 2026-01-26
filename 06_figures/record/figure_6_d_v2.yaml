@@ -117,31 +117,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: discovery
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Following the identification of a stable membrane context–related mechanistic axis, we next asked which EphB1 downstream signaling modules exhibit cross-batch consistent transcriptional changes and show reproducible coupling to the Membrane context axis at the sample level."
+      cn: "在确认 membrane context 相关机制轴存在稳定障碍之后，我们进一步检验哪些 EphB1 下游信号模块在转录足迹层面呈现跨批次一致变化，并在样本层面与 Membrane context 轴分数表现出可重复的耦合关系。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "Using three independent RNA-seq batches of WT and Ephb1-deficient macrophages, we computed pathway footprint scores (M) for predefined EphB1 downstream gene sets and Membrane context axis scores (Z), summarized genotype effects as batch-level ΔM (KO−WT), and quantified within-batch coupling by linear regression of Z on M while controlling for genotype."
+      cn: "基于三批独立的 WT 与 Ephb1 缺失巨噬细胞 RNA-seq 数据，我们计算预定义 EphB1 下游基因集的通路足迹分数（M）及 Membrane context 轴分数（Z），以批次内 KO−WT 的 ΔM 汇总基因型效应，并在批内通过回归 Z ~ M + X（控制基因型）刻画 M↔Z 的耦合关系。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Cross-batch aggregation revealed that most EphB1 downstream modules showed negative ΔM in EphB1-deficient cells, with the largest decreases observed for PI3K–AKT–mTOR and JAK–STAT, whereas cytoskeleton/adhesion modules (FAK–Src–Rho) displayed positive ΔM; correspondingly, PI3K–AKT–mTOR and JAK–STAT scores were negatively coupled to the Membrane context axis, while FAK–Src–Rho showed a positive coupling."
+      cn: "跨批次汇总显示，多数 EphB1 下游模块在 Ephb1 缺失中呈负向 ΔM，其中 PI3K–AKT–mTOR 与 JAK–STAT 的下降幅度最大；相对地，骨架/黏附模块（FAK–Src–Rho）呈正向 ΔM。相应地，PI3K–AKT–mTOR 与 JAK–STAT 的通路分数与 Membrane context 轴呈负向耦合，而 FAK–Src–Rho 与其呈正向耦合。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "The direction of X→M effects was consistent across batches by ΔM sign voting, and M↔Z coupling remained stable under pooled leave-one-out refitting, with PI3K–AKT–mTOR and JAK–STAT showing predominantly negative β_M_loo intervals and FAK–Src–Rho showing positive intervals."
+      cn: "通过 ΔM 符号投票，X→M 的方向在多个批次间保持一致；同时，在 pooled leave-one-out（逐样本剔除）重复拟合中，PI3K–AKT–mTOR 与 JAK–STAT 的 β_M_loo 区间主要为负值，而 FAK–Src–Rho 主要为正值，表明耦合方向具有稳健性。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these analyses prioritize PI3K–AKT–mTOR and JAK–STAT as the most robust EphB1 downstream candidates whose transcriptional attenuation is consistently associated with increased membrane context barrier scores, while distinguishing cytoskeleton/adhesion modules as oppositely coupled pathways."
+      cn: "综上，这些分析将 PI3K–AKT–mTOR 与 JAK–STAT 确立为最稳健的 EphB1 下游候选通路，其转录足迹降低与 membrane context 障碍分数升高呈一致关联；同时也将骨架/黏附模块区分为与之方向相反耦合的通路。"
       logic_source: "results.group_difference_statement"

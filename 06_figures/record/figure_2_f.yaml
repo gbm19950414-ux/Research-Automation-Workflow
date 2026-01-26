@@ -120,31 +120,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: localization
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Given that ASC oligomerization remains intact upon EphB1 deficiency, we next asked whether the observed reduction in inflammasome output reflects impaired caspase-1 activation or a defect in its subsequent extracellular release."
+      cn: "鉴于 EphB1 缺失并不影响 ASC 寡聚化，我们进一步检验炎症小体输出降低究竟源于 caspase-1 激活受损，还是其后续胞外释放环节受阻。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and EphB1-deficient primary peritoneal macrophages were primed and activated via the NLRP3 inflammasome, after which pro-caspase-1 and cleaved caspase-1 p20 were examined in total cell lysates and corresponding supernatants by immunoblotting."
+      cn: "在 WT 与 EphB1 缺失原代腹腔巨噬细胞中诱导 NLRP3 炎症小体激活后，分别通过免疫印迹检测全细胞裂解液与上清液中的 pro-caspase-1 及裂解型 caspase-1 p20。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Caspase-1 activation, as reflected by intracellular p20 levels, was comparable between WT and EphB1-deficient macrophages."
+      cn: "以细胞内 p20 水平衡量的 caspase-1 激活在 WT 与 EphB1 缺失巨噬细胞中保持相当。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "This result was reproducible across independent experiments, with no significant genotype-dependent differences in total lysate p20."
+      cn: "该细胞内与胞外分布的不一致性在多次独立实验中均可重复观察到，其中裂解液中 p20 在不同基因型间无显著差异。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "These results localize the effect of EphB1 deficiency to a post-activation step, indicating that caspase-1 is efficiently activated."
+      cn: "综上，这些结果将 EphB1 缺失的作用定位于激活之后的步骤，表明 caspase-1 可被有效激活。"
       logic_source: "results.group_difference_statement"

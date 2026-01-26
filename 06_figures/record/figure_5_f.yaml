@@ -150,31 +150,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: elimination
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "After identifying Membrane context as the dominant mechanistic axis perturbed by EphB1 deficiency, we next asked whether axis-level effects can quantitatively predict changes in total cardiolipin abundance across experimental batches."
+      cn: "在将 Membrane context 识别为 EphB1 缺失条件下主要受影响的机制轴之后，我们进一步检验机制轴层级效应是否能够在跨批次层面定量预测心磷脂总量（sum_CL）的变化。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "For each experimental batch, combined mechanistic axis Z scores (HO–WT) were regressed against the corresponding HO–WT differences in total cardiolipin abundance (sum_CL) to assess cross-batch linear associations between axis effects and cardiolipin content."
+      cn: "以批次为单位，将各机制轴的 combined Z 分数（HO–WT）与对应的心磷脂总量差值（sum_CL，HO–WT）进行线性回归分析，用于评估跨批次的轴效应—心磷脂总量关联。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Among all axes, the Membrane context axis showed the strongest negative association with sum_CL, with higher combined Z scores corresponding to lower total cardiolipin levels, whereas all other axes displayed weak or near-zero correlations."
+      cn: "在所有机制轴中，Membrane context 轴与 sum_CL 呈现出最强的负相关趋势，即 combined Z 越高，总心磷脂水平越低；而其余机制轴的相关性均较弱或接近于零。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "However, none of the axis–sum_CL associations reached statistical significance within the current sample size (3–4 batches), with the Membrane context axis showing a moderate effect size (r ≈ −0.65) but a non-significant p value, indicating limited statistical power and sensitivity to batch-level variation."
+      cn: "然而，在当前 3–4 个批次的数据规模下，所有机制轴与 sum_CL 的相关性均未达到统计学显著性；其中 Membrane context 虽表现出中等强度的效应量（r≈−0.65），但 p 值未达显著，提示统计功效有限且对批次波动较为敏感。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these results indicate that total cardiolipin abundance (sum_CL) is not a sensitive or robust readout for capturing mechanistic axis effects across batches, thereby excluding sum_CL as a primary quantitative proxy for axis-level perturbations and motivating the use of more informative cardiolipin accessibility or composition-based metrics."
+      cn: "综上，这些结果表明心磷脂总量（sum_CL）并非捕捉机制轴效应的敏感或稳健读数，从而排除了其作为轴级扰动主要量化指标的适用性，并提示应优先采用更具信息量的心磷脂可及性或组成相关指标。"
       logic_source: "results.group_difference_statement"

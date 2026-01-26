@@ -4,158 +4,196 @@
 # ============================================================
 
 meta:
-  panel_type: "model"       # 必填： "model"
-  figure: "6"                # 如 "Figure 6"
-  panel: "a"                 # 如 "A"
-  short_title: "EphB1-心磷脂代谢机制瓶颈概念图"           # 概念图一句话标题，如：“EphB1 regulates mitochondrial-ROS–CL–NLRP3 axis”
-  chapter: ""               # 属于哪一章
-  role_in_paper: "定义线粒体心磷脂代谢的6条机制轴（合成、重塑、转运、供给、氧化、膜组成），作为后续 Ephb1 缺失多组学分析的“机制坐标系”和解释框架。"         # 这张概念图在整篇论文中的作用（非常重要）
+  panel_type: "model"
+  figure: "Figure 7"
+  panel: "A"
+  short_title: "RNA-first X–M–Z framework linking EphB1 downstream modules to membrane context"
+  chapter: "S4"
+  role_in_paper: >
+    以 X–M–Z 概念图形式，定义 EphB1 状态（X）、Eph 下游信号模块（M）与
+    RNA membrane context 轴（Z）之间的分析框架；
+    在脂质组配对样本受限的前提下，以 RNA 内机制耦合为主计算（回归/相关），
+    并以脂质表型方向一致性作为独立验证层，支撑 Figure 7 后续的通路优先级筛选。
 
 # ---------- 1. Conceptual Goal（这张图要解释什么？） ----------
 concept_goal:
   core_message: >
-    这张概念图将心磷脂代谢拆分为6条功能轴，并为每条轴标注关键基因和脂质 readout，
-    说明后续多组学分析如何在该框架下量化 Ephb1 缺失对心磷脂代谢的影响。
+    将 EphB1 缺失对膜环境机制轴的影响，组织为“X→M（跨批次ΔM一致性）+ M↔Z（批内回归/相关）
+    + Z↔lipid（方向一致性验证）”的 RNA-first 框架，用于排序最可能解释 membrane context 扰动的候选通路。
   problem_being_explained: >
-    如何把复杂的转录组与脂质组数据，整合到一套直观的“心磷脂转运-合成–重塑–供给–氧化-功能”机制模型中，
-    以便定量描述 Ephb1 缺失对各环节的方向性效应。
+    在严格配对的 RNA–lipid 样本量有限、跨组学中介回归不稳定的前提下，
+    如何以可复现的证据链识别哪些 EphB1 下游信号模块最可能与 membrane context（Z）耦合，
+    并与独立脂质表型方向保持一致，从而为后续湿实验验证提供优先级候选？
 
 # ---------- 2. Mechanistic Elements（机制组成部分） ----------
 mechanism:
   key_nodes:
-    - name: "Mitochondrion"
-      description: "心磷脂（CL）合成、重塑和氧化的主要场所，是6条轴的中心背景结构。"
-    - name: "ER"
-      description: "提供磷脂酸（PA）的内质网库，作为 CL 合成的前体来源。"
+    - name: "X: EphB1 status"
+      description: >
+        遗传或处理层面的 EphB1 状态（WT vs KO / HO），被视为外生处理变量 X，
+        是整个中介模型的起点。
+    - name: "M: Eph downstream signaling modules"
+      description: >
+        由预先定义的 EphB1 下游信号/转录模块构成的候选集合（M₁…M_k），
+        以 RNA-seq 转录足迹（gene set scores）量化其“长期配置/转录状态”（capacity/footprint），
+        包括 PI3K–AKT–mTOR、mito stress/cell death、AMPK energy sensing、
+        PGC1–NRF mitochondrial biogenesis、MAPK (ERK/p38/JNK)、integrin/caveolae microdomains、
+        NFκB–ROS、JAK–STAT、cytoskeleton–FAK–Src–Rho 等；
+        这些模块用于通路优先级排序，并不等同于瞬时磷酸化活性读出。
+    - name: "Z: RNA membrane context axis score"
+      description: >
+        RNA 层面的 membrane context 机制轴样本级得分（Z），
+        用作脂质层 membrane/CL 表型的转录代理（proxy），
+        旨在刻画膜环境、线粒体容量/组织与 CL 可及性相关的长期状态，
+        不要求与 CL 总量（sum_CL）呈稳定线性关系。
+    - name: "lipid: key lipid readouts"
+      description: >
+        独立脂质组学表型（例如 CL_fraction、mito_lipid_mass、PC/PE/CL 等 readouts 或其效应方向），
+        作为与 RNA Z 的“方向一致性（concordance）”验证层；
+        本框架不以 lipid 作为主回归结果变量，而用于检查 Z 是否在方向上可重复映射到脂质表型。
 
-    - name: "CL"
-      description: "线粒体特异性磷脂，是5条轴的汇聚中心，也是重塑与氧化反应的起点。"
-
-    - name: "Synthesis axis"
-      description: "PA → CDP-DAG → PG → CL 的 de novo 合成通路。"
-    - name: "Remodeling axis"
-      description: "MLCL 与 CL 之间的往返重塑，调控 CL 的分子种类与功能。"
-    - name: "Transport axis"
-      description: "把 ER 端 PA/PG 实际送进线粒体内膜的过程。"
-    - name: "Supply axis"
-      description: "ER 端 PA/PG 的合成与可用性，决定“有多少前体可被使用”。"
-    - name: "Oxidation axis"
-      description: "CL 被 ROS 或脂氧合酶等催化氧化为 oxCL 的通路。"
-    - name: "Membrane context axis"
-      description: "反映线粒体内膜的整体磷脂负载（PC+PE+CL）和 CL 在其中的相对占比，以及这些指标如何通过生物发生、膜结构组织和 PC/PE 平衡来调节 CL 功能。"
 
   key_edges:
-    - from: "ER Supply axis"
-      to: "CL"
-      type: "PA supply"
-      evidence: "概念上表示 ER 为 PA 前体池，后续轴通过 PRELID/TRIAP1 等转运蛋白调用该前体。"
-    - from: "Transport axis"
-      to: "CL"
-      type: "PA transport"
-      evidence: "PA成功转运到线粒体内膜"
-    - from: "Synthesis axis"
-      to: "CL"
-      type: "CL synthesis"
-      evidence: "从PA->CL的合成过程"
-
-    - from: "remodeling axis"
-      to: "CL"
-      type: "remodeling"
-      evidence: "MLCL ↔ CL，反映去酰/再酰化循环。"
-    - from: "oxidation axis"
-      to: "CL"
-      type: "oxidation"
-      evidence: "CL → oxCL (ROS)。"
-    -
-    - from: "membrane context axis"
-      to: "oxCL"
-      type: "availability"
-      evidence: "线粒体膜环境决定心磷脂是否能顺利发挥功能。"
+    - from: "X: EphB1 status"
+      to: "M: Eph downstream signaling modules"
+      type: "associate"
+      evidence: >
+        在每个 RNA 批次内比较 EphB1 WT 与 KO/HO 的通路分数差异（ΔM = KO−WT），
+        并汇总跨批次方向投票与效应量，用于评估 X→M 的一致性与稳健性（不依赖配对脂质组学）。
+    - from: "M: Eph downstream signaling modules"
+      to: "Z: RNA membrane context axis score"
+      type: "associate"
+      evidence: >
+        在每个批次内评估 Z 与 M 的耦合（相关或回归），
+        并可在模型中控制 X（Z ~ M + X）以区分“通路—轴”的独立关联；
+        该边用于筛选哪些 M 与 Z 保持方向一致、且对单样本扰动具有一定稳健性（如 LOO 检查）。
+    - from: "Z: RNA membrane context axis score"
+      to: "lipid: key lipid readouts"
+      type: "concordance"
+      evidence: >
+        以批次为单位比较 Z 的 HO−WT 效应方向/大小与脂质表型的 HO−WT 效应方向/大小，
+        计算方向一致性（direction concordance）作为独立验证层；
+        该步骤用于检验 RNA proxy（Z）是否能在方向上重复映射到脂质变化，而非用于中介因果量化。
+    - from: "X: EphB1 status"
+      to: "Z: RNA membrane context axis score"
+      type: "associate"
+      evidence: >
+        X 与 Z 的总体差异（HO−WT）在多批次 RNA 中可重复评估，
+        作为“EphB1 缺失与 membrane context 转录代理改变”的主效应证据。
+        本框架不要求估计或强调 c/c'，重点在于可重复的通路优先级筛选。
+    - from: "X: EphB1 status"
+      to: "lipid: key lipid readouts"
+      type: "associate"
+      evidence: >
+        在独立脂质组学批次中评估关键脂质表型的 HO−WT 效应方向/大小，
+        与 RNA 的 Z 进行方向对齐；脂质层证据在本框架中作为外部验证，而非主回归目标。
 
 # ---------- 3. Evidence Mapping（每条机制对应论文证据） ----------
 evidence_mapping:
-  supported_links:          # 哪些机制步骤是“有数据支持”的？
-    - mechanism_step: ""    # 如 “EphB1 → mtROS（inhibition）”
-      supported_by: []
-      confidence: "high|medium|low"
-  speculative_links:        # 哪些步骤是推断（discussion中的）？
-    - mechanism_step: ""
-      rationale: ""         # 为何推断成立？
-      boundary: ""          # 有哪些不能确定的地方？
+  supported_links:
+    - mechanism_step: "X → Z：EphB1 缺失与 RNA membrane context 轴（Z）的跨批次主效应"
+      supported_by: ["Fig6C", "Fig6D", "Fig6E"]
+      confidence: "high"
+    - mechanism_step: "X → M：EphB1 缺失对候选通路模块的跨批次ΔM一致性"
+      supported_by: ["Fig7B", "Fig7C"]
+      confidence: "medium"
+    - mechanism_step: "M ↔ Z：批内通路分数与 Z 的耦合（相关/回归，控制X可选）"
+      supported_by: ["Fig7D", "Fig7E"]
+      confidence: "medium"
+    - mechanism_step: "Z ↔ lipid：RNA proxy 与脂质表型的方向一致性验证"
+      supported_by: ["Fig6E", "Fig6F"]
+      confidence: "medium"
+  speculative_links:
+    - mechanism_step: "形式化跨组学中介（a×b）"
+      rationale: >
+        在严格配对的 RNA–lipid 样本量显著扩大后，
+        才适合对 X→M→lipid 的 a×b 进行更稳定的因果中介量化；
+        目前以 RNA-first 的一致性与耦合证据进行候选通路排序更可辩护。
+      boundary: >
+        当前框架不把 a×b 的显著性作为主结论来源，
+        也不排除非转录机制或未建模通路对脂质表型的贡献。
 
 # ---------- 4. Graphical Logic（图要怎么讲故事） ----------
 visual_logic:
-  flow_direction: "left-to-right"  # 选择一个故事流向
-  entry_point: "ER和线粒体框，提示心磷脂代谢发生在 ER–线粒体接口。"           # 从哪里开始讲（如 “EphB1 deletion”）
-  exit_point: "CL以及图下注解的 ‘directional Z score (mechanistic effect)’"            # 图最终指向什么（如 “↓ IL-1β release”）
-  causal_chain:             # 主因果链
-    - "ER Supply axis 提供 PA 前体"
-    - "Transport axis 将前体转运至线粒体"
-    - "Synthesis axis 将 PA 转化为 PG 再转化为 CL，决定 CL 总量"
-    - "Remodeling axis 在 MLCL ↔ CL 之间往返，优化 CL 组成与功能"
-    - "Oxidation axis 将 CL 氧化为 oxCL，连接线粒体损伤与下游炎症"
-    - "Membrane context axis 调节线粒体膜环境，影响 CL 功能发挥"
-  parallel_paths:           # 如果你的机制中有支路（如线粒体支路 + 细胞质支路）
-    - "合成、转运和供给轴共同决定 CL pool 的大小（ΣCL、CL/PG、ΣPG）。"
-    - "重塑、氧化和膜环境轴在既有 CL pool 上调节质量与功能发挥（MLCL/CL）与损伤状态（oxCL/CL）。"
-  feedback_loops:           # 若有反馈回路也可表达
-    - ""
+  flow_direction: "left-to-right"
+  entry_point: "EphB1 status (WT vs KO/HO) 作为外生处理变量 X"
+  exit_point: "Z（RNA membrane context 轴）作为主结果，脂质 readouts 作为方向一致性验证层"
+  causal_chain:
+    - "EphB1 status (X)"
+    - "Eph downstream signaling modules (M)"
+    - "RNA membrane context axis score (Z)"
+  parallel_paths:
+    - "多个 Eph 下游模块 M₁…M_k 并联作为候选解释者：先看 X→M 的跨批次ΔM一致性，再看 M↔Z 的批内耦合，形成排序。"
+  feedback_loops:
+    - "本图不建模反馈回路与瞬时激活；脂质层仅用于与 Z 的方向一致性验证。"
 
 # ---------- 5. Message Strength & Boundaries（力度与边界） ----------
 interpretation:
-  what_is_certain: "心磷脂的生物合成、重塑、跨膜/跨细胞器转运以及氧化损伤涉及不同基因模块和脂质 readout；这些模块可以在概念上拆分为6条代谢/功能轴，并与转录组和脂质组指标一一对应。"       # 明确写出“本文章中有数据支持的部分”
-  what_is_plausible: "通过为每条轴构建加权的基因集和脂质 readout，并计算方向性 Z 分数，可以在轴层面上定量描述 Ephb1 缺失对心磷脂代谢网络的综合影响。"     # 逻辑推断但未直接测试的部分
-  what_is_unknown: > # 模型中仍未被实验解决的问题（常用于 Discussion）
-    各轴之间是否存在显著的功能耦联或补偿（例如合成轴受抑时重塑轴是否上调）仍未被系统性实验验证；
-    不同组织或刺激条件下，这6条轴的权重是否改变也有待后续研究。
-    由于脂质组学检测未进行细胞级分，因此未能从脂质组学层面量化心磷脂的外翻过程，该过程也是心磷脂代谢的关键功能轴之一。
-  why_model_needed: "     多组学数据维度高且分散，直接解读困难；
-    将 CL 代谢组织成6条机制轴，可以为后续的 Ephb1 依赖性变化提供清晰、可解释的坐标系，
-    也是整篇文章从“观测差异”上升到“机制层面整合”的关键一步。"      # 这张图为何有助于读者理解整章逻辑？
+  what_is_certain: >
+    该框架可以稳定地回答三个可重复问题：
+    (1) EphB1 缺失是否在多批次 RNA 中一致改变候选通路分数（X→M, ΔM一致性）；
+    (2) 候选通路分数是否在批内与 membrane context 轴（Z）保持耦合（M↔Z, 相关/回归）；
+    (3) Z 的效应方向是否与独立脂质表型方向一致（Z↔lipid concordance）。
+  what_is_plausible: >
+    若某条通路同时满足“X→M 方向稳定”与“ M↔Z 耦合稳定”，且 Z 与脂质表型方向一致，
+    则该通路可作为解释 EphB1 对膜环境长期扰动的优先候选，用于后续湿实验验证。
+  what_is_unknown: >
+    在当前配对多组学样本量下，无法对跨组学因果中介份额（a×b）给出稳健量化；
+    同时也无法排除 EphB1 通过非转录机制或未纳入模块的通路影响膜环境。
+  why_model_needed: >
+    该图将 Figure 7 的计算目标从“形式化中介显著性”转为“可复现的候选通路优先级排序”，
+    使读者清楚理解：ΔM、批内回归/相关、以及与脂质表型的方向一致性分别在证据链中承担何种角色。
 
 # ---------- 6. Transition（图在正文中的作用） ----------
 transition:
-  how_it_summarizes_previous: "    在前几章中，我们分别从脂质组和转录组角度观察到 Ephb1 缺失影响 CL 可及性。
-    本图将这个过程放到统一的 ER–线粒体 CL 代谢框架中。"   # 这张图如何总结前面所有实验？
-  how_it_leads_next_section: "    在此概念轴框架基础上，接下来的表格将提供所有该机制图中省略的关键基因与脂质读数。"    # 若之后有新章节，图如何作为桥？
+  how_it_summarizes_previous: >
+    基于 Figure 6 已确立的 membrane context 机制轴优先级，
+    本图把后续分析的目标明确为：在多个 RNA 批次中筛选与 Z 最一致耦合的 EphB1 下游候选通路，
+    并用独立脂质表型的方向一致性对 Z 的生物学对应关系进行验证。
+  how_it_leads_next_section: >
+    接下来将依次展示：
+    (i) 各通路模块在不同 RNA 批次的 ΔM（X→M）与方向投票；
+    (ii) 各通路与 Z 的批内耦合强度与稳健性（M↔Z）；
+    (iii) Z 与脂质表型在批次层面的方向一致性（Z↔lipid）。
+    这些结果共同用于输出“最值得优先验证的 EphB1 下游通路候选”。
 
 # ---------- 7. AI Writing Hints（写作提示，可选） ----------
 ai_hints:
-  target_section: ["Discussion_model", "Overall_mechanism"]
+  target_section: ["Results_mediation", "Discussion_model"]
   tone: "neutral"
   language: "zh_en_mix"
   target_journal_style: "Cell Metabolism"
-
-  # ---------- 8. English ----------
+---
+# ---------- 8. English ----------
 
 results_skeleton_en:
   stage: T3
-  purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  purpose: "panel-level Results skeleton (conceptual framework, bilingual)"
+  panel_level: framework
+  results_logic_type: mechanistic_integration
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "To address the challenge of limited strictly paired RNA–lipid samples and unstable cross-omics mediation, we formulated an RNA-first X–M–Z framework that prioritizes reproducible pathway ranking over formal causal quantification."
+      cn: "为应对严格配对的 RNA–lipid 样本量有限且跨组学中介分析不稳定的问题，我们提出了一个以 RNA 为核心的 X–M–Z 框架，将重点从形式化因果量化转向可复现的通路优先级排序。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "In this framework, EphB1 status is treated as an exogenous variable (X), downstream Eph-related signaling modules are quantified as RNA-based pathway scores (M), and the RNA membrane context axis score serves as a transcriptional proxy (Z) for lipid membrane phenotypes, while lipid readouts are used only for direction-concordance validation."
+      cn: "在该框架中，EphB1 状态被视为外生变量（X），其下游信号模块以 RNA 层面的通路分数进行量化（M），RNA membrane context 轴得分作为脂质膜表型的转录代理（Z），而脂质读出仅用于方向一致性验证。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Rather than estimating a single cross-omics mediation effect, the framework decomposes the analysis into three reproducible steps: cross-batch consistency of X→M effects, within-batch coupling between M and Z, and directional concordance between Z and independent lipid phenotypes."
+      cn: "该框架并不试图估计单一的跨组学中介效应，而是将分析拆解为三个可复现的步骤：X→M 的跨批次一致性、M 与 Z 的批内耦合，以及 Z 与独立脂质表型之间的方向一致性。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "By separating consistency, coupling, and concordance into distinct evaluation layers, the X–M–Z framework reduces sensitivity to sample pairing limitations and batch noise, enabling stable prioritization of candidate EphB1 downstream pathways across datasets."
+      cn: "通过将一致性、耦合与方向验证划分为彼此独立的评估层级，X–M–Z 框架降低了对样本配对限制与批次噪音的敏感性，从而实现跨数据集稳定的 EphB1 下游候选通路排序。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, this RNA-first X–M–Z framework provides a transparent and reproducible strategy for ranking EphB1 downstream signaling modules most likely coupled to membrane context perturbation, thereby guiding subsequent experimental validation without over-interpreting limited cross-omics mediation."
+      cn: "综上，该 RNA-first 的 X–M–Z 框架为在不过度解读有限跨组学中介结果的前提下，对最可能与膜环境扰动耦合的 EphB1 下游信号模块进行排序，提供了一种透明且可复现的分析策略，并用于指导后续实验验证。"
       logic_source: "results.group_difference_statement"

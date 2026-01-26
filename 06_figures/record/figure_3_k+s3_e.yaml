@@ -133,31 +133,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: localization
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "we next asked whether EphB1 affects the early association of GSDMD-NT with mitochondria during inflammasome activation."
+      cn: "我们进一步检验 EphB1 是否影响炎症小体激活早期 GSDMD-NT 与线粒体的结合。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and Ephb1−/− primary peritoneal macrophages were primed and activated with LPS and Nigericin, followed by rapid isolation of mitochondrial fractions at defined early time points and immunoblot analysis of GSDMD-NT in total lysates and mitochondrial fractions."
+      cn: "在 WT 与 Ephb1−/− 原代腹腔巨噬细胞中进行 LPS 预激并以 Nigericin 激活后，于早期时间点快速分离线粒体分级，并通过免疫印迹分别检测 total 裂解液与线粒体分级中的 GSDMD-NT。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "In WT macrophages, GSDMD-NT transiently accumulated in the mitochondrial fraction with a pronounced peak at approximately 7.5 minutes after inflammasome activation, whereas this early mitochondrial enrichment of GSDMD-NT was markedly reduced in Ephb1−/− cells."
+      cn: "在 WT 巨噬细胞中，炎症小体激活后约 7.5 min，GSDMD-NT 在线粒体分级中出现明显的瞬时富集峰值；而在 Ephb1−/− 细胞中，该早期线粒体富集显著降低。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "By contrast, the extent of GSDMD cleavage in total cell lysates was comparable between genotypes, and mitochondrial abundance—as assessed by HK2 protein levels and mitochondrial 16S rRNA content—did not differ significantly, supporting a selective defect in mitochondrial targeting rather than substrate generation or organelle quantity."
+      cn: "相比之下，不同基因型间 total 裂解液中的 GSDMD 剪切程度保持相当，且以 HK2 蛋白与线粒体 16S rRNA 评估的线粒体数量亦未见显著差异，支持差异特异发生于线粒体靶向而非底物生成或细胞器丰度。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these data localize the effect of EphB1 deficiency to the early mitochondrial enrichment of GSDMD-NT during inflammasome activation, indicating that EphB1 promotes efficient GSDMD–mitochondria association at the execution stage."
+      cn: "综上，这些结果将 EphB1 缺失的效应定位于炎症小体激活过程中 GSDMD-NT 的早期线粒体富集阶段，表明 EphB1 促进执行端阶段 GSDMD 与线粒体的有效结合。"
       logic_source: "results.group_difference_statement"

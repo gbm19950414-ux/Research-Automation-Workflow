@@ -89,31 +89,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: perturbation_response
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "After establishing that pharmacological manipulation can reduce the NAO-accessible cardiolipin pool, we next asked whether lowering cardiolipin availability is sufficient to suppress inflammasome-driven IL-1β release."
+      cn: "在确认药理学手段可降低 NAO 可及心磷脂池之后，我们进一步检验降低心磷脂可及性是否足以抑制炎症小体驱动的 IL-1β 释放。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and Ephb1−/− primary peritoneal macrophages were pretreated with alexidine dihydrochloride (AD) at increasing doses and durations, followed by LPS priming and Nigericin activation, and IL-1β released into the supernatant was quantified by ELISA with cell-number normalization."
+      cn: "对 WT 与 Ephb1−/− 原代腹腔巨噬细胞进行不同剂量与时间的 alexidine dihydrochloride（AD）预处理后，实施 LPS 预激与 Nigericin 激活，并通过 ELISA 定量检测上清中的 IL-1β 释放量并校正细胞数量。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "AD treatment markedly suppressed LPS- and Nigericin-induced IL-1β release in macrophages in a dose- and time-dependent manner."
+      cn: "AD 处理以剂量与时间依赖的方式显著抑制 LPS+nigericin 诱导的 IL-1β 释放。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "The genotype-by-dose interaction was statistically significant, with most AD doses producing significant inhibition in WT cells but not in Ephb1−/− cells, and these patterns were reproducible across independent experimental batches without evidence of AD-induced cytotoxicity."
+      cn: "基因型与剂量之间的交互效应达到统计学显著性，多数 AD 剂量在 WT 细胞中产生显著抑制而在 Ephb1−/− 细胞中不显著；上述模式在多批次独立实验中稳定复现，且未观察到 AD 相关细胞毒性。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these results demonstrate that pharmacological reduction of cardiolipin availability is sufficient to suppress inflammasome-mediated IL-1β release, supporting a causal role for cardiolipin accessibility in controlling inflammasome output."
+      cn: "综上，这些结果表明，通过药理学方式降低心磷脂可及性本身即可抑制炎症小体介导的 IL-1β 释放，支持心磷脂可及性在调控炎症小体输出中的因果作用。"
       logic_source: "results.group_difference_statement"

@@ -27,7 +27,7 @@ assets:
 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
-  context_from_previous: "前一节显示 EphB1 缺失减弱 GSDMD-NT 线粒体结合与 ROS/Δψm 损伤指标，提示线粒体破损可能受限。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
+  context_from_previous: "前一节显示 EphB1 缺失支持执行阶段线粒体损伤受限的模型，提示线粒体破损可能受限。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
                              # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
   core_question: "EphB1 缺失是否减少炎症小体激活诱导的胞质 mtDNA 脉冲式释放？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
                              # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”
@@ -134,31 +134,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: localization
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en:  "we next asked whether inflammasome-induced release of mitochondrial contents—specifically cytosolic mtDNA—was correspondingly reduced."
+      cn: "我们接下来想知道炎性小体诱导的线粒体内容物释放-特别是细胞质mtdna -是否相应减少"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and Ephb1−/− primary peritoneal macrophages were primed and activated with Nigericin, followed by rapid subcellular fractionation and qPCR-based quantification of mtDNA (16S and ND1) in cytosolic, mitochondrial, and total cell fractions across a defined time course."
+      cn: "在 WT 与 Ephb1−/− 原代腹腔巨噬细胞中进行 Nigericin 激活后，快速分离胞质、线粒体及全细胞组分，并通过 qPCR 定量检测各组分中 mtDNA（16S、ND1）在时间梯度上的变化。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "In WT macrophages, inflammasome activation induced a rapid and transient pulse of cytosolic mtDNA, peaking at early time points, whereas this cytosolic mtDNA peak was markedly reduced in Ephb1−/− cells."
+      cn: "在 WT 巨噬细胞中，炎症小体激活诱导胞质 mtDNA 在早期时间点出现快速而短暂的脉冲式升高；而在 Ephb1−/− 细胞中，该胞质 mtDNA 峰值显著降低。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "In contrast, mtDNA levels in the total cell fraction remained largely stable between genotypes, with no significant differences detected for 16S and only minor fluctuations observed for ND1, and the early cytosolic mtDNA pulse was reproducible across independent experiments."
+      cn: "相比之下，不同基因型之间 total 组分中的 mtDNA 整体保持稳定，其中 16S 未见显著差异，ND1 仅出现轻微波动；同时，胞质 mtDNA 的早期脉冲峰值在多次独立实验中均可重复观察到。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these results indicate that EphB1 deficiency selectively limits inflammasome-induced release of mitochondrial DNA into the cytosol without reducing total mtDNA content, localizing the effect to diminished mitochondrial membrane disruption during the execution phase."
+      cn: "综上，这些结果表明 EphB1 缺失可在不降低 mtDNA 总量的前提下，选择性限制炎症小体激活诱导的线粒体 mtDNA 向胞质外泄，从而将效应定位于执行阶段线粒体膜破损程度的降低。"
       logic_source: "results.group_difference_statement"

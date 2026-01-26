@@ -29,9 +29,9 @@ assets:
 question:
   context_from_previous: "上一节显示 NAO 可染 CL 池减少，提示线粒体膜脂环境可能发生改变。"  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
                              # 例如：“前一节结果提示 EphB1 缺失可能限制 NLRP3 炎性小体的完全激活。”
-  core_question: "EphB1 缺失是否导致线粒体心磷脂（CL）总量下降并伴随分子物种组成变化？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
+  core_question: "EphB1 缺失是否导致线粒体心磷脂（CL）总量下降？"          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
                              # 例如：“本节检验 EphB1 缺失是否降低 NLRP3 激活后 IL-1β 的分泌水平。”
-  hypothesis_or_expectation: "若 NAO 信号下降源于 CL 池减少，则脂质组学应呈现 CL 总量下调及物种组成重排。"  # 你的假设或预期结果（1 句）
+  hypothesis_or_expectation: "若 NAO 信号下降源于 CL 池减少，则脂质组学应呈现 CL 总量下调。"  # 你的假设或预期结果（1 句）
                              # 例如：“如果 EphB1 促进 NLRP3 炎性小体的效应端活性，则 EphB1 缺失应降低 IL-1β 的释放。”
   importance_reason: "CL 是维持线粒体膜结构与 GSDMD-NT 孔形成的重要膜脂，其改变是解释膜阶段瓶颈的重要依据。"      # 为什么这个问题重要/值得单列一节（1 句即可）
                              # 例如：“IL-1β 是 NLRP3 炎性小体的关键功能 readout，用于评估效应端活性。”
@@ -71,7 +71,7 @@ methods:
 results:
   data_direction: "KO 的 CL 总量显著下降，约为 WT 的 70%，并伴随广泛的分子物种下调。"           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
                                # 例如：“在 LPS+ATP 刺激下，Ephb1−/− 巨噬细胞释放的 IL-1β 显著低于 WT。”
-  stats_summary: "总 CL：KO/WT ≈ 0.70，95% CI [0.60, 0.82]，q < 0.01；物种水平约 60% 物种下调，18:2 富集物种下降显著（q < 0.05）。"            # 统计显著性信息（检验方法、p 值区间即可）
+  stats_summary: "总 CL：KO/WT ≈ 0.70，95% CI [0.60, 0.82]，q < 0.01；物种水平约 60% 物种下调。"            # 统计显著性信息（检验方法、p 值区间即可）
                                # 例如：“非配对 t 检验，p < 0.01。”
   key_numbers: "CL 总量下降约 30%；113 个物种中 ~60% 下调；少数长链/高不饱和 CL 有轻微上升但贡献有限。"              # 可选：fold change、均值±SEM、效应量（方便你之后查）
                                # 例如：“WT: 850 ± 120 pg/mL；Ephb1−/−: 410 ± 90 pg/mL；约下降 50%。”
@@ -120,31 +120,33 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: localization
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Having observed a reduction in the NAO-detectable cardiolipin pool, we next asked whether this change reflects an overall decrease in cardiolipin abundance and accompanying alterations in molecular species composition."
+      cn: "在观察到 NAO 可染心磷脂池减少后，我们进一步检验这一变化是否源于心磷脂总量的整体下降，并伴随分子物种组成的改变。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "Total cardiolipin content and molecular species composition were quantified by LC–MS/MS–based lipidomics in resting WT and Ephb1−/− primary peritoneal macrophages, with abundances normalized to cell number using internal standards."
+      cn: "在静息状态下的 WT 与 Ephb1−/− 原代腹腔巨噬细胞中，采用 LC–MS/MS 脂质组学定量检测心磷脂总量及分子物种组成，并通过内标按细胞数量进行归一化。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Compared with WT cells, Ephb1−/− macrophages exhibited a significant reduction in total cardiolipin abundance, reaching approximately 70% of WT levels, accompanied by broad downregulation across a majority of cardiolipin molecular species."
+      cn: "与 WT 相比，Ephb1−/− 巨噬细胞的心磷脂总量显著下降，约为 WT 的 70%，并伴随大多数心磷脂分子物种的整体下调。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "This decrease was reproducible across independent experimental batches and remained significant after multiple-testing correction, with roughly 60% of detected cardiolipin species showing reduced abundance."
+      cn: "该下降趋势在多批次独立实验中均可重复，并在多重检验校正后仍保持显著性，约 60% 的检测到的心磷脂物种呈现丰度下降。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these lipidomic data show that EphB1 deficiency not only reduces the NAO-accessible cardiolipin pool but also decreases total cardiolipin abundance, providing a quantitative membrane lipid basis for the attenuated mitochondrial damage observed in EphB1-deficient peritoneal macrophages."
+      cn: "综上，这些脂质组学结果表明 EphB1 缺失不仅显著降低 NAO 可及的心磷脂池，还减少了心磷脂总量，为 EphB1 缺失腹腔巨噬细胞中线粒体损伤减弱的模型提供了定量的膜脂学基础。"
       logic_source: "results.group_difference_statement"
+
+      

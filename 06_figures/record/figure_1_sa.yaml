@@ -137,31 +137,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: elimination
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "To determine whether the reduced inflammasome-associated cell death observed upon EphB1 deficiency reflects a generalized alteration in non-inflammatory cell death pathways, we next examined apoptotic responses induced by staurosporine."
+      cn: "为判断 EphB1 缺失所致的炎症小体相关细胞死亡减弱是否源于对非炎性细胞死亡通路的普遍影响，我们进一步检测了 staurosporine 诱导的凋亡反应。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "Apoptosis was assessed by measuring cleaved caspase-3 levels in WT and EphB1-deficient primary peritoneal macrophages following staurosporine treatment."
+      cn: "通过检测 WT 与 EphB1 缺失原代腹腔巨噬细胞在 staurosporine 处理后的 cleaved caspase-3 水平，对凋亡程度进行评估。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Staurosporine induced comparable levels of caspase-3 cleavage in WT and EphB1-deficient macrophages."
+      cn: "staurosporine 处理在 WT 与 EphB1 缺失巨噬细胞中诱导了相当水平的 caspase-3 剪切。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "This lack of genotype-dependent difference was reproducible across independent experiments and did not reach statistical significance."
+      cn: "该基因型间无差异的结果在多次独立实验中可重复获得，且未达到统计学显著性。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Thus, EphB1 deficiency does not measurably alter staurosporine-induced apoptotic signaling, indicating that the observed phenotype is not attributable to a generalized change in apoptosis."
+      cn: "因此，EphB1 缺失并未显著改变 staurosporine 诱导的凋亡信号，提示该表型并非来源于对经典凋亡过程的普遍性改变。"
       logic_source: "results.group_difference_statement"

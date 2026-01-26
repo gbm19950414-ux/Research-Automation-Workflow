@@ -70,31 +70,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: elimination
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Following confirmation that transcriptional priming remains intact, we next asked whether the reduced IL-1β output observed upon EphB1 deficiency could be attributed to a generalized impairment of classical cytokine secretion."
+      cn: "在确认转录性 priming 未受影响后，我们进一步检验 EphB1 缺失所致的 IL-1β 输出降低是否源于经典分泌能力的普遍性受损。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "Classical secretion was assessed by quantifying TNF-α and IL-6 release from WT and EphB1-deficient primary peritoneal macrophages following LPS stimulation at defined time points using ELISA."
+      cn: "通过 ELISA 定量检测 WT 与 EphB1 缺失原代腹腔巨噬细胞在 LPS 刺激后不同时间点的 TNF-α 与 IL-6 释放水平，以评估经典分泌能力。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "LPS stimulation induced robust increases in both TNF-α and IL-6 in WT and EphB1-deficient macrophages, with no significant genotype-dependent differences observed."
+      cn: "LPS 刺激在 WT 与 EphB1 缺失巨噬细胞中均诱导了显著的 TNF-α 与 IL-6 分泌，且未观察到基因型依赖的显著差异。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "These responses were consistent across independent experiments and remained non-significant after dual background subtraction and normalization to cell number."
+      cn: "上述结果在多次独立实验中保持一致，并在完成双重背景扣除及细胞数量归一化后仍未达到统计学显著性。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Thus, EphB1 deficiency does not measurably impair TLR4-driven classical secretion of TNF-α or IL-6, excluding a generalized secretory defect as the basis for reduced inflammasome-associated outputs."
+      cn: "因此，EphB1 缺失并未显著影响 TLR4 介导的 TNF-α 或 IL-6 经典分泌，排除了普遍分泌缺陷作为炎症小体相关输出降低原因的可能性。"
       logic_source: "results.group_difference_statement"

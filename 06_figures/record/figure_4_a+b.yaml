@@ -43,7 +43,7 @@ rationale:
                              # 例如：“选用原代腹腔巨噬细胞，因为其对 NLRP3 激活高度敏感，且能反映体内炎症状态。”
   key_variables: "NAO 荧光强度、NAO/Δψm、显微与板读两种 readout 均用于评估 CL 可达性/可复合性。"          # 本实验关注的关键变量 + 操纵方式
                              # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
-  control_logic: "同步检测 TMRM（non-quench）以校正 Δψm；使用固定曝光显微成像与背景扣除板读确保跨方法可比性。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
+  control_logic: "使用固定曝光显微成像与背景扣除板读确保跨方法可比性。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
                              # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1−/− 的参照组。”
   core_justification: "若 NAO 信号下降在 Δψm 校正后仍成立，则差异来源于 CL 池本身，而非电位或线粒体质量变化。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
                              # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1−/− 细胞在相同刺激下应释放更少 IL-1β。”
@@ -56,17 +56,17 @@ methods:
                                # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1−/− 小鼠来源的原代腹腔巨噬细胞。”
   experimental_groups: "WT vs Ephb1−/−；细胞数量严格等量接种。"      # 组别及核心差异：基因型、处理、时间点
                                # 例如：“按基因型分为 WT 和 Ephb1−/−，均接受 LPS 预处理 + ATP 激活。”
-  stimuli_and_treatment: "NAO 200 nM 染色 30 min；TMRM（non-quench）同步染色；未加 nigericin。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
+  stimuli_and_treatment: "NAO 200 nM 染色 30 min；未加 nigericin。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
                                # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
   time_points: "显微 30 min 固定时间点；板读 0、5、10、24、48 min。"              # 关键测定时间点（如果不在上面已写清）
-  dose_info: "NAO 200 nM；TMRM 使用标准工作浓度。"                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
+  dose_info: "NAO 200 nM"                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
   readout_and_assay: "显微镜统一曝光/增益，ImageJ 统一阈值定量；板读进行未加染料孔背景扣除；计算 NAO/Δψm。"        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
                                # 例如：“使用 IL-1β ELISA 测定上清中 IL-1β，按厂商说明书操作。”
   replicates: "每组 n ≥ 3；≥3 次独立实验重复。"               # 生物学重复数 n，以及是否合并多次实验
                                # 例如：“每组 n = 4 生物学重复，结果合并自两次独立实验。”
-  analysis_notes: "荧光以背景扣除后值归一化；Δψm（TMRM）用于校正 NAO；双尾 t 检验评估差异。"           # 本 panel 特有的分析方法/统计模型（如 normalization、配对 vs 非配对）
+  analysis_notes: "荧光以背景扣除后值归一化；Δψm;双尾 t 检验评估差异。"           # 本 panel 特有的分析方法/统计模型（如 normalization、配对 vs 非配对）
                                # 例如：“采用非配对双尾 t 检验；ELISA 结果按蛋白浓度归一化。”
-  minimal_methods_summary: "WT 与 KO 巨噬细胞以 NAO 染色检测 CL 可染性，同时用 TMRM 校正 Δψm，并通过显微与板读两类 readout 验证基因型差异。"  # 1–2 句，把上面内容压缩成将来写 Methods 时可以直接用的一小段。
+  minimal_methods_summary: "WT 与 KO 巨噬细胞以 NAO 染色检测 CL 可染性"  # 1–2 句，把上面内容压缩成将来写 Methods 时可以直接用的一小段。
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
@@ -121,31 +121,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: localization
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "We asked whether EphB1 deficiency reduces the pool of cardiolipin that is detectable by NAO within the mitochondrial membrane."
+      cn: "我们检验 EphB1 缺失是否降低线粒体膜中可被 NAO 检测到的心磷脂池容量。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "WT and Ephb1−/− primary peritoneal macrophages were stained with NAO under identical conditions, and NAO-associated fluorescence was quantified using fixed-exposure confocal imaging as well as time-resolved plate-reader measurements with no-dye wells for background subtraction."
+      cn: "在相同条件下对 WT 与 Ephb1−/− 原代腹腔巨噬细胞进行 NAO 染色，并通过固定曝光的共聚焦成像与时间分辨板读两种方式定量 NAO 相关荧光信号；板读使用未加染料孔进行背景扣除。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Across both imaging- and plate-based readouts, Ephb1−/− macrophages displayed significantly lower NAO fluorescence than WT cells, consistent with a reduced NAO-detectable cardiolipin pool."
+      cn: "无论在显微成像还是板读检测中，Ephb1−/− 巨噬细胞的 NAO 荧光信号均显著低于 WT，提示 NAO 可检测的心磷脂池减少。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "This decrease was consistently observed across multiple time points and independent experimental batches, and the concordant direction across two measurement modalities supports robustness of the phenotype."
+      cn: "该下降趋势在多个时间点及多批次独立实验中稳定复现，且两种检测方式方向一致，支持该表型的稳健性。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these results show that EphB1 deficiency is associated with a significant reduction in NAO fluorescence, indicating a decreased NAO-detectable cardiolipin pool in the mitochondrial membrane under conditions where baseline mitochondrial membrane potential is unchanged."
+      cn: "综上，这些结果表明，在基线线粒体膜电位未发生改变的条件下，EphB1 缺失与 NAO 荧光显著下降相关，提示线粒体膜中 NAO 可检测的心磷脂池减少。"
       logic_source: "results.group_difference_statement"

@@ -1010,3 +1010,131 @@ english_projection:
         Having defined and prioritized a membrane-context mechanistic axis from integrated multi-omics, we next asked which EphB1-linked candidate signaling programs most consistently couple to this axis (X→M→Z), yielding a short, testable set of upstream mediators and validation hooks.
       cn: >
         在通过多组学整合界定并筛选出优先的 membrane context 机制轴后，我们进一步追问：哪些与 EphB1 相关的候选信号程序最稳定地与该机制轴耦合（X→M→Z），从而收敛出少数可检验的上游中介与验证钩子。
+
+results_build:
+  # 你的 paper_logic.yaml 所在目录就是 record_dir（默认自动推断）
+  # 也可以显式写绝对路径：
+  # record_dir: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record"
+  debug_transitions: true
+  output_path: "Results_v0.md"   # 相对 record_dir；也可写绝对路径
+  language: "en"                # 目前只输出英文 Results v0
+
+  # --- 文件纳入规则 ---
+  # 先 glob，再用 include_files / exclude_globs 进一步过滤
+  include_globs:
+    - "figure_*.yaml"           # panel说明文件通常以 figure_ 开头
+  exclude_globs:
+    - "paper_logic.yaml"        # 避免把逻辑总表当 panel
+    - "*_template*.yaml"
+    - "*_draft*.yaml"
+
+  # 你说“不是所有说明文件都纳入”：用 include_files 显式列出最稳
+  # （推荐）只列你要进 Results 的那些 figure 说明文件名
+  include_files: 
+    - figure_1_a_000.yaml
+    - figure_1_b_001.yaml
+    - figure_1_c_v2.yaml
+    - figure_1_d_v2.yaml
+    - figure_1_sa.yaml
+    - figure_1_sb.yaml
+    - figure_2_a+b.yaml
+    - figure_2_c_v2.yaml
+    - figure_2_d.yaml
+    - figure_2_e.yaml
+    - figure_2_f.yaml
+    - figure_2_g.yaml
+    - figure_3_a+b+c+d+e+f+g+h.yaml
+    - figure_3_i+j+s3_d+f+g.yaml
+    - figure_3_k+s3_e.yaml
+    - figure_3_sa+b+c.yaml
+    - figure_4_a+b.yaml
+    - figure_4_c+d.yaml
+    - figure_4_e+f.yaml
+    - figure_4_g.yaml
+    - figure_4_sa+b.yaml
+    - figure_4_sc.yaml
+    - figure-5_a.yaml
+    - figure-5_b.yaml
+    - figure-5_c.yaml
+    - figure-5_d.yaml
+    - figure-5_e.yaml
+    - figure-5_f.yaml
+    - figure-6_a.yaml
+    - figure-6_b.yaml
+    - figure-6_c_v2.yaml
+
+    - figure-6_d_v2.yaml
+
+    - figure-6_e.yaml
+  # 例：
+  # include_files:
+  #   - "figure_1_a.yaml"
+  #   - "figure_1_b.yaml"
+  #   - "figure_2_a+b.yaml"
+  #   - "figure_4_a+b.yaml"
+  #   - "figure-5_a.yaml"
+  #   - "figure-6_d_v2.yaml"
+
+  # 如果你的 paper_logic 里已经有 figure 顺序字段，脚本会优先用它；
+  # 否则可以在这里显式指定顺序（用文件名或 figure_id 都行）
+  figure_order: 
+    - figure_1_a_000.yaml
+    - figure_1_b_001.yaml
+    - figure_1_c_v2.yaml
+    - figure_1_d_v2.yaml
+    - figure_1_sa.yaml
+    - figure_1_sb.yaml
+    - figure_2_a+b.yaml
+    - figure_2_c_v2.yaml
+    - figure_2_d.yaml
+    - figure_2_e.yaml
+    - figure_2_f.yaml
+    - figure_2_g.yaml
+    - figure_3_a+b+c+d+e+f+g+h.yaml
+    - figure_3_i+j+s3_d+f+g.yaml
+    - figure_3_k+s3_e.yaml
+    - figure_3_sa+b+c.yaml
+    - figure_4_a+b.yaml
+    - figure_4_c+d.yaml
+    - figure_4_e+f.yaml
+    - figure_4_g.yaml
+    - figure_4_sa+b.yaml
+    - figure_4_sc.yaml
+    - figure-5_a.yaml
+    - figure-5_b.yaml
+    - figure-5_c.yaml
+    - figure-5_d.yaml
+    - figure-5_e.yaml
+    - figure-5_f.yaml
+    - figure-6_a.yaml
+    - figure-6_b.yaml
+    - figure-6_c_v2.yaml
+
+    - figure-6_d_v2.yaml
+
+    - figure-6_e.yaml
+  # 例：
+  # figure_order:
+  #   - "figure_1_a.yaml"
+  #   - "figure_2_a+b.yaml"
+  #   - "figure_3_x.yaml"
+
+  # --- panel 级过滤（可选）---
+  # 只拼某些 panel_level：比如 Results v0 想要 framework + results 都保留
+  allowed_panel_levels: ["framework", "results"]
+
+  # --- 模块选择策略（核心）---
+  # 规则：先看 panel_level，再按 results_logic_type 覆盖
+  module_rules:
+    framework:
+      include_modules: ["M1_motivation", "M2_level_definition", "M5_panel_conclusion"]
+      # 可选加 M4_robustness：如果你希望框架图也说“可复现性/稳定性”
+      # include_modules: ["M1_motivation", "M2_level_definition", "M4_robustness", "M5_panel_conclusion"]
+
+    results_default:
+      include_modules: ["M1_motivation", "M2_level_definition", "M3_directional_result", "M4_robustness", "M5_panel_conclusion"]
+
+    results_by_logic_type:
+      descriptive:
+        include_modules: ["M1_motivation", "M2_level_definition", "M3_directional_result", "M5_panel_conclusion"]
+      # elimination/localization/perturbation_response/discovery 通常走 results_default 就够

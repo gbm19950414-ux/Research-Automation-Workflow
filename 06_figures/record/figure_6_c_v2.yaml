@@ -135,31 +135,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: discovery
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Having established that EphB1 deficiency alters mitochondrial membrane lipid context and inflammasome output, we next asked whether loss of EphB1 leaves a detectable and systematic transcriptional footprint across its known downstream signaling pathways at the time of sample collection."
+      cn: "在确认 EphB1 缺失会改变线粒体膜脂环境并影响炎症小体输出之后，我们进一步检验在收样时刻，EphB1 缺失是否在其已知下游信号通路中留下可检测且系统性的转录响应足迹。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "Using RNA-seq data from multiple independent batches of WT and Ephb1−/− primary peritoneal macrophages, we quantified pathway-level transcriptional response scores based on predefined EphB1 downstream signaling gene sets, and summarized genotype-dependent shifts within each batch as standardized pathway z scores."
+      cn: "基于多个独立批次 WT 与 Ephb1−/− 原代腹腔巨噬细胞的 RNA-seq 数据，我们利用预定义的 EphB1 下游信号通路基因集计算通路层面的转录响应分数，并在每个批次内以标准化的通路 z 分数概括基因型差异。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Across three RNA-seq batches, EphB1 deficiency induced reproducible directional shifts in multiple signaling modules: PI3K–AKT–mTOR pathways showed consistent negative responses (KO < WT), NF-κB/ROS and JAK–STAT was overall reduced with batch-dependent reversals, cytoskeleton-related modules were shifted in a positive direction, and other pathways exhibited weaker or inconsistent effects."
+      cn: "在三个独立 RNA 批次中，EphB1 缺失在多条信号模块中引起可重复的方向性偏移：PI3K–AKT–mTOR 在各批次中总体呈负向改变（KO < WT）；NF-κB/ROS 与 JAK–STAT 总体下移但存在批次依赖的反向；Cytoskeleton 相关模块总体呈正向偏移；其余通路效应较弱或方向不一致。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "When pathway scores were integrated across batches using a meta Z approach, PI3K–AKT–mTOR and JAK–STAT displayed the highest cross-batch directional consistency and effect magnitude, whereas other modules showed smaller or batch-sensitive effects, highlighting differences in robustness rather than single-batch significance."
+      cn: "在采用跨批次合并的 meta Z 方法后，PI3K–AKT–mTOR 与 JAK–STAT 表现出最高的方向一致性与效应强度；相比之下，其余模块的效应幅度较小或对批次更为敏感，强调了稳健性排序而非单批次显著性。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "Together, these analyses provide an overview of the transcriptional response state of EphB1 downstream signaling at the time of sampling, identifying PI3K–AKT–mTOR and JAK–STAT as the most consistently downregulated modules and prioritizing them as candidate pathways for subsequent coupling analyses with membrane context perturbation."
+      cn: "综上，这些分析刻画了收样时刻 EphB1 下游信号网络的转录响应状态，确定 PI3K–AKT–mTOR 与 JAK–STAT 是跨批次最一致受抑的模块，并将其优先作为后续与 membrane context 机制轴耦合分析的候选通路。"
       logic_source: "results.group_difference_statement"

@@ -150,31 +150,29 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
-
+  panel_level: results
+  results_logic_type: discovery
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "Following establishment of the genetic screening framework, we next asked whether any strains exhibit pronounced inflammasome-associated phenotypic differences under activation conditions."
+      cn: "在建立遗传筛选框架后，我们进一步关注是否存在在炎症小体激活条件下呈现显著表型差异的品系。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
-      logic_source: "methods.readout_and_assay + question.core_question"
-
+      en: "IL-1β release was quantified as the functional readout of inflammasome activation across multiple pb genetic backgrounds, with WT and HO cells compared within each strain."
+      cn: "以 IL-1β 释放作为炎症小体激活的功能性读出，在多个 pb 遗传背景中于各自品系内比较 WT 与 HO 细胞。"
+      logic_source: "methods.readout_and_assay + rationale.key_variables + rationale.control_logic"
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Among the screened strains, only a small subset displayed significant genotype-dependent differences in IL-1β release following Nigericin stimulation."
+      cn: "在所筛选的多个品系中，仅少数品系在 Nigericin 刺激后表现出显著的基因型依赖性 IL-1β 释放差异。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
-      logic_source: "results.robustness_and_qc + results.stats_summary"
+      en: "Notably, the Ephb1-associated 081230020-HRB strain showed a statistically significant and reproducible reduction in IL-1β release, supported by adequate biological replicates and within-strain statistical testing."
+      cn: "其中，Ephb1 对应的 081230020-HRB 品系在具有充分生物学重复的前提下，于品系内统计分析中显示出显著且可重复的 IL-1β 释放降低。"
+      logic_source: "results.stats_summary + results.key_numbers + results.robustness_and_qc"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
-      logic_source: "results.group_difference_statement"
+      en: "Compared with other genetic backgrounds, the Ephb1 strain exhibited the most consistent and robust inflammasome-associated phenotype, prioritizing Ephb1 as a leading candidate for subsequent mechanistic investigation."
+      cn: "相较于其他遗传背景，Ephb1 所在品系表现出最为一致且稳健的炎症小体相关表型，从而将 Ephb1 确立为后续机制研究的优先候选基因。"
+      logic_source: "results.group_difference_statement + interpretation.claim_supported"

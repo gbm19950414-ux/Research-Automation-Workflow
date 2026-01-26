@@ -120,31 +120,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: elimination
 
   modules:
     M1_motivation:
-      en: ""
-      cn: ""
+      en: "After establishing that transcriptional priming and classical cytokine secretion remain intact, we next examined whether the reduced inflammasome output observed upon EphB1 deficiency arises from impaired inflammasome assembly at the level of ASC oligomerization."
+      cn: "在确认转录性 priming 与经典分泌过程未受影响后，我们进一步检验 EphB1 缺失所致的炎症小体输出降低是否源于 ASC 寡聚化层面的装配缺陷。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: ""
-      cn: ""
+      en: "ASC assembly was assessed in WT and EphB1-deficient primary peritoneal macrophages following LPS priming and Nigericin stimulation by biochemical fractionation into soluble and insoluble fractions, DSS crosslinking, and immunoblot analysis of ASC oligomers."
+      cn: "在 WT 与 EphB1 缺失原代腹腔巨噬细胞经 LPS 预激并以 Nigericin 激活后，通过可溶/不溶分级结合 DSS 交联及免疫印迹分析，评估 ASC 的寡聚化状态。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: ""
-      cn: ""
+      en: "Under NLRP3 activation conditions, EphB1-deficient macrophages displayed levels of ASC oligomers, dimers, and monomers comparable to those observed in WT controls."
+      cn: "在 NLRP3 激活条件下，EphB1 缺失巨噬细胞中 ASC 寡聚体、二聚体及单体水平均与 WT 对照相当。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: ""
-      cn: ""
+      en: "This lack of genotype-dependent difference was consistently observed across independent experiments, with no significant changes detected in any ASC species following quantitative densitometric analysis."
+      cn: "该基因型间无差异的结果在多次独立实验中保持一致，经定量灰度分析后各类 ASC 形式均未显示显著变化。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: ""
-      cn: ""
+      en: "These data indicate that EphB1 deficiency does not disrupt ASC oligomerization during NLRP3 inflammasome activation, excluding defective inflammasome assembly as the basis for reduced downstream outputs."
+      cn: "综上，这些结果表明 EphB1 缺失并不影响 NLRP3 炎症小体激活过程中的 ASC 装配，从而排除了炎症小体组装缺陷作为下游输出降低原因的可能性。"
       logic_source: "results.group_difference_statement"

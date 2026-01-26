@@ -66,33 +66,31 @@ ai_hints:
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
-  panel_level: framework | results
-  results_logic_type: discovery | elimination | localization | perturbation_response | mechanistic_integration | null
+  panel_level: results
+  results_logic_type: elimination
 
   modules:
     M1_motivation:
-      en: "To determine whether EphB1 deficiency affects inflammasome priming."
-      cn: "为判断 EphB1 缺失是否影响炎症小体的第一信号（priming）过程。"
+      en: "To localize the point at which EphB1 influences inflammasome output, we first examined whether EphB1 deficiency alters transcriptional priming downstream of TLR4–NF-κB signaling."
+      cn: "为定位 EphB1 在炎症小体通路中的作用节点，我们首先检验 EphB1 缺失是否影响 TLR4–NF-κB 下游的转录性 priming。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "Transcriptional priming downstream of TLR4–NF-κB was assessed by qPCR."
-      cn: "通过 qPCR 评估 TLR4–NF-κB 下游转录性 priming 程序。"
+      en: "Transcriptional priming was assessed by qPCR analysis of Tnf, Il6, and Il1b mRNA levels in WT and EphB1-deficient primary peritoneal macrophages following LPS stimulation."
+      cn: "通过 qPCR 检测 WT 与 EphB1 缺失原代腹腔巨噬细胞在 LPS 刺激后的 Tnf、Il6 与 Il1b mRNA 水平，以评估转录性 priming。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "LPS stimulation induced comparable increases in Tnf, Il6, and Il1b mRNA in WT and Ephb1-deficient macrophages."
-      cn: "LPS 刺激在 WT 与 EphB1 缺失巨噬细胞中均诱导 Tnf、Il6 与 Il1b mRNA 的相似上调。"
+      en: "LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il1b transcripts in WT and EphB1-deficient macrophages across all examined time points."
+      cn: "在所有检测时间点，LPS 刺激均在 WT 与 EphB1 缺失巨噬细胞中诱导了幅度相当的 Tnf、Il6 与 Il1b 转录上调。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: "This pattern was consistent across independent experiments and did not reach statistical significance between genotypes."
-      cn: "该结果在多次独立实验中保持一致，且不同基因型之间均未达到统计学显著性。"
+      en: "These transcriptional responses were reproducible across independent experiments and showed no statistically significant differences between genotypes."
+      cn: "上述转录反应在多次独立实验中具有良好重复性，且不同基因型之间均未观察到统计学显著差异。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Thus, Ephb1 deficiency does not impair transcriptional priming during inflammasome activation."
-      cn: "因此，EphB1 缺失并不损伤炎症小体激活过程中的转录性 priming。"
-      logic_source: "results.group_difference_statement"
-
-      
+      en: "Together, these data indicate that EphB1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming, excluding defective first-signal activation as the cause of reduced inflammasome output."
+      cn: "综上，这些结果表明 EphB1 缺失并不影响 TLR4–NF-κB 依赖的转录性 priming，从而排除了第一信号受损导致炎症小体输出降低的可能性。"
+      logic_source: "results.group_difference_statement"      
