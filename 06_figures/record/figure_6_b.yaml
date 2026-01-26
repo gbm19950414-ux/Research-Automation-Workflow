@@ -4,8 +4,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "Figure 7"
-  panel: "7B-table"
+  figure: "Figure 6"              # 如 "Figure 3"
+  figure_id: "6b"   
   panel_type: "table"
   short_title: "EphB1 下游信号模块与心磷脂机制轴汇总"
   chapter: "第三章 EphB1 依赖的信号通路介导心磷脂瓶颈"

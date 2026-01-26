@@ -5,8 +5,8 @@
 
 meta:
   panel_type: "model"       # 依旧使用 model 类型，但本 panel 是“流程图型 model”
-  figure: "Figure 6"
-  panel: "C"
+  figure: "Figure 5"              # 如 "Figure 3"
+  figure_id: "5c"             # 如 "A"
   short_title: "转录组学、脂质组学与 CL panel 数据处理流程" 
   chapter: "Results – Data processing and mechanistic indicators"
   role_in_paper: >

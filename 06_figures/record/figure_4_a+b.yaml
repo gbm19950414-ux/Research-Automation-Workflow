@@ -8,7 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "4a/b"              # 如 "Figure 3"
+  figure: "Figure 4"              # 如 "Figure 3"
+  figure_id: "4a/b"             # 如 "A"
   short_title: "EphB1 缺失降低 NAO 标记的心磷脂池"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.4 EphB1 缺失影响线粒体心磷脂环境"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_4_c"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"

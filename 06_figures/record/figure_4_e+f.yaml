@@ -8,8 +8,9 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "s4a/b"              # 如 "Figure 3"
-  panel: "A"               # 如 "A"
+  figure: "Figure 4"              # 如 "Figure 3"
+  # 推荐再加一个更稳的字段，避免未来你再改 figure 字段语义：
+  figure_id: "4e/f"
   short_title: "AD 处理降低 NAO 信号并抹除基因型差异"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.5 线粒体心磷脂可及性与含量的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_5_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
@@ -130,28 +131,28 @@ results_skeleton_en:
   panel_level: results
   results_logic_type: perturbation_response
 
-modules:
-  M1_motivation:
-    en: "We next asked whether an independent pharmacological inhibition of cardiolipin biosynthesis is sufficient to reduce NAO signals in WT macrophages."
-    cn: "我们进一步检验，一种独立的、针对心磷脂合成通路的药理学抑制，是否足以在 WT 巨噬细胞中降低 NAO 信号。"
-    logic_source: "question.context_from_previous + question.core_question"
+  modules:
+    M1_motivation:
+      en: "We next asked whether an independent pharmacological inhibition of cardiolipin biosynthesis is sufficient to reduce NAO signals in WT macrophages."
+      cn: "我们进一步检验，一种独立的、针对心磷脂合成通路的药理学抑制，是否足以在 WT 巨噬细胞中降低 NAO 信号。"
+      logic_source: "question.context_from_previous + question.core_question"
 
-  M2_level_definition:
-    en: "WT primary peritoneal macrophages were pretreated with the cardiolipin biosynthesis inhibitor alexidine dihydrochloride (AD) prior to NAO staining, and cardiolipin-associated fluorescence was quantified by confocal microscopy under fixed exposure conditions."
-    cn: "在 NAO 染色前对 WT 原代腹腔巨噬细胞进行心磷脂合成通路抑制剂 alexidine dihydrochloride（AD）预处理，并在固定曝光条件下通过共聚焦显微镜定量心磷脂相关荧光信号。"
-    logic_source: "methods.readout_and_assay + question.core_question"
+    M2_level_definition:
+      en: "WT primary peritoneal macrophages were pretreated with the cardiolipin biosynthesis inhibitor alexidine dihydrochloride (AD) prior to NAO staining, and cardiolipin-associated fluorescence was quantified by confocal microscopy under fixed exposure conditions."
+      cn: "在 NAO 染色前对 WT 原代腹腔巨噬细胞进行心磷脂合成通路抑制剂 alexidine dihydrochloride（AD）预处理，并在固定曝光条件下通过共聚焦显微镜定量心磷脂相关荧光信号。"
+      logic_source: "methods.readout_and_assay + question.core_question"
 
-  M3_directional_result:
-    en: "AD treatment markedly reduced NAO fluorescence in WT macrophages, indicating that pharmacological inhibition of cardiolipin biosynthesis decreases the NAO-accessible cardiolipin pool."
-    cn: "AD 处理在 WT 巨噬细胞中显著降低 NAO 荧光信号，提示药理学抑制心磷脂合成可减少 NAO 可及的心磷脂池。"
-    logic_source: "results.data_direction"
+    M3_directional_result:
+      en: "AD treatment markedly reduced NAO fluorescence in WT macrophages, indicating that pharmacological inhibition of cardiolipin biosynthesis decreases the NAO-accessible cardiolipin pool."
+      cn: "AD 处理在 WT 巨噬细胞中显著降低 NAO 荧光信号，提示药理学抑制心磷脂合成可减少 NAO 可及的心磷脂池。"
+      logic_source: "results.data_direction"
 
-  M4_robustness:
-    en: "This reduction in NAO signal was reproducible across independent experimental batches and reached statistical significance."
-    cn: "该 NAO 信号下降在多批次独立实验中稳定复现，并达到统计学显著性。"
-    logic_source: "results.robustness_and_qc + results.stats_summary"
+    M4_robustness:
+      en: "This reduction in NAO signal was reproducible across independent experimental batches and reached statistical significance."
+      cn: "该 NAO 信号下降在多批次独立实验中稳定复现，并达到统计学显著性。"
+      logic_source: "results.robustness_and_qc + results.stats_summary"
 
-  M5_panel_conclusion:
-    en: "Together, these results demonstrate that pharmacological inhibition of cardiolipin biosynthesis alone is sufficient to reduce the NAO-accessible cardiolipin pool in WT macrophages, supporting cardiolipin abundance as a key determinant of NAO-detectable cardiolipin availability."
-    cn: "综上，这些结果表明，仅通过药理学抑制心磷脂合成即可在 WT 巨噬细胞中降低 NAO 可及的心磷脂池，支持心磷脂含量本身是决定 NAO 可检测心磷脂可用性的关键因素。"
-    logic_source: "results.group_difference_statement"
+    M5_panel_conclusion:
+      en: "Together, these results demonstrate that pharmacological inhibition of cardiolipin biosynthesis alone is sufficient to reduce the NAO-accessible cardiolipin pool in WT macrophages, supporting cardiolipin abundance as a key determinant of NAO-detectable cardiolipin availability."
+      cn: "综上，这些结果表明，仅通过药理学抑制心磷脂合成即可在 WT 巨噬细胞中降低 NAO 可及的心磷脂池，支持心磷脂含量本身是决定 NAO 可检测心磷脂可用性的关键因素。"
+      logic_source: "results.group_difference_statement"

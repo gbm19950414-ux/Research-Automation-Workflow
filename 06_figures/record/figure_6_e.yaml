@@ -4,8 +4,8 @@
 # ============================================================
 
 meta:
-  figure: "Figure 7"
-  panel: "E"
+  figure: "Figure 6"              # 如 "Figure 3"
+  figure_id: "6e"   
   short_title: "EphB1–signal–lipid indicator 中介分析"
   chapter: "7.5 Mediation analysis on lipid indicators downstream of EphB1"
   experiment_id: "2025-03-21_mediation_CL_indicators"

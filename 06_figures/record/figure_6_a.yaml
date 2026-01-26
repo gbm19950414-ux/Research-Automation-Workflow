@@ -5,8 +5,8 @@
 
 meta:
   panel_type: "model"
-  figure: "Figure 7"
-  panel: "A"
+  figure: "Figure 6"              # 如 "Figure 3"
+  figure_id: "6a"             # 如 "A"
   short_title: "RNA-first X–M–Z framework linking EphB1 downstream modules to membrane context"
   chapter: "S4"
   role_in_paper: >

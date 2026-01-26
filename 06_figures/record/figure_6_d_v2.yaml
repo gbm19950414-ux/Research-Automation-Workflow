@@ -8,7 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure_id: "Figure7D"
+  figure: "Figure 6"              # 如 "Figure 3"
+  figure_id: "6d"   
   experiment_id: "RNA_only_XMZ_ranking_MembraneContext"
   short_title: "EphB1 状态驱动的下游通路变化（ΔM）及其与 Membrane context 轴（Z）的耦合与稳健性"
 

@@ -8,8 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "6"
-  panel: "E"
+  figure: "Figure 5"              # 如 "Figure 3"
+  figure_id: "5e"             # 如 "A"
   short_title: "跨组学机制轴综合得分"
   chapter: "多组学整合：Ephb1 缺失对线粒体相关机制轴的整体影响"
   experiment_id: "multiomics_axis_meta_summary"

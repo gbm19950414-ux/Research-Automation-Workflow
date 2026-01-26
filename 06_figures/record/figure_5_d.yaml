@@ -3,8 +3,8 @@
 # ============================================================
 
 meta:
-  figure: "6"
-  panel: "D"
+  figure: "Figure 5"              # 如 "Figure 3"
+  figure_id: "5d"             # 如 "A"
   short_title: "跨 RNA 与脂质组的机制轴效应矩阵"
   chapter: "CL 机制轴跨组学整合分析"
   experiment_id: "2025-11-26_mechanistic_axis_crossomics"

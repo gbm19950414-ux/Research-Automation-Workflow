@@ -76,6 +76,7 @@ sections:
 figures:
   - id: "Figure 1"
     title: "EphB1 缺失降低炎症小体激活诱导的巨噬细胞焦亡与 IL-1β 释放"
+    title_en: "EphB1 loss limits inflammasome-induced pyroptosis and IL-1β release"
     section: "S1"
     role_in_story: "Phenotype establishment"
     one_sentence_purpose: >
@@ -185,6 +186,7 @@ figures:
 
   - id: "Figure 2"
     title: "EphB1 缺失不影响 NLRP3 上游激活，差异集中于 GSDMD 执行层外排"
+    title_en: "EphB1 loss preserves upstream NLRP3 activation but restricts GSDMD-mediated execution"
     section: "S1"
     role_in_story: "Level mapping: upstream intact, execution limited"
     one_sentence_purpose: >
@@ -359,6 +361,7 @@ figures:
 
   - id: "Figure 3"
     title: "EphB1 缺失降低 GSDMD 与线粒体膜的结合"
+    title_en: "EphB1 loss reduces GSDMD engagement with the mitochondrial membrane"
     section: "S2"
     role_in_story: "Execution interface: GSDMD–mitochondria engagement"
     one_sentence_purpose: >
@@ -373,34 +376,20 @@ figures:
       between_panels:
 
 
-        - from: "s3a/b/c"
-          to: "s3d"
+        - from: "3a/b/c/d/e/f/g/h"
+          to: "3/i/j/s3/d/f/g"
           en: >
-            Having profiled mitochondrial stress signatures during inflammasome activation, we next asked when the early GSDMD–mitochondria engagement window occurs, to anchor subsequent interface readouts to an appropriate temporal regime.
+            Having delineated the kinetics of mitochondrial stress during inflammasome activation, we next defined the key time window for early interface events, so that subsequent readouts can be anchored to the appropriate temporal regime and we can test whether a more direct mitochondrial-content–release readout likewise shows an EphB1-dependent constraint consistent with a mitochondria-stage bottleneck.
           cn: >
-            在描绘炎症小体激活过程中的线粒体应激动力学后，我们进一步确定早期界面事件发生的关键时间窗口，以便将后续 readout 锚定到合适的时序区间。
+            在描绘炎症小体激活过程中的线粒体应激动力学后，我们进一步确定早期界面事件发生的关键时间窗口，以便将后续 readout 锚定到合适的时序区间，并进一步检验：更直接的线粒体内容物外泄 readout 是否同样呈现 EphB1 依赖的限幅特征，从而支持“线粒体阶段瓶颈”的阶段定位。
 
-        - from: "s3d"
-          to: "3i/j"
+        - from: "3/i/j/s3/d/f/g"
+          to: "3k/s3e"
           en: >
-            Having temporally anchored the engagement window, we next asked whether a direct mitochondrial-content–release readout captures an EphB1-dependent constraint consistent with an early mitochondrial stage bottleneck.
+            Having further reinforced the early mitochondrial-stage signature, we next asked whether an independent protein-level time-course can pinpoint the same peak window and, in doing so, whether EphB1 loss selectively diminishes GSDMD-NT enrichment on mitochondria—thereby placing the bottleneck at interface engagement/enrichment rather than upstream proteolytic activation.
           cn: >
-            在确定关键时间窗后，我们进一步检验：更直接的线粒体内容物外泄 readout 是否同样呈现 EphB1 依赖的限幅特征，从而支持“线粒体阶段瓶颈”的阶段定位。
+            在进一步强化“早期线粒体阶段”特征后，我们进一步检验：蛋白层面的时间梯度读数是否能独立地指认相同的峰值时间窗，并进一步检验：EphB1 缺失是否选择性削弱 GSDMD-NT 在线粒体上的富集，从而将瓶颈精确落在“界面对接/富集”而非上游加工环节。
 
-
-        - from: "s3f/g"
-          to: "s3e"
-          en: >
-            Having reinforced an early mitochondrial-stage signature, we next asked whether a protein-level temporal readout independently identifies the same peak engagement window.
-          cn: >
-            在进一步强化“早期线粒体阶段”特征后，我们进一步检验：蛋白层面的时间梯度读数是否能独立地指认相同的峰值时间窗。
-
-        - from: "s3e"
-          to: "3k"
-          en: >
-            Having established the peak temporal regime, we next asked whether EphB1 loss selectively limits GSDMD-NT enrichment on mitochondria, thereby pinpointing the bottleneck at interface engagement rather than upstream processing.
-          cn: >
-            在锁定峰值时间窗后，我们进一步检验：EphB1 缺失是否选择性削弱 GSDMD-NT 在线粒体上的富集，从而将瓶颈精确落在“界面对接/富集”而非上游加工环节。
 
     panels:
 
@@ -496,6 +485,7 @@ figures:
 
   - id: "Figure 4"
     title: "心磷脂是EphB1 缺失降低炎症小体通路激活的重要因素"
+    title_en: "Cardiolipin mediates the EphB1-dependent constraint on inflammasome signalling"
     section: "S3"
     role_in_story: "Lipid gate: cardiolipin abundance/accessibility and causality"
     one_sentence_purpose: >
@@ -646,7 +636,8 @@ figures:
         depends_on_panels: []
 
   - id: "Figure 5"
-    title: "多组学机制轴分析指向 membrane context 阻碍严重"
+    title: "多组学机制轴分析确定“膜环境轴”为优先异常轴"
+    title_en: "Integrated multi-omics prioritizes membrane context as the dominant perturbed axis"
     section: ""   
     role_in_story: "Omics synthesis: define and prioritize a mechanistic axis"
     one_sentence_purpose: >
@@ -799,6 +790,7 @@ figures:
     
   - id: "Figure 6"
     title: "候选通路优先级排序：RNA 机制路径（X–M–Z）与 lipid 表型一致性验证"
+    title_en: "Prioritizing candidate pathways: an RNA X–M–Z framework with lipid phenotypic alignment"
     section: ""
     role_in_story: "Pathway prioritization: X–M–Z framework + validation hooks"
     one_sentence_purpose: >
@@ -1035,8 +1027,7 @@ results_build:
     - figure_1_b_001.yaml
     - figure_1_c_v2.yaml
     - figure_1_d_v2.yaml
-    - figure_1_sa.yaml
-    - figure_1_sb.yaml
+
     - figure_2_a+b.yaml
     - figure_2_c_v2.yaml
     - figure_2_d.yaml
@@ -1046,34 +1037,34 @@ results_build:
     - figure_3_a+b+c+d+e+f+g+h.yaml
     - figure_3_i+j+s3_d+f+g.yaml
     - figure_3_k+s3_e.yaml
-    - figure_3_sa+b+c.yaml
+
     - figure_4_a+b.yaml
     - figure_4_c+d.yaml
     - figure_4_e+f.yaml
     - figure_4_g.yaml
     - figure_4_sa+b.yaml
     - figure_4_sc.yaml
-    - figure-5_a.yaml
-    - figure-5_b.yaml
-    - figure-5_c.yaml
-    - figure-5_d.yaml
-    - figure-5_e.yaml
-    - figure-5_f.yaml
-    - figure-6_a.yaml
-    - figure-6_b.yaml
-    - figure-6_c_v2.yaml
+    - figure_5_a.yaml
+    - figure_5_b.yaml
+    - figure_5_c.yaml
+    - figure_5_d.yaml
+    - figure_5_e.yaml
+    - figure_5_f.yaml
+    - figure_6_a.yaml
+    - figure_6_b.yaml
+    - figure_6_c_v2.yaml
 
-    - figure-6_d_v2.yaml
+    - figure_6_d_v2.yaml
 
-    - figure-6_e.yaml
+    - figure_6_e.yaml
   # 例：
   # include_files:
   #   - "figure_1_a.yaml"
   #   - "figure_1_b.yaml"
   #   - "figure_2_a+b.yaml"
   #   - "figure_4_a+b.yaml"
-  #   - "figure-5_a.yaml"
-  #   - "figure-6_d_v2.yaml"
+  #   - "figure_5_a.yaml"
+  #   - "figure_6_d_v2.yaml"
 
   # 如果你的 paper_logic 里已经有 figure 顺序字段，脚本会优先用它；
   # 否则可以在这里显式指定顺序（用文件名或 figure_id 都行）
@@ -1082,8 +1073,7 @@ results_build:
     - figure_1_b_001.yaml
     - figure_1_c_v2.yaml
     - figure_1_d_v2.yaml
-    - figure_1_sa.yaml
-    - figure_1_sb.yaml
+
     - figure_2_a+b.yaml
     - figure_2_c_v2.yaml
     - figure_2_d.yaml
@@ -1093,26 +1083,26 @@ results_build:
     - figure_3_a+b+c+d+e+f+g+h.yaml
     - figure_3_i+j+s3_d+f+g.yaml
     - figure_3_k+s3_e.yaml
-    - figure_3_sa+b+c.yaml
+
     - figure_4_a+b.yaml
     - figure_4_c+d.yaml
     - figure_4_e+f.yaml
     - figure_4_g.yaml
     - figure_4_sa+b.yaml
     - figure_4_sc.yaml
-    - figure-5_a.yaml
-    - figure-5_b.yaml
-    - figure-5_c.yaml
-    - figure-5_d.yaml
-    - figure-5_e.yaml
-    - figure-5_f.yaml
-    - figure-6_a.yaml
-    - figure-6_b.yaml
-    - figure-6_c_v2.yaml
+    - figure_5_a.yaml
+    - figure_5_b.yaml
+    - figure_5_c.yaml
+    - figure_5_d.yaml
+    - figure_5_e.yaml
+    - figure_5_f.yaml
+    - figure_6_a.yaml
+    - figure_6_b.yaml
+    - figure_6_c_v2.yaml
 
-    - figure-6_d_v2.yaml
+    - figure_6_d_v2.yaml
 
-    - figure-6_e.yaml
+    - figure_6_e.yaml
   # 例：
   # figure_order:
   #   - "figure_1_a.yaml"

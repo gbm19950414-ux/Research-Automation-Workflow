@@ -1,4 +1,6 @@
 meta:
+  figure: "Figure 5"              # 如 "Figure 3"
+  figure_id: "5b"             # 如 "A"
   panel_type: "table"
   title: "Cardiolipin 机制轴的关键基因脂质指标整理"
   role_in_paper: >
@@ -491,7 +493,7 @@ entries:
 
   # ---------- 8. English ----------
 
-results_skeleton_en:results_skeleton_en:
+results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
   panel_level: framework

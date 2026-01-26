@@ -8,7 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure_id: "Figure 7C"
+  figure: "Figure 6"              # 如 "Figure 3"
+  figure_id: "6c"   
   experiment_id: "RNAseq_EphB1_downstream_state"
   short_title: "EphB1 缺失重塑下游信号通路的转录响应状态"
 

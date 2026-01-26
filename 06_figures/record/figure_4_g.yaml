@@ -8,8 +8,9 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "S4c"              # 如 "Figure 3"
-  panel: "B"               # 如 "A"
+  figure: "Figure 4"              # 如 "Figure 3"
+  # 推荐再加一个更稳的字段，避免未来你再改 figure 字段语义：
+  figure_id: "4g"             # 如 "A"
   short_title: "降低心磷脂可及性抑制 IL-1β 释放并遮蔽 EphB1 缺失表型"
   chapter: "3.5 线粒体心磷脂可及性与重塑的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_5_b"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"

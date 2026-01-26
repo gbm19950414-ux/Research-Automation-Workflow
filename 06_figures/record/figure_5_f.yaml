@@ -8,8 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "6"              # 如 "Figure 3"
-  panel: "A"               # 如 "A"
+  figure: "Figure 5"              # 如 "Figure 3"
+  figure_id: "5f"             # 如 "A"
   short_title: "机制轴效应与 CL 表型的跨批次关联分析"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "Mitochondrial lipid remodeling"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "multiomics_axis_CL_link"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"

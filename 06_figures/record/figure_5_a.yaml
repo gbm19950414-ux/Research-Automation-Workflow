@@ -5,8 +5,8 @@
 
 meta:
   panel_type: "model"       # 必填： "model"
-  figure: "6"                # 如 "Figure 6"
-  panel: "a"                 # 如 "A"
+  figure: "Figure 5"              # 如 "Figure 3"
+  figure_id: "5a"             # 如 "A"
   short_title: "EphB1-心磷脂代谢机制瓶颈概念图"           # 概念图一句话标题，如：“EphB1 regulates mitochondrial-ROS–CL–NLRP3 axis”
   chapter: ""               # 属于哪一章
   role_in_paper: "定义线粒体心磷脂代谢的6条机制轴（合成、重塑、转运、供给、氧化、膜组成），作为后续 Ephb1 缺失多组学分析的“机制坐标系”和解释框架。"         # 这张概念图在整篇论文中的作用（非常重要）

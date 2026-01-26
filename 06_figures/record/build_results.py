@@ -119,7 +119,7 @@ def normalize_panel_id(s: str) -> str:
     # canonical separators
     t = t.replace(" ", "")
     t = t.replace("+", "/").replace(",", "/").replace("_", "/")
-    t = re.sub(r"/+/", "/", t)
+    t = re.sub(r"/+", "/", t)
 
     return t.lower()
 
@@ -237,6 +237,33 @@ def get_panel_id(y: Any, fallback: str = "") -> str:
     return normalize_panel_id((fallback or "").strip())
 
 
+# ---- Figure group assignment helper ----
+def get_figure_group(y: Any, panel_id: str) -> str:
+    """Return the figure-group label used for between_figures matching.
+
+    Prefer explicit figure group labels from YAML (meta.figure or top-level figure).
+    This avoids mis-grouping supplementary panel ids like 's4c' as 'Figure S4'
+    when they should belong to a main figure group (e.g., meta.figure: 'Figure 4').
+    """
+    if isinstance(y, dict):
+        meta = y.get("meta") or {}
+        # Prefer explicit figure group label from YAML
+        for k in ["figure", "figure_group"]:
+            v = meta.get(k)
+            if isinstance(v, str) and v.strip():
+                fg = normalize_figure_group(v.strip())
+                if fg:
+                    return fg
+        for k in ["figure", "figure_group"]:
+            v = y.get(k)
+            if isinstance(v, str) and v.strip():
+                fg = normalize_figure_group(v.strip())
+                if fg:
+                    return fg
+    # Fallback: derive from panel id
+    return figure_group_label(panel_id)
+
+
 def figure_group_label(panel_id: str) -> str:
     """Map a panel_id like '4a/b' -> 'Figure 4' for between_figures matching."""
     s = normalize_panel_id(panel_id)
@@ -330,12 +357,29 @@ def build_transition_maps(
     return panel_map, fig_map
 
 
-def render_transition(text: str) -> str:
-    """Render transition as a compact markdown block."""
-    t = (text or "").strip()
-    if not t:
+def render_transition(en_text: str, cn_text: str, primary: str = "en") -> str:
+    """Render a bilingual transition blockquote.
+
+    Order is controlled by `primary` ("en" or "cn").
+    """
+    en = " ".join((en_text or "").strip().split())
+    cn = " ".join((cn_text or "").strip().split())
+    if not en and not cn:
         return ""
-    return "> **Transition:** " + " ".join(t.split())
+
+    if primary == "cn":
+        first, second = (cn, en)
+        first_label, second_label = ("转场", "Transition")
+    else:
+        first, second = (en, cn)
+        first_label, second_label = ("Transition", "转场")
+
+    lines: List[str] = []
+    if first:
+        lines.append(f"> **{first_label}:** {first}")
+    if second:
+        lines.append(f"> **{second_label}:** {second}")
+    return "\n".join(lines)
 
 def extract_panels(y: Any, source_name: str) -> List[Dict[str, Any]]:
     """
@@ -377,24 +421,49 @@ def pick_modules(panel_level: str, logic_type: str, cfg: Dict[str, Any]) -> List
 
     return list((rules.get("results_default", {}) or {}).get("include_modules", []) or [])
 
-def render_panel(panel: Dict[str, Any], include_module_keys: List[str], lang: str = "en") -> str:
-    modules = panel["modules"]
-    lines: List[str] = []
+def render_block(block: Dict[str, Any], include_keys: List[str], primary: str = "en") -> str:
+    """Render modules as bilingual bullets (EN+CN).
 
-    for mk in include_module_keys:
-        mk = normalize_module_key(mk)
-        if mk not in modules:
+    For each module, output the primary language as the main bullet, and the other
+    language as an indented sub-bullet when available.
+    """
+    modules = block.get("modules") or {}
+    if not isinstance(modules, dict):
+        return ""
+
+    other = "cn" if primary == "en" else "en"
+
+    lines: List[str] = []
+    for mk in include_keys:
+        mk = (mk or "").strip()
+        if not mk or mk not in modules:
             continue
+
         node = modules.get(mk) or {}
         if not isinstance(node, dict):
             continue
-        text = node.get(lang, "")
-        if isinstance(text, str):
-            text = text.strip()
+
+        t_primary = node.get(primary, "")
+        t_other = node.get(other, "")
+
+        t_primary = t_primary.strip() if isinstance(t_primary, str) else ""
+        t_other = t_other.strip() if isinstance(t_other, str) else ""
+
+        # If primary is missing but other exists, still render.
+        if not t_primary and not t_other:
+            continue
+
+        if primary == "cn":
+            main = t_primary or t_other
+            sub = t_other if t_primary else ""
         else:
-            text = ""
-        if text:
-            lines.append(f"- {text}")
+            main = t_primary or t_other
+            sub = t_other if t_primary else ""
+
+        lines.append(f"- {main}")
+        if sub:
+            lines.append(f"  - {sub}")
+
     return "\n".join(lines).strip()
 
 def resolve_record_dir(paper_logic_path: Path, cfg: Dict[str, Any]) -> Path:
@@ -454,10 +523,12 @@ def main() -> int:
 
     record_dir = resolve_record_dir(paper_logic, cfg)
     output_path = resolve_output_path(record_dir, cfg)
-    lang = cfg.get("language", "en")
+    primary_lang = (cfg.get("language") or "en").strip().lower()
+    if primary_lang not in ("en", "cn"):
+        primary_lang = "en"
     debug_transitions = bool(cfg.get("debug_transitions", False))
     if debug_transitions:
-        print(f"[DEBUG] language={lang}")
+        print(f"[DEBUG] primary_language={primary_lang}")
         print(f"[DEBUG] panel_transitions={len(panel_tr_map)} keys; figure_transitions={len(figure_tr_map)} keys")
         # show a small sample of keys to confirm normalization
         print(f"[DEBUG] sample panel keys: {list(panel_tr_map.keys())[:10]}")
@@ -502,7 +573,7 @@ def main() -> int:
         fig_title = get_meta_title(y, fallback=fpath.stem)
         fname_panel_id = derive_panel_id_from_filename(fpath.name)
         curr_panel_id = get_panel_id(y, fallback=(fname_panel_id or fig_title))
-        curr_fig_group = figure_group_label(curr_panel_id)
+        curr_fig_group = get_figure_group(y, curr_panel_id)
 
         next_panel_id = ""
         next_fig_group = ""
@@ -510,7 +581,7 @@ def main() -> int:
             y_next = load_yaml(filtered[i + 1])
             next_fname_panel_id = derive_panel_id_from_filename(filtered[i + 1].name)
             next_panel_id = get_panel_id(y_next, fallback=(next_fname_panel_id or filtered[i + 1].stem))
-            next_fig_group = figure_group_label(next_panel_id)
+            next_fig_group = get_figure_group(y_next, next_panel_id)
 
         if debug_transitions:
             print(
@@ -521,7 +592,8 @@ def main() -> int:
         panels = extract_panels(y, source_name=fpath.name)
         if not panels:
             continue
-
+        if not panels and debug_transitions:
+            print(f"[DEBUG] SKIP (no results_skeleton_en found): {fpath.name}")
         # figure header
         md.append(f"## {fig_title}  \n`{fpath.name}`\n")
 
@@ -533,8 +605,8 @@ def main() -> int:
             if pl and pl not in allowed_panel_levels:
                 continue
 
-            include_module_keys = pick_modules(pl, lt, cfg)
-            body = render_panel(p, include_module_keys, lang=lang)
+            include_keys = pick_modules(pl, lt, cfg)
+            body = render_block(p, include_keys, primary=primary_lang)
             if not body:
                 continue
 
@@ -562,7 +634,7 @@ def main() -> int:
                     key = (normalize_panel_id(curr_panel_id), normalize_panel_id(next_panel_id))
                     print(f"[DEBUG] panel lookup key={key} hit={bool(tr)}")
                 if tr:
-                    transition_text = tr.get(lang, "")
+                    transition_text = tr
 
             # Otherwise use figure-to-figure transitions when moving across figure groups
             if (not transition_text) and curr_fig_group and next_fig_group and curr_fig_group != next_fig_group:
@@ -571,12 +643,28 @@ def main() -> int:
                     key = (normalize_figure_group(curr_fig_group), normalize_figure_group(next_fig_group))
                     print(f"[DEBUG] figure lookup key={key} hit={bool(tr)}")
                 if tr:
-                    transition_text = tr.get(lang, "")
+                    transition_text = tr
+
+            # Fallback: allow explicit panel-to-panel transitions even across figure groups
+            # (useful for Fig -> FigS jumps such as 4g -> s4a/b)
+            if (not transition_text) and curr_panel_id and next_panel_id:
+                tr = panel_tr_map.get((normalize_panel_id(curr_panel_id), normalize_panel_id(next_panel_id)))
+                if debug_transitions:
+                    key = (normalize_panel_id(curr_panel_id), normalize_panel_id(next_panel_id))
+                    print(f"[DEBUG] panel fallback lookup key={key} hit={bool(tr)}")
+                if tr:
+                    transition_text = tr
 
             if transition_text:
                 if debug_transitions:
                     print(f"[DEBUG] inserted transition ({'panel' if curr_fig_group==next_fig_group else 'figure'})")
-                md.append(render_transition(transition_text))
+                md.append(
+                    render_transition(
+                        transition_text.get("en", ""),
+                        transition_text.get("cn", ""),
+                        primary=primary_lang,
+                    )
+                )
                 md.append("")
             elif debug_transitions:
                 print("[DEBUG] no transition inserted for this pair")
