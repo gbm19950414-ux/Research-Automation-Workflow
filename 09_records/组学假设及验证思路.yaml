@@ -20,30 +20,12 @@ mechanistic_chain:
         in_this_paper_validation:
           node_validation:
             - id: EV001
-              status: "组学"
-              condition: "多批次 RNA"
-              readout: "PI3K capacity gene set 一致性检验"
               minimal_details: "检验 PI3K capacity 基因集在多批次 RNA 数据中的表达一致性"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "RNA"
-              assay_type: "RNA-seq"
             - id: EV002
-              status: "qPCR"
-              condition: "多批次 mRNA"
-              readout: "PI3K capacity gene set 表达下调"
               minimal_details: "使用 qPCR 验证 PI3K capacity 基因集在多批次样本中的下调趋势"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "RNA"
-              assay_type: "qPCR"
           link_validation:
             - id: EV003
-              status: "无需"
-              condition: "EphB1 缺失小鼠"
-              readout: "现象必由 EphB1 缺失引起"
               minimal_details: "该现象发生在 EphB1 缺失小鼠中，无需额外验证"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "无"
-              assay_type: "无"
             
         expected_if_true: "KO 的 PI3K capacity 分数在多数批次（方向投票）为下降，qPCR验证成功"
         alternative_explanations:
@@ -60,33 +42,23 @@ mechanistic_chain:
           - "Lisabeth et al., 2013, notes context-dependent Akt modulation in Eph signalling (PMCID: PMC3753714)"
         in_this_paper_validation:
           node_validation:
-            - id: EV004
-              status: "WB"
-              condition: "WT vs KO"
-              readout: "p-AKT(T308/S473)、p-S6(S235/236)、p-4EBP1 水平"
-              minimal_details: "检测蛋白磷酸化水平以评估 PI3K–AKT–mTOR 通路即时活性"
-              treatment: >
-                "EphB1 KO vs WT"
-                "饥饿处理，生长因子脉冲"
-              sample_type: "蛋白"
-              assay_type: "WB"
+            - id: EV004a
+              minimal_details: >
+                通过血清饥饿后进行 FBS 再喂养的时间曲线（time-course），
+                比较 WT 与 KO 在 PI3K–AKT–mTOR 通路蛋白磷酸化响应中的
+                峰值、动态范围或 AUC，以解锁并定义通路 capacity 差异。
+
+            - id: EV004b
+              minimal_details: >
+                在统一血清饥饿起点下，采用固定时间点的 FBS 浓度梯度刺激，
+                比较 WT 与 KO 的最大响应幅度（max）与剂量–反应关系，
+                以独立于时相因素评估 PI3K–AKT–mTOR 通路的 capacity 上限差异。
+              
             - id: EV005
-              status: "qPCR"
-              condition: "WT vs KO"
-              readout: "FOXO 子模块经典靶基因转录水平（Bim / Cdkn1a / Gadd45a / Sod2）"
               minimal_details: "检测 FOXO 靶基因表达，作为 AKT 抑制解除的标志"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "RNA"
-              assay_type: "qPCR"
           link_validation:
             - id: EV006
-              status: "无需"
-              condition: "capacity-活性下降假设"
-              readout: "活性下降即链条打通"
               minimal_details: "capacity 下降必然导致活性下降，存在干扰时链条可能不完整"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "无"
-              assay_type: "无"
         expected_if_true: "KO 中 p-AKT/p-S6 下移（在匹配条件下可复现）"
         alternative_explanations:
           - "翻译后调控补偿（capacity 低但输出保持）"
@@ -103,38 +75,14 @@ mechanistic_chain:
         in_this_paper_validation:
           node_validation:
             - id: EV007
-              status: "RNA-seq"
-              condition: "多批次"
-              readout: "flux/turnover 轴 一致性（固定 gene set + 方向投票/效应量）"
               minimal_details: "分析多批次 RNA-seq 数据中脂质代谢通量相关基因表达方向和效应量"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "RNA"
-              assay_type: "RNA-seq"
             - id: EV008
-              status: "qPCR"
-              condition: "4–6 个瓶颈节点"
-              readout: "关键节点表达验证"
               minimal_details: "对关键瓶颈基因进行 qPCR 验证，作为转录重编程的正交证据"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "RNA"
-              assay_type: "qPCR"
           link_validation:
             - id: EV009
-              status: "药理复制"
-              condition: "PI3K 抑制（如 LY294002/PI3K isoform inhibitor）"
-              readout: "flux/turnover 轴方向 qPCR 结果复制"
               minimal_details: "通过 PI3K 抑制剂检测是否复制转录轴方向变化"
-              treatment: "PI3K 抑制剂处理"
-              sample_type: "RNA"
-              assay_type: "qPCR"
             - id: EV010
-              status: "药理救援"
-              condition: "AKT/mTOR 激活或抑制刹车"
-              readout: "qPCR 结果部分逆转"
               minimal_details: "通过激活或抑制 AKT/mTOR 通路观察转录变化的可逆性"
-              treatment: "AKT/mTOR 通路调控处理"
-              sample_type: "RNA"
-              assay_type: "qPCR"
         expected_if_true: "抑制 PI3K 输出 → 合成轴下移；并出现周转增强相关转录迹象"
         alternative_explanations:
           - "AMPK/ISR/炎症应激作为主驱动；PI3K 仅伴随"
@@ -151,38 +99,14 @@ mechanistic_chain:
         in_this_paper_validation:
           node_validation:
             - id: EV011
-              status: "脂质组"
-              condition: "跨批次"
-              readout: "HO−WT 脂质组效应方向与 flux/turnover 轴方向一致"
               minimal_details: "比较不同批次脂质组数据中膜磷脂含量变化与转录通量轴方向是否一致"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "脂质"
-              assay_type: "脂质组"
             - id: EV012
-              status: "转录与脂质对照"
-              condition: "关键合成酶/供给节点"
-              readout: "转录变化与对应脂质类群方向匹配"
               minimal_details: "检测关键合成酶基因表达变化与对应脂质组分变化的方向性关系"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "RNA"
-              assay_type: "qPCR"
             - id: EV013
-              status: "Bartlett 磷测定 + BODIPY 493/503 染色"
-              condition: "总磷脂量和总 TG 量"
-              readout: "磷脂含量和脂滴染色结合证据"
               minimal_details: "结合总磷脂测定和脂滴染色验证脂质周转变化"
-              treatment: "EphB1 KO vs WT"
-              sample_type: "脂质; 细胞染色"
-              assay_type: "Bartlett 磷测定; BODIPY 染色"
           link_validation:
             - id: EV014
-              status: "PI3K 抑制"
-              condition: "前述假设成立"
-              readout: "总磷脂/TG 含量下降"
               minimal_details: "抑制 PI3K 后检测膜磷脂和 TG 含量变化"
-              treatment: "PI3K 抑制剂处理"
-              sample_type: "脂质"
-              assay_type: "脂质组"
 
         expected_if_true: "合成受限/周转增强 → 多类膜磷脂净下降，TG 代偿上升"
         alternative_explanations:
@@ -201,38 +125,14 @@ mechanistic_chain:
         in_this_paper_validation:
           node_validation:
             - id: EV015
-              status: "NAO 染色"
-              condition: "与膜电位无关对照（配合 TMRM/JC-1）"
-              readout: "NAO 信号排除 ΔΨm 干扰"
               minimal_details: "通过膜电位染色对照排除 NAO 信号受膜电位影响"
-              treatment: "无额外处理（基线）"
-              sample_type: "细胞染色"
-              assay_type: "NAO 染色"
           link_validation:
             - id: EV017
-              status: "PI3K 抑制剂处理"
-              condition: "总量变化不显著"
-              readout: "膜环境操控改变 NAO/效应端 readout"
               minimal_details: "在总量无显著变化条件下，检测膜环境操控对 NAO 信号的影响"
-              treatment: "PI3K 抑制剂处理"
-              sample_type: "细胞染色"
-              assay_type: "NAO 染色"
             - id: EV018
-              status: "限制 PC/PE 合成"
-              condition: "原料供给/合成酶限制"
-              readout: "D 表型出现，E（NAO）随之下降"
               minimal_details: "通过限制膜磷脂合成观察膜磷脂缩水及 NAO 信号变化"
-              treatment: "限制膜磷脂合成"
-              sample: "细胞染色"
-              assay_type: "NAO 染色"
             - id: EV019
-              status: "补充实验"
-              condition: "补 choline / ethanolamine（或 CDP-choline/相关前体）"
-              readout: "D 被救回，E（NAO）随 D 回升"
               minimal_details: "补充膜磷脂合成前体，观察膜磷脂及 NAO 信号恢复"
-              treatment: "补充胆碱/乙醇胺"
-              sample_type: "细胞染色"
-              assay_type: "NAO 染色"
         expected_if_true: "膜磷脂库缩水伴随 NAO 可及性下降；二者可非线性但方向一致"
         alternative_explanations:
           - "ΔΨm/线粒体数量/聚集状态影响 NAO 信号"

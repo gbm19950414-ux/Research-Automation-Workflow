@@ -1,0 +1,15 @@
+ir_version: '0.1'
+document:
+  meta:
+    id: ephb1_abstract
+    language: en
+    title: ''
+    authors: []
+    date: ''
+  sections:
+  - id: abstract
+    title: Abstract
+    blocks:
+    - type: paragraph
+      text: Inflammasome activation does not necessarily translate into proportional IL-1β release and pyroptotic output, yet the upstream mechanisms that constrain terminal execution remain unclear. Increasing evidence implicates mitochondrial membrane context, particularly cardiolipin status, as a critical but poorly understood regulator of inflammasome output. We asked whether loss of the receptor EphB1 reshapes mitochondrial cardiolipin-dependent membrane context to shift the execution threshold of gasdermin D and thereby attenuate inflammasome-induced lytic output. Using primary murine peritoneal macrophages, we combined genetic perturbation, layered functional positioning of inflammasome signaling, lipid accessibility profiling, pharmacological modulation of cardiolipin state, and integrative multi-omics analyses to dissect causal links between upstream signaling, membrane context, and terminal output. EphB1 deficiency consistently reduced IL-1β release and cell lysis across multiple
+        inflammasome stimuli without affecting transcriptional priming, ASC assembly, or caspase-1 activation, localizing the defect to the execution stage. This was associated with impaired mitochondrial enrichment of GSDMD-NT and a coordinated reduction in cardiolipin abundance and accessibility, phenocopied by pharmacological disruption of cardiolipin state. These findings support a membrane-mediated model in which EphB1-dependent signaling remodels cardiolipin-centered membrane context to tune the functional threshold of GSDMD pore formation and limit inflammasome output, providing a mechanistic framework for dissociating activation from output intensity.

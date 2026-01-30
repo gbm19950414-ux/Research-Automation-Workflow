@@ -12,6 +12,7 @@ Minimal dependencies:
 from __future__ import annotations
 
 import fnmatch
+import csv
 import os
 import sys
 import re
@@ -91,6 +92,62 @@ def get_meta_title(y: Any, fallback: str) -> str:
             return v.strip()
 
     return fallback
+
+
+# -----------------------------
+# Figure title mapping helpers
+# -----------------------------
+
+def build_figure_title_maps(logic: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
+    """Build a mapping from normalized figure-group label (e.g., 'Figure 2')
+    to titles defined in paper_logic.yaml.figures[].
+
+    Returns: { 'Figure 2': {'title': '...', 'title_en': '...'}, ... }
+    """
+    out: Dict[str, Dict[str, str]] = {}
+    figs = logic.get("figures") or []
+    if not isinstance(figs, list):
+        return out
+
+    for it in figs:
+        if not isinstance(it, dict):
+            continue
+        fig_id = it.get("id")
+        if not isinstance(fig_id, str) or not fig_id.strip():
+            continue
+        key = normalize_figure_group(fig_id)
+        if not key:
+            continue
+        title = it.get("title")
+        title_en = it.get("title_en")
+        out[key] = {
+            "title": title.strip() if isinstance(title, str) else "",
+            "title_en": title_en.strip() if isinstance(title_en, str) else "",
+        }
+
+    return out
+
+
+def pick_figure_display_title(
+    fig_group: str,
+    fig_title_map: Dict[str, Dict[str, str]],
+    primary_lang: str,
+    fallback: str,
+) -> str:
+    """Pick the display title for a figure/section.
+
+    Preference:
+      - If primary_lang == 'en' and title_en exists -> use title_en
+      - Else if title exists -> use title
+      - Else fallback
+    """
+    m = fig_title_map.get(normalize_figure_group(fig_group) or fig_group, {})
+    if primary_lang == "en":
+        t = (m.get("title_en") or "").strip()
+        if t:
+            return t
+    t2 = (m.get("title") or "").strip()
+    return t2 or fallback
 
 
 # -----------------------------
@@ -472,6 +529,7 @@ def resolve_record_dir(paper_logic_path: Path, cfg: Dict[str, Any]) -> Path:
         return Path(rd).expanduser().resolve()
     return paper_logic_path.parent.resolve()
 
+
 def resolve_output_path(record_dir: Path, cfg: Dict[str, Any]) -> Path:
     out = cfg.get("output_path", "Results_v0.md")
     if not isinstance(out, str) or not out.strip():
@@ -480,6 +538,17 @@ def resolve_output_path(record_dir: Path, cfg: Dict[str, Any]) -> Path:
     if not out_path.is_absolute():
         out_path = record_dir / out_path
     return out_path.resolve()
+
+
+# Mapping output path helper
+def resolve_mapping_path(record_dir: Path, cfg: Dict[str, Any]) -> Path:
+    mp = cfg.get("mapping_path", "Results_mapping.tsv")
+    if not isinstance(mp, str) or not mp.strip():
+        mp = "Results_mapping.tsv"
+    mp_path = Path(mp)
+    if not mp_path.is_absolute():
+        mp_path = record_dir / mp_path
+    return mp_path.resolve()
 
 
 # -----------------------------
@@ -521,8 +590,11 @@ def main() -> int:
 
     panel_tr_map, figure_tr_map = build_transition_maps(logic)
 
+    fig_title_map = build_figure_title_maps(logic)
+
     record_dir = resolve_record_dir(paper_logic, cfg)
     output_path = resolve_output_path(record_dir, cfg)
+    mapping_path = resolve_mapping_path(record_dir, cfg)
     primary_lang = (cfg.get("language") or "en").strip().lower()
     if primary_lang not in ("en", "cn"):
         primary_lang = "en"
@@ -566,7 +638,12 @@ def main() -> int:
 
     # 2) build markdown
     md: List[str] = []
-    md.append("# Results v0 (auto-assembled)\n")
+    md.append("# Results\n")
+
+    current_fig_group: str = ""
+    current_display_title: str = ""
+    mapping_rows: List[Dict[str, str]] = []
+    map_order = 0
 
     for i, fpath in enumerate(filtered):
         y = load_yaml(fpath)
@@ -589,13 +666,31 @@ def main() -> int:
                 f"{(filtered[i + 1].name if i + 1 < len(filtered) else '<end>')}({next_panel_id}, {next_fig_group})"
             )
 
+        # Section range == figure: emit a section header once per figure group.
+        if curr_fig_group and curr_fig_group != current_fig_group:
+            display_title = pick_figure_display_title(
+                curr_fig_group,
+                fig_title_map,
+                primary_lang,
+                fallback=curr_fig_group,
+            )
+            md.append(f"## {display_title}\n")
+            # Also keep an explicit figure label line (Nature-style readers still like this anchor)
+            md.append(f"**{curr_fig_group}.**\n")
+            current_fig_group = curr_fig_group
+            current_display_title = display_title
+
         panels = extract_panels(y, source_name=fpath.name)
         if not panels:
             continue
         if not panels and debug_transitions:
             print(f"[DEBUG] SKIP (no results_skeleton_en found): {fpath.name}")
-        # figure header
-        md.append(f"## {fig_title}  \n`{fpath.name}`\n")
+
+        # Per-source (panel YAML) header (kept lightweight; section header is figure-level)
+        md.append(f"### Source: `{fpath.name}`")
+        if curr_panel_id:
+            md.append(f"_panel_id_: `{curr_panel_id}`")
+        md.append("")
 
         any_panel_written = False
         for p in panels:
@@ -613,13 +708,26 @@ def main() -> int:
             # panel header (keep minimal; you can enrich later)
             md.append(f"### Panel block ({pl or 'unknown'}; {lt or 'unspecified'})")
             md.append(body)
+            map_order += 1
+            mapping_rows.append({
+                "order": str(map_order),
+                "figure_group": curr_fig_group,
+                "section_title": current_display_title or pick_figure_display_title(
+                    curr_fig_group, fig_title_map, primary_lang, fallback=curr_fig_group
+                ),
+                "source_yaml": fpath.name,
+                "panel_id": curr_panel_id,
+                "panel_key": str(p.get("panel_key", "")),
+                "panel_level": pl or "",
+                "results_logic_type": lt or "",
+                "include_modules": ",".join(include_keys),
+            })
             md.append("")  # blank line
             any_panel_written = True
 
         if not any_panel_written:
-            # remove figure header if nothing output
-            md = md[:-1]  # last blank line removal is tricky; keep simple
-            # (Minimal behavior: just keep header; you can adjust later)
+            # remove previous header if nothing output
+            md = md[:-1]
 
         # Insert smooth transition to the next section (panel-to-panel or figure-to-figure)
         if next_panel_id:
@@ -669,11 +777,34 @@ def main() -> int:
             elif debug_transitions:
                 print("[DEBUG] no transition inserted for this pair")
 
-        md.append("---\n")
+        # Figure separator: only when we are about to move to a different figure group
+        if next_fig_group and curr_fig_group and next_fig_group != curr_fig_group:
+            md.append("---\n")
 
     final_text = "\n".join(md).strip() + "\n"
     dump_text(output_path, final_text)
+
+    # Write mapping TSV
+    mapping_path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "order",
+        "figure_group",
+        "section_title",
+        "source_yaml",
+        "panel_id",
+        "panel_key",
+        "panel_level",
+        "results_logic_type",
+        "include_modules",
+    ]
+    with mapping_path.open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames, delimiter="\t")
+        w.writeheader()
+        for r in mapping_rows:
+            w.writerow({k: r.get(k, "") for k in fieldnames})
+
     print(f"[OK] Wrote: {output_path}")
+    print(f"[OK] Wrote: {mapping_path}")
     return 0
 
 

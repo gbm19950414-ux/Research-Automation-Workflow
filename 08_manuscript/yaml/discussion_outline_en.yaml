@@ -1,0 +1,213 @@
+discussion_outline:
+  version: "T8_skeleton_v1"
+  goal:
+    deliverables:
+      - "Discussion_T8_working.md (traceable master)"
+      - "Discussion_for_review.docx (clean for supervisor)"
+    constraints:
+      paragraph_count: 5
+      style: "journal_discussion"
+      principle: "not translation; compile+compress from CN logic"
+  mapping_rule:
+    cn_to_en:
+      - "Use CN sections as content library; compile into D1–D5 functional paragraphs."
+      - "Each D paragraph must declare: purpose, claim spine, evidence interfaces, boundaries, CN trace."
+      - "Avoid repeating Results; convert to interpretation + adjudication language."
+
+  paragraphs:
+    - id: D1
+      title_en: "Opening: Decoupling and the central question (activation ≠ lytic output)"
+      purpose:
+        - "Establish the structural paradox in the field: similar upstream readouts but divergent lytic outputs."
+        - "Shift the question from 'whether inflammasome activates' to 'how execution output is capped/thresholded'."
+        - "State the minimal testable causal chain as the Discussion anchor."
+      verdict_level: "main_text"
+      cn_source_sections:
+        primary:
+          - "4.1.1 科学问题与总结"
+        secondary:
+          - "4.1.3 概念与方法创新（概念部分可借一句）"
+      claim_spine_en_skeleton:
+        - "Field default equivalence (upstream readouts ≈ inflammation strength) is incomplete."
+        - "A recurring paradox: activation/assembly can be similar, yet IL-1β lytic release and rupture diverge."
+        - "Therefore, an execution-layer threshold/cap exists after assembly/activation."
+        - "Minimal testable chain: signal input → membrane-environment mediator → pore functional output."
+      cn_source_key_points:
+        - "活化≠输出：装配读出相近但裂解性输出分叉（核心矛盾）"
+        - "阈值层：排多少、何时破、是否破"
+        - "压缩缺口为可检验路径：信号输入→膜环境中介→孔功能输出"
+      evidence_interfaces_to_reference:
+        - type: "Results bridge (no data re-listing)"
+          note: "Only 1–2 sentences: phenotype anchor + why it requires execution-threshold framing."
+      boundary_statements_en_skeleton:
+        - "We do not claim upstream is irrelevant; we claim it is necessary but not sufficient to predict lytic output strength."
+      compression_rule:
+        max_sentences: 6
+        must_include:
+          - "activation≠output decoupling"
+          - "execution threshold/cap framing"
+          - "minimal causal chain statement"
+        must_avoid:
+          - "long background literature review"
+          - "repeating Results paragraph-by-paragraph"
+
+    - id: D2
+      title_en: "Evidence-chain synopsis: from localization to a threshold model"
+      purpose:
+        - "Provide a compact, reviewer-friendly evidence logic: phenomenon → localization → mechanism mediator → causal criteria."
+        - "Introduce ESCRT repair and NINJ1 rupture separation as structural space for decoupling."
+      verdict_level: "main_text"
+      cn_source_sections:
+        primary:
+          - "4.1.2 证据链梗概"
+        secondary:
+          - "4.1.1（末端阈值语言）"
+      claim_spine_en_skeleton:
+        - "Phenotype anchor: Ephb1 loss shows weakened lytic outputs across inflammasome contexts."
+        - "Localization: divergence is better explained at the execution layer than a global upstream shutdown."
+        - "Execution is parameterized (pore efficiency/stability, conductance threshold, sub-lytic ceiling)."
+        - "ESCRT repair can cap membrane catastrophe; rupture is separable (e.g., NINJ1)."
+        - "Thus, a threshold/cap model is structurally plausible and testable."
+      cn_source_key_points:
+        - "定位：差异发生在激活之后的输出环节"
+        - "执行端拆分：孔形成/导通/修复/膜破裂"
+        - "ESCRT限幅、NINJ1使孔与破裂可解耦"
+      causal_criteria_to_state (adjudication language):
+        - "hierarchical masking (downstream manipulation should override upstream differences)"
+        - "same-level rescue (planned/partially missing; state as future causal test)"
+        - "dose–response (graded shift expected under threshold model)"
+      boundaries_en_skeleton:
+        - "Current strength: necessity + layer-localization; sufficiency remains to be proven."
+      compression_rule:
+        max_sentences: 8
+        must_include:
+          - "phenotype anchor → localization"
+          - "execution parameterization"
+          - "ESCRT + rupture separability"
+          - "three causal criteria (masking/rescue/dose-response)"
+        must_avoid:
+          - "detailing every assay; keep as logic synopsis"
+
+    - id: D3
+      title_en: "Mediator and pathway organization: CL/membrane environment + mechanism axes + mediation roadmap"
+      purpose:
+        - "Define the mediator layer: membrane lipid environment (CL metabolic state as quantifiable proxy)."
+        - "Explain why 'mechanism axes + mediation decomposition' is used to avoid premature single-enzyme convergence."
+        - "Position Ephb1 as upstream signal input that propagates through network → membrane environment → pore output."
+      verdict_level: "main_text"
+      cn_source_sections:
+        primary:
+          - "4.1.1（膜环境/CL中介缺口与Ephb1组织方式）"
+          - "4.1.5 路径定位与中介"
+        secondary:
+          - "4.1.3（方法创新：机制轴+中介分解）"
+      claim_spine_en_skeleton:
+        - "Membrane lipid environment is not background; it is a mediator controlling pore permissiveness."
+        - "CL metabolic state (amount/remodeling/oxidation/accessibility pool) serves as a quantifiable mediator proxy."
+        - "Ephb1 is positioned as signal input; its effects are organized as network-driven membrane remodeling."
+        - "Mechanism axes provide cross-batch reproducible phenotype coordinates; mediation yields prioritized pathways (roadmap)."
+      cn_source_key_points:
+        - "CL从‘结合位点想象’回落到‘可量化代谢与膜环境状态’"
+        - "避免单一酶节点叙事：机制轴稳定表征+中介分解给优先级"
+        - "Ephb1→下游通路网络→膜环境/CL表型→孔功能输出"
+      evidence_interfaces_to_reference:
+        - type: "omics integration"
+          note: "Only state what the framework enables (reproducible coordinates + prioritization), not list all pathways."
+      boundary_statements_en_skeleton:
+        - "Mediation analysis is a prioritization roadmap, not a substitute for mechanistic proof."
+        - "We discuss CL metabolic state as mediator proxy; not in situ binding constants."
+      compression_rule:
+        max_sentences: 7
+        must_include:
+          - "CL/membrane environment as mediator"
+          - "Ephb1 as upstream input via network"
+          - "mechanism axes + mediation = roadmap"
+        must_avoid:
+          - "naming too many candidate enzymes/pathways in the main text"
+
+    - id: D4
+      title_en: "Strength of claims, alternatives, and limitations (what we can and cannot conclude)"
+      purpose:
+        - "Adjudicate evidence strength (necessity > sufficiency)."
+        - "Handle alternative explanations and literature/context conflicts in a controlled way."
+        - "State internal/external validity limits without weakening the central claim."
+      verdict_level: "main_text"
+      cn_source_sections:
+        primary:
+          - "4.1.6 充分性与救援"
+          - "4.1.7 替代解释与文献冲突的判断"
+          - "4.3 技术与解释的局限性（内/外部效度要点）"
+        secondary:
+          - "4.1.4 必要性（可用1–2句，但不单列段）"
+      claim_spine_en_skeleton:
+        - "What is strongly supported: execution-threshold model + mediator layer localization."
+        - "What is not yet supported: full sufficiency loop; direct Ephb1–GSDMD structural interaction; precise CL accessibility constants."
+        - "Why the framework is robust to measurement limits: it models relative threshold shifts, not absolute physical constants."
+        - "Context dependence explains literature conflicts: stimulus strength/timing, cell-type lipid background, Eph family context."
+      key_alternatives_to_list (as adjudication bullets):
+        - "ROS-first vs CL-first causality (Ephb1→ROS→CL vs Ephb1→CL independent of ROS)"
+        - "ESCRT/NINJ1 dominance (repair/rupture axis may dominate terminal lysis)"
+        - "tool off-target/energetics confounds (e.g., BEL, ΔΨm affecting NAO and outputs)"
+        - "GSDME/apoptosis cross-talk scenarios"
+      limitations_bucket:
+        internal_validity:
+          - "measurement specificity (NAO vs LC–MS; ΔΨm and mitochondrial mass covariates)"
+          - "tool specificity/off-targets (BEL enantiomers, energetic effects)"
+          - "batch effects and modeling (LMM/robust handling)"
+        external_validity:
+          - "species/cell type (C57 peritoneal macrophage boundary)"
+          - "stimulation paradigm (acute LPS+nigericin; chronic/infection may shift windows)"
+          - "metabolic/ROS extremes (nonlinear regimes)"
+      compression_rule:
+        max_sentences: 9
+        must_include:
+          - "necessity vs sufficiency adjudication"
+          - "explicit 'we do not claim' statements"
+          - "top 3 alternative explanations + how to test"
+          - "internal + external validity boundary"
+        must_avoid:
+          - "turning limitations into long methods; keep as decision-relevant constraints"
+
+    - id: D5
+      title_en: "Implications, next steps, and take-home conclusion"
+      purpose:
+        - "Provide brief functional/physiology implications without over-extrapolation."
+        - "State 2–3 concrete next-step experiments that close the sufficiency loop and validate pathway priority."
+        - "Deliver a 2–3 sentence take-home message aligned with the central claim."
+      verdict_level: "brief"
+      cn_source_sections:
+        primary:
+          - "4.2 功能意义与生理/疾病相关性（压缩为半段/数句）"
+          - "4.4 下一步研究方向（只取4.4.1与4.4.2作为核心）"
+          - "4.5 整体贡献与结论（作为closing模板）"
+        secondary:
+          - "4.2.2 启示（可借一句作generalizable principle）"
+      claim_spine_en_skeleton:
+        - "Implication (brief): execution-layer capping offers finer control than shutting down upstream activation."
+        - "Next step 1: test causal sufficiency of CL rescue vs ROS lowering in KO."
+        - "Next step 2: validate mediation-prioritized pathways with 'pathway → axis/CL → pore/output' three-step logic."
+        - "Take-home: Ephb1 shapes membrane environment (CL state) to shift execution threshold, explaining activation–output decoupling."
+      compression_rule:
+        max_sentences: 7
+        must_include:
+          - "1 brief implication"
+          - "2 key next steps (4.4.1 + 4.4.2)"
+          - "2–3 sentence take-home aligned with D1 claim"
+        must_avoid:
+          - "disease-by-disease long mapping"
+          - "grant-style future work expansion"
+
+  doc_build_hints:
+    md_master:
+      filename: "Discussion_T8_working.md"
+      include_html_comments_for_trace: true
+      comment_fields:
+        - "role"
+        - "logic_ids (optional)"
+        - "cn_source_sections"
+        - "verdict_level"
+    docx_for_review:
+      filename: "Discussion_for_review.docx"
+      rule:
+        - "strip all trace comments and CN anchors"
+        - "keep only headings + English paragraphs"

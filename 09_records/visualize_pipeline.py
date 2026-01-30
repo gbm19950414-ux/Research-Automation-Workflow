@@ -23,6 +23,14 @@ def safe_list(x):
     return [x]
 
 
+def is_active_status(v: Any) -> bool:
+    if v is None:
+        return False
+    if isinstance(v, str):
+        return v.strip().lower() == "active"
+    return False
+
+
 def slugify(s: str) -> str:
     import re
     s = s.lower()
@@ -70,13 +78,21 @@ def mk_pipeline_graph(data: Dict[str, Any], out_prefix: str, title: str = None):
         run_id = run.get("run_id", f"RUN{i:02d}")
         goal = run.get("goal", "")
         shared = run.get("shared_condition", run.get("shared_condition", ""))
+        run_status = run.get("status")
+        run_active = is_active_status(run_status)
 
         run_node = f"RUN__{run_id}"
-        run_label = f"{run_id}\n{wrap(goal, 44)}"
+        run_title = run_id
+        if run_active:
+            run_title = f"★ {run_id} (ACTIVE)"
+        run_label = f"{run_title}\n{wrap(goal, 44)}"
         if shared:
             run_label += f"\n—\n共享条件：{wrap(shared, 44)}"
 
-        g.node(run_node, label=run_label, shape="box", style="rounded,bold")
+        run_style = "rounded,bold"
+        if run_active:
+            run_style = "rounded,bold,filled"
+        g.node(run_node, label=run_label, shape="box", style=run_style)
 
         # Edge from root to run
         g.edge(root_id, run_node)
@@ -92,13 +108,18 @@ def mk_pipeline_graph(data: Dict[str, Any], out_prefix: str, title: str = None):
 
             for b in branches:
                 bid = b.get("branch_id", "branch")
+                bnode = f"BR__{run_id}__{bid}"
                 sample_type = b.get("sample_type", "")
                 assay = b.get("assay", "")
                 purpose = b.get("purpose", "")
                 linked = safe_list(b.get("linked_EVs"))
+                b_status = b.get("status")
+                b_active = is_active_status(b_status)
 
-                bnode = f"BR__{run_id}__{bid}"
-                lines = [bid]
+                title_line = bid
+                if b_active:
+                    title_line = f"★ {bid} (ACTIVE)"
+                lines = [title_line]
                 meta = []
                 if sample_type:
                     meta.append(f"样品：{sample_type}")
@@ -111,7 +132,10 @@ def mk_pipeline_graph(data: Dict[str, Any], out_prefix: str, title: str = None):
                 if purpose:
                     lines.append(wrap(purpose, 44))
 
-                c.node(bnode, label="\n".join(lines))
+                b_style = "rounded"
+                if b_active:
+                    b_style = "rounded,filled"
+                c.node(bnode, label="\n".join(lines), style=b_style)
 
                 # Connect run -> branch
                 c.edge(run_node, bnode)
@@ -151,13 +175,26 @@ def mk_pipeline_graph(data: Dict[str, Any], out_prefix: str, title: str = None):
 
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage: python visualize_pipeline.py <pipeline.yaml> <out_prefix> [title]")
+    # Allow 1-3 args:
+    #   1) pipeline.yaml
+    #   2) pipeline.yaml + out_prefix
+    #   3) pipeline.yaml + out_prefix + title
+    if len(sys.argv) < 2:
+        print("Usage: python visualize_pipeline.py <pipeline.yaml> [out_prefix] [title]")
         print("Example: python visualize_pipeline.py 组学假设验证pipeline.yaml out/pipeline_vis \"FigureX Pipeline\"")
+        print("Example (auto out_prefix): python visualize_pipeline.py 组学假设验证pipeline.yaml")
         sys.exit(1)
 
     yaml_path = sys.argv[1]
-    out_prefix = sys.argv[2]
+
+    # Default out_prefix: same directory as yaml, file name without extension + "_vis"
+    if len(sys.argv) >= 3:
+        out_prefix = sys.argv[2]
+    else:
+        base_dir = os.path.dirname(os.path.abspath(yaml_path))
+        base_name = os.path.splitext(os.path.basename(yaml_path))[0]
+        out_prefix = os.path.join(base_dir, f"{base_name}_vis")
+
     title = sys.argv[3] if len(sys.argv) >= 4 else None
 
     data = load_yaml(yaml_path)

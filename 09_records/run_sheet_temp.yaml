@@ -1,172 +1,158 @@
 run_sheet:
-  run_id: "RUN01_basal_core_validation__2026-01-22"
-  pipeline_ref: "组学假设验证pipeline.yaml::RUN01_basal_core_validation"
+  date: "2026-01-29"        # TODO
   operator: "gongbaoming"
-  date: "2026-01-22"
-  location: "xxx lab"
-  goal: "基线条件下复现 PI3K capacity/flux-turnover 转录方向 + NAO readout（含ΔΨm控制）"
+  location: "sl lab"       # TODO
+  active_branches:
+    - "RUN01_A"
+    - "RUN02_A"
+    - "RUN03_A"
+    - "RUN04_A"
+  goal: >
 
-  shared_conditions:
-    cell_system:
-      cell_type: "原代小鼠腹腔巨噬细胞"
-      genotype_groups: ["WT", "EphB1_KO"]
-      notes:
-        - "同日分离 WT/KO；同板培养；尽量匹配贴壁时间与密度"
-    treatment:
-      name: "basal"
-      details: "无额外处理（不做脉冲、不加抑制剂）"
-    plating:
-      format: "12-well"
-      target_cells_per_well: "6e5"
-      medium: "DMEM + 10% FBS（示例）"
-      incubation: "37C 5% CO2"
-    randomization:
-      strategy: "WT/KO 交错布局；同一 assay 的技术重复相邻但不相同排"
-    metadata_to_record:
-      - "每孔细胞数/活性（贴壁后、收样前）"
-      - "显微镜拍照（可选）"
-      - "培养基颜色/酸化（可选）"
 
+  # =====================
+  # 1. 样品映射表（核心）
+  # =====================
   samples:
-    # “样品实例”是 run sheet 的核心：必须落到具体 sample_id
-    # sample_id 建议同时包含 genotype + replicate + plate/well 位置信息
-    rna_samples:
-      - sample_id: "RUN01_RNA_WT_01"
-        genotype: "WT"
-        replicate: 1
-        well: "Plate1_A1"
-      - sample_id: "RUN01_RNA_WT_02"
-        genotype: "WT"
-        replicate: 2
-        well: "Plate1_A2"
-      - sample_id: "RUN01_RNA_WT_03"
-        genotype: "WT"
-        replicate: 3
-        well: "Plate1_A3"
-      - sample_id: "RUN01_RNA_KO_01"
-        genotype: "EphB1_KO"
-        replicate: 1
-        well: "Plate1_B1"
-      - sample_id: "RUN01_RNA_KO_02"
-        genotype: "EphB1_KO"
-        replicate: 2
-        well: "Plate1_B2"
-      - sample_id: "RUN01_RNA_KO_03"
-        genotype: "EphB1_KO"
-        replicate: 3
-        well: "Plate1_B3"
+    - branch: "RUN01_A"
+      condition: "basal"
+      destination: "RNA"
+      sample_ids:
+        - "S0001~S0010"
+        - "S0021~S0040"
 
-    stain_samples:
-      - sample_id: "RUN01_NAO_WT_01"
-        genotype: "WT"
-        replicate: 1
-        dish: "GlassBottom_01"
-      - sample_id: "RUN01_NAO_WT_02"
-        genotype: "WT"
-        replicate: 2
-        dish: "GlassBottom_02"
-      - sample_id: "RUN01_NAO_KO_01"
-        genotype: "EphB1_KO"
-        replicate: 1
-        dish: "GlassBottom_03"
-      - sample_id: "RUN01_NAO_KO_02"
-        genotype: "EphB1_KO"
-        replicate: 2
-        dish: "GlassBottom_04"
+    - branch: "RUN02_A"
+      condition: "PI3Ki"
+      destination: "protein"
+      sample_ids:
+        - "S0041~S0076"
 
-    optional_proxy_samples:
-      enabled: false
-      phospholipid_bartlett:
-        - sample_id: "RUN01_BARTLETT_WT_01"
-          genotype: "WT"
-          replicate: 1
-          well: "Plate2_A1"
-      lipid_droplet_bodipy:
-        - sample_id: "RUN01_BODIPY_KO_01"
-          genotype: "EphB1_KO"
-          replicate: 1
-          dish: "Plate2_B1"
+    - branch: "RUN03_A"
+      condition: "PI3Ki"
+      destination: "RNA"
+      sample_ids:
+        - "S0001~S0010"
+        - "S0001~S0020"
 
-  branches_execution:
-    - branch_id: "RUN01_A_RNA_qPCR_PI3K_capacity_and_flux_turnover"
-      assay: "qPCR"
-      sample_type: "RNA"
-      linked_EVs: ["EV002", "EV008", "EV005"]
-      protocol_ref:
-        extraction: "protocols.yaml::RNA_TRIzol_v1"
-        cdna: "protocols.yaml::cDNA_reverse_transcription_v1"
-        qpcr: "protocols.yaml::qPCR_SYBR_v1"
-        primer_panel: "primer.yaml::PI3K_capacity_vX + FOXO_targets_vX + flux_turnover_vX"
-      inputs:
-        samples: "*rna_samples"
-      collection:
-        timepoint: "T0 (basal)"
-        method: "TRIzol 直接裂解"
-        storage: "-80C"
-      qc_log:
-        technical:
-          - item: "RNA RIN/纯度"
-            pass_fail: ""
-            notes: ""
-          - item: "qPCR melt curve 单峰"
-            pass_fail: ""
-            notes: ""
-        biological:
-          - item: "内参稳定（gapdh/hprt1）"
-            pass_fail: ""
-            notes: ""
-      outputs_expected:
-        - "Ct table"
-        - "ΔCt/ΔΔCt"
-        - "panel Z-score（按 protocol 规则）"
+    - branch: "RUN04_A"
+      condition: "PI3Ki"
+      destination: "RNA"
+      sample_ids:
+        - "S0077~S0096"
 
-    - branch_id: "RUN01_B_STAIN_NAO_with_DeltaPsi_control"
-      assay: "NAO + (TMRM/JC-1)"
-      sample_type: "细胞染色"
-      linked_EVs: ["EV015"]
-      protocol_ref:
-        nao: "protocols.yaml::NAO_stain_v1"
-        delta_psi: "protocols.yaml::TMRM_or_JC1_control_v1"
-        imaging: "protocols.yaml::imaging_settings_fixed_v1"
-      inputs:
-        samples: "*stain_samples"
-      collection:
-        timepoint: "同日成像"
-        method: "live-cell stain → image"
-        storage: "raw images → NAS/SSD"
-      qc_log:
-        technical:
-          - item: "曝光/增益固定"
-            pass_fail: ""
-            notes: ""
-          - item: "每组有效细胞数≥N"
-            pass_fail: ""
-            notes: ""
-        biological:
-          - item: "ΔΨm 控制无系统性崩塌"
-            pass_fail: ""
-            notes: ""
-      outputs_expected:
-        - "NAO intensity per cell"
-        - "ΔΨm control per cell"
-        - "group summary plot"
 
-  timeline:
-    - time: "09:00"
-      task: "细胞贴壁检查 + 记录密度/活性"
-    - time: "10:00"
-      task: "RNA 分支收样（TRIzol）"
-    - time: "11:00"
-      task: "NAO/TMRM 染色与成像"
-    - time: "14:00"
-      task: "qPCR 前处理（若同日进行）或样品入库"
+  # =====================
+  # 2. 执行步骤（时间线）
+  # =====================
+  steps:
+    - action: 造模，注射肉汤
+      run: 
+        - "RUN01_A"
+        - "RUN02_A"
+        - "RUN03_A"
+        - "RUN04_A"
+      day: 1
+      status: done
 
-  files_and_paths:
-    raw_data_dir: "/Volumes/.../RUN01/raw/"
-    processed_dir: "/Volumes/.../RUN01/processed/"
-    notes_file: "/Volumes/.../RUN01/run_notes.md"
+    - action: 取细胞
+      run: 
+        - "RUN01_A"
+        - "RUN02_A"
+        - "RUN03_A"
+        - "RUN04_A"
+      day: 4
+      status: active
 
-  deviations_and_incidents:
-    - item: "（留空）"
-      impact: ""
-      action_taken: ""
+    - action: 种12孔板*1，(WT*5+HO*5)*2
+      run: 
+        - "RUN01_A"
+        - "RUN03_A"
+      day: 4
+      status: todo
+
+    - action: 种12孔板*3，(WT*1+HO*1)*6*3个不同样品
+      run: 
+        - "RUN02_A"
+      day: 4
+      status: todo
+
+    - action: 种12孔板*1，(WT*5+HO*5)*2
+      run: 
+        - "RUN04_A"
+      day: 4
+      status: todo
+
+    - action: pi3k抑制剂过夜刺激？ # 找到货号，查说明书
+      run: 
+        - "RUN03_A"
+        - "RUN04_A"
+      day: 4
+      status: todo
+
+    - action: NAO染色
+      run: 
+        - "RUN04_A"
+      day: 5
+      status: todo
+
+    - action: 药物处理，血清饥饿后使用 FBS 刺激，于0、2、5、10、20、40分钟收样
+      run: 
+        - "RUN02_A"
+      day: 5
+      status: todo
+
+    - action: "RNA 收样"
+      run: 
+        - "RUN01_A"
+        - "RUN03_A"
+      day: 5
+      status: todo
+
+    - action: 拍摄照片
+      run: 
+        - "RUN04_A"
+      day: 5
+      status: todo
+
+    - action: WB 实验做胶、一抗
+      run: 
+        - "RUN02_A"
+      day: 6
+      status: todo
+
+    - action: "qPCR 实验"
+      run: 
+        - "RUN01_A"
+        - "RUN03_A"
+      offset days: 1
+      day: 6
+      status: todo
+
+    - action: WB 实验二抗、曝光
+      run: 
+        - "RUN02_A"
+      day: 7
+      status: todo
+
+
+
+  # =====================
+  # 3. 输出与路径
+  # =====================
+  outputs:
+    raw_data_dir: "/Volumes/.../MVP_run/raw/"     # TODO
+    processed_dir: "/Volumes/.../MVP_run/processed/"  # TODO
+    expected:
+      - "qPCR Ct table"
+      - "NAO raw images"
+
+  # =====================
+  # 4. 最小 QC 判定
+  # =====================
+  qc:
+    qPCR:
+      - "melt curve 单峰"
+      - "内参稳定"
+    NAO:
+      - "成像参数固定"
+      - "每组有效细胞数 ≥ N"

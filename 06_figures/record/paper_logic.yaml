@@ -1010,7 +1010,8 @@ results_build:
   debug_transitions: true
   output_path: "Results_v0.md"   # 相对 record_dir；也可写绝对路径
   language: "en"                # 目前只输出英文 Results v0
-
+  results_build.primary_review_format: docx
+  results_build.mapping_path: Results_mapping.tsv
   # --- 文件纳入规则 ---
   # 先 glob，再用 include_files / exclude_globs 进一步过滤
   include_globs:
