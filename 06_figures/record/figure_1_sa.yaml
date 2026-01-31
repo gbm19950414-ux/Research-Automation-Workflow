@@ -8,6 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
+  figure: "Figure 1"              # 如 "Figure 3"
+
   figure_id: "s1"              # 如 "Figure 3"
   experiment_id: "figure_1_a"                      # 如 "A"
   short_title: "EphB1 缺失对 staurosporine 诱导凋亡的影响评估"     
@@ -131,6 +133,40 @@ ai_hints:
   tone: "neutral"
   target_journal_style: ""
   language: "zh_en_mix"
+
+
+figure_legend:
+  panel: "a"
+  panel_title_en: "Staurosporine-induced apoptosis"
+  panel_title_cn: "staurosporine 诱导的经典凋亡"
+
+  one_sentence_en: >
+    Cleaved caspase-3 levels in WT and EphB1-deficient primary peritoneal macrophages following staurosporine-induced apoptotic stimulation.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus EphB1 PB−/− (KO)"
+    key_treatments: "Staurosporine treatment under standard apoptotic induction conditions"
+    time_window: "Cells harvested at the end of staurosporine treatment for protein analysis"
+
+  readouts_and_assays:
+    primary_readout: "Cleaved caspase-3 abundance as an apoptotic readout"
+    assay: "Western blot"
+    normalization: >
+      Band intensities were normalized to loading controls (e.g., GAPDH),
+      and cleaved caspase-3 levels were expressed relative to total caspase-3
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 3 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: ""
 
   # ---------- 8. English ----------
 

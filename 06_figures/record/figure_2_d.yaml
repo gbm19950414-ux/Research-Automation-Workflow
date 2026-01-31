@@ -1,4 +1,5 @@
 meta:
+  figure: "Figure 2"              # 如 "Figure 3"
   figure_id: "2d"
   experiment_id: "figure_1_c_a"
   short_title: "EphB1 缺失在 NLRP3 激活下呈剂量依赖性降低 IL-1β 释放"
@@ -44,14 +45,45 @@ interpretation:
   transition_to_next: "为将差异精确定位在‘上游装配/酶活’还是‘GSDMD 孔介导外排’层级，下一步需要比较 ASC 寡聚化、caspase-1/GSDMD/IL-1β 的切割及其在细胞内与上清中的分布。"
 
 figure_legend:
-  panels:
-    description: "WT 与 HO 巨噬细胞在对照与不同剂量 Nigericin 刺激下的 IL-1β 释放（ELISA）。"
-  groups:
-    definition: "WT 为同窝野生型对照；HO 为 EphB1−/− 敲除组"
-  normalization:
-    description: "ELISA 读数以 pg/mL 表示；若按通用 protocol 进行了细胞数/蛋白量校正，则以该 protocol 为准。"
+  panel: "d"
+  panel_title_en: "Dose-dependent NLRP3-induced IL-1β release"
+  panel_title_cn: "NLRP3 激活下 IL-1β 释放的剂量依赖性"
 
-    # ---------- 8. English ----------
+  one_sentence_en: >
+    IL-1β release from WT and EphB1-deficient primary peritoneal macrophages following
+    NLRP3 activation with increasing doses of nigericin.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus EphB1 PB−/− (HO)"
+    key_treatments: >
+      LPS priming followed by nigericin stimulation at 0, 10, or 20 μM
+    time_window: >
+      Supernatants collected at the endpoint of the standard NLRP3 activation protocol
+
+  readouts_and_assays:
+    primary_readout: "Mature IL-1β release in culture supernatants"
+    assay: "ELISA"
+    normalization: >
+      ELISA signals were background-subtracted and quantified as pg/mL
+      according to the manufacturer’s standard curve
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n = 3 per group"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: >
+    Each data point represents one biological replicate; comparisons were performed
+    between genotypes at each nigericin dose.
+
+
+# ---------- 8. English ----------
 
 results_skeleton_en:
   stage: T3

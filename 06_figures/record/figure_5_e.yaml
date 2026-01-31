@@ -181,6 +181,45 @@ ai_hints:
   target_journal_style: "Cell Metabolism"
   language: "zh_en_mix"
 
+
+figure_legend:
+  panel: "e"
+  panel_title_en: "Integrated multi-omics axis Z summary"
+  panel_title_cn: "跨组学机制轴综合 Z 汇总"
+
+  one_sentence_en: >
+    Overall multi-omics Z scores summarizing Ephb1−/− versus WT effects across six predefined
+    mitochondrial-related mechanistic axes by Stouffer meta-analysis of RNA-seq and lipidomics batches.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages (multi-batch RNA-seq and lipidomics datasets)"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: "Not applicable (integrated analysis of existing omics datasets)"
+    time_window: "Single endpoint per batch (see Methods for dataset-specific timing)"
+
+  readouts_and_assays:
+    primary_readout: "Axis-level Z_multiomics_overall values for six mechanistic axes"
+    assay: >
+      Batch-aware axis scoring in RNA-seq and lipidomics followed by Stouffer meta-analysis
+      within each omics layer and equal-weight Stouffer integration across omics
+    normalization: >
+      Z scores were defined with direction as Ephb1−/− relative to WT; positive values indicate
+      increased bottleneck strength and negative values indicate decreased bottleneck strength
+
+  stats:
+    n_definition: "n indicates independent experimental batches per omics dataset"
+    n: "RNA-seq: 3 batches; lipidomics: 3–4 batches"
+    summary: "Z_multiomics_overall ± (not applicable); bars represent integrated Z values"
+    test: "Two-sided p values derived from Stouffer-combined Z scores"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: >
+    Mechanistic axes include Synthesis, Remodeling, Oxidation, Transport, Supply, and Membrane context.
+    The Membrane context axis shows the largest absolute integrated effect in this analysis.
+
   # ---------- 8. English ----------
 
 results_skeleton_en:

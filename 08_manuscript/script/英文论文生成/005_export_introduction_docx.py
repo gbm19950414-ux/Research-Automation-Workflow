@@ -35,6 +35,12 @@ def _load_yaml(path: Path) -> Dict[str, Any]:
     return data
 
 
+def _dump_yaml(obj: Dict[str, Any], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        yaml.safe_dump(obj, f, sort_keys=False, allow_unicode=True, width=1000)
+
+
 def _normalize_space(text: str) -> str:
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\s+\n", "\n", text)
@@ -122,6 +128,63 @@ def _iter_blocks(data: Dict[str, Any]) -> List[Tuple[Optional[str], Dict[str, An
     return blocks
 
 
+def build_introduction_ir(data: Dict[str, Any]) -> Dict[str, Any]:
+    blocks = _iter_blocks(data)
+    out_blocks: List[Dict[str, Any]] = []
+
+    last_heading: Optional[str] = None
+    for heading, p in blocks:
+        # Mirror DOCX behavior: drop hypothesis blocks by default if present
+        if "hypotheses" in p:
+            continue
+
+        # We keep Nature-like formatting by default: no subheadings in IR unless explicitly enabled later.
+        # However, we preserve the source section heading as metadata for potential future use.
+        topic_sentence = p.get("topic_sentence")
+        sentences = p.get("sentences")
+        par_text = _format_paragraph(topic_sentence, sentences)
+
+        citations = p.get("citations")
+        par_text = _append_citations(par_text, citations)
+
+        if not par_text:
+            continue
+
+        meta: Dict[str, Any] = {}
+        if isinstance(p.get("pid"), str) and p.get("pid").strip():
+            meta["pid"] = p.get("pid").strip()
+        if heading:
+            meta["section_heading"] = heading
+
+        blk: Dict[str, Any] = {
+            "type": "paragraph",
+            "text": par_text,
+        }
+        if meta:
+            blk.update(meta)
+        out_blocks.append(blk)
+
+    return {
+        "ir_version": "0.1",
+        "document": {
+            "meta": {
+                "id": "ephb1_introduction",
+                "language": "en",
+                "title": "",
+                "authors": [],
+                "date": "",
+            },
+            "sections": [
+                {
+                    "id": "introduction",
+                    "title": "Introduction",
+                    "blocks": out_blocks,
+                }
+            ],
+        },
+    }
+
+
 def _set_doc_defaults(doc: Document) -> None:
     style = doc.styles["Normal"]
     font = style.font
@@ -175,12 +238,21 @@ def build_docx(
 
 
 def main() -> None:
-    here = Path(__file__).resolve().parent
-    yaml_path = here / "introduction_en.yaml"
-    out_path = here / "Introduction.docx"
+    script_dir = Path(__file__).resolve().parent
+    manuscript_dir = script_dir.parents[1]  # .../08_manuscript
+
+    # Expected layout:
+    #   08_manuscript/
+    #     yaml/introduction_en.yaml
+    #     IR/Introduction.docx   (output)
+    yaml_path = manuscript_dir / "yaml" / "introduction_en.yaml"
+    out_path = manuscript_dir / "IR" / "Introduction.docx"
+
+    # Ensure output directory exists (python-docx will not create parent dirs)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
 
     if not yaml_path.exists():
-        raise FileNotFoundError(f"YAML not found: {yaml_path}")
+        raise FileNotFoundError(f"YAML not found: {yaml_path.resolve()}")
 
     build_docx(
         yaml_path=yaml_path,
@@ -188,6 +260,13 @@ def main() -> None:
         include_subheadings=False,
         keep_hypotheses=False,
     )
+
+    data = _load_yaml(yaml_path)
+    ir = build_introduction_ir(data)
+    ir_out = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript/IR/introduction.ir.yaml")
+    _dump_yaml(ir, ir_out)
+    print(f"OK: wrote IR {ir_out}")
+
     print(f"OK: wrote {out_path}")
 
 

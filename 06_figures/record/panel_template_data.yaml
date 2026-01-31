@@ -100,44 +100,37 @@ interpretation:
   transition_to_next: ""         # 引出下一节（1 句）：下一步要看什么/为什么自然过渡到下一节？
                                  # 例如：“为了明确这种效应是否依赖于线粒体 ROS，我们随后检测了 NLRP3 激活过程中 mtROS 的变化。”
 
-# ---------- 6. figure_legend ----------
-
-figure_legend:
-
-  title: "EphB1 缺失在多通路炎症小体激活下均降低 IL-1β 释放" 
-    # 简短、结论式标题
-      # (A–C) 或单 panel 展示的对象
-      # 告诉读者“这个 panel 在比较什么现象”。
-      # 不包含基因型信息
-
-  panels:
-    description: ""
-      # (A–C) 或单 panel 展示的对象
-      # 例："WT 与 Ephb1 pb/pb 巨噬细胞在不同炎症小体第二信号刺激下的 IL-1β 释放"
-
-  groups:
-    definition: ""
-      # 对照与突变组的明确说明
-      # 例："WT 为同窝野生型对照，Ephb1 pb/pb 为敲除组"
-
-  sample_size:
-    n_per_group: "n ≥ 3"
-    replicates: "结果在 ≥3 次独立实验中重复获得"
-
-  statistics:
-    test: "非配对双尾 t 检验"
-    multiple_comparison: "未进行多重比较校正"
-      # 若使用 ANOVA / mixed model / FDR，这里写；否则可以省略
-
-  normalization:
-    description: ""
-      # 仅在“影响 y 轴数值含义”时填写
-      # 例："ELISA 信号按细胞数量进行标准化"
-      # 若只是背景扣除、技术校正，可不写
-
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
+figure_legend: 
+  panel: ""                  # 必填：a/b/c/...（用于渲染为 "(a)"）
+  panel_title_en: ""         # 可选：panel 的短标题（英文，<= 8-12 words），用于内部检索/一致性
+  panel_title_cn: ""         # 可选：中文短标题（方便你自己）
+  one_sentence_en: ""        # 推荐：英文 1 句概括（你希望 legend 里 (a) 这一句的主干）
+                              # 例："IL-1β release from WT and Ephb1−/− macrophages following NLRP3 activation."
+  system_and_design:
+    model: ""                # 例："Primary murine peritoneal macrophages"
+    genotype_or_groups: ""   # 例："WT vs Ephb1−/−"（或更复杂分组）
+    key_treatments: ""       # 例："LPS priming (4 h) followed by nigericin (10 µM, 30 min)"
+    time_window: ""          # 例："7.5–120 min after stimulation"（若已包含在 key_treatments 可留空）
+  readouts_and_assays:
+    primary_readout: ""      # 例："IL-1β in supernatant"
+    assay: ""                # 例："ELISA" / "LDH release assay" / "Immunoblot" / "Confocal imaging"
+    normalization: ""        # 仅在影响 y 轴含义时填写；例："normalized to cell number by MTT"
+  stats:
+    n_definition: ""         # 推荐写清："n indicates independent mice" 或 "independent experiments"
+    n: ""                    # 例："n=4 mice per genotype" / "n=3 independent experiments"
+    summary: ""              # 例："mean ± SEM" / "median (IQR)"
+    test: ""                 # 例："two-tailed unpaired t-test" / "two-way ANOVA"
+    multiple_comparisons: "" # 例："Sidak’s multiple comparisons" / "FDR" / "none"
   significance:
-    symbols: "* p < 0.05, ** p < 0.01, *** p < 0.001; ns, 不显著"
-
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+  extra_notes: ""            # 可选：1–2 句补充（缩写解释、特殊对照、关键试剂批次等）；避免讨论式语气
 # ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
 ai_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"] 

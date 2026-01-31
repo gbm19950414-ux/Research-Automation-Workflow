@@ -491,6 +491,46 @@ entries:
       Oma1 剪切 OPA1，可在应激下破坏 cristae 结构。
       升高不排除膜环境异常，而是提示调控层恶化，仅作低权重提示信号。
 
+
+figure_legend:
+  panel: "b"
+  panel_title_en: "Axis feature table for cardiolipin framework"
+  panel_title_cn: "心磷脂六轴机制框架的 feature 表"
+
+  one_sentence_en: >
+    Curated table of representative lipid readouts and key genes mapped to six cardiolipin-related
+    mechanistic axes, including explicit directionality conventions (bottleneck_sign) and within-axis
+    weights to support axis-level scoring and interpretation.
+
+  system_and_design:
+    model: "Curation framework (no experimental measurements shown)"
+    genotype_or_groups: "Not applicable"
+    key_treatments: "Not applicable"
+    time_window: "Not applicable"
+
+  readouts_and_assays:
+    primary_readout: >
+      Axis assignment, feature definitions, formulae (for lipid metrics), biological interpretations,
+      directionality (bottleneck_sign), and weights for supply, transport, synthesis, remodeling,
+      oxidation, and membrane context axes
+    assay: "Structured table (lookup resource)"
+    normalization: "Not applicable"
+
+  stats:
+    n_definition: "Not applicable"
+    n: "Not applicable"
+    summary: "Not applicable"
+    test: "Not applicable"
+    multiple_comparisons: "Not applicable"
+
+  significance:
+    symbols: "Not applicable"
+
+  extra_notes: >
+    This table is used as an interpretable reference for constructing axis-level transcript/lipid scores
+    and for linking curated features to the mechanistic schematic in Fig. 6A; it does not present
+    quantitative comparisons.
+
   # ---------- 8. English ----------
 
 results_skeleton_en:

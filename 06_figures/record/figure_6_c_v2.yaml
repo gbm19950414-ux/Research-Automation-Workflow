@@ -80,43 +80,7 @@ interpretation:
   link_to_previous: "在已观察到 membrane context 等机制轴发生跨批次改变后，本节进一步量化 EphB1 已知下游通路在收样时刻的转录响应状态，以确定后续需要优先检验的候选信号模块。"
   transition_to_next: "基于该跨批次通路状态图，我们将在后续分析中评估这些候选模块与 membrane context 轴之间的统计耦合与稳健性，并据此筛选最有希望进入湿实验验证的通路。"
 
-# ---------- 6. figure_legend ----------
 
-figure_legend:
-
-  title: "EphB1 缺失在多通路炎症小体激活下均降低 IL-1β 释放" 
-    # 简短、结论式标题
-      # (A–C) 或单 panel 展示的对象
-      # 告诉读者“这个 panel 在比较什么现象”。
-      # 不包含基因型信息
-
-  panels:
-    description: ""
-      # (A–C) 或单 panel 展示的对象
-      # 例："WT 与 Ephb1 pb/pb 巨噬细胞在不同炎症小体第二信号刺激下的 IL-1β 释放"
-
-  groups:
-    definition: ""
-      # 对照与突变组的明确说明
-      # 例："WT 为同窝野生型对照，Ephb1 pb/pb 为敲除组"
-
-  sample_size:
-    n_per_group: "n ≥ 3"
-    replicates: "结果在 ≥3 次独立实验中重复获得"
-
-  statistics:
-    test: "非配对双尾 t 检验"
-    multiple_comparison: "未进行多重比较校正"
-      # 若使用 ANOVA / mixed model / FDR，这里写；否则可以省略
-
-  normalization:
-    description: ""
-      # 仅在“影响 y 轴数值含义”时填写
-      # 例："ELISA 信号按细胞数量进行标准化"
-      # 若只是背景扣除、技术校正，可不写
-
-  significance:
-    symbols: "* p < 0.05, ** p < 0.01, *** p < 0.001; ns, 不显著"
 
 # ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
 ai_hints:
@@ -131,7 +95,44 @@ ai_hints:
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
 
-    # ---------- 8. English ----------
+figure_legend:
+  panel: "c"
+  panel_title_en: "Cross-batch EphB1 downstream pathway response state"
+  panel_title_cn: "EphB1 下游通路转录响应状态（跨批次）"
+
+  one_sentence_en: >
+    Pathway-level transcriptional response scores for curated EphB1 downstream signaling modules in
+    WT and Ephb1−/− primary peritoneal macrophages across three independent RNA-seq batches, summarized
+    as per-batch z_pathway shifts and cross-batch meta Z effects.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: "Unstimulated condition consistent with the RNA-seq experiments"
+    time_window: "Single endpoint at the time of RNA collection (per batch)"
+
+  readouts_and_assays:
+    primary_readout: "EphB1 downstream signaling module response scores (z_pathway) and cross-batch meta Z"
+    assay: >
+      RNA-seq–based differential expression (DESeq2, batch-wise log2 fold change) followed by
+      gene-set aggregation to compute pathway response scores
+    normalization: >
+      Pathway scores were standardized within each batch as z_pathway and integrated across batches
+      using a meta Z approach to summarize directional consistency and effect magnitude
+
+  stats:
+    n_definition: "n indicates independent RNA-seq batches"
+    n: "n = 3 RNA-seq batches"
+    summary: "z_pathway and meta Z values displayed"
+    test: "not applicable (cross-batch consistency and effect-size ranking)"
+    multiple_comparisons: "not applicable"
+
+  significance:
+    symbols: "not applicable"
+
+  extra_notes: >
+    Meta Z values reflect directionally consistent shifts across batches rather than single-batch significance;
+    pathway response scores represent transcriptional footprints and do not directly report kinase phosphorylation activity.    # ---------- 8. English ----------
 
 results_skeleton_en:
   stage: T3

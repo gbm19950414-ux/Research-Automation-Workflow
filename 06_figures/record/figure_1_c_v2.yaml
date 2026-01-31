@@ -8,6 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
+  figure: "Figure 1"              # 如 "Figure 3"
+
   figure_id: "1c"
   experiment_id: "figure_2_d"
   short_title: "EphB1 缺失在多感受器第二信号触发下均降低 IL-1β 释放"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
@@ -91,38 +93,48 @@ interpretation:
 
 # ---------- 6. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------# ---------- 6. figure_legend ----------
 
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
 figure_legend:
+  panel: "c"
+  panel_title_en: "Cross-pathway inflammasome activation"
+  panel_title_cn: "跨通路炎症小体激活"
 
-  title: "EphB1 缺失在多通路炎症小体激活下均降低 IL-1β 释放" 
-    # 简短、结论式标题
-    # 例："EphB1 缺失在多通路炎症小体激活下均降低 IL-1β 释放"
+  one_sentence_en: >
+    IL-1β release from primary peritoneal macrophages following activation of distinct inflammasome pathways via different secondary stimuli.
 
-  panels:
-    description: "原代腹腔巨噬细胞在不同炎症小体第二信号刺激下的 IL-1β 释放"
-      # (A–C) 或单 panel 展示的对象
-      # 告诉读者“这个 panel 在比较什么现象”。
-      # 不包含基因型信息
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1 pb/pb (PB−/−)"
+    key_treatments: >
+      LPS priming followed by nigericin (NLRP3),
+      cytosolic flagellin delivery (NLRC4),
+      or cytosolic poly(dA:dT) delivery (AIM2)
+    time_window: "Supernatants collected after the indicated secondary stimulation periods"
 
-  groups:
-    definition: "WT 为同窝野生型对照；Ephb1 pb/pb 为 EphB1 缺失组（PB⁻/⁻）。"      # 对照与突变组的明确说明
-      # 例："WT 为同窝野生型对照，Ephb1 pb/pb 为敲除组"
+  readouts_and_assays:
+    primary_readout: "IL-1β release in culture supernatants"
+    assay: "ELISA"
+    normalization: >
+      ELISA signals were background-subtracted (blank wells and 480 nm)
+      and normalized to cell number based on MTT measurements
 
-  sample_size:
-    n_per_group: "n ≥ 3"
-    replicates: "结果在 ≥3 次独立实验中重复获得"
-
-  statistics:
-    test: "非配对双尾 t 检验"
-    multiple_comparison: "未进行多重比较校正"
-      # 若使用 ANOVA / mixed model / FDR，这里写；否则可以省略
-
-  normalization:
-    description: "ELISA 信号经空白孔与 480 nm 背景双重扣除，并根据 MTT 结果对细胞数量进行标准化矫正。"      # 仅在“影响 y 轴数值含义”时填写
-      # 例："ELISA 信号按细胞数量进行标准化"
-      # 若只是背景扣除、技术校正，可不写
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 3 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
 
   significance:
-    symbols: "* p < 0.05, ** p < 0.01, *** p < 0.001; ns, 不显著"
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: ""
 
 # ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
 ai_hints:

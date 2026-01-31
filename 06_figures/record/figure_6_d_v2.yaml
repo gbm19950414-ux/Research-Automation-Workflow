@@ -73,33 +73,54 @@ interpretation:
   claim_supported: "PI3K–AKT–mTOR 与 JAK–STAT 等模块为解释 membrane context 障碍的优先候选通路（用于后续功能验证）。"
   link_to_previous: "在确定 membrane context 相关机制轴存在稳定障碍后，本节进一步利用 RNA-only 的跨批次足迹在 EphB1 已知下游通路中进行候选排序。"
   transition_to_next: "下一步将把该候选排序与脂质表型方向一致性（concordance）整合，并在关键候选通路上进行靶向生化/药理验证以测试其对 membrane context 与 CL 可及性的因果贡献。"
-
-# ---------- 6. figure_legend ----------
-
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
 figure_legend:
+  panel: "d"
+  panel_title_en: "Cross-batch ΔM ranking and M–Z coupling robustness"
+  panel_title_cn: "跨批次 ΔM 排序与 M–Z 耦合稳健性"
 
-  title: "EphB1 缺失相关的下游通路变化（ΔM）及其与 Membrane context 轴（Z）的耦合与稳健性"
+  one_sentence_en: >
+    Cross-batch ranking of EphB1 downstream signaling modules by genotype-associated
+    transcriptional shifts (ΔM) and assessment of their coupling robustness with the
+    Membrane context axis using within-batch regression and pooled leave-one-out refitting.
 
-  panels:
-    description: "(A) 各 EphB1 下游模块在 KO 相对 WT 的跨批次 ΔM（HO−WT）汇总；(B) Z=Membrane context 与 top 模块 M 的样本层面散点关系（按批次分层显示）；(C) pooled leave-one-out（逐样本剔除）回归得到的 β_M_loo 热图，用于评估 M↔Z 耦合的稳健性。"
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: "Unstimulated condition consistent with the RNA-seq datasets"
+    time_window: "Single RNA collection endpoint per batch"
 
-  groups:
-    definition: "WT 为野生型对照；KO（HO）为 Ephb1 缺失组。"
+  readouts_and_assays:
+    primary_readout: >
+      Batch-level ΔM (KO−WT) for EphB1 downstream signaling modules and corresponding
+      M↔Z coupling coefficients (β_M) with robustness evaluated by leave-one-out refitting
+    assay: >
+      RNA-seq–based pathway footprint scoring followed by batch-wise aggregation of ΔM,
+      within-batch linear regression of Z ~ M + X, and pooled leave-one-out refitting
+    normalization: >
+      ΔM values were computed within each batch as mean(KO)−mean(WT); regression coefficients
+      were derived without cross-batch pooling of expression values
 
-  sample_size:
-    n_per_group: "n ≥ 3"
-    replicates: "结果在 ≥3 次独立实验中重复获得"
-
-  statistics:
-    test: "非配对双尾 t 检验"
-    multiple_comparison: "未进行多重比较校正"
-
-  normalization:
-    description: "通路/机制轴分数基于预定义基因集按 gene_effect_sign 聚合得到；ΔM 在每个批次内按 KO−WT 计算后跨批次汇总。"
+  stats:
+    n_definition: "n indicates independent RNA-seq batches or samples, as specified"
+    n: "3 RNA-seq batches; pooled LOO across all samples"
+    summary: "ΔM median across batches; β_M and β_M_loo distributions"
+    test: "Linear regression within batch; robustness assessed by sign consistency under LOO"
+    multiple_comparisons: "not applicable"
 
   significance:
-    symbols: "* p < 0.05, ** p < 0.01, *** p < 0.001; ns, 不显著"
+    symbols: "not applicable"
 
+  extra_notes: >
+    Module prioritization is based on the concordance of cross-batch ΔM direction and
+    the stability of M↔Z coupling under leave-one-out refitting, and is intended for
+    candidate ranking rather than formal causal inference.
 # ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
 ai_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"] 

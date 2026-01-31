@@ -8,7 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "2g"              # 如 "Figure 3"
+  figure: "Figure 2"              # 如 "Figure 3"
+  figure_id: "2g"              # 如 "Figure 3"
   short_title: "EphB1 缺失保留 Caspase‑1 底物切割但限制成熟产物外排"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   experiment_id: "figure_2_g"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
@@ -113,6 +114,43 @@ ai_hints:
     # 例如："Cell Metabolism", "Nature Immunology"
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
+
+
+figure_legend:
+  panel: "g"
+  panel_title_en: "Substrate cleavage versus extracellular export"
+  panel_title_cn: "底物切割与成熟产物外排的分离检验"
+
+  one_sentence_en: >
+    GSDMD and IL-1β processing in total cell lysates versus corresponding supernatants from WT and Ephb1−/−
+    primary peritoneal macrophages following NLRP3 inflammasome activation.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: "LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM, 45–60 min)"
+    time_window: "Total lysates and supernatants collected immediately after nigericin treatment"
+
+  readouts_and_assays:
+    primary_readout: >
+      GSDMD (pro and NT) and IL-1β (pro/p31 and mature/p17) in total lysate and supernatant fractions,
+      with cleavage and maturation indices quantified by densitometry
+    assay: "Immunoblotting of total lysate and supernatant fractions"
+    normalization: >
+      Densitometry was normalized to GAPDH; cleavage index was calculated as GSDMD-NT/(pro+NT),
+      and IL-1β maturation index was calculated as p17/(p31+p17)
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 3 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: "Total lysate and supernatant fractions were processed in parallel to distinguish intracellular processing from extracellular export."
 
     # ---------- 8. English ----------
 

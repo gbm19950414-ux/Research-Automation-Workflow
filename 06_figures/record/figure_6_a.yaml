@@ -163,7 +163,56 @@ ai_hints:
   tone: "neutral"
   language: "zh_en_mix"
   target_journal_style: "Cell Metabolism"
----
+
+
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
+figure_legend:
+  panel: "a"
+  panel_title_en: "RNA-first X–M–Z framework"
+  panel_title_cn: "RNA-first 的 X–M–Z 分析框架"
+
+  one_sentence_en: >
+    Conceptual diagram illustrating an RNA-first X–M–Z framework that links EphB1 status (X),
+    downstream signaling modules (M), and an RNA membrane context axis (Z), with independent
+    lipid phenotypes used for directional concordance validation.
+
+  system_and_design:
+    model: "Conceptual framework (no experimental data shown)"
+    genotype_or_groups: "WT versus EphB1-deficient (KO/HO) as abstract variable X"
+    key_treatments: "Not applicable"
+    time_window: "Not applicable"
+
+  readouts_and_assays:
+    primary_readout: >
+      Relationships among X (EphB1 status), M (RNA-based pathway module scores),
+      and Z (RNA membrane context axis score), and their directional alignment with
+      independent lipid readouts
+    assay: "Schematic representation of analytical logic"
+    normalization: "Not applicable"
+
+  stats:
+    n_definition: "Not applicable"
+    n: "Not applicable"
+    summary: "Not applicable"
+    test: "Not applicable"
+    multiple_comparisons: "Not applicable"
+
+  significance:
+    symbols: "Not applicable"
+
+  extra_notes: >
+    The framework decomposes cross-omics interpretation into three evaluation layers:
+    cross-batch consistency of X→M effects, within-batch coupling between M and Z,
+    and directional concordance between Z and independent lipid phenotypes; it is
+    intended for pathway prioritization rather than formal causal mediation.
+
+
 # ---------- 8. English ----------
 
 results_skeleton_en:

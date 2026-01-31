@@ -8,7 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "3_i+j+s3_d+f+g"              # 如 "Figure 3"
+  figure: "Figure 3"              # 如 "Figure 3"
+  figure_id: "3_i+j+s3_d+f+g"              # 如 "Figure 3"
   short_title: "EphB1 缺失减少炎症小体激活诱导的胞质 mtDNA 释放"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.3 EphB1 缺失降低 GSDMD 的线粒体结合"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_3_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
@@ -128,6 +129,74 @@ ai_hints:
     # 例如："Cell Metabolism", "Nature Immunology"
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
+
+# ---------- 6. figure_legend (shared) ----------
+figure_legend:
+  one_sentence_en: >
+    Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary peritoneal macrophages
+    following NLRP3 inflammasome activation, quantified by rapid subcellular fractionation and qPCR.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: >
+      LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM) and rapid fractionation
+      at 0, 7.5, 15, 30, and 60 min after stimulation
+    time_window: "0–60 min time course with early peak comparison at 7.5 min"
+
+  readouts_and_assays:
+    primary_readout: "mtDNA abundance (16S and ND1) in cytosolic, mitochondrial, and total fractions"
+    assay: "Subcellular fractionation followed by qPCR quantification of mtDNA (16S, ND1)"
+    normalization: >
+      qPCR ΔCt values were calculated for each fraction and normalized using total mtDNA (16S/ND1)
+      as the reference; fold changes were expressed relative to the WT mean using ΔΔCt (log2FC)
+
+  stats:
+    n_definition: "n indicates independent experimental replicates"
+    n: "n ≥ 2 per group; replicated in ≥3 independent batches"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: >
+    Total mtDNA measurements serve as an internal control for baseline mtDNA abundance and
+    to separate cytosolic release from changes in overall mtDNA content.
+
+
+# ---------- panel-specific overrides ----------
+panel_overrides:
+  i:
+    panel_title_en: "Cytosolic mtDNA pulse (16S)"
+    panel_title_cn: "胞质 mtDNA 脉冲（16S）"
+    displayed_targets:
+      - "Cytosolic 16S mtDNA (time course; peak at 7.5 min)"
+
+  j:
+    panel_title_en: "Cytosolic mtDNA pulse (ND1)"
+    panel_title_cn: "胞质 mtDNA 脉冲（ND1）"
+    displayed_targets:
+      - "Cytosolic ND1 mtDNA (time course; peak at 7.5 min)"
+
+  s3_d:
+    panel_title_en: "Total mtDNA control (16S)"
+    panel_title_cn: "全细胞 mtDNA 对照（16S）"
+    displayed_targets:
+      - "Total 16S mtDNA (time course control)"
+
+  s3_f:
+    panel_title_en: "Total mtDNA control (ND1)"
+    panel_title_cn: "全细胞 mtDNA 对照（ND1）"
+    displayed_targets:
+      - "Total ND1 mtDNA (time course control)"
+
+  s3_g:
+    panel_title_en: "Mitochondrial fraction mtDNA (control)"
+    panel_title_cn: "线粒体组分 mtDNA（对照）"
+    displayed_targets:
+      - "Mitochondrial fraction mtDNA (16S/ND1; time course control)"
 
     # ---------- 8. English ----------
 

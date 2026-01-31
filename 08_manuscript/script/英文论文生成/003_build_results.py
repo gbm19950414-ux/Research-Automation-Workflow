@@ -20,6 +20,34 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple, Optional
 
 import yaml
+# -----------------------------
+# Utilities
+# -----------------------------
+
+# --- IR helpers ---
+def init_results_ir() -> Dict[str, Any]:
+    return {
+        "ir_version": "0.1",
+        "document": {
+            "meta": {
+                "id": "ephb1_results",
+                "language": "en",
+                "title": "",
+                "authors": [],
+                "date": "",
+            },
+            "sections": [
+                {
+                    "id": "results",
+                    "title": "Results",
+                    "blocks": [],
+                }
+            ],
+        },
+    }
+
+def append_ir_block(ir: Dict[str, Any], block: Dict[str, Any]) -> None:
+    ir["document"]["sections"][0]["blocks"].append(block)
 
 
 # -----------------------------
@@ -559,16 +587,38 @@ def main() -> int:
     # Locate paper_logic.yaml
     # Priority:
     #   1) Explicit CLI argument
-    #   2) Current working directory
-    #   3) Directory containing this script (so running from project root still works)
+    #   2) Path.cwd() / "paper_logic.yaml"
+    #   3) Standard project location
+    #      "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/paper_logic.yaml"
+    #   4) Directory containing this script
+    # If none found, raise error as before.
+    paper_logic = None
+    # 1) CLI argument
     if len(sys.argv) >= 2 and sys.argv[1].strip():
-        paper_logic = Path(sys.argv[1]).expanduser().resolve()
-    else:
-        cwd_candidate = Path.cwd() / "paper_logic.yaml"
-        script_candidate = Path(__file__).resolve().parent / "paper_logic.yaml"
-        paper_logic = cwd_candidate if cwd_candidate.exists() else script_candidate
+        candidate = Path(sys.argv[1]).expanduser().resolve()
+        if candidate.exists():
+            paper_logic = candidate
+            print(f"[INFO] Using paper_logic.yaml: {paper_logic}")
+    # 2) CWD
+    if paper_logic is None:
+        candidate = Path.cwd() / "paper_logic.yaml"
+        if candidate.exists():
+            paper_logic = candidate
+            print(f"[INFO] Using paper_logic.yaml: {paper_logic}")
+    # 3) Standard project location
+    if paper_logic is None:
+        candidate = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/paper_logic.yaml")
+        if candidate.exists():
+            paper_logic = candidate
+            print(f"[INFO] Using paper_logic.yaml: {paper_logic}")
+    # 4) Script directory
+    if paper_logic is None:
+        candidate = Path(__file__).resolve().parent / "paper_logic.yaml"
+        if candidate.exists():
+            paper_logic = candidate
+            print(f"[INFO] Using paper_logic.yaml: {paper_logic}")
 
-    if not paper_logic.exists():
+    if paper_logic is None or not paper_logic.exists():
         print(
             "ERROR: paper_logic.yaml not found.\n"
             "- Run this script from the record directory, or\n"
@@ -605,6 +655,9 @@ def main() -> int:
         # show a small sample of keys to confirm normalization
         print(f"[DEBUG] sample panel keys: {list(panel_tr_map.keys())[:10]}")
         print(f"[DEBUG] sample figure keys: {list(figure_tr_map.keys())[:10]}")
+
+    # --- IR initialization ---
+    results_ir = init_results_ir()
 
     include_globs = cfg.get("include_globs", ["figure_*.yaml"]) or ["figure_*.yaml"]
     exclude_globs = cfg.get("exclude_globs", ["paper_logic.yaml"]) or []
@@ -679,6 +732,12 @@ def main() -> int:
             md.append(f"**{curr_fig_group}.**\n")
             current_fig_group = curr_fig_group
             current_display_title = display_title
+            # --- IR: add heading block for figure section header ---
+            append_ir_block(results_ir, {
+                "type": "heading",
+                "level": 2,
+                "text": display_title,
+            })
 
         panels = extract_panels(y, source_name=fpath.name)
         if not panels:
@@ -725,6 +784,20 @@ def main() -> int:
             md.append("")  # blank line
             any_panel_written = True
 
+            # --- IR: add paragraph block for panel body ---
+            para = " ".join(
+                line[2:].strip() if line.startswith("- ") else ""
+                for line in body.splitlines()
+                if line.startswith("- ")
+            ).strip()
+            if para:
+                append_ir_block(results_ir, {
+                    "type": "paragraph",
+                    "text": para,
+                    "source": fpath.name,
+                    "panel_id": curr_panel_id,
+                })
+
         if not any_panel_written:
             # remove previous header if nothing output
             md = md[:-1]
@@ -766,14 +839,21 @@ def main() -> int:
             if transition_text:
                 if debug_transitions:
                     print(f"[DEBUG] inserted transition ({'panel' if curr_fig_group==next_fig_group else 'figure'})")
-                md.append(
-                    render_transition(
-                        transition_text.get("en", ""),
-                        transition_text.get("cn", ""),
-                        primary=primary_lang,
-                    )
+                rendered_transition_text = render_transition(
+                    transition_text.get("en", ""),
+                    transition_text.get("cn", ""),
+                    primary=primary_lang,
                 )
+                md.append(rendered_transition_text)
                 md.append("")
+                # --- IR: add transition as English-only paragraph block ---
+                en_tr = (transition_text.get("en", "") or "").strip()
+                if en_tr:
+                    append_ir_block(results_ir, {
+                        "type": "paragraph",
+                        "text": en_tr,
+                        "tags": ["transition"],
+                    })
             elif debug_transitions:
                 print("[DEBUG] no transition inserted for this pair")
 
@@ -803,8 +883,14 @@ def main() -> int:
         for r in mapping_rows:
             w.writerow({k: r.get(k, "") for k in fieldnames})
 
+    # --- Write Results IR YAML ---
+    ir_out = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript/IR/results.ir.yaml")
+    ir_out.parent.mkdir(parents=True, exist_ok=True)
+    with ir_out.open("w", encoding="utf-8") as f:
+        yaml.safe_dump(results_ir, f, sort_keys=False, allow_unicode=True, width=1000)
     print(f"[OK] Wrote: {output_path}")
     print(f"[OK] Wrote: {mapping_path}")
+    print(f"[OK] Wrote: {ir_out}")
     return 0
 
 

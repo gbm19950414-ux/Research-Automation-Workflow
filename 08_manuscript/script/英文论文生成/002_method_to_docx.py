@@ -78,26 +78,91 @@ def export_to_docx(methods: List[Dict[str, Any]], out_path: Path) -> None:
     doc.save(str(out_path))
 
 
+def build_methods_ir(methods: List[Dict[str, Any]]) -> Dict[str, Any]:
+    sections_blocks = []
+    for m in methods:
+        title = (m.get("title") or m.get("id") or "Untitled").strip()
+        sentences = m.get("sentences")
+
+        if not sentences or not isinstance(sentences, list):
+            continue
+
+        parts: List[str] = []
+        for sent in sentences:
+            if not isinstance(sent, dict):
+                continue
+            if sent.get("required") is False:
+                continue
+            text = normalize_text(str(sent.get("text") or ""))
+            if text:
+                parts.append(text)
+
+        if not parts:
+            continue
+
+        paragraph_text = " ".join(parts).strip()
+
+        sections_blocks.append(
+            {"type": "heading", "level": 2, "text": title}
+        )
+        sections_blocks.append(
+            {"type": "paragraph", "text": paragraph_text}
+        )
+
+    ir = {
+        "ir_version": "0.1",
+        "document": {
+            "meta": {
+                "id": "ephb1_methods",
+                "language": "en",
+                "title": "",
+                "authors": [],
+                "date": "",
+            },
+            "sections": [
+                {
+                    "id": "methods",
+                    "title": "Methods",
+                    "blocks": sections_blocks,
+                }
+            ],
+        },
+    }
+    return ir
+
+
+def write_ir_yaml(ir: Dict[str, Any], out_path: Path) -> None:
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open("w", encoding="utf-8") as f:
+        yaml.safe_dump(ir, f, sort_keys=False, allow_unicode=True, width=1000)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(
-        description="Export method.yaml to a DOCX file (one title = one paragraph)."
+        description="Export method.yaml to a DOCX file (one title = one paragraph) and Methods IR YAML."
     )
     ap.add_argument(
         "-i",
         "--input",
-        default="08_manuscript/method.yaml",
-        help="Path to method.yaml (default: 08_manuscript/method.yaml)",
+        default="08_manuscript/yaml/method.yaml",
+        help="Path to method.yaml (default: 08_manuscript/yaml/method.yaml)",
     )
     ap.add_argument(
         "-o",
         "--output",
-        default="08_manuscript/methods_export.docx",
-        help="Output .docx path (default: 08_manuscript/methods_export.docx)",
+        default="08_manuscript/out/methods_export.docx",
+        help="Output .docx path (default: 08_manuscript/out/methods_export.docx)",
+    )
+    ap.add_argument(
+        "--out_ir",
+        default="08_manuscript/IR/methods.ir.yaml",
+        help="Output Methods IR YAML path (default: 08_manuscript/IR/methods.ir.yaml)",
     )
     args = ap.parse_args()
 
     in_path = Path(args.input).expanduser().resolve()
     out_path = Path(args.output).expanduser().resolve()
+    out_ir_path = Path(args.out_ir).expanduser().resolve()
 
     if not in_path.exists():
         raise FileNotFoundError(f"Input YAML not found: {in_path}")
@@ -108,7 +173,11 @@ def main() -> None:
         raise ValueError("YAML must contain a top-level `methods:` list.")
 
     export_to_docx(methods, out_path)
-    print(f"Saved: {out_path}")
+    ir = build_methods_ir(methods)
+    write_ir_yaml(ir, out_ir_path)
+
+    print(f"Saved DOCX: {out_path}")
+    print(f"Saved IR: {out_ir_path}")
 
 
 if __name__ == "__main__":

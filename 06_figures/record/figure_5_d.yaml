@@ -104,6 +104,47 @@ aio_hints:
   target_journal_style: "Cell Metabolism"
   language: "zh_en_mix"
 
+
+figure_legend:
+  panel: "d"
+  panel_title_en: "Cross-omics mechanistic axis effect matrix"
+  panel_title_cn: "跨 RNA 与脂质组的机制轴效应矩阵"
+
+  one_sentence_en: >
+    Batch-level effect_z matrix summarizing the direction and magnitude of EphB1 deficiency–associated
+    changes across six mechanistic axes in RNA-seq and lipidomics datasets.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: "Steady-state condition without additional stimulation"
+    time_window: "Single endpoint per batch"
+
+  readouts_and_assays:
+    primary_readout: >
+      Mechanistic axis effect_z values derived from batch-specific KO versus WT comparisons
+      in RNA-seq and lipidomics datasets
+    assay: >
+      RNA-seq differential expression modeling (DESeq2, batch-wise) and lipidomics normalization
+      followed by axis-level feature aggregation
+    normalization: >
+      Effect_z values were calculated within each batch and are displayed without cross-batch pooling
+      or global scaling
+
+  stats:
+    n_definition: "n indicates independent experimental batches"
+    n: "RNA-seq: 3 batches; lipidomics: 4 batches"
+    summary: "effect_z values displayed as a matrix"
+    test: "not applicable (directional consistency analysis)"
+    multiple_comparisons: "not applicable"
+
+  significance:
+    symbols: "not applicable"
+
+  extra_notes: >
+    Effect_z values represent directional effect sizes rather than formal significance testing;
+    consistency across batches and omics layers was used as the primary robustness criterion.
+
   # ---------- 8. English ----------
 
 results_skeleton_en:

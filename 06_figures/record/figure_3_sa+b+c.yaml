@@ -5,6 +5,7 @@
 
 # ---------- 0. Meta & Assets ----------
 meta:
+  figure: "Figure 3"    
   figure_id: "Figure S3A–C"
   experiment_id: "figure_3_b"
   short_title: "多批次条件下 ROS 与 Δψm 动态模式的整体一致性分析"
@@ -128,29 +129,64 @@ interpretation:
     后续章节将进一步结合更直接的线粒体界面 readout
     定位 EphB1 作用的分子层级。
 
-# ---------- 6. figure_legend ----------
+# ---------- 6. figure_legend (shared; Figure S3A–C) ----------
 figure_legend:
-  title: "多批次 ROS 与 Δψm 时间序列的 WT/HO 比值热图分析"
-  panels:
-    description: >
-      (A) H2DCFDA、(B) MitoSOX 与 (C) TMRM 在不同批次、
-      不同刺激条件下的 WT/HO 时间序列比值热图。
-  groups:
-    definition: >
-      WT 与 Ephb1−/− 原代腹腔巨噬细胞。
-  sample_size:
-    n_per_group: "每批次 n ≥ 3 技术重复"
-    replicates: "≥3 次独立生物学实验批次"
-  statistics:
-    test: "不适用（结构性可视化分析）"
-    multiple_comparison: "未进行"
-  normalization:
-    description: >
-      所有时间序列按各自起始时间点归一化，
-      并以 WT/HO 比值形式展示。
-  significance:
-    symbols: "不适用"
+  one_sentence_en: >
+    Multi-batch consistency analysis of cytosolic ROS, mitochondrial ROS, and mitochondrial
+    membrane potential dynamics in WT and Ephb1−/− primary peritoneal macrophages under different
+    stimulation conditions.
 
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: >
+      Unstimulated control, LPS priming alone, or LPS priming followed by nigericin stimulation,
+      assessed across multiple independent experimental batches
+    time_window: "0–120 min time course with continuous plate-reader acquisition"
+
+  readouts_and_assays:
+    primary_readout: "WT/HO ratio dynamics of ROS and mitochondrial membrane potential"
+    assay: >
+      Plate-reader–based time-resolved fluorescence measurements using H2DCFDA (cytosolic ROS),
+      MitoSOX (mitochondrial ROS), and TMRM (Δψm)
+    normalization: >
+      All time-series signals were normalized to their respective baseline values and
+      expressed as WT/HO ratios to enable cross-batch comparison
+
+  stats:
+    n_definition: "n indicates independent experimental batches"
+    n: "n ≥ 3 independent experiments"
+    summary: "not applicable (structural visualization)"
+    test: "not applicable"
+    multiple_comparisons: "not applicable"
+
+  significance:
+    symbols: "not applicable"
+
+  extra_notes: >
+    Heatmaps visualize temporal structure and pattern consistency across batches rather than
+    testing statistical significance at individual time points.
+
+
+# ---------- panel-specific overrides ----------
+panel_overrides:
+  a:
+    panel_title_en: "Cytosolic ROS dynamics across batches"
+    panel_title_cn: "多批次细胞质 ROS 动态"
+    displayed_targets:
+      - "H2DCFDA WT/HO ratio time-course heatmap"
+
+  b:
+    panel_title_en: "Mitochondrial ROS dynamics across batches"
+    panel_title_cn: "多批次线粒体 ROS 动态"
+    displayed_targets:
+      - "MitoSOX WT/HO ratio time-course heatmap"
+
+  c:
+    panel_title_en: "Mitochondrial membrane potential dynamics across batches"
+    panel_title_cn: "多批次线粒体膜电位（Δψm）动态"
+    displayed_targets:
+      - "TMRM WT/HO ratio time-course heatmap"
 # ---------- 7. AI Writing Hints ----------
 ai_hints:
   target_section: ["Results", "Discussion_mini"]

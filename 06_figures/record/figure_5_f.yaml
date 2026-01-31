@@ -145,6 +145,44 @@ ai_hints:
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
 
+
+figure_legend:
+  panel: "f"
+  panel_title_en: "Axis–cardiolipin phenotype cross-batch regression"
+  panel_title_cn: "机制轴效应与 CL 表型的跨批次回归"
+
+  one_sentence_en: >
+    Cross-batch linear regression linking mechanistic axis combined Z scores (HO–WT) to batch-matched
+    HO–WT differences in total cardiolipin abundance (sum_CL) to test whether axis-level effects predict
+    cardiolipin content at the batch level.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages (multi-batch omics and CL panel datasets)"
+    genotype_or_groups: "WT versus Ephb1−/− (batch-wise HO–WT contrasts)"
+    key_treatments: "Not applicable (computational association analysis using batch-matched contrasts)"
+    time_window: "Single endpoint per batch; each batch contributes one paired data point"
+
+  readouts_and_assays:
+    primary_readout: "Association between combined Z (HO–WT) per mechanistic axis and sum_CL (HO–WT)"
+    assay: "Linear regression performed per axis using batch-level paired contrasts"
+    normalization: >
+      Both predictors (combined Z) and outcomes (sum_CL) were defined as HO–WT differences within each batch
+      to reduce batch effects; no log transformation was applied
+
+  stats:
+    n_definition: "n indicates independent experimental batches (one point per batch)"
+    n: "n = 3–4 batches (axis-dependent point availability)"
+    summary: "Pearson r and two-sided p values reported per axis"
+    test: "Linear regression / correlation test per axis"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: >
+    None of the axis–sum_CL associations reached statistical significance in the current batch range; the
+    Membrane context axis showed the largest absolute correlation magnitude (r = −0.65, p = 0.35).
+
     # ---------- 8. English ----------
 
 results_skeleton_en:

@@ -8,7 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "3a+b+c+d+e+f+g+h"
+  figure: "Figure 3"              # 如 "Figure 3"
+  figure_id: "3a+b+c+d+e+f+g+h"
   short_title: "EphB1 缺失减缓炎症小体激活期 ROS 上升并在基线条件下对线粒体膜电位影响有限"
   chapter: "3.3 EphB1 缺失降低 GSDMD 的线粒体结合"
   experiment_id: "figure_3_b"
@@ -92,6 +93,79 @@ ai_hints:
     # 例如："Cell Metabolism", "Nature Immunology"
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
+
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+figure_legend:
+  one_sentence_en: >
+    Time-resolved changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential
+    in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome activation
+    and under unstimulated baseline conditions.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: >
+      LPS priming (100 ng/mL, 4 h) followed by nigericin stimulation (10 μM),
+      or unstimulated conditions for baseline measurements
+    time_window: "0–120 min after stimulation, with continuous fluorescence acquisition"
+
+  readouts_and_assays:
+    primary_readout: "Cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential"
+    assay: "Live-cell fluorescence measurements using H2DCHA, MitoSOX, and TMRM"
+    normalization: >
+      All fluorescence signals were normalized to the first time point immediately
+      before nigericin addition to allow comparison of dynamic changes
+
+  stats:
+    n_definition: "n indicates biologically independent experiments"
+    n: "n ≥ 3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test on area-under-the-curve or endpoint values"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+panel_overrides:
+  a:
+    panel_title_en: "Cytosolic ROS dynamics"
+    displayed_targets:
+      - "H2DCHA fluorescence"
+
+  b:
+    panel_title_en: "Mitochondrial ROS dynamics"
+    displayed_targets:
+      - "MitoSOX fluorescence"
+
+  c:
+    panel_title_en: "Mitochondrial membrane potential dynamics"
+    displayed_targets:
+      - "TMRM fluorescence"
+
+  d:
+    panel_title_en: "Cytosolic ROS AUC"
+    displayed_targets:
+      - "H2DCHA AUC (0–120 min)"
+
+  e:
+    panel_title_en: "Mitochondrial ROS AUC"
+    displayed_targets:
+      - "MitoSOX AUC (0–120 min)"
+
+  f:
+    panel_title_en: "ΔΨm AUC during activation"
+    displayed_targets:
+      - "TMRM AUC (0–120 min)"
+
+  g:
+    panel_title_en: "Baseline mitochondrial membrane potential"
+    displayed_targets:
+      - "Baseline TMRM fluorescence (unstimulated)"
+
+  h:
+    panel_title_en: "Baseline ΔΨm quantification"
+    displayed_targets:
+      - "Baseline TMRM AUC (unstimulated)"
 
     # ---------- 8. English ----------
 

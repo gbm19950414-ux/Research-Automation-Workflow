@@ -1,5 +1,6 @@
 meta:
-  figure: "2a/b"
+  figure: "Figure 2"              # 如 "Figure 3"
+  figure_id: "2a/b"
   short_title: "EphB1 缺失不影响炎症小体第一信号（priming）的转录程序"
   experiment_id: "figure_2_b"
   version: 1
@@ -62,7 +63,57 @@ ai_hints:
   target_journal_style: "Cell Metabolism"
   language: "zh_en_mix"
 
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
+# ---------- Figure 2: shared legend ----------
+figure_legend:
+  one_sentence_en: >
+    Transcriptional priming responses to LPS stimulation in WT and EphB1-deficient
+    primary peritoneal macrophages.
 
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus EphB1 PB−/− (KO)"
+    key_treatments: "LPS stimulation (100 ng/mL)"
+    time_window: "Cells harvested at the indicated time points after LPS treatment"
+
+  readouts_and_assays:
+    primary_readout: "Transcriptional priming markers"
+    assay: "qPCR"
+    normalization: >
+      Transcript levels were normalized to GAPDH and expressed as fold change
+      relative to the unstimulated control using the ΔCt–ΔΔCt method
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 3 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+
+# ---------- Figure 2: panel-specific overrides ----------
+panel_overrides:
+  a:
+    panel_title_en: "Priming gene induction (Tnf)"
+    panel_title_cn: "转录性 priming：Tnf"
+    displayed_targets:
+      - "Tnf mRNA"
+
+  b:
+    panel_title_en: "Priming gene induction (Il1b)"
+    panel_title_cn: "转录性 priming：Il1b"
+    displayed_targets:
+      - "Il1b mRNA"
+      
 results_skeleton_en:
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"

@@ -123,6 +123,57 @@ ai_hints:
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
 
+# ---------- 6. figure_legend (shared; Figure 4e/f) ----------
+figure_legend:
+  one_sentence_en: >
+    Pharmacological inhibition with alexidine dihydrochloride (AD) reduces NAO-associated fluorescence
+    and collapses genotype-dependent differences in WT and Ephb1−/− primary peritoneal macrophages.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
+    genotype_or_groups: "WT versus Ephb1−/−, each treated with vehicle or AD"
+    key_treatments: >
+      AD pretreatment (10 μM, 16 h) followed by LPS priming and nigericin stimulation,
+      then NAO staining (200 nM, 30 min)
+    time_window: "NAO imaging performed after staining under fixed exposure conditions"
+
+  readouts_and_assays:
+    primary_readout: "NAO fluorescence intensity as a readout of the NAO-accessible cardiolipin pool"
+    assay: "Fixed-exposure fluorescence microscopy with ImageJ-based quantification"
+    normalization: >
+      Images were acquired using identical exposure/gain settings; fluorescence quantification used a unified
+      ImageJ thresholding workflow with background subtraction
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 3 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: ""
+
+
+# ---------- panel-specific overrides ----------
+panel_overrides:
+  e:
+    panel_title_en: "AD reduces NAO fluorescence"
+    panel_title_cn: "AD 降低 NAO 荧光"
+    displayed_targets:
+      - "Representative NAO fluorescence images (±AD) under fixed exposure"
+      - "Imaging-based NAO intensity quantification in WT (±AD)"
+
+  f:
+    panel_title_en: "AD collapses genotype difference"
+    panel_title_cn: "AD 抹除基因型差异"
+    displayed_targets:
+      - "NAO intensity comparison across WT/KO × ±AD"
+      - "Genotype-wise difference in NAO signal before and after AD treatment"
+
+
     # ---------- 8. English ----------
 
 results_skeleton_en:

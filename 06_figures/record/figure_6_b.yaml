@@ -419,6 +419,41 @@ ai_hints:
   tone: "neutral"
   target_journal_style: "Cell Metabolism"
   language: "zh_en_mix"
+figure_legend:
+  panel: "b"
+  panel_title_en: "EphB1 downstream signaling module dictionary"
+  panel_title_cn: "EphB1 下游信号模块字典表"
+
+  one_sentence_en: >
+    Curated table defining EphB1 downstream signaling modules (gene sets) and mapping each module to
+    the cardiolipin mechanistic axes it is expected to influence.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophage RNA-seq–derived module curation (table resource)"
+    genotype_or_groups: "WT versus Ephb1−/− (used to define directionality for module scoring)"
+    key_treatments: "Not applicable (module definition table)"
+    time_window: "Not applicable"
+
+  readouts_and_assays:
+    primary_readout: >
+      Module identifiers and labels, network category, targeted cardiolipin axes, module size, and
+      gene lists annotated with gene_effect_sign for standardized module scoring direction
+    assay: "Structured table (module dictionary)"
+    normalization: "Not applicable"
+
+  stats:
+    n_definition: "Not applicable"
+    n: "Not applicable"
+    summary: "Not applicable"
+    test: "Not applicable"
+    multiple_comparisons: "Not applicable"
+
+  significance:
+    symbols: "Not applicable"
+
+  extra_notes: >
+    This table is referenced for downstream module scoring and mechanistic integration and does not
+    present quantitative comparisons.
 
   # ---------- 8. English ----------
 

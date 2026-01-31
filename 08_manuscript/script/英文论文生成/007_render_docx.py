@@ -75,9 +75,12 @@ def resolve_default_ir_path() -> Path:
         if pref_path in candidates:
             return pref_path
 
-    # Otherwise choose the most recently modified
-    candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+    # Otherwise choose the first IR file by filename order (deterministic default)
+    candidates.sort(key=lambda p: p.name)
     return candidates[0]
+
+def is_manuscript_ir(path: Path) -> bool:
+    return path.name in ("manuscript.ir.yaml", "manuscript.ir.yml")
 
 
 # -----------------------
@@ -417,7 +420,13 @@ def main():
             print(f"[ERROR] {e}", file=sys.stderr)
             sys.exit(1)
 
-    template_path = Path(args.template)
+    # Implement default mode switch for assembled manuscript IR
+    if args.template == str(DEFAULT_TEMPLATE_PATH) and is_manuscript_ir(ir_path):
+        template_path = MANUSCRIPT_DIR / "templates" / "thesis.yaml"
+        print("[INFO] Assembled manuscript IR detected; defaulting template to thesis.yaml")
+    else:
+        template_path = Path(args.template)
+
     ref_db_path = Path(args.refdb)
 
     t = load_template(template_path)

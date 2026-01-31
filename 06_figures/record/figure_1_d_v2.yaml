@@ -3,6 +3,8 @@
 # ============================================================
 
 meta:
+  figure: "Figure 1"              # 如 "Figure 3"
+
   figure_id: "1d"
   experiment_id: "figure_1_b"
   short_title: "EphB1 缺失降低多类型炎症小体诱导的焦亡水平"
@@ -91,12 +93,58 @@ interpretation:
   transition_to_next: >
     下一节将评估 IL-1β 释放与 GSDMD 剪切，以定位 EphB1 影响的具体执行步骤。
 
+
+
 ai_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"]
   tone: "neutral"
   target_journal_style: ""
   language: "zh_en_mix"
 
+
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
+figure_legend:
+  panel: "d"
+  panel_title_en: "Pyroptotic cell lysis across inflammasome pathways"
+  panel_title_cn: "多通路炎症小体诱导的焦亡裂解"
+
+  one_sentence_en: >
+    LDH release from WT and EphB1-deficient primary peritoneal macrophages following activation of NLRP3, NLRC4, or AIM2 inflammasomes under the indicated conditions.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus EphB1 PB−/− (KO)"
+    key_treatments: >
+      Nigericin stimulation to activate NLRP3 (1 h and 8 h),
+      cytosolic flagellin delivery to activate NLRC4 (2 h),
+      or cytosolic poly(dA:dT) delivery to activate AIM2 (8 h)
+    time_window: >
+      Supernatants collected at the indicated time points after inflammasome activation
+
+  readouts_and_assays:
+    primary_readout: "LDH release as a measure of pyroptotic cell lysis"
+    assay: "CytoTox 96® LDH release assay"
+    normalization: >
+      LDH values were background-subtracted using blank wells and normalized
+      to total lysis controls to account for batch-to-batch variability
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 4 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: ""
 # ---------- 8. English ----------
 
 results_skeleton_en:

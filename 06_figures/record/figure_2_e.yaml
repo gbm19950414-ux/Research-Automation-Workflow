@@ -8,7 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "2e"              # 如 "Figure 3"
+  figure: "Figure 2"              # 如 "Figure 3"
+  figure_id: "2e"              # 如 "Figure 3"
   short_title: "EphB1 缺失不影响 ASC 组装"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.2 NLRP3 inflammasome activation"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_2_e"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
@@ -114,6 +115,38 @@ ai_hints:
     # 例如："Cell Metabolism", "Nature Immunology"
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
+
+
+figure_legend:
+  panel: "e"
+  panel_title_en: "ASC oligomerization assay"
+  panel_title_cn: "ASC 寡聚化检测"
+
+  one_sentence_en: >
+    ASC oligomerization in WT and EphB1-deficient primary peritoneal macrophages following NLRP3 inflammasome activation.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: "LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM, 45–60 min)"
+    time_window: "Cells lysed immediately after nigericin treatment for fractionation and crosslinking"
+
+  readouts_and_assays:
+    primary_readout: "ASC oligomers, dimers, and monomers in soluble and insoluble fractions"
+    assay: "Biochemical fractionation (S-Lys./Pel.), DSS crosslinking of Pel., and immunoblotting for ASC"
+    normalization: "Densitometry normalized to GAPDH; soluble/insoluble fractions processed in parallel to minimize fractionation variability"
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 3 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: ""
 
     # ---------- 8. English ----------
 

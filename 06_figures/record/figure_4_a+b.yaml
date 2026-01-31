@@ -117,6 +117,56 @@ ai_hints:
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
 
+
+# ---------- 6. figure_legend (shared; Figure 4a/b) ----------
+figure_legend:
+  one_sentence_en: >
+    NAO-associated fluorescence in WT and Ephb1−/− primary peritoneal macrophages was quantified by
+    fixed-exposure microscopy and time-resolved plate-reader measurements to estimate the NAO-detectable
+    cardiolipin pool under conditions without nigericin stimulation.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: "NAO staining (200 nM, 30 min); no nigericin"
+    time_window: "Microscopy at 30 min; plate-reader acquisition at 0, 5, 10, 24, and 48 min"
+
+  readouts_and_assays:
+    primary_readout: "NAO fluorescence as a readout of the NAO-detectable cardiolipin pool"
+    assay: "Fixed-exposure fluorescence imaging and plate-reader fluorescence measurement"
+    normalization: >
+      Imaging quantification used identical exposure/gain and unified ImageJ thresholding; plate-reader signals
+      were background-subtracted using no-dye wells. Where indicated, NAO signals were additionally expressed
+      as NAO/Δψm using matched Δψm measurements.
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 3 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: ""
+
+
+# ---------- panel-specific overrides ----------
+panel_overrides:
+  a:
+    panel_title_en: "NAO imaging quantification"
+    panel_title_cn: "NAO 显微成像定量"
+    displayed_targets:
+      - "Representative NAO fluorescence images (fixed exposure)"
+      - "Imaging-based NAO intensity quantification"
+
+  b:
+    panel_title_en: "Time-resolved NAO plate-reader signal"
+    panel_title_cn: "NAO 板读时间曲线"
+    displayed_targets:
+      - "Plate-reader NAO fluorescence time course (0–48 min)"
+      - "Background-subtracted NAO signal (and NAO/Δψm if shown)"
     # ---------- 8. English ----------
 
 results_skeleton_en:

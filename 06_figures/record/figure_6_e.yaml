@@ -201,6 +201,58 @@ ai_hints:
   target_journal_style: "Nature Metabolism"
   language: "zh_en_mix"
 
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
+figure_legend:
+  panel: "e"
+  panel_title_en: "Mediation on lipid indicators"
+  panel_title_cn: "脂质指标的中介分析"
+
+  one_sentence_en: >
+    Mediation analyses testing whether EphB1-dependent changes in five lipid indicators are transmitted
+    through RNA-seq–derived downstream signaling pathway scores, summarized as pathway-specific indirect
+    effects (a×b) with bootstrap confidence intervals.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages with matched RNA-seq and lipidomics from the same samples"
+    genotype_or_groups: "WT (X=0) versus Ephb1−/− (X=1)"
+    key_treatments: >
+      No external stimulation; steady-state condition. For each lipid indicator (Y), separate X→M→Y mediation
+      models were fit using nine curated EphB1 downstream pathway sample-level scores as mediators (M)
+    time_window: "Single endpoint (paired RNA + lipid measurements)"
+
+  readouts_and_assays:
+    primary_readout: >
+      Indirect effects (a×b) of EphB1 genotype on five lipid indicators:
+      CL fraction (CL/total), membrane CL content, mitochondrial total lipid mass (PC+PE+CL),
+      membrane PC, and membrane PE
+    assay: >
+      Linear mediation framework with paths a (M ~ X) and b (Y ~ X + M),
+      reporting the indirect effect a×b per pathway for each lipid indicator
+    normalization: >
+      Pathway mediator variables are RNA-seq–derived transcriptional signature scores (sample-level scores);
+      indirect effects are shown as bootstrap means with 95% confidence intervals, and direction labels
+      denote the signs of a and b (e.g., a+, b+ or a+, b−)
+
+  stats:
+    n_definition: "n indicates samples with paired RNA and lipid data used in the mediation models"
+    n: "n=3 WT and n=2 KO (batch1); same sample set as Fig. 6d"
+    summary: "bootstrap mean ± 95% CI (for a×b)"
+    test: "bootstrap inference for indirect effects (a×b)"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "not applicable"
+
+  extra_notes: >
+    Indirect-effect magnitudes are comparable only within the same lipid indicator panel because units and
+    scales differ across indicators; pathway scores are transcriptional footprints and do not directly report
+    kinase activity or protein phosphorylation.
   # ---------- 8. English ----------
 
 results_skeleton_en:

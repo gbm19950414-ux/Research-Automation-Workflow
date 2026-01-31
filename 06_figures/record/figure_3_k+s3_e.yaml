@@ -8,7 +8,8 @@
 
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
-  figure: "3k+s3e"              # 如 "Figure 3"
+  figure: "Figure 3"              # 如 "Figure 3"
+  figure_id: "3k+s3e"              # 如 "Figure 3"
   short_title: "EphB1 缺失降低 GSDMD-NT 在线粒体早期富集"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.3 EphB1 缺失降低 GSDMD 的线粒体结合"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_3_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
@@ -128,6 +129,61 @@ ai_hints:
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
 
+
+# ---------- 6. figure_legend (shared; multi-panel record: 3k + S3e) ----------
+figure_legend:
+  one_sentence_en: >
+    Early mitochondrial enrichment of GSDMD-NT during NLRP3 inflammasome activation in WT and Ephb1−/−
+    primary peritoneal macrophages, with mitochondrial abundance controls assessed in parallel.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: >
+      LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM), with rapid collection at
+      0, 7.5, 15, 30, and 60 min for mitochondrial fractionation and total lysate analysis
+    time_window: "0–60 min after nigericin; 7.5 min corresponds to the WT peak enrichment time point"
+
+  readouts_and_assays:
+    primary_readout: "GSDMD-NT abundance in mitochondrial fractions versus total lysates; mitochondrial abundance controls"
+    assay: >
+      Immunoblotting of GSDMD-NT in total lysates and mitochondrial fractions across time points;
+      HK2 protein (immunoblot) and mitochondrial 16S rRNA (qPCR) as mitochondrial abundance controls
+    normalization: >
+      Immunoblot band intensities were quantified by densitometry and normalized to loading controls;
+      mitochondrial enrichment was evaluated at the WT peak time point (7.5 min)
+
+  stats:
+    n_definition: "n indicates biologically independent experiments"
+    n: "n ≥ 3 per genotype; results reproduced in ≥3 independent batches"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: >
+    Comparisons focus on mitochondrial GSDMD-NT enrichment at the peak time point, while total-lysate cleavage
+    controls exclude differences in substrate generation. HK2 and mitochondrial 16S rRNA are used to assess
+    mitochondrial abundance and exclude organelle-quantity confounding.
+
+
+# ---------- panel-specific overrides ----------
+panel_overrides:
+  k:
+    panel_title_en: "Early mitochondrial enrichment of GSDMD-NT"
+    panel_title_cn: "GSDMD-NT 在线粒体早期富集"
+    displayed_targets:
+      - "Mitochondrial-fraction GSDMD-NT time course (0, 7.5, 15, 30, 60 min)"
+      - "Total-lysate GSDMD cleavage control (GSDMD-NT / FL)"
+
+  s3e:
+    panel_title_en: "Mitochondrial abundance controls"
+    panel_title_cn: "线粒体数量对照"
+    displayed_targets:
+      - "HK2 protein abundance (immunoblot)"
+      - "Mitochondrial 16S rRNA content (qPCR)"
     # ---------- 8. English ----------
 
 results_skeleton_en:

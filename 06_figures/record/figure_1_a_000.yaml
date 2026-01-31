@@ -4,8 +4,9 @@
 # ============================================================
 
 meta:
+  figure: "Figure 1"              # 如 "Figure 3"
+  figure_id: "1a"   
   panel_type: "model"
-  figure_id: "1a"
   experiment_id: "000"
   short_title: "炎症小体遗传筛选流程示意图"
   chapter: "S1"
@@ -107,6 +108,8 @@ transition:
     基于该筛选流程，Figure 1b 展示了 Ephb1 在筛选中的具体表型结果，
     并为后续机制研究章节确定研究对象。
 
+
+
 # ---------- 7. AI Writing Hints ----------
 ai_hints:
   target_section: ["Results_intro", "Figure_legend", "Discussion_transition"]
@@ -114,19 +117,44 @@ ai_hints:
   language: "zh"
   target_journal_style: "中国生物学博士论文"
 
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
 figure_legend:
-  title: "炎症小体遗传筛选流程示意图"
-  panels:
-    description: >
-      (A) 炎症小体相关遗传筛选的整体流程示意。左侧为筛选输入，
-      包括多个 pb 遗传背景下的 WT 与 HO 配对；中间为统一的实验流程，
-      以原代巨噬细胞为研究对象，经 LPS 预处理和 Nigericin 刺激激活 NLRP3 炎症小体，
-      并检测 IL-1β 释放作为焦亡相关效应端读出；右侧为筛选输出，
-      在同一遗传背景内比较 WT 与 HO 的差异，并根据差异幅度与统计显著性筛选候选品系。
-  notes:
-    description: >
-      本流程图用于说明遗传筛选的设计与判定逻辑，不包含具体定量数据。
+  panel: "a"
+  panel_title_en: "Genetic screening workflow"
+  panel_title_cn: "遗传筛选流程示意"
 
+  one_sentence_en: >
+    Schematic overview of the genetic screening strategy used to identify regulators of inflammasome-associated pyroptotic output.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT and HO pairs within multiple pb genetic backgrounds"
+    key_treatments: "LPS priming followed by nigericin-induced NLRP3 activation"
+    time_window: "Defined stimulation window under standardized conditions"
+
+  readouts_and_assays:
+    primary_readout: "IL-1β release as a functional readout of pyroptotic output"
+    assay: "Conceptual workflow schematic (no quantitative assay)"
+    normalization: "Not applicable"
+
+  stats:
+    n_definition: "Not applicable"
+    n: "Not applicable"
+    summary: "Not applicable"
+    test: "Not applicable"
+    multiple_comparisons: "Not applicable"
+
+  significance:
+    symbols: "Not applicable"
+
+  extra_notes: >
+    This schematic illustrates experimental design and decision logic only and does not present quantitative data.
 # ---------- 8. English ----------
 
 results_skeleton_en:

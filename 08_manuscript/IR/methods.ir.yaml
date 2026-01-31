@@ -1,0 +1,91 @@
+ir_version: '0.1'
+document:
+  meta:
+    id: ephb1_methods
+    language: en
+    title: ''
+    authors: []
+    date: ''
+  sections:
+  - id: methods
+    title: Methods
+    blocks:
+    - type: heading
+      level: 2
+      text: Animals
+    - type: paragraph
+      text: All experiments were performed using mice on a C57BL/6J genetic background. Ephb1 mutant mice and wild-type littermates were used in this study. Mice were housed under specific pathogen-free (SPF) conditions with controlled temperature, humidity, and a 12 h light/12 h dark cycle. Animals had ad libitum access to sterilized standard chow and acidified drinking water. Ephb1 mutant mice were obtained from the piggyBac (PB) transposon-based mouse mutant library at the Institute of Developmental Biology and Molecular Medicine, Fudan University. Genotypes were confirmed by PCR-based analysis, and mice aged 6 weeks or older were used for experiments. All animal procedures were approved by the Institutional Animal Care and Use Committee of Fudan University and conducted in accordance with relevant guidelines and regulations.
+    - type: heading
+      level: 2
+      text: Primary peritoneal macrophage isolation
+    - type: paragraph
+      text: Primary peritoneal macrophages were isolated from 6–10-week-old C57BL/6J wild-type and Ephb1-deficient mice. To elicit macrophage recruitment, mice were intraperitoneally injected with 1–2 mL of sterile 4% thioglycollate medium. Three days after injection, peritoneal exudate cells were harvested by lavage with pre-warmed phosphate-buffered saline (PBS). Recovered cells were collected by centrifugation and subjected to red blood cell lysis when necessary. Cells were resuspended in RPMI 1640 medium supplemented with 10% fetal bovine serum and antibiotics, counted, and seeded at the indicated densities. After 1–2 h of incubation, non-adherent cells were removed by gentle washing with PBS, and adherent macrophages were cultured overnight prior to subsequent experiments.
+    - type: heading
+      level: 2
+      text: Cell culture and treatments
+    - type: paragraph
+      text: For inflammasome priming, cells were treated with lipopolysaccharide (LPS) at a final concentration of 1–10 ng/mL for 4 h. NLRP3 inflammasome activation was induced by treatment with either nigericin or ATP, NLRC4 activation was triggered by cytosolic delivery of flagellin, and AIM2 activation was induced by transfection of poly(dA:dT). For NLRP3 activation, cells were stimulated with nigericin (10 µg/mL) for 7.5–120 min or ATP (5 mM) for 2 h. For NLRC4 activation, cells were transfected with flagellin (0.5 ng/mL) using Lipofectamine 2000 and incubated for 2 h. For AIM2 activation, cells were transfected with poly(dA:dT) (0.1 ng/mL) using Lipofectamine 2000 and incubated for 8 h. Where indicated, cells were co-treated with Ephb1-Fc fusion protein to modulate ephrin-B/EphB signaling during inflammasome activation. To generate higher-order Ephb1-Fc clusters, Ephb1-Fc was pre-incubated with anti-human IgG Fc-specific antibody at a 10:1 ratio for 30 min at room temperature with gentle
+        rotation. Ephb1-Fc complexes were prepared at final concentrations of 5, 0.5, 0.05, or 0.005 µg/mL in complete RPMI 1640 medium. Pre-formed Ephb1-Fc complexes were added to cell cultures together with the indicated inflammasome stimuli. At the end of stimulation, culture plates were immediately placed on ice, and supernatants and cell lysates were collected for downstream analyses.
+    - type: heading
+      level: 2
+      text: Inflammasome activation assays
+    - type: paragraph
+      text: Inflammasome assembly was assessed by detecting ASC oligomerization using a chemical crosslinking-based assay. Primary peritoneal macrophages were stimulated to activate the NLRP3 inflammasome as described above. Following stimulation, cells were lysed with Triton X-100-containing buffer to separate soluble and detergent-insoluble fractions. The detergent-insoluble pellet fraction, enriched for ASC specks, was collected for crosslinking analysis. ASC oligomers in the insoluble fraction were chemically crosslinked using disuccinimidyl suberate (DSS). Crosslinking reactions were terminated by SDS-mediated denaturation prior to sample processing. Crosslinked samples were analyzed by SDS-PAGE followed by Western blotting to detect high-molecular-weight ASC oligomers. ASC oligomerization patterns in crosslinked insoluble fractions were compared with corresponding soluble lysate fractions.
+    - type: heading
+      level: 2
+      text: Mitochondrial functional assays
+    - type: paragraph
+      text: Cellular and mitochondrial reactive oxygen species (ROS) production and mitochondrial membrane potential were assessed using fluorescent probe-based assays. H2DCFDA was used to monitor total intracellular ROS, MitoSOX Red was used to detect mitochondrial superoxide, and tetramethylrhodamine methyl ester (TMRM) was used to assess mitochondrial membrane potential. Experiments were performed sequentially, including LPS priming, probe loading, inflammasome activation, and fluorescence measurement. Cells were primed with lipopolysaccharide (LPS) for 4 h prior to fluorescent probe loading. For probe loading, cells were incubated with H2DCFDA, MitoSOX Red, and TMRM in serum-free medium during the final 45 min of LPS priming. Inflammasome activation was triggered by treatment with nigericin at a final concentration of 10 µg/mL. Fluorescence signals were recorded immediately after stimulation using a temperature-controlled multimode microplate reader. Fluorescence intensity was measured
+        at excitation/emission wavelengths of approximately 488/525 nm for H2DCFDA, 510/580 nm for MitoSOX Red, and 550/576 nm for TMRM. Kinetic measurements were performed at 2.5-min intervals for up to 2 h following nigericin stimulation. Fluorescence signals were analyzed to evaluate changes in cellular and mitochondrial ROS levels and mitochondrial membrane potential under the indicated experimental conditions. Mitochondrial cardiolipin content was assessed using 10-N-nonyl acridine orange (NAO) staining. NAO was used at low nanomolar concentrations to semi-quantitatively monitor cardiolipin abundance and oxidation status in mitochondria. Following experimental treatments, cells were incubated with NAO at a final concentration of 200 nM for 30 min at 37 °C. After staining, fluorescence signals were acquired using either a multimode microplate reader or fluorescence microscopy. NAO fluorescence was measured at excitation/emission wavelengths of approximately 519/555 nm. Changes in NAO
+        fluorescence intensity were used to evaluate dynamic alterations in mitochondrial cardiolipin levels under different experimental conditions.
+    - type: heading
+      level: 2
+      text: Cell death assays
+    - type: paragraph
+      text: Pyroptotic cell death were quantitatively assessed following pharmacological or genetic perturbations. Primary peritoneal macrophages were seeded in 96-well plates at a density of 1 × 10^5 cells per well and cultured overnight to allow metabolic stabilization. Cells were subjected to inflammasome activation or control treatments as described above under a final volume of 100 µL per well. For maximal LDH release controls, cells were treated with lysis solution 45 min prior to sample collection. Following treatment, culture supernatants were collected for lactate dehydrogenase (LDH) release measurements. LDH activity in culture supernatants was determined using the CytoTox 96® Non-Radioactive Cytotoxicity Assay according to the manufacturer’s instructions. Absorbance was measured at 490–492 nm using a multimode microplate reader. Percent cytotoxicity was calculated by normalizing LDH release from treated samples to maximal LDH release controls after background subtraction. Apoptosis
+        was induced by treating cells with staurosporine at a final concentration of 1 µM for 4 h, with vehicle-treated cells serving as controls. Apoptotic signaling was evaluated by immunoblot detection of cleaved caspase-3. Data were obtained from at least three independent experiments and analyzed using standard statistical methods as described below.
+    - type: heading
+      level: 2
+      text: Protein analysis
+    - type: paragraph
+      text: Protein expression and secretion were analyzed by Western blotting and enzyme-linked immunosorbent assay (ELISA). Cells were lysed in Laemmli sample buffer supplemented with protease and phosphatase inhibitors, followed by heat denaturation. Protein samples were separated by SDS-PAGE using gels of appropriate acrylamide concentrations based on target protein molecular weight. Separated proteins were transferred onto polyvinylidene fluoride (PVDF) membranes under cold conditions. Membranes were blocked and incubated with primary antibodies overnight at 4 °C, followed by incubation with HRP-conjugated secondary antibodies. Protein signals were visualized using enhanced chemiluminescence reagents and captured with a digital imaging system. Band intensities were quantified by densitometric analysis and normalized to GAPDH as loading controls. Levels of secreted cytokines in culture supernatants were measured using mouse TNF-α, IL-6, and IL-1β uncoated ELISA kits. ELISA assays were
+        performed according to the manufacturer’s instructions using 96-well high-binding plates. Cytokine concentrations were calculated from standard curves generated using serially diluted recombinant standards. Protein quantification data were obtained from at least three independent experiments and analyzed using appropriate statistical methods as described below.
+    - type: heading
+      level: 2
+      text: RNA analysis
+    - type: paragraph
+      text: Gene expression was quantified by real-time quantitative PCR (qPCR). Total RNA was extracted from primary peritoneal macrophages using TRIzol reagent according to standard protocols. Complementary DNA (cDNA) was synthesized using a two-step reverse transcription protocol with genomic DNA removal. Quantitative PCR was performed using SYBR Green-based detection chemistry on a real-time PCR system. Gene expression levels were normalized to the geometric mean of GAPDH and HPRT1 as reference genes. Amplification specificity was confirmed by melt curve analysis, and technical replicates with excessive Ct variation were excluded. Relative gene expression was calculated using the ΔΔCt method with wild-type samples serving as calibrators. Each mouse was considered an independent biological replicate, and statistical analyses were performed as described below.
+    - type: heading
+      level: 2
+      text: Confocal microscopy and image analysis
+    - type: paragraph
+      text: Confocal microscopy was performed to examine the subcellular distribution of cardiolipin using NAO staining in primary macrophages. Primary peritoneal macrophages were cultured on glass coverslips and subjected to the indicated treatments prior to fixation. Cells were fixed and, where indicated, permeabilized prior to staining. Cells were stained with 10-N-nonyl acridine orange (NAO) to visualize mitochondrial cardiolipin, with nuclei counterstained using DAPI where indicated. Fluorescence images were acquired using an Olympus SpinSR super-resolution confocal microscope. Multichannel images were collected using identical laser power, detector gain, and exposure settings for all experimental groups. For each condition, multiple randomly selected fields of view were imaged, and a minimum of 100 cells per group were analyzed. NAO fluorescence was quantified by applying consistent intensity thresholding and particle/region-of-interest analysis to derive signal intensity and/or area
+        metrics. Image quantification was performed using ImageJ software with consistent analysis parameters applied across all samples.
+    - type: heading
+      level: 2
+      text: Mitochondrial isolation and analysis
+    - type: paragraph
+      text: Mitochondria were isolated to assess mitochondrial integrity and cytosolic release of mitochondrial DNA (mtDNA) following inflammasome activation. Primary peritoneal macrophages were stimulated with lipopolysaccharide followed by nigericin prior to subcellular fractionation. Mitochondria were isolated using a commercial mitochondria isolation kit based on differential centrifugation under cold conditions. Differential centrifugation was used to obtain mitochondrial fractions, cytosolic fractions, and corresponding total cell lysates for comparison. Isolated mitochondrial pellets were either maintained in storage buffer for functional analyses or lysed for downstream protein or nucleic acid extraction. The purity of mitochondrial fractions was evaluated by quantitative PCR analysis of mitochondrial-encoded and nuclear-encoded DNA markers. Cytosolic mtDNA release was quantified by comparing mtDNA abundance in cytosolic fractions relative to total cellular mtDNA. DNA was extracted
+        from total, mitochondrial, and cytosolic fractions, and mtDNA levels were quantified by real-time PCR. Relative mtDNA release was calculated using ΔCt-based normalization of cytosolic mtDNA to total mtDNA within each sample. Analyses were performed using samples from at least three independent biological replicates and evaluated using appropriate statistical methods as described below.
+    - type: heading
+      level: 2
+      text: Lipidomics
+    - type: paragraph
+      text: Lipidomic analyses were performed to characterize global and pathway-specific lipid alterations in primary peritoneal macrophages following Ephb1 deficiency. Cellular lipids were extracted using a modified methyl tert-butyl ether (MTBE)-based method. Untargeted lipidomics was conducted to enable broad-spectrum detection and identification of lipid species. Lipid extracts were analyzed by liquid chromatography coupled to high-resolution mass spectrometry with polarity switching and data-dependent MS/MS acquisition. Lipid species were identified based on accurate mass measurements and MS/MS fragmentation patterns using dedicated lipidomics analysis software. Targeted lipidomics was performed to quantitatively validate selected lipid species of interest identified in the untargeted analysis. Quantification was achieved using internal standards and calibration curves, and lipid abundances were expressed as relative or absolute quantities as appropriate. Lipidomic data were normalized
+        and scaled prior to statistical analysis to reduce technical variation and improve comparability across samples. Differential lipid abundance was assessed using univariate statistical testing and multivariate analyses, including principal component analysis. Quality control samples were included throughout the analytical workflow to monitor instrument stability, reproducibility, and data reliability.
+    - type: heading
+      level: 2
+      text: RNA-seq analysis
+    - type: paragraph
+      text: RNA sequencing (RNA-seq) was performed to characterize global transcriptomic changes in primary peritoneal macrophages. Total RNA was extracted from macrophages, and RNA integrity and purity were assessed to ensure suitability for library construction. Strand-specific RNA-seq libraries were prepared following mRNA enrichment or rRNA depletion using standard protocols. Libraries were sequenced on an Illumina high-throughput sequencing platform using paired-end reads. Raw sequencing reads were subjected to quality control to remove adaptor sequences and low-quality reads prior to downstream analysis. Clean reads were aligned to the reference mouse genome, and gene-level expression counts were generated using standard alignment and quantification pipelines. Differentially expressed genes were identified using statistical models based on normalized read counts with multiple testing correction. Functional annotation and enrichment analyses were performed to identify biological processes
+        and pathways associated with differentially expressed genes.
+    - type: heading
+      level: 2
+      text: Statistical analysis
+    - type: paragraph
+      text: Statistical analyses were performed to assess differences between experimental groups and evaluate the reliability of observed effects. Data analysis and visualization were conducted using R and python statistical computing environment. Data distributions were assessed for normality prior to statistical testing, and appropriate parametric or non-parametric tests were selected accordingly. Two-group comparisons were performed using two-tailed Student’s t-tests or non-parametric alternatives, while multi-group comparisons were analyzed using analysis of variance (ANOVA) with appropriate post hoc tests. Data are presented as mean ± SEM unless otherwise indicated, with individual data points shown where appropriate. All statistical tests were two-sided, and P values less than 0.05 were considered statistically significant. Detailed information on sample size, statistical tests, and significance values is provided in the figure legends.
+    - type: heading
+      level: 2
+      text: Data availability
+    - type: paragraph
+      text: Data management and analysis were performed in accordance with standard practices to ensure data integrity, traceability, and reproducibility. Raw experimental data were securely stored and backed up throughout the study. Data processing and statistical analyses were conducted using documented workflows to enable reproducibility. Key experimental findings were validated by independent biological replicates. Data supporting the findings of this study are available from the corresponding author upon reasonable request.

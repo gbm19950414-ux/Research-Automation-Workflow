@@ -84,7 +84,45 @@ ai_hints:
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
 
-    # ---------- 8. English ----------
+
+figure_legend:
+  panel: "s4c"
+  panel_title_en: "BEL suppresses IL-1β release"
+  panel_title_cn: "BEL 抑制 IL-1β 释放"
+
+  one_sentence_en: >
+    IL-1β release from WT and Ephb1−/− primary peritoneal macrophages following
+    LPS and nigericin stimulation under increasing doses and durations of BEL treatment.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: >
+      BEL pretreatment (1, 2, or 4 μM for 4 h or 16 h), followed by LPS priming
+      (100 ng/mL, 4 h) and nigericin stimulation (10 μM, 1 h)
+    time_window: "Supernatants collected after 1 h of nigericin stimulation"
+
+  readouts_and_assays:
+    primary_readout: "IL-1β release in culture supernatants"
+    assay: "ELISA"
+    normalization: >
+      ELISA signals were background-subtracted using blank wells and 480 nm readings
+      and normalized to cell number based on MTT measurements
+
+  stats:
+    n_definition: "n indicates biologically independent experiments"
+    n: "n ≥ 3 per group; results reproduced in ≥3 independent experiments"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test; genotype × dose interaction assessed by two-way ANOVA"
+    multiple_comparisons: "none"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: >
+    DMSO-treated cells served as vehicle controls; BEL treatment did not induce
+    detectable cytotoxicity as assessed by MTT.
+# ---------- 8. English ----------
 
 results_skeleton_en:
   stage: T3

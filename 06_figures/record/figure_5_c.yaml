@@ -232,6 +232,45 @@ ai_hints:
   target_journal_style: "Cell Metabolism"
 
 
+figure_legend:
+  panel: "c"
+  panel_title_en: "Multi-omics data-processing pipeline"
+  panel_title_cn: "多组学数据处理流程图"
+
+  one_sentence_en: >
+    Integrated workflow summarizing how multi-batch RNA-seq, untargeted lipidomics, and targeted cardiolipin
+    panel datasets were quality-controlled, normalized, batch-modeled, and compressed into mechanistic axis Z
+    scores and cardiolipin-related indicators for downstream multi-omics integration.
+
+  system_and_design:
+    model: "Conceptual pipeline schematic (no experimental data shown)"
+    genotype_or_groups: "Not applicable"
+    key_treatments: "Not applicable"
+    time_window: "Not applicable"
+
+  readouts_and_assays:
+    primary_readout: >
+      Processing nodes and dependencies from raw datasets to axis-level Z scores, integrated multi-omics Z values,
+      and axis–cardiolipin phenotype regression readouts
+    assay: "Schematic representation of computational workflow"
+    normalization: "Not applicable"
+
+  stats:
+    n_definition: "Not applicable"
+    n: "Not applicable"
+    summary: "Not applicable"
+    test: "Not applicable"
+    multiple_comparisons: "Not applicable"
+
+  significance:
+    symbols: "Not applicable"
+
+  extra_notes: >
+    The diagram emphasizes batch-aware modeling for RNA-seq (DESeq2 ~ batch + group), within-batch normalization
+    for lipidomics (PQN to QC median profile), and feature aggregation into predefined mechanistic axes before
+    cross-omics integration (Stouffer-weighted Z) and axis–cardiolipin phenotype mapping.
+
+
   # ---------- 8. English ----------
 
 results_skeleton_en:

@@ -116,6 +116,53 @@ ai_hints:
   language: "zh_en_mix"
     # 你希望生成何种语言： "zh"（中文）/ "en"（英文）/ "zh_en_mix"（中英混排方便你润色）
 
+# ---------- 6. figure_legend (shared; Figure 4c/d) ----------
+figure_legend:
+  one_sentence_en: >
+    LC–MS/MS lipidomics quantification of total cardiolipin abundance and molecular species composition
+    in resting WT and Ephb1−/− primary peritoneal macrophages.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages"
+    genotype_or_groups: "WT versus Ephb1−/−"
+    key_treatments: "Resting (unstimulated) condition; samples extracted immediately with BHT-containing MTBE/MeOH"
+    time_window: "Single endpoint (baseline, no inflammasome stimulation)"
+
+  readouts_and_assays:
+    primary_readout: "Total cardiolipin (CL) content and abundance of individual CL molecular species"
+    assay: "LC–MS/MS lipidomics (positive/negative ion modes with MS/MS confirmation of CL species)"
+    normalization: "Absolute abundances normalized to cell number using internal standards (nmol per 10^6 cells)"
+
+  stats:
+    n_definition: "n indicates biologically independent samples"
+    n: "n ≥ 3 per group; reproduced in ≥2 independent experimental batches"
+    summary: "mean ± SEM"
+    test: "two-tailed unpaired t-test"
+    multiple_comparisons: "FDR correction (q values) for species-level comparisons"
+
+  significance:
+    symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
+
+  extra_notes: >
+    Species-level fold changes were calculated relative to WT; broad downregulation across the CL species pool
+    was evaluated using abundance-weighted summaries.
+
+
+# ---------- panel-specific overrides ----------
+panel_overrides:
+  c:
+    panel_title_en: "Reduced total cardiolipin abundance"
+    panel_title_cn: "心磷脂总量下降"
+    displayed_targets:
+      - "Total CL abundance (nmol per 10^6 cells) in WT vs Ephb1−/−"
+
+  d:
+    panel_title_en: "Cardiolipin species remodeling"
+    panel_title_cn: "心磷脂物种组成重排"
+    displayed_targets:
+      - "Fold-change distribution across detected CL molecular species (e.g., 113 species)"
+      - "Species-level differential abundance summary with FDR (q values)"
+
     # ---------- 8. English ----------
 
 results_skeleton_en:
