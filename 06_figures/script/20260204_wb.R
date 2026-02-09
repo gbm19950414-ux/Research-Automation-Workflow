@@ -6,6 +6,9 @@ root <- "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1"
 # 引用通用 WB panel 模板函数
 source(file.path(root, "06_figures", "script", "wb_panel.R"))
 
+# 引用灰度值可视化脚本（bar plots）
+source(file.path(root, "06_figures", "script", "wb_intensity_plot.R"))
+
 # YAML config reader (install if needed): install.packages("yaml")
 
 config_rel <- file.path("06_figures", "script", "20260204_wb.yaml")
@@ -71,6 +74,23 @@ if (!is.null(cfg_all$panels) && length(cfg_all$panels) > 0) {
     )
   }
 
+  # 生成灰度值可视化（基于 04_data/interim/wb/intensity/<panel>.lane_intensity.tsv）
+  # total_map 用于处理例如 p-EBP1 -> 4-EBP1 这种不易自动推断的 total 目标
+  total_map <- list(
+    "p-EBP1" = "4-EBP1"
+  )
+
+  run_intensity_plots_from_yaml(
+    root = root,
+    config_rel = config_rel,
+    panel = NULL,
+    intensity_dir_rel = "04_data/interim/wb/intensity",
+    signal_field = "signal_sum",
+    loading_label = "GAPDH",
+    total_map = total_map,
+    out_dir_rel = "06_figures/results"
+  )
+
   quit(save = "no", status = 0)
 }
 
@@ -85,3 +105,19 @@ out_dir <- file.path(root, "06_figures", "results", name)
 if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 
 out_pdf <- file.path(out_dir, paste0(name, ".pdf"))
+
+# 生成灰度值可视化（单 panel）
+total_map <- list(
+  "p-EBP1" = "4-EBP1"
+)
+
+run_intensity_plots_from_yaml(
+  root = root,
+  config_rel = config_rel,
+  panel = name,
+  intensity_dir_rel = "04_data/interim/wb/intensity",
+  signal_field = "signal_sum",
+  loading_label = "GAPDH",
+  total_map = total_map,
+  out_dir_rel = "06_figures/results"
+)

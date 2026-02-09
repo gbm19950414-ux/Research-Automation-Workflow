@@ -346,12 +346,19 @@ def main():
     parser = argparse.ArgumentParser(description="从 WB panel YAML 读取 bands 信息，对每个 lane 进行 densitometry。")
 
     # 默认使用 figure_1_a.yaml 作为 panel 配置
-    default_cfg = root / "06_figures" / " script" / "figure_1_a.yaml"
+    default_cfg = root / "06_figures" / "script" / "figure_1_a.yaml"
     parser.add_argument(
         "--config",
         type=str,
         default=str(default_cfg),
-        help="WB panel 配置 YAML（例如 06_figures/ script/figure_1_a.yaml）"
+        help="WB panel 配置 YAML（例如 06_figures/script/figure_1_a.yaml）"
+    )
+
+    parser.add_argument(
+        "--panel",
+        type=str,
+        default=None,
+        help="当 config YAML 含有顶层 panels: 时，指定只跑某一个 panel 的 name；省略则跑全部 panels"
     )
 
     parser.add_argument(
@@ -383,184 +390,221 @@ def main():
         raise FileNotFoundError(f"Config YAML 不存在: {cfg_path}")
     panel_cfg = load_yaml(cfg_path)
 
-    # 读取 bands 列表（必需）
-    bands_cfg = panel_cfg.get("bands")
-    if not bands_cfg:
-        raise ValueError("Config YAML 缺少必需字段: bands")
+    # ---- 兼容 multi-panel YAML（顶层 panels:） ----
+    panels = []
+    if isinstance(panel_cfg, dict) and isinstance(panel_cfg.get("panels"), list) and panel_cfg["panels"]:
+        base_cfg = dict(panel_cfg)
+        base_cfg.pop("panels", None)
 
-    # 可选：读取 lanes 配置（例如 lanes: 6 或 lanes: {count: 6}）
-    lane_count_yaml = None
-    lanes_cfg = panel_cfg.get("lanes")
-    if isinstance(lanes_cfg, dict) and "count" in lanes_cfg:
-        try:
-            lane_count_yaml = int(lanes_cfg["count"])
-        except Exception:
-            lane_count_yaml = None
-    elif isinstance(lanes_cfg, int):
-        lane_count_yaml = lanes_cfg
+        for p in panel_cfg["panels"]:
+            if not isinstance(p, dict):
+                continue
+            name = p.get("name")
+            if args.panel is not None and str(name) != str(args.panel):
+                continue
+            if not name:
+                raise ValueError("multi-panel YAML: 每个 panel 需要 name")
 
-    # 组合 lane_count：命令行 > YAML > 自动（None）
-    lane_count_global = lane_count_arg if lane_count_arg is not None else lane_count_yaml
+            cfg_one = dict(base_cfg)
+            cfg_one["name"] = name
+            # panel overrides (fallback to base defaults if provided)
+            cfg_one["bands"] = p.get("bands") or base_cfg.get("bands")
+            cfg_one["lanes"] = p.get("lanes") or base_cfg.get("lanes")
+            panels.append(cfg_one)
 
-    gel_crops_root = root / "04_data/interim/wb/gel_crops"
-    exposure_path = root / "04_data/interim/wb/exposure_selected/exposure_selected.yaml"
-
-    # 输出路径：06_figures/<figure_x>/<panel_name>.tsv，例如 figure_1_a.yaml → 06_figures/figure_1/figure_1_a.tsv
-    panel_name = cfg_path.stem  # figure_1_a
-    panel_group = panel_name.rsplit("_", 1)[0]  # figure_1
-    out_dir = root / "06_figures" / panel_group
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / f"{panel_name}.tsv"
-
-    # exposure_selected.yaml 可选：有就读，没有就用空 dict
-    if exposure_path.exists():
-        exposure = load_yaml(exposure_path) or {}
+        if args.panel is not None and not panels:
+            raise ValueError(f"未在 panels: 中找到 name='{args.panel}'")
     else:
-        exposure = {}
+        # single-panel YAML
+        panels = [panel_cfg]
 
-    rows = []
-
-    # 遍历 panel YAML 中声明的 bands，而不是所有 gel_crops
-    for band_idx, band_cfg in enumerate(bands_cfg, start=1):
-        prefix = band_cfg.get("prefix")
-        shot_id = band_cfg.get("shot_id")
-        if not prefix or not shot_id:
-            print(f"[WARN] bands[{band_idx}] 缺少 prefix 或 shot_id，跳过。")
+    # 逐个 panel 运行（single 或 multi 都统一为 panels 列表）
+    for one_cfg in panels:
+        # 读取 bands 列表（必需）
+        bands_cfg = one_cfg.get("bands")
+        if not bands_cfg:
+            panel_name_tmp = one_cfg.get("name") or cfg_path.stem
+            keys = list(one_cfg.keys()) if isinstance(one_cfg, dict) else []
+            print(f"[WARN] panel '{panel_name_tmp}': 缺少必需字段 bands（当前 keys={keys}），跳过该 panel。")
             continue
 
-        # gel_name 由 prefix 的左半部分推断：Gx_xxx...
-        gel_name = prefix.split("__", 1)[0]
+        # 可选：读取 lanes 配置（例如 lanes: 6 或 lanes: {count: 6}）
+        lane_count_yaml = None
+        lanes_cfg = one_cfg.get("lanes")
+        if isinstance(lanes_cfg, dict) and "count" in lanes_cfg:
+            try:
+                lane_count_yaml = int(lanes_cfg["count"])
+            except Exception:
+                lane_count_yaml = None
+        elif isinstance(lanes_cfg, int):
+            lane_count_yaml = lanes_cfg
 
-        # ROI 中用于匹配的 band 名：优先显式 roi_band，其次 band 字段，其次 label，再次 prefix
-        band_label = band_cfg.get("roi_band") or band_cfg.get("band") or band_cfg.get("label") or prefix
+        # 组合 lane_count：命令行 > YAML > 自动（None）
+        lane_count_global = lane_count_arg if lane_count_arg is not None else lane_count_yaml
 
-        shot_dir = gel_crops_root / shot_id
-        gel_dir = shot_dir / gel_name
+        gel_crops_root = root / "04_data/interim/wb/gel_crops"
+        exposure_path = root / "04_data/interim/wb/exposure_selected/exposure_selected.yaml"
 
-        if not gel_dir.exists():
-            print(f"[WARN] {shot_id}/{gel_name}: gel 目录不存在，跳过。")
-            continue
+        # 输出路径：统一输出到 04_data/interim/wb/intensity
+        panel_name = one_cfg.get("name") or cfg_path.stem
+        out_dir = root / "04_data" / "interim" / "wb" / "intensity"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path = out_dir / f"{panel_name}.lane_intensity.tsv"
 
-        roi_path = gel_dir / "roi.yaml"
-        if not roi_path.exists():
-            print(f"[WARN] {shot_id}/{gel_name}: 缺少 roi.yaml，跳过。")
-            continue
+        rows = []
 
-        # 1) 选择最佳曝光文件：优先 exposure_selected.yaml 中的 best_file
-        best_file = None
-        shot_expo = exposure.get(shot_id, {}) if isinstance(exposure, dict) else {}
-        info = shot_expo.get(gel_name) if isinstance(shot_expo, dict) else None
-        if isinstance(info, dict):
-            best_file = info.get("best_file")
+        # exposure_selected.yaml 可选：有就读，没有就用空 dict
+        if exposure_path.exists():
+            exposure = load_yaml(exposure_path) or {}
+        else:
+            exposure = {}
 
-        # 2) 如果 exposure_selected 没有记录，则自动从该 gel 目录中选择一张图像
-        if not best_file:
-            candidates = sorted(
-                p.name
-                for p in gel_dir.iterdir()
-                if p.is_file() and p.suffix.lower() in (".tif", ".tiff", ".png", ".jpg", ".jpeg")
-            )
-            if not candidates:
-                print(f"[WARN] {shot_id}/{gel_name}: 未找到图像文件，跳过。")
-                continue
-            best_file = candidates[0]
-
-        img_path = gel_dir / best_file
-        if not img_path.exists():
-            print(f"[WARN] 缺少图像文件: {img_path}，跳过。")
-            continue
-
-        img = np.array(Image.open(img_path))
-        img2d = ensure_gray(img)
-
-        roi_entries = read_roi_yaml(roi_path)
-        rois_all = [
-            r for r in (roi_entries or [])
-            if isinstance(r, dict) and "points" in r and isinstance(r["points"], list) and len(r["points"]) >= 4
-        ]
-        print(f"[DEBUG-ROI] {shot_id}/{gel_name}: parsed ROIs = {len(rois_all)}")
-
-        if not rois_all:
-            continue
-
-        # 尝试按 band_label 匹配 ROI（roi.yaml 中的 'band' 字段）
-        rois = [r for r in rois_all if str(r.get("band")) == str(band_label)]
-        if not rois:
-            # 如果没有匹配到，退回用全部 ROI，但打警告
-            print(f"[WARN] {shot_id}/{gel_name}: 未找到 band='{band_label}' 的 ROI，改用所有 ROI。")
-            rois = rois_all
-
-        for roi_idx, roi in enumerate(rois, start=1):
-            poly = roi.get("points", [])
-            if not poly or len(poly) < 4:
+        # 遍历 panel YAML 中声明的 bands，而不是所有 gel_crops
+        for band_idx, band_cfg in enumerate(bands_cfg, start=1):
+            prefix = band_cfg.get("prefix")
+            shot_id = band_cfg.get("shot_id")
+            if not prefix or not shot_id:
+                print(f"[WARN] bands[{band_idx}] 缺少 prefix 或 shot_id，跳过。")
                 continue
 
-            center, theta, ordered_pts, centerline_length = centerline_from_quad(poly)
+            # gel_name 由 prefix 的左半部分推断：Gx_xxx...
+            gel_name = prefix.split("__", 1)[0]
 
-            # 角度规范到 (-90°, 90°]
-            if theta > 90:
-                theta -= 180
-            elif theta <= -90:
-                theta += 180
+            # ROI 中用于匹配的 band 名：优先显式 roi_band，其次 band 字段，其次 label，再次 prefix
+            band_label = band_cfg.get("roi_band") or band_cfg.get("band") or band_cfg.get("label") or prefix
 
-            # 沿中线方向的基准宽度
-            roi_width_line = width_along_direction(ordered_pts, center, theta)
+            shot_dir = gel_crops_root / shot_id
+            gel_dir = shot_dir / gel_name
 
-            margin = float(width_margin)
-            target_H = int(rectified_height)
-            target_W = max(1, int(round(roi_width_line * (1.0 + 2.0 * margin))))
-
-            quad = oriented_rect_corners(center, theta, target_W, target_H)
-            cropped = crop_by_quad_upright(img2d, quad, target_W, target_H, bg=None)
-
-            lane_stats = quantify_lanes(cropped, lane_count=lane_count_global)
-            if not lane_stats:
-                print(f"[WARN] {shot_id}/{gel_name} | band={band_label}: no lane detected.")
+            if not gel_dir.exists():
+                print(f"[WARN] {shot_id}/{gel_name}: gel 目录不存在，跳过。")
                 continue
 
-            for st in lane_stats:
-                rows.append(
-                    dict(
-                        panel=panel_name,
-                        shot_id=shot_id,
-                        gel_name=gel_name,
-                        band=str(band_label),
-                        band_prefix=prefix,
-                        roi_index=roi_idx,
-                        lane_index=st["lane_index"],
-                        x_center=st["x_center"],
-                        x_min=st["x_min"],
-                        x_max=st["x_max"],
-                        height_px=st["height_px"],
-                        signal_sum=st["signal_sum"],
-                        signal_mean=st["signal_mean"],
-                    )
+            roi_path = gel_dir / "roi.yaml"
+            if not roi_path.exists():
+                print(f"[WARN] {shot_id}/{gel_name}: 缺少 roi.yaml，跳过。")
+                continue
+
+            # 1) 选择最佳曝光文件：优先 exposure_selected.yaml 中的 best_file
+            best_file = None
+            shot_expo = exposure.get(shot_id, {}) if isinstance(exposure, dict) else {}
+            info = shot_expo.get(gel_name) if isinstance(shot_expo, dict) else None
+            if isinstance(info, dict):
+                best_file = info.get("best_file")
+
+            # 2) 如果 exposure_selected 没有记录，则自动从该 gel 目录中选择一张图像
+            if not best_file:
+                candidates = sorted(
+                    p.name
+                    for p in gel_dir.iterdir()
+                    if p.is_file() and p.suffix.lower() in (".tif", ".tiff", ".png", ".jpg", ".jpeg")
                 )
+                if not candidates:
+                    print(f"[WARN] {shot_id}/{gel_name}: 未找到图像文件，跳过。")
+                    continue
+                best_file = candidates[0]
 
-    # 写出 TSV
-    if rows:
-        cols = [
-            "panel",
-            "shot_id",
-            "gel_name",
-            "band",
-            "band_prefix",
-            "roi_index",
-            "lane_index",
-            "x_center",
-            "x_min",
-            "x_max",
-            "height_px",
-            "signal_sum",
-            "signal_mean",
-        ]
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write("\t".join(cols) + "\n")
-            for r in rows:
-                f.write("\t".join(str(r[c]) for c in cols) + "\n")
-        print(f"[OK] lane intensity table for panel '{panel_name}' saved → {out_path}")
-    else:
-        print("[WARN] No lane intensity rows produced; nothing written.")
+            img_path = gel_dir / best_file
+            if not img_path.exists():
+                print(f"[WARN] 缺少图像文件: {img_path}，跳过。")
+                continue
+
+            img = np.array(Image.open(img_path))
+            img2d = ensure_gray(img)
+
+            roi_entries = read_roi_yaml(roi_path)
+            rois_all = [
+                r for r in (roi_entries or [])
+                if isinstance(r, dict) and "points" in r and isinstance(r["points"], list) and len(r["points"]) >= 4
+            ]
+            print(f"[DEBUG-ROI] {shot_id}/{gel_name}: parsed ROIs = {len(rois_all)}")
+
+            if not rois_all:
+                continue
+
+            # ROI 选择逻辑：
+            # - 如果只有 1 个 ROI：直接使用，不做 band 匹配，也不输出警告（常见于每个 gel 只裁一块区域）
+            # - 如果有多个 ROI：再按 band_label（roi.yaml 的 band 字段）进行匹配；匹配失败才 warning 并退回全部 ROI
+            if len(rois_all) == 1:
+                rois = rois_all
+            else:
+                rois = [r for r in rois_all if str(r.get("band")) == str(band_label)]
+                if not rois:
+                    print(f"[WARN] {shot_id}/{gel_name}: 未找到 band='{band_label}' 的 ROI，改用所有 ROI。")
+                    rois = rois_all
+
+            for roi_idx, roi in enumerate(rois, start=1):
+                poly = roi.get("points", [])
+                if not poly or len(poly) < 4:
+                    continue
+
+                center, theta, ordered_pts, centerline_length = centerline_from_quad(poly)
+
+                # 角度规范到 (-90°, 90°]
+                if theta > 90:
+                    theta -= 180
+                elif theta <= -90:
+                    theta += 180
+
+                # 沿中线方向的基准宽度
+                roi_width_line = width_along_direction(ordered_pts, center, theta)
+
+                margin = float(width_margin)
+                target_H = int(rectified_height)
+                target_W = max(1, int(round(roi_width_line * (1.0 + 2.0 * margin))))
+
+                quad = oriented_rect_corners(center, theta, target_W, target_H)
+                cropped = crop_by_quad_upright(img2d, quad, target_W, target_H, bg=None)
+
+                lane_stats = quantify_lanes(cropped, lane_count=lane_count_global)
+                if not lane_stats:
+                    print(f"[WARN] {shot_id}/{gel_name} | band={band_label}: no lane detected.")
+                    continue
+
+                for st in lane_stats:
+                    rows.append(
+                        dict(
+                            panel=panel_name,
+                            shot_id=shot_id,
+                            gel_name=gel_name,
+                            band=str(band_label),
+                            band_prefix=prefix,
+                            roi_index=roi_idx,
+                            lane_index=st["lane_index"],
+                            x_center=st["x_center"],
+                            x_min=st["x_min"],
+                            x_max=st["x_max"],
+                            height_px=st["height_px"],
+                            signal_sum=st["signal_sum"],
+                            signal_mean=st["signal_mean"],
+                        )
+                    )
+
+        # 写出 TSV
+        if rows:
+            cols = [
+                "panel",
+                "shot_id",
+                "gel_name",
+                "band",
+                "band_prefix",
+                "roi_index",
+                "lane_index",
+                "x_center",
+                "x_min",
+                "x_max",
+                "height_px",
+                "signal_sum",
+                "signal_mean",
+            ]
+            with open(out_path, "w", encoding="utf-8") as f:
+                f.write("\t".join(cols) + "\n")
+                for r in rows:
+                    f.write("\t".join(str(r[c]) for c in cols) + "\n")
+            print(f"[OK] lane intensity table for panel '{panel_name}' saved → {out_path}")
+        else:
+            print("[WARN] No lane intensity rows produced; nothing written.")
+
 
 if __name__ == "__main__":
     main()
