@@ -1,0 +1,55 @@
+shot_id: 20260205_SHOT1
+white: 4.tif
+file:
+- 2026-02-05-08-55-53.TIF
+seconds:
+- s1
+gel_boxes:
+- gel_id: G1
+  rect:
+  - 0
+  - 85
+  - 507
+  - 43
+  target: 2a_pakt308
+  sample_batch: '20260204'
+- gel_id: G2
+  rect:
+  - 0
+  - 125
+  - 502
+  - 49
+  target: 5a_pakt308
+  sample_batch: '20260204'
+- gel_id: G3
+  rect:
+  - 0
+  - 163
+  - 507
+  - 59
+  target: 8a_pakt308
+  sample_batch: '20260204'
+- gel_id: G4
+  rect:
+  - 1
+  - 196
+  - 507
+  - 58
+  target: 3a_pakt473
+  sample_batch: '20260204'
+- gel_id: G5
+  rect:
+  - 13
+  - 237
+  - 477
+  - 61
+  target: 6a_pakt473
+  sample_batch: '20260204'
+- gel_id: G6
+  rect:
+  - 1
+  - 281
+  - 492
+  - 81
+  target: 9a_pakt473
+  sample_batch: '20260204'

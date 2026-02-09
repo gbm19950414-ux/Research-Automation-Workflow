@@ -11,7 +11,7 @@
 #   已经用 00_define_gel_boxes.py 写好了 gel_boxes。
 #
 # 运行示例：
-#   python 01_split_shot.py --shot E26_SHOT1
+#   python 01_split_shot.py 会自动扫描没有被切割的shot，自动切割到gel_crops 文件夹
 #
 # 参数：
 #   --shot        必填，shot 目录名

@@ -400,6 +400,967 @@
       contrast: 0.08882230869001284
       snr: 2.964532141673934
       file: lycat_s1_p005.tif
+20260205_SHOT1:
+  G1_3b_gapdh_20260204:
+    best_file: 3b_gapdh_s1_p005.tif
+    metrics:
+      mean: 0.8979769769639235
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.17433997100785836
+      snr: 4.348902623302745
+      file: 3b_gapdh_s1_p005.tif
+    all_files:
+    - mean: 0.9841343050742144
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0023041123064012625
+      snr: 0.2211921149568459
+      file: 3b_gapdh_s1_p001.tif
+    - mean: 0.967826274886533
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.007415884641794435
+      snr: 0.6610064860549814
+      file: 3b_gapdh_s1_p002.tif
+    - mean: 0.9499704622509335
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.023514152742809213
+      snr: 1.6816944452626126
+      file: 3b_gapdh_s1_p003.tif
+    - mean: 0.9275782288432588
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.07259388113221943
+      snr: 3.2259906984146087
+      file: 3b_gapdh_s1_p004.tif
+    - mean: 0.8979769769639235
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.17433997100785836
+      snr: 4.348902623302745
+      file: 3b_gapdh_s1_p005.tif
+  G2_6b_gapdh_20260204:
+    best_file: 6b_gapdh_s1_p005.tif
+    metrics:
+      mean: 0.8901569580400819
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2678411535820553
+      snr: 4.936041669796402
+      file: 6b_gapdh_s1_p005.tif
+    all_files:
+    - mean: 0.9840719209640354
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.003189135576409652
+      snr: 0.3030887402226199
+      file: 6b_gapdh_s1_p001.tif
+    - mean: 0.9675530085512243
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.010945754177157152
+      snr: 0.9324502366651997
+      file: 6b_gapdh_s1_p002.tif
+    - mean: 0.9489665282327423
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0356906996261539
+      snr: 2.2480868068620796
+      file: 6b_gapdh_s1_p003.tif
+    - mean: 0.9243299442699924
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.11185870145723664
+      snr: 3.9255114542616356
+      file: 6b_gapdh_s1_p004.tif
+    - mean: 0.8901569580400819
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.2678411535820553
+      snr: 4.936041669796402
+      file: 6b_gapdh_s1_p005.tif
+  G3_9b_gapdh_20260204:
+    best_file: 9b_gapdh_s1_p005.tif
+    metrics:
+      mean: 0.8541971789680075
+      sat_ratio: 0.0
+      dark_ratio: 0.002779064381658175
+      contrast: 0.7533516441596093
+      snr: 5.295640641699441
+      file: 9b_gapdh_s1_p005.tif
+    all_files:
+    - mean: 0.9837365480396096
+      sat_ratio: 0.966130152848541
+      dark_ratio: 0.0
+      contrast: 0.007736324101625169
+      snr: 0.6842539423307592
+      file: 9b_gapdh_s1_p001.tif
+    - mean: 0.9661941038934428
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.02901609826810103
+      snr: 1.9228230080617965
+      file: 9b_gapdh_s1_p002.tif
+    - mean: 0.9441577382129268
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09943648432135499
+      snr: 3.5748430093828274
+      file: 9b_gapdh_s1_p003.tif
+    - mean: 0.9090754388832886
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.31490470740825516
+      snr: 4.734278354959563
+      file: 9b_gapdh_s1_p004.tif
+    - mean: 0.8541971789680075
+      sat_ratio: 0.0
+      dark_ratio: 0.002779064381658175
+      contrast: 0.7533516441596093
+      snr: 5.295640641699441
+      file: 9b_gapdh_s1_p005.tif
+  G4_1a_akt_20260204:
+    best_file: 1a_akt_s1_p003.tif
+    metrics:
+      mean: 0.9148429593591291
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.4698023956664377
+      snr: 4.982252562123677
+      file: 1a_akt_s1_p003.tif
+    all_files:
+    - mean: 0.9816775894317951
+      sat_ratio: 0.8792989417989417
+      dark_ratio: 0.0
+      contrast: 0.03378347447928598
+      snr: 2.114731088464735
+      file: 1a_akt_s1_p001.tif
+    - mean: 0.9578930002971069
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.1342349889372091
+      snr: 3.9513696260603597
+      file: 1a_akt_s1_p002.tif
+    - mean: 0.9148429593591291
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.4698023956664377
+      snr: 4.982252562123677
+      file: 1a_akt_s1_p003.tif
+    - mean: 0.8294661748003714
+      sat_ratio: 0.0
+      dark_ratio: 0.02662037037037037
+      contrast: 0.9355916685740444
+      snr: 4.500073875476417
+      file: 1a_akt_s1_p004.tif
+    - mean: 0.7265626494869458
+      sat_ratio: 0.0
+      dark_ratio: 0.0695271164021164
+      contrast: 0.9182282749675745
+      snr: 3.4931755791804133
+      file: 1a_akt_s1_p005.tif
+  G5_4a_akt_20260204:
+    best_file: 4a_akt_s1_p003.tif
+    metrics:
+      mean: 0.9120188206127018
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.44368810559243155
+      snr: 4.823203802410757
+      file: 4a_akt_s1_p003.tif
+    all_files:
+    - mean: 0.9814795677164957
+      sat_ratio: 0.8797391631484346
+      dark_ratio: 0.0
+      contrast: 0.0320286869611659
+      snr: 2.023813953402191
+      file: 4a_akt_s1_p001.tif
+    - mean: 0.9570874009162194
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.12695689326314186
+      snr: 3.8083183374399163
+      file: 4a_akt_s1_p002.tif
+    - mean: 0.9120188206127018
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.44368810559243155
+      snr: 4.823203802410757
+      file: 4a_akt_s1_p003.tif
+    - mean: 0.8205000586795916
+      sat_ratio: 0.0
+      dark_ratio: 0.02416084939179869
+      contrast: 0.9355916685740444
+      snr: 4.607827176556893
+      file: 4a_akt_s1_p004.tif
+    - mean: 0.7049247895197546
+      sat_ratio: 0.0
+      dark_ratio: 0.06278476779668102
+      contrast: 0.9183337148088807
+      snr: 3.652344587693387
+      file: 4a_akt_s1_p005.tif
+  G6_7a_akt_20260204:
+    best_file: 7a_akt_s1_p003.tif
+    metrics:
+      mean: 0.9141003490752865
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.49567101548790715
+      snr: 4.872746064552614
+      file: 7a_akt_s1_p003.tif
+    all_files:
+    - mean: 0.9816132567098069
+      sat_ratio: 0.8803576440399342
+      dark_ratio: 0.0
+      contrast: 0.035480277714198594
+      snr: 2.1490700187261567
+      file: 7a_akt_s1_p001.tif
+    - mean: 0.9576634647345825
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.14129243915465028
+      snr: 3.9130891350930397
+      file: 7a_akt_s1_p002.tif
+    - mean: 0.9141003490752865
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.49567101548790715
+      snr: 4.872746064552614
+      file: 7a_akt_s1_p003.tif
+    - mean: 0.8322186578376392
+      sat_ratio: 0.0
+      dark_ratio: 0.02489876107613969
+      contrast: 0.9352040894178683
+      snr: 4.4261554979535385
+      file: 7a_akt_s1_p004.tif
+    - mean: 0.7376883723454142
+      sat_ratio: 0.0
+      dark_ratio: 0.06463253277735456
+      contrast: 0.9171526665140763
+      snr: 3.521485609622436
+      file: 7a_akt_s1_p005.tif
+20260205_SHOT2:
+  G1_1b_s6_20260204:
+    best_file: 1b_s6_s1_p002.tif
+    metrics:
+      mean: 0.8809863225643161
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.5278782330052644
+      snr: 3.7666902213415465
+      file: 1b_s6_s1_p002.tif
+    all_files:
+    - mean: 0.9625352038864537
+      sat_ratio: 0.38838288365698576
+      dark_ratio: 0.0
+      contrast: 0.13196002136263074
+      snr: 3.112148350373064
+      file: 1b_s6_s1_p001.tif
+    - mean: 0.8809863225643161
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.5278782330052644
+      snr: 3.7666902213415465
+      file: 1b_s6_s1_p002.tif
+    - mean: 0.699091765657244
+      sat_ratio: 0.0
+      dark_ratio: 0.10186458154322048
+      contrast: 0.9515068284122987
+      snr: 2.924588738635651
+      file: 1b_s6_s1_p003.tif
+    - mean: 0.4927469612971653
+      sat_ratio: 0.0
+      dark_ratio: 0.26731397147276165
+      contrast: 0.9315480277714199
+      snr: 2.4428501458671996
+      file: 1b_s6_s1_p004.tif
+  G2_4b_s6_20260204:
+    best_file: 4b_s6_s1_p002.tif
+    metrics:
+      mean: 0.8989494358014528
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.3705287251087206
+      snr: 3.5937343644513025
+      file: 4b_s6_s1_p002.tif
+    all_files:
+    - mean: 0.9670519870070029
+      sat_ratio: 0.46157137966449846
+      dark_ratio: 0.0
+      contrast: 0.09234760051880675
+      snr: 2.787976573900612
+      file: 4b_s6_s1_p001.tif
+    - mean: 0.8989494358014528
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.3705287251087206
+      snr: 3.5937343644513025
+      file: 4b_s6_s1_p002.tif
+    - mean: 0.7194110136391677
+      sat_ratio: 0.0
+      dark_ratio: 0.061451557685724065
+      contrast: 0.9514610513466086
+      snr: 3.144649290710499
+      file: 4b_s6_s1_p003.tif
+    - mean: 0.5052790201743755
+      sat_ratio: 0.0
+      dark_ratio: 0.26664669633687094
+      contrast: 0.931242847333486
+      snr: 2.3858005112145375
+      file: 4b_s6_s1_p004.tif
+  G3_7b_s6_20260204:
+    best_file: 7b_s6_s1_p002.tif
+    metrics:
+      mean: 0.9305165835711107
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.37261982146944383
+      snr: 4.097336921650432
+      file: 7b_s6_s1_p002.tif
+    all_files:
+    - mean: 0.9749552781345089
+      sat_ratio: 0.7191770014831645
+      dark_ratio: 0.0
+      contrast: 0.09203082322423128
+      snr: 3.0740551283879167
+      file: 7b_s6_s1_p001.tif
+    - mean: 0.9305165835711107
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.37261982146944383
+      snr: 4.097336921650432
+      file: 7b_s6_s1_p002.tif
+    - mean: 0.8273103820530636
+      sat_ratio: 0.0
+      dark_ratio: 0.04679857363753984
+      contrast: 0.952346074616617
+      snr: 3.7042625638334408
+      file: 7b_s6_s1_p003.tif
+    - mean: 0.70693984808483
+      sat_ratio: 0.0
+      dark_ratio: 0.12676323014295182
+      contrast: 0.9329213397421225
+      snr: 2.9215877644714925
+      file: 7b_s6_s1_p004.tif
+20260205_SHOT3:
+  G1_1c_4ebp1_20260204:
+    best_file: 1c_4ebp1_s1_p004.tif
+    metrics:
+      mean: 0.9335872738956383
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.028113527122911486
+      snr: 1.8515320095949366
+      file: 1c_4ebp1_s1_p004.tif
+    all_files:
+    - mean: 0.9842529265871724
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.001617456321049926
+      snr: 0.15635026373737182
+      file: 1c_4ebp1_s1_p001.tif
+    - mean: 0.968348138344816
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.003494316014343468
+      snr: 0.3265625737010815
+      file: 1c_4ebp1_s1_p002.tif
+    - mean: 0.9518676177278151
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.009323262378881592
+      snr: 0.7969376340675992
+      file: 1c_4ebp1_s1_p003.tif
+    - mean: 0.9335872738956383
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.028113527122911486
+      snr: 1.8515320095949366
+      file: 1c_4ebp1_s1_p004.tif
+  G2_4c_4ebp1_20260204:
+    best_file: 4c_4ebp1_s1_p004.tif
+    metrics:
+      mean: 0.9339019502835053
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.023202716105897636
+      snr: 1.5208410310751048
+      file: 4c_4ebp1_s1_p004.tif
+    all_files:
+    - mean: 0.9842604013124227
+      sat_ratio: 0.9999759465050272
+      dark_ratio: 0.0
+      contrast: 0.0016479743648433187
+      snr: 0.1591596910813636
+      file: 4c_4ebp1_s1_p001.tif
+    - mean: 0.968374280559268
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0030823224231326662
+      snr: 0.28829869540046804
+      file: 4c_4ebp1_s1_p002.tif
+    - mean: 0.9519544577692401
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.007385366598001153
+      snr: 0.6330320555965413
+      file: 4c_4ebp1_s1_p003.tif
+    - mean: 0.9339019502835053
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.023202716105897636
+      snr: 1.5208410310751048
+      file: 4c_4ebp1_s1_p004.tif
+  G3_7c_4ebp1_20260204:
+    best_file: 7c_4ebp1_s1_p004.tif
+    metrics:
+      mean: 0.9351743284971861
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.01608300907911797
+      snr: 1.1922382327940353
+      file: 7c_4ebp1_s1_p004.tif
+    all_files:
+    - mean: 0.9842870750581962
+      sat_ratio: 1.0
+      dark_ratio: 0.0
+      contrast: 0.0014801251239796587
+      snr: 0.14341907871230952
+      file: 7c_4ebp1_s1_p001.tif
+    - mean: 0.9684765102462858
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0026398107881284716
+      snr: 0.24957090698589798
+      file: 7c_4ebp1_s1_p002.tif
+    - mean: 0.9523134656687534
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.0056615548943314
+      snr: 0.5052813751801577
+      file: 7c_4ebp1_s1_p003.tif
+    - mean: 0.9351743284971861
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.01608300907911797
+      snr: 1.1922382327940353
+      file: 7c_4ebp1_s1_p004.tif
+20260205_SHOT4:
+  G1_2a_pakt308_20260204:
+    best_file: 2a_pakt308_s1_p004.tif
+    metrics:
+      mean: 0.7762308373017832
+      sat_ratio: 0.0
+      dark_ratio: 0.010779322049447274
+      contrast: 0.9223773556115054
+      snr: 4.512131972214738
+      file: 2a_pakt308_s1_p004.tif
+    all_files:
+    - mean: 0.9809513470660821
+      sat_ratio: 0.7511582037521215
+      dark_ratio: 0.0
+      contrast: 0.02276646066987109
+      snr: 1.570340107446698
+      file: 2a_pakt308_s1_p001.tif
+    - mean: 0.9549032517923357
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09098954757000077
+      snr: 3.2258119179210616
+      file: 2a_pakt308_s1_p002.tif
+    - mean: 0.9033294417963031
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.322240024414435
+      snr: 4.28006872730039
+      file: 2a_pakt308_s1_p003.tif
+    - mean: 0.7762308373017832
+      sat_ratio: 0.0
+      dark_ratio: 0.010779322049447274
+      contrast: 0.9223773556115054
+      snr: 4.512131972214738
+      file: 2a_pakt308_s1_p004.tif
+  G2_5a_pakt308_20260204:
+    best_file: 5a_pakt308_s1_p003.tif
+    metrics:
+      mean: 0.8786924154689859
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.448249485008011
+      snr: 4.261581379037255
+      file: 5a_pakt308_s1_p003.tif
+    all_files:
+    - mean: 0.9792478164471796
+      sat_ratio: 0.6551345637856736
+      dark_ratio: 0.0
+      contrast: 0.031373464560921605
+      snr: 1.8919085522133787
+      file: 5a_pakt308_s1_p001.tif
+    - mean: 0.9480096873883724
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.12515449759670405
+      snr: 3.4171611994767606
+      file: 5a_pakt308_s1_p002.tif
+    - mean: 0.8786924154689859
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.448249485008011
+      snr: 4.261581379037255
+      file: 5a_pakt308_s1_p003.tif
+    - mean: 0.707987924889211
+      sat_ratio: 0.0
+      dark_ratio: 0.04252378242133507
+      contrast: 0.9353170061799039
+      snr: 3.527654952256909
+      file: 5a_pakt308_s1_p004.tif
+  G3_8a_pakt308_20260204:
+    best_file: 8a_pakt308_s1_p003.tif
+    metrics:
+      mean: 0.8735279427656653
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.3903892576485848
+      snr: 4.001598712991693
+      file: 8a_pakt308_s1_p003.tif
+    all_files:
+    - mean: 0.9789502514745523
+      sat_ratio: 0.5641694246648614
+      dark_ratio: 0.0
+      contrast: 0.027311818112458974
+      snr: 1.7005992059523642
+      file: 8a_pakt308_s1_p001.tif
+    - mean: 0.9467408568442491
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.10990951400015259
+      snr: 3.189407734421611
+      file: 8a_pakt308_s1_p002.tif
+    - mean: 0.8735279427656653
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.3903892576485848
+      snr: 4.001598712991693
+      file: 8a_pakt308_s1_p003.tif
+    - mean: 0.6829257010840963
+      sat_ratio: 0.0
+      dark_ratio: 0.042623608464547186
+      contrast: 0.9367513542381933
+      snr: 3.6363949307119734
+      file: 8a_pakt308_s1_p004.tif
+  G4_3a_pakt473_20260204:
+    best_file: 3a_pakt473_s1_p004.tif
+    metrics:
+      mean: 0.7625771891238803
+      sat_ratio: 0.0
+      dark_ratio: 0.022614432428756038
+      contrast: 0.9367360952162966
+      snr: 4.06291434696978
+      file: 3a_pakt473_s1_p004.tif
+    all_files:
+    - mean: 0.9809200019546244
+      sat_ratio: 0.7812691287492348
+      dark_ratio: 0.0
+      contrast: 0.023009842069123376
+      snr: 1.5420996015023578
+      file: 3a_pakt473_s1_p001.tif
+    - mean: 0.9546672117903722
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.09202410925459681
+      snr: 3.0839533893659286
+      file: 3a_pakt473_s1_p002.tif
+    - mean: 0.9014567431091981
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.3292095826657512
+      snr: 4.05524837511957
+      file: 3a_pakt473_s1_p003.tif
+    - mean: 0.7625771891238803
+      sat_ratio: 0.0
+      dark_ratio: 0.022614432428756038
+      contrast: 0.9367360952162966
+      snr: 4.06291434696978
+      file: 3a_pakt473_s1_p004.tif
+  G5_6a_pakt473_20260204:
+    best_file: 6a_pakt473_s1_p004.tif
+    metrics:
+      mean: 0.8356845796397877
+      sat_ratio: 0.0
+      dark_ratio: 0.00790459497542702
+      contrast: 0.84483161669337
+      snr: 6.590327187873508
+      file: 6a_pakt473_s1_p004.tif
+    all_files:
+    - mean: 0.9823556657957875
+      sat_ratio: 0.9370381826305118
+      dark_ratio: 0.0
+      contrast: 0.02018951705195704
+      snr: 1.3971241156410819
+      file: 6a_pakt473_s1_p001.tif
+    - mean: 0.9604882560818276
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.07889646753643098
+      snr: 2.824350008346811
+      file: 6a_pakt473_s1_p002.tif
+    - mean: 0.9224739981811941
+      sat_ratio: 0.0
+      dark_ratio: 0.0007217238890607279
+      contrast: 0.27833554589150833
+      snr: 3.9217739276308206
+      file: 6a_pakt473_s1_p003.tif
+    - mean: 0.8356845796397877
+      sat_ratio: 0.0
+      dark_ratio: 0.00790459497542702
+      contrast: 0.84483161669337
+      snr: 6.590327187873508
+      file: 6a_pakt473_s1_p004.tif
+  G6_9a_pakt473_20260204:
+    best_file: 9a_pakt473_s1_p004.tif
+    metrics:
+      mean: 0.8557645013872608
+      sat_ratio: 0.0
+      dark_ratio: 0.01370069256248118
+      contrast: 0.9374532692454414
+      snr: 5.439437077339671
+      file: 9a_pakt473_s1_p004.tif
+    all_files:
+    - mean: 0.9824044126156837
+      sat_ratio: 0.9296898524540801
+      dark_ratio: 0.0
+      contrast: 0.027427939269092816
+      snr: 1.5491465786383085
+      file: 9a_pakt473_s1_p001.tif
+    - mean: 0.9607350328128318
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.11010879682612351
+      snr: 2.67015897240555
+      file: 9a_pakt473_s1_p002.tif
+    - mean: 0.9253898614620031
+      sat_ratio: 0.0
+      dark_ratio: 0.0034126267188597814
+      contrast: 0.4169959563591975
+      snr: 4.2972331254230625
+      file: 9a_pakt473_s1_p003.tif
+    - mean: 0.8557645013872608
+      sat_ratio: 0.0
+      dark_ratio: 0.01370069256248118
+      contrast: 0.9374532692454414
+      snr: 5.439437077339671
+      file: 9a_pakt473_s1_p004.tif
+20260205_SHOT5:
+  G1_2b_p_s6_20260204:
+    best_file: 2b_p_s6_s1_p004.tif
+    metrics:
+      mean: 0.839108039990129
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.36945662623025866
+      snr: 4.244178722541794
+      file: 2b_p_s6_s1_p004.tif
+    all_files:
+    - mean: 0.9825487479624141
+      sat_ratio: 0.9599246906939215
+      dark_ratio: 0.0
+      contrast: 0.0081542687113757
+      snr: 0.7052518651859859
+      file: 2b_p_s6_s1_p001.tif
+    - mean: 0.9612296503452725
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03205584802014194
+      snr: 1.97002461302901
+      file: 2b_p_s6_s1_p002.tif
+    - mean: 0.925175902727534
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.1136034180209049
+      snr: 3.4625467350972854
+      file: 2b_p_s6_s1_p003.tif
+    - mean: 0.839108039990129
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.36945662623025866
+      snr: 4.244178722541794
+      file: 2b_p_s6_s1_p004.tif
+  G2_5b_p_s6_20260204:
+    best_file: 5b_p_s6_s1_p004.tif
+    metrics:
+      mean: 0.8586837673957202
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.1947022201876859
+      snr: 2.871971991750008
+      file: 5b_p_s6_s1_p004.tif
+    all_files:
+    - mean: 0.9830851461665004
+      sat_ratio: 0.9948379351740696
+      dark_ratio: 0.0
+      contrast: 0.004196231021591612
+      snr: 0.37995434940215744
+      file: 5b_p_s6_s1_p001.tif
+    - mean: 0.9633812385105107
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.015182726787212886
+      snr: 1.073854496536751
+      file: 5b_p_s6_s1_p002.tif
+    - mean: 0.932321726584889
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.05448996719310295
+      snr: 2.122787430080554
+      file: 5b_p_s6_s1_p003.tif
+    - mean: 0.8586837673957202
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.1947022201876859
+      snr: 2.871971991750008
+      file: 5b_p_s6_s1_p004.tif
+  G3_8b_p_s6_20260204:
+    best_file: 8b_p_s6_s1_p004.tif
+    metrics:
+      mean: 0.8700733173185262
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.22000442511635
+      snr: 3.751351763024327
+      file: 8b_p_s6_s1_p004.tif
+    all_files:
+    - mean: 0.9833529770611945
+      sat_ratio: 0.9869933267424617
+      dark_ratio: 0.0
+      contrast: 0.0049591821164264305
+      snr: 0.4549099951086207
+      file: 8b_p_s6_s1_p001.tif
+    - mean: 0.964556946605605
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.018600747692072983
+      snr: 1.3769415212762826
+      file: 8b_p_s6_s1_p002.tif
+    - mean: 0.9365972003089067
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.06522194247348745
+      snr: 2.829739105950989
+      file: 8b_p_s6_s1_p003.tif
+    - mean: 0.8700733173185262
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.22000442511635
+      snr: 3.751351763024327
+      file: 8b_p_s6_s1_p004.tif
+20260205_SHOT6:
+  G1_2b_p_s6_20260204:
+    best_file: 2b_p_s6_s1_p004.tif
+    metrics:
+      mean: 0.7781540571178734
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.5297912565804532
+      snr: 4.5504904595290006
+      file: 2b_p_s6_s1_p004.tif
+    all_files:
+    - mean: 0.9808252813903758
+      sat_ratio: 0.6412002553734837
+      dark_ratio: 0.0
+      contrast: 0.011964446478980761
+      snr: 0.9651188542218566
+      file: 2b_p_s6_s1_p001.tif
+    - mean: 0.9545349291886726
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.04736675059128714
+      snr: 2.424389822348921
+      file: 2b_p_s6_s1_p002.tif
+    - mean: 0.903073963083461
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.16684489204242003
+      snr: 3.830855131417824
+      file: 2b_p_s6_s1_p003.tif
+    - mean: 0.7781540571178734
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.5297912565804532
+      snr: 4.5504904595290006
+      file: 2b_p_s6_s1_p004.tif
+  G2_5b_p_s6_20260204:
+    best_file: 5b_p_s6_s1_p004.tif
+    metrics:
+      mean: 0.7617569725445106
+      sat_ratio: 0.0
+      dark_ratio: 3.085848299697587e-05
+      contrast: 0.6169756618600748
+      snr: 5.19670639087184
+      file: 5b_p_s6_s1_p004.tif
+    all_files:
+    - mean: 0.9804975423373702
+      sat_ratio: 0.627908412022465
+      dark_ratio: 0.0
+      contrast: 0.01397573815518427
+      snr: 1.120464228588908
+      file: 5b_p_s6_s1_p001.tif
+    - mean: 0.9531727999096458
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.05504921034561683
+      snr: 2.7870343461244755
+      file: 5b_p_s6_s1_p002.tif
+    - mean: 0.8981996976909292
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.19252307927061874
+      snr: 4.353242272527383
+      file: 5b_p_s6_s1_p003.tif
+    - mean: 0.7617569725445106
+      sat_ratio: 0.0
+      dark_ratio: 3.085848299697587e-05
+      contrast: 0.6169756618600748
+      snr: 5.19670639087184
+      file: 5b_p_s6_s1_p004.tif
+  G3_8b_p_s6_20260204:
+    best_file: 8b_p_s6_s1_p004.tif
+    metrics:
+      mean: 0.800451431498482
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.3785273517967498
+      snr: 3.800437132371715
+      file: 8b_p_s6_s1_p004.tif
+    all_files:
+    - mean: 0.9813616378997334
+      sat_ratio: 0.755597389558233
+      dark_ratio: 0.0
+      contrast: 0.008819714656290611
+      snr: 0.7339670948925755
+      file: 8b_p_s6_s1_p001.tif
+    - mean: 0.9566806954682235
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.03374700541695275
+      snr: 1.8764401981932135
+      file: 8b_p_s6_s1_p002.tif
+    - mean: 0.9105163110671114
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.11825146868085745
+      snr: 3.101803193392371
+      file: 8b_p_s6_s1_p003.tif
+    - mean: 0.800451431498482
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.3785273517967498
+      snr: 3.800437132371715
+      file: 8b_p_s6_s1_p004.tif
+20260205_SHOT7:
+  G1_2c_p_4ebp1_20260204:
+    best_file: 2c_p_4ebp1_s1_p002.tif
+    metrics:
+      mean: 0.9049360793745
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.44494331273365373
+      snr: 4.295583748764802
+      file: 2c_p_4ebp1_s1_p002.tif
+    all_files:
+    - mean: 0.9685217093225404
+      sat_ratio: 0.3901201799012018
+      dark_ratio: 0.0
+      contrast: 0.11042526894026095
+      snr: 3.3208816707820317
+      file: 2c_p_4ebp1_s1_p001.tif
+    - mean: 0.9049360793745
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.44494331273365373
+      snr: 4.295583748764802
+      file: 2c_p_4ebp1_s1_p002.tif
+    - mean: 0.7463943619224773
+      sat_ratio: 0.0
+      dark_ratio: 0.051375064513750644
+      contrast: 0.9517814908064393
+      snr: 3.5850827771082927
+      file: 2c_p_4ebp1_s1_p003.tif
+    - mean: 0.4968477267238446
+      sat_ratio: 0.0
+      dark_ratio: 0.23298680232986801
+      contrast: 0.9337148088807508
+      snr: 2.5375790933852067
+      file: 2c_p_4ebp1_s1_p004.tif
+  G2_5c_p_4ebp1_20260204:
+    best_file: 5c_p_4ebp1_s1_p003.tif
+    metrics:
+      mean: 0.8417997274689212
+      sat_ratio: 0.0
+      dark_ratio: 0.002112272161371998
+      contrast: 0.6113612573434042
+      snr: 4.448731293614727
+      file: 5c_p_4ebp1_s1_p003.tif
+    all_files:
+    - mean: 0.9765163258124192
+      sat_ratio: 0.46286737448766907
+      dark_ratio: 0.0
+      contrast: 0.0428079652094302
+      snr: 1.9821014500881424
+      file: 5c_p_4ebp1_s1_p001.tif
+    - mean: 0.9370091919421953
+      sat_ratio: 0.0
+      dark_ratio: 0.00029375970456166855
+      contrast: 0.17165941863126566
+      snr: 3.0930141531828568
+      file: 5c_p_4ebp1_s1_p002.tif
+    - mean: 0.8417997274689212
+      sat_ratio: 0.0
+      dark_ratio: 0.002112272161371998
+      contrast: 0.6113612573434042
+      snr: 4.448731293614727
+      file: 5c_p_4ebp1_s1_p003.tif
+    - mean: 0.6126119125544852
+      sat_ratio: 0.0
+      dark_ratio: 0.09664694280078895
+      contrast: 0.9332875562676433
+      snr: 3.1560493528993843
+      file: 5c_p_4ebp1_s1_p004.tif
+  G3_8c_p_4ebp1_20260204:
+    best_file: 8c_p_4ebp1_s1_p004.tif
+    metrics:
+      mean: 0.8186599751445149
+      sat_ratio: 0.0
+      dark_ratio: 0.0013558486379884136
+      contrast: 0.6876664377813382
+      snr: 4.5135790163125185
+      file: 8c_p_4ebp1_s1_p004.tif
+    all_files:
+    - mean: 0.9821841809176443
+      sat_ratio: 0.858791445827684
+      dark_ratio: 0.0
+      contrast: 0.014526588845655053
+      snr: 1.1222386742309352
+      file: 8c_p_4ebp1_s1_p001.tif
+    - mean: 0.9598017555793398
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.05758709086747538
+      snr: 2.6251480346195057
+      file: 8c_p_4ebp1_s1_p002.tif
+    - mean: 0.919656751988824
+      sat_ratio: 0.0
+      dark_ratio: 0.0
+      contrast: 0.20778118562600134
+      snr: 3.897131166355083
+      file: 8c_p_4ebp1_s1_p003.tif
+    - mean: 0.8186599751445149
+      sat_ratio: 0.0
+      dark_ratio: 0.0013558486379884136
+      contrast: 0.6876664377813382
+      snr: 4.5135790163125185
+      file: 8c_p_4ebp1_s1_p004.tif
 E12_SHOT1:
   G1_gapdh_E12_lys.l(1-12):
     best_file: gapdh_S1_p003.tif
