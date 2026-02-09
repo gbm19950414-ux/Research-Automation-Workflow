@@ -157,38 +157,38 @@ panels:
             Serum hunger: "+"
             Refeeding (min): "60"
 
-  - name: "20260204_wb_batch_1"
+  - name: "20260204_wb_batch_2"
 
     bands:
-      - prefix: "G3_9b_gapdh_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+      - prefix: "G2_6b_gapdh_20260204"  # materials 中的文件前缀（不带 _patch.tif）
         label: "GAPDH"                     # 左侧标签显示内容
         sample_type: "lys"
         shot_id: "20260205_SHOT1"
-      - prefix: "G6_7a_akt_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+      - prefix: "G5_4a_akt_20260204"  # materials 中的文件前缀（不带 _patch.tif）
         label: "AKT"                     # 左侧标签显示内容
         sample_type: "lys"
         shot_id: "20260205_SHOT1"
-      - prefix: "G3_8a_pakt308_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+      - prefix: "G2_5a_pakt308_20260204"  # materials 中的文件前缀（不带 _patch.tif）
         label: "p-AKT(308)"                     # 左侧标签显示内容
         sample_type: "lys"
         shot_id: "20260205_SHOT4"  
-      - prefix: "G6_9a_pakt473_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+      - prefix: "G5_6a_pakt473_20260204"  # materials 中的文件前缀（不带 _patch.tif）
         label: "p-AKT(473)"                     # 左侧标签显示内容
         sample_type: "lys"
         shot_id: "20260205_SHOT4"  
-      - prefix: "G3_7b_s6_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+      - prefix: "G2_4b_s6_20260204"  # materials 中的文件前缀（不带 _patch.tif）
         label: "S6"                     # 左侧标签显示内容
         sample_type: "lys"
         shot_id: "20260205_SHOT2"
-      - prefix: "G3_8b_p_s6_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+      - prefix: "G2_5b_p_s6_20260204"  # materials 中的文件前缀（不带 _patch.tif）
         label: "p-S6"                     # 左侧标签显示内容
         sample_type: "lys"
         shot_id: "20260205_SHOT6"
-      - prefix: "G3_7c_4ebp1_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+      - prefix: "G2_4c_4ebp1_20260204"  # materials 中的文件前缀（不带 _patch.tif）
         label: "4-EBP1"                     # 左侧标签显示内容
         sample_type: "lys"
         shot_id: "20260205_SHOT3"
-      - prefix: "G3_8c_p_4ebp1_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+      - prefix: "G2_5c_p_4ebp1_20260204"  # materials 中的文件前缀（不带 _patch.tif）
         label: "p-EBP1"                     # 左侧标签显示内容
         sample_type: "lys"
         shot_id: "20260205_SHOT7"
@@ -287,4 +287,132 @@ panels:
             Serum hunger: "+"
             Refeeding (min): "60"
 
+  - name: "20260204_wb_batch_1"
 
+    bands:
+      - prefix: "G1_3b_gapdh_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+        label: "GAPDH"                     # 左侧标签显示内容
+        sample_type: "lys"
+        shot_id: "20260205_SHOT1"
+      - prefix: "G4_1a_akt_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+        label: "AKT"                     # 左侧标签显示内容
+        sample_type: "lys"
+        shot_id: "20260205_SHOT1"
+      - prefix: "G1_2a_pakt308_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+        label: "p-AKT(308)"                     # 左侧标签显示内容
+        sample_type: "lys"
+        shot_id: "20260205_SHOT4"  
+      - prefix: "G4_3a_pakt473_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+        label: "p-AKT(473)"                     # 左侧标签显示内容
+        sample_type: "lys"
+        shot_id: "20260205_SHOT4"  
+      - prefix: "G1_1b_s6_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+        label: "S6"                     # 左侧标签显示内容
+        sample_type: "lys"
+        shot_id: "20260205_SHOT2"
+      - prefix: "G1_2b_p_s6_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+        label: "p-S6"                     # 左侧标签显示内容
+        sample_type: "lys"
+        shot_id: "20260205_SHOT6"
+      - prefix: "G1_1c_4ebp1_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+        label: "4-EBP1"                     # 左侧标签显示内容
+        sample_type: "lys"
+        shot_id: "20260205_SHOT3"
+      - prefix: "G1_2c_p_4ebp1_20260204"  # materials 中的文件前缀（不带 _patch.tif）
+        label: "p-EBP1"                     # 左侧标签显示内容
+        sample_type: "lys"
+        shot_id: "20260205_SHOT7"
+    lanes:
+      count: 12
+
+      # 每种处理方式一行的顺序
+      treatment_rows:
+        - "Serum hunger"
+        - "Refeeding (min)"
+
+
+      items:
+        - lane: 1
+          genotype: "WT"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "0"
+
+
+        - lane: 2
+          genotype: "HO"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "0"
+        - lane: 3
+          genotype: "WT"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "5"
+
+
+        - lane: 4
+          genotype: "HO"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "5"
+        - lane: 5
+          genotype: "WT"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "10"
+
+
+        - lane: 6
+          genotype: "HO"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "10"
+        - lane: 7
+          genotype: "WT"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "20"
+
+
+        - lane: 8
+          genotype: "HO"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "20"
+        - lane: 9
+          genotype: "WT"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "40"
+
+
+        - lane: 10
+          genotype: "HO"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "40"
+        - lane: 11
+          genotype: "WT"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "60"
+
+
+        - lane: 12
+          genotype: "HO"
+          treatments:
+    
+            Serum hunger: "+"
+            Refeeding (min): "60"

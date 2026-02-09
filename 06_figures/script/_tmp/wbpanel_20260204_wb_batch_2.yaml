@@ -1,0 +1,118 @@
+materials_rel_dir: 04_data/interim/wb/materials
+page:
+  width_mm: 84
+  height_mm: 80
+  top_margin_mm: 0
+  bottom_margin_mm: 0
+  left_margin_mm: 0
+  right_margin_mm: 0
+  band_spacing_mm: 8
+  label_gap_mm: 1
+  band_label_gap_mm: 2
+  genotype_row_height_mm: 6
+  band_row_height_mm: 9
+  treatment_row_height_mm: 6
+  layout:
+    band_width_ratio: 0.65
+    antibody_label_ratio: 0.25
+    sample_type_ratio: 0.1
+name: 20260204_wb_batch_2
+bands:
+- prefix: G2_6b_gapdh_20260204
+  label: GAPDH
+  sample_type: lys
+  shot_id: 20260205_SHOT1
+- prefix: G5_4a_akt_20260204
+  label: AKT
+  sample_type: lys
+  shot_id: 20260205_SHOT1
+- prefix: G2_5a_pakt308_20260204
+  label: p-AKT(308)
+  sample_type: lys
+  shot_id: 20260205_SHOT4
+- prefix: G5_6a_pakt473_20260204
+  label: p-AKT(473)
+  sample_type: lys
+  shot_id: 20260205_SHOT4
+- prefix: G2_4b_s6_20260204
+  label: S6
+  sample_type: lys
+  shot_id: 20260205_SHOT2
+- prefix: G2_5b_p_s6_20260204
+  label: p-S6
+  sample_type: lys
+  shot_id: 20260205_SHOT6
+- prefix: G2_4c_4ebp1_20260204
+  label: 4-EBP1
+  sample_type: lys
+  shot_id: 20260205_SHOT3
+- prefix: G2_5c_p_4ebp1_20260204
+  label: p-EBP1
+  sample_type: lys
+  shot_id: 20260205_SHOT7
+lanes:
+  count: 12
+  treatment_rows:
+  - Serum hunger
+  - Refeeding (min)
+  items:
+  - lane: 1
+    genotype: WT
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '0'
+  - lane: 2
+    genotype: HO
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '0'
+  - lane: 3
+    genotype: WT
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '5'
+  - lane: 4
+    genotype: HO
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '5'
+  - lane: 5
+    genotype: WT
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '10'
+  - lane: 6
+    genotype: HO
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '10'
+  - lane: 7
+    genotype: WT
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '20'
+  - lane: 8
+    genotype: HO
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '20'
+  - lane: 9
+    genotype: WT
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '40'
+  - lane: 10
+    genotype: HO
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '40'
+  - lane: 11
+    genotype: WT
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '60'
+  - lane: 12
+    genotype: HO
+    treatments:
+      Serum hunger: +
+      Refeeding (min): '60'

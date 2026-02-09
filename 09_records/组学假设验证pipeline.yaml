@@ -143,7 +143,7 @@ runs:
           stimulation: "FBS 再喂养（refeed）作为输入脉冲"
           designs:
             EV004a_timecourse:
-              timepoints: ["0", "2", "5", "10", "20", "30", "60 min"]
+              timepoints: ["0", "5", "10", "20", "40", "60 min"]
               metric: "峰值（max）与 AUC（0–30/0–60）"
             EV004b_dose_response:
               fixed_timepoint: "10–15 min（先用 timecourse 确定）"
@@ -166,7 +166,7 @@ runs:
             - group_id: "G1_refeed_vehicle_main"
               genotype: ["WT", "EphB1_KO"]
               PI3K_inhibitor: "vehicle"
-              refeed: "FBS_refeed 时间梯度2、5、10、20、40min"
+              refeed: "FBS_refeed 时间梯度5、10、20、40、60min"
               purpose: "比较pi3k信号通路响应程度"
 
         minimal_readouts:

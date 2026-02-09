@@ -10,37 +10,65 @@
 meta:
   figure: ""           # e.g., "Figure 1"
   figure_id: ""        # e.g., "1d"
-  experiment_id: ""
-  short_title: ""         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
+  experiment_id: "20260204_wb"
+  short_title: "EphB1 缺失抑制PI3K信号通路活化"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: ""
   version: 2026-02-09
+
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
-  context_from_previous: ""  # 与上一节的衔接（1 句）：上一节发现/提出了什么问题？
-  core_question: ""          # 本 panel 的核心科学问题（1 句，用“是否”、“如何”、“在多大程度上”等）
-  hypothesis_or_expectation: ""  # 你的假设或预期结果（1 句）
-  importance_reason: ""      # 为什么这个问题重要/值得单列一节（1 句即可）
+  context_from_previous: >
+    前一节在转录与表型 readout 层面
+    提示 EphB1 缺失可能改变 PI3K 相关输出与下游代谢/膜环境节点，
+    但仍缺少“即刻信号输出”层面的直接证据。
+  core_question: >
+    EphB1 缺失是否会改变 PI3K–AKT–mTOR 通路在
+    标准化输入脉冲（血清再喂养）下的即时磷酸化输出动力学（幅度与积分输出）？
+  hypothesis_or_expectation: >
+    若 EphB1 影响 PI3K 输出 capacity，
+    则在饥饿统一起点后进行 FBS refeed，
+    KO 与 WT 的 p-AKT(T308/S473)、p-S6、p-4EBP1 的峰值与/或 AUC 将出现可重复差异。
+  importance_reason: >
+    磷酸化层的动态 readout 能将“上游输入差异/基线差异”与“通路输出 capacity 差异”解耦，
+    为后续 link_validation（B→C）提供因果链的关键中间证据。
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: ""       # 使用的模型/系统 + 选择理由
-  key_variables: ""          # 本实验关注的关键变量 + 操纵方式
-  control_logic: ""          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
-  core_justification: ""     # 最关键的一句“设计理由”（可直接当自动摘要用）
+  model_and_system: >
+    采用 WT 与 EphB1_KO 原代小鼠腹腔巨噬细胞，
+    并在同日分离同板培养的条件下直接比较基因型差异。
+  key_variables: >
+    主要变量为基因型（WT vs EphB1_KO）与刺激输入（no_refeed vs FBS_refeed），
+    以时间点梯度刻画 p-AKT/p-S6/p-4EBP1 的动力学曲线。
+  control_logic: >
+    先用无血清预处理统一起点并“打开动态范围”；
+    no_refeed 定义饥饿后的基线/地板效应，
+    FBS_refeed 提供标准化输入脉冲，确保比较聚焦于通路响应能力而非培养波动。
+  core_justification: >
+    通过“统一预处理 + 标准化 refeed 脉冲 + 时间梯度曲线”，
+    可以用峰值与 AUC 等容量指标定量比较 WT 与 KO 的 PI3K–AKT–mTOR 即时输出差异。
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
-  inherits_from_protocol: ""   # 引用全章或整篇论文的通用 protocol 名称，如 "default_peritoneal_macrophage_NLRP3_activation"
-  biological_material: ""      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
-  experimental_groups: ""      # 组别及核心差异：基因型、处理、时间点
-  stimuli_and_treatment: ""    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
-  time_points: ""              # 关键测定时间点（如果不在上面已写清）
-  dose_info: ""                # 若有剂量梯度，在此简要说明（如 “Alexidine 0, 1, 5, 10 μM”）
-  readout_and_assay: ""        # 读出方式（ELISA/WB/IF/plate reader）及关键差异信息
-  replicates: ""               # 生物学重复数 n，以及是否合并多次实验
-  analysis_notes: ""           # 本 panel 特有的分析方法/统计模型（如 normalization、配对 vs 非配对）
-  minimal_methods_summary: ""  # 1–2 句，把上面内容压缩成将来写 Methods 时可以直接用的一小段。
-
+  inherits_from_protocol: "protocols.WB_phospho_signaling_v1"
+  biological_material: >
+    WT 与 EphB1_KO（EphB1 PB−/−）小鼠来源原代腹腔巨噬细胞；同日分离、同板培养以减少批间差异。
+  experimental_groups: >
+    no_refeed（饥饿后不再喂养）与 FBS_refeed（再喂养）两类条件下，分别比较 WT vs KO；主分析聚焦于 refeed 条件下的 WT vs KO。
+  stimuli_and_treatment: >
+    采用血清饥饿预处理（5 h，统一起点）后，以 FBS （10%）再喂养作为标准化输入脉冲。
+  time_points: >
+    timecourse：0、5、10、20、40、60 min（ 0 min 为no_refeed）。
+  dose_info: >
+    统一无血清饥饿，10% FBS refeed
+  readout_and_assay: >
+    Western blot 检测 p-AKT(T308/S473)、p-S6、p-4EBP1，并检测 total AKT/S6/4EBP1 与 GAPDH 作为 loading/归一化参考。
+  replicates: >
+    每个时间点与条件包含生物学重复（n=3），并在独立批次重复以验证方向一致性。
+  analysis_notes: >
+    以 total protein 或对应 total target 进行归一化后，提取峰值（max）与积分输出（AUC，0–30/0–60）作为 capacity 指标；对 no_refeed 与 refeed 分别建模，核心对比为 refeed 条件下 WT vs KO。
+  minimal_methods_summary: >
+    WT 与 EphB1_KO 原代腹腔巨噬细胞经无血清预处理统一起点后进行 FBS 再喂养时间梯度取样，WB 检测 p-AKT/p-S6/p-4EBP1 并以 total/loading 归一化，使用 max 与 AUC 定量比较通路输出差异。
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
   data_direction: ""           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
