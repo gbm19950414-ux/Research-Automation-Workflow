@@ -297,61 +297,52 @@ wb_panel_from_yaml <- function(root,
   )
   pushViewport(viewport(layout = layout))
 
-  # ---- 顶部 genotype 分组 ----
+  # ---- 顶部 genotype 分组（方案B：按连续区段 rle 兼容 block 与交替） ----
   lane_width_npc <- 1 / lane_count
 
-  geno_vec    <- vapply(lane_items, function(x) x$genotype, character(1))
-  unique_geno <- unique(geno_vec[geno_vec != ""])
+  geno_vec <- vapply(lane_items, function(x) x$genotype, character(1))
 
   pushViewport(viewport(
     layout.pos.row = 1L,
     layout.pos.col = band_col_index
   ))
 
-  if (length(unique_geno) > 0L) {
-    # 对每一种非空 genotype 画一段水平线，并把文字放在该 genotype block 的几何中心
-    for (g in unique_geno) {
-      idx <- which(geno_vec == g)
-      if (length(idx) == 0L) next
+  # 规则：对连续相同的 genotype 作为一个区段绘制。
+  # - 区段长度 > 1：画括号线 + 居中标签（适合 block 上样）
+  # - 区段长度 == 1：只画标签不画线（适合 WT/HO 交替）
+  if (length(geno_vec) > 0L && any(nzchar(geno_vec))) {
+    r <- rle(geno_vec)
+    ends   <- cumsum(r$lengths)
+    starts <- ends - r$lengths + 1
 
-      # 覆盖该 genotype 的 lane 范围（在 band 列内的 npc 坐标）
-      full_start <- (min(idx) - 1) * lane_width_npc
-      full_end   <- max(idx) * lane_width_npc
+    for (j in seq_along(r$values)) {
+      g <- r$values[j]
+      if (!nzchar(g)) next
 
-      # 在线段两端各留出 10% 的水平 padding
-      pad_frac   <- 0.10
-      line_start <- full_start + (full_end - full_start) * pad_frac
-      line_end   <- full_end   - (full_end - full_start) * pad_frac
+      s <- starts[j]
+      e <- ends[j]
 
-      # 文本位置使用整个 genotype block 的中点
-      x_mid <- (full_start + full_end) / 2
+      full_start <- (s - 1) * lane_width_npc
+      full_end   <- e * lane_width_npc
+      x_mid      <- (full_start + full_end) / 2
 
-      grid::grid.lines(
-        x = unit(c(line_start, line_end), "npc"),
-        y = unit(c(0.3, 0.3), "npc"),
-        gp = gpar(lwd = 0.7)
-      )
+      # 仅当区段覆盖 >=2 lanes 时画横线
+      if (r$lengths[j] > 1L) {
+        pad_frac   <- 0.10
+        line_start <- full_start + (full_end - full_start) * pad_frac
+        line_end   <- full_end   - (full_end - full_start) * pad_frac
+
+        grid::grid.lines(
+          x = unit(c(line_start, line_end), "npc"),
+          y = unit(c(0.3, 0.3), "npc"),
+          gp = gpar(lwd = 0.7)
+        )
+      }
 
       grid::grid.text(
         label = g,
         x     = unit(x_mid, "npc"),
         y     = unit(0.75, "npc"),
-        just  = c("centre", "centre"),
-        gp    = gpar(
-          fontsize = style$typography$axis_tick_default$font_size_pt %||% 6
-        )
-      )
-    }
-  } else {
-    # 所有 genotype 都是空字符串的 fallback：逐 lane 打标签（不画横线）
-    for (k in seq_len(lane_count)) {
-      geno_label <- geno_vec[k]
-      if (!nzchar(geno_label)) next
-      x_mid <- (k - 0.5) * lane_width_npc
-      grid::grid.text(
-        label = geno_label,
-        x     = unit(x_mid, "npc"),
-        y     = unit(0.5, "npc"),
         just  = c("centre", "centre"),
         gp    = gpar(
           fontsize = style$typography$axis_tick_default$font_size_pt %||% 6
