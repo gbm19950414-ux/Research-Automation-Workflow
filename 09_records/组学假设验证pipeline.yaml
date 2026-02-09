@@ -38,7 +38,7 @@ runs:
           qpcr: "protocols.qPCR_SYBR_v1"
           analysis: "protocols.qPCR_DCt_DDct_Zscore_v1"
         purpose: >
-          node_validation：验证 PI3K capacity（A）与 flux/turnover（C）在独立样本中是否复现组学方向。
+          node_validation：验证 PI3K capacity（A）、PI3K foot print（B）、与 flux/turnover（C）在独立样本中是否复现组学方向。
         linked_EVs:
           - EV002   # PI3K capacity qPCR
           - EV008   # flux/turnover 关键节点 qPCR
@@ -204,11 +204,28 @@ runs:
         linked_EVs:
           - EV009
         minimal_design:
-          treatment: "PI3K 抑制剂处理（如 LY294002/isoform inhibitor）"
-          controls:
-            - "vehicle 对照"
+          intent: "PI3K inhibition overnight to recapitulate flux/turnover transcription"
+          groups_minimal:
+            - group_id: "vehicle"
+              genotype: ["WT","HO"]
+              drug:
+                name: "DMSO"
+                final_conc: 0.5
+                unit: "μM"
+              duration:
+                value: "overnight"
+                hours_range: "12-16"
+
+            - group_id: "PI3Ki"
+              genotype: ["WT","HO"]
+              drug:
+                name: "Copanlisib (or LY294002)"
+                final_conc: 0.5
+                unit: "μM"
+              duration:
+                value: "overnight"
+                hours_range: "12-16"
         readouts:
-          - "flux/turnover 关键节点 qPCR（与 EV008 同 panel）"
 
       - branch_id: RUN03_B_AKT_mTOR_modulation_rescues_flux_turnover_direction
         sample_type: "RNA"
@@ -268,10 +285,25 @@ runs:
         linked_EVs:
           - EV017
         minimal_design:
-          treatment: "PI3K 抑制剂处理"
-          controls:
-            - "ΔΨm 对照（TMRM/JC-1）"
-            - "（可选）线粒体数量 proxy"
+            - group_id: "vehicle"
+              genotype: ["WT","HO"]
+              drug:
+                name: "DMSO"
+                final_conc: 0.5
+                unit: "μM"
+              duration:
+                value: "overnight"
+                hours_range: "12-16"
+
+            - group_id: "PI3Ki"
+              genotype: ["WT","HO"]
+              drug:
+                name: "Copanlisib (or LY294002)"
+                final_conc: 0.5
+                unit: "μM"
+              duration:
+                value: "overnight"
+                hours_range: "12-16"
         readouts:
           - "NAO 信号变化（方向与 D/E 假设一致）"
 

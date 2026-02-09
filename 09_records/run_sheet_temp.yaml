@@ -52,7 +52,7 @@ run_sheet:
         - "RUN03_A"
         - "RUN04_A"
       day: 1
-      status: done
+      finish_day: 2026-01-29
 
     - action: 取细胞
       run: 
@@ -61,78 +61,86 @@ run_sheet:
         - "RUN03_A"
         - "RUN04_A"
       day: 4
-      status: active
+      finish_day: 2026-02-02
 
     - action: 种12孔板*1，(WT*5+HO*5)*2
       run: 
         - "RUN01_A"
         - "RUN03_A"
       day: 4
-      status: todo
+      finish_day: 2026-02-02
 
     - action: 种12孔板*3，(WT*1+HO*1)*6*3个不同样品
       run: 
         - "RUN02_A"
       day: 4
-      status: todo
+      finish_day: 2026-02-02
 
     - action: 种12孔板*1，(WT*5+HO*5)*2
       run: 
         - "RUN04_A"
       day: 4
-      status: todo
+      finish_day: 2026-02-02
 
     - action: pi3k抑制剂过夜刺激？ # 找到货号，查说明书
       run: 
         - "RUN03_A"
         - "RUN04_A"
       day: 4
-      status: todo
+      finish_day: 2026-02-02
 
     - action: NAO染色
       run: 
         - "RUN04_A"
       day: 5
-      status: todo
+      finish_day: 2026-02-03
 
     - action: 药物处理，血清饥饿后使用 FBS 刺激，于0、2、5、10、20、40分钟收样
       run: 
         - "RUN02_A"
       day: 5
-      status: todo
+      finish_day: 2026-02-03
 
     - action: "RNA 收样"
       run: 
         - "RUN01_A"
         - "RUN03_A"
       day: 5
-      status: todo
+      finish_day: 2026-02-03
 
     - action: 拍摄照片
       run: 
         - "RUN04_A"
       day: 5
-      status: todo
+      finish_day: 2026-02-03
 
     - action: WB 实验做胶、一抗
       run: 
         - "RUN02_A"
       day: 6
-      status: todo
+      finish_day: 2026-02-04
 
-    - action: "qPCR 实验"
+    - action: "qPCR 实验-rna提取"
       run: 
         - "RUN01_A"
         - "RUN03_A"
       offset days: 1
       day: 6
-      status: todo
+      finish_day: 2026-02-05
+
+    - action: "qPCR 实验-点样、跑程序"
+      run: 
+        - "RUN01_A"
+        - "RUN03_A"
+      offset days: 
+      day: 7
+      finish_day: 2026-02-06
 
     - action: WB 实验二抗、曝光
       run: 
         - "RUN02_A"
       day: 7
-      status: todo
+      finish_day: 2026-02-05
 
 
 
