@@ -23,6 +23,39 @@ read_yaml_safe <- function(path) {
   yaml::read_yaml(path)
 }
 
+load_style_palette <- function(style_path) {
+  if (is.null(style_path) || !file.exists(style_path)) return(NULL)
+  st <- yaml::read_yaml(style_path)
+
+  # Try common locations
+  cand <- NULL
+  if (!is.null(st$palette$genotype)) cand <- st$palette$genotype
+  if (is.null(cand) && !is.null(st$colors$genotype)) cand <- st$colors$genotype
+  if (is.null(cand) && !is.null(st$palette)) cand <- st$palette
+  if (is.null(cand) && !is.null(st$colors)) cand <- st$colors
+
+  # Coerce list to named character vector
+  if (is.null(cand)) return(NULL)
+  if (is.list(cand)) {
+    vals <- unlist(cand, use.names = TRUE)
+  } else {
+    vals <- cand
+  }
+  vals <- as.character(vals)
+  if (length(vals) == 0) return(NULL)
+  vals
+}
+
+# Make a safe filename component from a label (e.g., p-AKT(308) -> p_AKT_308)
+make_safe_slug <- function(x) {
+  x <- as.character(x)
+  x <- stringr::str_replace_all(x, "[^A-Za-z0-9]+", "_")
+  x <- stringr::str_replace_all(x, "_+", "_")
+  x <- stringr::str_replace_all(x, "^_+|_+$", "")
+  if (!nzchar(x)) x <- "target"
+  x
+}
+
 merge_page_like <- function(base, override) {
   # shallow merge for lists
   if (is.null(base)) base <- list()
@@ -118,10 +151,7 @@ infer_total_label <- function(phospho_label, available_labels, total_map = NULL)
 
 # ---- normalization: phospho/total if possible else /GAPDH ----
 normalize_intensity <- function(df_long, loading_label = "GAPDH", total_map = NULL) {
-  # df_long columns: lane_index, band_label, raw (signal_sum), plus metadata columns
   available_labels <- unique(df_long$band_label)
-
-  # phospho candidates: labels starting with "p-" (you can expand later)
   phospho_labels <- available_labels[str_detect(available_labels, "^p-")]
 
   out <- list()
@@ -138,7 +168,6 @@ normalize_intensity <- function(df_long, loading_label = "GAPDH", total_map = NU
       denom_label <- loading_label
       denom_type  <- "loading"
     } else {
-      # cannot normalize -> skip
       next
     }
 
@@ -150,12 +179,19 @@ normalize_intensity <- function(df_long, loading_label = "GAPDH", total_map = NU
       dplyr::rename(denom_raw = raw) %>%
       dplyr::select(-band_label)
 
+    # Keep denom table slim to avoid duplicate metadata columns (e.g., genotype) getting suffixed
+    join_keys <- intersect(c("panel", "lane_index"), intersect(names(numer), names(denom)))
+    if (!("lane_index" %in% join_keys)) {
+      stop("normalize_intensity: lane_index missing in join keys")
+    }
+    denom <- denom %>% dplyr::select(dplyr::all_of(join_keys), denom_raw)
+
     if (!("lane_index" %in% names(numer)) || !("lane_index" %in% names(denom))) {
       stop("normalize_intensity: lane_index missing in numer/denom data")
     }
 
     merged <- numer %>%
-      dplyr::left_join(denom, by = c("lane_index")) %>%
+      dplyr::left_join(denom, by = join_keys) %>%
       dplyr::mutate(
         target = pl,
         denom_used = denom_label,
@@ -176,7 +212,6 @@ normalize_intensity <- function(df_long, loading_label = "GAPDH", total_map = NU
 # ---- build group id = genotype + treatments(all columns except lane_index) ----
 make_group_id <- function(df_norm) {
   meta_cols <- setdiff(names(df_norm), c("lane_index", "numer_raw", "denom_raw", "value"))
-  # treatments cols are those that are not in fixed set
   fixed <- c("genotype", "target", "denom_used", "denom_type")
   treat_cols <- setdiff(meta_cols, fixed)
 
@@ -189,30 +224,42 @@ make_group_id <- function(df_norm) {
 }
 
 # ---- bar plot ----
-plot_bar <- function(df_norm, panel_name, out_pdf, x_prefer_time = TRUE) {
+plot_bar <- function(df_norm, panel_name, out_pdf, x_prefer_time = TRUE, genotype_palette = NULL, target_label = NULL) {
   df2 <- make_group_id(df_norm)
 
-  # choose x-axis label: prefer numeric time column if exists
+  if (!is.null(target_label)) {
+    df2 <- df2 %>% dplyr::filter(target == target_label)
+  }
+
   x_col <- NULL
   if (x_prefer_time && ("Refeeding (min)" %in% names(df2))) x_col <- "Refeeding (min)"
 
-  # summarize for bars, keep replicates as points
-  # replicate unit: lane_index (since one lane = one sample)
-  sum_df <- df2 %>%
-    dplyr::group_by(target, genotype, group_id, .add = TRUE) %>%
-    dplyr::summarise(
-      n = sum(!is.na(value)),
-      mean = mean(value, na.rm = TRUE),
-      sem = sd(value, na.rm = TRUE) / sqrt(max(1, n)),
-      .groups = "drop"
-    )
+  # Summaries for bars/lines
+  if (!is.null(x_col) && (x_col %in% names(df2))) {
+    sum_df <- df2 %>%
+      dplyr::group_by(genotype, !!rlang::sym(x_col)) %>%
+      dplyr::summarise(
+        n = sum(!is.na(value)),
+        mean = mean(value, na.rm = TRUE),
+        sem = sd(value, na.rm = TRUE) / sqrt(max(1, n)),
+        .groups = "drop"
+      )
+  } else {
+    sum_df <- df2 %>%
+      dplyr::group_by(genotype, group_id) %>%
+      dplyr::summarise(
+        n = sum(!is.na(value)),
+        mean = mean(value, na.rm = TRUE),
+        sem = sd(value, na.rm = TRUE) / sqrt(max(1, n)),
+        .groups = "drop"
+      )
+  }
 
-  # build x aesthetic
-  if (!is.null(x_col)) {
-    # within each target & genotype, group by time
-    # ensure numeric ordering
+  if (!is.null(x_col) && (x_col %in% names(df2))) {
     df2[[x_col]] <- suppressWarnings(as.numeric(df2[[x_col]]))
-    sum_df[[x_col]] <- suppressWarnings(as.numeric(sum_df[[x_col]] %||% NA_real_))
+    if (x_col %in% names(sum_df)) {
+      sum_df[[x_col]] <- suppressWarnings(as.numeric(sum_df[[x_col]]))
+    }
   }
 
   p <- ggplot() +
@@ -228,26 +275,53 @@ plot_bar <- function(df_norm, panel_name, out_pdf, x_prefer_time = TRUE) {
       position = position_dodge(width = 0.85),
       width = 0.25
     ) +
+    geom_line(
+      data = sum_df,
+      aes(
+        x = if (!is.null(x_col)) !!rlang::sym(x_col) else group_id,
+        y = mean,
+        color = genotype,
+        group = genotype
+      ),
+      linewidth = 0.4,
+      alpha = 0.9
+    ) +
+    geom_point(
+      data = sum_df,
+      aes(
+        x = if (!is.null(x_col)) !!rlang::sym(x_col) else group_id,
+        y = mean,
+        color = genotype
+      ),
+      size = 1.8,
+      alpha = 0.95
+    ) +
     geom_point(
       data = df2,
-      aes(x = if (!is.null(x_col)) !!rlang::sym(x_col) else group_id, y = value, shape = genotype),
+      aes(x = if (!is.null(x_col)) !!rlang::sym(x_col) else group_id, y = value, shape = genotype, color = genotype),
       position = position_jitterdodge(jitter.width = 0.10, dodge.width = 0.85),
       size = 1.7,
       alpha = 0.85
     ) +
-    facet_wrap(~ target, scales = "free_y") +
     labs(
-      title = panel_name,
+      title = if (!is.null(target_label)) paste0(panel_name, " | ", target_label) else panel_name,
       x = if (!is.null(x_col)) x_col else "Group (genotype + treatments)",
       y = "Normalized intensity",
       fill = "Genotype",
-      shape = "Genotype"
+      shape = "Genotype",
+      color = "Genotype"
     ) +
     theme_bw(base_size = 10) +
     theme(
       panel.grid.minor = element_blank(),
       axis.text.x = element_text(angle = if (is.null(x_col)) 45 else 0, hjust = 1)
     )
+
+  if (!is.null(genotype_palette)) {
+    p <- p +
+      scale_fill_manual(values = genotype_palette) +
+      scale_color_manual(values = genotype_palette)
+  }
 
   ggsave(out_pdf, p, width = 8.5, height = 5.5, units = "in")
 }
@@ -258,6 +332,7 @@ run_panel_intensity_plot <- function(root, panel_cfg, intensity_dir_rel = "04_da
                                      loading_label = "GAPDH",
                                      total_map = NULL,
                                      out_dir_rel = "06_figures/results",
+                                     style_rel = NULL,
                                      out_suffix = "intensity_bar") {
   panel_name <- panel_cfg$name %||% "panel"
   lanes_cfg <- panel_cfg$lanes
@@ -266,13 +341,10 @@ run_panel_intensity_plot <- function(root, panel_cfg, intensity_dir_rel = "04_da
   lane_meta <- lane_meta_from_yaml(lanes_cfg)
   band_map  <- band_map_from_yaml(bands_cfg)
 
-  # read intensity TSV
   tsv_path <- file.path(root, intensity_dir_rel, paste0(panel_name, ".lane_intensity.tsv"))
   if (!file.exists(tsv_path)) stop("Intensity TSV not found: ", tsv_path)
 
   df_raw <- readr::read_tsv(tsv_path, show_col_types = FALSE)
-
-  # choose raw signal column
   if (!(signal_field %in% names(df_raw))) stop("signal_field not found in TSV: ", signal_field)
 
   df_use <- df_raw %>%
@@ -282,21 +354,35 @@ run_panel_intensity_plot <- function(root, panel_cfg, intensity_dir_rel = "04_da
     dplyr::left_join(band_map, by = "band_prefix") %>%
     dplyr::left_join(lane_meta, by = "lane_index")
 
-  # normalize
   df_norm <- normalize_intensity(df_use, loading_label = loading_label, total_map = total_map)
   if (nrow(df_norm) == 0) {
     warning("No normalized values produced for panel: ", panel_name)
     return(invisible(NULL))
   }
 
-  # output
   out_dir <- file.path(root, out_dir_rel, panel_name)
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-  out_pdf <- file.path(out_dir, paste0(panel_name, ".", out_suffix, ".pdf"))
 
-  plot_bar(df_norm, panel_name = panel_name, out_pdf = out_pdf, x_prefer_time = TRUE)
-  message("[OK] intensity bar plot saved → ", out_pdf)
-  invisible(out_pdf)
+  style_path <- if (!is.null(style_rel)) file.path(root, style_rel) else NULL
+  genotype_palette <- load_style_palette(style_path)
+
+  targets <- sort(unique(df_norm$target))
+  out_paths <- character(0)
+  for (tg in targets) {
+    slug <- make_safe_slug(tg)
+    out_pdf <- file.path(out_dir, paste0(panel_name, ".", out_suffix, ".", slug, ".pdf"))
+    plot_bar(
+      df_norm,
+      panel_name = panel_name,
+      out_pdf = out_pdf,
+      x_prefer_time = TRUE,
+      genotype_palette = genotype_palette,
+      target_label = tg
+    )
+    message("[OK] intensity bar plot saved → ", out_pdf)
+    out_paths <- c(out_paths, out_pdf)
+  }
+  invisible(out_paths)
 }
 
 # ---- main entry: run from YAML config (multi-panel supported) ----
@@ -305,6 +391,7 @@ run_intensity_plots_from_yaml <- function(root, config_rel, panel = NULL,
                                          signal_field = "signal_sum",
                                          loading_label = "GAPDH",
                                          total_map = NULL,
+                                         style_rel = NULL,
                                          out_dir_rel = "06_figures/results") {
   cfg_path <- file.path(root, config_rel)
   cfg_all <- read_yaml_safe(cfg_path)
@@ -322,7 +409,8 @@ run_intensity_plots_from_yaml <- function(root, config_rel, panel = NULL,
       signal_field = signal_field,
       loading_label = loading_label,
       total_map = total_map,
-      out_dir_rel = out_dir_rel
+      out_dir_rel = out_dir_rel,
+      style_rel = style_rel
     )
   }
   invisible(TRUE)

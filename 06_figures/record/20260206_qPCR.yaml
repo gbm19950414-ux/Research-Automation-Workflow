@@ -10,7 +10,7 @@
 meta:
   figure: ""           # e.g., "Figure 1"
   figure_id: ""        # e.g., "1d"
-  experiment_id: "20260204_wb"
+  experiment_id: "20260206_qPCR"
   short_title: "EphB1 缺失抑制PI3K信号通路活化"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: ""
   version: 2026-02-09

@@ -14,7 +14,7 @@ import pathlib, sys
 
 # -------- 用户一次性配置 ---------------------------------
 INPUT_FILE  = ("04_data/interim/qpcr/qpcr_original_data_long_format.csv")
-OBJECTIVES  = ["心磷脂代谢过程关键基因变化", "线粒体总量变化","细胞因子检测"]
+OBJECTIVES  = ["001a+003a"]
 OUTPUT_FILE = f"04_data/interim/qpcr/ddct_analysis_{'_'.join(OBJECTIVES)}.csv"
 
 

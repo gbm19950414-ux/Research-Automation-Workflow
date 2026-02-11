@@ -1,0 +1,66 @@
+# figure_4_b_violin.yaml
+
+title: "Figure 5a — NAO intensity violin plot"
+out: "20260203_NAO"
+out_dir: "06_figures/results"
+
+size:
+  width_mm: 84
+  high_mm: 60
+
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  - id: "a"
+    type: "violin"
+    data: "04_data/interim/imaging_if/20260202_statistic_IntDen_stats.xlsx"
+    sheet: 2
+
+    mapping:
+      x: "group"
+      x_interaction: ["treatment", "genotype"]
+      x_sep: "_"
+      "y": "IntDen"
+      hue: "genotype"
+
+    order: ["control_WT", "control_HO", "pi3ki_WT", "pi3ki_HO"]
+    hue_order: ["WT", "HO"]
+
+    rename_x:
+      control_WT: "Control"
+      control_HO: "Ctrl HO"
+      pi3ki_WT: "pi3ki"
+      pi3ki_HO: "pi3ki HO"
+
+    x_label: ""
+    y_label: "NAO intensity after pi3ki treated (IntDen)"
+
+    strip: true
+
+
+    stats:
+      enabled: true
+      source: "04_data/interim/imaging_if/20260202_statistic_IntDen_stats.xlsx"
+      sheet: 6
+      column: "p_value"
+      pairs:
+        - ["control_WT", "control_HO"]
+        - ["pi3ki_WT", "pi3ki_HO"]
+        - ["control_WT", "pi3ki_WT"]   # ✅ 新增：WT 内 treatment 对比
+        - ["control_HO", "pi3ki_HO"]   # ✅ 新增：HO 内 treatment 对比
+      pair_groups: ["control", "pi3ki"]
+      level: "cell"
+      # ⚠️ 这里要么删除 contrast，要么改成支持这种对比的值
+      # contrast: "ANY"   或者直接删掉
+    ylim: [0, 400]

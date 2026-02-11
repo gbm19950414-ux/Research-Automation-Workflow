@@ -24,7 +24,8 @@ input_files <- c(
   "04_data/raw/imaging_if/E30_NAO/E30_statistic.xlsx",
   "04_data/raw/imaging_if/E33_NAO/E33_statistic.xlsx",
   "04_data/raw/imaging_if/E36_NAO/E36_statistic.xlsx",
-  "04_data/raw/imaging_if/E39_NAO/E39_statistic.xlsx"
+  "04_data/raw/imaging_if/E39_NAO/E39_statistic.xlsx",
+  "04_data/raw/imaging_if/20260202_NAO/20260202_statistic.xlsx"
 )
 metrics <- c("norm_intden", "Mean", "IntDen")
 output_dir <- "04_data/interim/imaging_if"

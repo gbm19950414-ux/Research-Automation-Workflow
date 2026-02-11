@@ -1,0 +1,159 @@
+title: "PI3K假设"
+out: "/results/20260206_qPCR"
+
+size:
+  width_mm: 42
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+panels:
+  # a: Il1b
+  - id: a
+    type: box
+    data: 
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Inpp4b_stats.xlsx"
+        keep_x: []
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Rps6kb2_stats.xlsx"
+        keep_x: []
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Pik3ip1_stats.xlsx"
+        keep_x: []
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "ctrl"
+
+    rename_x:
+      "ctrl": "Control"
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "PI3K capacity mRNA expression (fold change)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Inpp4b_stats.xlsx"
+          keep_x: []
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Rps6kb2_stats.xlsx"
+          keep_x: []
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Pik3ip1_stats.xlsx"
+          keep_x: []
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: b
+    type: box
+    data: 
+      - path: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+        keep_x: ["lps_1ngul_4h+nigericin_10ngul_7.5min"]
+      - path: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "ctrl"
+      - "lps_1ngul_4h+nigericin_10ngul_7.5min"
+
+    rename_x:
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
+      "ctrl": "Control"
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "total ND1 mRNA expression (fold change)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source: 
+        - path: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+          keep_x: ["lps_1ngul_4h+nigericin_10ngul_7.5min"]
+        - path: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: c
+    type: box
+    data: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/47_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "lps_1ngul_4h+nigericin_10ngul_7.5min"
+
+    rename_x:
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "cyto 16sRNA mRNA expression (fold change)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/47_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: d
+    type: box
+    data: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/47_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "lps_1ngul_4h+nigericin_10ngul_7.5min"
+
+    rename_x:
+      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
+
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "cyto ND1 mRNA expression (fold change)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/47_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
