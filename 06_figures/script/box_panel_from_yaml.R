@@ -150,6 +150,13 @@ plot_box_panel <- function(panel,
     d$.keep_x <- if (is.null(s$keep_x)) NA_character_ else paste(s$keep_x, collapse = "||")
     d
   })
+  # ---- normalize column types across sources (avoid bind_rows type conflicts) ----
+  df_list <- lapply(df_list, function(d) {
+    if ("batch_id" %in% colnames(d)) {
+      d$batch_id <- as.character(d$batch_id)
+    }
+    d
+  })
   df <- dplyr::bind_rows(df_list)
 
   # 如果 mapping$x 不是现有列名，则尝试按简单拼接表达式解析（例如 "antibody + '|' + drug"）
@@ -304,6 +311,13 @@ plot_box_panel <- function(panel,
         sh <- s$sheet %||% stats_sheet
         d <- readxl::read_excel(s$path, sheet = sh)
         d$.source_path <- basename(s$path)
+        d
+      })
+      # ---- normalize column types across sources (avoid bind_rows type conflicts) ----
+      raw_list <- lapply(raw_list, function(d) {
+        if ("batch_id" %in% colnames(d)) {
+          d$batch_id <- as.character(d$batch_id)
+        }
         d
       })
       raw_stats <- dplyr::bind_rows(raw_list)
