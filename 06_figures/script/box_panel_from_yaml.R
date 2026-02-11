@@ -530,25 +530,38 @@ plot_box_panel <- function(panel,
   width_in  <- width_mm  / mm_per_inch
   height_in <- height_mm / mm_per_inch
 
-  # 由 yaml 文件名推 figure 目录，例如 figure_1_b.yaml -> figure_1
+  # 由 yaml 文件名推 figure 名称，例如 20260206_qPCR.yaml -> 20260206
   yaml_base   <- basename(panel_yaml_path)
   yaml_stem   <- sub("\\.yaml$", "", yaml_base)
   figure_name <- sub("_[^_]+$", "", yaml_stem) # 去掉最后一个下划线后的部分
 
-  # out 基础名：panel$out 优先，其次 panel_cfg$out，再其次 figure_name
+  # out：允许写成子路径（相对 06_figures），例如 "results/20260206_qPCR"
+  # 兼容旧行为：如果 out 不含路径分隔符，则仍输出到 06_figures/<figure_name>/
   out_base <- panel$out %||% panel_cfg$out %||% figure_name
 
-  # 如果一个 yaml 内有多个 panel，同一 out_base 加 _id
+  out_subdir <- dirname(out_base)
+  out_stem   <- basename(out_base)
+
+  # 如果一个 yaml 内有多个 panel，同一 out_stem 加 _id
   if (!is.null(panel$id)) {
-    out_base_panel <- paste0(out_base, "_", panel$id)
+    out_file_stem <- paste0(out_stem, "_", panel$id)
   } else {
-    out_base_panel <- out_base
+    out_file_stem <- out_stem
   }
 
-  out_dir <- file.path(project_root, "06_figures", figure_name)
+  # 输出目录：
+  # - out_base 为 "results/xxx" -> 06_figures/results/xxx
+  # - out_base 为 "20260206"      -> 06_figures/<figure_name>/
+  if (!identical(out_subdir, ".")) {
+    out_dir <- file.path(project_root, "06_figures", out_subdir, out_stem)
+  } else {
+    out_dir <- file.path(project_root, "06_figures", figure_name)
+  }
+
+  # 一劳永逸：确保输出目录存在
   if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
-  out_pdf <- file.path(out_dir, paste0(out_base_panel, ".pdf"))
+  out_pdf <- file.path(out_dir, paste0(out_file_stem, ".pdf"))
 
   message("[INFO] panel ", panel$id,
           " -> ", out_pdf,
@@ -768,6 +781,7 @@ if (is.null(fill_pal) && !is.null(wt_ho_pal) && all(hue_levels %in% names(wt_ho_
     )
 
   # ---- 导出 PDF ----
+  dir.create(dirname(out_pdf), recursive = TRUE, showWarnings = FALSE)
   grDevices::cairo_pdf(
     file   = out_pdf,
     width  = width_in,

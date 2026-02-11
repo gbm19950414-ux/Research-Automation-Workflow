@@ -1,5 +1,5 @@
 title: "PI3K假设"
-out: "/results/20260206_qPCR"
+out: "results/20260206_qPCR"
 
 size:
   width_mm: 42
@@ -20,53 +20,10 @@ layout:
 
 panels:
   # a: Il1b
-  - id: a
+  - id: 1
     type: box
     data: 
-      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Inpp4b_stats.xlsx"
-        keep_x: []
-      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Rps6kb2_stats.xlsx"
-        keep_x: []
-      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Pik3ip1_stats.xlsx"
-        keep_x: []
-    sheet: "data"
-    mapping:
-      x: "treatment"
-      "y": "fold_change"
-      hue: "genetype"       # WT / HO
-
-    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
-    order:
-      - "ctrl"
-
-    rename_x:
-      "ctrl": "Control"
-
-    hue_order: ["WT", "HO"]
-    x_label: ""
-    y_label: "PI3K capacity mRNA expression (fold change)"
-    x_tick_rotation: 0
-    strip: true
-
-    stats:
-      enabled: true
-      source:
-        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Inpp4b_stats.xlsx"
-          keep_x: []
-        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Rps6kb2_stats.xlsx"
-          keep_x: []
-        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E62_Pik3ip1_stats.xlsx"
-          keep_x: []
-      sheet: "pair_stats"
-      column: p_value
-      pairs: [["WT", "HO"]]
-
-  - id: b
-    type: box
-    data: 
-      - path: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
-        keep_x: ["lps_1ngul_4h+nigericin_10ngul_7.5min"]
-      - path: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx"
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Inpp4b_stats.xlsx"
         keep_x: ["ctrl"]
     sheet: "data"
     mapping:
@@ -77,24 +34,135 @@ panels:
     # 只画 ctrl 与 lps，跳过 "-" 那些占位行
     order:
       - "ctrl"
-      - "lps_1ngul_4h+nigericin_10ngul_7.5min"
-
     rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
       "ctrl": "Control"
-
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "total ND1 mRNA expression (fold change)"
+    y_label: "PI3K capacity_Inpp4b mRNA expression (fold change)"
     x_tick_rotation: 0
     strip: true
 
     stats:
       enabled: true
-      source: 
-        - path: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/46_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
-          keep_x: ["lps_1ngul_4h+nigericin_10ngul_7.5min"]
-        - path: "04_data/interim/qpcr/ddct_analysis_心磷脂代谢过程关键基因变化_线粒体总量变化_细胞因子检测_split/42_E62_线粒体总量变化_E62_Mito_Isolation_nd1_stats.xlsx"
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Inpp4b_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+  - id: 2
+    type: box
+    data: 
+
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Rps6kb2_stats.xlsx"
+        keep_x: ["ctrl"]
+
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "ctrl"
+    rename_x:
+      "ctrl": "Control"
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "PI3K capacity Rps6kb2 mRNA expression (fold change)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source:
+
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Rps6kb2_stats.xlsx"
+          keep_x: ["ctrl"]
+
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: 3
+    type: box
+    data: 
+
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Pik3ip1_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"       # WT / HO
+
+    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
+    order:
+      - "ctrl"
+    rename_x:
+      "ctrl": "Control"
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "PI3K capacity Pik3ip1 mRNA expression (fold change)"
+    x_tick_rotation: 0
+    strip: true
+
+    stats:
+      enabled: true
+      source:
+
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Pik3ip1_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: a
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Myc_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Myc mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Myc_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: b
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Pes1_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Pes1 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Pes1_stats.xlsx"
           keep_x: ["ctrl"]
       sheet: "pair_stats"
       column: p_value
@@ -102,58 +170,254 @@ panels:
 
   - id: c
     type: box
-    data: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/47_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Scd1_stats.xlsx"
+        keep_x: ["ctrl"]
     sheet: "data"
     mapping:
       x: "treatment"
       "y": "fold_change"
-      hue: "genetype"       # WT / HO
-
-    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
-    order:
-      - "lps_1ngul_4h+nigericin_10ngul_7.5min"
-
-    rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
-
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "cyto 16sRNA mRNA expression (fold change)"
-    x_tick_rotation: 0
+    y_label: "Scd1 mRNA expression (fold change)"
     strip: true
-
     stats:
       enabled: true
-      source: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/47_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_16S_stats.xlsx"
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Scd1_stats.xlsx"
+          keep_x: ["ctrl"]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
 
   - id: d
     type: box
-    data: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/47_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Mvd_stats.xlsx"
+        keep_x: ["ctrl"]
     sheet: "data"
     mapping:
       x: "treatment"
       "y": "fold_change"
-      hue: "genetype"       # WT / HO
-
-    # 只画 ctrl 与 lps，跳过 "-" 那些占位行
-    order:
-      - "lps_1ngul_4h+nigericin_10ngul_7.5min"
-
-    rename_x:
-      "lps_1ngul_4h+nigericin_10ngul_7.5min": Nigericin
-
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
     hue_order: ["WT", "HO"]
     x_label: ""
-    y_label: "cyto ND1 mRNA expression (fold change)"
-    x_tick_rotation: 0
+    y_label: "Mvd mRNA expression (fold change)"
     strip: true
-
     stats:
       enabled: true
-      source: "04_data/interim/qpcr/ddct_analysis_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_split/47_E63-2_EphB1缺失NLRP3炎症小体引发的线粒体损伤减少_mtDNA释放减少_E63-2_mito_isolation_nd1_stats.xlsx"
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Mvd_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: e
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Bnip3_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Bnip3 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Bnip3_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: f
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Trib3_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Trib3 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Trib3_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: g
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Acaca_stats.xlsx"
+        keep_x: ["ctrl", "pi3ki"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Acaca mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Acaca_stats.xlsx"
+          keep_x: ["ctrl", "pi3ki"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: h
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Cept1_stats.xlsx"
+        keep_x: ["ctrl"]
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Cept1_stats.xlsx"
+        keep_x: ["pi3ki"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Cept1 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Cept1_stats.xlsx"
+          keep_x: ["ctrl"]
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Cept1_stats.xlsx"
+          keep_x: ["pi3ki"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: i
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Etnk1_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Etnk1 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Etnk1_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: j
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Dgat2_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Dgat2 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Dgat2_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: k
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Mgll_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Mgll mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Mgll_stats.xlsx"
+          keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: l
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Lipe_stats.xlsx"
+        keep_x: ["ctrl"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl"]
+    rename_x: {"ctrl": "Control"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Lipe mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Lipe_stats.xlsx"
+          keep_x: ["ctrl"]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
