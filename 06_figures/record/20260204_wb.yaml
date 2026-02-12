@@ -20,14 +20,14 @@ question:
   context_from_previous: >
     前一节在转录与表型 readout 层面
     提示 EphB1 缺失可能改变 PI3K 相关输出与下游代谢/膜环境节点，
-    但仍缺少“即刻信号输出”层面的直接证据。
+    但仍缺少蛋白层面的直接证据。
   core_question: >
     EphB1 缺失是否会改变 PI3K–AKT–mTOR 通路在
-    标准化输入脉冲（血清再喂养）下的即时磷酸化输出动力学（幅度与积分输出）？
+    标准化输入脉冲（血清再喂养）下的即时磷酸化输出动力学（峰值与总量）？
   hypothesis_or_expectation: >
     若 EphB1 影响 PI3K 输出 capacity，
     则在饥饿统一起点后进行 FBS refeed，
-    KO 与 WT 的 p-AKT(T308/S473)、p-S6、p-4EBP1 的峰值与/或 AUC 将出现可重复差异。
+    KO 与 WT 的 p-AKT(T308/S473)、p-S6、p-4EBP1 的峰值或总量将出现可重复差异。
   importance_reason: >
     磷酸化层的动态 readout 能将“上游输入差异/基线差异”与“通路输出 capacity 差异”解耦，
     为后续 link_validation（B→C）提供因果链的关键中间证据。
@@ -41,12 +41,11 @@ rationale:
     主要变量为基因型（WT vs EphB1_KO）与刺激输入（no_refeed vs FBS_refeed），
     以时间点梯度刻画 p-AKT/p-S6/p-4EBP1 的动力学曲线。
   control_logic: >
-    先用无血清预处理统一起点并“打开动态范围”；
-    no_refeed 定义饥饿后的基线/地板效应，
-    FBS_refeed 提供标准化输入脉冲，确保比较聚焦于通路响应能力而非培养波动。
+    先用无血清预处理统一起点；
+    no_refeed 定义饥饿后的基线，
+    FBS_refeed 提供标准化输入，确保比较聚焦于通路响应能力。
   core_justification: >
-    通过“统一预处理 + 标准化 refeed 脉冲 + 时间梯度曲线”，
-    可以用峰值与 AUC 等容量指标定量比较 WT 与 KO 的 PI3K–AKT–mTOR 即时输出差异。
+    用峰值与总量指标比较 WT 与 KO 的 PI3K–AKT–mTOR 输出动力学差异。
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
@@ -66,9 +65,9 @@ methods:
   replicates: >
     每个时间点与条件包含生物学重复（n=3），并在独立批次重复以验证方向一致性。
   analysis_notes: >
-    以 total protein 或对应 total target 进行归一化后，提取峰值（max）与积分输出（AUC，0–30/0–60）作为 capacity 指标；对 no_refeed 与 refeed 分别建模，核心对比为 refeed 条件下 WT vs KO。
+    以 total target 进行归一化后，观察各时间点各个基因型相对于0min的变化情况。
   minimal_methods_summary: >
-    WT 与 EphB1_KO 原代腹腔巨噬细胞经无血清预处理统一起点后进行 FBS 再喂养时间梯度取样，WB 检测 p-AKT/p-S6/p-4EBP1 并以 total/loading 归一化，使用 max 与 AUC 定量比较通路输出差异。
+    WT 与 EphB1_KO 原代腹腔巨噬细胞经无血清预处理统一起点后进行 FBS 再喂养时间梯度取样，WB 检测 p-AKT/p-S6/p-4EBP1 并以 total 归一化，比较通路输出差异。
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
   data_direction: >           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
@@ -111,68 +110,68 @@ results:
   group_difference_statement: >  # 用一两句把组间差异说清楚（可直接作为结果段主句）
     在血清再喂养时间梯度下，
     WT 与 EphB1_KO 原代巨噬细胞在 p-AKT(T308) 与 p-S6 的动态变化上总体相似，未见稳定可重复的基因型差异；
-    而 4EBP1 / p-4EBP1 的变化则表现出明显的批间不一致性，未形成一致的基因型效应。
+    而 4EBP1 / p-4EBP1 的变化则表现出明显的批间不一致性，未形成一致的基因型效应，且4EBP1表现出不应该出现的大幅变化的动力学特征。
     相比之下，与 WT 相比，EphB1_KO（HO）细胞在血清再喂养后的中期阶段（10–40 min）p-AKT(S473) 的回升幅度持续偏低，
     而 p-AKT(T308) 与 p-S6 的整体动力学差异不明显，提示 EphB1 缺失更可能影响 AKT(S473) 相关的持续/再平衡输出而非早期刺激启动。
   robustness_and_qc: "本次实验采用3对WT与HO进行检测，若结果同时出现在3批次中，则认为结果可靠"        # 是否在多批次实验中重复、是否排除了明显 outlier 等
   anomalies_or_limits: >      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
-    0 min T308最低，但 S473最高
+    1.0 min T308最低，但 S473最高问题：
       饥饿 5 h 的 PI3K/PDK1 输入很低（T308低），但细胞处在某种 应激/代偿状态，导致 mTORC2 或 S473 上游激酶活跃 或 去磷酸化被抑制（S473高）。
-    S473 的动力学特征：先下降、再回升、40 min 再峰值、60 min 再掉到底
+    2.S473 的动力学特征：先下降、再回升、40 min 再峰值、60 min 再掉到底问题：
       refeed 早期启动“快速负反馈”，优先压 S473，然后随着系统平衡再次上升，40min时的峰值反应mtorc2的二阶段激活
-      60min时刺激足够强，建立了充足的负反馈，
-    total 4ebp1变化剧烈的问题，可能来自于实验体系错误。
+      60min时刺激足够强，建立了充足的负反馈，因此473几乎消失，而308持续增强
+    3.total 4ebp1变化剧烈的问题：
+      可能来自于实验体系错误。
 
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
   minimal_bio_interpretation: >
     在标准化的血清再喂养输入下，EphB1 缺失并未导致 p-AKT(T308) 或 p-S6 的整体动力学发生稳定改变，
     但在 10–40 min 的再平衡/维持阶段，HO 的 p-AKT(S473) 回升幅度在多批次中持续低于 WT，
-    提示 EphB1 可能影响 AKT(S473) 相关的中期持续输出能力，而非早期刺激启动本身。
+    提示 EphB1 可能影响 AKT(S473) 相关的中期持续输出能力，而非早期刺激启动或稳态磷酸化强度。
   alternative_explanations: >
     由于每批次仅包含 1 个 WT 与 1 个 HO 且跨批次在不同膜上完成，当前证据以“方向一致性”支持趋势判断而非统计显著性。
     p-AKT(S473) 的中期回升减弱既可能源于 mTORC2/膜-骨架相关状态适应不足，也可能反映更强/更早建立的负反馈或位点选择性去磷酸化增强；
-    HO 中 Inpp4b 高表达在机制上可作为候选解释（通过改变 PI(3,4)P2 动力学削弱中期维持），但仍需在蛋白/功能干预层面建立因果。
-    另外，0 min 时 S473 高而 T308 低的“基线解耦”以及 60 min 的极端点位可能受取样终止速度、曝光动态范围与条带饱和等技术因素影响；
-    4EBP1/ p-4EBP1 的批间不一致性亦提示该轴的结论需要更严格的定量与条带形态（多磷酸化迁移）控制。
+    HO 中 Inpp4b 高表达在机制上可作为候选解释（通过改变 PI(3,4)P2 动力学削弱中期维持）。
+    4EBP1/ p-4EBP1 的批间不一致性亦提示该轴的结论需要更严格的实验技术控制。
   summary_type: "supportive,exploratory,descriptive"
   claim_supported: >
     在血清再喂养诱导的 PI3K–AKT–mTOR 即刻信号动力学中，EphB1 缺失的主要可重复差异体现在 AKT(S473) 的中期回升/维持不足，而非 T308 或 S6 轴的整体响应缺失。
   link_to_previous: >
-    前一节提示 EphB1 缺失可能改变 PI3K 相关输出与下游代谢/膜环境节点，本节通过标准化 refeed 时间梯度的磷酸化读出，进一步在“即刻信号输出”层面提供中间证据。
+    前一节提示 EphB1 缺失可能改变 PI3K 相关输出与下游代谢/膜环境节点，本节通过标准化 refeed 时间梯度的磷酸化读出，进一步在蛋白层面提供验证证据。
   transition_to_next: >
     下一步需要通过密度定量（max/AUC）、关键节点补充读出（AKT 底物磷酸化、mTORC2 相关指标）及对候选调控因子（如 INPP4B）的功能干预，验证 HO 的 S473 回升缺陷是否对应真实的输出能力下降并建立因果链。
 # ---------- 6. figure_legend ----------
 
 figure_legend:
-  panel: ""
-  panel_title_en: ""
-  panel_title_cn: ""
+  panel: "Figure X, panel Y"
+  panel_title_en: "EphB1 deficiency modestly blunts AKT(S473) re-activation during serum refeeding without altering p-AKT(T308) or p-S6 dynamics"
+  panel_title_cn: "EphB1 缺失在血清再喂养中期削弱 AKT(S473) 回升，而 p-AKT(T308) 与 p-S6 动力学总体相似"
 
-  one_sentence_en: ""
+  one_sentence_en: "WT and EphB1-KO (HO) primary peritoneal macrophages were serum-starved and then refed with serum for the indicated times, followed by immunoblotting of PI3K–AKT–mTOR pathway nodes."
 
   system_and_design:
-    model: ""
-    genotype_or_groups: ""
-    key_treatments: ""
-    time_window: ""
+    model: "Primary mouse peritoneal macrophages (WT and EphB1-KO/HO)"
+    genotype_or_groups: "WT vs HO, paired lanes at each time point"
+    key_treatments: "Serum starvation (serum hunger) followed by serum refeeding (FBS refeed)"
+    time_window: "Refeeding time course: 0, 5, 10, 20, 40, 60 min (0 min represents starved/no-refeed baseline)"
 
   readouts_and_assays:
-    primary_readout: ""
-    assay: ""
-    normalization: ""
+    primary_readout: "Phosphorylation dynamics of AKT and mTORC1 downstream targets during refeeding"
+    assay: "Western blot (immunoblot) of lysates"
+    normalization: "Total AKT/S6/4-EBP1 and GAPDH were detected as loading/normalization references (as shown on the same membrane)."
 
   stats:
-    n_definition: ""
-    n: ""
-    summary: ""
-    test: ""
-    multiple_comparisons: ""
+    n_definition: "Each lane corresponds to one biological sample (one WT or one HO) at the indicated time point within one batch/blot."
+    n: "Batch 1 shown (WT and HO paired across 0–60 min); overall biological replicate number across batches is reported in Methods."
+    summary: "Representative immunoblots are shown for GAPDH, total AKT, p-AKT(T308), p-AKT(S473), total S6, p-S6, total 4-EBP1, and p-4EBP1."
+    test: "Not applicable for this representative blot image (quantification and statistics, if performed, are described in the corresponding quantification panel)."
+    multiple_comparisons: "Not applicable for the blot image."
 
   significance:
-    symbols: ""
+    symbols: "Not shown in this blot panel."
 
-  extra_notes: ""
+  extra_notes: "Lanes are ordered as WT/HO pairs for each refeeding time point; all samples were serum-starved (serum hunger '+') prior to refeeding."
 
 # ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
 ai_hints:

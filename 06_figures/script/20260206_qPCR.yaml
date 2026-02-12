@@ -272,7 +272,7 @@ panels:
     type: box
     data:
       - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Acaca_stats.xlsx"
-        keep_x: ["ctrl", "pi3ki"]
+        keep_x: ["ctrl", ""]
     sheet: "data"
     mapping:
       x: "treatment"
@@ -288,7 +288,7 @@ panels:
       enabled: true
       source:
         - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Acaca_stats.xlsx"
-          keep_x: ["ctrl", "pi3ki"]
+          keep_x: ["ctrl", ""]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
@@ -297,9 +297,9 @@ panels:
     type: box
     data:
       - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Cept1_stats.xlsx"
-        keep_x: ["ctrl"]
+        keep_x: [""]
       - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Cept1_stats.xlsx"
-        keep_x: ["pi3ki"]
+        keep_x: ["ctrl"]
     sheet: "data"
     mapping:
       x: "treatment"
@@ -315,9 +315,9 @@ panels:
       enabled: true
       source:
         - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Cept1_stats.xlsx"
-          keep_x: ["ctrl"]
+          keep_x: [""]
         - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Cept1_stats.xlsx"
-          keep_x: ["pi3ki"]
+          keep_x: ["ctrl"]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
@@ -325,15 +325,17 @@ panels:
   - id: i
     type: box
     data:
-      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Etnk1_stats.xlsx"
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Etnk1_stats.xlsx"
         keep_x: ["ctrl"]
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Etnk1_stats.xlsx"
+        keep_x: [""]
     sheet: "data"
     mapping:
       x: "treatment"
       "y": "fold_change"
       hue: "genetype"
-    order: ["ctrl"]
-    rename_x: {"ctrl": "Control"}
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
     hue_order: ["WT", "HO"]
     x_label: ""
     y_label: "Etnk1 mRNA expression (fold change)"
@@ -341,8 +343,10 @@ panels:
     stats:
       enabled: true
       source:
-        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Etnk1_stats.xlsx"
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Etnk1_stats.xlsx"
           keep_x: ["ctrl"]
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Etnk1_stats.xlsx"
+          keep_x: [""]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
@@ -351,14 +355,15 @@ panels:
     type: box
     data:
       - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Dgat2_stats.xlsx"
-        keep_x: ["ctrl"]
+        keep_x: ["ctrl", ""]
+
     sheet: "data"
     mapping:
       x: "treatment"
       "y": "fold_change"
       hue: "genetype"
-    order: ["ctrl"]
-    rename_x: {"ctrl": "Control"}
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
     hue_order: ["WT", "HO"]
     x_label: ""
     y_label: "Dgat2 mRNA expression (fold change)"
@@ -367,7 +372,7 @@ panels:
       enabled: true
       source:
         - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Dgat2_stats.xlsx"
-          keep_x: ["ctrl"]
+          keep_x: ["ctrl", ""]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
@@ -376,14 +381,14 @@ panels:
     type: box
     data:
       - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Mgll_stats.xlsx"
-        keep_x: ["ctrl"]
+        keep_x: ["ctrl", ""]
     sheet: "data"
     mapping:
       x: "treatment"
       "y": "fold_change"
       hue: "genetype"
-    order: ["ctrl"]
-    rename_x: {"ctrl": "Control"}
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
     hue_order: ["WT", "HO"]
     x_label: ""
     y_label: "Mgll mRNA expression (fold change)"
@@ -392,7 +397,7 @@ panels:
       enabled: true
       source:
         - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Mgll_stats.xlsx"
-          keep_x: ["ctrl"]
+          keep_x: ["ctrl", ""]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]
@@ -401,14 +406,16 @@ panels:
     type: box
     data:
       - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Lipe_stats.xlsx"
+        keep_x: [""]
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Lipe_stats.xlsx"
         keep_x: ["ctrl"]
     sheet: "data"
     mapping:
       x: "treatment"
       "y": "fold_change"
       hue: "genetype"
-    order: ["ctrl"]
-    rename_x: {"ctrl": "Control"}
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
     hue_order: ["WT", "HO"]
     x_label: ""
     y_label: "Lipe mRNA expression (fold change)"
@@ -417,7 +424,172 @@ panels:
       enabled: true
       source:
         - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Lipe_stats.xlsx"
+          keep_x: [""]
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Lipe_stats.xlsx"
           keep_x: ["ctrl"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+# 抑制剂版本
+  - id: pi3k_g
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Acaca_stats.xlsx"
+        keep_x: ["ctrl", "pi3ki"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
+    hue_order: ["WT", ""]
+    x_label: ""
+    y_label: "Acaca mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Acaca_stats.xlsx"
+          keep_x: ["ctrl", "pi3ki"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: pi3k_h
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Cept1_stats.xlsx"
+        keep_x: [""]
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Cept1_stats.xlsx"
+        keep_x: ["ctrl","pi3ki"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Cept1 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Cept1_stats.xlsx"
+          keep_x: [""]
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Cept1_stats.xlsx"
+          keep_x: ["ctrl","pi3ki"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: pi3k_i
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Etnk1_stats.xlsx"
+        keep_x: [""]
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Etnk1_stats.xlsx"
+        keep_x: ["ctrl","pi3ki"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Etnk1 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/63_20260206_qPCR_001a+003a_E61_Etnk1_stats.xlsx"
+          keep_x: [""]
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Etnk1_stats.xlsx"
+          keep_x: ["ctrl","pi3ki"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: pi3k_j
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Dgat2_stats.xlsx"
+        keep_x: ["ctrl", "pi3ki"]
+
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Dgat2 mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Dgat2_stats.xlsx"
+          keep_x: ["ctrl", "pi3ki"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: pi3k_k
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Mgll_stats.xlsx"
+        keep_x: ["ctrl", "pi3ki"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Mgll mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Mgll_stats.xlsx"
+          keep_x: ["ctrl", "pi3ki"]
+      sheet: "pair_stats"
+      column: p_value
+      pairs: [["WT", "HO"]]
+
+  - id: pi3k_l
+    type: box
+    data:
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Lipe_stats.xlsx"
+        keep_x: [""]
+      - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Lipe_stats.xlsx"
+        keep_x: ["ctrl","pi3ki"]
+    sheet: "data"
+    mapping:
+      x: "treatment"
+      "y": "fold_change"
+      hue: "genetype"
+    order: ["ctrl", "pi3ki"]
+    rename_x: {"ctrl": "Control", "pi3ki": "PI3K inhibitor"}
+    hue_order: ["WT", "HO"]
+    x_label: ""
+    y_label: "Lipe mRNA expression (fold change)"
+    strip: true
+    stats:
+      enabled: true
+      source:
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/64_20260206_qPCR_001a+003a_E62_Lipe_stats.xlsx"
+          keep_x: [""]
+        - path: "04_data/interim/qpcr/ddct_analysis_001a+003a_split/62_20260206_qPCR_001a+003a_20260206_Lipe_stats.xlsx"
+          keep_x: ["ctrl","pi3ki"]
       sheet: "pair_stats"
       column: p_value
       pairs: [["WT", "HO"]]

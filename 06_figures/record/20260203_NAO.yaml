@@ -1,0 +1,132 @@
+# ============================================================
+# schema.yaml v3  ——  单个 panel 的结构化写作模版（与 figure_1_d_v2.yaml 对齐）
+# 目标：让 AI 在几乎不需要补充信息的前提下，生成：
+#   - 结果段（Results）
+#   - 简短讨论/过渡段（Mini Discussion / Transition）
+#   - Methods 中本实验的“差异性信息”
+# ============================================================
+
+# ---------- 0. Meta & Assets：基本信息 ----------
+meta:
+  figure: ""           # e.g., "Figure 1"
+  figure_id: ""        # e.g., "1d"
+  experiment_id: "20260203_NAO"
+  short_title: "PI3Ki 是否足以降低 WT PM 的NAO染色水平"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
+  chapter: ""
+  version: 2026-02-09
+# ---------- 1. Scientific Question：本节要回答什么 ----------
+question:
+  context_from_previous: "前述结果提示 EphB1 缺失可能通过降低 PI3K–AKT 输出，牵引膜磷脂库（D）变化并影响 CL 可及性/功能池的 NAO readout（E），但仍缺乏 D→E 的因果支撑。"
+  core_question: "在不显著改变线粒体 ΔΨm/数量前提下，操纵 PI3K 输出（PI3K 抑制）是否足以改变 NAO 信号，从而为“膜环境/磷脂库变化驱动 NAO readout（D→E）”提供因果证据？"
+  hypothesis_or_expectation: "若 PI3K 抑制能够促成膜磷脂库缩小/膜环境改变，则 NAO 信号将出现与 D/E 假设一致的方向性变化（预期下降），且该变化不能用 ΔΨm 的系统性改变来解释。"
+  importance_reason: "该实验把“相关性观察”推进到“可操纵的因果链条验证”，用于证明 NAO readout 更可能反映膜/磷脂库状态而非单纯线粒体膜电位混杂。"
+# ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
+rationale:
+  model_and_system: "采用原代小鼠腹腔巨噬细胞（WT 与 EphB1_KO），因为该系统是组学差异与后续功能 readout（NAO/ΔΨm）出现的同一生物背景，便于将 link 实验直接嵌入主线机制链条。"
+  key_variables: "关键自变量为 PI3K 通路输出（用 PI3K 抑制剂 overnight 处理作为操纵手段）；关键因变量为 NAO 信号（CL 相关 readout），并同时测 ΔΨm（TMRM/JC-1）作为潜在混杂的解释边界。"
+  control_logic: "vehicle（DMSO）作为药物溶剂对照用于定义背景；PI3Ki 组用于测试“操纵 PI3K 是否足以牵引 NAO”；ΔΨm 对照并行测定用于判断 NAO 变化是否可能由膜电位驱动，从而提高因果解释的可置信度。"
+  core_justification: "用最小干预（PI3K 抑制）在同一细胞系统中制造膜环境变化，并用 ΔΨm 并行对照限制混杂，从而对 D→E 的因果链条给出可检验的方向性证据。"
+# ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
+methods:
+  inherits_from_protocol: "protocols.drug_treatment_PI3K_inhibition_v1 + protocols.NAO_stain_live_v1 + protocols.DeltaPsi_TMRM_or_JC1_v1 + protocols.imaging_fixed_settings_v1 + protocols.image_quantification_per_cell_v1"
+  biological_material: "原代小鼠腹腔巨噬细胞；分组包含 WT 与 EphB1_KO（同批次分离、同板培养以降低批次效应）。"
+  experimental_groups: "vehicle vs PI3K inhibitor；每个处理下均包含 WT 与 EphB1_KO（用于比较基因型差异及药物效应是否一致/交互）。"
+  stimuli_and_treatment: "PI3K 抑制剂（Copanlisib 或 LY294002）处理；vehicle 为 DMSO。处理方式为 overnight（12–16 h）。"
+  time_points: "药物处理结束后立即进行活细胞 NAO 染色，并在同一批样本上并行测定 ΔΨm（TMRM/JC-1）。"
+  dose_info: "药物终浓度按设计为 0.5 μM（vehicle 中 DMSO 终浓度按设计为 0.5；按你实际记录填写单位与比例）。"
+  readout_and_assay: "NAO 染色信号作为主要 readout；ΔΨm（TMRM/JC-1）作为并行对照 readout；采集平台为荧光显微镜成像或流式（按你实际使用填写）。"
+  replicates: "生物学重复 n = （填写你本次完成的 n）；若包含多次独立实验合并分析，注明实验批次数与合并规则。"
+  analysis_notes: "NAO 与 ΔΨm 信号在固定成像/采集参数下获取；按细胞/事件层级进行定量，并在组间比较时以 vehicle 归一化或直接比较原始强度（按你实际分析流程填写）；若同批 WT/KO 配对分离与同板培养，可优先使用配对设计/分层校正批次。"
+  minimal_methods_summary: "WT 与 EphB1_KO 原代腹腔巨噬细胞采用 vehicle（DMSO）或 PI3K 抑制剂（Copanlisib/LY294002，0.5 μM）overnight（12–16 h）处理后进行活细胞 NAO 染色，并并行测定 ΔΨm（TMRM/JC-1）作为混杂控制；在固定采集参数下定量 NAO 与 ΔΨm 信号并比较处理与基因型差异。"
+# ---------- 4. Results：把图变成结构化文字 ----------
+results:
+  data_direction: "在 WT 中，PI3K 抑制后 NAO 强度较对照下降；在 HO 中，PI3K 抑制后 NAO 强度亦下降；未处理条件下 WT 与 HO 之间无显著差异；PI3K 抑制后 WT 与 HO 之间亦无显著差异。"
+  stats_summary: "组间比较显示：WT Control vs HO Control 为 ns；WT Control vs WT pi3ki 为显著差异（*）；HO Control vs HO pi3ki 为显著差异（*）；WT pi3ki vs HO pi3ki 为 ns。具体检验方法与 p 值区间见原始统计文件与图中标注。"
+  key_numbers: "NAO IntDen 在 WT 中由对照约百量级下降至 PI3Ki 处理后的较低水平；HO 中呈相似下降趋势（精确均值±SEM 见源数据表）。"
+  group_difference_statement: "PI3K 抑制在 WT 与 HO 背景下均导致 NAO 强度显著降低，而基因型本身在对照或抑制条件下均未造成显著差异。"
+  robustness_and_qc: "各组数据分布以小提琴图与单细胞散点展示，趋势在两种基因型中一致；未处理组与处理组内部分布重叠有限，支持效应的稳健性。"
+  anomalies_or_limits: >
+    部分组别存在分布重叠与个体差异，且 WT 与 HO 在 PI3Ki 条件下差异未达显著，提示该效应主要由药物处理而非基因型驱动。
+    本实验设计基于“pi3k信号通路与膜磷脂库周转存在因果关系”以及“copanlisib可以有效模拟pi3k信号通路抑制情况”两个假设，但是目前结果并不支持假设2，所以该实验设计存在缺陷，需要重新设置。
+
+# ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
+interpretation:
+  minimal_bio_interpretation: "这些结果表明，单纯抑制 PI3K 输出即可在 WT 与 EphB1_KO 背景下均引起 NAO 信号下降，支持 NAO readout 对膜环境/磷脂库状态变化具有敏感性。"
+  alternative_explanations: 
+    NAO 信号下降仍可能部分受到线粒体功能状态或其他未测量膜参数影响，因此需要结合 ΔΨm 等指标进一步排除电位或线粒体数量变化的贡献。
+  summary_type: "supportive, elimination"
+  claim_supported: "操纵 PI3K 输出本身足以驱动 NAO readout 下降，支持“膜/磷脂库变化（D）→ NAO readout 改变（E）”的因果链条，并部分排除基因型本身作为唯一决定因素。"
+  link_to_previous: "上一节提出 NAO readout 变化可能源于 PI3K–AKT 轴介导的膜环境改变，而本节通过直接抑制 PI3K 提供了该链条的可操纵因果证据。"
+  transition_to_next: "下一步需要结合 ΔΨm 与其他线粒体功能指标，进一步判定 NAO 变化是否独立于线粒体电位或数量变化。"
+# ---------- 6. figure_legend ----------
+
+figure_legend:
+  panel: ""
+  panel_title_en: "PI3K inhibition reduces NAO staining intensity in WT and EphB1-KO peritoneal macrophages"
+  panel_title_cn: "PI3K 抑制降低 WT 与 EphB1-KO 腹腔巨噬细胞的 NAO 染色强度"
+
+  one_sentence_en: "WT and EphB1-KO peritoneal macrophages were treated with a PI3K inhibitor, and NAO fluorescence intensity (IntDen) was quantified to assess changes in CL-related signal."
+  
+  system_and_design:
+    model: "Primary mouse peritoneal macrophages"
+    genotype_or_groups: "WT and EphB1-KO (HO), each with vehicle control or PI3K inhibitor treatment"
+    key_treatments: "Vehicle (DMSO) or PI3K inhibitor (pi3ki)"
+    time_window: "Overnight treatment followed by live-cell NAO staining"
+
+  readouts_and_assays:
+    primary_readout: "NAO fluorescence intensity (IntDen)"
+    assay: "Fluorescence imaging-based quantification"
+    normalization: "Raw integrated density per cell (no additional normalization indicated)"
+
+  stats:
+    n_definition: "Each dot represents one cell (pooled from biological replicates)"
+    n: "See source data for exact cell numbers per group"
+    summary: "Data are shown as violin plots with individual data points"
+    test: "Statistical test as indicated in the source data/analysis pipeline"
+    multiple_comparisons: "Multiple group comparisons with significance annotated on the plot"
+
+  significance:
+    symbols: "ns, not significant; *, P < 0.05"
+
+  extra_notes: "WT control vs HO control and WT pi3ki vs HO pi3ki are not significantly different, whereas PI3K inhibition significantly reduces NAO intensity within each genotype."
+
+# ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"]
+  tone: "neutral"
+  target_journal_style: ""
+  language: "zh_en_mix"
+
+# ---------- 8. English ----------
+
+results_skeleton_en:
+  stage: T3
+  purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
+  panel_level: results
+  results_logic_type: perturbation_response
+
+  modules:
+    M1_motivation:
+      en: ""
+      cn: ""
+      logic_source: "question.context_from_previous + question.core_question"
+
+    M2_level_definition:
+      en: ""
+      cn: ""
+      logic_source: "methods.readout_and_assay + question.core_question"
+
+    M3_directional_result:
+      en: ""
+      cn: ""
+      logic_source: "results.data_direction"
+
+    M4_robustness:
+      en: ""
+      cn: ""
+      logic_source: "results.robustness_and_qc + results.stats_summary"
+
+    M5_panel_conclusion:
+      en: ""
+      cn: ""
+      logic_source: "results.group_difference_statement"

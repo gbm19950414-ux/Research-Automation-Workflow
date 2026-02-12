@@ -1,0 +1,154 @@
+# figure_4_b_image.yaml
+title: "20260203_NAO_image"
+out: "20260203_NAO_image"
+out_dir: "06_figures/results"
+
+size:
+  width_mm: 84
+  high_mm: 60
+constrained_layout: true
+
+layout:
+  axis_outer_frac:
+    left: 0.05
+    right: 0.00
+    bottom: 0.05
+    top: 0.00
+  axis_gap_pt:
+    x_title_to_ticks: 5
+    x_ticks_to_axis: 2
+    y_title_to_ticks: 5
+    y_ticks_to_axis: 2
+
+curve:
+  enable: false
+  type: sigmoid
+  strength: 0.75   # 0..1, 越大曲线越“弯”
+  mid: 0.5        # 0..1, 曲线拐点（类似把中灰往哪边推）
+
+grid:
+  n_rows: 2        # 例如：上行 WT，下行 HO（后面可以改）
+  n_cols: 2        # 比如三种处理 / 部位
+
+  image_size_mm:
+    width: 35
+    height: 35
+
+  label_height_mm: 4   # 列标题那一行有多高
+  gap_mm: 2
+
+  # 行标题（左侧）
+  row_labels:
+    - "Control"
+    - "PI3Ki"
+
+
+  # 列标题（上方）
+  col_labels:
+    - "WT"
+    - "HO"
+
+  # 每个单元格的配置：
+  # row / col 为 1-based 索引
+  # images 是相对于 project_root 的路径
+  # blend: "single" | "lighten"
+  cells:
+    - row: 2
+      col: 1
+      images:
+        - 04_data/raw/imaging_if/20260202_NAO/raw/1.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/2.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/3.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/4.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/5.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/6.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/7.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/8.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/9.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/10.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/11.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/12.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/13.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/14.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/15.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/16.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/17.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/18.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/19.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/20.tif
+      blend: "lighten"
+
+    - row: 2
+      col: 2
+      images:
+        - 04_data/raw/imaging_if/20260202_NAO/raw/21.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/22.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/23.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/24.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/25.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/26.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/27.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/28.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/29.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/30.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/31.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/32.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/33.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/34.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/35.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/36.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/37.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/38.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/39.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/40.tif
+      blend: "lighten"
+
+    - row: 1
+      col: 1
+      images:
+        - 04_data/raw/imaging_if/20260202_NAO/raw/41.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/42.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/43.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/44.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/45.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/46.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/47.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/48.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/49.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/50.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/51.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/52.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/53.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/54.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/55.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/56.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/57.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/58.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/59.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/60.tif
+      blend: "lighten"
+
+    - row: 1
+      col: 2
+      images:
+        - 04_data/raw/imaging_if/20260202_NAO/raw/61.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/62.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/63.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/64.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/65.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/66.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/67.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/68.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/69.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/70.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/71.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/72.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/73.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/74.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/75.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/76.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/77.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/78.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/79.tif
+        - 04_data/raw/imaging_if/20260202_NAO/raw/80.tif
+      blend: "lighten"

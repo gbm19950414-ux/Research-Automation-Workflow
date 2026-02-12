@@ -1,0 +1,127 @@
+# ============================================================
+# schema.yaml v3  ——  单个 panel 的结构化写作模版（与 figure_1_d_v2.yaml 对齐）
+# 目标：让 AI 在几乎不需要补充信息的前提下，生成：
+#   - 结果段（Results）
+#   - 简短讨论/过渡段（Mini Discussion / Transition）
+#   - Methods 中本实验的“差异性信息”
+# ============================================================
+
+meta:
+  figure: "Figure X"
+  figure_id: "Xx"
+  experiment_id: "RUN03_A_PI3K_inhibition_recapitulates_flux_turnover_qPCR"
+  short_title: "PI3K 抑制（overnight）是否复制 flux/turnover 轴的转录方向（WT/HO；vehicle vs PI3Ki）"
+  chapter: "Link validation: PI3K output → flux/turnover (B→C)"
+  version: 2026-02-09
+
+question:
+  context_from_previous: "RUN01 已在基线条件下观察到 flux/turnover 相关节点在 WT 与 KO 间存在方向性差异，但仍不清楚该差异是否由 PI3K 输出变化所驱动。"
+  core_question: "在 WT（并可在 HO 背景作为一致性验证）中，药理抑制 PI3K 输出是否足以在转录层面复制 flux/turnover 轴的方向性变化，从而为 B→C 的因果链条提供支持？"
+  hypothesis_or_expectation: "若 flux/turnover 轴确由 PI3K 输出驱动，则 PI3K 抑制（overnight）将使 flux/turnover panel 的关键基因呈现与 KO 观察到的相同方向性偏移。"
+  importance_reason: "该实验把“基因型相关性差异”转化为“可操纵的因果验证”，用于判断 B→C 是否成立并为后续救援/反向调控实验提供方向锚点。"
+
+rationale:
+  model_and_system: "采用原代小鼠腹腔巨噬细胞（WT 与 EphB1_KO/HO），因为该系统已建立 KO 的组学与 qPCR 基线差异，且与后续 link 实验（NAO 等 readout）保持同一生物背景。"
+  key_variables: "关键自变量为 PI3K 输出（通过 PI3K 抑制剂 overnight 处理操纵）；关键因变量为 flux/turnover panel 的转录读出（qPCR）。并行包含 WT 与 HO 用于检验药物效应的背景一致性。"
+  control_logic: "vehicle（DMSO）控制药物溶剂与处理流程；PI3Ki 组提供通路操纵；WT 与 HO 同时纳入可区分“药物主效应”与“基因型背景差异/交互”，并增强结论的可迁移性。"
+  core_justification: "用最小化的通路操纵（PI3K 抑制）直接测试 flux/turnover 轴是否随 PI3K 输出而改变，从而为 B→C 提供可检验的因果证据。"
+
+methods:
+  inherits_from_protocol: "protocols.drug_treatment_PI3K_inhibition_v1 + protocols.RNA_TRIzol_v1 + protocols.cDNA_RT_v1 + protocols.qPCR_SYBR_v1 + protocols.qPCR_DCt_DDct_Zscore_v1"
+  biological_material: "原代小鼠腹腔巨噬细胞；基因型包含 WT 与 EphB1_KO（HO）；同批次分离、同板培养以降低批次效应。"
+  experimental_groups: "2×2 设计：WT-vehicle、WT-PI3Ki、HO-vehicle、HO-PI3Ki（以 vehicle vs PI3Ki 为主效应对比，并评估基因型背景差异）。"
+  stimuli_and_treatment: "PI3K 抑制剂（Copanlisib 或 LY294002）处理；vehicle 为 DMSO；处理时长为 overnight（12–16 h）。"
+  time_points: "单一终点：overnight 处理结束后立即收集 RNA。"
+  dose_info: "DMSO 或 PI3Ki 终浓度按设计为 0.5 μM（按你 pipeline 记录；若实际单位为 %v/v 或其他，请以原始记录为准替换）。"
+  readout_and_assay: "qPCR：flux/turnover primer panel（关键瓶颈节点与周转/重定向相关基因）；输出为相对表达（fold change）。"
+  replicates: "生物学重复 n = （按你实际完成填写）；若合并多次独立分离实验，注明批次数与合并规则。"
+  analysis_notes: "按预设流程进行 ΔCt→ΔΔCt 计算并输出 fold change；可按单基因比较与/或按 panel 方向性汇总（用于判断是否复制 RUN01 的方向）。若同批次配对分离，可在统计中纳入批次/配对信息（分层或配对检验）。"
+  minimal_methods_summary: "WT 与 HO 原代腹腔巨噬细胞以 vehicle（DMSO）或 PI3K 抑制剂（Copanlisib）处理 12–16 h 后收集 RNA，完成逆转录并用 SYBR qPCR 检测 flux/turnover panel 的关键基因；采用 ΔCt/ΔΔCt 计算相对表达并比较 vehicle vs PI3Ki（及其在不同基因型背景下的一致性）。"# ---------- 4. Results：把图变成结构化文字 ----------
+results:
+  data_direction: "在 PI3K 抑制实验中，rerouting/turnover 相关基因呈现明显重排：在 Control 条件下，HO 相较 WT 表现为 Dgat2 显著降低（**）、Mgll 显著降低（*）、Lipe 显著降低（*）；在 PI3K 抑制后，Dgat2 的 WT–HO 差异消失（ns），而 Mgll 与 Lipe 在两基因型中整体上调，且在 PI3K 抑制条件下 WT 仍高于 HO（*）。在 flux/entry 相关基因中，Acaca 在 Control 与 PI3K 抑制条件下 WT 与 HO 均为 ns；Cept1 在 Control 条件下 HO 显著高于 WT（***），而在 PI3K 抑制后两者差异消失（ns），表现为 WT 上调而 HO 回落；Etkk1 在 Control 条件下 HO 高于 WT，而在 PI3K 抑制后 WT 显著高于 HO（*），HO 水平下降至接近基线。"
+  stats_summary: "显著性标注显示：Control 条件下 Dgat2（**）、Mgll（*）、Lipe（*）、Cept1（***）存在 WT–HO 差异；PI3K 抑制条件下，Dgat2 与 Cept1 为 ns，而 Mgll、Lipe 与 Etkk1 仍显示 WT–HO 差异（*）。Acaca 在两种条件下均为 ns。"
+  key_numbers: "大致幅度：Control 下 HO 的 Dgat2/Mgll/Lipe 约为 WT 的 ~0.6–0.8；PI3K 抑制后 WT 的 Mgll/Lipe 上调至 ~1.5–1.6，而 HO 约 ~1.1–1.2；Cept1 在 Control 下 HO ~1.15–1.2、WT ~1.0，PI3K 抑制后 WT ~1.25、HO ~1.1；Etkk1 在 Control 下 HO 偏高，而 PI3K 抑制后 HO 回落至 ~1.0、WT ~1.15–1.2（精确数值见源数据）。"
+  group_difference_statement: "PI3K 抑制不会统一改变所有节点（如 Acaca 不敏感），但会系统性地重排多项 flux/turnover 与重定向相关基因（Dgat2、Mgll、Lipe、Cept1、Etkk1）的相对表达格局，并削弱或逆转 Control 条件下 HO 相对 WT 的部分偏移。"
+  robustness_and_qc: "各组内数据点分布集中；在两个 panel 中，多数出现显著性的基因在方向上相互一致（PI3K 抑制后 WT 倾向上调、HO 倾向回落），支持该效应具有重复性。"
+  anomalies_or_limits: >
+    Acaca 对 PI3K 抑制不敏感，提示该 link 为选择性节点重排而非全局性转录响应。
+    本实验设计基于“pi3k信号通路与膜磷脂库周转存在因果关系”以及“copanlisib可以有效模拟pi3k信号通路抑制情况”两个假设，但是目前结果并不支持假设2，所以该实验设计存在缺陷，需要重新设置。
+
+# ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
+interpretation:
+  minimal_bio_interpretation: "按原始假设，本实验用于检验 PI3K 抑制是否足以复制 RUN01 中 KO 的 flux/turnover 方向性偏移。结果显示，该预期仅在部分节点上成立：PI3K 抑制能够重排并牵引若干关键节点（如 Dgat2、Cept1、Mgll、Lipe、Etkk1），并在 Dgat2 与 Cept1 上使 WT–HO 差异消失，但对 Acaca 不敏感，且 Mgll/Lipe/Etkk1 在 PI3Ki 条件下仍保留基因型差异，说明该复制是选择性且不完全的。"
+  alternative_explanations: "PI3K 抑制的时程可能引入适应性/反馈调节；不同节点对 PI3K 输出的敏感性不同；以及潜在 off-target 或并行通路也可能参与调控，因此转录层面的改变未必完全等同于通量层面的变化。"
+  summary_type: "partial_support"
+  claim_supported: "这些结果支持假设在‘方向性牵引/可操纵性’层面部分成立，但不足以证明 PI3K 输出对 KO 的全部 flux/turnover 差异具有充分性（sufficiency）。"
+  link_to_previous: "RUN01 在基线条件下观察到 KO 在多项 flux/turnover 节点上的方向性偏移；本实验通过抑制 PI3K 输出检验这些节点的可操纵性，显示其中一部分节点对 PI3K 状态敏感。"
+  transition_to_next: "下一步需要通过剂量/时间梯度或功能 readout（如脂滴、NAO、脂质定量）评估这种选择性转录重排是否足以驱动下游表型（C→D→E）。"
+# ---------- 6. figure_legend ----------
+figure_legend:
+  panel: "Figure X, panel Y"
+  panel_title_en: "PI3K inhibition reprograms flux/turnover and rerouting-related gene expression in WT and EphB1-KO macrophages"
+  panel_title_cn: "PI3K 抑制重排 WT 与 EphB1-KO 巨噬细胞中 flux/turnover 与重定向相关基因的表达"
+
+  one_sentence_en: "WT and EphB1-KO (HO) primary peritoneal macrophages were treated with a PI3K inhibitor or vehicle, and mRNA levels of selected flux/turnover- and rerouting-related genes were quantified by qPCR."
+
+  system_and_design:
+    model: "Primary mouse peritoneal macrophages"
+    genotype_or_groups: "WT and EphB1-KO (HO)"
+    key_treatments: "Vehicle (Control) or PI3K inhibitor"
+    time_window: "Overnight treatment followed by RNA collection"
+
+  readouts_and_assays:
+    primary_readout: "mRNA expression levels (fold change) of Acaca, Cept1, Etkk1 (flux/entry) and Dgat2, Mgll, Lipe (rerouting/turnover)"
+    assay: "qPCR (SYBR-based)"
+    normalization: "Relative expression calculated by ΔCt/ΔΔCt using housekeeping gene normalization"
+
+  stats:
+    n_definition: "Each dot represents one biological replicate"
+    n: "n as indicated in the source data"
+    summary: "Data are shown as box plots with individual data points overlaid"
+    test: "Statistical tests as specified in the analysis pipeline"
+    multiple_comparisons: "Between-genotype comparisons within each treatment condition"
+
+  significance:
+    symbols: "ns, not significant; *, P < 0.05; **, P < 0.01; ***, P < 0.001"
+
+  extra_notes: "PI3K inhibition selectively alters the relative expression of multiple flux/turnover and rerouting nodes (Dgat2, Mgll, Lipe, Cept1, Etkk1), while Acaca remains largely unchanged."
+# ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"]
+  tone: "neutral"
+  target_journal_style: ""
+  language: "zh_en_mix"
+
+# ---------- 8. English ----------
+
+results_skeleton_en:
+  stage: T3
+  purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
+  panel_level: results
+  results_logic_type: perturbation_response
+
+  modules:
+    M1_motivation:
+      en: ""
+      cn: ""
+      logic_source: "question.context_from_previous + question.core_question"
+
+    M2_level_definition:
+      en: ""
+      cn: ""
+      logic_source: "methods.readout_and_assay + question.core_question"
+
+    M3_directional_result:
+      en: ""
+      cn: ""
+      logic_source: "results.data_direction"
+
+    M4_robustness:
+      en: ""
+      cn: ""
+      logic_source: "results.robustness_and_qc + results.stats_summary"
+
+    M5_panel_conclusion:
+      en: ""
+      cn: ""
+      logic_source: "results.group_difference_statement"
