@@ -7,7 +7,8 @@
 1. 自动从 sample_id 提取 genetype (WT/HO)
 2. 按 (gene, treatment, genetype) 统计 n、mean、sd
 3. 在每个 (gene, treatment) 组合内做 WT vs HO t 检验
-4. 输出 <文件名>_stats.xlsx ：
+4. 在每个 (gene, genetype) 组合内做不同 treatment 的比较（仅当该组合恰好有 2 个 treatment 且两组各>=2）
+5. 输出 <文件名>_stats.xlsx ：
    - data       : 原始数据 + genetype + 统计列
    - pair_stats : 每个 (gene, treatment) 的 WT vs HO 统计
    - meta       : 运行时间
@@ -83,8 +84,50 @@ def process_one(path: str):
 
     pair_stats = pd.DataFrame(pair_rows)
 
+    # 2b. 在每个 (gene, genetype) 组合内做 treatment 两组比较（仅支持该组合恰好 2 个 treatment）
+    tr_rows = []
+    for (g, gt), sub in df.groupby(["gene", "genetype"], dropna=False):
+        # 仅当该组合恰好包含两个 treatment 时做比较
+        treatments = list(pd.Series(sub["treatment"].astype(str).unique()).dropna())
+        if len(treatments) != 2:
+            # 不满足条件则跳过（也可在输出中保留一行提示）
+            continue
+
+        tr_a, tr_b = treatments[0], treatments[1]
+        a = pd.to_numeric(sub.loc[sub["treatment"].astype(str) == tr_a, VALUE_COL], errors="coerce").dropna()
+        b = pd.to_numeric(sub.loc[sub["treatment"].astype(str) == tr_b, VALUE_COL], errors="coerce").dropna()
+
+        if len(a) >= 2 and len(b) >= 2:
+            t_stat, p_val = ttest_ind(a, b, equal_var=False)
+        else:
+            t_stat, p_val = np.nan, np.nan
+
+        tr_rows.append({
+            "gene": g,
+            "genetype": gt,
+            "treatment_a": tr_a,
+            "treatment_b": tr_b,
+            "treatment1": tr_a,
+            "treatment2": tr_b,
+            "a_n": len(a),
+            "a_mean": a.mean() if len(a) else np.nan,
+            "a_sd": a.std(ddof=1) if len(a) > 1 else (0.0 if len(a) == 1 else np.nan),
+            "b_n": len(b),
+            "b_mean": b.mean() if len(b) else np.nan,
+            "b_sd": b.std(ddof=1) if len(b) > 1 else (0.0 if len(b) == 1 else np.nan),
+            "delta(b-a)": (b.mean() - a.mean()) if len(a) and len(b) else np.nan,
+            "t_stat": t_stat,
+            "p_value": p_val,
+        })
+
+    treatment_stats = pd.DataFrame(tr_rows)
+
     # 把每个 (gene, treatment) 的比较结果合并回原始行
     df = df.merge(pair_stats, on=["gene", "treatment"], how="left")
+
+    # 把每个 (gene, genetype) 的 treatment 比较结果合并回原始行
+    if not treatment_stats.empty:
+        df = df.merge(treatment_stats, on=["gene", "genetype"], how="left")
 
     # 3. 输出 Excel
     out_dir  = os.path.dirname(path)
@@ -94,6 +137,8 @@ def process_one(path: str):
     with pd.ExcelWriter(out_path, engine="openpyxl") as w:
         df.to_excel(w, index=False, sheet_name="data")
         pair_stats.to_excel(w, index=False, sheet_name="pair_stats")
+        # 始终写出 treatment_stats（即使为空），方便绘图脚本统一读取
+        treatment_stats.to_excel(w, index=False, sheet_name="treatment_stats")
         pd.DataFrame({
             "key": ["run_time"],
             "value": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")]

@@ -355,6 +355,11 @@ plot_box_panel <- function(panel,
           select(-.keep_flag)
       }
 
+      # NEW: 如果 panel 设置了 keep_hue，且统计表中也包含 hue 变量列（例如 genetype），则对 raw_stats 同步过滤
+      if (!is.null(keep_hue) && !is.null(hue_var) && hue_var %in% colnames(raw_stats)) {
+        raw_stats <- raw_stats %>% filter(.data[[hue_var]] %in% keep_hue)
+      }
+
       if (!has_pairwise) {
         # -------- old behavior: per-x single-row stats (one p per x_level) --------
         if (is.na(key_col) || !p_col %in% colnames(raw_stats)) {
