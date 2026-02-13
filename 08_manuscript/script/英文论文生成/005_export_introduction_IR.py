@@ -2,17 +2,50 @@
 # -*- coding: utf-8 -*-
 
 """
-export_introduction_docx.py
+export_introduction_ir.py
 
-Default behavior (no args):
-- Read: 08_manuscript/introduction_en.yaml (same folder as this script)
-- Write: 08_manuscript/Introduction.docx
-- Output only submission-ready Introduction text:
-  - Keep only: "Introduction" heading + paragraphs in order
+USAGE
+-----
+Run without arguments from anywhere:
+
+  python 005_export_introduction_IR.py
+
+Expected project layout (relative to this script):
+
+  08_manuscript/
+    yaml/
+      introduction_en.yaml
+      policy_introduction.yaml   # optional
+    IR/
+      introduction.ir.yaml        # output
+    script/英文论文生成/
+      005_export_introduction_IR.py
+
+What it does
+------------
+- Reads: 08_manuscript/yaml/introduction_en.yaml
+- Reads (optional): 08_manuscript/yaml/policy_introduction.yaml
+- Writes: 08_manuscript/IR/introduction.ir.yaml
+
+Policy controls (policy_introduction.yaml)
+------------------------------------------
+- include_subheadings: bool   # reserved (currently not emitted in IR blocks)
+- keep_hypotheses: bool       # include/exclude paragraphs containing 'hypotheses'
+- filter.include_pids: [str]  # only include these paragraph pids (empty = include all)
+- filter.exclude_pids: [str]  # exclude these paragraph pids
+
+Default behavior (no policy or empty filters)
+---------------------------------------------
+- Output submission-ready Introduction IR:
+  - Keep only the "Introduction" section and its paragraphs, in order
   - Paragraph = topic_sentence + sentences[] merged
-  - Do NOT include YAML scaffolding fields: source_trace, pid, bridge, hypotheses, narrative_role, etc.
-  - Do NOT include subsection headings by default (Nature-style)
-  - Citations in `citations: ["[1]", ...]` are appended to paragraph end if not already present
+  - Do NOT include YAML scaffolding fields: source_trace, bridge, narrative_role, etc.
+  - Citations in `citations: ["[1]", ...]` or DOI strings are appended at paragraph end if missing
+
+Notes
+-----
+- The script infers the 08_manuscript root as two levels above this file.
+- If policy_introduction.yaml is missing, legacy defaults apply (include all non-hypotheses paragraphs).
 """
 
 from __future__ import annotations
@@ -22,9 +55,6 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
-from docx import Document
-from docx.shared import Pt
-from docx.oxml.ns import qn
 
 
 def _load_yaml(path: Path) -> Dict[str, Any]:
@@ -33,6 +63,44 @@ def _load_yaml(path: Path) -> Dict[str, Any]:
     if not isinstance(data, dict):
         raise ValueError("YAML root must be a mapping (dict).")
     return data
+
+
+def _load_policy(path: Path) -> Dict[str, Any]:
+    """Load a policy YAML. If missing, return defaults matching legacy behavior."""
+    defaults: Dict[str, Any] = {
+        "mode": "submission",
+        "include_subheadings": False,
+        "keep_hypotheses": False,
+        "filter": {"include_pids": [], "exclude_pids": []},
+    }
+    if not path or not path.exists():
+        return defaults
+    raw = _load_yaml(path)
+    if not isinstance(raw, dict):
+        return defaults
+    # merge shallow
+    out = dict(defaults)
+    out.update({k: raw.get(k) for k in ["mode", "include_subheadings", "keep_hypotheses"] if k in raw})
+    filt = raw.get("filter")
+    if isinstance(filt, dict):
+        out_f = dict(defaults["filter"])
+        out_f.update({k: filt.get(k) for k in ["include_pids", "exclude_pids"] if k in filt})
+        out["filter"] = out_f
+    return out
+
+
+def _norm_str_list(x: Any) -> List[str]:
+    if x is None:
+        return []
+    if isinstance(x, str):
+        x = [x]
+    if not isinstance(x, list):
+        return []
+    out: List[str] = []
+    for it in x:
+        if isinstance(it, str) and it.strip():
+            out.append(it.strip())
+    return out
 
 
 def _dump_yaml(obj: Dict[str, Any], path: Path) -> None:
@@ -128,18 +196,25 @@ def _iter_blocks(data: Dict[str, Any]) -> List[Tuple[Optional[str], Dict[str, An
     return blocks
 
 
-def build_introduction_ir(data: Dict[str, Any]) -> Dict[str, Any]:
+def build_introduction_ir(data: Dict[str, Any], *, keep_hypotheses: bool = False, include_pids: Optional[List[str]] = None, exclude_pids: Optional[List[str]] = None) -> Dict[str, Any]:
     blocks = _iter_blocks(data)
     out_blocks: List[Dict[str, Any]] = []
 
+    include_set = set(_norm_str_list(include_pids)) if include_pids else set()
+    exclude_set = set(_norm_str_list(exclude_pids)) if exclude_pids else set()
+
     last_heading: Optional[str] = None
     for heading, p in blocks:
-        # Mirror DOCX behavior: drop hypothesis blocks by default if present
-        if "hypotheses" in p:
+        if (not keep_hypotheses) and ("hypotheses" in p):
             continue
 
-        # We keep Nature-like formatting by default: no subheadings in IR unless explicitly enabled later.
-        # However, we preserve the source section heading as metadata for potential future use.
+        pid = p.get("pid") if isinstance(p.get("pid"), str) else ""
+        pid = pid.strip() if pid else ""
+        if include_set and pid and (pid not in include_set):
+            continue
+        if exclude_set and pid and (pid in exclude_set):
+            continue
+
         topic_sentence = p.get("topic_sentence")
         sentences = p.get("sentences")
         par_text = _format_paragraph(topic_sentence, sentences)
@@ -151,8 +226,8 @@ def build_introduction_ir(data: Dict[str, Any]) -> Dict[str, Any]:
             continue
 
         meta: Dict[str, Any] = {}
-        if isinstance(p.get("pid"), str) and p.get("pid").strip():
-            meta["pid"] = p.get("pid").strip()
+        if pid:
+            meta["pid"] = pid
         if heading:
             meta["section_heading"] = heading
 
@@ -185,58 +260,6 @@ def build_introduction_ir(data: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def _set_doc_defaults(doc: Document) -> None:
-    style = doc.styles["Normal"]
-    font = style.font
-    font.name = "Times New Roman"
-    font.size = Pt(11)
-    # East Asia font fallback
-    rpr = style.element.rPr
-    rFonts = rpr.rFonts
-    rFonts.set(qn("w:eastAsia"), "Times New Roman")
-
-
-def build_docx(
-    yaml_path: Path,
-    out_path: Path,
-    include_subheadings: bool = False,  # keep False for Nature-like formatting
-    keep_hypotheses: bool = False,      # drop hypotheses by default for submission
-) -> None:
-    data = _load_yaml(yaml_path)
-
-    doc = Document()
-    _set_doc_defaults(doc)
-
-    # Title
-    doc.add_heading("Introduction", level=1)
-
-    blocks = _iter_blocks(data)
-    last_heading: Optional[str] = None
-
-    for heading, p in blocks:
-        # Drop hypothesis blocks by default (your YAML stores them under `hypotheses`)
-        if (not keep_hypotheses) and ("hypotheses" in p):
-            continue
-
-        # Do not include subheadings unless explicitly enabled
-        if include_subheadings and heading and heading != last_heading:
-            doc.add_heading(heading, level=2)
-            last_heading = heading
-
-        topic_sentence = p.get("topic_sentence")
-        sentences = p.get("sentences")
-        par_text = _format_paragraph(topic_sentence, sentences)
-
-        # Append citations from YAML field
-        citations = p.get("citations")
-        par_text = _append_citations(par_text, citations)
-
-        if par_text:
-            doc.add_paragraph(par_text)
-
-    doc.save(str(out_path))
-
-
 def main() -> None:
     script_dir = Path(__file__).resolve().parent
     manuscript_dir = script_dir.parents[1]  # .../08_manuscript
@@ -244,30 +267,30 @@ def main() -> None:
     # Expected layout:
     #   08_manuscript/
     #     yaml/introduction_en.yaml
-    #     IR/Introduction.docx   (output)
+    #     IR/introduction.ir.yaml   (output)
     yaml_path = manuscript_dir / "yaml" / "introduction_en.yaml"
-    out_path = manuscript_dir / "IR" / "Introduction.docx"
+    policy_path = manuscript_dir / "yaml" / "policy_introduction.yaml"
+    policy = _load_policy(policy_path)
 
-    # Ensure output directory exists (python-docx will not create parent dirs)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
+    include_subheadings = bool(policy.get("include_subheadings"))
+    keep_hypotheses = bool(policy.get("keep_hypotheses"))
+    filt = policy.get("filter") if isinstance(policy.get("filter"), dict) else {}
+    include_pids = _norm_str_list(filt.get("include_pids"))
+    exclude_pids = _norm_str_list(filt.get("exclude_pids"))
 
     if not yaml_path.exists():
         raise FileNotFoundError(f"YAML not found: {yaml_path.resolve()}")
 
-    build_docx(
-        yaml_path=yaml_path,
-        out_path=out_path,
-        include_subheadings=False,
-        keep_hypotheses=False,
-    )
-
     data = _load_yaml(yaml_path)
-    ir = build_introduction_ir(data)
-    ir_out = Path("/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript/IR/introduction.ir.yaml")
+    ir = build_introduction_ir(
+        data,
+        keep_hypotheses=keep_hypotheses,
+        include_pids=include_pids,
+        exclude_pids=exclude_pids,
+    )
+    ir_out = manuscript_dir / "IR" / "introduction.ir.yaml"
     _dump_yaml(ir, ir_out)
     print(f"OK: wrote IR {ir_out}")
-
-    print(f"OK: wrote {out_path}")
 
 
 if __name__ == "__main__":

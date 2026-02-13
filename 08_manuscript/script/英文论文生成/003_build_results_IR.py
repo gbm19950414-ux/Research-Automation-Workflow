@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Build Results v0 (English) by assembling panel-level results_skeleton_en modules
+Build Results IR (English) by assembling panel-level results_skeleton_en modules
 from YAML files under 06_figures/record, using configuration embedded in paper_logic.yaml.
 
 Minimal dependencies:
@@ -69,10 +69,46 @@ def load_yaml(path: Path) -> Any:
         return docs[0]
     return docs
 
-def dump_text(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as f:
-        f.write(text)
+
+
+# -----------------------------
+# Policy loader for results_build
+# -----------------------------
+
+def load_results_policy(manuscript_dir: Path) -> Dict[str, Any]:
+    """Load optional results policy from 08_manuscript/yaml/policy_results.yaml.
+
+    If missing/invalid, returns {} and preserves legacy behavior.
+    """
+    p = manuscript_dir / "yaml" / "policy_results.yaml"
+    if not p.exists():
+        return {}
+    pol = load_yaml(p)
+    return pol if isinstance(pol, dict) else {}
+
+
+def apply_policy_to_cfg(cfg: Dict[str, Any], policy: Dict[str, Any]) -> Dict[str, Any]:
+    """Return a shallow-merged cfg where policy values override cfg.
+
+    We intentionally keep this minimal: only override keys present in policy.
+    """
+    if not policy:
+        return cfg
+    out = dict(cfg)
+    # Support either top-level 'module_rules' or nested under 'module_rules'
+    for k in [
+        "include_globs",
+        "exclude_globs",
+        "include_files",
+        "figure_order",
+        "allowed_panel_levels",
+        "language",
+        "debug_transitions",
+        "module_rules",
+    ]:
+        if k in policy:
+            out[k] = policy.get(k)
+    return out
 
 def matches_any(name: str, patterns: List[str]) -> bool:
     return any(fnmatch.fnmatch(name, pat) for pat in patterns)
@@ -363,6 +399,129 @@ def figure_group_label(panel_id: str) -> str:
     return ""
 
 
+# -----------------------------
+# Figure reference helpers (Nature-style)
+# -----------------------------
+
+def format_fig_ref(panel_id: str) -> str:
+    """Format a panel id into a Nature-style figure reference.
+
+    Examples:
+      - '1a' -> 'Fig. 1a'
+      - '2a/b' -> 'Fig. 2a,b'
+      - 's3g' -> 'Fig. S3g'
+      - 's4a/b' -> 'Fig. S4a,b'
+    """
+    pid = normalize_panel_id(panel_id)
+    if not pid:
+        return ""
+
+    # Split leading figure number token (including supplementary 's#') and the rest
+    m = re.match(r"^(s\d+|\d+)(.*)$", pid, flags=re.IGNORECASE)
+    if not m:
+        return ""
+
+    fig = m.group(1)
+    rest = (m.group(2) or "")
+
+    if fig.lower().startswith("s"):
+        fig_label = fig.upper()  # 'S3'
+    else:
+        fig_label = fig  # '1'
+
+    if rest:
+        # rest may be like 'a/b' or 'g'
+        rest2 = rest.lstrip("/")
+        rest2 = rest2.replace("/", ",")
+        return f"Fig. {fig_label}{rest2}"
+
+    return f"Fig. {fig_label}"
+
+
+def has_same_fig_ref(text: str, panel_id: str) -> bool:
+    """Return True only if the SAME panel is already cited (e.g., Fig. 1a / Figure 1a).
+
+    This avoids blocking insertion when the text references a different panel (e.g., 'Figure 1b').
+    """
+    if not isinstance(text, str):
+        return False
+    t = text
+    pid = normalize_panel_id(panel_id)
+    if not pid:
+        return False
+
+    m = re.match(r"^(s\d+|\d+)(.*)$", pid, flags=re.IGNORECASE)
+    if not m:
+        return False
+
+    fig = m.group(1)
+    rest = (m.group(2) or "").lstrip("/")
+    fig_label = fig.upper() if fig.lower().startswith("s") else fig
+
+    if rest:
+        # allow a/b -> a,b matching
+        rest2 = rest.replace("/", ",")
+        pat = rf"\b(Fig\.?|Figure)\s*{re.escape(fig_label)}\s*{re.escape(rest2)}\b"
+        # also match if text uses a/b style
+        pat2 = rf"\b(Fig\.?|Figure)\s*{re.escape(fig_label)}\s*{re.escape(rest)}\b"
+        return bool(re.search(pat, t)) or bool(re.search(pat2, t))
+
+    pat = rf"\b(Fig\.?|Figure)\s*{re.escape(fig_label)}\b"
+    return bool(re.search(pat, t))
+
+
+def append_fig_ref(text: str, panel_id: str) -> str:
+    """Append a figure reference as '(Fig. 1a)' before terminal punctuation."""
+    if not isinstance(text, str):
+        return text
+    t = text.strip()
+    if not t:
+        return text
+
+    if has_same_fig_ref(t, panel_id):
+        return text
+
+    ref = format_fig_ref(panel_id)
+    if not ref:
+        return text
+
+    # Insert before terminal punctuation if present
+    if t.endswith("."):
+        return t[:-1] + f" ({ref})."
+    if t.endswith("?"):
+        return t[:-1] + f" ({ref})?"
+    if t.endswith("!"):
+        return t[:-1] + f" ({ref})!"
+
+    return t + f" ({ref})."
+
+
+# Helper: inject fig ref into a single sentence string
+def inject_fig_ref_into_sentence(sentence: str, panel_id: str) -> str:
+    """Inject '(Fig. X)' into the given sentence before terminal punctuation.
+
+    Only inject if the SAME panel ref is not already present.
+    """
+    if not isinstance(sentence, str):
+        return sentence
+    s = sentence.strip()
+    if not s:
+        return sentence
+    if has_same_fig_ref(s, panel_id):
+        return sentence
+    ref = format_fig_ref(panel_id)
+    if not ref:
+        return sentence
+
+    if s.endswith("."):
+        return s[:-1] + f" ({ref})."
+    if s.endswith("?"):
+        return s[:-1] + f" ({ref})?"
+    if s.endswith("!"):
+        return s[:-1] + f" ({ref})!"
+    return s + f" ({ref})."
+
+
 def build_transition_maps(
     logic: Dict[str, Any]
 ) -> Tuple[Dict[Tuple[str, str], Dict[str, str]], Dict[Tuple[str, str], Dict[str, str]]]:
@@ -551,6 +710,63 @@ def render_block(block: Dict[str, Any], include_keys: List[str], primary: str = 
 
     return "\n".join(lines).strip()
 
+
+# Helper: render block as ordered (module_key, primary_text) segments for paragraph assembly
+def render_block_segments(block: Dict[str, Any], include_keys: List[str], primary: str = "en") -> List[Tuple[str, str]]:
+    """Return ordered (module_key, primary_text) segments for paragraph assembly.
+
+    This preserves module boundaries so we can attach (Fig. X) after a specific module.
+    """
+    modules = block.get("modules") or {}
+    if not isinstance(modules, dict):
+        return []
+
+    other = "cn" if primary == "en" else "en"
+    segs: List[Tuple[str, str]] = []
+
+    for mk in include_keys:
+        mk = (mk or "").strip()
+        if not mk or mk not in modules:
+            continue
+        node = modules.get(mk) or {}
+        if not isinstance(node, dict):
+            continue
+
+        t_primary = node.get(primary, "")
+        t_other = node.get(other, "")
+        t_primary = t_primary.strip() if isinstance(t_primary, str) else ""
+        t_other = t_other.strip() if isinstance(t_other, str) else ""
+
+        if not t_primary and not t_other:
+            continue
+
+        # prefer primary; fallback to other if primary missing
+        main = t_primary or t_other
+        segs.append((mk, main))
+
+    return segs
+
+
+# Helper: pick anchor module for figure ref injection
+def pick_figref_anchor_module(panel_level: str, cfg: Dict[str, Any]) -> str:
+    """Choose which module gets the '(Fig. X)' suffix.
+
+    Defaults:
+      - framework -> M2_level_definition
+      - results   -> M3_directional_result
+    Can be overridden via cfg['figure_ref']['anchor_modules'].
+    """
+    fig_ref_cfg = cfg.get("figure_ref") if isinstance(cfg.get("figure_ref"), dict) else {}
+    anchor_map = fig_ref_cfg.get("anchor_modules") if isinstance(fig_ref_cfg.get("anchor_modules"), dict) else {}
+
+    pl = (panel_level or "").strip()
+    if pl in anchor_map and isinstance(anchor_map.get(pl), str) and anchor_map.get(pl).strip():
+        return anchor_map.get(pl).strip()
+
+    if pl == "framework":
+        return "M2_level_definition"
+    return "M3_directional_result"
+
 def resolve_record_dir(paper_logic_path: Path, cfg: Dict[str, Any]) -> Path:
     rd = cfg.get("record_dir")
     if isinstance(rd, str) and rd.strip():
@@ -558,14 +774,6 @@ def resolve_record_dir(paper_logic_path: Path, cfg: Dict[str, Any]) -> Path:
     return paper_logic_path.parent.resolve()
 
 
-def resolve_output_path(record_dir: Path, cfg: Dict[str, Any]) -> Path:
-    out = cfg.get("output_path", "Results_v0.md")
-    if not isinstance(out, str) or not out.strip():
-        out = "Results_v0.md"
-    out_path = Path(out)
-    if not out_path.is_absolute():
-        out_path = record_dir / out_path
-    return out_path.resolve()
 
 
 # Mapping output path helper
@@ -638,12 +846,16 @@ def main() -> int:
         print("ERROR: paper_logic.yaml.results_build must be a dict.", file=sys.stderr)
         return 2
 
+    # Resolve 08_manuscript dir from this script location: 08_manuscript/script/英文论文生成
+    manuscript_dir = Path(__file__).resolve().parents[2]
+    policy = load_results_policy(manuscript_dir)
+    cfg = apply_policy_to_cfg(cfg, policy)
+
     panel_tr_map, figure_tr_map = build_transition_maps(logic)
 
     fig_title_map = build_figure_title_maps(logic)
 
     record_dir = resolve_record_dir(paper_logic, cfg)
-    output_path = resolve_output_path(record_dir, cfg)
     mapping_path = resolve_mapping_path(record_dir, cfg)
     primary_lang = (cfg.get("language") or "en").strip().lower()
     if primary_lang not in ("en", "cn"):
@@ -656,8 +868,13 @@ def main() -> int:
         print(f"[DEBUG] sample panel keys: {list(panel_tr_map.keys())[:10]}")
         print(f"[DEBUG] sample figure keys: {list(figure_tr_map.keys())[:10]}")
 
+    # Figure reference emission (Nature style): append '(Fig. 1a)' at paragraph end
+    fig_ref_cfg = cfg.get("figure_ref") if isinstance(cfg.get("figure_ref"), dict) else {}
+    emit_fig_refs = bool(fig_ref_cfg.get("enabled", True))
+
     # --- IR initialization ---
     results_ir = init_results_ir()
+    pending_transition_en: str = ""
 
     include_globs = cfg.get("include_globs", ["figure_*.yaml"]) or ["figure_*.yaml"]
     exclude_globs = cfg.get("exclude_globs", ["paper_logic.yaml"]) or []
@@ -688,10 +905,6 @@ def main() -> int:
         filtered.sort(key=lambda p: order_map.get(p.name, 10**9))
     else:
         filtered.sort(key=lambda p: p.name)
-
-    # 2) build markdown
-    md: List[str] = []
-    md.append("# Results\n")
 
     current_fig_group: str = ""
     current_display_title: str = ""
@@ -727,9 +940,6 @@ def main() -> int:
                 primary_lang,
                 fallback=curr_fig_group,
             )
-            md.append(f"## {display_title}\n")
-            # Also keep an explicit figure label line (Nature-style readers still like this anchor)
-            md.append(f"**{curr_fig_group}.**\n")
             current_fig_group = curr_fig_group
             current_display_title = display_title
             # --- IR: add heading block for figure section header ---
@@ -738,18 +948,14 @@ def main() -> int:
                 "level": 2,
                 "text": display_title,
             })
+            # Avoid carrying a transition across figure boundaries in IR.
+            pending_transition_en = ""
 
         panels = extract_panels(y, source_name=fpath.name)
         if not panels:
             continue
         if not panels and debug_transitions:
             print(f"[DEBUG] SKIP (no results_skeleton_en found): {fpath.name}")
-
-        # Per-source (panel YAML) header (kept lightweight; section header is figure-level)
-        md.append(f"### Source: `{fpath.name}`")
-        if curr_panel_id:
-            md.append(f"_panel_id_: `{curr_panel_id}`")
-        md.append("")
 
         any_panel_written = False
         for p in panels:
@@ -760,13 +966,10 @@ def main() -> int:
                 continue
 
             include_keys = pick_modules(pl, lt, cfg)
-            body = render_block(p, include_keys, primary=primary_lang)
-            if not body:
+            segs = render_block_segments(p, include_keys, primary=primary_lang)
+            if not segs:
                 continue
 
-            # panel header (keep minimal; you can enrich later)
-            md.append(f"### Panel block ({pl or 'unknown'}; {lt or 'unspecified'})")
-            md.append(body)
             map_order += 1
             mapping_rows.append({
                 "order": str(map_order),
@@ -781,26 +984,36 @@ def main() -> int:
                 "results_logic_type": lt or "",
                 "include_modules": ",".join(include_keys),
             })
-            md.append("")  # blank line
             any_panel_written = True
 
             # --- IR: add paragraph block for panel body ---
-            para = " ".join(
-                line[2:].strip() if line.startswith("- ") else ""
-                for line in body.splitlines()
-                if line.startswith("- ")
-            ).strip()
+            # Assemble paragraph while preserving module boundaries so we can attach (Fig. X)
+            anchor_mk = pick_figref_anchor_module(pl, cfg)
+            out_parts: List[str] = []
+            injected = False
+            for mk, txt in segs:
+                t = txt.strip()
+                if not t:
+                    continue
+                if emit_fig_refs and (not injected) and mk == anchor_mk:
+                    t = inject_fig_ref_into_sentence(t, curr_panel_id)
+                    injected = True
+                out_parts.append(t)
+
+            para = " ".join(out_parts).strip()
             if para:
+                if pending_transition_en:
+                    para = (pending_transition_en + " " + para).strip()
+                    pending_transition_en = ""
+                # Fallback: if anchor module was not present, append at paragraph end
+                if emit_fig_refs and (not injected):
+                    para = append_fig_ref(para, curr_panel_id)
                 append_ir_block(results_ir, {
                     "type": "paragraph",
                     "text": para,
                     "source": fpath.name,
                     "panel_id": curr_panel_id,
                 })
-
-        if not any_panel_written:
-            # remove previous header if nothing output
-            md = md[:-1]
 
         # Insert smooth transition to the next section (panel-to-panel or figure-to-figure)
         if next_panel_id:
@@ -839,30 +1052,12 @@ def main() -> int:
             if transition_text:
                 if debug_transitions:
                     print(f"[DEBUG] inserted transition ({'panel' if curr_fig_group==next_fig_group else 'figure'})")
-                rendered_transition_text = render_transition(
-                    transition_text.get("en", ""),
-                    transition_text.get("cn", ""),
-                    primary=primary_lang,
-                )
-                md.append(rendered_transition_text)
-                md.append("")
-                # --- IR: add transition as English-only paragraph block ---
+                # --- IR: merge transition into the NEXT panel paragraph (Nature-style flow) ---
                 en_tr = (transition_text.get("en", "") or "").strip()
                 if en_tr:
-                    append_ir_block(results_ir, {
-                        "type": "paragraph",
-                        "text": en_tr,
-                        "tags": ["transition"],
-                    })
+                    pending_transition_en = en_tr
             elif debug_transitions:
                 print("[DEBUG] no transition inserted for this pair")
-
-        # Figure separator: only when we are about to move to a different figure group
-        if next_fig_group and curr_fig_group and next_fig_group != curr_fig_group:
-            md.append("---\n")
-
-    final_text = "\n".join(md).strip() + "\n"
-    dump_text(output_path, final_text)
 
     # Write mapping TSV
     mapping_path.parent.mkdir(parents=True, exist_ok=True)
@@ -888,9 +1083,8 @@ def main() -> int:
     ir_out.parent.mkdir(parents=True, exist_ok=True)
     with ir_out.open("w", encoding="utf-8") as f:
         yaml.safe_dump(results_ir, f, sort_keys=False, allow_unicode=True, width=1000)
-    print(f"[OK] Wrote: {output_path}")
-    print(f"[OK] Wrote: {mapping_path}")
-    print(f"[OK] Wrote: {ir_out}")
+    print(f"[OK] Wrote mapping: {mapping_path}")
+    print(f"[OK] Wrote IR: {ir_out}")
     return 0
 
 

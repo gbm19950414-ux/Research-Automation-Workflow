@@ -1,0 +1,18 @@
+# 08_manuscript/yaml/policy_discussion.yaml
+# Nature submission–oriented policy: semantic filtering, not length caps
+
+# Discussion in Nature is usually a continuous narrative; hide D# subheadings
+include_subheadings: false
+
+# Enforce per-paragraph compression using each block's compression_rule.max_sentences
+apply_compression_rule: true
+
+filter:
+  # Include only core argumentative paragraphs and the brief take-home/implications close
+  include_verdict_levels:
+    - main_text
+    - brief
+
+  # Do NOT hard-cap paragraph count; rely on semantic filters instead
+  # include_para_ids: []
+  # exclude_para_ids: []

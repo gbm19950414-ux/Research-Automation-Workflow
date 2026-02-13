@@ -1,0 +1,56 @@
+figure_ref:
+  enabled: true
+  style: "paren"          # (Fig. 1a)
+  prefix: "Fig."
+  anchor_modules:
+    framework: "M2_level_definition"
+    results: "M3_directional_result"
+    
+inputs:
+  overall_logic: "/.../overall_logic.yaml"
+  figures_glob: "/.../figure_*.yaml"
+
+output:
+  format: "markdown"
+  path: "/.../Results_v0.md"
+
+module_rules:
+  framework:
+    include_modules:
+      - M1_motivation
+      - M2_level_definition
+      - M5_panel_conclusion
+
+  results_default:
+    include_modules:
+      - M3_directional_result
+      - M5_panel_conclusion
+
+  results_by_logic_type:
+    discovery:
+      include_modules:
+        - M3_directional_result
+        - M5_panel_conclusion
+        # 如果你非常想强调稳健性，可加：
+        # - M4_robustness
+
+    perturbation_response:
+      include_modules:
+        - M3_directional_result
+        - M5_panel_conclusion
+        # 同上，必要时才加 M4
+
+    mechanistic_localization:
+      include_modules:
+        - M3_directional_result
+        - M5_panel_conclusion
+
+    causality:
+      include_modules:
+        - M3_directional_result
+        - M5_panel_conclusion
+
+    rescue:
+      include_modules:
+        - M3_directional_result
+        - M5_panel_conclusion

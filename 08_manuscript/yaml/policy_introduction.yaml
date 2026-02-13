@@ -1,6 +1,26 @@
-mode: submission        # submission | review
+mode: submission
 include_subheadings: false
 keep_hypotheses: false
 filter:
-  include_pids: []      # 可选：只导出这些 pid
-  exclude_pids: []      # 可选：排除这些 pid
+  include_pids:
+    # --- 快速建立“execution threshold”问题 ---
+    - "1.1.2.p1"   # 三层模型：priming / assembly / execution
+    - "1.1.2.p3"   # 执行阈值决定输出形态
+    - "1.1.2.p4"   # 脂质/CL 决定 GSDMD 插入与效率
+
+    # --- 引出 mitochondria + CL 作为执行接口 ---
+    - "1.1.2.p7"   # CL 作为候选执行接口（承上启下）
+    - "1.1.3.p2"   # CL 在炎症/线粒体/执行层的多重角色
+    - "1.1.3.p3"   # 明确 gap：缺 upstream → CL → execution 的系统模型
+
+    # --- 引出 EphB1 作为 upstream 候选 ---
+    - "1.1.3.p4"   # Eph 家族 & EphB1 的合理性
+    - "1.1.3.p5"   # 提出工作框架：EphB1 → CL → execution
+
+    # --- 核心问题与研究策略（1.3 基本全保留） ---
+    # - "1.3.p1"
+    # - "1.3.p2"
+    # - "1.3.p3"
+    - "1.3.p4"
+    - "1.3.p5"
+    # - "1.3.p6"
