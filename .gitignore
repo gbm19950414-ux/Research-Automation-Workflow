@@ -9,3 +9,4 @@
 !*.yml
 !*.py
 !*.R
+.DS_Store
