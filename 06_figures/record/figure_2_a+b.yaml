@@ -72,9 +72,10 @@ ai_hints:
 #     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
 # ---------- Figure 2: shared legend ----------
 figure_legend:
-  one_sentence_en: >
-    Transcriptional priming responses to LPS stimulation in WT and EphB1-deficient
-    primary peritoneal macrophages.
+  one_sentence_en: 
+    - panels: [a,b]
+      text: TNF-α and IL-1β Transcriptional priming responses to LPS stimulation in WT and EphB1-deficient primary peritoneal macrophages.
+    
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"

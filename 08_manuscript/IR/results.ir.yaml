@@ -576,389 +576,75 @@ document:
     - type: figure
       id: Figure 1
       title: EphB1 loss constrains inflammasome-triggered pyroptosis and IL-1β release
-      legend: '(a) Schematic overview of the genetic screening strategy used to identify regulators of inflammasome-associated
-        pyroptotic output.. LPS priming followed by nigericin-induced NLRP3 activation Defined stimulation window under standardized
-        conditions. Readout: IL-1β release as a functional readout of pyroptotic output (Conceptual workflow schematic (no
-        quantitative assay)). Normalization: Not applicable. n: Not applicable; stats: Not applicable. This schematic illustrates
-        experimental design and decision logic only and does not present quantitative data. (b) Normalized IL-1β release across
-        multiple pb genetic backgrounds following nigericin-induced inflammasome activation, highlighting strains with pronounced
-        genotype-dependent differences.. Nigericin stimulation (10 μM) Supernatants collected after inflammasome activation.
-        Readout: IL-1β release in culture supernatants (ELISA). n: n ≥ 3 per group; stats: two-tailed Welch’s t-test. Each
-        point represents an individual genetic background, with WT and HO comparisons performed within the same background.
-        (c) IL-1β release from primary peritoneal macrophages following activation of distinct inflammasome pathways via different
-        secondary stimuli.. LPS priming followed by nigericin (NLRP3), cytosolic flagellin delivery (NLRC4), or cytosolic
-        poly(dA:dT) delivery (AIM2) Supernatants collected after the indicated secondary stimulation periods. Readout: IL-1β
-        release in culture supernatants (ELISA). Normalization: ELISA signals were background-subtracted (blank wells and
-        480 nm) and normalized to cell number based on MTT measurements. n: n ≥ 3 per group; results reproduced in ≥3 independent
-        experiments; stats: two-tailed unpaired t-test. (d) LDH release from WT and EphB1-deficient primary peritoneal macrophages
-        following activation of NLRP3, NLRC4, or AIM2 inflammasomes under the indicated conditions.. Nigericin stimulation
-        to activate NLRP3 (1 h and 8 h), cytosolic flagellin delivery to activate NLRC4 (2 h), or cytosolic poly(dA:dT) delivery
-        to activate AIM2 (8 h) Supernatants collected at the indicated time points after inflammasome activation. Readout:
-        LDH release as a measure of pyroptotic cell lysis (CytoTox 96® LDH release assay). Normalization: LDH values were
-        background-subtracted using blank wells and normalized to total lysis controls to account for batch-to-batch variability.
-        n: n ≥ 4 per group; results reproduced in ≥3 independent experiments; stats: two-tailed unpaired t-test.'
+      legend: (a) Schematic overview of the genetic screening strategy used to identify regulators of inflammasome-associated
+        pyroptotic output.. (b) Normalized IL-1β release across multiple pb genetic backgrounds following nigericin-induced
+        inflammasome activation, highlighting strains with pronounced genotype-dependent differences.. (c) IL-1β release from
+        primary peritoneal macrophages following activation of distinct inflammasome pathways via different secondary stimuli..
+        (d) LDH release from WT and EphB1-deficient primary peritoneal macrophages following activation of NLRP3, NLRC4, or
+        AIM2 inflammasomes under the indicated conditions..
       image_path: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_1_画板 1.png
     - type: figure
       id: Figure 2
       title: EphB1 loss preserves upstream NLRP3 activation yet constrains GSDMD pore–driven execution
-      legend: '(a) Transcriptional priming responses to LPS stimulation in WT and EphB1-deficient primary peritoneal macrophages.
-        (Tnf mRNA). LPS stimulation (100 ng/mL) Cells harvested at the indicated time points after LPS treatment. Readout:
-        Transcriptional priming markers (qPCR). Normalization: Transcript levels were normalized to GAPDH and expressed as
-        fold change relative to the unstimulated control using the ΔCt–ΔΔCt method. n: n ≥ 3 per group; results reproduced
-        in ≥3 independent experiments; stats: two-tailed unpaired t-test. (a) Time-resolved changes in cytosolic ROS, mitochondrial
-        ROS, and mitochondrial membrane potential in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome
-        activation and under unstimulated baseline conditions. (H2DCHA fluorescence). LPS priming (100 ng/mL, 4 h) followed
-        by nigericin stimulation (10 μM), or unstimulated conditions for baseline measurements 0–120 min after stimulation,
-        with continuous fluorescence acquisition. Readout: Cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential
-        (Live-cell fluorescence measurements using H2DCHA, MitoSOX, and TMRM). Normalization: All fluorescence signals were
-        normalized to the first time point immediately before nigericin addition to allow comparison of dynamic changes. n:
-        n ≥ 3 independent experiments; stats: two-tailed unpaired t-test on area-under-the-curve or endpoint values. (b) Transcriptional
-        priming responses to LPS stimulation in WT and EphB1-deficient primary peritoneal macrophages. (Il1b mRNA). LPS stimulation
-        (100 ng/mL) Cells harvested at the indicated time points after LPS treatment. Readout: Transcriptional priming markers
-        (qPCR). Normalization: Transcript levels were normalized to GAPDH and expressed as fold change relative to the unstimulated
-        control using the ΔCt–ΔΔCt method. n: n ≥ 3 per group; results reproduced in ≥3 independent experiments; stats: two-tailed
-        unpaired t-test. (b) Time-resolved changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential
-        in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome activation and under unstimulated
-        baseline conditions. (MitoSOX fluorescence). LPS priming (100 ng/mL, 4 h) followed by nigericin stimulation (10 μM),
-        or unstimulated conditions for baseline measurements 0–120 min after stimulation, with continuous fluorescence acquisition.
-        Readout: Cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential (Live-cell fluorescence measurements
-        using H2DCHA, MitoSOX, and TMRM). Normalization: All fluorescence signals were normalized to the first time point
-        immediately before nigericin addition to allow comparison of dynamic changes. n: n ≥ 3 independent experiments; stats:
-        two-tailed unpaired t-test on area-under-the-curve or endpoint values. (c) TNF-α and IL-6 secretion from WT and EphB1-deficient
-        primary peritoneal macrophages following LPS stimulation at defined time points.. LPS stimulation (100 ng/mL) Supernatants
-        collected at 2 h for IL-6 and 4 h for TNF-α after stimulation. Readout: TNF-α and IL-6 release in culture supernatants
-        (ELISA). Normalization: ELISA signals were background-subtracted using blank wells and 480 nm readings and normalized
-        to cell number based on MTT measurements. n: n ≥ 3 per group; results reproduced in ≥3 independent experiments; stats:
-        two-tailed unpaired t-test. (c) Time-resolved changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane
-        potential in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome activation and under
-        unstimulated baseline conditions. (TMRM fluorescence). LPS priming (100 ng/mL, 4 h) followed by nigericin stimulation
-        (10 μM), or unstimulated conditions for baseline measurements 0–120 min after stimulation, with continuous fluorescence
-        acquisition. Readout: Cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential (Live-cell fluorescence
-        measurements using H2DCHA, MitoSOX, and TMRM). Normalization: All fluorescence signals were normalized to the first
-        time point immediately before nigericin addition to allow comparison of dynamic changes. n: n ≥ 3 independent experiments;
-        stats: two-tailed unpaired t-test on area-under-the-curve or endpoint values. (d) IL-1β release from WT and EphB1-deficient
-        primary peritoneal macrophages following NLRP3 activation with increasing doses of nigericin.. LPS priming followed
-        by nigericin stimulation at 0, 10, or 20 μM Supernatants collected at the endpoint of the standard NLRP3 activation
-        protocol. Readout: Mature IL-1β release in culture supernatants (ELISA). Normalization: ELISA signals were background-subtracted
-        and quantified as pg/mL according to the manufacturer’s standard curve. n: n = 3 per group; stats: two-tailed unpaired
-        t-test. Each data point represents one biological replicate; comparisons were performed between genotypes at each
-        nigericin dose. (d) Time-resolved changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential
-        in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome activation and under unstimulated
-        baseline conditions. (H2DCHA AUC (0–120 min)). LPS priming (100 ng/mL, 4 h) followed by nigericin stimulation (10
-        μM), or unstimulated conditions for baseline measurements 0–120 min after stimulation, with continuous fluorescence
-        acquisition. Readout: Cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential (Live-cell fluorescence
-        measurements using H2DCHA, MitoSOX, and TMRM). Normalization: All fluorescence signals were normalized to the first
-        time point immediately before nigericin addition to allow comparison of dynamic changes. n: n ≥ 3 independent experiments;
-        stats: two-tailed unpaired t-test on area-under-the-curve or endpoint values. (e) ASC oligomerization in WT and EphB1-deficient
-        primary peritoneal macrophages following NLRP3 inflammasome activation.. LPS priming (100 ng/mL, 4 h) followed by
-        nigericin (10 μM, 45–60 min) Cells lysed immediately after nigericin treatment for fractionation and crosslinking.
-        Readout: ASC oligomers, dimers, and monomers in soluble and insoluble fractions (Biochemical fractionation (S-Lys./Pel.),
-        DSS crosslinking of Pel., and immunoblotting for ASC). Normalization: Densitometry normalized to GAPDH; soluble/insoluble
-        fractions processed in parallel to minimize fractionation variability. n: n ≥ 3 per group; results reproduced in ≥3
-        independent experiments; stats: two-tailed unpaired t-test. (e) Time-resolved changes in cytosolic ROS, mitochondrial
-        ROS, and mitochondrial membrane potential in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome
-        activation and under unstimulated baseline conditions. (MitoSOX AUC (0–120 min)). LPS priming (100 ng/mL, 4 h) followed
-        by nigericin stimulation (10 μM), or unstimulated conditions for baseline measurements 0–120 min after stimulation,
-        with continuous fluorescence acquisition. Readout: Cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential
-        (Live-cell fluorescence measurements using H2DCHA, MitoSOX, and TMRM). Normalization: All fluorescence signals were
-        normalized to the first time point immediately before nigericin addition to allow comparison of dynamic changes. n:
-        n ≥ 3 independent experiments; stats: two-tailed unpaired t-test on area-under-the-curve or endpoint values. (f) Pro-caspase-1
-        and cleaved caspase-1 p20 levels in total cell lysates and corresponding supernatants from WT and EphB1-deficient
-        primary peritoneal macrophages following NLRP3 inflammasome activation.. LPS priming (100 ng/mL, 4 h) followed by
-        nigericin (10 μM, 45–60 min) Total lysates and supernatants collected immediately after nigericin treatment. Readout:
-        Pro-caspase-1 (45 kDa) and cleaved caspase-1 p20 in lysate versus supernatant (Immunoblotting of total lysate and
-        supernatant fractions). Normalization: Band intensities were quantified by densitometry and normalized to GAPDH. n:
-        n ≥ 3 per group; results reproduced in ≥3 independent experiments; stats: two-tailed unpaired t-test. Lysate and supernatant
-        fractions were processed in parallel to compare intracellular activation with extracellular release. (f) Time-resolved
-        changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential in WT and EphB1-deficient primary
-        peritoneal macrophages during NLRP3 inflammasome activation and under unstimulated baseline conditions. (TMRM AUC
-        (0–120 min)). LPS priming (100 ng/mL, 4 h) followed by nigericin stimulation (10 μM), or unstimulated conditions for
-        baseline measurements 0–120 min after stimulation, with continuous fluorescence acquisition. Readout: Cytosolic ROS,
-        mitochondrial ROS, and mitochondrial membrane potential (Live-cell fluorescence measurements using H2DCHA, MitoSOX,
-        and TMRM). Normalization: All fluorescence signals were normalized to the first time point immediately before nigericin
-        addition to allow comparison of dynamic changes. n: n ≥ 3 independent experiments; stats: two-tailed unpaired t-test
-        on area-under-the-curve or endpoint values. (g) GSDMD and IL-1β processing in total cell lysates versus corresponding
-        supernatants from WT and Ephb1−/− primary peritoneal macrophages following NLRP3 inflammasome activation.. LPS priming
-        (100 ng/mL, 4 h) followed by nigericin (10 μM, 45–60 min) Total lysates and supernatants collected immediately after
-        nigericin treatment. Readout: GSDMD (pro and NT) and IL-1β (pro/p31 and mature/p17) in total lysate and supernatant
-        fractions, with cleavage and maturation indices quantified by densitometry (Immunoblotting of total lysate and supernatant
-        fractions). Normalization: Densitometry was normalized to GAPDH; cleavage index was calculated as GSDMD-NT/(pro+NT),
-        and IL-1β maturation index was calculated as p17/(p31+p17). n: n ≥ 3 per group; results reproduced in ≥3 independent
-        experiments; stats: two-tailed unpaired t-test. Total lysate and supernatant fractions were processed in parallel
-        to distinguish intracellular processing from extracellular export. (g) Time-resolved changes in cytosolic ROS, mitochondrial
-        ROS, and mitochondrial membrane potential in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome
-        activation and under unstimulated baseline conditions. (Baseline TMRM fluorescence (unstimulated)). LPS priming (100
-        ng/mL, 4 h) followed by nigericin stimulation (10 μM), or unstimulated conditions for baseline measurements 0–120
-        min after stimulation, with continuous fluorescence acquisition. Readout: Cytosolic ROS, mitochondrial ROS, and mitochondrial
-        membrane potential (Live-cell fluorescence measurements using H2DCHA, MitoSOX, and TMRM). Normalization: All fluorescence
-        signals were normalized to the first time point immediately before nigericin addition to allow comparison of dynamic
-        changes. n: n ≥ 3 independent experiments; stats: two-tailed unpaired t-test on area-under-the-curve or endpoint values.
-        (h) Time-resolved changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential in WT and EphB1-deficient
-        primary peritoneal macrophages during NLRP3 inflammasome activation and under unstimulated baseline conditions. (Baseline
-        TMRM AUC (unstimulated)). LPS priming (100 ng/mL, 4 h) followed by nigericin stimulation (10 μM), or unstimulated
-        conditions for baseline measurements 0–120 min after stimulation, with continuous fluorescence acquisition. Readout:
-        Cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential (Live-cell fluorescence measurements using
-        H2DCHA, MitoSOX, and TMRM). Normalization: All fluorescence signals were normalized to the first time point immediately
-        before nigericin addition to allow comparison of dynamic changes. n: n ≥ 3 independent experiments; stats: two-tailed
-        unpaired t-test on area-under-the-curve or endpoint values.'
+      legend: (a,b) TNF-α and IL-1β Transcriptional priming responses to LPS stimulation in WT and EphB1-deficient primary
+        peritoneal macrophages.. (c) TNF-α and IL-1β secretion from WT and EphB1-deficient primary peritoneal macrophages
+        following LPS stimulation at defined time points.. (d) IL-1β release from WT and EphB1-deficient primary peritoneal
+        macrophages following NLRP3 activation with increasing doses of nigericin.. (e) ASC oligomerization in WT and EphB1-deficient
+        primary peritoneal macrophages following NLRP3 inflammasome activation.. (f) Pro-caspase-1 and cleaved caspase-1 p20
+        levels in total cell lysates from WT and EphB1-deficient primary peritoneal macrophages following NLRP3 inflammasome
+        activation.. (g) GSDMD and IL-1β processing in total cell lysates from WT and Ephb1−/− primary peritoneal macrophages
+        following NLRP3 inflammasome activation..
       image_path: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_2_画板 1.png
     - type: figure
       id: Figure 3
       title: EphB1 loss diminishes GSDMD-NT engagement and enrichment on mitochondria
-      legend: '(i) Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary peritoneal macrophages following NLRP3
-        inflammasome activation, quantified by rapid subcellular fractionation and qPCR. (Cytosolic 16S mtDNA (time course;
-        peak at 7.5 min)). LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM) and rapid fractionation at 0, 7.5, 15,
-        30, and 60 min after stimulation 0–60 min time course with early peak comparison at 7.5 min. Readout: mtDNA abundance
-        (16S and ND1) in cytosolic, mitochondrial, and total fractions (Subcellular fractionation followed by qPCR quantification
-        of mtDNA (16S, ND1)). Normalization: qPCR ΔCt values were calculated for each fraction and normalized using total
-        mtDNA (16S/ND1) as the reference; fold changes were expressed relative to the WT mean using ΔΔCt (log2FC). n: n ≥
-        2 per group; replicated in ≥3 independent batches; stats: two-tailed unpaired t-test. Total mtDNA measurements serve
-        as an internal control for baseline mtDNA abundance and to separate cytosolic release from changes in overall mtDNA
-        content. (j) Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary peritoneal macrophages following NLRP3
-        inflammasome activation, quantified by rapid subcellular fractionation and qPCR. (Cytosolic ND1 mtDNA (time course;
-        peak at 7.5 min)). LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM) and rapid fractionation at 0, 7.5, 15,
-        30, and 60 min after stimulation 0–60 min time course with early peak comparison at 7.5 min. Readout: mtDNA abundance
-        (16S and ND1) in cytosolic, mitochondrial, and total fractions (Subcellular fractionation followed by qPCR quantification
-        of mtDNA (16S, ND1)). Normalization: qPCR ΔCt values were calculated for each fraction and normalized using total
-        mtDNA (16S/ND1) as the reference; fold changes were expressed relative to the WT mean using ΔΔCt (log2FC). n: n ≥
-        2 per group; replicated in ≥3 independent batches; stats: two-tailed unpaired t-test. Total mtDNA measurements serve
-        as an internal control for baseline mtDNA abundance and to separate cytosolic release from changes in overall mtDNA
-        content. (k) Early mitochondrial enrichment of GSDMD-NT during NLRP3 inflammasome activation in WT and Ephb1−/− primary
-        peritoneal macrophages, with mitochondrial abundance controls assessed in parallel. (Mitochondrial-fraction GSDMD-NT
-        time course (0, 7.5, 15, 30, 60 min); Total-lysate GSDMD cleavage control (GSDMD-NT / FL)). LPS priming (100 ng/mL,
-        4 h) followed by nigericin (10 μM), with rapid collection at 0, 7.5, 15, 30, and 60 min for mitochondrial fractionation
-        and total lysate analysis 0–60 min after nigericin; 7.5 min corresponds to the WT peak enrichment time point. Readout:
-        GSDMD-NT abundance in mitochondrial fractions versus total lysates; mitochondrial abundance controls (Immunoblotting
-        of GSDMD-NT in total lysates and mitochondrial fractions across time points; HK2 protein (immunoblot) and mitochondrial
-        16S rRNA (qPCR) as mitochondrial abundance controls). Normalization: Immunoblot band intensities were quantified by
-        densitometry and normalized to loading controls; mitochondrial enrichment was evaluated at the WT peak time point
-        (7.5 min). n: n ≥ 3 per genotype; results reproduced in ≥3 independent batches; stats: two-tailed unpaired t-test.
-        Comparisons focus on mitochondrial GSDMD-NT enrichment at the peak time point, while total-lysate cleavage controls
-        exclude differences in substrate generation. HK2 and mitochondrial 16S rRNA are used to assess mitochondrial abundance
-        and exclude organelle-quantity confounding. (s3_d) Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary
-        peritoneal macrophages following NLRP3 inflammasome activation, quantified by rapid subcellular fractionation and
-        qPCR. (Total 16S mtDNA (time course control)). LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM) and rapid
-        fractionation at 0, 7.5, 15, 30, and 60 min after stimulation 0–60 min time course with early peak comparison at 7.5
-        min. Readout: mtDNA abundance (16S and ND1) in cytosolic, mitochondrial, and total fractions (Subcellular fractionation
-        followed by qPCR quantification of mtDNA (16S, ND1)). Normalization: qPCR ΔCt values were calculated for each fraction
-        and normalized using total mtDNA (16S/ND1) as the reference; fold changes were expressed relative to the WT mean using
-        ΔΔCt (log2FC). n: n ≥ 2 per group; replicated in ≥3 independent batches; stats: two-tailed unpaired t-test. Total
-        mtDNA measurements serve as an internal control for baseline mtDNA abundance and to separate cytosolic release from
-        changes in overall mtDNA content. (s3_f) Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary peritoneal
-        macrophages following NLRP3 inflammasome activation, quantified by rapid subcellular fractionation and qPCR. (Total
-        ND1 mtDNA (time course control)). LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM) and rapid fractionation
-        at 0, 7.5, 15, 30, and 60 min after stimulation 0–60 min time course with early peak comparison at 7.5 min. Readout:
-        mtDNA abundance (16S and ND1) in cytosolic, mitochondrial, and total fractions (Subcellular fractionation followed
-        by qPCR quantification of mtDNA (16S, ND1)). Normalization: qPCR ΔCt values were calculated for each fraction and
-        normalized using total mtDNA (16S/ND1) as the reference; fold changes were expressed relative to the WT mean using
-        ΔΔCt (log2FC). n: n ≥ 2 per group; replicated in ≥3 independent batches; stats: two-tailed unpaired t-test. Total
-        mtDNA measurements serve as an internal control for baseline mtDNA abundance and to separate cytosolic release from
-        changes in overall mtDNA content. (s3_g) Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary peritoneal
-        macrophages following NLRP3 inflammasome activation, quantified by rapid subcellular fractionation and qPCR. (Mitochondrial
-        fraction mtDNA (16S/ND1; time course control)). LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM) and rapid
-        fractionation at 0, 7.5, 15, 30, and 60 min after stimulation 0–60 min time course with early peak comparison at 7.5
-        min. Readout: mtDNA abundance (16S and ND1) in cytosolic, mitochondrial, and total fractions (Subcellular fractionation
-        followed by qPCR quantification of mtDNA (16S, ND1)). Normalization: qPCR ΔCt values were calculated for each fraction
-        and normalized using total mtDNA (16S/ND1) as the reference; fold changes were expressed relative to the WT mean using
-        ΔΔCt (log2FC). n: n ≥ 2 per group; replicated in ≥3 independent batches; stats: two-tailed unpaired t-test. Total
-        mtDNA measurements serve as an internal control for baseline mtDNA abundance and to separate cytosolic release from
-        changes in overall mtDNA content. (s3e) Early mitochondrial enrichment of GSDMD-NT during NLRP3 inflammasome activation
-        in WT and Ephb1−/− primary peritoneal macrophages, with mitochondrial abundance controls assessed in parallel. (HK2
-        protein abundance (immunoblot); Mitochondrial 16S rRNA content (qPCR)). LPS priming (100 ng/mL, 4 h) followed by nigericin
-        (10 μM), with rapid collection at 0, 7.5, 15, 30, and 60 min for mitochondrial fractionation and total lysate analysis
-        0–60 min after nigericin; 7.5 min corresponds to the WT peak enrichment time point. Readout: GSDMD-NT abundance in
-        mitochondrial fractions versus total lysates; mitochondrial abundance controls (Immunoblotting of GSDMD-NT in total
-        lysates and mitochondrial fractions across time points; HK2 protein (immunoblot) and mitochondrial 16S rRNA (qPCR)
-        as mitochondrial abundance controls). Normalization: Immunoblot band intensities were quantified by densitometry and
-        normalized to loading controls; mitochondrial enrichment was evaluated at the WT peak time point (7.5 min). n: n ≥
-        3 per genotype; results reproduced in ≥3 independent batches; stats: two-tailed unpaired t-test. Comparisons focus
-        on mitochondrial GSDMD-NT enrichment at the peak time point, while total-lysate cleavage controls exclude differences
-        in substrate generation. HK2 and mitochondrial 16S rRNA are used to assess mitochondrial abundance and exclude organelle-quantity
-        confounding.'
+      legend: (a,b,c,d,e,f,g,h) Time-resolved changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential
+        in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome activation and under unstimulated
+        baseline conditions.. (i,j) Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary peritoneal macrophages
+        following NLRP3 inflammasome activation, quantified by rapid subcellular fractionation and qPCR.. (k) Early mitochondrial
+        enrichment of GSDMD-NT during NLRP3 inflammasome activation in WT and Ephb1−/− primary peritoneal macrophages, with
+        mitochondrial abundance controls assessed in parallel..
       image_path: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_3_画板 1.png
     - type: figure
       id: Figure 4
       title: Cardiolipin availability mediates EphB1-dependent limitation of inflammasome output
-      legend: '(a) NAO-associated fluorescence in WT and Ephb1−/− primary peritoneal macrophages was quantified by fixed-exposure
-        microscopy and time-resolved plate-reader measurements to estimate the NAO-detectable cardiolipin pool under conditions
-        without nigericin stimulation. (Representative NAO fluorescence images (fixed exposure); Imaging-based NAO intensity
-        quantification). NAO staining (200 nM, 30 min); no nigericin Microscopy at 30 min; plate-reader acquisition at 0,
-        5, 10, 24, and 48 min. Readout: NAO fluorescence as a readout of the NAO-detectable cardiolipin pool (Fixed-exposure
-        fluorescence imaging and plate-reader fluorescence measurement). Normalization: Imaging quantification used identical
-        exposure/gain and unified ImageJ thresholding; plate-reader signals were background-subtracted using no-dye wells.
-        Where indicated, NAO signals were additionally expressed as NAO/Δψm using matched Δψm measurements.. n: n ≥ 3 per
-        group; results reproduced in ≥3 independent experiments; stats: two-tailed unpaired t-test. (a) Pharmacological inhibition
-        of iPLA2 with BEL reduces NAO-associated fluorescence and collapses genotype-dependent differences in WT and Ephb1−/−
-        primary peritoneal macrophages. (Representative NAO fluorescence images (±BEL) under fixed exposure; Imaging-based
-        NAO intensity quantification in WT (±BEL)). BEL pretreatment (10 μM, 16 h), followed by LPS priming and nigericin
-        stimulation, then NAO staining (200 nM, 30 min) NAO imaging performed after staining under fixed exposure conditions.
-        Readout: NAO fluorescence intensity as a readout of the NAO-accessible cardiolipin pool (Fixed-exposure fluorescence
-        microscopy with ImageJ-based quantification). Normalization: Images were acquired using identical exposure/gain settings;
-        fluorescence quantification used a unified ImageJ thresholding workflow with background subtraction. n: n ≥ 3 per
-        group; results reproduced in ≥3 independent experiments; stats: two-tailed unpaired t-test. (b) NAO-associated fluorescence
-        in WT and Ephb1−/− primary peritoneal macrophages was quantified by fixed-exposure microscopy and time-resolved plate-reader
-        measurements to estimate the NAO-detectable cardiolipin pool under conditions without nigericin stimulation. (Plate-reader
-        NAO fluorescence time course (0–48 min); Background-subtracted NAO signal (and NAO/Δψm if shown)). NAO staining (200
-        nM, 30 min); no nigericin Microscopy at 30 min; plate-reader acquisition at 0, 5, 10, 24, and 48 min. Readout: NAO
-        fluorescence as a readout of the NAO-detectable cardiolipin pool (Fixed-exposure fluorescence imaging and plate-reader
-        fluorescence measurement). Normalization: Imaging quantification used identical exposure/gain and unified ImageJ thresholding;
-        plate-reader signals were background-subtracted using no-dye wells. Where indicated, NAO signals were additionally
-        expressed as NAO/Δψm using matched Δψm measurements.. n: n ≥ 3 per group; results reproduced in ≥3 independent experiments;
-        stats: two-tailed unpaired t-test. (b) Pharmacological inhibition of iPLA2 with BEL reduces NAO-associated fluorescence
-        and collapses genotype-dependent differences in WT and Ephb1−/− primary peritoneal macrophages. (NAO intensity comparison
-        across WT/KO × ±BEL; Genotype-wise difference in NAO signal before and after BEL treatment). BEL pretreatment (10
-        μM, 16 h), followed by LPS priming and nigericin stimulation, then NAO staining (200 nM, 30 min) NAO imaging performed
-        after staining under fixed exposure conditions. Readout: NAO fluorescence intensity as a readout of the NAO-accessible
-        cardiolipin pool (Fixed-exposure fluorescence microscopy with ImageJ-based quantification). Normalization: Images
-        were acquired using identical exposure/gain settings; fluorescence quantification used a unified ImageJ thresholding
-        workflow with background subtraction. n: n ≥ 3 per group; results reproduced in ≥3 independent experiments; stats:
-        two-tailed unpaired t-test. (c) LC–MS/MS lipidomics quantification of total cardiolipin abundance and molecular species
-        composition in resting WT and Ephb1−/− primary peritoneal macrophages. (Total CL abundance (nmol per 10^6 cells) in
-        WT vs Ephb1−/−). Resting (unstimulated) condition; samples extracted immediately with BHT-containing MTBE/MeOH Single
-        endpoint (baseline, no inflammasome stimulation). Readout: Total cardiolipin (CL) content and abundance of individual
-        CL molecular species (LC–MS/MS lipidomics (positive/negative ion modes with MS/MS confirmation of CL species)). Normalization:
-        Absolute abundances normalized to cell number using internal standards (nmol per 10^6 cells). n: n ≥ 3 per group;
-        reproduced in ≥2 independent experimental batches; stats: two-tailed unpaired t-test. Species-level fold changes were
-        calculated relative to WT; broad downregulation across the CL species pool was evaluated using abundance-weighted
-        summaries. (d) LC–MS/MS lipidomics quantification of total cardiolipin abundance and molecular species composition
-        in resting WT and Ephb1−/− primary peritoneal macrophages. (Fold-change distribution across detected CL molecular
-        species (e.g., 113 species); Species-level differential abundance summary with FDR (q values)). Resting (unstimulated)
-        condition; samples extracted immediately with BHT-containing MTBE/MeOH Single endpoint (baseline, no inflammasome
-        stimulation). Readout: Total cardiolipin (CL) content and abundance of individual CL molecular species (LC–MS/MS lipidomics
-        (positive/negative ion modes with MS/MS confirmation of CL species)). Normalization: Absolute abundances normalized
-        to cell number using internal standards (nmol per 10^6 cells). n: n ≥ 3 per group; reproduced in ≥2 independent experimental
-        batches; stats: two-tailed unpaired t-test. Species-level fold changes were calculated relative to WT; broad downregulation
-        across the CL species pool was evaluated using abundance-weighted summaries. (e) Pharmacological inhibition with alexidine
-        dihydrochloride (AD) reduces NAO-associated fluorescence and collapses genotype-dependent differences in WT and Ephb1−/−
-        primary peritoneal macrophages. (Representative NAO fluorescence images (±AD) under fixed exposure; Imaging-based
-        NAO intensity quantification in WT (±AD)). AD pretreatment (10 μM, 16 h) followed by LPS priming and nigericin stimulation,
-        then NAO staining (200 nM, 30 min) NAO imaging performed after staining under fixed exposure conditions. Readout:
-        NAO fluorescence intensity as a readout of the NAO-accessible cardiolipin pool (Fixed-exposure fluorescence microscopy
-        with ImageJ-based quantification). Normalization: Images were acquired using identical exposure/gain settings; fluorescence
-        quantification used a unified ImageJ thresholding workflow with background subtraction. n: n ≥ 3 per group; results
-        reproduced in ≥3 independent experiments; stats: two-tailed unpaired t-test. (f) Pharmacological inhibition with alexidine
-        dihydrochloride (AD) reduces NAO-associated fluorescence and collapses genotype-dependent differences in WT and Ephb1−/−
-        primary peritoneal macrophages. (NAO intensity comparison across WT/KO × ±AD; Genotype-wise difference in NAO signal
-        before and after AD treatment). AD pretreatment (10 μM, 16 h) followed by LPS priming and nigericin stimulation, then
-        NAO staining (200 nM, 30 min) NAO imaging performed after staining under fixed exposure conditions. Readout: NAO fluorescence
-        intensity as a readout of the NAO-accessible cardiolipin pool (Fixed-exposure fluorescence microscopy with ImageJ-based
-        quantification). Normalization: Images were acquired using identical exposure/gain settings; fluorescence quantification
-        used a unified ImageJ thresholding workflow with background subtraction. n: n ≥ 3 per group; results reproduced in
-        ≥3 independent experiments; stats: two-tailed unpaired t-test. (g) IL-1β release from WT and Ephb1−/− primary peritoneal
-        macrophages following LPS and nigericin stimulation in the presence of increasing doses and durations of alexidine
-        dihydrochloride (AD).. AD pretreatment (1, 2, or 4 μM for 4 h or 16 h), followed by LPS priming (100 ng/mL, 4 h) and
-        nigericin stimulation (10 μM, 1 h) Supernatants collected after 1 h of nigericin stimulation. Readout: IL-1β release
-        in culture supernatants (ELISA). Normalization: ELISA signals were background-subtracted and normalized to cell number
-        based on MTT measurements. n: n ≥ 3 per group; results reproduced in ≥3 independent experiments; stats: two-tailed
-        unpaired t-test; genotype × dose interaction assessed by two-way ANOVA. DMSO-treated cells served as vehicle controls;
-        AD treatment did not induce detectable cytotoxicity as assessed by MTT. (s4c) IL-1β release from WT and Ephb1−/− primary
-        peritoneal macrophages following LPS and nigericin stimulation under increasing doses and durations of BEL treatment..
-        BEL pretreatment (1, 2, or 4 μM for 4 h or 16 h), followed by LPS priming (100 ng/mL, 4 h) and nigericin stimulation
-        (10 μM, 1 h) Supernatants collected after 1 h of nigericin stimulation. Readout: IL-1β release in culture supernatants
-        (ELISA). Normalization: ELISA signals were background-subtracted using blank wells and 480 nm readings and normalized
-        to cell number based on MTT measurements. n: n ≥ 3 per group; results reproduced in ≥3 independent experiments; stats:
-        two-tailed unpaired t-test; genotype × dose interaction assessed by two-way ANOVA. DMSO-treated cells served as vehicle
-        controls; BEL treatment did not induce detectable cytotoxicity as assessed by MTT.'
+      legend: (a,b) Pharmacological inhibition of iPLA2 with BEL reduces NAO-associated fluorescence and collapses genotype-dependent
+        differences in WT and Ephb1−/− primary peritoneal macrophages.. (c,d) LC–MS/MS lipidomics quantification of total
+        cardiolipin abundance and molecular species composition in resting WT and Ephb1−/− primary peritoneal macrophages..
+        (e,f) Pharmacological inhibition with alexidine dihydrochloride (AD) reduces NAO-associated fluorescence and collapses
+        genotype-dependent differences in WT and Ephb1−/− primary peritoneal macrophages.. (g) IL-1β release from WT and Ephb1−/−
+        primary peritoneal macrophages following LPS and nigericin stimulation in the presence of increasing doses and durations
+        of alexidine dihydrochloride (AD).. (s4c) IL-1β release from WT and Ephb1−/− primary peritoneal macrophages following
+        LPS and nigericin stimulation under increasing doses and durations of BEL treatment..
       image_path: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_4_画板 1.png
     - type: figure
       id: Figure 5
       title: Multi-omics integration prioritizes the membrane-context axis as the dominant perturbation
-      legend: '(a) Conceptual diagram illustrating six mechanistic axes of cardiolipin metabolism and their organization into
-        an ER–mitochondria–centered framework used to interpret EphB1-dependent multi-omics changes.. Not applicable Not applicable.
-        Readout: Six cardiolipin-related mechanistic axes, including synthesis, remodeling, transport, supply, oxidation,
-        and membrane context (Schematic representation). Normalization: Not applicable. n: Not applicable; stats: Not applicable.
-        This model serves as a mechanistic coordinate system for organizing transcriptomic and lipidomic readouts in subsequent
-        figures and does not imply quantitative relationships or directionality. (b) Curated table of representative lipid
-        readouts and key genes mapped to six cardiolipin-related mechanistic axes, including explicit directionality conventions
-        (bottleneck_sign) and within-axis weights to support axis-level scoring and interpretation.. Not applicable Not applicable.
-        Readout: Axis assignment, feature definitions, formulae (for lipid metrics), biological interpretations, directionality
-        (bottleneck_sign), and weights for supply, transport, synthesis, remodeling, oxidation, and membrane context axes
-        (Structured table (lookup resource)). Normalization: Not applicable. n: Not applicable; stats: Not applicable. This
-        table is used as an interpretable reference for constructing axis-level transcript/lipid scores and for linking curated
-        features to the mechanistic schematic in Fig. 6A; it does not present quantitative comparisons. (c) Integrated workflow
-        summarizing how multi-batch RNA-seq, untargeted lipidomics, and targeted cardiolipin panel datasets were quality-controlled,
-        normalized, batch-modeled, and compressed into mechanistic axis Z scores and cardiolipin-related indicators for downstream
-        multi-omics integration.. Not applicable Not applicable. Readout: Processing nodes and dependencies from raw datasets
-        to axis-level Z scores, integrated multi-omics Z values, and axis–cardiolipin phenotype regression readouts (Schematic
-        representation of computational workflow). Normalization: Not applicable. n: Not applicable; stats: Not applicable.
-        The diagram emphasizes batch-aware modeling for RNA-seq (DESeq2 ~ batch + group), within-batch normalization for lipidomics
-        (PQN to QC median profile), and feature aggregation into predefined mechanistic axes before cross-omics integration
-        (Stouffer-weighted Z) and axis–cardiolipin phenotype mapping. (d) Batch-level effect_z matrix summarizing the direction
-        and magnitude of EphB1 deficiency–associated changes across six mechanistic axes in RNA-seq and lipidomics datasets..
-        Steady-state condition without additional stimulation Single endpoint per batch. Readout: Mechanistic axis effect_z
-        values derived from batch-specific KO versus WT comparisons in RNA-seq and lipidomics datasets (RNA-seq differential
-        expression modeling (DESeq2, batch-wise) and lipidomics normalization followed by axis-level feature aggregation).
-        Normalization: Effect_z values were calculated within each batch and are displayed without cross-batch pooling or
-        global scaling. n: RNA-seq: 3 batches; lipidomics: 4 batches; stats: not applicable (directional consistency analysis).
-        Effect_z values represent directional effect sizes rather than formal significance testing; consistency across batches
-        and omics layers was used as the primary robustness criterion. (e) Overall multi-omics Z scores summarizing Ephb1−/−
-        versus WT effects across six predefined mitochondrial-related mechanistic axes by Stouffer meta-analysis of RNA-seq
-        and lipidomics batches.. Not applicable (integrated analysis of existing omics datasets) Single endpoint per batch
-        (see Methods for dataset-specific timing). Readout: Axis-level Z_multiomics_overall values for six mechanistic axes
-        (Batch-aware axis scoring in RNA-seq and lipidomics followed by Stouffer meta-analysis within each omics layer and
-        equal-weight Stouffer integration across omics). Normalization: Z scores were defined with direction as Ephb1−/− relative
-        to WT; positive values indicate increased bottleneck strength and negative values indicate decreased bottleneck strength.
-        n: RNA-seq: 3 batches; lipidomics: 3–4 batches; stats: Two-sided p values derived from Stouffer-combined Z scores.
-        Mechanistic axes include Synthesis, Remodeling, Oxidation, Transport, Supply, and Membrane context. The Membrane context
-        axis shows the largest absolute integrated effect in this analysis. (f) Cross-batch linear regression linking mechanistic
-        axis combined Z scores (HO–WT) to batch-matched HO–WT differences in total cardiolipin abundance (sum_CL) to test
-        whether axis-level effects predict cardiolipin content at the batch level.. Not applicable (computational association
-        analysis using batch-matched contrasts) Single endpoint per batch; each batch contributes one paired data point. Readout:
-        Association between combined Z (HO–WT) per mechanistic axis and sum_CL (HO–WT) (Linear regression performed per axis
-        using batch-level paired contrasts). Normalization: Both predictors (combined Z) and outcomes (sum_CL) were defined
-        as HO–WT differences within each batch to reduce batch effects; no log transformation was applied. n: n = 3–4 batches
-        (axis-dependent point availability); stats: Linear regression / correlation test per axis. None of the axis–sum_CL
-        associations reached statistical significance in the current batch range; the Membrane context axis showed the largest
-        absolute correlation magnitude (r = −0.65, p = 0.35). # ---------- 8. English ----------.'
+      legend: (a) Conceptual diagram illustrating six mechanistic axes of cardiolipin metabolism and their organization into
+        an ER–mitochondria–centered framework used to interpret EphB1-dependent multi-omics changes.. (b) Curated table of
+        representative lipid readouts and key genes mapped to six cardiolipin-related mechanistic axes, including explicit
+        directionality conventions (bottleneck_sign) and within-axis weights to support axis-level scoring and interpretation..
+        (c) Integrated workflow summarizing how multi-batch RNA-seq, untargeted lipidomics, and targeted cardiolipin panel
+        datasets were quality-controlled, normalized, batch-modeled, and compressed into mechanistic axis Z scores and cardiolipin-related
+        indicators for downstream multi-omics integration.. (d) Batch-level effect_z matrix summarizing the direction and
+        magnitude of EphB1 deficiency–associated changes across six mechanistic axes in RNA-seq and lipidomics datasets..
+        (e) Overall multi-omics Z scores summarizing Ephb1−/− versus WT effects across six predefined mitochondrial-related
+        mechanistic axes by Stouffer meta-analysis of RNA-seq and lipidomics batches.. (f) Cross-batch linear regression linking
+        mechanistic axis combined Z scores (HO–WT) to batch-matched HO–WT differences in total cardiolipin abundance (sum_CL)
+        to test whether axis-level effects predict cardiolipin content at the batch level..
       image_path: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_5_画板 1.png
     - type: figure
       id: Figure 6
       title: An RNA X–M–Z framework prioritizes EphB1-linked pathways with orthogonal lipid alignment
-      legend: '(a) Conceptual diagram illustrating an RNA-first X–M–Z framework that links EphB1 status (X), downstream signaling
+      legend: (a) Conceptual diagram illustrating an RNA-first X–M–Z framework that links EphB1 status (X), downstream signaling
         modules (M), and an RNA membrane context axis (Z), with independent lipid phenotypes used for directional concordance
-        validation.. Not applicable Not applicable. Readout: Relationships among X (EphB1 status), M (RNA-based pathway module
-        scores), and Z (RNA membrane context axis score), and their directional alignment with independent lipid readouts
-        (Schematic representation of analytical logic). Normalization: Not applicable. n: Not applicable; stats: Not applicable.
-        The framework decomposes cross-omics interpretation into three evaluation layers: cross-batch consistency of X→M effects,
-        within-batch coupling between M and Z, and directional concordance between Z and independent lipid phenotypes; it
-        is intended for pathway prioritization rather than formal causal mediation. (b) Curated table defining EphB1 downstream
-        signaling modules (gene sets) and mapping each module to the cardiolipin mechanistic axes it is expected to influence..
-        Not applicable (module definition table) Not applicable. Readout: Module identifiers and labels, network category,
-        targeted cardiolipin axes, module size, and gene lists annotated with gene_effect_sign for standardized module scoring
-        direction (Structured table (module dictionary)). Normalization: Not applicable. n: Not applicable; stats: Not applicable.
-        This table is referenced for downstream module scoring and mechanistic integration and does not present quantitative
-        comparisons. (c) Pathway-level transcriptional response scores for curated EphB1 downstream signaling modules in WT
-        and Ephb1−/− primary peritoneal macrophages across three independent RNA-seq batches, summarized as per-batch z_pathway
-        shifts and cross-batch meta Z effects.. Unstimulated condition consistent with the RNA-seq experiments Single endpoint
-        at the time of RNA collection (per batch). Readout: EphB1 downstream signaling module response scores (z_pathway)
-        and cross-batch meta Z (RNA-seq–based differential expression (DESeq2, batch-wise log2 fold change) followed by gene-set
-        aggregation to compute pathway response scores). Normalization: Pathway scores were standardized within each batch
-        as z_pathway and integrated across batches using a meta Z approach to summarize directional consistency and effect
-        magnitude. n: n = 3 RNA-seq batches; stats: not applicable (cross-batch consistency and effect-size ranking). Meta
-        Z values reflect directionally consistent shifts across batches rather than single-batch significance; pathway response
-        scores represent transcriptional footprints and do not directly report kinase phosphorylation activity. # ----------
-        8. English ----------. (d) Cross-batch ranking of EphB1 downstream signaling modules by genotype-associated transcriptional
-        shifts (ΔM) and assessment of their coupling robustness with the Membrane context axis using within-batch regression
-        and pooled leave-one-out refitting.. Unstimulated condition consistent with the RNA-seq datasets Single RNA collection
-        endpoint per batch. Readout: Batch-level ΔM (KO−WT) for EphB1 downstream signaling modules and corresponding M↔Z coupling
-        coefficients (β_M) with robustness evaluated by leave-one-out refitting (RNA-seq–based pathway footprint scoring followed
-        by batch-wise aggregation of ΔM, within-batch linear regression of Z ~ M + X, and pooled leave-one-out refitting).
-        Normalization: ΔM values were computed within each batch as mean(KO)−mean(WT); regression coefficients were derived
-        without cross-batch pooling of expression values. n: 3 RNA-seq batches; pooled LOO across all samples; stats: Linear
-        regression within batch; robustness assessed by sign consistency under LOO. Module prioritization is based on the
-        concordance of cross-batch ΔM direction and the stability of M↔Z coupling under leave-one-out refitting, and is intended
-        for candidate ranking rather than formal causal inference. (e) Mediation analyses testing whether EphB1-dependent
-        changes in five lipid indicators are transmitted through RNA-seq–derived downstream signaling pathway scores, summarized
-        as pathway-specific indirect effects (a×b) with bootstrap confidence intervals.. No external stimulation; steady-state
-        condition. For each lipid indicator (Y), separate X→M→Y mediation models were fit using nine curated EphB1 downstream
-        pathway sample-level scores as mediators (M) Single endpoint (paired RNA + lipid measurements). Readout: Indirect
-        effects (a×b) of EphB1 genotype on five lipid indicators: CL fraction (CL/total), membrane CL content, mitochondrial
-        total lipid mass (PC+PE+CL), membrane PC, and membrane PE (Linear mediation framework with paths a (M ~ X) and b (Y
-        ~ X + M), reporting the indirect effect a×b per pathway for each lipid indicator). Normalization: Pathway mediator
-        variables are RNA-seq–derived transcriptional signature scores (sample-level scores); indirect effects are shown as
-        bootstrap means with 95% confidence intervals, and direction labels denote the signs of a and b (e.g., a+, b+ or a+,
-        b−). n: n=3 WT and n=2 KO (batch1); same sample set as Fig. 6d; stats: bootstrap inference for indirect effects (a×b).
-        Indirect-effect magnitudes are comparable only within the same lipid indicator panel because units and scales differ
-        across indicators; pathway scores are transcriptional footprints and do not directly report kinase activity or protein
-        phosphorylation.'
+        validation.. (b) Curated table defining EphB1 downstream signaling modules (gene sets) and mapping each module to
+        the cardiolipin mechanistic axes it is expected to influence.. (c) Pathway-level transcriptional response scores for
+        curated EphB1 downstream signaling modules in WT and Ephb1−/− primary peritoneal macrophages across three independent
+        RNA-seq batches, summarized as per-batch z_pathway shifts and cross-batch meta Z effects.. (d) Cross-batch ranking
+        of EphB1 downstream signaling modules by genotype-associated transcriptional shifts (ΔM) and assessment of their coupling
+        robustness with the Membrane context axis using within-batch regression and pooled leave-one-out refitting.. (e) Mediation
+        analyses testing whether EphB1-dependent changes in five lipid indicators are transmitted through RNA-seq–derived
+        downstream signaling pathway scores, summarized as pathway-specific indirect effects (a×b) with bootstrap confidence
+        intervals..
       image_path: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_6_画板 1.png

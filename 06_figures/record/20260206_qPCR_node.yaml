@@ -40,38 +40,39 @@ methods:
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
-  data_direction: "在基线条件下，rerouting to TG 相关基因中，Dgat2 与 Mgll 在 HO 中显著下调，而 Lipe 在两组间无显著差异；AKT/FOXO footprint 相关基因中，Myc、Pes1、Scd1、Mvd 与 Bnip3 在 WT 与 HO 间均为 ns，而 Trib3 在 HO 中显著下调；PI3K capacity 节点中，Inpp4b 与 Pik3ip1 在两组间为 ns，而 Rps6kb2 在 HO 中显著下调；flux limitation 相关基因中，Acaca 与 Cept1 在两组间均为 ns，而 Etnk1 在 HO 中呈下降趋势但未达到统计学显著。"
-  stats_summary: "显著性标注显示：Dgat2（**）与 Mgll（*）在 WT 与 HO 间存在显著差异，Trib3（*）与 Rps6kb2（*）在 WT 与 HO 间存在显著差异；Lipe、Myc、Pes1、Scd1、Mvd、Bnip3、Inpp4b、Pik3ip1、Acaca 与 Cept1 为 ns，Etnk1 未达到显著性阈值。"
-  key_numbers: "大致幅度：HO 中 Dgat2 约降至 ~0.6–0.7 fold，Mgll 约降至 ~0.7 fold；Trib3 约降至 ~0.85 fold；Rps6kb2 约降至 ~0.8–0.85 fold；其余基因变化幅度较小（具体均值±SEM 见源数据）。"
+  data_direction: "在 WT 原代巨噬细胞中，PI3K 抑制剂处理后，rerouting/turnover 相关基因中 Mgll 与 Lipe 显著上调，而 Dgat2 在两组间为 ns；在 flux limitation 相关基因中，Cept1 与 Etnk1 显著上调，而 Acaca 在两组间为 ns。"
+  stats_summary: "显著性标注显示：Mgll（**）、Lipe（**）、Cept1（***）与 Etnk1（*）在对照与 PI3K 抑制组之间存在显著差异；Dgat2 与 Acaca 为 ns。"
+  key_numbers: "大致幅度：PI3K 抑制后 Mgll 约升至 ~1.2 fold，Lipe 约升至 ~1.4 fold，Cept1 约升至 ~1.25 fold，Etnk1 约升至 ~1.15–1.2 fold；Dgat2 与 Acaca 的变化幅度较小（具体数值见源数据）。"
   group_difference_statement: >
-    在基线条件下，EphB1 缺失并未引起 AKT/FOXO footprint 轴或 flux limitation 轴的大范围同步改变（多数节点为 ns），但在 PI3K capacity 轴的一个组成节点（Rps6kb2）以及 rerouting to TG/周转相关节点（Dgat2、Mgll）上出现了方向一致且具有统计学意义的下调，同时 Trib3 作为 FOXO footprint 节点表现为轻度但显著的下降，提示转录层面的改变呈现为“选择性节点受影响”而非全轴性重编程。
-  robustness_and_qc: "各基因在两组内的重复点分布集中；出现显著差异的节点（Dgat2、Mgll、Rps6kb2、Trib3）在组间分布分离清晰，而多数未显著基因在 WT 与 HO 间高度重叠，支持该结果的稳健性。"
-  anomalies_or_limits: "flux limitation 轴的 Acaca、Cept1 与 Etnk1 未出现与假设一致的显著变化，提示该轴在转录层面的证据不足或效应较弱；同时多数 footprint 节点保持稳定，说明该分支效应为选择性而非全局性改变。"
+    在 WT 背景下，单纯降低 PI3K 输出即可诱导多项 rerouting/turnover 节点（Mgll、Lipe）以及部分 flux limitation 节点（Cept1、Etnk1）的转录上调，而并非所有脂质合成入口节点均发生改变（Dgat2、Acaca 为 ns），提示该响应呈现为“选择性节点重调节”而非全轴性一致变化。
+    rerouting/turnover 节点均体现为上调，说明PI3K通路活化同时增加了TG的周转与磷脂的合成，这与HO脂质组中的TG增加、磷脂减少的表型不符，说明该抑制剂Copanlisib 不能有效模拟HO的PI3K信号通路状态，需要寻找更合适的抑制剂，重新设计实验
+  robustness_and_qc: "各基因在组内的重复点分布集中；出现显著差异的节点（Mgll、Lipe、Cept1、Etnk1）在两组间分布分离清晰，而 Dgat2 与 Acaca 在两组间高度重叠，支持结果的稳健性。"
+  anomalies_or_limits: "Dgat2 与 Acaca 未随 PI3K 抑制出现显著变化，提示并非所有脂质合成入口或 rerouting 节点都对 PI3K 输出下降敏感；该转录响应可能更偏向周转/分支重分配层面的调节。"
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
-  minimal_bio_interpretation: "本 panel 的设计目标是作为 node-level 验证：检验组学中提出的 PI3K capacity / AKT(FOXO) footprint / flux–turnover 三条轴是否能在湿实验中被复现。结果显示，该假设获得选择性支持：capacity 轴未在 Pik3ip1形成一致证据 ，但 Inpp4b/Rps6kb2 上呈一致方向；FOXO footprint 轴整体稳定，仅 Trib3 发生改变；flux轴中无明显一致性变化，而turnover 轴中大多下调（与预期相反）"
+  minimal_bio_interpretation: "本 panel 作为 B→C 的 link-level 验证，检验“降低 PI3K 输出”是否足以驱动脂质代谢相关转录网络的重排。结果显示，在 WT 细胞中，PI3K 抑制可显著上调 Mgll、Lipe、Cept1 与 Etnk1，而 Dgat2 与 Acaca 保持稳定，说明Copanlisib导致的通路输出下降并非引发HO相同的PI3K信号轴扰动，而是导致磷脂与TG的全局合成增加。"
   alternative_explanations: >
-    由于样本量与转录层面的局限，部分 node 的不一致结果可能来自生物学变异、补偿调控或检测灵敏度限制
-    同时转录变化未必等同于蛋白/通量层面的改变
-    同时收样时通路瞬时状态可能与真正有差异的时间段错开（比如473重磷酸化峰值）
-  summary_type: "node_validation"
-  claim_supported: "因此，本实验在 node 层面上对 pipeline 假设提供了‘部分复现、定点支持’的证据，提示真正的节点可能是Trib3、Rps6kb2"
-  link_to_previous: "该证据力度不足，实验设计本身存在缺陷，不足以验证node"
-  transition_to_next: "放弃该实验的node验证，转而专注于pi3k下游akt 473磷酸化与轴的联系。"
+    由于该实验为急性药理抑制，观察到的转录变化可能同时反映直接通路效应与继发适应性反应；
+    且转录层面的变化未必等同于蛋白水平或真实代谢通量的改变；
+    不同细胞状态对 PI3K 输出变化的敏感性差异，也可能来自并行调控通路或代谢补偿机制。
+  summary_type: "link_validation"
+  claim_supported: "因此，本实验在功能上支持“PI3K 输出下降足以驱动脂质代谢转录网络发生系统性响应”，但不能为EphB1缺失导致的PI3K信号降低与磷脂-TG周转变化建立因果连接提供直接证据。"
+  link_to_previous: "该结果与前一分支中 EphB1 缺失背景下观察到的‘节点选择性改变’在结构上相呼应，但方向不完全对称，提示遗传缺失与急性通路抑制在网络层面的重编程方式可能不同。"
+  transition_to_next: "基于该 link-level 证据，下一步将重新设计实验，更精确地模仿HO的PI3K抑制状态。"
 # ---------- 6. figure_legend ----------
 
 figure_legend:
-  panel: "Figure X, panel Y"
-  panel_title_en: "Baseline qPCR validation of PI3K capacity, AKT/FOXO footprint, and lipid flux/turnover nodes in WT and EphB1-KO macrophages"
-  panel_title_cn: "在基线条件下用 qPCR 验证 WT 与 EphB1-KO 巨噬细胞中 PI3K capacity、AKT/FOXO 足迹及脂质 flux/turnover 关键节点"
+  panel: "Figure X"
+  panel_title_en: "PI3K inhibition reshapes transcription of lipid rerouting/turnover and flux-limitation nodes in WT macrophages"
+  panel_title_cn: "在 WT 巨噬细胞中，PI3K 抑制剂重塑脂质 rerouting/turnover 与 flux-limitation 相关转录节点"
 
-  one_sentence_en: "Baseline mRNA levels of selected genes representing PI3K capacity, AKT/FOXO footprint, and lipid synthesis/turnover pathways were quantified by qPCR in WT and EphB1-KO (HO) primary peritoneal macrophages."
+  one_sentence_en: "WT primary macrophages were treated with a PI3K inhibitor or vehicle, and mRNA levels of selected lipid rerouting/turnover and flux-limitation genes were quantified by qPCR."
 
   system_and_design:
     model: "Primary mouse peritoneal macrophages"
-    genotype_or_groups: "WT and EphB1-KO (HO) under baseline (no additional treatment) conditions"
-    key_treatments: "No stimulation or inhibitor; baseline culture conditions only"
-    time_window: "Single baseline sampling time point"
+    genotype_or_groups: "WT cells treated with vehicle (control) or PI3K inhibitor"
+    key_treatments: "PI3K inhibitor versus vehicle control"
+    time_window: "Single treatment and sampling time point"
 
   readouts_and_assays:
     primary_readout: "mRNA expression levels (fold change)"
@@ -82,13 +83,13 @@ figure_legend:
     n_definition: "Each dot represents one biological replicate"
     n: "n as indicated in the source data"
     summary: "Data are shown as box plots with individual data points overlaid"
-    test: "Statistical tests as specified in the analysis pipeline"
-    multiple_comparisons: "Between-genotype comparisons for each gene"
+    test: "Two-group comparisons between control and PI3K inhibitor within WT"
+    multiple_comparisons: "Per-gene comparison between treatments"
 
   significance:
     symbols: "ns, not significant; *, P < 0.05; **, P < 0.01; ***, P < 0.001"
 
-  extra_notes: "Genes are grouped to represent lipid synthesis/entry (e.g., Acaca, Cept1), lipid turnover/redirecting (e.g., Dgat2, Mgll, Lipe), PI3K capacity (e.g., Inpp4b, Rps6kb2, Pik3ip1), and AKT/FOXO footprint (e.g., Myc, Pes1, Scd1, Mvd, Bnip3, Trib3)."
+  extra_notes: "Genes shown include rerouting/turnover nodes (Dgat2, Mgll, Lipe) and flux-limitation nodes (Acaca, Cept1, Etnk1)."
 # ---------- 7. AI Writing Hints（可选）：给 LLM 的写作风格提示 ----------
 ai_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"]

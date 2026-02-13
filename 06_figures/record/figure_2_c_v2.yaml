@@ -80,7 +80,7 @@ figure_legend:
   panel_title_cn: "经典炎症因子的分泌"
 
   one_sentence_en: >
-    TNF-α and IL-6 secretion from WT and EphB1-deficient primary peritoneal macrophages following LPS stimulation at defined time points.
+    TNF-α and IL-1β secretion from WT and EphB1-deficient primary peritoneal macrophages following LPS stimulation at defined time points.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"

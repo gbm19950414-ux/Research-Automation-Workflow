@@ -181,18 +181,21 @@ panel_overrides:
       - "Cytosolic ND1 mtDNA (time course; peak at 7.5 min)"
 
   s3_d:
+    belongs_to: "S3"
     panel_title_en: "Total mtDNA control (16S)"
     panel_title_cn: "全细胞 mtDNA 对照（16S）"
     displayed_targets:
       - "Total 16S mtDNA (time course control)"
 
   s3_f:
+    belongs_to: "S3"
     panel_title_en: "Total mtDNA control (ND1)"
     panel_title_cn: "全细胞 mtDNA 对照（ND1）"
     displayed_targets:
       - "Total ND1 mtDNA (time course control)"
 
   s3_g:
+    belongs_to: "S3"
     panel_title_en: "Mitochondrial fraction mtDNA (control)"
     panel_title_cn: "线粒体组分 mtDNA（对照）"
     displayed_targets:

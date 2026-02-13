@@ -1,0 +1,12 @@
+mode: short
+merge_shared_panels: true
+panel_filter:
+  exclude_belongs_to: ["S3", "S4", "S5"]
+panel_template: "({panel}) {one_sentence_en}."
+fields:
+  one_sentence_en:
+    source_priority:
+      - panel_override.one_sentence_en
+      - shared_legend.one_sentence_en
+options:
+  schematic_suffix: " (no quantitative data)."

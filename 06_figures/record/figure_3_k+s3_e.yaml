@@ -164,6 +164,7 @@ figure_legend:
     symbols: "* P < 0.05, ** P < 0.01, *** P < 0.001; ns, not significant"
 
   extra_notes: >
+    
     Comparisons focus on mitochondrial GSDMD-NT enrichment at the peak time point, while total-lysate cleavage
     controls exclude differences in substrate generation. HK2 and mitochondrial 16S rRNA are used to assess
     mitochondrial abundance and exclude organelle-quantity confounding.
@@ -179,6 +180,7 @@ panel_overrides:
       - "Total-lysate GSDMD cleavage control (GSDMD-NT / FL)"
 
   s3e:
+    belongs_to: "S3"
     panel_title_en: "Mitochondrial abundance controls"
     panel_title_cn: "线粒体数量对照"
     displayed_targets:

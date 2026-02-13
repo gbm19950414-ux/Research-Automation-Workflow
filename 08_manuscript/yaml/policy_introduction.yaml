@@ -1,0 +1,6 @@
+mode: submission        # submission | review
+include_subheadings: false
+keep_hypotheses: false
+filter:
+  include_pids: []      # 可选：只导出这些 pid
+  exclude_pids: []      # 可选：排除这些 pid

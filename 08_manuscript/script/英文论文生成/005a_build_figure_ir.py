@@ -32,7 +32,7 @@ import argparse
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Set
 
 import yaml
 
@@ -72,6 +72,17 @@ def dump_yaml(obj: Any, path: Path) -> None:
             sort_keys=False,
             width=120,
         )
+
+
+# --- Legend policy loader ---
+def load_legend_policy(path: Path) -> Dict[str, Any]:
+    """Load legend policy YAML if present; return {} if missing.
+
+    This keeps legacy behavior when no policy file is provided.
+    """
+    if not path or not Path(path).exists():
+        return {}
+    return load_yaml(Path(path))
 
 
 def norm_space(s: str) -> str:
@@ -177,10 +188,81 @@ def find_rendered_figure_image(figs_dir: Path, figure_num: str, prefer_ext: List
 # -----------------------------
 # Legend rendering
 # -----------------------------
+
+def format_panel_group_label(panels: List[str]) -> str:
+    """Format a merged panel label like (a,b) with stable ordering."""
+    ps = [norm_space(p) for p in (panels or []) if norm_space(p)]
+    ps_sorted = sorted(ps, key=parse_panel_label)
+    return f"({','.join(ps_sorted)})"
+
+
+def resolve_one_sentence(
+    shared_legend: Dict[str, Any],
+    panel_legend: Dict[str, Any],
+    panel_key: str,
+) -> str:
+    """Resolve one_sentence_en for a panel.
+
+    Supports:
+      - string: one_sentence_en: "..."
+      - dict:   one_sentence_en: {a: "...", "a,b": "..."}
+      - list:   one_sentence_en: [{panels:[a,b], text:"..."}, ...]
+
+    Panel overrides take precedence over shared legend.
+    """
+
+    def _from_obj(obj: Any) -> str:
+        if obj is None:
+            return ""
+        # string
+        if isinstance(obj, str):
+            return obj
+        # dict mapping
+        if isinstance(obj, dict):
+            # exact match
+            if panel_key in obj and isinstance(obj.get(panel_key), str):
+                return obj.get(panel_key) or ""
+            # group keys like "a,b" or "a,b,c"
+            for k, v in obj.items():
+                if not isinstance(k, str) or not isinstance(v, str):
+                    continue
+                ks = [norm_space(x) for x in k.split(",") if norm_space(x)]
+                if panel_key in ks:
+                    return v
+            return ""
+        # list of group specs
+        if isinstance(obj, list):
+            for it in obj:
+                if not isinstance(it, dict):
+                    continue
+                panels = it.get("panels")
+                text = it.get("text")
+                if not isinstance(text, str) or not text.strip():
+                    continue
+                if isinstance(panels, str):
+                    ps = [norm_space(x) for x in panels.split(",") if norm_space(x)]
+                elif isinstance(panels, list):
+                    ps = [norm_space(str(x)) for x in panels if norm_space(str(x))]
+                else:
+                    ps = []
+                if panel_key in ps:
+                    return text
+            return ""
+        return ""
+
+    # panel override first
+    v1 = _from_obj(panel_legend.get("one_sentence_en"))
+    if v1 and str(v1).strip():
+        return str(v1).strip()
+    v2 = _from_obj(shared_legend.get("one_sentence_en"))
+    return str(v2).strip() if v2 else ""
+
+
 def render_panel_legend(
     shared_legend: Dict[str, Any],
     panel_legend: Dict[str, Any],
     panel_key: str,
+    legend_policy: Optional[Dict[str, Any]] = None,
 ) -> str:
     """
     Produce a readable panel legend paragraph.
@@ -193,11 +275,21 @@ def render_panel_legend(
       - Avoid discussion-y phrases; just factual fields
     """
     # Prefer panel-specific legend fields; fall back to shared
-    one_sentence = first_nonempty(
-        panel_legend.get("one_sentence_en"),
-        shared_legend.get("one_sentence_en"),
-    )
-    one_sentence = norm_space(one_sentence)
+    one_sentence = norm_space(resolve_one_sentence(shared_legend, panel_legend, panel_key))
+
+    # Optional policy: allow a short legend mode that only keeps one_sentence_en.
+    # We keep this intentionally minimal and permissive: any of the following will trigger short mode:
+    #   - legend_policy.mode == "short"
+    #   - legend_policy.legend_mode == "short"
+    #   - legend_policy.one_sentence_only == True
+    lp = legend_policy or {}
+    mode = (lp.get("mode") or lp.get("legend_mode") or "").strip().lower()
+    one_sentence_only = bool(lp.get("one_sentence_only")) or (mode == "short")
+    if one_sentence_only:
+        label = lp.get("_panel_label") or f"({panel_key})"
+        if one_sentence:
+            return f"{label} {one_sentence}."
+        return f"{label}."
 
     displayed_targets = panel_legend.get("displayed_targets") or panel_legend.get("displayed_target") or []
     if isinstance(displayed_targets, str):
@@ -460,6 +552,23 @@ def upsert_figures_section_into_results_ir(results_ir_path: Path, figure_blocks:
 
     dump_yaml(results, results_ir_path)
 
+def get_panel_belongs_to(it: PanelItem) -> str:
+    """Return belongs_to tag for a panel item.
+
+    Convention (scheme B): put `belongs_to` inside panel_overrides for multi-panel records.
+    Fallbacks are supported for single-panel records.
+    """
+    if it.is_multi and isinstance(it.panel_override, dict):
+        v = it.panel_override.get("belongs_to")
+        if v is not None:
+            return norm_space(str(v))
+    # Fallback: allow shared legend to carry a tag (e.g., single-panel records)
+    if isinstance(it.shared_legend, dict):
+        v = it.shared_legend.get("belongs_to")
+        if v is not None:
+            return norm_space(str(v))
+    return ""
+
 # -----------------------------
 # Main build
 # -----------------------------
@@ -473,6 +582,12 @@ def main() -> None:
     ap.add_argument("--strict", action="store_true", help="Fail if any listed record is missing")
     ap.add_argument("--results-ir", type=str, default="08_manuscript/IR/results.ir.yaml", help="Target results.ir.yaml to upsert a figures section")
     ap.add_argument("--no-write-results-ir", action="store_true", help="Do NOT update results.ir.yaml (default: update)")
+    ap.add_argument(
+        "--legend-policy",
+        type=str,
+        default="08_manuscript/yaml/legend_policy.yaml",
+        help="Optional legend policy YAML (e.g., mode: short) to control stitched legend verbosity",
+    )
     args = ap.parse_args()
 
     # Default to current working directory if --root is not provided
@@ -481,6 +596,8 @@ def main() -> None:
     record_dir = (root / args.record_dir).resolve()
     figs_dir = (root / args.figs_dir).resolve()
     out_path = (root / args.out).resolve()
+    legend_policy_path = (root / args.legend_policy).resolve() if args.legend_policy else None
+    legend_policy = load_legend_policy(legend_policy_path) if legend_policy_path else {}
 
     paper_logic = load_yaml(paper_logic_path)
 
@@ -552,6 +669,38 @@ def main() -> None:
         # sort panels by label
         items_sorted = sorted(items, key=lambda x: parse_panel_label(x.panel))
 
+        # Optional policy-driven panel filtering (scheme B): route panels by `belongs_to`.
+        # Example policy:
+        #   panel_filter:
+        #     include_belongs_to: ["F3"]
+        pf = legend_policy.get("panel_filter") or {}
+        include_bt = pf.get("include_belongs_to")
+        exclude_bt = pf.get("exclude_belongs_to")
+
+        if include_bt is not None:
+            if isinstance(include_bt, str):
+                include_set = {norm_space(include_bt)}
+            elif isinstance(include_bt, list):
+                include_set = {norm_space(str(x)) for x in include_bt if norm_space(str(x))}
+            else:
+                include_set = set()
+            if include_set:
+                items_sorted = [it for it in items_sorted if get_panel_belongs_to(it) in include_set]
+
+        if exclude_bt is not None:
+            if isinstance(exclude_bt, str):
+                exclude_set = {norm_space(exclude_bt)}
+            elif isinstance(exclude_bt, list):
+                exclude_set = {norm_space(str(x)) for x in exclude_bt if norm_space(str(x))}
+            else:
+                exclude_set = set()
+            if exclude_set:
+                items_sorted = [it for it in items_sorted if get_panel_belongs_to(it) not in exclude_set]
+
+        # If filtering removes all panels for a figure, skip emitting that figure.
+        if not items_sorted:
+            continue
+
         # determine figure number for asset lookup
         m = re.match(r"^Figure\s+(\d+)", fig)
         fig_num = m.group(1) if m else ""
@@ -565,17 +714,62 @@ def main() -> None:
         fig_title = figure_titles.get(fig, "")
         # Build stitched legend text
         panel_texts: List[str] = []
-        for it in items_sorted:
-            if it.is_multi:
-                # Multi-panel: render using shared legend + override (which holds displayed_targets etc)
-                panel_texts.append(
-                    render_panel_legend(it.shared_legend, it.panel_override, it.panel)
-                )
-            else:
-                # Single-panel: render using shared legend only
-                panel_texts.append(
-                    render_panel_legend(it.shared_legend, it.shared_legend, it.panel)
-                )
+
+        # In short mode, optionally merge panels that share the same one_sentence_en.
+        lp_mode = (legend_policy.get("mode") or legend_policy.get("legend_mode") or "").strip().lower()
+        short_mode = bool(legend_policy.get("one_sentence_only")) or (lp_mode == "short")
+        merge_shared = bool(legend_policy.get("merge_shared_panels"))
+
+        if short_mode and merge_shared:
+            # 1) Resolve one_sentence per panel
+            sent_by_panel: Dict[str, str] = {}
+            shared_by_panel: Dict[str, Dict[str, Any]] = {}
+            override_by_panel: Dict[str, Dict[str, Any]] = {}
+            for it in items_sorted:
+                p = it.panel
+                shared_by_panel[p] = it.shared_legend
+                override_by_panel[p] = it.panel_override if it.is_multi else it.shared_legend
+                sent_by_panel[p] = norm_space(resolve_one_sentence(it.shared_legend, override_by_panel[p], p))
+
+            # 2) Group panels by sentence (non-empty). Empty sentences stay per-panel.
+            groups: Dict[str, List[str]] = {}
+            empty_panels: List[str] = []
+            for p, s in sent_by_panel.items():
+                if s:
+                    groups.setdefault(s, []).append(p)
+                else:
+                    empty_panels.append(p)
+
+            # 3) Emit merged lines, ordered by first panel appearance in items_sorted
+            seen: Set[str] = set()
+            for it in items_sorted:
+                p = it.panel
+                if p in seen:
+                    continue
+                s = sent_by_panel.get(p, "")
+                if s:
+                    ps = groups.get(s, [p])
+                    for pp in ps:
+                        seen.add(pp)
+                    label = format_panel_group_label(ps)
+                    # Pass a per-call label override via a private policy key
+                    lp2 = dict(legend_policy)
+                    lp2["_panel_label"] = label
+                    panel_texts.append(render_panel_legend(shared_by_panel[p], override_by_panel[p], p, lp2))
+                else:
+                    seen.add(p)
+                    panel_texts.append(render_panel_legend(shared_by_panel[p], override_by_panel[p], p, legend_policy))
+        else:
+            # Legacy behavior: one line per panel
+            for it in items_sorted:
+                if it.is_multi:
+                    panel_texts.append(
+                        render_panel_legend(it.shared_legend, it.panel_override, it.panel, legend_policy)
+                    )
+                else:
+                    panel_texts.append(
+                        render_panel_legend(it.shared_legend, it.shared_legend, it.panel, legend_policy)
+                    )
 
         stitched = ""
         if fig_title:
