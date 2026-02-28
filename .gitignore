@@ -6,6 +6,7 @@
 
 # Track YAML, Python, and R files anywhere in the repository
 !*.yaml
+!*.docx
 !*.yml
 !*.py
 !*.R
