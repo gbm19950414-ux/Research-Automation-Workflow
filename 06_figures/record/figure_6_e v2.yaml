@@ -1,0 +1,209 @@
+# ============================================================
+# schema.yaml v2 —— 单个 panel 的结构化写作模版
+# Figure 6E：Membrane context 与下游通路得分的样本层关联（Z vs M）
+# ============================================================
+
+meta:
+  figure: "Figure 6"              # 如 "Figure 3"
+  figure_id: "6e"   
+  short_title: "Membrane context 与下游通路得分的样本层关联（Z vs M）"
+  chapter: "3.6 Mediation-informed pathway prioritization"
+  experiment_id: "2025-03-21_mediation_membrane_context_pathways"
+  version: 2
+
+assets:
+  main_figure_file: "results/figs/Figure6B_Z_vs_M_membrane_context.pdf"
+  sub_panels:
+    panel_A_rank_deltaM: "results/figs/Figure6A_mediator_rank_deltaM.pdf"
+    panel_B_Z_vs_M: "results/figs/Figure6B_Z_vs_M_membrane_context.pdf"
+    panel_C_loo_heatmap: "results/figs/Figure6C_LOO_spearman_heatmap.pdf"
+  raw_data_files:
+    - "results/figs/sample_scores_for_mediation.tsv"
+    - "results/figs/robust_rank_M1_membrane_context.tsv"
+  analysis_scripts:
+    - "scripts/analysis/05_中介效应检验数据准备_rna_lipid_sample_scores.R"
+    - "scripts/analysis/06.1a_mediation_rank_m1_membrane_context_robust.R"
+    - "scripts/analysis/06.2a_plot_robust_panels_A_B_C.R"
+  supplementary_items:
+    - "Figure S6C"
+
+# ---------- 1. Scientific Question ----------
+question:
+  context_from_previous: >
+    Membrane context 轴在 EphB1 缺失条件下发生改变，反映膜环境的整体状态。
+    为深入理解哪些下游通路在样本层面与该轴协变，需考察各通路的 mediator score 与 membrane context score 之间的关系。
+  core_question: >
+    在不同样本和批次中，下游通路的 mediator score (M) 是否与 membrane context 轴得分 (Z) 存在一致的关联？
+    哪些通路表现出最强且稳定的相关性？
+  hypothesis_or_expectation: >
+    预期那些 KO-vs-WT 差异稳健且 mediator score 与 membrane context 轴得分呈显著相关的通路，将被优先考虑为关键调控因子（不过不直接断言因果关系）。
+  importance_reason: >
+    这种样本层面的关联分析有助于优先筛选候选通路，并作为后续中介分析和功能验证前的合理性检验。
+
+# ---------- 2. Rationale / Design Logic ----------
+rationale:
+  model_and_system: >
+    定义 Z 为膜环境整体的 membrane context 轴得分，M 为基于 RNA-seq 推导的 EphB1 下游通路转录特征得分。
+    通过绘制样本级 Z 与 M 的散点图，并结合批次和基因型信息编码，评估通路与膜环境的协变关系，避免批次驱动的假象。
+  key_variables: >
+    样本层面的膜环境指标 Z 与 9 条 EphB1 下游通路的 mediator score M。
+  control_logic: >
+    利用 robust ranking 方法，基于各批次 HO 与 WT 组之间 ΔM 差异、Spearman 相关性及 leave-one-out 稳定性综合评估通路优先级。
+    通过多批次样本散点图展示 Z vs M 关系，辅助直观理解通路与膜环境的耦合模式。
+  core_justification: >
+    该策略既能揭示样本层面信号通路与膜环境的共变结构，也能检测批次效应，指导后续的中介分析和功能实验设计。
+
+# ---------- 3. Methods（差异性信息） ----------
+methods:
+  inherits_from_protocol: "default_sample_score_and_robust_rank_pipeline"
+  biological_material: >
+    采用多批次（batch1–3）来源的原代小鼠腹腔巨噬细胞，包含 WT 与 Ephb1−/− 组，进行 RNA-seq 测序。
+  experimental_groups: "WT 与 Ephb1−/− 基因型比较，无外源刺激。"
+  stimuli_and_treatment: "无外源刺激，稳态条件下采样。"
+  time_points: "单一终点采样。"
+  dose_info: ""
+  readout_and_assay: >
+    结果变量 Z 为膜环境的 membrane context 轴得分；
+    中介变量 M 为 9 条 EphB1 下游通路的 RNA-seq 推导转录特征样本级得分。
+  replicates: >
+    包含三个独立批次（batch1–3），每批次含 WT 与 KO 样本，具体样本量依数据集而定。
+  analysis_notes: >
+    Figure 6eB 中散点图展示每个样本的 Z 与 M 值，点颜色区分基因型（WT vs KO），形状区分批次；
+    线性拟合曲线用于视觉辅助；
+    通路与膜环境关联的定量评估采用 Spearman 相关及 leave-one-out 稳定性排名。
+    注意：通路得分为转录足迹，不等同于激酶活性或蛋白磷酸化水平。
+
+# ---------- 4. Results：结构化描述 ----------
+results:
+  data_direction: >
+    三条通路的一个共同特征是：HO 与 WT 在 (Z, M) 联合空间中均呈现明显的基因型聚集现象，提示 EphB1 缺失导致样本在该二维机制空间中发生系统性重排。
+    然而，不同通路之间的分离结构存在重要差异。
+    在 PI3K_AKT_mTOR 面板中，HO 与 WT 不仅在 Z 轴上分离，同时在 M 轴上也呈现方向一致的位移（HO 偏向低 M / 高 Z，WT 偏向高 M / 低 Z），形成沿对角线方向的整体空间分离，提示该通路的 mediator score 既受基因型驱动，又与膜环境轴呈稳定协变关系。
+    相比之下，在 JAK_STAT_inflammatory 与 cytoskeleton_FAK_Src_Rho 面板中，基因型分离主要体现在 Z 轴方向，而两组样本在 M 轴上的取值范围高度重叠、分布相对均匀，提示这些通路的 mediator score 在基因型间缺乏一致方向性的位移。
+  stats_summary: >
+    不同批次样本以不同形状区分，上述基因型聚集与分离模式在多个独立批次中均可观察到，降低了单一批次驱动假象的可能性。
+  key_numbers: >
+    结合 robust ranking 中 ΔM、Spearman 相关性及 leave-one-out 稳定性结果，PI3K_AKT_mTOR 在基因型差异与 Z–M 协变结构上均表现出更一致的方向性，而后两条通路主要体现为与膜环境轴相关的伴随分布模式。
+  group_difference_statement: >
+    整体来看，三条通路均参与 EphB1 缺失后的膜环境重塑过程，但 PI3K_AKT_mTOR 显示出更强的“基因型驱动 + 协同位移”特征，提示其在候选中介通路中具有相对更高的优先级。
+  robustness_and_qc: >
+    多批次重复中一致的空间结构增强了该结论的稳健性。
+  anomalies_or_limits: >
+    样本量有限，且散点图仅反映样本层相关结构；是否构成主要中介链路仍需通过正式中介模型（比较 Z~X 与 Z~X+M）进行定量检验。
+
+# ---------- 5. Interpretation & Role in Chapter ----------
+interpretation:
+  minimal_bio_interpretation: >
+    样本层面的 Z–M 联合空间结构显示，不同通路在“基因型驱动”与“膜环境协变”两个维度上的行为存在本质差异。
+    三条通路均出现基因型聚集现象，说明 EphB1 缺失导致整体机制空间发生系统性重排；
+    但仅 PI3K_AKT_mTOR 同时在 Z 轴与 M 轴上呈现一致方向的协同位移，
+    表现出“基因型驱动 + mediator 方向性重构”的双重特征，
+    提示其更可能处于膜环境改变与转录重塑之间的关键调控节点。
+    相比之下，JAK/STAT 与细胞骨架相关通路虽与膜环境轴存在关联，
+    但其 M 轴分布在两基因型间高度重叠，更符合“伴随响应”而非主导中介的模式。
+
+  alternative_explanations: >
+    上述空间分离可能部分来源于共享上游调控网络或整体转录程序的协同漂移。
+    此外，样本量与稳态条件限制了动态因果链条的直接推断，
+    因此当前结果应被视为机制优先级信号，而非因果结论。
+
+  claim_supported: >
+    本图不仅支持多通路参与膜环境重塑，
+    更重要的是揭示 PI3K 通路在二维机制空间中表现出独特的协同位移结构，
+    为其作为优先候选中介通路提供结构性证据。
+
+  link_to_previous: >
+    该分析在 robust ranking 的统计优先级基础上，
+    提供了样本层空间结构的独立验证，
+    强化了 PI3K 通路在膜环境–转录耦合网络中的中心位置假设。
+
+  transition_to_next: >
+    后续将通过正式中介模型（比较 Z~X 与 Z~X+M）及功能干预实验，
+    定量检验 PI3K 通路在膜环境调控中的实际中介贡献度。
+
+# ---------- 6. AI Writing Hints ----------
+ai_hints:
+  target_section: ["Results", "Discussion_mini", "Methods_diff"]
+  tone: "neutral"
+  target_journal_style: "Nature Metabolism"
+  language: "zh"
+
+# ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
+# 设计原则：
+# - 这是“投稿层”信息（允许事实：系统/条件/n/统计/归一化），但不写讨论式推理。
+# - 每个 panel 只写“这个 panel 自己需要的 legend 信息”。
+# - 脚本在 figure 层汇总时：
+#     - Figure title 由 figure-level yaml 提供（若你之后有）；
+#     - Panel legend 由这里提供并按 (a)(b)(c) 顺序拼接。
+figure_legend:
+  panel: "e"
+  panel_title_en: "Sample-level relationships between membrane context score (Z) and pathway mediator scores (M)"
+  panel_title_cn: "膜环境轴得分 (Z) 与通路 mediator 得分 (M) 的样本层关联"
+
+  one_sentence_en: >
+    Sample-level Z–M scatter plots across independent RNA-seq batches reveal genotype-dependent clustering in joint (Z, M) space, with pathway-specific separation patterns that prioritize PI3K_AKT_mTOR.
+
+  system_and_design:
+    model: "Primary murine peritoneal macrophages (WT vs Ephb1−/−) profiled by RNA-seq across independent batches (batch1–3)"
+    genotype_or_groups: "WT (X=0) versus Ephb1−/− (X=1)"
+    key_treatments: >
+      No external stimulation; steady-state condition. Sample-level scatter plots (Z vs M) were used to visualize pathway–membrane-context covariation and genotype-dependent clustering. Pathway priority was evaluated using robust ranking and leave-one-out (LOO) stability.
+    time_window: "Single endpoint RNA-seq sampling under steady-state conditions"
+
+  readouts_and_assays:
+    primary_readout: >
+      Membrane context axis score (Z) and pathway mediator scores (M) derived from RNA-seq transcriptional signatures (shown: PI3K_AKT_mTOR, JAK_STAT_inflammatory, cytoskeleton_FAK_Src_Rho).
+    assay: >
+      Scatter plots with points colored by genotype and shaped by batch; fitted lines shown for visualization. Robust ranking combined ΔM, Spearman correlation, and LOO robustness.
+    normalization: >
+      Pathway mediator scores represent RNA-seq–derived transcriptional footprints (sample-level signature scores).
+
+  stats:
+    n_definition: "Samples from independent RNA-seq batches (batch1–3) including WT and KO genotypes"
+    n: "Multiple samples per genotype per batch; exact n varies by batch"
+    summary: "Visual Z–M scatter patterns plus robust ranking statistics (ΔM, Spearman correlation, LOO stability)"
+    test: "Correlation and robust ranking (no single inferential statistical test in this panel)"
+    multiple_comparisons: "not applicable"
+
+  significance:
+    symbols: "not applicable"
+
+  extra_notes: >
+    Pathway mediator scores reflect transcriptional footprints and do not directly measure kinase activity or protein phosphorylation. The scatter plots describe sample-level covariation and genotype-dependent clustering but do not by themselves establish causality.
+# ---------- 8. English ----------
+results_skeleton_en:
+  stage: T3
+  purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
+  panel_level: results
+  results_logic_type: localization
+
+  modules:
+    M1_motivation:
+      en: "To identify downstream pathways that covary with the membrane context axis at the sample level, we examined relationships between membrane context scores (Z) and pathway mediator scores (M) across multiple independent RNA-seq batches."
+      cn: "为探究哪些下游通路在样本层面与膜环境轴协变，我们分析了多个独立 RNA-seq 批次中膜环境得分 (Z) 与通路 mediator 得分 (M) 之间的关系。"
+      logic_source: "question.context_from_previous + question.core_question"
+
+    M2_level_definition:
+      en: "We visualized sample-level Z–M scatter plots for representative top-ranked pathways, with points colored by genotype and shaped by batch, to evaluate genotype-dependent clustering and batch robustness."
+      cn: "我们绘制代表性优先通路的样本级 Z–M 散点图（颜色区分基因型、形状区分批次），用于评估基因型聚集及其在多批次中的稳健性。"
+      logic_source: "methods.readout_and_assay + rationale.control_logic"
+
+    M3_joint_clustering:
+      en: "Across the three shown pathways, KO and WT samples form distinct clusters in the joint (Z, M) space, indicating a systematic genotype-dependent reorganization of this mechanistic landscape."
+      cn: "在三条展示通路中，KO 与 WT 样本在 (Z, M) 联合空间中形成清晰聚集，提示该二维机制空间发生系统性的基因型相关重排。"
+      logic_source: "results.data_direction"
+
+    M4_pathway_specific_structure:
+      en: "Notably, PI3K_AKT_mTOR exhibits coordinated separation along both axes, with KO samples biased toward low M/high Z and WT samples toward high M/low Z. In contrast, JAK_STAT_inflammatory and cytoskeleton_FAK_Src_Rho separate primarily along the Z axis, while showing substantial overlap along the M axis."
+      cn: "值得注意的是，PI3K_AKT_mTOR 同时沿 Z 与 M 两轴呈协同位移（KO 偏向低 M/高 Z，WT 偏向高 M/低 Z）；而 JAK/STAT 与细胞骨架通路主要沿 Z 轴分离，M 轴上两组高度重叠。"
+      logic_source: "results.data_direction + interpretation.minimal_bio_interpretation"
+
+    M5_robustness:
+      en: "Batch-specific symbols indicate that these clustering and separation patterns are consistently observed across independent batches rather than being driven by a single batch."
+      cn: "批次符号提示上述聚集与分离结构在多个独立批次中均可观察到，降低了单一批次驱动的可能性。"
+      logic_source: "results.robustness_and_qc"
+
+    M6_panel_conclusion:
+      en: "Together with robust ranking and leave-one-out stability, these spatial patterns support prioritizing PI3K_AKT_mTOR as a higher-priority candidate mediator axis, whereas JAK/STAT and cytoskeletal pathways more likely reflect covarying or context-dependent transcriptional responses."
+      cn: "结合稳健排序与 LOO 稳定性，上述空间结构支持将 PI3K_AKT_mTOR 作为更高优先级的候选中介轴，而 JAK/STAT 与细胞骨架通路更可能反映与膜环境协变的伴随或情境性转录响应。"
+      logic_source: "interpretation.claim_supported + interpretation.link_to_previous"
