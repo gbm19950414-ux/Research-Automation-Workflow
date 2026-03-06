@@ -86,6 +86,53 @@ def load_results_policy(manuscript_dir: Path) -> Dict[str, Any]:
     pol = load_yaml(p)
     return pol if isinstance(pol, dict) else {}
 
+# -----------------------------
+# Opening sentence loader
+# -----------------------------
+
+def load_opening_sentences(record_dir: Path) -> Dict[str, str]:
+    """Load optional figure opening sentences from
+    06_figures/record/opening_and_trans.yaml.
+
+    Expected minimal structure:
+
+    figures:
+      Figure 1:
+        opening_en: "Sentence..."
+      Figure 2:
+        opening_en: "Sentence..."
+
+    Returns mapping: {"Figure 1": "sentence", ...}
+    """
+    # Preferred location: 08_manuscript/yaml/opening_and_trans.yaml
+    manuscript_yaml = Path(__file__).resolve().parents[2] / "yaml" / "opening_and_trans.yaml"
+
+    if manuscript_yaml.exists():
+        p = manuscript_yaml
+    else:
+        # Backward compatibility: allow legacy location in 06_figures/record
+        p = record_dir / "opening_and_trans.yaml"
+
+    if not p.exists():
+        return {}
+
+    data = load_yaml(p)
+    if not isinstance(data, dict):
+        return {}
+
+    figs = data.get("figures") or {}
+    if not isinstance(figs, dict):
+        return {}
+
+    out: Dict[str, str] = {}
+    for k, v in figs.items():
+        if not isinstance(v, dict):
+            continue
+        s = v.get("opening_en")
+        if isinstance(s, str) and s.strip():
+            out[normalize_figure_group(k) or k] = s.strip()
+    return out
+
 
 def apply_policy_to_cfg(cfg: Dict[str, Any], policy: Dict[str, Any]) -> Dict[str, Any]:
     """Return a shallow-merged cfg where policy values override cfg.
@@ -856,6 +903,7 @@ def main() -> int:
     fig_title_map = build_figure_title_maps(logic)
 
     record_dir = resolve_record_dir(paper_logic, cfg)
+    opening_map = load_opening_sentences(record_dir)
     mapping_path = resolve_mapping_path(record_dir, cfg)
     primary_lang = (cfg.get("language") or "en").strip().lower()
     if primary_lang not in ("en", "cn"):
@@ -948,6 +996,15 @@ def main() -> int:
                 "level": 2,
                 "text": display_title,
             })
+            # Insert figure opening sentence if defined
+            opening = opening_map.get(normalize_figure_group(curr_fig_group) or curr_fig_group)
+            if opening:
+                append_ir_block(results_ir, {
+                    "type": "paragraph",
+                    "text": opening,
+                    "source": "opening_and_trans.yaml",
+                    "panel_id": "",
+                })
             # Avoid carrying a transition across figure boundaries in IR.
             pending_transition_en = ""
 

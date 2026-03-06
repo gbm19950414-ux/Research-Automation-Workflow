@@ -317,4 +317,8 @@ narrative:
 
   - figure: 5
     type: upstream_regulation
-    edges: [e12, e11, e10]
+    edges: [e9, e10]
+
+  - figure: 6
+    type: upstream_regulation
+    edges: [e12, e11]

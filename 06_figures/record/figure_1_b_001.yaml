@@ -79,17 +79,22 @@ methods:
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
   data_direction: >
-    在多遗传背景的筛选中，仅少数品系在 Nigericin 诱导的 IL-1β 释放上显示出 WT 与 HO 之间的显著差异。
+    在多遗传背景的筛选结果中，大多数品系在 Nigericin 诱导条件下 WT 与 HO 之间的 IL-1β 释放差异较小或不具统计学显著性，仅有少数品系表现出较为明显的基因型依赖性变化。
+
   stats_summary: >
-    按品系分别进行双侧 Welch t 检验，其中 Ephb1 对应的 081230020-HRB 品系在筛选中表现出统计学显著的 IL-1β 释放降低，其显著性水平在所有检测品系中较为突出。
+    在逐品系进行的双侧 Welch t 检验中，仅有两个品系达到名义统计学显著水平。其中 Ephb1 对应的 081230020-HRB 品系具有最低的 p 值（P≈0.034），而另一品系 080214058-HRA 亦达到统计学显著（P≈0.045）。其余多数品系的 WT 与 HO 差异未达到统计学显著。
+
   key_numbers: >
-    Ephb1（081230020-HRB）品系中，WT 与 HO 组均具有充分的生物学重复数（WT n≈5，HO n≈5），且归一化后差异达到统计学显著；其他多数品系未达到显著水平。
+    在 Ephb1（081230020-HRB）品系中，HO 组的归一化 IL-1β 释放均值约为 0.585，相较 WT（归一化为 1）约下降 41%。该品系 WT 与 HO 均具有充分的生物学重复数（WT n≈5，HO n≈5），为统计比较提供了较好的统计效力。相比之下，080214058-HRA 品系 HO 均值约为 0.627（约下降 37%）。
+
   group_difference_statement: >
-    相较于其他遗传背景，Ephb1 所在品系在炎症小体激活条件下表现出更为清晰且可重复的基因型差异。
+    综合效应量与统计显著性，Ephb1 所在的 081230020-HRB 品系在所有检测背景中表现出最为突出的统计显著表型之一，并呈现清晰的基因型依赖性 IL-1β 释放下降。
+
   robustness_and_qc: >
-    所有差异检验均在品系内独立完成，Ephb1 品系的显著性结果不依赖于跨品系比较。
+    所有统计检验均在各遗传背景内部独立完成，并以各自 WT 平均值进行归一化处理，因此 Ephb1 品系中观察到的差异不依赖于跨品系比较。
+
   anomalies_or_limits: >
-    其他品系中部分因重复数不足或差异幅度较小，未能在筛选中达到统计学显著。
+    在部分其他品系中，由于生物学重复数较少或基因型差异幅度较小，未能在筛选阶段达到统计学显著水平，因此这些品系的潜在效应仍需在后续针对性实验中进一步评估。
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
@@ -161,16 +166,15 @@ results_skeleton_en:
       cn: "以 IL-1β 释放作为炎症小体激活的功能性读出，在多个 pb 遗传背景中于各自品系内比较 WT 与 HO 细胞。"
       logic_source: "methods.readout_and_assay + rationale.key_variables + rationale.control_logic"
     M3_directional_result:
-      en: "Among the screened strains, only a small subset displayed significant genotype-dependent differences in IL-1β release following Nigericin stimulation."
-      cn: "在所筛选的多个品系中，仅少数品系在 Nigericin 刺激后表现出显著的基因型依赖性 IL-1β 释放差异。"
-      logic_source: "results.data_direction"
+      en: "Across the 10 screened strains, most genetic backgrounds showed little or no genotype-dependent difference in IL-1β release following Nigericin stimulation, whereas only two strains reached nominal statistical significance in within-strain comparisons."
+      cn: "在所筛选的10个遗传背景中，大多数品系在 Nigericin 刺激后 WT 与 HO 之间的 IL-1β 释放差异较小或未达到统计学显著，仅有两个品系在品系内比较中达到名义统计学显著水平。"
+      logic_source: "results.data_direction + results.stats_summary"
 
     M4_robustness:
       en: "Notably, the Ephb1-associated 081230020-HRB strain showed a statistically significant and reproducible reduction in IL-1β release, supported by adequate biological replicates and within-strain statistical testing."
       cn: "其中，Ephb1 对应的 081230020-HRB 品系在具有充分生物学重复的前提下，于品系内统计分析中显示出显著且可重复的 IL-1β 释放降低。"
       logic_source: "results.stats_summary + results.key_numbers + results.robustness_and_qc"
-
     M5_panel_conclusion:
-      en: "Compared with other genetic backgrounds, the Ephb1 strain exhibited the most consistent and robust inflammasome-associated phenotype, prioritizing Ephb1 as a leading candidate for subsequent mechanistic investigation."
-      cn: "相较于其他遗传背景，Ephb1 所在品系表现出最为一致且稳健的炎症小体相关表型，从而将 Ephb1 确立为后续机制研究的优先候选基因。"
-      logic_source: "results.group_difference_statement + interpretation.claim_supported"
+      en: "Notably, the Ephb1-associated strain (081230020-HRB) exhibited a pronounced reduction in IL-1β release in HO cells (~41% decrease relative to WT; P≈0.034), representing the strongest statistically significant genotype-dependent phenotype observed in the screen and prioritizing Ephb1 for subsequent mechanistic investigation."
+      cn: "其中，Ephb1 对应的 081230020-HRB 品系在 HO 细胞中表现出明显的 IL-1β 释放降低（约下降 41%，P≈0.034），在所有检测背景中形成最为突出的统计学显著基因型依赖表型之一，从而将 Ephb1 确立为后续机制研究的优先候选基因。"
+      logic_source: "results.key_numbers + results.group_difference_statement + interpretation.claim_supported"

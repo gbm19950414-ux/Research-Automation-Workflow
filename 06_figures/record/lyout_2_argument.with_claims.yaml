@@ -79,21 +79,36 @@ claims:
   type: upstream_regulation
   title: Fig5 upstream_regulation
   weakest_evidence_level: correlation
-  text_en_draft: These data suggest that EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through upstream signaling
-    (e.g., Membrane environment axis).
+  text_en_draft: These data suggest that EphB1 deficiency may influence Membrane environment axis through upstream signaling.
   derived:
-    figure_title: EphB1 deficiency alters PI3K–AKT–mTOR signaling module
+    figure_title: EphB1 deficiency alters Membrane environment axis
+    paragraph_opening: To determine whether EphB1 deficiency may influence Membrane environment axis through upstream signaling
+      during  in macrophage, we examined the relevant readouts.
+    paragraph_summary: Together, these data suggest that EphB1 deficiency may influence Membrane environment axis through
+      upstream signaling.
+    claim_core_en: EphB1 deficiency may influence Membrane environment axis through upstream signaling
+  supported_by_edges:
+  - e9
+  - e10
+  edge_summary_en:
+  - 'e9: EphB1 basal state inhibits Membrane environment axis (evidence: necessity)'
+  - 'e10: Membrane environment axis promotes Cardiolipin level (evidence: correlation)'
+- id: c_fig6
+  figure: 6
+  type: upstream_regulation
+  title: Fig6 upstream_regulation
+  weakest_evidence_level: correlation
+  text_en_draft: These data suggest that EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through upstream signaling.
+  derived:
+    figure_title: EphB1 deficiency increases PI3K–AKT–mTOR signaling module
     paragraph_opening: To determine whether EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through upstream
-      signaling (e.g., Membrane environment axis) during  in macrophage, we examined the relevant readouts.
+      signaling during  in macrophage, we examined the relevant readouts.
     paragraph_summary: Together, these data suggest that EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through
-      upstream signaling (e.g., Membrane environment axis).
-    claim_core_en: EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through upstream signaling (e.g., Membrane
-      environment axis)
+      upstream signaling.
+    claim_core_en: EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through upstream signaling
   supported_by_edges:
   - e12
   - e11
-  - e10
   edge_summary_en:
   - 'e12: EphB1 basal state inhibits PI3K–AKT–mTOR signaling module (evidence: necessity)'
   - 'e11: PI3K–AKT–mTOR signaling module inhibits Membrane environment axis (evidence: correlation)'
-  - 'e10: Membrane environment axis promotes Cardiolipin level (evidence: correlation)'

@@ -76,7 +76,7 @@ sections:
 figures:
   - id: "Figure 1"
     title: "EphB1 缺失降低炎症小体激活诱导的巨噬细胞焦亡与 IL-1β 释放"
-    title_en: "EphB1 deficiency reduces inflammasome-associated outputs"
+    title_en: "EphB1 deficiency reduces pyroptosis and IL-1β release"
     figure_title: "EphB1 缺失限幅炎症小体诱导的焦亡与 IL-1β 外排"
     figure_title_en: "EphB1 loss constrains inflammasome-triggered pyroptosis and IL-1β release"
 
@@ -189,7 +189,7 @@ figures:
 
   - id: "Figure 2"
     title: "EphB1 缺失不影响 NLRP3 上游激活，差异集中于 GSDMD 执行层外排"
-    title_en: "EphB1 deficiency reduces Inflammasome receptor downstream pathway"
+    title_en: "EphB1 deficiency reduces pyroptotic execution"
     figure_title: "EphB1 缺失保留 NLRP3 上游激活但限制 GSDMD 孔驱动的执行输出"
     figure_title_en: "EphB1 loss preserves upstream NLRP3 activation yet constrains GSDMD pore–driven execution"
     section: "S1"

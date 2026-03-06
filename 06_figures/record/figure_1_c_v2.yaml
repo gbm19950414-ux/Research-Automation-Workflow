@@ -184,6 +184,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These data indicate that the diminished IL-1β output in Ephb1 pb/pb macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 in a shared downstream execution process."
+      en: "These data indicate that the diminished IL-1β output in Ephb1 pb/pb macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 in receptor downstream pathway."
       cn: "综上，Ephb1 pb/pb 细胞 IL-1β 输出受限并非局限于单一感受器通路，支持 EphB1 作用于炎症小体下游的共同执行过程。"
       logic_source: "results.group_difference_statement"

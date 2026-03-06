@@ -145,17 +145,21 @@ document:
     blocks:
     - type: heading
       level: 2
-      text: EphB1 deficiency reduces inflammasome-associated outputs
+      text: EphB1 deficiency reduces pyroptosis and IL-1β release
     - type: paragraph
-      text: A standardized workflow was designed in which primary macrophages from multiple genetic backgrounds were subjected to uniform NLRP3 inflammasome activation and assessed using IL-1β release as the functional readout (Fig. 1a). Together, this framework provides the experimental basis for the screening results presented in Figure 1b, without implying any mechanistic interpretation at this stage.
+      text: To identify regulators of inflammasome, we performed a genetic screening strategy in primary macrophages from PB genetic backgrounds using IL-1β release as the functional readout.
+      source: opening_and_trans.yaml
+      panel_id: ''
+    - type: paragraph
+      text: A standardized workflow was designed in which primary macrophages from multiple genetic backgrounds were subjected to uniform NLRP3 inflammasome activation and assessed using IL-1β release as the functional readout (Fig. 1a). This framework provides the experimental basis for the screening results.
       source: figure_1_a_000.yaml
       panel_id: 1a
     - type: paragraph
-      text: Having outlined the genetic-screening strategy, we next sought to identify, across the full panel of perturbations, a candidate signal that is both reproducible and sufficiently prominent to prioritize for mechanistic dissection. Among the screened strains, only a small subset displayed significant genotype-dependent differences in IL-1β release following Nigericin stimulation (Fig. 1b). Compared with other genetic backgrounds, the Ephb1 strain exhibited the most consistent and robust inflammasome-associated phenotype, prioritizing Ephb1 as a leading candidate for subsequent mechanistic investigation.
+      text: Having outlined the genetic-screening strategy, we next sought to identify, across the full panel of perturbations, a candidate signal that is both reproducible and sufficiently prominent to prioritize for mechanistic dissection. Across the 10 screened strains, most genetic backgrounds showed little or no genotype-dependent difference in IL-1β release following Nigericin stimulation, whereas only two strains reached nominal statistical significance in within-strain comparisons (Fig. 1b). Notably, the Ephb1-associated strain (081230020-HRB) exhibited a pronounced reduction in IL-1β release in HO cells (~41% decrease relative to WT; P≈0.034), representing the strongest statistically significant genotype-dependent phenotype observed in the screen and prioritizing Ephb1 for subsequent mechanistic investigation.
       source: figure_1_b_001.yaml
       panel_id: 1b
     - type: paragraph
-      text: Having prioritized EphB1 from the screen, we next asked whether the phenotype generalizes beyond a single inflammasome agonist, thereby arguing against a stimulus-specific artifact. Across all three activation routes, Ephb1 pb/pb macrophages released significantly less IL-1β than WT controls (Fig. 1c). These data indicate that the diminished IL-1β output in Ephb1 pb/pb macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 in a shared downstream execution process.
+      text: Having prioritized EphB1 from the screen, we next asked whether the phenotype generalizes beyond a single inflammasome agonist, thereby arguing against a stimulus-specific artifact. Across all three activation routes, Ephb1 pb/pb macrophages released significantly less IL-1β than WT controls (Fig. 1c). These data indicate that the diminished IL-1β output in Ephb1 pb/pb macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 in receptor downstream pathway.
       source: figure_1_c_v2.yaml
       panel_id: 1c
     - type: paragraph
@@ -164,7 +168,11 @@ document:
       panel_id: 1d
     - type: heading
       level: 2
-      text: EphB1 deficiency reduces Inflammasome receptor downstream pathway
+      text: EphB1 deficiency reduces pyroptotic execution
+    - type: paragraph
+      text: To determine where EphB1 functions within the inflammasome pathway, we compared inflammasome activation across NLRP3, AIM2, and NLRC4 stimuli in WT and Ephb1-deficient macrophages.
+      source: opening_and_trans.yaml
+      panel_id: ''
     - type: paragraph
       text: LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il1b transcripts in WT and EphB1-deficient macrophages across all examined time points (Fig. 2a,b). Together, these data indicate that EphB1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming, excluding defective first-signal activation as the cause of reduced inflammasome output.
       source: figure_2_a+b.yaml
@@ -193,6 +201,10 @@ document:
       level: 2
       text: EphB1 deficiency reduces recruitment of GSDMD to mitochondria
     - type: paragraph
+      text: To investigate how EphB1 regulates pyroptotic execution, we examined mitochondrial integrity and GSDMD recruitment to mitochondria during NLRP3 inflammasome activation in WT and Ephb1-deficient macrophages.
+      source: opening_and_trans.yaml
+      panel_id: ''
+    - type: paragraph
       text: Upon inflammasome activation, Ephb1−/− macrophages exhibited attenuated accumulation of cytosolic ROS and a smaller loss of mitochondrial membrane potential compared with WT cells, whereas mitochondrial ROS signals measured by MitoSOX showed no significant genotype-dependent difference in overall magnitude (Fig. 3a,b,c,d,e,f,g,h). Together, these results indicate that EphB1 deficiency does not cause an intrinsic alteration in mitochondrial membrane potential at baseline but limits ROS accumulation and membrane depolarization during inflammasome activation, supporting a model in which mitochondrial damage is attenuated during the execution phase.
       source: figure_3_a+b+c+d+e+f+g+h.yaml
       panel_id: 3a/b/c/d/e/f/g/h
@@ -207,6 +219,10 @@ document:
     - type: heading
       level: 2
       text: EphB1 deficiency reduces Cardiolipin level
+    - type: paragraph
+      text: To test whether altered mitochondrial membrane composition contributes to the EphB1-dependent phenotype, we quantified cardiolipin levels in WT and Ephb1-deficient macrophages.
+      source: opening_and_trans.yaml
+      panel_id: ''
     - type: paragraph
       text: Across both imaging- and plate-based readouts, Ephb1−/− macrophages displayed significantly lower NAO fluorescence than WT cells, consistent with a reduced NAO-detectable cardiolipin pool (Fig. 4a,b). Together, these results show that EphB1 deficiency is associated with a significant reduction in NAO fluorescence, indicating a decreased NAO-detectable cardiolipin pool in the mitochondrial membrane under conditions where baseline mitochondrial membrane potential is unchanged.
       source: figure_4_a+b.yaml
@@ -235,6 +251,10 @@ document:
       level: 2
       text: Membrane context perturbation dominates the cardiolipin metabolic axis
     - type: paragraph
+      text: To identify cellular processes associated with cardiolipin variation, we defined a set of biological process axes centered on cardiolipin metabolism, each represented by corresponding lipidomic indicators and gene sets, and evaluated their perturbation magnitude and association with cardiolipin abundance across batch.
+      source: opening_and_trans.yaml
+      panel_id: ''
+    - type: paragraph
       text: This framework defines six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—and assigns to each axis representative genes and lipid readouts that can, in principle, be extracted from transcriptomic and lipidomic datasets (Fig. 5a). Together, this conceptual model serves as a mechanistic coordinate system for organizing cardiolipin-related pathways and readouts, providing a common reference for the multi-omics analyses presented in subsequent figures.
       source: figure_5_a.yaml
       panel_id: 5a
@@ -261,6 +281,10 @@ document:
     - type: heading
       level: 2
       text: PI3K–AKT–mTOR signaling tracks membrane-context impairment
+    - type: paragraph
+      text: To identify signaling pathways downstream of EphB1 associated with membrane context axis, we constructed EphB1 downstream pathway gene sets and evaluated their perturbation magnitude, consistency across samples, and covariation with the membrane context axis.
+      source: opening_and_trans.yaml
+      panel_id: ''
     - type: paragraph
       text: In this framework, EphB1 status is treated as an exogenous variable (X), downstream Eph-related signaling modules are quantified as RNA-based pathway scores (M), and the RNA membrane context axis score serves as a transcriptional proxy (Z) for lipid membrane phenotypes, while lipid readouts are used only for direction-concordance validation (Fig. 6a). Together, this RNA-first X–M–Z framework provides a transparent and reproducible strategy for ranking EphB1 downstream signaling modules most likely coupled to membrane context perturbation, thereby guiding subsequent experimental validation without over-interpreting limited cross-omics mediation.
       source: figure_6_a.yaml

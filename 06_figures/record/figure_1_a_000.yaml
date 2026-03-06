@@ -184,6 +184,6 @@ results_skeleton_en:
       logic_source: "mechanism.key_nodes.significance and effect size"
 
     M5_panel_conclusion:
-      en: "Together, this framework provides the experimental basis for the screening results presented in Figure 1b, without implying any mechanistic interpretation at this stage."
+      en: "This framework provides the experimental basis for the screening results."
       cn: "综上，该框架为 Figure 1b 所示的筛选结果提供了实验基础，但本图并不涉及任何机制层面的解释。"
       logic_source: "evidence_mapping.speculative_links.boundary + transition.how_it_leads_next_section"
