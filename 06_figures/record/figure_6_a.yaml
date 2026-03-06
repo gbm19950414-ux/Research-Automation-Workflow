@@ -14,7 +14,11 @@ meta:
     RNA membrane context 轴（Z）之间的分析框架；
     在脂质组配对样本受限的前提下，以 RNA 内机制耦合为主计算（回归/相关），
     并以脂质表型方向一致性作为独立验证层，支撑 Figure 7 后续的通路优先级筛选。
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 # ---------- 1. Conceptual Goal（这张图要解释什么？） ----------
 concept_goal:
   core_message: >

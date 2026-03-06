@@ -14,7 +14,11 @@ meta:
   chapter: "多组学整合：Ephb1 缺失对线粒体相关机制轴的整体影响"
   experiment_id: "multiomics_axis_meta_summary"
   version: 1
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "results/figs/figure_6_e_multiomics_axis_barplot.pdf"
   raw_data_files:

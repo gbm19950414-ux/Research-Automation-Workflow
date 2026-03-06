@@ -1,0 +1,114 @@
+templates:
+
+  # ---------- Results section rendering ----------
+  results:
+
+    figure_title:
+      template: "{subject} {verb} {object}"
+      description: >
+        Short title for Results subsection or figure title.
+        Should be concise and remove hedging.
+
+    paragraph_opening:
+      template: "To determine whether {claim_core} during {stimulus} in {biological_system}, we {approach}."
+      description: >
+        Opening sentence of a Results paragraph.
+        Introduces the experimental question.
+
+    paragraph_summary:
+      correlation:
+        template: "Together, these data suggest that {claim_core}."
+      positioning:
+        template: "Together, these data support that {claim_core}."
+      necessity:
+        template: "Together, these data indicate that {claim_core}."
+      sufficiency:
+        template: "Together, these data indicate that {claim_core}."
+      causal_closure:
+        template: "Together, these results demonstrate that {claim_core}."
+      established_biology:
+        template: "Consistent with established biology, {claim_core}."
+
+
+  # ---------- Claim sentence rendering ----------
+  claim_rendering:
+
+    phenotype:
+      template: "{prefix} {subject} {verb} {object}."
+
+    positioning:
+      template: "{prefix} {subject} acts at the level of {object}."
+
+    mechanism_discovery:
+      with_mediator:
+        template: "{prefix} {subject} {verb} {object} through {mediator}."
+
+      without_mediator:
+        template: "{prefix} {subject} {verb} {object}."
+
+    mechanism_completion:
+      with_mediator:
+        template: "{prefix} regulation of {object} by {subject} depends on {mediator}."
+
+      without_mediator:
+        template: "{prefix} {subject} {verb} {object}."
+
+    upstream_regulation:
+      with_mediator:
+        template: "{prefix} {subject} influences {object} through upstream signaling involving {mediator}."
+
+      without_mediator:
+        template: "{prefix} {subject} influences {object} through upstream signaling."
+
+
+  # ---------- Evidence hedging ----------
+  hedging:
+
+    correlation:
+      prefix: "These data suggest that"
+      modal: "may"
+
+    positioning:
+      prefix: "These data support the positioning that"
+      modal: ""
+
+    necessity:
+      prefix: "These data support that"
+      modal: "is required to"
+
+    sufficiency:
+      prefix: "These data support that"
+      modal: "is sufficient to"
+
+    causal_closure:
+      prefix: "Together, these data support a causal role in which"
+      modal: ""
+
+    established_biology:
+      prefix: "Based on established biology,"
+      modal: ""
+
+
+  # ---------- Relation verbs ----------
+  relations:
+
+    promote:
+      verb: "promotes"
+
+    promotion:
+      verb: "promotes"
+
+    inhibition:
+      verb: "inhibits"
+
+    requirement:
+      verb: "is required for"
+
+    generation:
+      verb: "generates"
+
+    state_transition:
+      verb: "converts"
+
+    default:
+      verb: "affects"

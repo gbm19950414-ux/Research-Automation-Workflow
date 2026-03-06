@@ -12,7 +12,11 @@ meta:
   figure_id: "6c"   
   experiment_id: "RNAseq_EphB1_downstream_state"
   short_title: "EphB1 缺失重塑下游信号通路的转录响应状态"
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "figures/F7/F7C_EphB1_downstream_pathway_scores.pdf"
   raw_data_files:

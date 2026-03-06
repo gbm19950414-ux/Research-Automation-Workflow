@@ -37,7 +37,11 @@ meta:
     在上述分层纳入与统一排除规则下，每个轴的转录基因集由少量核心执行基因（Tier-1）、有限数量的路径近邻执行基因（Tier-2）以及极少数条件性贡献者（Tier-3）构成。该结构既保证了基因集在功能上的轴级特异性与机制清晰度，又通过适度扩容提高了轴级 RNA Z-score 的稳定性，使其在与脂质 readouts（如 CL_PG_ratio、MLCL_CL_ratio、oxCL_CL_ratio、PA–PG mismatch 等）进行 5:5 权重多组学整合时，能够提供有分量且可解释的转录层证据，而不被全局代谢重编程信号所主导。
   related_figures:
     - "Fig6A"
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 # 这张表的“列”（供你生成真正的 Word/LaTeX 表格用）
 columns:
   - name: "axis"

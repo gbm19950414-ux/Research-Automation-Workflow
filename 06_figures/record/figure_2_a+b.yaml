@@ -4,7 +4,11 @@ meta:
   short_title: "EphB1 缺失不影响炎症小体第一信号（priming）的转录程序"
   experiment_id: "figure_2_b"
   version: 1
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "figures/F3/F3_5_priming_qPCR.pdf"
   raw_data_files:

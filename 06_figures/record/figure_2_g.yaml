@@ -13,7 +13,11 @@ meta:
   short_title: "EphB1 缺失保留 Caspase‑1 底物切割但限制成熟产物外排"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   experiment_id: "figure_2_g"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: ""    # 主图文件路径，如 "figures/F3/F3A_IL1b_ELISA.pdf"
   raw_data_files:         # 原始数据/整理后数据的文件路径列表

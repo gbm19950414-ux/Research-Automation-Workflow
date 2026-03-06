@@ -12,7 +12,11 @@ meta:
   figure_id: "6d"   
   experiment_id: "RNA_only_XMZ_ranking_MembraneContext"
   short_title: "EphB1 状态驱动的下游通路变化（ΔM）及其与 Membrane context 轴（Z）的耦合与稳健性"
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "results/multiomics/figures/fig6_XMZ_panels_ABC_Membrane_context.png"
   raw_data_files:

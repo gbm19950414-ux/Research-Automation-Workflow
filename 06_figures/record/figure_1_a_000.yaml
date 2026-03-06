@@ -3,6 +3,7 @@
 # Figure 1a：遗传筛选流程示意图
 # ============================================================
 
+
 meta:
   figure: "Figure 1"              # 如 "Figure 3"
   figure_id: "1a"   
@@ -13,6 +14,7 @@ meta:
   role_in_paper: >
     用于说明 Ephb1 表型的发现路径，建立 Figure 1b 遗传筛选结果的实验与逻辑合法性，
     而非用于展示数据或提出机制结论。
+
 
 # ---------- 1. Conceptual Goal ----------
 concept_goal:

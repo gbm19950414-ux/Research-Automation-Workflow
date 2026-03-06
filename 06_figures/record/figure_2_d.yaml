@@ -3,7 +3,11 @@ meta:
   figure_id: "2d"
   experiment_id: "figure_1_c_a"
   short_title: "EphB1 缺失在 NLRP3 激活下呈剂量依赖性降低 IL-1β 释放"
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 question:
   context_from_previous: "在确认 EphB1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷后，需要检验其对炎症小体特异性 IL-1β 外排是否存在选择性影响。"
   core_question: "在 LPS priming 后的 NLRP3 第二信号刺激中，EphB1 缺失是否降低成熟 IL-1β 的释放，并且该差异是否随刺激强度（Nigericin 剂量）变化？"

@@ -17,7 +17,7 @@ output:
 module_rules:
   framework:
     include_modules:
-      - M1_motivation
+    #  - M1_motivation 期刊不需要偏 Methods的描述
       - M2_level_definition
       - M5_panel_conclusion
 

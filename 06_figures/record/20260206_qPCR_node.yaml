@@ -13,7 +13,11 @@ meta:
   short_title: "在基线条件下用 qPCR 复现 PI3K capacity/AKT(FOXO footprint)/flux-turnover 关键转录轴（WT vs EphB1_KO）"
   chapter: "Node validation: A/B/C transcriptional axes"
   version: 2026-02-09
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 question:
   context_from_previous: "前述组学分析提示 EphB1 缺失可能伴随 PI3K capacity 下调、AKT 输出改变的转录足迹以及脂质 flux/turnover 轴的方向性重塑，但需要在独立样本中验证其可复现性。"
   core_question: "在无额外刺激与无药理干预的纯基线条件下，WT 与 EphB1_KO 的 PI3K capacity（A）、AKT 输出足迹（FOXO targets，B）以及 flux/turnover 关键节点（C）是否能用 qPCR 在独立样本中复现组学方向？"

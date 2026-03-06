@@ -15,7 +15,11 @@ meta:
   short_title: "EphB1 缺失对 staurosporine 诱导凋亡的影响评估"     
   chapter: "EphB1 缺失降低炎症小体诱导的巨噬细胞焦亡与 IL-1β 释放"
   version: 1
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: ""    # 主图文件路径，如 "figures/F1/F1A_cleaved_caspase3_WB.pdf"
   raw_data_files:         # 原始数据/整理后数据的文件路径列表

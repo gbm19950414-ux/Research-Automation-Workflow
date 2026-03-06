@@ -14,7 +14,11 @@ meta:
   chapter: "Mitochondrial lipid remodeling"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "multiomics_axis_CL_link"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
   version: 1              # 整数，用来追踪修改
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "results/figs/figure_6_f.png"    # 主图文件路径，如 "figures/F3/F3A_IL1b_ELISA.pdf"
   raw_data_files:         # 原始数据/整理后数据的文件路径列表

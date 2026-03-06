@@ -13,7 +13,11 @@ meta:
     以一张流程图的形式，向审稿人交代 RNA-seq、非靶向脂质组和靶向 CL panel
     的多批次数据是如何从原始测序/质谱信号，经过 QC、归一化和建模，
     被压缩为用于下游多组学分析的“机制轴 Z 与 CL 机制指标”的。
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 # ---------- 1. Conceptual Goal（这张图要解释什么？） ----------
 concept_goal:
   core_message: >

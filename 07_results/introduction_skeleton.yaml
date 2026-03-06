@@ -1,0 +1,20 @@
+introduction:
+  field_importance:
+    phenotype_nodes: &id002
+    - n4
+    - n2
+  known_mechanism:
+    path: p3
+  mechanistic_focus:
+    nodes: &id001
+    - n8
+    - n7
+    - n6
+  knowledge_gap:
+    upstream_nodes:
+    - n10
+    - n9
+  hypothesis:
+    regulator_node: n1
+    mechanism_nodes: *id001
+    phenotype_nodes: *id002

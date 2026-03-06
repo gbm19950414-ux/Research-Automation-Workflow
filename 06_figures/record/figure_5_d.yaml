@@ -45,7 +45,11 @@ methods:
   replicates: "RNA 各批次 n≈3–6；脂质组各批次 n≈3～6。"
   analysis_notes: "effect_z = batch 内 KO vs WT 的方向性效应；不跨批次合并，仅作方向比较。"
   minimal_methods_summary: "RNA 与脂质组分别在每个 batch 内计算机制轴效应（effect_z），再整合成 axis×batch×omics 矩阵用于方向一致性分析。"
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 results:
   data_direction: >
     基于 RNA-seq（3 个批次）与脂质组学（4 个批次）计算的 batch-level effect_z 矩阵显示，

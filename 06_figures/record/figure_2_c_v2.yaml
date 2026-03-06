@@ -5,7 +5,11 @@ meta:
   chapter: "EphB1 缺失不影响 NLRP3 炎症小体 priming–ASC–caspase-1 激活，差异集中在 GSDMD 膜孔形成/内容物外排环节"
   experiment_id: "figure_2_a"
   version: 1
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "figures/F3/F3_4_TNF_IL6_ELISA.pdf"
   raw_data_files:

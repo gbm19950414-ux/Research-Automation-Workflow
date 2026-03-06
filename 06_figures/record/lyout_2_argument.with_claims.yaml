@@ -1,0 +1,99 @@
+source_yaml: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/lyout_2_argument.yaml
+claims:
+- id: c_fig1
+  figure: 1
+  type: phenotype
+  title: Fig1 phenotype
+  weakest_evidence_level: necessity
+  text_en_draft: These data support that EphB1 deficiency reduces IL-1β release.
+  derived:
+    figure_title: EphB1 deficiency reduces IL-1β release
+    paragraph_opening: To determine whether EphB1 deficiency reduces IL-1β release during NLRP3 inflammasome in macrophage,
+      we examined the relevant readouts.
+    paragraph_summary: Together, these data indicate that EphB1 deficiency reduces IL-1β release.
+    claim_core_en: EphB1 deficiency reduces IL-1β release
+  supported_by_edges:
+  - e1
+  - e3
+  edge_summary_en:
+  - 'e1: EphB1 basal state promotes IL-1β release (evidence: necessity)'
+  - 'e3: EphB1 basal state promotes Pyroptosis (evidence: necessity)'
+- id: c_fig2
+  figure: 2
+  type: positioning
+  title: Fig2 positioning
+  weakest_evidence_level: positioning
+  text_en_draft: These data support the positioning that EphB1 deficiency maps to the level of Inflammasome receptor downstream
+    pathway.
+  derived:
+    figure_title: EphB1 deficiency reduces Inflammasome receptor downstream pathway
+    paragraph_opening: To determine whether EphB1 deficiency maps to the level of Inflammasome receptor downstream pathway
+      during NLRP3, AIM2, NLRC4 inflammasome in macrophage, we examined the relevant readouts.
+    paragraph_summary: Together, these data support that EphB1 deficiency maps to the level of Inflammasome receptor downstream
+      pathway.
+    claim_core_en: EphB1 deficiency maps to the level of Inflammasome receptor downstream pathway
+  supported_by_edges:
+  - e2
+  - e4
+  edge_summary_en:
+  - 'e2: EphB1 basal state promotes Inflammasome receptor downstream pathway (evidence: necessity)'
+  - 'e4: EphB1 basal state promotes Caspase-1 cleavage downstream pathway (evidence: positioning)'
+- id: c_fig3
+  figure: 3
+  type: mechanism_discovery
+  title: Fig3 mechanism_discovery
+  weakest_evidence_level: necessity
+  text_en_draft: These data support that EphB1 deficiency reduces Mitochondrial rupture.
+  derived:
+    figure_title: EphB1 deficiency reduces Mitochondrial rupture
+    paragraph_opening: To determine whether EphB1 deficiency reduces Mitochondrial rupture during NLRP3 inflammasome in macrophage,
+      we examined the relevant readouts.
+    paragraph_summary: Together, these data indicate that EphB1 deficiency reduces Mitochondrial rupture.
+    claim_core_en: EphB1 deficiency reduces Mitochondrial rupture
+  supported_by_edges:
+  - e5
+  - e6
+  edge_summary_en:
+  - 'e5: EphB1 basal state promotes Mitochondrial rupture (evidence: necessity)'
+  - 'e6: EphB1 basal state promotes GSDMD recruitment to mitochondria (evidence: necessity)'
+- id: c_fig4
+  figure: 4
+  type: mechanism_completion
+  title: Fig4 mechanism_completion
+  weakest_evidence_level: necessity
+  text_en_draft: These data support that EphB1 deficiency reduces Cardiolipin level.
+  derived:
+    figure_title: EphB1 deficiency reduces Cardiolipin level
+    paragraph_opening: To determine whether EphB1 deficiency reduces Cardiolipin level during NLRP3 inflammasome in macrophage,
+      we examined the relevant readouts.
+    paragraph_summary: Together, these data indicate that EphB1 deficiency reduces Cardiolipin level.
+    claim_core_en: EphB1 deficiency reduces Cardiolipin level
+  supported_by_edges:
+  - e7
+  - e8
+  edge_summary_en:
+  - 'e7: EphB1 basal state promotes Cardiolipin level (evidence: necessity)'
+  - 'e8: Cardiolipin level promotes IL-1β release (evidence: necessity)'
+- id: c_fig5
+  figure: 5
+  type: upstream_regulation
+  title: Fig5 upstream_regulation
+  weakest_evidence_level: correlation
+  text_en_draft: These data suggest that EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through upstream signaling
+    (e.g., Membrane environment axis).
+  derived:
+    figure_title: EphB1 deficiency alters PI3K–AKT–mTOR signaling module
+    paragraph_opening: To determine whether EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through upstream
+      signaling (e.g., Membrane environment axis) during  in macrophage, we examined the relevant readouts.
+    paragraph_summary: Together, these data suggest that EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through
+      upstream signaling (e.g., Membrane environment axis).
+    claim_core_en: EphB1 deficiency may influence PI3K–AKT–mTOR signaling module through upstream signaling (e.g., Membrane
+      environment axis)
+  supported_by_edges:
+  - e12
+  - e11
+  - e10
+  edge_summary_en:
+  - 'e12: EphB1 basal state inhibits PI3K–AKT–mTOR signaling module (evidence: necessity)'
+  - 'e11: PI3K–AKT–mTOR signaling module inhibits Membrane environment axis (evidence: correlation)'
+  - 'e10: Membrane environment axis promotes Cardiolipin level (evidence: correlation)'

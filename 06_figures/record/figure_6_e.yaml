@@ -10,7 +10,11 @@ meta:
   chapter: "7.5 Mediation analysis on lipid indicators downstream of EphB1"
   experiment_id: "2025-03-21_mediation_CL_indicators"
   version: 1
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "results/figs/figure_7_e.pdf"
   sub_panels:

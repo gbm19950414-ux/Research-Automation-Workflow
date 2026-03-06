@@ -14,6 +14,11 @@ meta:
   short_title: "PI3Ki 是否足以降低 WT PM 的NAO染色水平"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: ""
   version: 2026-02-09
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
   context_from_previous: "前述结果提示 EphB1 缺失可能通过降低 PI3K–AKT 输出，牵引膜磷脂库（D）变化并影响 CL 可及性/功能池的 NAO readout（E），但仍缺乏 D→E 的因果支撑。"

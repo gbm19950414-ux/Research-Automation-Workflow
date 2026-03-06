@@ -12,9 +12,9 @@ document:
     blocks:
     - type: heading
       level: 2
-      text: EphB1 loss limits inflammasome-induced pyroptosis and IL-1β release
+      text: EphB1 deficiency reduces inflammasome-associated outputs
     - type: paragraph
-      text: To establish the experimental and logical framework underlying the genetic screening strategy used to identify regulators of inflammasome-associated outputs. A standardized workflow was designed in which primary macrophages from multiple genetic backgrounds were subjected to uniform NLRP3 inflammasome activation and assessed using IL-1β release as the functional readout (Fig. 1a). Together, this framework provides the experimental basis for the screening results presented in Figure 1b, without implying any mechanistic interpretation at this stage.
+      text: A standardized workflow was designed in which primary macrophages from multiple genetic backgrounds were subjected to uniform NLRP3 inflammasome activation and assessed using IL-1β release as the functional readout (Fig. 1a). Together, this framework provides the experimental basis for the screening results presented in Figure 1b, without implying any mechanistic interpretation at this stage.
       source: figure_1_a_000.yaml
       panel_id: 1a
     - type: paragraph
@@ -31,7 +31,7 @@ document:
       panel_id: 1d
     - type: heading
       level: 2
-      text: EphB1 loss preserves upstream NLRP3 activation but restricts GSDMD-mediated execution
+      text: EphB1 deficiency reduces Inflammasome receptor downstream pathway
     - type: paragraph
       text: LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il1b transcripts in WT and EphB1-deficient macrophages across all examined time points (Fig. 2a,b). Together, these data indicate that EphB1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming, excluding defective first-signal activation as the cause of reduced inflammasome output.
       source: figure_2_a+b.yaml
@@ -58,7 +58,7 @@ document:
       panel_id: 2g
     - type: heading
       level: 2
-      text: EphB1 loss reduces GSDMD engagement with the mitochondrial membrane
+      text: EphB1 deficiency reduces recruitment of GSDMD to mitochondria
     - type: paragraph
       text: Upon inflammasome activation, Ephb1−/− macrophages exhibited attenuated accumulation of cytosolic ROS and a smaller loss of mitochondrial membrane potential compared with WT cells, whereas mitochondrial ROS signals measured by MitoSOX showed no significant genotype-dependent difference in overall magnitude (Fig. 3a,b,c,d,e,f,g,h). Together, these results indicate that EphB1 deficiency does not cause an intrinsic alteration in mitochondrial membrane potential at baseline but limits ROS accumulation and membrane depolarization during inflammasome activation, supporting a model in which mitochondrial damage is attenuated during the execution phase.
       source: figure_3_a+b+c+d+e+f+g+h.yaml
@@ -73,7 +73,7 @@ document:
       panel_id: 3k/s3e
     - type: heading
       level: 2
-      text: Cardiolipin mediates the EphB1-dependent constraint on inflammasome signalling
+      text: EphB1 deficiency reduces Cardiolipin level
     - type: paragraph
       text: Across both imaging- and plate-based readouts, Ephb1−/− macrophages displayed significantly lower NAO fluorescence than WT cells, consistent with a reduced NAO-detectable cardiolipin pool (Fig. 4a,b). Together, these results show that EphB1 deficiency is associated with a significant reduction in NAO fluorescence, indicating a decreased NAO-detectable cardiolipin pool in the mitochondrial membrane under conditions where baseline mitochondrial membrane potential is unchanged.
       source: figure_4_a+b.yaml
@@ -100,18 +100,17 @@ document:
       panel_id: s4c
     - type: heading
       level: 2
-      text: Integrated multi-omics prioritizes membrane context as the dominant perturbed axis
+      text: Membrane context perturbation dominates the cardiolipin metabolic axis
     - type: paragraph
-      text: To organize cardiolipin metabolism into an interpretable structure suitable for multi-omics integration, we constructed a conceptual framework that decomposes cardiolipin-related processes into six mechanistic axes. This framework defines six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—and assigns to each axis representative genes and lipid readouts that can, in principle, be extracted from transcriptomic and lipidomic datasets (Fig. 5a). Together, this conceptual model serves as a mechanistic coordinate system for organizing cardiolipin-related pathways and readouts, providing a common reference for the multi-omics analyses presented in subsequent figures.
+      text: This framework defines six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—and assigns to each axis representative genes and lipid readouts that can, in principle, be extracted from transcriptomic and lipidomic datasets (Fig. 5a). Together, this conceptual model serves as a mechanistic coordinate system for organizing cardiolipin-related pathways and readouts, providing a common reference for the multi-omics analyses presented in subsequent figures.
       source: figure_5_a.yaml
       panel_id: 5a
     - type: paragraph
-      text: Having introduced the mechanistic-axis conceptual framework, we next specified the concrete gene and lipid features that instantiate each axis, together with directionality and weighting rules. To support the mechanistic schematic in Fig. 6A and ensure interpretability of axis-level scoring in the multi-omics integration, we curated a structured table of key lipid readouts and representative genes for each cardiolipin-related mechanistic axis. For each axis (supply, transport, synthesis, remodeling, oxidation, and membrane context), we define minimal feature records that specify axis assignment, biological meaning, quantitative formulae for lipid metrics, directionality conventions (bottleneck_sign), and within-axis weights, together with tiered inclusion rules (Tier-1 executors, Tier-2 proximal components, and Tier-3 conditional contributors) and cross-axis exclusion criteria (Fig. 5b). Together, this table serves as an interpretable lookup resource that links the six-axis cardiolipin
-        framework to concrete gene and lipid features, thereby supporting Fig. 6A and guiding subsequent axis-based multi-omics analyses.
+      text: Having introduced the mechanistic-axis conceptual framework, we next specified the concrete gene and lipid features that instantiate each axis, together with directionality and weighting rules. For each axis (supply, transport, synthesis, remodeling, oxidation, and membrane context), we define minimal feature records that specify axis assignment, biological meaning, quantitative formulae for lipid metrics, directionality conventions (bottleneck_sign), and within-axis weights, together with tiered inclusion rules (Tier-1 executors, Tier-2 proximal components, and Tier-3 conditional contributors) and cross-axis exclusion criteria (Fig. 5b). Together, this table serves as an interpretable lookup resource that links the six-axis cardiolipin framework to concrete gene and lipid features, thereby supporting Fig. 6A and guiding subsequent axis-based multi-omics analyses.
       source: figure_5_b.yaml
       panel_id: 5b
     - type: paragraph
-      text: Having fixed axis definitions a priori, we next asked how heterogeneous multi-batch omics measurements can be normalized and projected into comparable axis-level scores. To clarify how multi-batch RNA-seq, untargeted lipidomics, and targeted cardiolipin panel data were processed and rendered comparable for downstream mechanistic analyses, we summarized the complete data-processing workflow as an integrated pipeline. For each omics layer, raw data underwent modality-specific quality control, normalization, and batch-aware modeling, followed by feature aggregation into predefined mechanistic indicators and axis-level Z scores that serve as standardized inputs for multi-omics integration (Fig. 5c). Together, this processing pipeline provides a transparent and reproducible foundation for deriving mechanistic axis scores and cardiolipin phenotypes from heterogeneous multi-omics datasets, thereby enabling the integrative analyses presented in subsequent panels.
+      text: Having fixed axis definitions a priori, we next asked how heterogeneous multi-batch omics measurements can be normalized and projected into comparable axis-level scores. For each omics layer, raw data underwent modality-specific quality control, normalization, and batch-aware modeling, followed by feature aggregation into predefined mechanistic indicators and axis-level Z scores that serve as standardized inputs for multi-omics integration (Fig. 5c). Together, this processing pipeline provides a transparent and reproducible foundation for deriving mechanistic axis scores and cardiolipin phenotypes from heterogeneous multi-omics datasets, thereby enabling the integrative analyses presented in subsequent panels.
       source: figure_5_c.yaml
       panel_id: 5c
     - type: paragraph
@@ -128,14 +127,13 @@ document:
       panel_id: 5f
     - type: heading
       level: 2
-      text: 'Prioritizing candidate pathways: an RNA X–M–Z framework with lipid phenotypic alignment'
+      text: PI3K–AKT–mTOR signaling tracks membrane-context impairment
     - type: paragraph
-      text: To address the challenge of limited strictly paired RNA–lipid samples and unstable cross-omics mediation, we formulated an RNA-first X–M–Z framework that prioritizes reproducible pathway ranking over formal causal quantification. In this framework, EphB1 status is treated as an exogenous variable (X), downstream Eph-related signaling modules are quantified as RNA-based pathway scores (M), and the RNA membrane context axis score serves as a transcriptional proxy (Z) for lipid membrane phenotypes, while lipid readouts are used only for direction-concordance validation (Fig. 6a). Together, this RNA-first X–M–Z framework provides a transparent and reproducible strategy for ranking EphB1 downstream signaling modules most likely coupled to membrane context perturbation, thereby guiding subsequent experimental validation without over-interpreting limited cross-omics mediation.
+      text: In this framework, EphB1 status is treated as an exogenous variable (X), downstream Eph-related signaling modules are quantified as RNA-based pathway scores (M), and the RNA membrane context axis score serves as a transcriptional proxy (Z) for lipid membrane phenotypes, while lipid readouts are used only for direction-concordance validation (Fig. 6a). Together, this RNA-first X–M–Z framework provides a transparent and reproducible strategy for ranking EphB1 downstream signaling modules most likely coupled to membrane context perturbation, thereby guiding subsequent experimental validation without over-interpreting limited cross-omics mediation.
       source: figure_6_a.yaml
       panel_id: 6a
     - type: paragraph
-      text: Having defined the X–M–Z inference scaffold and the role of orthogonal lipid alignment, we next specified a minimal, literature-anchored set of EphB1-linked candidate signaling programs and their scoring rules. To enable transparent and reproducible RNA-first X–M–Z prioritization of EphB1 downstream pathways, we curated a structured table that defines each downstream signaling module and its hypothesized linkage to cardiolipin regulatory axes. Each table row corresponds to one EphB1 downstream signaling gene set. Columns specify a unique pathway ID, a human-readable module label, network category (EphB1_signaling), the targeted cardiolipin mechanistic axes, module size (n_genes), and the full gene list annotated with gene_effect_sign to standardize directionality for module scoring (Fig. 6b). Together, this module dictionary provides the standardized building blocks used in Fig. 7A–7D, allowing readers and reviewers to trace how each EphB1 downstream pathway was defined and how
-        it was linked to cardiolipin axes for subsequent quantitative analyses.
+      text: Having defined the X–M–Z inference scaffold and the role of orthogonal lipid alignment, we next specified a minimal, literature-anchored set of EphB1-linked candidate signaling programs and their scoring rules. Each table row corresponds to one EphB1 downstream signaling gene set. Columns specify a unique pathway ID, a human-readable module label, network category (EphB1_signaling), the targeted cardiolipin mechanistic axes, module size (n_genes), and the full gene list annotated with gene_effect_sign to standardize directionality for module scoring (Fig. 6b). Together, this module dictionary provides the standardized building blocks used in Fig. 7A–7D, allowing readers and reviewers to trace how each EphB1 downstream pathway was defined and how it was linked to cardiolipin axes for subsequent quantitative analyses.
       source: figure_6_b.yaml
       panel_id: 6b
     - type: paragraph

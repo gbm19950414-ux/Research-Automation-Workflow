@@ -14,7 +14,11 @@ meta:
   chapter: "3.1 EphB1 缺失降低炎症小体诱导的巨噬细胞焦亡与 IL‑1β 释放"
   experiment_id: "figure_1_c"
   version: 1
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "figures/F1/F1C_IL1b_WB.pdf"
   raw_data_files:

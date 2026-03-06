@@ -76,7 +76,7 @@ sections:
 figures:
   - id: "Figure 1"
     title: "EphB1 缺失降低炎症小体激活诱导的巨噬细胞焦亡与 IL-1β 释放"
-    title_en: "EphB1 loss limits inflammasome-induced pyroptosis and IL-1β release"
+    title_en: "EphB1 deficiency reduces inflammasome-associated outputs"
     figure_title: "EphB1 缺失限幅炎症小体诱导的焦亡与 IL-1β 外排"
     figure_title_en: "EphB1 loss constrains inflammasome-triggered pyroptosis and IL-1β release"
 
@@ -189,7 +189,7 @@ figures:
 
   - id: "Figure 2"
     title: "EphB1 缺失不影响 NLRP3 上游激活，差异集中于 GSDMD 执行层外排"
-    title_en: "EphB1 loss preserves upstream NLRP3 activation but restricts GSDMD-mediated execution"
+    title_en: "EphB1 deficiency reduces Inflammasome receptor downstream pathway"
     figure_title: "EphB1 缺失保留 NLRP3 上游激活但限制 GSDMD 孔驱动的执行输出"
     figure_title_en: "EphB1 loss preserves upstream NLRP3 activation yet constrains GSDMD pore–driven execution"
     section: "S1"
@@ -361,12 +361,9 @@ figures:
         focuses_on_axes: []
         depends_on_panels: []
 
-
-
-
   - id: "Figure 3"
     title: "EphB1 缺失降低 GSDMD 与线粒体膜的结合"
-    title_en: "EphB1 loss reduces GSDMD engagement with the mitochondrial membrane"
+    title_en: "EphB1 deficiency reduces recruitment of GSDMD to mitochondria"
     figure_title: "EphB1 缺失削弱 GSDMD-NT 在线粒体膜上的对接与富集"
     figure_title_en: "EphB1 loss diminishes GSDMD-NT engagement and enrichment on mitochondria"
     section: "S2"
@@ -492,7 +489,7 @@ figures:
 
   - id: "Figure 4"
     title: "心磷脂是EphB1 缺失降低炎症小体通路激活的重要因素"
-    title_en: "Cardiolipin mediates the EphB1-dependent constraint on inflammasome signalling"
+    title_en: "EphB1 deficiency reduces Cardiolipin level"
     figure_title: "心磷脂可及性介导 EphB1 依赖的炎症小体输出限幅"
     figure_title_en: "Cardiolipin availability mediates EphB1-dependent limitation of inflammasome output"
     section: "S3"
@@ -646,7 +643,7 @@ figures:
 
   - id: "Figure 5"
     title: "多组学机制轴分析确定“膜环境轴”为优先异常轴"
-    title_en: "Integrated multi-omics prioritizes membrane context as the dominant perturbed axis"
+    title_en: "Membrane context perturbation dominates the cardiolipin metabolic axis"
     figure_title: "多组学整合优先锁定 membrane context 机制轴为主导扰动"
     figure_title_en: "Multi-omics integration prioritizes the membrane-context axis as the dominant perturbation"
     section: ""   
@@ -801,7 +798,7 @@ figures:
     
   - id: "Figure 6"
     title: "候选通路优先级排序：RNA 机制路径（X–M–Z）与 lipid 表型一致性验证"
-    title_en: "Prioritizing candidate pathways: an RNA X–M–Z framework with lipid phenotypic alignment"
+    title_en: "PI3K–AKT–mTOR signaling tracks membrane-context impairment"
     figure_title: "RNA X–M–Z 框架优选 EphB1 下游候选通路并与脂质表型对齐"
     figure_title_en: "An RNA X–M–Z framework prioritizes EphB1-linked pathways with orthogonal lipid alignment"
     section: ""

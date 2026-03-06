@@ -11,7 +11,11 @@ meta:
   chapter: "第三章 EphB1 依赖的信号通路介导心磷脂瓶颈"
   experiment_id: "ephb1_downstream_signaling_v1"
   version: 3
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_table_file: "results/figs/figure_7_b_ephb1_downstream_signaling_table.tsv"
   raw_data_files:

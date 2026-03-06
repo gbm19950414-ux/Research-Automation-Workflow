@@ -9,7 +9,11 @@ meta:
   chapter: "4.2 Downstream signaling axes linked to EphB1"
   experiment_id: "2025-04-04_RNA_EphB1_downstream_signaling_metaZ"
   version: 1
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "results/figs/figure_7_c.pdf"
   raw_data_files:

@@ -12,6 +12,12 @@ meta:
   figure_id: "1b"
   experiment_id: "001"
   short_title: "EphB1 在炎症小体遗传筛选中的表型表现"
+  hypothesis: Ephb1 缺失调控NLRP3炎症小体激活导致的 IL-1β 释放
+  claim: "在炎症小体遗传筛选中，Ephb1 对应的 081230020-HRB 品系在 Nigericin 诱导的炎症小体激活条件下表现出显著降低的 IL-1β 释放，提示 Ephb1 可能是一个值得进一步研究的炎症小体调控候选基因。"
+  evidence_level: association
+  causal_strength: suggestive
+  scope: "来源于多个 pb 遗传背景的小鼠原代巨噬细胞，在 Nigericin（10 μM）刺激诱导炎症小体激活的筛选条件下，通过 ELISA 检测 IL-1β 释放。"
+  alt_explanations: "该表型差异仍可能受到不同遗传背景基础反应性差异、炎症小体激活敏感性差异或筛选阶段统计波动等因素影响，而不一定完全由 Ephb1 的直接调控作用所导致。"
 
 assets:
   main_figure_file: "06_figures/figure_1/001_genetic_screening_dotplot_nigericin_10.pdf"

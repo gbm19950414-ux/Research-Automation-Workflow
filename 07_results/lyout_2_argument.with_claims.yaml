@@ -1,0 +1,396 @@
+nodes:
+- id: n1
+  label_cn: Ephb1常态
+  label: EphB1 basal state
+- id: n2
+  label_cn: IL-1β 释放
+  label: IL-1β release
+- id: n3
+  label_cn: 炎症小体感受器下游通路
+  label: Inflammasome receptor downstream pathway
+  contains:
+  - n2
+  - n4
+  - n5
+  - n6
+  - n7
+- id: n4
+  label_cn: 焦亡
+  label: Pyroptosis
+- id: n5
+  label_cn: Caspase-1蛋白切割下游通路
+  label: Caspase-1 cleavage downstream pathway
+- id: n6
+  label_cn: 线粒体破裂
+  label: Mitochondrial rupture
+- id: n7
+  label_cn: GSDMD与线粒体结合
+  label: GSDMD recruitment to mitochondria
+- id: n8
+  label_cn: 心磷脂含量
+  label: Cardiolipin level
+- id: n9
+  label_cn: 膜环境轴
+  label: Membrane environment axis
+- id: n10
+  label_cn: PI3K-AKT-mTOR信号模块
+  label: PI3K–AKT–mTOR signaling module
+edges:
+- id: e1
+  from: n1
+  to: n2
+  evidence_level: necessity
+  relation: promotes
+  robustness: high
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: NLRP3炎症小体激活
+  - temporal context: LPS 预激 4 h 后，Nigericin 10 μM 刺激 60 min
+  - genetic / molecular context: null
+  - measurement context: ELISA supernatant
+  supported_by:
+  - ref: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_1_b_001.yaml
+    note: 基因敲除
+  - ref: 06_figures/record/figure_1_sb.yaml
+    note: 更换检测方式、指标
+  - ref: 06_figures/record/figure_2_d.yaml
+    note: 剂量依赖
+- id: e2
+  from: n1
+  to: n3
+  evidence_level: necessity
+  relation: promotes
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: NLRP3、AIM2、NLRC4 炎症小体激活
+  - temporal context: LPS 预激 4 h 后，Nigericin 10 μM 刺激 60 min
+  - genetic / molecular context: null
+  - measurement context: ELISA supernatant
+  supported_by:
+  - 06_figures/record/figure_1_c_v2.yaml
+- id: e3
+  from: n1
+  to: n4
+  evidence_level: necessity
+  relation: promotes
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: NLRP3、AIM2、NLRC4 炎症小体激活
+  - temporal context: LPS 预激 4 h 后，Nigericin 10 μM 刺激 60 min
+  - genetic / molecular context: null
+  - measurement context: LDH release
+  supported_by:
+  - 06_figures/record/figure_1_d_v2.yaml
+- id: e4
+  from: n1
+  to: n5
+  relation: promotes
+  evidence_level: positioning
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: NLRP3炎症小体激活
+  - temporal context: LPS 预激 4 h 后，Nigericin 10 μM 刺激 60 min
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - 06_figures/record/figure_2_g.yaml
+  - 06_figures/record/figure_2_f.yaml
+  - 06_figures/record/figure_2_e.yaml
+  - 06_figures/record/figure_2_c_v2.yaml
+  - 06_figures/record/figure_2_a+b.yaml
+- id: e5
+  from: n1
+  to: n6
+  relation: promotes
+  evidence_level: necessity
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: NLRP3炎症小体激活
+  - temporal context: LPS 预激 4 h 后，Nigericin 10 μM 刺激 7.5 min
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - ref: 06_figures/record/figure_3_i+j+s3_d+f+g.yaml
+    note: null
+  - ref: 06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
+    note: 更换检测方式
+  - ref: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_sa+b+c.yaml
+    note: 重复多次试验
+- id: e6
+  from: n1
+  to: n7
+  relation: promotes
+  evidence_level: necessity
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: NLRP3炎症小体激活
+  - temporal context: LPS 预激 4 h 后，Nigericin 10 μM 刺激 7.5 min
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - ref: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_k+s3_e.yaml
+- id: e7
+  from: n1
+  to: n8
+  relation: promotes
+  evidence_level: necessity
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: NLRP3炎症小体激活
+  - temporal context: 基线条件
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - ref: 06_figures/record/figure_4_a+b.yaml
+  - ref: 06_figures/record/figure_4_c+d.yaml
+- id: e8
+  from: n8
+  to: n2
+  relation: promotes
+  evidence_level: necessity
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: NLRP3炎症小体激活
+  - temporal context: null
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - ref: 06_figures/record/figure_4_e+f.yaml
+  - ref: 06_figures/record/figure_4_g.yaml
+  - ref: 06_figures/record/figure_4_sa+b.yaml
+  - ref: 06_figures/record/figure_4_sc.yaml
+- id: e9
+  from: n1
+  to: n9
+  relation: inhibition
+  evidence_level: necessity
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: null
+  - temporal context: null
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - ref: 06_figures/record/figure_5_d.yaml
+    note: 批次间一致性
+  - ref: 06_figures/record/figure_5_e.yaml
+    note: 主要证据
+- id: e10
+  from: n9
+  to: n8
+  relation: promotes
+  evidence_level: correlation
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: null
+  - temporal context: null
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - ref: 06_figures/record/figure_5_f.yaml
+- id: e11
+  from: n10
+  to: n9
+  relation: inhibition
+  evidence_level: correlation
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: null
+  - temporal context: null
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - ref: 06_figures/record/figure_6_c_v2.yaml
+- id: e12
+  from: n1
+  to: n10
+  relation: inhibition
+  evidence_level: necessity
+  condition:
+  - biological system: 小鼠腹腔巨噬细胞
+  - stimulus: null
+  - temporal context: null
+  - genetic / molecular context: null
+  - measurement context: null
+  supported_by:
+  - ref: 06_figures/record/figure_6_d_v2.yaml
+- id: e13
+  from: n3
+  to: n5
+  relation: promote
+  evidence_level: established biology
+- id: e14
+  from: n5
+  to: n7
+  relation: promote
+  evidence_level: established biology
+- id: e15
+  from: n7
+  to: n6
+  relation: promote
+  evidence_level: established biology
+- id: e16
+  from: n6
+  to: n4
+  relation: promote
+  evidence_level: established biology
+- id: e18
+  from: n4
+  to: n2
+  relation: promote
+  evidence_level: established biology
+- id: e19
+  from: n8
+  to: n7
+  relation: promote
+  evidence_level: established biology
+paths:
+- id: p1
+  role: main_axis
+  start: n1
+  end: n2
+  nodes:
+  - n1
+  - n10
+  - n9
+  - n8
+  - n7
+  - n6
+  - n4
+  - n2
+- id: p2
+  role: mechanism_core
+  start: n1
+  end: n2
+  nodes:
+  - n1
+  - n8
+  - n7
+  - n6
+  - n4
+  - n2
+- id: p3
+  role: inflammasome_downstream_established
+  start: n3
+  end: n2
+  nodes:
+  - n3
+  - n5
+  - n7
+  - n6
+  - n4
+  - n2
+narrative:
+- figure: 1
+  type: phenotype
+  edges:
+  - e1
+  - e3
+  claim: null
+- figure: 2
+  type: positioning
+  edges:
+  - e2
+  - e4
+- figure: 3
+  type: mechanism_discovery
+  edges:
+  - e5
+  - e6
+- figure: 4
+  type: mechanism_completion
+  edges:
+  - e7
+  - e8
+- figure: 5
+  type: upstream_regulation
+  edges:
+  - e12
+  - e11
+  - e10
+claims:
+- id: c_fig1
+  figure: 1
+  type: phenotype
+  title: Fig1 phenotype
+  weakest_evidence_level: necessity
+  text_zh_draft: EphB1 basal state 会影响（调控）IL-1β release（现象层结论，需对应图中证据）。
+  text_en_draft: These data support that EphB1 basal state positively regulate IL-1β release.
+  supported_by_edges:
+  - e1
+  - e3
+  edge_summary_zh:
+  - 'e1: EphB1 basal state 促进 IL-1β release（必要性）'
+  - 'e3: EphB1 basal state 促进 Pyroptosis（必要性）'
+  edge_summary_en:
+  - 'e1: EphB1 basal state positively regulate IL-1β release (evidence: necessity)'
+  - 'e3: EphB1 basal state positively regulate Pyroptosis (evidence: necessity)'
+- id: c_fig2
+  figure: 2
+  type: positioning
+  title: Fig2 positioning
+  weakest_evidence_level: positioning
+  text_zh_draft: EphB1 basal state 的作用可被定位在 Inflammasome receptor downstream pathway 相关层级（定位性结论：强调排除与定位，而非完整机制）。
+  text_en_draft: These data support the positioning that EphB1 basal state acts at the level of Inflammasome receptor downstream
+    pathway (positioning; emphasizes exclusion/localization rather than full mechanism).
+  supported_by_edges:
+  - e2
+  - e4
+  edge_summary_zh:
+  - 'e2: EphB1 basal state 促进 Inflammasome receptor downstream pathway（必要性）'
+  - 'e4: EphB1 basal state 促进 Caspase-1 cleavage downstream pathway（定位）'
+  edge_summary_en:
+  - 'e2: EphB1 basal state positively regulate Inflammasome receptor downstream pathway (evidence: necessity)'
+  - 'e4: EphB1 basal state positively regulate Caspase-1 cleavage downstream pathway (evidence: positioning)'
+- id: c_fig3
+  figure: 3
+  type: mechanism_discovery
+  title: Fig3 mechanism_discovery
+  weakest_evidence_level: necessity
+  text_zh_draft: EphB1 basal state 与 Mitochondrial rupture 的机制关联可通过该组证据被支持（机制发现：指出关键过程）。
+  text_en_draft: These data support that EphB1 basal state positively regulate Mitochondrial rupture.
+  supported_by_edges:
+  - e5
+  - e6
+  edge_summary_zh:
+  - 'e5: EphB1 basal state 促进 Mitochondrial rupture（必要性）'
+  - 'e6: EphB1 basal state 促进 GSDMD recruitment to mitochondria（必要性）'
+  edge_summary_en:
+  - 'e5: EphB1 basal state positively regulate Mitochondrial rupture (evidence: necessity)'
+  - 'e6: EphB1 basal state positively regulate GSDMD recruitment to mitochondria (evidence: necessity)'
+- id: c_fig4
+  figure: 4
+  type: mechanism_completion
+  title: Fig4 mechanism_completion
+  weakest_evidence_level: necessity
+  text_zh_draft: EphB1 basal state 对 Cardiolipin level 的调控链条在该组证据下可被进一步补全（机制补全）。
+  text_en_draft: These data support that EphB1 basal state positively regulate Cardiolipin level.
+  supported_by_edges:
+  - e7
+  - e8
+  edge_summary_zh:
+  - 'e7: EphB1 basal state 促进 Cardiolipin level（必要性）'
+  - 'e8: Cardiolipin level 促进 IL-1β release（必要性）'
+  edge_summary_en:
+  - 'e7: EphB1 basal state positively regulate Cardiolipin level (evidence: necessity)'
+  - 'e8: Cardiolipin level positively regulate IL-1β release (evidence: necessity)'
+- id: c_fig5
+  figure: 5
+  type: upstream_regulation
+  title: Fig5 upstream_regulation
+  weakest_evidence_level: correlation
+  text_zh_draft: EphB1 basal state 可能通过上游模块（例如 Membrane environment axis）调控 PI3K–AKT–mTOR signaling module（上游调控：证据力度需在措辞中透明体现）。
+  text_en_draft: These data suggest that EphB1 basal state may influence PI3K–AKT–mTOR signaling module through upstream signaling
+    (e.g., Membrane environment axis).
+  supported_by_edges:
+  - e12
+  - e11
+  - e10
+  edge_summary_zh:
+  - 'e12: EphB1 basal state 抑制 PI3K–AKT–mTOR signaling module（必要性）'
+  - 'e11: PI3K–AKT–mTOR signaling module 抑制 Membrane environment axis（相关）'
+  - 'e10: Membrane environment axis 促进 Cardiolipin level（相关）'
+  edge_summary_en:
+  - 'e12: EphB1 basal state negatively regulate PI3K–AKT–mTOR signaling module (evidence: necessity)'
+  - 'e11: PI3K–AKT–mTOR signaling module negatively regulate Membrane environment axis (evidence: correlation)'
+  - 'e10: Membrane environment axis positively regulate Cardiolipin level (evidence: correlation)'

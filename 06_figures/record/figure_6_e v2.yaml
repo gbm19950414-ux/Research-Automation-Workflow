@@ -10,7 +10,11 @@ meta:
   chapter: "3.6 Mediation-informed pathway prioritization"
   experiment_id: "2025-03-21_mediation_membrane_context_pathways"
   version: 2
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "results/figs/Figure6B_Z_vs_M_membrane_context.pdf"
   sub_panels:

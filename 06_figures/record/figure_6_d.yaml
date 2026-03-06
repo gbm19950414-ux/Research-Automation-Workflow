@@ -10,7 +10,11 @@ meta:
   chapter: "7.4 Mediation analysis links EphB1 signaling to CL-axis bottlenecks"
   experiment_id: "2025-03-21_mediation_CL_axes"
   version: 2
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 assets:
   main_figure_file: "results/figs/figure_7_d.pdf"
   raw_data_files:

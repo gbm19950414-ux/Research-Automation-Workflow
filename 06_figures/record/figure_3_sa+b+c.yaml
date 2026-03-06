@@ -9,7 +9,11 @@ meta:
   figure_id: "Figure S3A–C"
   experiment_id: "figure_3_b"
   short_title: "多批次条件下 ROS 与 Δψm 动态模式的整体一致性分析"
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt explanations: 
 assets:
   main_figure_file: "figures/F3/F3S_heatmap_ros_tmrm.pdf"
   raw_data_files:

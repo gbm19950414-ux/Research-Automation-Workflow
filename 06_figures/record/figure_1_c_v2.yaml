@@ -13,6 +13,12 @@ meta:
   figure_id: "1c"
   experiment_id: "figure_2_d"
   short_title: "EphB1 缺失在多感受器第二信号触发下均降低 IL-1β 释放"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
+  hypothesis: Ephb1调控炎症小体激活的共同下游通路
+  claim: "在 LPS 预激后，无论通过 NLRP3（Nigericin）、NLRC4（胞质递送 Flagellin）还是 AIM2（胞质递送 poly(dA:dT)）通路触发第二信号，Ephb1 pb/pb 原代腹腔巨噬细胞的 IL-1β 释放均显著低于 WT，提示该表型并非 Nigericin 特异，而更可能涉及炎症小体下游的共同执行步骤。"
+  evidence_level: positioning
+  causal_strength: suggestive
+  scope: "C57BL/6 WT 与 Ephb1 pb/pb 小鼠原代腹腔巨噬细胞；LPS 预激 4 h 后分别给予 Nigericin（10 μM, 60 min）、flagellin/LFn 胞质递送（0.5 μg/mL, 2 h）或 poly(dA:dT) 胞质递送（0.1 μg/mL, 8 h）；检测上清 IL-1β（ELISA，双背景扣除并按 MTT 细胞数标准化）。"
+  alt_explanations: "仍不能排除 Ephb1 缺失影响 LPS 预激/前体 IL-1β 产生、整体细胞应激与存活、或对胞质递送效率（Flagellin、poly(dA:dT)）的间接影响；此外，不同通路刺激强度与时间窗差异也可能影响绝对释放量与效应量的可比性。"
 
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:

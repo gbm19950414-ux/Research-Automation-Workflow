@@ -13,7 +13,11 @@ meta:
   short_title: "PI3K 抑制（overnight）是否复制 flux/turnover 轴的转录方向（WT/HO；vehicle vs PI3Ki）"
   chapter: "Link validation: PI3K output → flux/turnover (B→C)"
   version: 2026-02-09
-
+  claim: 
+  evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
+  causal_strength: #correlational / suggestive / causal
+  scope: #cell type、stimulus、time window
+  alt_explanations: 
 question:
   context_from_previous: "RUN01 已在基线条件下观察到 flux/turnover 相关节点在 WT 与 KO 间存在方向性差异，但仍不清楚该差异是否由 PI3K 输出变化所驱动。"
   core_question: "在 WT（并可在 HO 背景作为一致性验证）中，药理抑制 PI3K 输出是否足以在转录层面复制 flux/turnover 轴的方向性变化，从而为 B→C 的因果链条提供支持？"
