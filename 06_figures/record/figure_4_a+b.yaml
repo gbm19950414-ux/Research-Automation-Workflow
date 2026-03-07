@@ -44,23 +44,23 @@ question:
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，可反映突变在生理条件下对线粒体膜脂状态的影响。"       # 使用的模型/系统 + 选择理由
+  model_and_system: "使用 WT 与 Ephb1-deficient 原代腹腔巨噬细胞，可反映突变在生理条件下对线粒体膜脂状态的影响。"       # 使用的模型/系统 + 选择理由
                              # 例如：“选用原代腹腔巨噬细胞，因为其对 NLRP3 激活高度敏感，且能反映体内炎症状态。”
   key_variables: "NAO 荧光强度、NAO/Δψm、显微与板读两种 readout 均用于评估 CL 可达性/可复合性。"          # 本实验关注的关键变量 + 操纵方式
-                             # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
+                             # 例如：“操纵基因型（WT vs Ephb1-deficient）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
   control_logic: "使用固定曝光显微成像与背景扣除板读确保跨方法可比性。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
-                             # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1−/− 的参照组。”
+                             # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1-deficient 的参照组。”
   core_justification: "若 NAO 信号下降在 Δψm 校正后仍成立，则差异来源于 CL 池本身，而非电位或线粒体质量变化。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
-                             # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1−/− 细胞在相同刺激下应释放更少 IL-1β。”
+                             # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1-deficient 细胞在相同刺激下应释放更少 IL-1β。”
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
   inherits_from_protocol: "default_peritoneal_macrophage_general_fluorescence_assay"   # 引用全章或整篇论文的通用 protocol 名称，如 "default_peritoneal_macrophage_NLRP3_activation"
                                # 之后可在 Methods 总节详细描述该 protocol。
-  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1−/− 原代腹腔巨噬细胞。"      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
-                               # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1−/− 小鼠来源的原代腹腔巨噬细胞。”
-  experimental_groups: "WT vs Ephb1−/−；细胞数量严格等量接种。"      # 组别及核心差异：基因型、处理、时间点
-                               # 例如：“按基因型分为 WT 和 Ephb1−/−，均接受 LPS 预处理 + ATP 激活。”
+  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1-deficient 原代腹腔巨噬细胞。"      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
+                               # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1-deficient 小鼠来源的原代腹腔巨噬细胞。”
+  experimental_groups: "WT vs Ephb1-deficient；细胞数量严格等量接种。"      # 组别及核心差异：基因型、处理、时间点
+                               # 例如：“按基因型分为 WT 和 Ephb1-deficient，均接受 LPS 预处理 + ATP 激活。”
   stimuli_and_treatment: "NAO 200 nM 染色 30 min；未加 nigericin。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
                                # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
   time_points: "显微 30 min 固定时间点；板读 0、5、10、24、48 min。"              # 关键测定时间点（如果不在上面已写清）
@@ -76,13 +76,13 @@ methods:
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
   data_direction: "KO 细胞的 NAO 荧光显著低于 WT，显微图像与板读曲线均显示 CL 可染池减少。"           # 纯“趋势描述”，不解释机制（↑/↓/无变化 + 相对谁）
-                               # 例如：“在 LPS+ATP 刺激下，Ephb1−/− 巨噬细胞释放的 IL-1β 显著低于 WT。”
+                               # 例如：“在 LPS+ATP 刺激下，Ephb1-deficient 巨噬细胞释放的 IL-1β 显著低于 WT。”
   stats_summary: "显微 NAO：KO 下降约 40%，p < 0.05；板读 0–48 min：KO 全程显著低于 WT（p < 0.05）。"            # 统计显著性信息（检验方法、p 值区间即可）
                                # 例如：“非配对 t 检验，p < 0.01。”
   key_numbers: "NAO 荧光降低约 40%；Δψm 校正后差异仍持续。"              # 可选：fold change、均值±SEM、效应量（方便你之后查）
-                               # 例如：“WT: 850 ± 120 pg/mL；Ephb1−/−: 410 ± 90 pg/mL；约下降 50%。”
+                               # 例如：“WT: 850 ± 120 pg/mL；Ephb1-deficient: 410 ± 90 pg/mL；约下降 50%。”
   group_difference_statement: "EphB1 缺失在线粒体膜中显著降低可被 NAO 标记的心磷脂池容量，即使在 Δψm 校正后仍成立。" # 用一两句把组间差异说清楚（可直接作为结果段主句）
-                                 # 例如：“与 WT 相比，Ephb1−/− 巨噬细胞在相同刺激强度下产生的 IL-1β 减少。”
+                                 # 例如：“与 WT 相比，Ephb1-deficient 巨噬细胞在相同刺激强度下产生的 IL-1β 减少。”
   robustness_and_qc: "趋势在显微与板读中一致；在 ≥3 批次实验均稳定复现。"        # 是否在多批次实验中重复、是否排除了明显 outlier 等
                                # 例如：“该趋势在两批独立实验中均一致，排除 1 个基于预设准则的 outlier 后结果不变。”
   anomalies_or_limits: "部分样本在后期时间点存在轻微噪声，但总体趋势不受影响。"      # 若有“怪点/边缘显著/批间差异”，在此简短记录（便于 Discussion）
@@ -125,13 +125,13 @@ ai_hints:
 # ---------- 6. figure_legend (shared; Figure 4a/b) ----------
 figure_legend:
   one_sentence_en: >
-    NAO-associated fluorescence in WT and Ephb1−/− primary peritoneal macrophages was quantified by
+    NAO-associated fluorescence in WT and Ephb1-deficient primary peritoneal macrophages was quantified by
     fixed-exposure microscopy and time-resolved plate-reader measurements to estimate the NAO-detectable
     cardiolipin pool under conditions without nigericin stimulation.
 
   system_and_design:
-    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
-    genotype_or_groups: "WT versus Ephb1−/−"
+    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1-deficient mice)"
+    genotype_or_groups: "WT versus Ephb1-deficient"
     key_treatments: "NAO staining (200 nM, 30 min); no nigericin"
     time_window: "Microscopy at 30 min; plate-reader acquisition at 0, 5, 10, 24, and 48 min"
 
@@ -186,13 +186,13 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "WT and Ephb1−/− primary peritoneal macrophages were stained with NAO under identical conditions, and NAO-associated fluorescence was quantified using fixed-exposure confocal imaging as well as time-resolved plate-reader measurements with no-dye wells for background subtraction."
-      cn: "在相同条件下对 WT 与 Ephb1−/− 原代腹腔巨噬细胞进行 NAO 染色，并通过固定曝光的共聚焦成像与时间分辨板读两种方式定量 NAO 相关荧光信号；板读使用未加染料孔进行背景扣除。"
+      en: "WT and Ephb1-deficient primary peritoneal macrophages were stained with NAO under identical conditions, and NAO-associated fluorescence was quantified using fixed-exposure confocal imaging as well as time-resolved plate-reader measurements with no-dye wells for background subtraction."
+      cn: "在相同条件下对 WT 与 Ephb1-deficient 原代腹腔巨噬细胞进行 NAO 染色，并通过固定曝光的共聚焦成像与时间分辨板读两种方式定量 NAO 相关荧光信号；板读使用未加染料孔进行背景扣除。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across both imaging- and plate-based readouts, Ephb1−/− macrophages displayed significantly lower NAO fluorescence than WT cells, consistent with a reduced NAO-detectable cardiolipin pool."
-      cn: "无论在显微成像还是板读检测中，Ephb1−/− 巨噬细胞的 NAO 荧光信号均显著低于 WT，提示 NAO 可检测的心磷脂池减少。"
+      en: "Ephb1-deficient macrophages displayed significantly lower NAO fluorescence than WT cells, indicating a reduced NAO-detectable cardiolipin pool"
+      cn: "无论在显微成像还是板读检测中，Ephb1-deficient 巨噬细胞的 NAO 荧光信号均显著低于 WT，提示 NAO 可检测的心磷脂池减少。"
       logic_source: "results.data_direction"
 
     M4_robustness:
@@ -201,6 +201,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results show that EphB1 deficiency is associated with a significant reduction in NAO fluorescence, indicating a decreased NAO-detectable cardiolipin pool in the mitochondrial membrane under conditions where baseline mitochondrial membrane potential is unchanged."
-      cn: "综上，这些结果表明，在基线线粒体膜电位未发生改变的条件下，EphB1 缺失与 NAO 荧光显著下降相关，提示线粒体膜中 NAO 可检测的心磷脂池减少。"
+      en: # "Together, these results show that EphB1 deficiency is associated with a significant reduction in NAO fluorescence, indicating a decreased NAO-detectable cardiolipin pool in the mitochondrial membrane under conditions where baseline mitochondrial membrane potential is unchanged."
       logic_source: "results.group_difference_statement"

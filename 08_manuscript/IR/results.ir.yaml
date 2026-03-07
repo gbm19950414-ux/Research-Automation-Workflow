@@ -14,161 +14,177 @@ document:
       level: 2
       text: EphB1 deficiency reduces pyroptosis and IL-1β release
     - type: paragraph
-      text: To identify regulators of inflammasome, we performed a genetic screening strategy in primary macrophages from PB genetic backgrounds using IL-1β release as the functional readout.
+      text: To identify regulators of inflammasome,
       source: opening_and_trans.yaml
       panel_id: ''
     - type: paragraph
-      text: A standardized workflow was designed in which primary macrophages from multiple genetic backgrounds were subjected to uniform NLRP3 inflammasome activation and assessed using IL-1β release as the functional readout (Fig. 1a). This framework provides the experimental basis for the screening results.
+      text: Primary macrophages from multiple PiggyBac (PB) genetic backgrounds were subjected to standardized NLRP3 inflammasome activation, and IL-1β release was used as the functional screening readout (Fig. 1a). Having outlined the genetic-screening strategy, we next sought to identify, a candidate strain to prioritize for mechanistic dissection.
       source: figure_1_a_000.yaml
       panel_id: 1a
     - type: paragraph
-      text: Having outlined the genetic-screening strategy, we next sought to identify, across the full panel of perturbations, a candidate signal that is both reproducible and sufficiently prominent to prioritize for mechanistic dissection. Across the 10 screened strains, most genetic backgrounds showed little or no genotype-dependent difference in IL-1β release following Nigericin stimulation, whereas only two strains reached nominal statistical significance in within-strain comparisons (Fig. 1b). Notably, the Ephb1-associated strain (081230020-HRB) exhibited a pronounced reduction in IL-1β release in HO cells (~41% decrease relative to WT; P≈0.034), representing the strongest statistically significant genotype-dependent phenotype observed in the screen and prioritizing Ephb1 for subsequent mechanistic investigation.
+      text: Across the 10 screened strains, most genetic backgrounds showed little or no genotype-dependent difference in IL-1β release following Nigericin stimulation, whereas only two strains reached statistical significance in within-strain comparisons (Fig. 1b). Notably, the Ephb1-associated strain (081230020-HRB) exhibited a pronounced reduction in IL-1β release in EphB1-deficient macrophages (~41% decrease relative to WT; P≈0.034), representing  the most statistically significant reduction observed in the screen and prioritizing Ephb1 for subsequent mechanistic investigation.
       source: figure_1_b_001.yaml
       panel_id: 1b
     - type: paragraph
-      text: Having prioritized EphB1 from the screen, we next asked whether the phenotype generalizes beyond a single inflammasome agonist, thereby arguing against a stimulus-specific artifact. Across all three activation routes, Ephb1 pb/pb macrophages released significantly less IL-1β than WT controls (Fig. 1c). These data indicate that the diminished IL-1β output in Ephb1 pb/pb macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 in receptor downstream pathway.
+      text: Having prioritized Ephb1 from the screen, we next asked whether the phenotype generalizes beyond a single inflammasome agonist, thereby arguing against a stimulus-specific artifact. Across all three activation routes, Ephb1-deficient macrophages released significantly less IL-1β than WT controls (Fig. 1c). These data indicate that the diminished IL-1β output in EphB1-deficient macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 at a receptor-downstream step.
       source: figure_1_c_v2.yaml
       panel_id: 1c
     - type: paragraph
-      text: Having established cross-agonist consistency within inflammasome, we next asked whether EphB1 loss broadly constrains lytic execution across distinct inflammasome sensors. Across all inflammasome activation conditions, EphB1-deficient macrophages exhibited consistently reduced LDH release compared with WT controls (Fig. 1d). These findings indicate that EphB1 deficiency broadly attenuates pyroptotic cell lysis downstream of distinct inflammasome receptors, consistent with a role in a shared execution step rather than pathway-specific signaling.
+      text: Having established cross-agonist consistency within inflammasome, we next asked whether Ephb1 loss broadly constrains lytic execution across distinct inflammasome sensors. Across all inflammasome activation conditions, EphB1-deficient macrophages exhibited consistently reduced LDH release compared with WT controls (Fig. 1d). These findings indicate that EphB1 deficiency broadly attenuates pyroptotic cell lysis downstream of distinct inflammasome receptors, consistent with a role in a shared execution step rather than pathway-specific signaling.
       source: figure_1_d_v2.yaml
       panel_id: 1d
+    - type: paragraph
+      text: Having established a output-limited inflammasome phenotype upon Ephb1-deficiency macrophages,  we next asked whether the defect reflects impaired upstream priming/assembly  or instead a restriction at the terminal, GSDMD pore–driven pyroptotic execution.
+      source: opening_and_trans.yaml
+      panel_id: ''
     - type: heading
       level: 2
       text: EphB1 deficiency reduces pyroptotic execution
     - type: paragraph
-      text: To determine where EphB1 functions within the inflammasome pathway, we compared inflammasome activation across NLRP3, AIM2, and NLRC4 stimuli in WT and Ephb1-deficient macrophages.
+      text: To map the position of Ephb1 within the inflammasome pathway,  we compared inflammasome responses triggered by NLRP3, AIM2, and NLRC4 in WT and Ephb1-deficient macrophages.
       source: opening_and_trans.yaml
       panel_id: ''
     - type: paragraph
-      text: LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il1b transcripts in WT and EphB1-deficient macrophages across all examined time points (Fig. 2a,b). Together, these data indicate that EphB1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming, excluding defective first-signal activation as the cause of reduced inflammasome output.
+      text: LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il-1β mRNA in WT and EphB1-deficient macrophages across all examined time points (Fig. 2a,b). Together, these data indicate that EphB1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming, arguing against defective first-signal activation as the cause of reduced inflammasome output.
       source: figure_2_a+b.yaml
       panel_id: 2a/b
     - type: paragraph
-      text: Having established that transcriptional priming is preserved, we next asked whether conventional cytokine secretion is also intact, thereby separating inflammasome output from a global secretion defect. LPS stimulation induced robust increases in both TNF-α and IL-6 in WT and EphB1-deficient macrophages, with no significant genotype-dependent differences observed (Fig. 2c). Thus, EphB1 deficiency does not measurably impair TLR4-driven classical secretion of TNF-α or IL-6, excluding a generalized secretory defect as the basis for reduced inflammasome-associated outputs.
+      text: We next asked whether conventional cytokine secretion was preserved, which would argue against a generalized secretory defect. LPS stimulation induced comparable increases in TNF-α and IL-6 in WT and EphB1-deficient macrophages, with no significant genotype-dependent differences (Fig. 2c). Thus, EphB1 deficiency does not measurably impair TLR4-driven secretion of TNF-α or IL-6, arguing against a generalized secretory defect as the basis for reduced inflammasome-associated outputs.
       source: figure_2_c_v2.yaml
       panel_id: 2c
     - type: paragraph
-      text: Having excluded a generalized secretion impairment, we next asked whether the EphB1-dependent difference manifests specifically in inflammasome-triggered IL-1β release across stimulus strength. While IL-1β release increased with higher Nigericin doses in both genotypes, EphB1-deficient macrophages consistently released less IL-1β than WT controls at each stimulatory dose (Fig. 2d). These results demonstrate that EphB1 deficiency limits mature IL-1β release in a dose-independent manner across the tested range of NLRP3 activation, supporting a selective defect at the inflammasome-specific execution or export stage rather than impaired priming.
+      text: We next asked whether the Ephb1-dependent difference specifically affects inflammasome-triggered IL-1β release across different levels of stimulation. While IL-1β release increased with higher nigericin doses in both genotypes, EphB1-deficient macrophages consistently released less IL-1β than WT controls at each stimulatory dose (Fig. 2d). These results indicate that EphB1 deficiency limits mature IL-1β release across the tested range of NLRP3 activation, supporting a defect at a late inflammasome execution or export step rather than impaired priming.
       source: figure_2_d.yaml
       panel_id: 2d
     - type: paragraph
-      text: Having confirmed an inflammasome-specific output defect, we next asked whether this arises from impaired inflammasome assembly at the ASC platform. Under NLRP3 activation conditions, EphB1-deficient macrophages displayed levels of ASC oligomers, dimers, and monomers comparable to those observed in WT controls (Fig. 2e). These data indicate that EphB1 deficiency does not disrupt ASC oligomerization during NLRP3 inflammasome activation, excluding defective inflammasome assembly as the basis for reduced downstream outputs.
+      text: We next examined whether this defect reflects impaired inflammasome assembly at the ASC platform. Under NLRP3 activation conditions, EphB1-deficient macrophages displayed levels of ASC oligomers, dimers, and monomers comparable to those observed in WT controls (Fig. 2e). These data indicate that EphB1 deficiency does not disrupt ASC oligomerization during NLRP3 inflammasome activation, arguing against defective inflammasome assembly as the basis for reduced downstream outputs.
       source: figure_2_e.yaml
       panel_id: 2e
     - type: paragraph
-      text: Having found no evidence for altered ASC oligomerization, we next asked whether caspase-1 activation itself is preserved, further narrowing the bottleneck toward execution. Caspase-1 activation, as reflected by intracellular p20 levels, was comparable between WT and EphB1-deficient macrophages (Fig. 2f). These results localize the effect of EphB1 deficiency to a post-activation step, indicating that caspase-1 is efficiently activated.
+      text: We next examined whether caspase-1 activation itself is preserved. Caspase-1 activation, as reflected by intracellular p20 levels, was comparable between WT and EphB1-deficient macrophages (Fig. 2f). These results localize the EphB1-dependent defect to a step downstream of caspase-1 activation.
       source: figure_2_f.yaml
       panel_id: 2f
     - type: paragraph
-      text: Having established that caspase-1 activation is largely preserved, we next asked whether its canonical substrates—pro-IL-1β and GSDMD—are processed normally, thereby excluding impaired substrate cleavage as the source of the EphB1-dependent defect. Caspase-1–dependent cleavage of GSDMD and pro–IL-1β occurred efficiently in EphB1-deficient macrophages, yielding cleavage and maturation degree comparable to those in WT cells (Fig. 2g). Together, these results demonstrate that EphB1 deficiency does not compromise caspase-1 substrate cleavage per se but selectively limits the extracellular release of mature inflammasome products, thereby localizing the defect to a late execution or export step.
+      text: We next examined whether the canonical caspase-1 substrates—pro-IL-1β and GSDMD—are processed normally. Caspase-1–dependent cleavage of GSDMD and pro–IL-1β occurred efficiently in EphB1-deficient macrophages, yielding levels of cleavage and maturation comparable to those in WT cells (Fig. 2g). Together, these results demonstrate that EphB1 deficiency does not compromise caspase-1 substrate cleavage per se but selectively limits the extracellular release of mature inflammasome products, thereby localizing the defect to a late execution or export step.
       source: figure_2_g.yaml
       panel_id: 2g
+    - type: paragraph
+      text: Having mapped the bottleneck pyroptotic execution,  we next asked whether Ephb1 specifically gates the early engagement of GSDMD-NT with mitochondria that precedes pore function and organelle injury.
+      source: opening_and_trans.yaml
+      panel_id: ''
     - type: heading
       level: 2
-      text: EphB1 deficiency reduces recruitment of GSDMD to mitochondria
+      text: EphB1 deficiency reduces mitochondrial enrichment of GSDMD
     - type: paragraph
-      text: To investigate how EphB1 regulates pyroptotic execution, we examined mitochondrial integrity and GSDMD recruitment to mitochondria during NLRP3 inflammasome activation in WT and Ephb1-deficient macrophages.
+      text: To investigate how Ephb1 regulates pyroptotic execution, we examined mitochondrial integrity and GSDMD localization during NLRP3 inflammasome activation in WT and Ephb1-deficient macrophages.
       source: opening_and_trans.yaml
       panel_id: ''
     - type: paragraph
-      text: Upon inflammasome activation, Ephb1−/− macrophages exhibited attenuated accumulation of cytosolic ROS and a smaller loss of mitochondrial membrane potential compared with WT cells, whereas mitochondrial ROS signals measured by MitoSOX showed no significant genotype-dependent difference in overall magnitude (Fig. 3a,b,c,d,e,f,g,h). Together, these results indicate that EphB1 deficiency does not cause an intrinsic alteration in mitochondrial membrane potential at baseline but limits ROS accumulation and membrane depolarization during inflammasome activation, supporting a model in which mitochondrial damage is attenuated during the execution phase.
+      text: Upon inflammasome activation, EphB1-deficient macrophages exhibited reduced accumulation of cytosolic ROS and a smaller loss of mitochondrial membrane potential compared with WT cells. In contrast, mitochondrial ROS levels measured by MitoSOX showed no significant genotype-dependent difference (Fig. 3a,b,c,d,e,f,g,h). Together, these results indicate that EphB1 deficiency does not cause an intrinsic alteration in mitochondrial membrane potential at baseline but limits ROS accumulation and mitochondrial depolarization during inflammasome activation, suggesting reduced mitochondrial damage.
       source: figure_3_a+b+c+d+e+f+g+h.yaml
       panel_id: 3a/b/c/d/e/f/g/h
     - type: paragraph
-      text: Having delineated the kinetics of mitochondrial stress during inflammasome activation, we next defined the key time window for early interface events, so that subsequent readouts can be anchored to the appropriate temporal regime and we can test whether a more direct mitochondrial-content–release readout likewise shows an EphB1-dependent constraint consistent with a mitochondria-stage bottleneck. In WT macrophages, inflammasome activation induced a rapid and transient pulse of cytosolic mtDNA, peaking at early time points, whereas this cytosolic mtDNA peak was markedly reduced in Ephb1−/− cells (Fig. 3i,j,s3,d,f,g). Together, these results indicate that EphB1 deficiency selectively limits inflammasome-induced release of mitochondrial DNA into the cytosol without reducing total mtDNA content, localizing the effect to diminished mitochondrial membrane disruption during the execution phase.
+      text: We therefore examined early mitochondrial events during inflammasome activation to determine whether Ephb1 deficiency affects mitochondrial content release. In WT macrophages, inflammasome activation induced a rapid and transient pulse of cytosolic mtDNA, peaking at 7.5min, whereas this cytosolic mtDNA peak was markedly reduced in EphB1-deficient macrophages (Fig. 3i,j,s3,d,f,g). Together, these results indicate that EphB1 deficiency reduces inflammasome-induced release of mitochondrial DNA into the cytosol without altering total mtDNA abundance.
       source: figure_3_i+j+s3_d+f+g.yaml
       panel_id: 3/i/j/s3/d/f/g
     - type: paragraph
-      text: Having further reinforced the early mitochondrial-stage signature, we next asked whether an independent protein-level time-course can pinpoint the same peak window and, in doing so, whether EphB1 loss selectively diminishes GSDMD-NT enrichment on mitochondria—thereby placing the bottleneck at interface engagement/enrichment rather than upstream proteolytic activation. In WT macrophages, GSDMD-NT transiently accumulated in the mitochondrial fraction with a pronounced peak at approximately 7.5 minutes after inflammasome activation, whereas this early mitochondrial enrichment of GSDMD-NT was markedly reduced in Ephb1−/− cells (Fig. 3k,s3e). Together, these data localize the effect of EphB1 deficiency to the early mitochondrial enrichment of GSDMD-NT during inflammasome activation, indicating that EphB1 promotes efficient GSDMD–mitochondria association at the execution stage.
+      text: We next examined whether GSDMD recruitment to mitochondria follows a similar temporal pattern during inflammasome activation. In WT macrophages, GSDMD-NT accumulated in the mitochondrial fraction at approximately 7.5 min after inflammasome activation, whereas this early mitochondrial enrichment of GSDMD-NT was markedly reduced in Ephb1-deficient macrophages (Fig. 3k,s3e). Together, these results indicate that EphB1 promotes early mitochondrial enrichment of GSDMD-NT during inflammasome activation.
       source: figure_3_k+s3_e.yaml
       panel_id: 3k/s3e
+    - type: paragraph
+      text: Having localized the execution defect to the GSDMD–mitochondria interface,  we next asked whether a defined lipid gate at the mitochondrial membrane—cardiolipin abundance—accounts for the altered engagement efficiency.
+      source: opening_and_trans.yaml
+      panel_id: ''
     - type: heading
       level: 2
-      text: EphB1 deficiency reduces Cardiolipin level
+      text: EphB1 deficiency reduces cardiolipin abundance
     - type: paragraph
-      text: To test whether altered mitochondrial membrane composition contributes to the EphB1-dependent phenotype, we quantified cardiolipin levels in WT and Ephb1-deficient macrophages.
+      text: To determine whether mitochondrial membrane composition contributes to the Ephb1-dependent phenotype, we quantified cardiolipin abundance in WT and Ephb1-deficient macrophages.
       source: opening_and_trans.yaml
       panel_id: ''
     - type: paragraph
-      text: Across both imaging- and plate-based readouts, Ephb1−/− macrophages displayed significantly lower NAO fluorescence than WT cells, consistent with a reduced NAO-detectable cardiolipin pool (Fig. 4a,b). Together, these results show that EphB1 deficiency is associated with a significant reduction in NAO fluorescence, indicating a decreased NAO-detectable cardiolipin pool in the mitochondrial membrane under conditions where baseline mitochondrial membrane potential is unchanged.
+      text: Ephb1-deficient macrophages displayed significantly lower NAO fluorescence than WT cells, indicating a reduced NAO-detectable cardiolipin pool (Fig. 4a,b).
       source: figure_4_a+b.yaml
       panel_id: 4a/b
     - type: paragraph
-      text: Having observed a change in an accessibility-proxy readout, we next asked whether independent chemical quantification supports a shift in cardiolipin abundance and/or species composition. Compared with WT cells, Ephb1−/− macrophages exhibited a significant reduction in total cardiolipin abundance, reaching approximately 70% of WT levels, accompanied by broad downregulation across a majority of cardiolipin molecular species (Fig. 4c,d). Together, these lipidomic data show that EphB1 deficiency not only reduces the NAO-accessible cardiolipin pool but also decreases total cardiolipin abundance, providing a quantitative membrane lipid basis for the attenuated mitochondrial damage observed in EphB1-deficient peritoneal macrophages.
+      text: We next examined whether lipidomic analysis confirms changes in cardiolipin abundance. Compared with WT cells, Ephb1-deficient macrophages exhibited a significant reduction in total cardiolipin abundance(~70% of WT levels) (Fig. 4c,d). Together, these lipidomic data show that EphB1 deficiency not only reduces the NAO-accessible cardiolipin pool but also decreases total cardiolipin abundance, providing a quantitative membrane lipid basis for the attenuated mitochondrial damage observed in EphB1-deficient macrophages.
       source: figure_4_c+d.yaml
       panel_id: 4c/d
     - type: paragraph
-      text: Having established a lipid-state framework, we next asked whether an independent upstream pharmacologic perturbation can experimentally and controllably tune the NAO-defined accessible cardiolipin pool, providing a manipulable entry point for causal testing. AD treatment markedly reduced NAO fluorescence in WT macrophages, indicating that pharmacological inhibition of cardiolipin biosynthesis decreases the NAO-accessible cardiolipin pool (Fig. 4e,f). Together, these results demonstrate that pharmacological inhibition of cardiolipin biosynthesis alone is sufficient to reduce the NAO-accessible cardiolipin pool in WT macrophages, supporting cardiolipin abundance as a key determinant of NAO-detectable cardiolipin availability.
+      text: We next tested whether pharmacological inhibition of cardiolipin biosynthesis alters  cardiolipin abundance. AD treatment markedly reduced NAO fluorescence in WT macrophages, pharmacological inhibition of cardiolipin biosynthesis decreases the cardiolipin abundance (Fig. 4e,f).
       source: figure_4_e+f.yaml
       panel_id: 4e/f
     - type: paragraph
-      text: Having implemented a lipid-state perturbation, we next asked whether inflammasome output shifts in the predicted direction—specifically, whether reduced accessible cardiolipin is sufficient to lower IL-1β release—thereby linking cardiolipin accessibility to terminal execution strength. AD treatment markedly suppressed LPS- and Nigericin-induced IL-1β release in macrophages in a dose- and time-dependent manner (Fig. 4g). Together, these results demonstrate that pharmacological reduction of cardiolipin availability is sufficient to suppress inflammasome-mediated IL-1β release, supporting a causal role for cardiolipin accessibility in controlling inflammasome output.
+      text: We next examined whether reduced cardiolipin abundance affects inflammasome-mediated IL-1β release. AD treatment markedly suppressed LPS and Nigericin induced IL-1β release in macrophages (Fig. 4g). These results indicate that pharmacological reduction of cardiolipin abundant suppresses inflammasome-induced IL-1β release.
       source: figure_4_g.yaml
       panel_id: 4g
     - type: paragraph
-      text: Having linked one perturbation axis to functional output, we next asked whether a mechanistically distinct perturbation converges on the same accessible-cardiolipin logic, reducing single-agent interpretive risk. BEL treatment led to a marked reduction in NAO fluorescence intensity, indicating that pharmacological interference with cardiolipin remodeling is sufficient to decrease the NAO-accessible cardiolipin pool (Fig. S4a,b). Together with perturbations targeting cardiolipin abundance, these results show that both manipulation of cardiolipin content and interference with cardiolipin remodeling can reduce NAO staining, indicating that changes in the NAO-accessible cardiolipin pool can arise through multiple mechanisms beyond alterations in total cardiolipin levels.
+      text: We next tested whether perturbation of cardiolipin remodeling produces a similar effect. BEL treatment led to a marked reduction in NAO fluorescence intensity, indicating that pharmacological interference with cardiolipin remodeling decrease the cardiolipin abundance (Fig. S4a,b). Together with perturbations targeting cardiolipin abundance, these results show that both manipulation of cardiolipin content and interference with cardiolipin remodeling can reduce NAO staining, indicating that changes in the NAO-accessible cardiolipin pool can arise through multiple mechanisms beyond alterations in total cardiolipin levels.
       source: figure_4_sa+b.yaml
       panel_id: s4a/b
     - type: paragraph
-      text: Having established a second, independent lipid-state manipulation, we next asked whether its functional consequence on inflammasome output aligns with the same lipid-gate model. Across these perturbations, reduction of cardiolipin availability consistently led to a marked decrease in LPS- and Nigericin-induced IL-1β release, indicating convergent suppression of inflammasome terminal output (Fig. S4c). Together, these results demonstrate that diverse perturbations of cardiolipin regulation—whether affecting cardiolipin abundance or remodeling—converge on attenuation of inflammasome-mediated IL-1β release, supporting cardiolipin availability as a common limiting factor for terminal inflammasome output.
+      text: We next examined whether this perturbation similarly affects inflammasome-mediated IL-1β release. Across these perturbations, reduced cardiolipin abundant consistently decreased LPS and Nigericin induced IL-1β release (Fig. S4c). Together, these results show that perturbations affecting cardiolipin abundance or remodeling consistently reduce inflammasome-mediated IL-1β release.
       source: figure_4_sc.yaml
       panel_id: s4c
     - type: heading
       level: 2
-      text: Membrane context perturbation dominates the cardiolipin metabolic axis
+      text: Membrane context is the dominant cardiolipin-related axis perturbed by EphB1 deficiency
     - type: paragraph
-      text: To identify cellular processes associated with cardiolipin variation, we defined a set of biological process axes centered on cardiolipin metabolism, each represented by corresponding lipidomic indicators and gene sets, and evaluated their perturbation magnitude and association with cardiolipin abundance across batch.
+      text: To identify cellular processes associated with cardiolipin variation, we defined biological process axes centered on cardiolipin metabolism, each represented by lipidomic indicators and gene sets, and evaluated their association with cardiolipin abundance across batches.
       source: opening_and_trans.yaml
       panel_id: ''
     - type: paragraph
-      text: This framework defines six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—and assigns to each axis representative genes and lipid readouts that can, in principle, be extracted from transcriptomic and lipidomic datasets (Fig. 5a). Together, this conceptual model serves as a mechanistic coordinate system for organizing cardiolipin-related pathways and readouts, providing a common reference for the multi-omics analyses presented in subsequent figures.
+      text: This framework defines six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—and assigns to each axis representative genes and lipid readouts derived from transcriptomic and lipidomic datasets (Fig. 5a).
       source: figure_5_a.yaml
       panel_id: 5a
     - type: paragraph
-      text: Having introduced the mechanistic-axis conceptual framework, we next specified the concrete gene and lipid features that instantiate each axis, together with directionality and weighting rules. For each axis (supply, transport, synthesis, remodeling, oxidation, and membrane context), we define minimal feature records that specify axis assignment, biological meaning, quantitative formulae for lipid metrics, directionality conventions (bottleneck_sign), and within-axis weights, together with tiered inclusion rules (Tier-1 executors, Tier-2 proximal components, and Tier-3 conditional contributors) and cross-axis exclusion criteria (Fig. 5b). Together, this table serves as an interpretable lookup resource that links the six-axis cardiolipin framework to concrete gene and lipid features, thereby supporting Fig. 6A and guiding subsequent axis-based multi-omics analyses.
+      text: We next defined the specific gene and lipid features assigned to each axis. For each axis, we defined representative genes and lipid features together with predefined weighting and inclusion rules (Fig. 5b).
       source: figure_5_b.yaml
       panel_id: 5b
     - type: paragraph
-      text: Having fixed axis definitions a priori, we next asked how heterogeneous multi-batch omics measurements can be normalized and projected into comparable axis-level scores. For each omics layer, raw data underwent modality-specific quality control, normalization, and batch-aware modeling, followed by feature aggregation into predefined mechanistic indicators and axis-level Z scores that serve as standardized inputs for multi-omics integration (Fig. 5c). Together, this processing pipeline provides a transparent and reproducible foundation for deriving mechanistic axis scores and cardiolipin phenotypes from heterogeneous multi-omics datasets, thereby enabling the integrative analyses presented in subsequent panels.
+      text: We next normalized multi-batch omics datasets and computed comparable axis-level scores. For each omics layer, raw data underwent quality control, normalization, and batch-aware modeling, followed by aggregation into predefined axis-level Z scores used for multi-omics integration (Fig. 5c).
       source: figure_5_c.yaml
       panel_id: 5c
     - type: paragraph
-      text: Having established the scoring pipeline, we next asked whether axis effects are directionally concordant across omics layers and batches, providing the first-pass structure of the perturbation landscape. Across three RNA-seq batches and four lipidomics batches, only the Membrane context axis displayed a consistent positive effect in both omics layers, with stable directionality and the largest absolute effect sizes among all axes (Fig. 5d). Together, this cross-omics effect matrix identifies Membrane context as the only mechanistic axis that is robustly and reproducibly perturbed by EphB1 deficiency, distinguishing it from other axes that are variably influenced by batch or omics-specific factors.
+      text: We next examined whether axis effects are consistent across omics layers and batches. Across three RNA-seq batches and four lipidomics batches, only the membrane context axis displayed a consistent positive effect in both omics layers, with stable directionality (Fig. 5d). These results identify the membrane context axis as the only axis consistently perturbed by Ephb1 deficiency across omics layers.
       source: figure_5_d.yaml
       panel_id: 5d
     - type: paragraph
-      text: Having surveyed batch-by-omics concordance, we next asked whether equal-weight evidence aggregation yields a coherent, axis-level summary of EphB1-dependent perturbation. Among the six axes, the Membrane context axis exhibited the strongest and most pronounced deviation from zero, with a positive multi-omics Z score of approximately +2.6, representing the largest absolute effect across all mechanistic axes (Fig. 5e). Together, these results identify Membrane context as the sole mechanistic axis that is robustly and significantly perturbed by EphB1 deficiency at the integrated multi-omics level, supporting the presence of a dominant membrane-related bottleneck rather than a distributed multi-axis imbalance.
+      text: We next integrated evidence across batches to obtain aggregated axis-level scores. Among the six axes, the membrane context axis showed the largest deviation from zero, with a multi-omics Z score of approximately +2.6 (Fig. 5e). These results identify membrane context as the primary axis perturbed by EphB1 deficiency.
       source: figure_5_e.yaml
       panel_id: 5e
     - type: paragraph
-      text: Having obtained aggregated axis-level deviations, we next asked how these deviations relate to predefined cardiolipin phenotypic indicators, providing an interpretable bridge between axes and lipid outcome space. Among all axes, the Membrane context axis showed the strongest negative association with sum_CL, with higher combined Z scores corresponding to lower total cardiolipin levels, whereas all other axes displayed weak or near-zero correlations (Fig. 5f). Together, these results indicate that total cardiolipin abundance (sum_CL) is not a sensitive or robust readout for capturing mechanistic axis effects across batches, thereby excluding sum_CL as a primary quantitative proxy for axis-level perturbations and motivating the use of more informative cardiolipin accessibility or composition-based metrics.
+      text: We next examined the relationship between axis scores and cardiolipin abundance. Among all axes, the membrane context axis showed the strongest negative association with sum_CL, with higher combined Z scores corresponding to lower total cardiolipin levels, whereas all other axes displayed weak or near-zero correlations (Fig. 5f). These results indicate that total cardiolipin abundance (sum_CL) consistently capture membrane context axis perturbations across batches.
       source: figure_5_f.yaml
       panel_id: 5f
+    - type: paragraph
+      text: We next examined which Ephb1 downstream signaling pathways correlate most strongly with the membrane context axis.
+      source: opening_and_trans.yaml
+      panel_id: ''
     - type: heading
       level: 2
-      text: PI3K–AKT–mTOR signaling tracks membrane-context impairment
+      text: PI3K–AKT–mTOR signaling correlates with the membrane-context axis
     - type: paragraph
-      text: To identify signaling pathways downstream of EphB1 associated with membrane context axis, we constructed EphB1 downstream pathway gene sets and evaluated their perturbation magnitude, consistency across samples, and covariation with the membrane context axis.
+      text: To identify Ephb1 downstream signaling pathways associated with the membrane context axis, we constructed Ephb1-related pathway gene sets and evaluated their transcriptional changes and correlation with the membrane context axis.
       source: opening_and_trans.yaml
       panel_id: ''
     - type: paragraph
-      text: In this framework, EphB1 status is treated as an exogenous variable (X), downstream Eph-related signaling modules are quantified as RNA-based pathway scores (M), and the RNA membrane context axis score serves as a transcriptional proxy (Z) for lipid membrane phenotypes, while lipid readouts are used only for direction-concordance validation (Fig. 6a). Together, this RNA-first X–M–Z framework provides a transparent and reproducible strategy for ranking EphB1 downstream signaling modules most likely coupled to membrane context perturbation, thereby guiding subsequent experimental validation without over-interpreting limited cross-omics mediation.
+      text: We applied an RNA-based analysis framework in which Ephb1 status was treated as the upstream variable and downstream signaling pathway scores were evaluated for association with the membrane context axis (Fig. 6a).
       source: figure_6_a.yaml
       panel_id: 6a
     - type: paragraph
-      text: Having defined the X–M–Z inference scaffold and the role of orthogonal lipid alignment, we next specified a minimal, literature-anchored set of EphB1-linked candidate signaling programs and their scoring rules. Each table row corresponds to one EphB1 downstream signaling gene set. Columns specify a unique pathway ID, a human-readable module label, network category (EphB1_signaling), the targeted cardiolipin mechanistic axes, module size (n_genes), and the full gene list annotated with gene_effect_sign to standardize directionality for module scoring (Fig. 6b). Together, this module dictionary provides the standardized building blocks used in Fig. 7A–7D, allowing readers and reviewers to trace how each EphB1 downstream pathway was defined and how it was linked to cardiolipin axes for subsequent quantitative analyses.
+      text: We next defined candidate EphB1 downstream signaling gene sets for pathway-level analysis. Each gene set represents an EphB1-associated signaling pathway with predefined gene members and scoring directionality (Fig. 6b).
       source: figure_6_b.yaml
       panel_id: 6b
     - type: paragraph
-      text: 'Having defined candidate programs and scoring directionality, we next asked which programs show reproducible EphB1-dependent shifts across RNA batches, qualifying them as plausible mediators (X→M). Across three RNA-seq batches, EphB1 deficiency induced reproducible directional shifts in multiple signaling modules: PI3K–AKT–mTOR pathways showed consistent negative responses (KO < WT), NF-κB/ROS and JAK–STAT was overall reduced with batch-dependent reversals, cytoskeleton-related modules were shifted in a positive direction, and other pathways exhibited weaker or inconsistent effects (Fig. 6c). Together, these analyses provide an overview of the transcriptional response state of EphB1 downstream signaling at the time of sampling, identifying PI3K–AKT–mTOR and JAK–STAT as the most consistently downregulated modules and prioritizing them as candidate pathways for subsequent coupling analyses with membrane context perturbation.'
+      text: We next examined which pathways show consistent EphB1-dependent transcriptional changes across RNA batches. Across three RNA-seq batches, EphB1 deficiency induced consistent decreases in PI3K–AKT–mTOR pathway scores (KO < WT). NF-κB/ROS and JAK–STAT modules showed weaker or batch-dependent reductions, whereas cytoskeleton-related pathways displayed positive shifts (Fig. 6c).
       source: figure_6_c_v2.yaml
       panel_id: 6c
     - type: paragraph
-      text: Having filtered candidates by cross-batch X→M consistency, we next asked which programs are mechanistically coupled to the prioritized membrane-context axis within RNA (M↔Z), strengthening chain coherence. Cross-batch aggregation revealed that most EphB1 downstream modules showed negative ΔM in EphB1-deficient cells, with the largest decreases observed for PI3K–AKT–mTOR and JAK–STAT, whereas cytoskeleton/adhesion modules (FAK–Src–Rho) displayed positive ΔM; correspondingly, PI3K–AKT–mTOR and JAK–STAT scores were negatively coupled to the Membrane context axis, while FAK–Src–Rho showed a positive coupling (Fig. 6d). Together, these analyses prioritize PI3K–AKT–mTOR and JAK–STAT as the most robust EphB1 downstream candidates whose transcriptional attenuation is consistently associated with increased membrane context barrier scores, while distinguishing cytoskeleton/adhesion modules as oppositely coupled pathways.
+      text: We next examined which pathways show the strongest change across batchs. Across pathways, PI3K–AKT–mTOR and JAK–STAT modules showed the largest decreases in EphB1-deficient macrophages, whereas cytoskeleton/adhesion pathways (FAK–Src–Rho) displayed positive shifts (Fig. 6d). Together, these results prioritize PI3K–AKT–mTOR as the most robust EphB1 downstream signaling candidate.
       source: figure_6_d_v2.yaml
       panel_id: 6d
     - type: paragraph
-      text: 'Having identified RNA-internal coupling candidates, we next asked whether the prioritized RNA axis aligns with lipid phenotypic space in independent repeats, providing orthogonal support without relying on paired-sample mediation. Across all five lipid indicators, EphB1 deficiency was consistently associated with increased pathway scores (a>0), while the direction of the pathway–lipid association (b) diverged by readout: positive for CL fraction and membrane CL, but negative for mitochondrial lipid mass, membrane PC, and membrane PE, yielding opposite-signed indirect effects (Fig. 6e). Together, these analyses indicate that the EphB1-dependent mediation structure observed at the membrane context axis level is recapitulated across multiple concrete lipid indicators, with pathway effects manifesting as coordinated but directionally distinct changes in cardiolipin-related versus PC/PE-dominated lipid readouts.'
-      source: figure_6_e.yaml
+      text: We next examined whether these pathways correlate with the membrane context axis. Notably, the PI3K–AKT–mTOR pathway shows coordinated shifts along both axes, with KO samples displaced toward lower M and higher Z values, whereas WT samples occupy the opposite quadrant. In contrast, JAK–STAT inflammatory and FAK–Src–Rho cytoskeleton pathways separate primarily along the Z axis while largely overlapping along the M axis (Fig. 6e). These results show that reduced PI3K–AKT–mTOR signaling is consistently associated with increased membrane context axis scores.
+      source: figure_6_e_v2.yaml
       panel_id: 6e

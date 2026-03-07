@@ -84,30 +84,6 @@ figures:
     role_in_story: "Phenotype establishment"
     one_sentence_purpose: >
       建立 EphB1 缺失在多种炎症小体激活条件下“输出端被限幅”的稳健功能表型，并为后续机制层级定位提供起点。
-    panel_transitions:
-      skeleton: Having established [panel-level premise], we next asked whether [next check / boundary condition] supports [the logic step].
-      skeleton_cn: 在完成“[本面板的逻辑前提]”后，我们进一步检验：[下一个边界条件/排除项]，以支撑“[逻辑推进]”。
-      between_panels:
-        - from: "1a"
-          to: "1b"
-          en: >
-            Having outlined the genetic-screening strategy, we next sought to identify, across the full panel of perturbations, a candidate signal that is both reproducible and sufficiently prominent to prioritize for mechanistic dissection.
-          cn: >
-            在交代遗传筛选的整体策略后，我们进一步在全部筛选扰动中寻找呈现出可重复、足够突出的候选信号。
-
-        - from: "1b"
-          to: "1c"
-          en: >
-            Having prioritized EphB1 from the screen, we next asked whether the phenotype generalizes beyond a single inflammasome agonist, thereby arguing against a stimulus-specific artifact.
-          cn: >
-            在从筛选中优先锁定 EphB1 之后，我们进一步检验：该表型是否可跨不同炎症小体激动剂复现，以排除刺激物特异的偶然效应。
-
-        - from: "1c"
-          to: "1d"
-          en: >
-            Having established cross-agonist consistency within inflammasome, we next asked whether EphB1 loss broadly constrains lytic execution across distinct inflammasome sensors.
-          cn: >
-            在确立炎症小体间跨激动剂的一致性后，我们进一步检验：该限制是否可跨不同炎症小体感受器推广，从而将其定位为更普遍的执行端表型。
 
     key_message: >
       ephb1是维持炎症小体功能的关键因素
@@ -200,58 +176,6 @@ figures:
       priming、pro-IL-1β/NLRP3 的胞内丰度或 ASC 寡聚化；在相同刺激下，caspase-1 激活及其对
       GSDMD/IL-1β 的切割基本保留，但成熟片段的胞外释放受限，提示瓶颈位于 GSDMD 孔与膜裂解
       步骤，而非炎症小体的组装或酶活本身。
-    panel_transitions:
-      skeleton: Having established [what is intact / excluded], we next asked whether [the next layer] accounts for [the remaining bottleneck].
-      skeleton_cn: 在确认“[该环节未受影响/已被排除]”后，我们进一步检验：[下一层级] 是否解释“[剩余瓶颈]”。
-      between_panels:
-        - from: "2a/b"
-          to: "2c"
-          en: >
-            Having established that transcriptional priming is preserved, we next asked whether conventional cytokine secretion is also intact, thereby separating inflammasome output from a global secretion defect.
-          cn: >
-            在确认转录性 priming 并未受影响后，我们进一步检验：经典细胞因子分泌途径是否同样完好，以将炎症小体输出与全局分泌缺陷区分开来。
-
-        - from: "2a/b"
-          to: "s2a"
-          en: >
-            Having established that transcriptional priming is preserved, we next asked whether this conclusion holds under a complementary priming readout IL6.
-          cn: >
-            在确认转录性 priming 并未受影响后，我们进一步用补充 readout IL6复核 priming 环节结论的稳健性。
-
-        - from: "2c"
-          to: "2d"
-          en: >
-            Having excluded a generalized secretion impairment, we next asked whether the EphB1-dependent difference manifests specifically in inflammasome-triggered IL-1β release across stimulus strength.
-          cn: >
-            在排除普遍分泌障碍后，我们进一步检验：差异是否特异体现在炎症小体触发的 IL-1β 裂解性外排，并在刺激强度维度上保持可解析性。
-
-        - from: "2c"
-          to: "s2b"
-          en: >
-            Having found no evidence for a generalized secretion impairment, we next asked whether the intactness of conventional cytokine secretion IL6 holds under an orthogonal cytokine readout.
-          cn: >
-            在排除普遍分泌障碍后，我们继续用另一类经典细胞因子 readout IL6 验证“常规分泌途径完整”的结论。
-
-        - from: "2d"
-          to: "2e"
-          en: >
-            Having confirmed an inflammasome-specific output defect, we next asked whether this arises from impaired inflammasome assembly at the ASC platform.
-          cn: >
-            在确认差异集中于炎症小体特异的输出后，我们进一步检验：该差异是否源自 ASC 平台层面的装配缺陷。
-
-        - from: "2e"
-          to: "2f"
-          en: >
-            Having found no evidence for altered ASC oligomerization, we next asked whether caspase-1 activation itself is preserved, further narrowing the bottleneck toward execution.
-          cn: >
-            在未见 ASC 寡聚化差异的前提下，我们进一步检验：caspase-1 激活是否仍然保留，以将瓶颈继续收束到更下游的执行环节。
-
-        - from: "2f"
-          to: "2g"
-          en: >
-            Having established that caspase-1 activation is largely preserved, we next asked whether its canonical substrates—pro-IL-1β and GSDMD—are processed normally, thereby excluding impaired substrate cleavage as the source of the EphB1-dependent defect.
-          cn: >
-            在确认 caspase-1 激活基本保留后，我们进一步检验其经典底物（pro-IL-1β 与 GSDMD）是否能够被正常切割，从而排除“底物加工受损”作为 EphB1 相关差异的来源。
 
     panels:
       - figure_id: "2a/b"
@@ -363,7 +287,7 @@ figures:
 
   - id: "Figure 3"
     title: "EphB1 缺失降低 GSDMD 与线粒体膜的结合"
-    title_en: "EphB1 deficiency reduces recruitment of GSDMD to mitochondria"
+    title_en: "EphB1 deficiency reduces mitochondrial enrichment of GSDMD"
     figure_title: "EphB1 缺失削弱 GSDMD-NT 在线粒体膜上的对接与富集"
     figure_title_en: "EphB1 loss diminishes GSDMD-NT engagement and enrichment on mitochondria"
     section: "S2"
@@ -374,27 +298,6 @@ figures:
       并检验 EphB1 缺失是否将焦亡执行瓶颈定位于 GSDMD-NT 与线粒体膜的早期相互作用。
       通过并行评估线粒体功能状态与线粒体内容物外泄读数，
       为后续追问“线粒体膜环境因素如何决定该界面效率”提供逻辑依据。
-    panel_transitions:
-      skeleton: Having established [interface-level premise], we next asked whether [the next readout] supports [the same stage assignment].
-      skeleton_cn: 在建立“[界面层前提]”后，我们进一步检验：[下一类 readout] 是否支持“[阶段定位]”。
-      between_panels:
-
-
-        - from: "3a/b/c/d/e/f/g/h"
-          to: "3/i/j/s3/d/f/g"
-          en: >
-            Having delineated the kinetics of mitochondrial stress during inflammasome activation, we next defined the key time window for early interface events, so that subsequent readouts can be anchored to the appropriate temporal regime and we can test whether a more direct mitochondrial-content–release readout likewise shows an EphB1-dependent constraint consistent with a mitochondria-stage bottleneck.
-          cn: >
-            在描绘炎症小体激活过程中的线粒体应激动力学后，我们进一步确定早期界面事件发生的关键时间窗口，以便将后续 readout 锚定到合适的时序区间，并进一步检验：更直接的线粒体内容物外泄 readout 是否同样呈现 EphB1 依赖的限幅特征，从而支持“线粒体阶段瓶颈”的阶段定位。
-
-        - from: "3/i/j/s3/d/f/g"
-          to: "3k/s3e"
-          en: >
-            Having further reinforced the early mitochondrial-stage signature, we next asked whether an independent protein-level time-course can pinpoint the same peak window and, in doing so, whether EphB1 loss selectively diminishes GSDMD-NT enrichment on mitochondria—thereby placing the bottleneck at interface engagement/enrichment rather than upstream proteolytic activation.
-          cn: >
-            在进一步强化“早期线粒体阶段”特征后，我们进一步检验：蛋白层面的时间梯度读数是否能独立地指认相同的峰值时间窗，并进一步检验：EphB1 缺失是否选择性削弱 GSDMD-NT 在线粒体上的富集，从而将瓶颈精确落在“界面对接/富集”而非上游加工环节。
-
-
     panels:
 
       - figure_id: "3a/b/c/d/e/f/g/h"
@@ -489,7 +392,7 @@ figures:
 
   - id: "Figure 4"
     title: "心磷脂是EphB1 缺失降低炎症小体通路激活的重要因素"
-    title_en: "EphB1 deficiency reduces Cardiolipin level"
+    title_en: "EphB1 deficiency reduces cardiolipin abundance"
     figure_title: "心磷脂可及性介导 EphB1 依赖的炎症小体输出限幅"
     figure_title_en: "Cardiolipin availability mediates EphB1-dependent limitation of inflammasome output"
     section: "S3"
@@ -502,52 +405,6 @@ figures:
       （3）随后用脂质组学在独立测量层面检验 CL 总量/亚型的改变是否能支撑 NAO 所指向的脂质差异；
       （4）最后用两条独立药理轴（AD、BEL）分别在“脂质状态操控（NAO）”与“功能后果（IL-1β 释放）”层面建立因果关联与遮蔽关系，
       从而将 EphB1 的主要作用阶层定位到 CL 可及性/可结合池这一膜脂阀门。
-    panel_transitions:
-      skeleton: Having excluded [a confounder], we next asked whether [lipid-state measure or perturbation] supports [the lipid-gate logic].
-      skeleton_cn: 在排除“[混杂因素]”后，我们进一步检验：[脂质状态读数/操控] 是否支持“[脂质阀门逻辑]”。
-      between_panels:
-        - from: "4A_mito_potential_and_mass_baseline"
-          to: "4a/b"
-          en: >
-            Having excluded baseline differences in mitochondrial state as a dominant confounder, we next asked whether EphB1 loss alters the functionally accessible cardiolipin pool measured by NAO.
-          cn: >
-            在排除基础线粒体状态差异作为主要混杂因素后，我们进一步检验：EphB1 缺失是否改变 NAO 所反映的“功能性可及/可结合”CL 池。
-
-        - from: "4a/b"
-          to: "4c/d"
-          en: >
-            Having observed a change in an accessibility-proxy readout, we next asked whether independent chemical quantification supports a shift in cardiolipin abundance and/or species composition.
-          cn: >
-            在获得可及性代理读数的线索后，我们进一步检验：独立的化学定量是否支持 CL 总量与/或物种谱的改变，以增强膜脂归因的稳健性。
-
-        - from: "4c/d"
-          to: "4e/f"
-          en: >
-            Having established a lipid-state framework, we next asked whether an independent upstream pharmacologic perturbation can experimentally and controllably tune the NAO-defined accessible cardiolipin pool, providing a manipulable entry point for causal testing.
-          cn: >
-            在建立脂质状态框架后，我们进一步检验：一条独立的上游药理操控是否能够在实验上、可控地调节 NAO 所定义的可及 CL 池，从而提供一个可操控的因果检验入口。
-
-        - from: "4e/f"
-          to: "4g"
-          en: >
-            Having implemented a lipid-state perturbation, we next asked whether inflammasome output shifts in the predicted direction—specifically, whether reduced accessible cardiolipin is sufficient to lower IL-1β release—thereby linking cardiolipin accessibility to terminal execution strength.
-          cn: >
-            在实现对 CL 可及池的药理操控后，我们进一步检验：炎症小体输出是否按预期方向变化——具体而言，可及 CL 的下降是否足以下调 IL-1β 裂解性外排——从而将“CL 可及性”与末端执行强度建立因果对应。
-
-        - from: "4g"
-          to: "s4a/b"
-          en: >
-            Having linked one perturbation axis to functional output, we next asked whether a mechanistically distinct perturbation converges on the same accessible-cardiolipin logic, reducing single-agent interpretive risk.
-          cn: >
-            在将第一条药理轴与功能输出对齐后，我们进一步检验：机制上独立的第二条药理轴是否同样收敛到“可及 CL 池”的逻辑，以降低单一药物解释风险。
-
-        - from: "s4a/b"
-          to: "s4c"
-          en: >
-            Having established a second, independent lipid-state manipulation, we next asked whether its functional consequence on inflammasome output aligns with the same lipid-gate model.
-          cn: >
-            在建立第二条独立的脂质状态操控后，我们进一步检验：其对炎症小体输出的功能后果是否与同一脂质阀门模型一致。
-
     panels:
       - figure_id: "4A_mito_potential_and_mass_baseline"
         experiment_id: 1
@@ -643,7 +500,7 @@ figures:
 
   - id: "Figure 5"
     title: "多组学机制轴分析确定“膜环境轴”为优先异常轴"
-    title_en: "Membrane context perturbation dominates the cardiolipin metabolic axis"
+    title_en: "Membrane context is the dominant cardiolipin-related axis perturbed by EphB1 deficiency"
     figure_title: "多组学整合优先锁定 membrane context 机制轴为主导扰动"
     figure_title_en: "Multi-omics integration prioritizes the membrane-context axis as the dominant perturbation"
     section: ""   
@@ -655,45 +512,6 @@ figures:
       （2）用明确的特征方向与权重规则，将 RNA 与脂质特征压缩为轴级分数；
       （3）在不同组学与批次中评估 EphB1 缺失对各轴的方向一致性与稳健性；
       （4）据此确定一条在多证据维度上最适合作为后续通路级分析与中介建模的锚定机制轴。
-    panel_transitions:
-      skeleton: Having defined [the axis framework], we next asked whether [the scoring and integration step] enables [cross-batch, cross-omics inference].
-      skeleton_cn: 在完成“[机制轴框架/定义]”后，我们进一步检验：[计分与整合步骤] 是否支持“[跨批次、跨组学推断]”。
-      between_panels:
-        - from: "5A"
-          to: "5B"
-          en: >
-            Having introduced the mechanistic-axis conceptual framework, we next specified the concrete gene and lipid features that instantiate each axis, together with directionality and weighting rules.
-          cn: >
-            在给出机制轴的概念框架后，我们进一步明确：每条轴由哪些基因与脂质特征构成，以及其方向与权重如何被先验、可追溯地定义。
-
-        - from: "5B"
-          to: "5C"
-          en: >
-            Having fixed axis definitions a priori, we next asked how heterogeneous multi-batch omics measurements can be normalized and projected into comparable axis-level scores.
-          cn: >
-            在先验固定机制轴定义后，我们进一步回答：不同批次、不同组学的原始测量如何被规范化并投影为可比较的轴级分数。
-
-        - from: "5C"
-          to: "5D"
-          en: >
-            Having established the scoring pipeline, we next asked whether axis effects are directionally concordant across omics layers and batches, providing the first-pass structure of the perturbation landscape.
-          cn: >
-            在建立计分管线后，我们进一步检验：各机制轴效应在不同组学与批次间是否方向一致，从而给出扰动景观的第一层结构信息。
-
-        - from: "5D"
-          to: "5E"
-          en: >
-            Having surveyed batch-by-omics concordance, we next asked whether equal-weight evidence aggregation yields a coherent, axis-level summary of EphB1-dependent perturbation.
-          cn: >
-            在评估批次×组学一致性之后，我们进一步检验：等权证据聚合能否形成连贯的轴级总结，用以量化 EphB1 相关扰动的总体模式。
-
-        - from: "5E"
-          to: "5F"
-          en: >
-            Having obtained aggregated axis-level deviations, we next asked how these deviations relate to predefined cardiolipin phenotypic indicators, providing an interpretable bridge between axes and lipid outcome space.
-          cn: >
-            在获得聚合后的轴级偏移量后，我们进一步检验：这些偏移与预先定义的 CL 表型指标之间的对应关系，从而在“机制轴”与“脂质结局空间”之间建立可解释的桥梁。
-
             
 
     panels:
@@ -798,7 +616,7 @@ figures:
     
   - id: "Figure 6"
     title: "候选通路优先级排序：RNA 机制路径（X–M–Z）与 lipid 表型一致性验证"
-    title_en: "PI3K–AKT–mTOR signaling tracks membrane-context impairment"
+    title_en: "PI3K–AKT–mTOR signaling correlates with the membrane-context axis"
     figure_title: "RNA X–M–Z 框架优选 EphB1 下游候选通路并与脂质表型对齐"
     figure_title_en: "An RNA X–M–Z framework prioritizes EphB1-linked pathways with orthogonal lipid alignment"
     section: ""
@@ -811,52 +629,6 @@ figures:
       （3）在 RNA 内部检验候选通路（M）与优先机制轴（Z；membrane context 的 RNA 代理）之间的耦合关系；
       （4）综合一致性、效应量与稳健性（如 LOO）形成候选通路排序，输出少数优先验证对象；
       （5）将 Z 与 lipid 表型作为独立重复的一致性对齐，用于支撑“RNA 机制轴可作为 lipid 表型的转录代理层”。
-    panel_transitions:
-      skeleton: Having established [the inference scaffold], we next asked whether [candidate module behavior] supports [prioritization and testability].
-      skeleton_cn: 在建立“[推断框架]”后，我们进一步检验：[候选模块的行为] 是否支撑“[优先级排序与可检验性]”。
-      between_panels:
-        - from: "6a"
-          to: "6b"
-          en: >
-            Having defined the X–M–Z inference scaffold and the role of orthogonal lipid alignment, we next specified a minimal, literature-anchored set of EphB1-linked candidate signaling programs and their scoring rules.
-          cn: >
-            在明确 X–M–Z 推断框架及脂质一致性验证的角色后，我们进一步给出：一组最小但有文献锚定的 EphB1 相关候选信号程序，以及其计分规则与方向约定。
-
-        - from: "6b"
-          to: "6c"
-          en: >
-            Having defined candidate programs and scoring directionality, we next asked which programs show reproducible EphB1-dependent shifts across RNA batches, qualifying them as plausible mediators (X→M).
-          cn: >
-            在明确候选程序及计分方向后，我们进一步检验：哪些程序在不同 RNA 批次中呈现可重复的 EphB1 相关偏移，从而具备作为候选中介（X→M）的基本资格。
-
-        - from: "6c"
-          to: "6d"
-          en: >
-            Having filtered candidates by cross-batch X→M consistency, we next asked which programs are mechanistically coupled to the prioritized membrane-context axis within RNA (M↔Z), strengthening chain coherence.
-          cn: >
-            在以跨批次 X→M 一致性筛选候选后，我们进一步检验：哪些程序在 RNA 内部与优先机制轴呈现稳健耦合（M↔Z），从而增强证据链的机制连贯性。
-
-        - from: "6d"
-          to: "6e"
-          en: >
-            Having identified RNA-internal coupling candidates, we next asked whether the prioritized RNA axis aligns with lipid phenotypic space in independent repeats, providing orthogonal support without relying on paired-sample mediation.
-          cn: >
-            在识别 RNA 内部耦合候选后，我们进一步检验：优先 RNA 机制轴是否能在独立重复中与脂质表型空间对齐，从而在不依赖配对样本中介回归的前提下获得正交支撑。
-
-        - from: "6e"
-          to: "6g/h"
-          en: >
-            Having established transcript–lipid alignment, we next designed a functionally testable perturbation to discriminate Eph–ephrin signaling directions, converting prioritized inferences into validation-ready experiments.
-          cn: >
-            在建立转录轴与脂质表型的一致性对齐后，我们进一步设计可检验的功能操控，用于区分 Eph–ephrin 的正向/反向信号贡献，从而将推断结果转化为可验证实验。
-
-        - from: "6g/h"
-          to: "6i"
-          en: >
-            Having specified the perturbation logic, we next asked how to project its membrane/lipid consequences back onto the terminal inflammasome output readout, closing the causal loop.
-          cn: >
-            在明确操控设计逻辑后，我们进一步将其膜脂后果投影回末端炎症小体输出 readout，以闭合“信号—膜环境—输出端”的可检验因果环。
-
 
     panels:
       - figure_id: "6a"
@@ -951,67 +723,6 @@ figures:
 
   
   # =================== english ====================
-anchors:
-  core_question: 
-    Does EphB1 tune the lipid membrane environment
-    ——encompassing cardiolipin abundance and accessibility——
-    to set the threshold for GSDMD pore formation and 
-    thereby modulate NLRP3 inflammasome–driven IL-1β release and pyroptotic lysis 
-    in LPS-primed primary murine peritoneal macrophages?
-
-english_projection:
-  scientific_question: "How does EphB1 control the mitochondrial cardiolipin pool and its accessibility to set the threshold for GSDMD pore–mediated inflammasome output?"
-  results_one_sentence_line:
-    We show that EphB1, acting through a PI3K–AKT–mTOR–linked signaling network, 
-    remodels mitochondrial cardiolipin abundance and accessibility
-    to curb GSDMD–mitochondria engagement and pore function, 
-    thereby limiting inflammasome-driven IL-1β release and pyroptotic cell lysis.
-
-  section_transitions:
-  skeleton: Having established [what level is addressed / what ambiguity is resolved], we next ask whether [next causal layer / interface / gating factor] explains [the bottleneck].
-  skeleton_cn: "在完成“[上一图解决的层级定位]”后，下一步需要回答：[更靠近因果链上游/更机制化的问题]，以解释/检验“[瓶颈/阀门]”。"
-  between_figures:
-    - from: "Figure 1"
-      to: "Figure 2"
-      en: >
-        Having established a reproducible output-limited inflammasome phenotype upon EphB1 loss, 
-        we next asked whether the defect reflects impaired upstream priming/assembly 
-        or instead a restriction at the terminal, GSDMD pore–driven execution step.
-      cn: >
-        在确立 EphB1 缺失导致炎症小体输出端被稳健限幅的表型后，
-        我们进一步追问：该差异源于上游 priming/装配受损，
-        还是发生在末端由 GSDMD 成孔所驱动的执行层。
-
-    - from: "Figure 2"
-      to: "Figure 3"
-      en: >
-        Having mapped the bottleneck downstream of inflammasome assembly and caspase-1 activation, 
-        we next asked whether EphB1 specifically gates the early engagement of GSDMD-NT with mitochondria that precedes pore function and organelle injury.
-      cn: >
-        在将瓶颈定位到炎症小体装配与 caspase-1 激活之后的执行阶段后，我们进一步追问：EphB1 是否特异性地调控 GSDMD-NT 与线粒体的早期对接，从而影响后续成孔与线粒体损伤。
-
-    - from: "Figure 3"
-      to: "Figure 4"
-      en: >
-        Having localized the execution defect to the GSDMD–mitochondria interface, 
-        we next asked whether a defined lipid gate at the mitochondrial membrane—cardiolipin abundance and accessibility—accounts for the altered engagement efficiency.
-      cn: >
-        在将执行缺陷锁定到 GSDMD–线粒体界面后，我们进一步追问：线粒体膜上是否存在一个可定义的脂质阀门——心磷脂（CL）的总量与可及池——能够解释该界面效率的改变。
-
-    - from: "Figure 4"
-      to: "Figure 5"
-      en: >
-        Having established cardiolipin abundance and accessibility as the execution interface governing inflammasome output, we next operationalized the multiple, parallel processes that collectively shape cardiolipin state—including synthesis, supply, transport, oxidation, remodeling, and membrane context itself—into a set of separable, quantifiable mechanistic axes, enabling cross-batch integration of transcriptomic and lipidomic data to delineate how EphB1 loss coordinately perturbs these axes and thereby tunes GSDMD–mitochondria engagement.
-      cn: >
-        在确立 CL 总量与可及性是调控炎症小体输出的关键执行界面后，我们进一步将塑造 CL 状态与膜环境的多个并行机制过程——包括合成、供给、转运、氧化、重塑与膜环境本身——操作化为一组可区分、可量化的机制轴，并在转录组与脂质组层面进行跨批次整合比较，以刻画 EphB1 缺失如何通过多轴协同扰动，重塑 GSDMD–线粒体结合的可能性。
-
-
-    - from: "Figure 5"
-      to: "Figure 6"
-      en: >
-        Having defined and prioritized a membrane-context mechanistic axis from integrated multi-omics, we next asked which EphB1-linked candidate signaling programs most consistently couple to this axis (X→M→Z), yielding a short, testable set of upstream mediators and validation hooks.
-      cn: >
-        在通过多组学整合界定并筛选出优先的 membrane context 机制轴后，我们进一步追问：哪些与 EphB1 相关的候选信号程序最稳定地与该机制轴耦合（X→M→Z），从而收敛出少数可检验的上游中介与验证钩子。
 
 results_build:
   # 你的 paper_logic.yaml 所在目录就是 record_dir（默认自动推断）
@@ -1067,7 +778,7 @@ results_build:
 
     - figure_6_d_v2.yaml
 
-    - figure_6_e.yaml
+    - figure_6_e_v2.yaml
   # 例：
   # include_files:
   #   - "figure_1_a.yaml"
@@ -1113,7 +824,7 @@ results_build:
 
     - figure_6_d_v2.yaml
 
-    - figure_6_e.yaml
+    - figure_6_e_v2.yaml
   # 例：
   # figure_order:
   #   - "figure_1_a.yaml"

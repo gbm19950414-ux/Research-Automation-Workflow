@@ -43,23 +43,23 @@ question:
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，因为其对 LPS+Nigericin 的响应能可靠诱导早期 GSDMD-NT 线粒体富集。"       # 使用的模型/系统 + 选择理由
+  model_and_system: "使用 WT 与 Ephb1-deficient 原代腹腔巨噬细胞，因为其对 LPS+Nigericin 的响应能可靠诱导早期 GSDMD-NT 线粒体富集。"       # 使用的模型/系统 + 选择理由
                              # 例如：“选用原代腹腔巨噬细胞，因为其对 NLRP3 激活高度敏感，且能反映体内炎症状态。”
   key_variables: "检测炎症小体激活后不同时间点线粒体分级中的 GSDMD-NT 变化，并比较 WT vs KO 在峰值时间的富集指数。"          # 本实验关注的关键变量 + 操纵方式
-                             # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
+                             # 例如：“操纵基因型（WT vs Ephb1-deficient）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
   control_logic: "Total lysate 中 pro-GSDMD/NT 比例用于排除切割不足；线粒体分级用于检测定位差异。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
-                             # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1−/− 的参照组。”
+                             # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1-deficient 的参照组。”
   core_justification: "若 KO 组在线粒体中的 NT 峰值降低，则说明差异定位于‘GSDMD 与膜结合/稳定’步骤，并结合线粒体数量评估，以避免将丰度变化误判为膜结合效率差异。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
-                             # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1−/− 细胞在相同刺激下应释放更少 IL-1β。”
+                             # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1-deficient 细胞在相同刺激下应释放更少 IL-1β。”
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
   inherits_from_protocol: "default_peritoneal_macrophage_NLRP3_activation"   # 引用全章或整篇论文的通用 protocol 名称，如 "default_peritoneal_macrophage_NLRP3_activation"
                                # 之后可在 Methods 总节详细描述该 protocol。
-  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1−/− 原代腹腔巨噬细胞。"      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
-                               # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1−/− 小鼠来源的原代腹腔巨噬细胞。”
-  experimental_groups: "WT vs Ephb1−/−；均接受 LPS priming + Nigericin 激活。"      # 组别及核心差异：基因型、处理、时间点
-                               # 例如：“按基因型分为 WT 和 Ephb1−/−，均接受 LPS 预处理 + ATP 激活。”
+  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1-deficient 原代腹腔巨噬细胞。"      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
+                               # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1-deficient 小鼠来源的原代腹腔巨噬细胞。”
+  experimental_groups: "WT vs Ephb1-deficient；均接受 LPS priming + Nigericin 激活。"      # 组别及核心差异：基因型、处理、时间点
+                               # 例如：“按基因型分为 WT 和 Ephb1-deficient，均接受 LPS 预处理 + ATP 激活。”
   stimuli_and_treatment: "LPS 100 ng/mL 4 h → Nigericin 10 μM；于 0、7.5、15、30、60 min 内按时间梯度快速收集线粒体分级与全裂解组分。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
                                # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
   time_points: "0、7.5、15、30、60 min ；7.5 min 为 WT 峰值时间。"              # 关键测定时间点（如果不在上面已写清）
@@ -78,7 +78,7 @@ results:
     在 WT 细胞中，LPS+nigericin 激活后，
     GSDMD-NT 在线粒体分级中于约 7.5 min 出现明显富集峰值，
     随后逐渐减弱。
-    相比之下，Ephb1−/− 细胞在相同刺激条件下，
+    相比之下，Ephb1-deficient 细胞在相同刺激条件下，
     线粒体分级中的 GSDMD-NT 水平显著降低，
     而 total lysate 中 GSDMD 的切割程度与 WT 相当。
     与此一致，线粒体数量相关的 HK2 与 16S rRNA 在 KO 与 WT 间未见显著差异（Figure 4B / S3E）。
@@ -137,12 +137,12 @@ ai_hints:
 # ---------- 6. figure_legend (shared; multi-panel record: 3k + S3e) ----------
 figure_legend:
   one_sentence_en: >
-    Early mitochondrial enrichment of GSDMD-NT during NLRP3 inflammasome activation in WT and Ephb1−/−
+    Early mitochondrial enrichment of GSDMD-NT during NLRP3 inflammasome activation in WT and Ephb1-deficient
     primary peritoneal macrophages, with mitochondrial abundance controls assessed in parallel.
 
   system_and_design:
-    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
-    genotype_or_groups: "WT versus Ephb1−/−"
+    model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1-deficient mice)"
+    genotype_or_groups: "WT versus Ephb1-deficient"
     key_treatments: >
       LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM), with rapid collection at
       0, 7.5, 15, 30, and 60 min for mitochondrial fractionation and total lysate analysis
@@ -205,13 +205,13 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "WT and Ephb1−/− primary peritoneal macrophages were primed and activated with LPS and Nigericin, followed by rapid isolation of mitochondrial fractions at defined early time points and immunoblot analysis of GSDMD-NT in total lysates and mitochondrial fractions."
-      cn: "在 WT 与 Ephb1−/− 原代腹腔巨噬细胞中进行 LPS 预激并以 Nigericin 激活后，于早期时间点快速分离线粒体分级，并通过免疫印迹分别检测 total 裂解液与线粒体分级中的 GSDMD-NT。"
+      en: "WT and Ephb1-deficient primary peritoneal macrophages were primed and activated with LPS and Nigericin, followed by rapid isolation of mitochondrial fractions at defined early time points and immunoblot analysis of GSDMD-NT in total lysates and mitochondrial fractions."
+      cn: "在 WT 与 Ephb1-deficient 原代腹腔巨噬细胞中进行 LPS 预激并以 Nigericin 激活后，于早期时间点快速分离线粒体分级，并通过免疫印迹分别检测 total 裂解液与线粒体分级中的 GSDMD-NT。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "In WT macrophages, GSDMD-NT transiently accumulated in the mitochondrial fraction with a pronounced peak at approximately 7.5 minutes after inflammasome activation, whereas this early mitochondrial enrichment of GSDMD-NT was markedly reduced in Ephb1−/− cells."
-      cn: "在 WT 巨噬细胞中，炎症小体激活后约 7.5 min，GSDMD-NT 在线粒体分级中出现明显的瞬时富集峰值；而在 Ephb1−/− 细胞中，该早期线粒体富集显著降低。"
+      en: "In WT macrophages, GSDMD-NT accumulated in the mitochondrial fraction at approximately 7.5 min after inflammasome activation, whereas this early mitochondrial enrichment of GSDMD-NT was markedly reduced in Ephb1-deficient macrophages."
+      cn: "在 WT 巨噬细胞中，炎症小体激活后约 7.5 min，GSDMD-NT 在线粒体分级中出现明显的瞬时富集峰值；而在 Ephb1-deficient 细胞中，该早期线粒体富集显著降低。"
       logic_source: "results.data_direction"
 
     M4_robustness:
@@ -220,6 +220,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these data localize the effect of EphB1 deficiency to the early mitochondrial enrichment of GSDMD-NT during inflammasome activation, indicating that EphB1 promotes efficient GSDMD–mitochondria association at the execution stage."
+      en: "Together, these results indicate that EphB1 promotes early mitochondrial enrichment of GSDMD-NT during inflammasome activation."
       cn: "综上，这些结果将 EphB1 缺失的效应定位于炎症小体激活过程中 GSDMD-NT 的早期线粒体富集阶段，表明 EphB1 促进执行端阶段 GSDMD 与线粒体的有效结合。"
       logic_source: "results.group_difference_statement"

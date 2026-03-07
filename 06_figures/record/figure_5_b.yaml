@@ -550,7 +550,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "For each axis (supply, transport, synthesis, remodeling, oxidation, and membrane context), we define minimal feature records that specify axis assignment, biological meaning, quantitative formulae for lipid metrics, directionality conventions (bottleneck_sign), and within-axis weights, together with tiered inclusion rules (Tier-1 executors, Tier-2 proximal components, and Tier-3 conditional contributors) and cross-axis exclusion criteria."
+      en: "For each axis, we defined representative genes and lipid features together with predefined weighting and inclusion rules"
       cn: "针对每条机制轴（供给、转运、合成、重塑、氧化与膜环境），我们以最小 feature 记录的方式明确其轴归属、生物学含义、脂质指标的计算公式、方向性定义（bottleneck_sign）与轴内权重，并给出分层纳入规则（Tier-1 核心执行、Tier-2 路径近邻、Tier-3 条件性贡献者）及跨轴统一排除原则。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
@@ -565,6 +565,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, this table serves as an interpretable lookup resource that links the six-axis cardiolipin framework to concrete gene and lipid features, thereby supporting Fig. 6A and guiding subsequent axis-based multi-omics analyses."
-      cn: "综上，该表作为可解释的对照索引，将六轴心磷脂机制框架与具体的基因/脂质特征一一对应，从而支撑 Fig.6A 并指导后续基于机制轴的多组学分析。"
+      en: # "Together, this table serves as an interpretable lookup resource that links the six-axis cardiolipin framework to concrete gene and lipid features, thereby supporting Fig. 6A and guiding subsequent axis-based multi-omics analyses."
       logic_source: "results.group_difference_statement"

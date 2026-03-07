@@ -39,7 +39,7 @@ question:
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞评估 BEL 对 IL-1β 释放的影响。"
+  model_and_system: "使用 WT 与 Ephb1-deficient 原代腹腔巨噬细胞评估 BEL 对 IL-1β 释放的影响。"
   key_variables: "BEL 处理时间（4/16 h）、剂量（1, 2, 4 μM）、基因型（WT vs KO）、IL-1β 释放量。"
   control_logic: "DMSO vehicle 作为基线对照；BEL 剂量与时间梯度用于评估功能抑制的依赖性；KO 组用于判断在 CL 可及性已受限背景下是否出现遮蔽效应。"
   core_justification: "若心磷脂可及性是炎症小体孔功能与 IL-1β 释放的必要脂质条件，则 BEL 诱导的 CL 可及性下降应直接抑制炎症小体激活，并在功能层面部分遮蔽 EphB1 缺失表型。"
@@ -47,7 +47,7 @@ rationale:
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
   inherits_from_protocol: "default_peritoneal_macrophage_NLRP3_activation"
-  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1−/− 原代腹腔巨噬细胞。"
+  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1-deficient 原代腹腔巨噬细胞。"
   experimental_groups: "WT vs KO × BEL 0/1/2/4 μM；BEL 预处理 4 h 或 16 h。"
   stimuli_and_treatment: "LPS 100 ng/mL 预激 4 h；Nigericin 10 μM 激活 1 h；BEL 预处理按剂量梯度。"
   time_points: "BEL 预处理 4 h 与 16 h；Nigericin 激活 1 h。"
@@ -95,12 +95,12 @@ figure_legend:
   panel_title_cn: "BEL 抑制 IL-1β 释放"
 
   one_sentence_en: >
-    IL-1β release from WT and Ephb1−/− primary peritoneal macrophages following
+    IL-1β release from WT and Ephb1-deficient primary peritoneal macrophages following
     LPS and nigericin stimulation under increasing doses and durations of BEL treatment.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
-    genotype_or_groups: "WT versus Ephb1−/−"
+    genotype_or_groups: "WT versus Ephb1-deficient"
     key_treatments: >
       BEL pretreatment (1, 2, or 4 μM for 4 h or 16 h), followed by LPS priming
       (100 ng/mL, 4 h) and nigericin stimulation (10 μM, 1 h)
@@ -146,7 +146,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across these perturbations, reduction of cardiolipin availability consistently led to a marked decrease in LPS- and Nigericin-induced IL-1β release, indicating convergent suppression of inflammasome terminal output."
+      en: "Across these perturbations, reduced cardiolipin abundant consistently decreased LPS and Nigericin induced IL-1β release "
       cn: "在上述多种干预条件下，心磷脂可及性的降低均伴随 LPS+nigericin 诱导的 IL-1β 释放显著下降，提示炎症小体终端输出出现一致性的抑制。"
       logic_source: "results.data_direction"
 
@@ -156,6 +156,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results demonstrate that diverse perturbations of cardiolipin regulation—whether affecting cardiolipin abundance or remodeling—converge on attenuation of inflammasome-mediated IL-1β release, supporting cardiolipin availability as a common limiting factor for terminal inflammasome output."
+      en: "Together, these results show that perturbations affecting cardiolipin abundance or remodeling consistently reduce inflammasome-mediated IL-1β release."
       cn: "综上，这些结果表明，无论是影响心磷脂含量还是干预心磷脂重塑，不同机制层面的心磷脂调控均汇聚于炎症小体介导的 IL-1β 释放减弱，支持心磷脂可及性作为限制炎症小体终端输出的共同关键因素。"
       logic_source: "results.group_difference_statement"

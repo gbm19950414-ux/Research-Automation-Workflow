@@ -182,6 +182,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These results localize the effect of EphB1 deficiency to a post-activation step, indicating that caspase-1 is efficiently activated."
+      en: "These results localize the EphB1-dependent defect to a step downstream of caspase-1 activation."
       cn: "综上，这些结果将 EphB1 缺失的作用定位于激活之后的步骤，表明 caspase-1 可被有效激活。"
       logic_source: "results.group_difference_statement"

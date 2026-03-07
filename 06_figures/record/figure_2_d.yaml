@@ -10,33 +10,33 @@ meta:
   alt_explanations: 
 question:
   context_from_previous: "在确认 EphB1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷后，需要检验其对炎症小体特异性 IL-1β 外排是否存在选择性影响。"
-  core_question: "在 LPS priming 后的 NLRP3 第二信号刺激中，EphB1 缺失是否降低成熟 IL-1β 的释放，并且该差异是否随刺激强度（Nigericin 剂量）变化？"
-  hypothesis_or_expectation: "若 EphB1 主要影响炎症小体执行层外排/孔功能而非普遍分泌途径，则在相同 priming 与刺激下，HO 应释放更少 IL-1β，且在不同 Nigericin 剂量下均可观察到该趋势。"
+  core_question: "在 LPS priming 后的 NLRP3 第二信号刺激中，EphB1 缺失是否降低成熟 IL-1β 的释放，并且该差异是否随刺激强度（nigericin 剂量）变化？"
+  hypothesis_or_expectation: "若 EphB1 主要影响炎症小体执行层外排/孔功能而非普遍分泌途径，则在相同 priming 与刺激下，HO 应释放更少 IL-1β，且在不同 nigericin 剂量下均可观察到该趋势。"
   importance_reason: "IL-1β 释放是 NLRP3 炎症小体功能输出的核心 readout，可用于将差异定位到炎症小体特异通路而非经典分泌。"
 
 rationale:
   model_and_system: "原代小鼠腹腔巨噬细胞（WT vs EphB1−/−/HO），其 NLRP3 反应灵敏，能够稳定产生 IL-1β 释放读出。"
-  key_variables: "基因型（WT vs HO）与 Nigericin 剂量（0/10/20 μM）作为第二信号强度梯度；LPS priming 保持一致。"
-  control_logic: "设置未加 Nigericin 的对照用于定义基线；通过剂量梯度检验表型是否随刺激强度变化，避免单一剂量造成的偶然差异。"
-  core_justification: "若 EphB1 缺失不影响 priming 与经典分泌，但削弱炎症小体执行层外排，则在相同 LPS priming 下 HO 的 IL-1β 释放将低于 WT，且该差异在不同 Nigericin 剂量下仍可保持。"
+  key_variables: "基因型（WT vs HO）与 nigericin 剂量（0/10/20 μM）作为第二信号强度梯度；LPS priming 保持一致。"
+  control_logic: "设置未加 nigericin 的对照用于定义基线；通过剂量梯度检验表型是否随刺激强度变化，避免单一剂量造成的偶然差异。"
+  core_justification: "若 EphB1 缺失不影响 priming 与经典分泌，但削弱炎症小体执行层外排，则在相同 LPS priming 下 HO 的 IL-1β 释放将低于 WT，且该差异在不同 nigericin 剂量下仍可保持。"
 
 methods:
   inherits_from_protocol: "default_peritoneal_macrophage_NLRP3_activation_ELISA"
   biological_material: "8–12 周龄 C57BL/6 WT 与 EphB1−/−（HO）小鼠来源的原代腹腔巨噬细胞。"
-  experimental_groups: "WT 与 HO；均进行 LPS priming 后给予不同剂量 Nigericin（0/10/20 μM）。"
-  stimuli_and_treatment: "LPS priming（按通用 protocol）后加入 Nigericin 作为第二信号刺激，设置 0、10、20 μM 梯度。"
+  experimental_groups: "WT 与 HO；均进行 LPS priming 后给予不同剂量 nigericin（0/10/20 μM）。"
+  stimuli_and_treatment: "LPS priming（按通用 protocol）后加入 nigericin 作为第二信号刺激，设置 0、10、20 μM 梯度。"
   time_points: "按通用 NLRP3 activation protocol 的终点收集上清进行 ELISA。"
-  dose_info: "Nigericin: 0, 10, 20 μM"
+  dose_info: "nigericin: 0, 10, 20 μM"
   readout_and_assay: "收集细胞上清，使用 IL-1β ELISA 定量（pg/mL）。"
   replicates: "每组 n = 3 生物学重复（图中每个点代表 1 个重复）。"
   analysis_notes: "组间比较采用非配对双尾 t 检验；显著性标注：ns、***。"
-  minimal_methods_summary: "WT 与 HO 原代腹腔巨噬细胞经 LPS priming 后给予 0/10/20 μM Nigericin 刺激，收集上清并用 IL-1β ELISA 定量，比较不同剂量下两基因型的释放差异。"
+  minimal_methods_summary: "WT 与 HO 原代腹腔巨噬细胞经 LPS priming 后给予 0/10/20 μM nigericin 刺激，收集上清并用 IL-1β ELISA 定量，比较不同剂量下两基因型的释放差异。"
 
 results:
-  data_direction: "对照条件下两组 IL-1β 释放接近且无显著差异；在 Nigericin（10 与 20 μM）刺激下，两组 IL-1β 释放均随剂量升高而上升，但 HO 在每个剂量点均低于 WT。"
-  stats_summary: "对照组：ns；Nigericin 10 μM 与 20 μM 条件下 WT vs HO：***（p < 0.001，非配对双尾 t 检验）。"
+  data_direction: "对照条件下两组 IL-1β 释放接近且无显著差异；在 nigericin（10 与 20 μM）刺激下，两组 IL-1β 释放均随剂量升高而上升，但 HO 在每个剂量点均低于 WT。"
+  stats_summary: "对照组：ns；nigericin 10 μM 与 20 μM 条件下 WT vs HO：***（p < 0.001，非配对双尾 t 检验）。"
   key_numbers: "约值（pg/mL）：control ~5；10 μM：WT ~70–80, HO ~45–55；20 μM：WT ~145–165, HO ~90–110。"
-  group_difference_statement: "在相同 LPS priming 与 Nigericin 第二信号刺激下，EphB1 缺失（HO）显著降低成熟 IL-1β 的胞外释放，并且该差异在 10–20 μM 的刺激强度范围内稳定存在。"
+  group_difference_statement: "在相同 LPS priming 与 nigericin 第二信号刺激下，EphB1 缺失（HO）显著降低成熟 IL-1β 的胞外释放，并且该差异在 10–20 μM 的刺激强度范围内稳定存在。"
   robustness_and_qc: "每组 n=3 且点位离散度较小；对照组接近 0 并为 ns，提示基线背景稳定。"
   anomalies_or_limits: "本图仅覆盖 10–20 μM 的剂量窗口；是否在更低/更高剂量或不同刺激时长下呈现相同趋势，需要在扩展条件中验证。"
 
@@ -102,21 +102,21 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "WT and EphB1-deficient primary peritoneal macrophages were uniformly primed with LPS and then stimulated with increasing doses of Nigericin, and mature IL-1β released into the supernatant was quantified by ELISA."
-      cn: "在 WT 与 EphB1 缺失原代腹腔巨噬细胞中统一进行 LPS priming 后，给予不同剂量的 Nigericin 刺激，并通过 ELISA 定量检测上清中成熟 IL-1β 的释放水平。"
+      en: "WT and EphB1-deficient primary peritoneal macrophages were uniformly primed with LPS and then stimulated with increasing doses of nigericin, and mature IL-1β released into the supernatant was quantified by ELISA."
+      cn: "在 WT 与 EphB1 缺失原代腹腔巨噬细胞中统一进行 LPS priming 后，给予不同剂量的 nigericin 刺激，并通过 ELISA 定量检测上清中成熟 IL-1β 的释放水平。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "While IL-1β release increased with higher Nigericin doses in both genotypes, EphB1-deficient macrophages consistently released less IL-1β than WT controls at each stimulatory dose."
-      cn: "尽管在两种基因型中 IL-1β 释放均随 Nigericin 剂量升高而增加，但在每一个刺激剂量下，EphB1 缺失巨噬细胞的 IL-1β 释放水平均持续低于 WT 对照。"
+      en: "While IL-1β release increased with higher nigericin doses in both genotypes, EphB1-deficient macrophages consistently released less IL-1β than WT controls at each stimulatory dose."
+      cn: "尽管在两种基因型中 IL-1β 释放均随 nigericin 剂量升高而增加，但在每一个刺激剂量下，EphB1 缺失巨噬细胞的 IL-1β 释放水平均持续低于 WT 对照。"
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: "The genotype-dependent reduction was statistically significant at both 10 and 20 μM Nigericin and was supported by low variability across biological replicates, whereas baseline release under control conditions remained comparable between groups."
-      cn: "该基因型依赖性的下降在 10 与 20 μM Nigericin 条件下均达到统计学显著性，且生物学重复间变异较小；而在对照条件下，两组的基线释放水平保持相当。"
+      en: "The genotype-dependent reduction was statistically significant at both 10 and 20 μM nigericin and was supported by low variability across biological replicates, whereas baseline release under control conditions remained comparable between groups."
+      cn: "该基因型依赖性的下降在 10 与 20 μM nigericin 条件下均达到统计学显著性，且生物学重复间变异较小；而在对照条件下，两组的基线释放水平保持相当。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These results demonstrate that EphB1 deficiency limits mature IL-1β release in a dose-independent manner across the tested range of NLRP3 activation, supporting a selective defect at the inflammasome-specific execution or export stage rather than impaired priming."
+      en: "These results indicate that EphB1 deficiency limits mature IL-1β release across the tested range of NLRP3 activation, supporting a defect at a late inflammasome execution or export step rather than impaired priming."
       cn: "综上，这些结果表明在所测试的 NLRP3 激活强度范围内，EphB1 缺失以剂量无关的方式限制成熟 IL-1β 的释放，支持差异发生于炎症小体特异的执行或外排层，而非 priming 过程受损。"
       logic_source: "results.group_difference_statement"

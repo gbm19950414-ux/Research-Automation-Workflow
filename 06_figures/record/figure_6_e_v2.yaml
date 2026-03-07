@@ -192,22 +192,17 @@ results_skeleton_en:
       cn: "我们绘制代表性优先通路的样本级 Z–M 散点图（颜色区分基因型、形状区分批次），用于评估基因型聚集及其在多批次中的稳健性。"
       logic_source: "methods.readout_and_assay + rationale.control_logic"
 
-    M3_joint_clustering:
-      en: "Across the three shown pathways, KO and WT samples form distinct clusters in the joint (Z, M) space, indicating a systematic genotype-dependent reorganization of this mechanistic landscape."
+    M3_directional_result:
+      en: "Notably, the PI3K–AKT–mTOR pathway shows coordinated shifts along both axes, with KO samples displaced toward lower M and higher Z values, whereas WT samples occupy the opposite quadrant. In contrast, JAK–STAT inflammatory and FAK–Src–Rho cytoskeleton pathways separate primarily along the Z axis while largely overlapping along the M axis."
       cn: "在三条展示通路中，KO 与 WT 样本在 (Z, M) 联合空间中形成清晰聚集，提示该二维机制空间发生系统性的基因型相关重排。"
       logic_source: "results.data_direction"
 
-    M4_pathway_specific_structure:
-      en: "Notably, PI3K_AKT_mTOR exhibits coordinated separation along both axes, with KO samples biased toward low M/high Z and WT samples toward high M/low Z. In contrast, JAK_STAT_inflammatory and cytoskeleton_FAK_Src_Rho separate primarily along the Z axis, while showing substantial overlap along the M axis."
-      cn: "值得注意的是，PI3K_AKT_mTOR 同时沿 Z 与 M 两轴呈协同位移（KO 偏向低 M/高 Z，WT 偏向高 M/低 Z）；而 JAK/STAT 与细胞骨架通路主要沿 Z 轴分离，M 轴上两组高度重叠。"
-      logic_source: "results.data_direction + interpretation.minimal_bio_interpretation"
 
-    M5_robustness:
+    M6_robust:
       en: "Batch-specific symbols indicate that these clustering and separation patterns are consistently observed across independent batches rather than being driven by a single batch."
       cn: "批次符号提示上述聚集与分离结构在多个独立批次中均可观察到，降低了单一批次驱动的可能性。"
       logic_source: "results.robustness_and_qc"
 
-    M6_panel_conclusion:
-      en: "Together with robust ranking and leave-one-out stability, these spatial patterns support prioritizing PI3K_AKT_mTOR as a higher-priority candidate mediator axis, whereas JAK/STAT and cytoskeletal pathways more likely reflect covarying or context-dependent transcriptional responses."
-      cn: "结合稳健排序与 LOO 稳定性，上述空间结构支持将 PI3K_AKT_mTOR 作为更高优先级的候选中介轴，而 JAK/STAT 与细胞骨架通路更可能反映与膜环境协变的伴随或情境性转录响应。"
+    M5_panel_conclusion:
+      en: "These results show that reduced PI3K–AKT–mTOR signaling is consistently associated with increased membrane context axis scores."
       logic_source: "interpretation.claim_supported + interpretation.link_to_previous"

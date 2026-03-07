@@ -43,23 +43,23 @@ question:
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，因其对 NLRP3 激活的 mtDNA 释放动力学可稳定复现。"       # 使用的模型/系统 + 选择理由
+  model_and_system: "使用 WT 与 EphB1-deficient 原代腹腔巨噬细胞，因其对 NLRP3 激活的 mtDNA 释放动力学可稳定复现。"       # 使用的模型/系统 + 选择理由
                              # 例如：“选用原代腹腔巨噬细胞，因为其对 NLRP3 激活高度敏感，且能反映体内炎症状态。”
   key_variables: "分离细胞质、线粒体、全细胞组分后测定 mtDNA（16S、ND1）含量，并比较 KO vs WT 的脉冲释放幅度。"          # 本实验关注的关键变量 + 操纵方式
-                             # 例如：“操纵基因型（WT vs Ephb1−/−）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
+                             # 例如：“操纵基因型（WT vs EphB1-deficient）和刺激条件（LPS 预处理 + ATP/Nigericin 激活）。”
   control_logic: "全细胞 mtDNA 作为内参排除 mtDNA 总量差异；统一基因校正（16S/ND1）保证不同分级可比性。"          # 对照设置背后的逻辑（为什么这些对照足以回答问题）
-                             # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 Ephb1−/− 的参照组。”
+                             # 例如：“未刺激组用于定义基线 IL-1β 水平，WT 作为 EphB1-deficient 的参照组。”
   core_justification: "若 KO 线粒体破损减少，则在相同激活条件下，胞质 mtDNA 峰值应下降而 total mtDNA 无变化。"     # 最关键的一句“设计理由”（可直接当自动摘要用）
-                             # 例如：“如果 EphB1 促进炎性小体效应端活性，则 Ephb1−/− 细胞在相同刺激下应释放更少 IL-1β。”
+                             # 例如：“如果 EphB1 促进炎性小体效应端活性，则 EphB1-deficient 细胞在相同刺激下应释放更少 IL-1β。”
 
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
   inherits_from_protocol: "default_peritoneal_macrophage_fractionation_qPCR"   # 引用全章或整篇论文的通用 protocol 名称，如 "default_peritoneal_macrophage_NLRP3_activation"
                                # 之后可在 Methods 总节详细描述该 protocol。
-  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1−/− 原代腹腔巨噬细胞。"      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
-                               # 例如：“8–12 周龄雄性 C57BL/6 WT 与 Ephb1−/− 小鼠来源的原代腹腔巨噬细胞。”
-  experimental_groups: "WT vs Ephb1−/−；均进行 LPS priming + Nigericin 激活。"      # 组别及核心差异：基因型、处理、时间点
-                               # 例如：“按基因型分为 WT 和 Ephb1−/−，均接受 LPS 预处理 + ATP 激活。”
+  biological_material: "8–12 周龄 C57BL/6 WT 与 EphB1-deficient 原代腹腔巨噬细胞。"      # 使用的生物材料/模型：动物/原代/细胞系 + 关键信息
+                               # 例如：“8–12 周龄雄性 C57BL/6 WT 与 EphB1-deficient 小鼠来源的原代腹腔巨噬细胞。”
+  experimental_groups: "WT vs EphB1-deficient；均进行 LPS priming + Nigericin 激活。"      # 组别及核心差异：基因型、处理、时间点
+                               # 例如：“按基因型分为 WT 和 EphB1-deficient，均接受 LPS 预处理 + ATP 激活。”
   stimuli_and_treatment: "LPS 100 ng/mL 4 h；随后 Nigericin 10 μM；按 0、7.5、15、30、60 min 进行时间梯度分级取样。"    # 刺激/药物/处理的关键信息（种类 + 浓度 + 时间）
                                # 例如：“LPS 100 ng/mL 预处理 4 h，随后 ATP 5 mM 处理 30 min。”
   time_points: "0、7.5、15、30、60 min 为峰值对比时间。"              # 关键测定时间点（如果不在上面已写清）
@@ -77,16 +77,16 @@ results:
   data_direction: >
     在 nigericin 激活后，WT 细胞中 胞质 mtRNA（16S、ND1）出现
     短暂而显著的脉冲式升高，升高峰值出现在7.5min时间点
-    在7.5min时间点，Ephb1−/− 细胞中该峰值明显降低。
+    在7.5min时间点，EphB1-deficient 细胞中该峰值明显降低。
     相比之下，total 组分中 mtRNA 整体保持相对稳定，
     其中 16S 未见显著差异，ND1 在激活条件下出现轻度增加。
   stats_summary: "胞质 16S/ND1：KO 7.5 min 显著降低（p < 0.05）；total 16S/ND1：ns。"            # 统计显著性信息（检验方法、p 值区间即可）
                                # 例如：“非配对 t 检验，p < 0.01。”
   key_numbers: "KO 胞质 mtDNA 峰值较 WT 约下降 30–50%；total mtDNA 波动 <5%。"              # 可选：fold change、均值±SEM、效应量（方便你之后查）
-                               # 例如：“WT: 850 ± 120 pg/mL；Ephb1−/−: 410 ± 90 pg/mL；约下降 50%。”
+                               # 例如：“WT: 850 ± 120 pg/mL；EphB1-deficient: 410 ± 90 pg/mL；约下降 50%。”
   group_difference_statement: >
     在相同炎症小体激活条件下，
-    Ephb1−/− 细胞中胞质 mtRNA 的显著下降
+    EphB1-deficient 细胞中胞质 mtRNA 的显著下降
     并未伴随 total mtRNA 的同步降低，
     且两种线粒体标记（16S、ND1）在胞质中呈一致变化，
     支持差异主要来源于线粒体内容物外泄过程的改变。
@@ -142,7 +142,7 @@ figure_legend:
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
-    genotype_or_groups: "WT versus Ephb1−/−"
+    genotype_or_groups: "WT versus EphB1-deficient"
     key_treatments: >
       LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM) and rapid fractionation
       at 0, 7.5, 15, 30, and 60 min after stimulation
@@ -220,13 +220,13 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "WT and Ephb1−/− primary peritoneal macrophages were primed and activated with Nigericin, followed by rapid subcellular fractionation and qPCR-based quantification of mtDNA (16S and ND1) in cytosolic, mitochondrial, and total cell fractions across a defined time course."
-      cn: "在 WT 与 Ephb1−/− 原代腹腔巨噬细胞中进行 Nigericin 激活后，快速分离胞质、线粒体及全细胞组分，并通过 qPCR 定量检测各组分中 mtDNA（16S、ND1）在时间梯度上的变化。"
+      en: "WT and EphB1-deficient primary peritoneal macrophages were primed and activated with Nigericin, followed by rapid subcellular fractionation and qPCR-based quantification of mtDNA (16S and ND1) in cytosolic, mitochondrial, and total cell fractions across a defined time course."
+      cn: "在 WT 与 EphB1-deficient 原代腹腔巨噬细胞中进行 Nigericin 激活后，快速分离胞质、线粒体及全细胞组分，并通过 qPCR 定量检测各组分中 mtDNA（16S、ND1）在时间梯度上的变化。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "In WT macrophages, inflammasome activation induced a rapid and transient pulse of cytosolic mtDNA, peaking at early time points, whereas this cytosolic mtDNA peak was markedly reduced in Ephb1−/− cells."
-      cn: "在 WT 巨噬细胞中，炎症小体激活诱导胞质 mtDNA 在早期时间点出现快速而短暂的脉冲式升高；而在 Ephb1−/− 细胞中，该胞质 mtDNA 峰值显著降低。"
+      en: "In WT macrophages, inflammasome activation induced a rapid and transient pulse of cytosolic mtDNA, peaking at 7.5min, whereas this cytosolic mtDNA peak was markedly reduced in EphB1-deficient macrophages."
+      cn: "在 WT 巨噬细胞中，炎症小体激活诱导胞质 mtDNA 在早期时间点出现快速而短暂的脉冲式升高；而在 EphB1-deficient 细胞中，该胞质 mtDNA 峰值显著降低。"
       logic_source: "results.data_direction"
 
     M4_robustness:
@@ -235,6 +235,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results indicate that EphB1 deficiency selectively limits inflammasome-induced release of mitochondrial DNA into the cytosol without reducing total mtDNA content, localizing the effect to diminished mitochondrial membrane disruption during the execution phase."
+      en: "Together, these results indicate that EphB1 deficiency reduces inflammasome-induced release of mitochondrial DNA into the cytosol without altering total mtDNA abundance."
       cn: "综上，这些结果表明 EphB1 缺失可在不降低 mtDNA 总量的前提下，选择性限制炎症小体激活诱导的线粒体 mtDNA 向胞质外泄，从而将效应定位于执行阶段线粒体膜破损程度的降低。"
       logic_source: "results.group_difference_statement"

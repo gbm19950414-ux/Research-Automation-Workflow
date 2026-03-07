@@ -1,51 +1,260 @@
 figures:
 
   Figure 1:
-    claim: EphB1 deficiency reduces IL-1β release
+    claim: Ephb1 deficiency reduces IL-1β release
 
     opening_en: >
       To identify regulators of inflammasome,
-      we performed a genetic screening strategy in primary macrophages
-      from PB genetic backgrounds using IL-1β release as the functional readout.
 
   Figure 2:
-    claim: EphB1 deficiency maps to the level of the inflammasome receptor downstream pathway
+    claim: Ephb1 deficiency maps to the level of the inflammasome receptor downstream pathway
 
     opening_en: >
-      To determine where EphB1 functions within the inflammasome pathway,
-      we compared inflammasome activation across NLRP3, AIM2, and NLRC4 stimuli
-      in WT and Ephb1-deficient macrophages.
+      To map the position of Ephb1 within the inflammasome pathway, 
+      we compared inflammasome responses triggered by NLRP3, AIM2, and NLRC4 in WT and Ephb1-deficient macrophages.
 
   Figure 3:
-    claim: EphB1 deficiency reduces mitochondrial rupture
+    claim: Ephb1 deficiency reduces mitochondrial rupture
 
     opening_en: >
-      To investigate how EphB1 regulates pyroptotic execution,
-      we examined mitochondrial integrity and GSDMD recruitment to mitochondria
+      To investigate how Ephb1 regulates pyroptotic execution,
+      we examined mitochondrial integrity and GSDMD localization
       during NLRP3 inflammasome activation in WT and Ephb1-deficient macrophages.
 
   Figure 4:
-    claim: EphB1 deficiency reduces cardiolipin levels
+    claim: Ephb1 deficiency reduces cardiolipin levels
 
     opening_en: >
-      To test whether altered mitochondrial membrane composition contributes
-      to the EphB1-dependent phenotype, we quantified cardiolipin levels
-      in WT and Ephb1-deficient macrophages.
+      To determine whether mitochondrial membrane composition contributes to the Ephb1-dependent phenotype, we quantified cardiolipin abundance in WT and Ephb1-deficient macrophages.
 
   Figure 5:
-    claim: EphB1 deficiency alters the membrane environment axis
+    claim: Ephb1 deficiency alters the membrane environment axis
 
     opening_en: >
-      To identify cellular processes associated with cardiolipin variation,
-      we defined a set of biological process axes centered on cardiolipin metabolism,
-      each represented by corresponding lipidomic indicators and gene sets,
-      and evaluated their perturbation magnitude and association with cardiolipin abundance across batch.
-
+      To identify cellular processes associated with cardiolipin variation, we defined biological process axes centered on cardiolipin metabolism, each represented by lipidomic indicators and gene sets, and evaluated their association with cardiolipin abundance across batches.
   Figure 6:
-    claim: EphB1 deficiency increases PI3K–AKT–mTOR signaling module
+    claim: Ephb1 deficiency increases PI3K–AKT–mTOR signaling module
 
     opening_en: >
-      To identify signaling pathways downstream of EphB1 associated with membrane context axis,
-      we constructed EphB1 downstream pathway gene sets
-      and evaluated their perturbation magnitude, consistency across samples,
-      and covariation with the membrane context axis.
+
+      To identify Ephb1 downstream signaling pathways associated with the membrane context axis, we constructed Ephb1-related pathway gene sets and evaluated their transcriptional changes and correlation with the membrane context axis.
+section_transitions:
+  between_figures:
+  - from: "Figure 1"
+    to: "Figure 2"
+    en: >
+      Having established a output-limited inflammasome phenotype upon Ephb1-deficiency macrophages, 
+      we next asked whether the defect reflects impaired upstream priming/assembly 
+      or instead a restriction at the terminal, GSDMD pore–driven pyroptotic execution.
+
+  - from: "Figure 2"
+    to: "Figure 3"
+    en: >
+      Having mapped the bottleneck pyroptotic execution, 
+      we next asked whether Ephb1 specifically gates the early engagement of GSDMD-NT with mitochondria that precedes pore function and organelle injury.
+
+  - from: "Figure 3"
+    to: "Figure 4"
+    en: >
+      Having localized the execution defect to the GSDMD–mitochondria interface, 
+      we next asked whether a defined lipid gate at the mitochondrial membrane—cardiolipin abundance—accounts for the altered engagement efficiency.
+
+  - from: "Figure 4"
+    to: "Figure 5"
+    en: 
+      # We next asked whether mitochondrial cardiolipin abundance influences GSDMD–mitochondria interaction during inflammasome activation.
+
+  - from: "Figure 5"
+    to: "Figure 6"
+    en: >
+      We next examined which Ephb1 downstream signaling pathways correlate most strongly with the membrane context axis.
+
+panel_transitions: #可以适当减少
+  between_panels:
+  - from: "1a"
+    to: "1b"
+    en: >
+      
+
+  - from: "1b"
+    to: "1c"
+    en: >
+      Having prioritized Ephb1 from the screen, we next asked whether the phenotype generalizes beyond a single inflammasome agonist, thereby arguing against a stimulus-specific artifact.
+    cn: >
+      在从筛选中优先锁定 Ephb1 之后，我们进一步检验：该表型是否可跨不同炎症小体激动剂复现，以排除刺激物特异的偶然效应。
+
+  - from: "1c"
+    to: "1d"
+    en: >
+      Having established cross-agonist consistency within inflammasome, we next asked whether Ephb1 loss broadly constrains lytic execution across distinct inflammasome sensors.
+    cn: >
+      在确立炎症小体间跨激动剂的一致性后，我们进一步检验：该限制是否可跨不同炎症小体感受器推广，从而将其定位为更普遍的执行端表型。
+
+  - from: "2a/b"
+    to: "2c"
+    en: >
+      We next asked whether conventional cytokine secretion was preserved, which would argue against a generalized secretory defect.
+    cn: >
+      在确认转录性 priming 并未受影响后，我们进一步检验：经典细胞因子分泌途径是否同样完好，以将炎症小体输出与全局分泌缺陷区分开来。
+
+  - from: "2a/b"
+    to: "s2a"
+    en: >
+      Having established that transcriptional priming is preserved, we next asked whether this conclusion holds under a complementary priming readout IL6.
+    cn: >
+      在确认转录性 priming 并未受影响后，我们进一步用补充 readout IL6复核 priming 环节结论的稳健性。
+
+  - from: "2c"
+    to: "2d"
+    en: >
+      We next asked whether the Ephb1-dependent difference specifically affects inflammasome-triggered IL-1β release across different levels of stimulation.
+    cn: >
+      在排除普遍分泌障碍后，我们进一步检验：差异是否特异体现在炎症小体触发的 IL-1β 裂解性外排，并在刺激强度维度上保持可解析性。
+
+  - from: "2c"
+    to: "s2b"
+    en: >
+      Having found no evidence for a generalized secretion impairment, we next asked whether the intactness of conventional cytokine secretion IL6 holds under an orthogonal cytokine readout.
+    cn: >
+      在排除普遍分泌障碍后，我们继续用另一类经典细胞因子 readout IL6 验证“常规分泌途径完整”的结论。
+
+  - from: "2d"
+    to: "2e"
+    en: >
+      We next examined whether this defect reflects impaired inflammasome assembly at the ASC platform.
+    cn: >
+      在确认差异集中于炎症小体特异的输出后，我们进一步检验：该差异是否源自 ASC 平台层面的装配缺陷。
+
+  - from: "2e"
+    to: "2f"
+    en: >
+      We next examined whether caspase-1 activation itself is preserved.
+    cn: >
+      在未见 ASC 寡聚化差异的前提下，我们进一步检验：caspase-1 激活是否仍然保留，以将瓶颈继续收束到更下游的执行环节。
+
+  - from: "2f"
+    to: "2g"
+    en: >
+      We next examined whether the canonical caspase-1 substrates—pro-IL-1β and GSDMD—are processed normally.
+    cn: >
+      在确认 caspase-1 激活基本保留后，我们进一步检验其经典底物（pro-IL-1β 与 GSDMD）是否能够被正常切割，从而排除“底物加工受损”作为 Ephb1 相关差异的来源。
+
+
+
+  - from: "3a/b/c/d/e/f/g/h"
+    to: "3/i/j/s3/d/f/g"
+    en: >
+      We therefore examined early mitochondrial events during inflammasome activation to determine whether Ephb1 deficiency affects mitochondrial content release.
+    cn: >
+
+  - from: "3/i/j/s3/d/f/g"
+    to: "3k/s3e"
+    en: >
+      We next examined whether GSDMD recruitment to mitochondria follows a similar temporal pattern during inflammasome activation.
+    cn: >
+      在进一步强化“早期线粒体阶段”特征后，我们进一步检验：蛋白层面的时间梯度读数是否能独立地指认相同的峰值时间窗，并进一步检验：Ephb1 缺失是否选择性削弱 GSDMD-NT 在线粒体上的富集，从而将瓶颈精确落在“界面对接/富集”而非上游加工环节。
+
+
+  - from: "4a/b"
+    to: "4c/d"
+    en: >
+      We next examined whether lipidomic analysis confirms changes in cardiolipin abundance.
+    cn: >
+      在获得可及性代理读数的线索后，我们进一步检验：独立的化学定量是否支持 CL 总量与/或物种谱的改变，以增强膜脂归因的稳健性。
+
+  - from: "4c/d"
+    to: "4e/f"
+    en: >
+      We next tested whether pharmacological inhibition of cardiolipin biosynthesis alters  cardiolipin abundance.
+    cn: >
+
+  - from: "4e/f"
+    to: "4g"
+    en: >
+      We next examined whether reduced cardiolipin abundance affects inflammasome-mediated IL-1β release.
+    cn: >
+
+  - from: "4g"
+    to: "s4a/b"
+    en: >
+      We next tested whether perturbation of cardiolipin remodeling produces a similar effect.
+
+  - from: "s4a/b"
+    to: "s4c"
+    en: >
+      We next examined whether this perturbation similarly affects inflammasome-mediated IL-1β release.
+    cn: >
+      在建立第二条独立的脂质状态操控后，我们进一步检验：其对炎症小体输出的功能后果是否与同一脂质阀门模型一致。
+
+  - from: "5A"
+    to: "5B"
+    en: >
+      We next defined the specific gene and lipid features assigned to each axis.
+    cn: >
+      在给出机制轴的概念框架后，我们进一步明确：每条轴由哪些基因与脂质特征构成，以及其方向与权重如何被先验、可追溯地定义。
+
+  - from: "5B"
+    to: "5C"
+    en: >
+      We next normalized multi-batch omics datasets and computed comparable axis-level scores.
+    cn: >
+      在先验固定机制轴定义后，我们进一步回答：不同批次、不同组学的原始测量如何被规范化并投影为可比较的轴级分数。
+
+  - from: "5C"
+    to: "5D"
+    en: >
+      We next examined whether axis effects are consistent across omics layers and batches.
+    cn: >
+      在建立计分管线后，我们进一步检验：各机制轴效应在不同组学与批次间是否方向一致，从而给出扰动景观的第一层结构信息。
+
+  - from: "5D"
+    to: "5E"
+    en: >
+      We next integrated evidence across batches to obtain aggregated axis-level scores.
+    cn: >
+      在评估批次×组学一致性之后，我们进一步检验：等权证据聚合能否形成连贯的轴级总结，用以量化 Ephb1 相关扰动的总体模式。
+
+  - from: "5E"
+    to: "5F"
+    en: >
+      We next examined the relationship between axis scores and cardiolipin abundance.
+
+  - from: "6a"
+    to: "6b"
+    en: >
+      We next defined candidate EphB1 downstream signaling gene sets for pathway-level analysis.
+    cn: >
+
+  - from: "6b"
+    to: "6c"
+    en: >
+      We next examined which pathways show consistent EphB1-dependent transcriptional changes across RNA batches.
+    cn: >
+      在明确候选程序及计分方向后，我们进一步检验：哪些程序在不同 RNA 批次中呈现可重复的 Ephb1 相关偏移，从而具备作为候选中介（X→M）的基本资格。
+
+  - from: "6c"
+    to: "6d"
+    en: >
+      We next examined which pathways show the strongest change across batchs.
+
+  - from: "6d"
+    to: "6e"
+    en: >
+      We next examined whether these pathways correlate with the membrane context axis.
+    cn: >
+      在识别 RNA 内部耦合候选后，我们进一步检验：优先 RNA 机制轴是否能在独立重复中与脂质表型空间对齐，从而在不依赖配对样本中介回归的前提下获得正交支撑。
+
+  - from: "6e"
+    to: "6g/h"
+    en: >
+      Having established transcript–lipid alignment, we next designed a functionally testable perturbation to discriminate Eph–ephrin signaling directions, converting prioritized inferences into validation-ready experiments.
+    cn: >
+      在建立转录轴与脂质表型的一致性对齐后，我们进一步设计可检验的功能操控，用于区分 Eph–ephrin 的正向/反向信号贡献，从而将推断结果转化为可验证实验。
+
+  - from: "6g/h"
+    to: "6i"
+    en: >
+      Having specified the perturbation logic, we next asked how to project its membrane/lipid consequences back onto the terminal inflammasome output readout, closing the causal loop.
+    cn: >
+      在明确操控设计逻辑后，我们进一步将其膜脂后果投影回末端炎症小体输出 readout，以闭合“信号—膜环境—输出端”的可检验因果环。
+

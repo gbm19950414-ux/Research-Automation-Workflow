@@ -40,13 +40,13 @@ methods:
   stimuli_and_treatment: "LPS（100 ng/mL）刺激后裂解收集 RNA。"
   time_points: ""
   dose_info: ""
-  readout_and_assay: "qPCR 检测 Tnf、Il6、Il1b mRNA；使用 GAPDH 作为内参；ΔCt → ΔΔCt → log2FC。"
+  readout_and_assay: "qPCR 检测 Tnf、Il6、Il-1β mRNA；使用 GAPDH 作为内参；ΔCt → ΔΔCt → log2FC。"
   replicates: "每组 n ≥ 3；趋势在 ≥3 次独立实验中重复获得。"
   analysis_notes: "双尾 t 检验；以 WT 组均值为基准。"
   minimal_methods_summary: "原代巨噬细胞经 LPS 刺激不同时间点收集 RNA，经 qPCR 分析 TNF-α、IL-6、IL-1β的转录性 priming。"
 
 results:
-  data_direction: "Tnf、Il6、Il1b 在 LPS 刺激下均上升；KO 相对 WT 各时间点转录水平均未见显著差异。"
+  data_direction: "Tnf、Il6、Il-1β 在 LPS 刺激下均上升；KO 相对 WT 各时间点转录水平均未见显著差异。"
   stats_summary: "双尾 t 检验均为 ns。"
   key_numbers: ""
   group_difference_statement: "EphB1 缺失不影响经典 TLR4 介导的第一信号转录性 priming。"
@@ -114,10 +114,10 @@ panel_overrides:
       - "Tnf mRNA"
 
   b:
-    panel_title_en: "Priming gene induction (Il1b)"
-    panel_title_cn: "转录性 priming：Il1b"
+    panel_title_en: "Priming gene induction (Il-1β)"
+    panel_title_cn: "转录性 priming：Il-1β"
     displayed_targets:
-      - "Il1b mRNA"
+      - "Il-1β mRNA"
       
 results_skeleton_en:
   stage: T3
@@ -132,13 +132,13 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "Transcriptional priming was assessed by qPCR analysis of Tnf, Il6, and Il1b mRNA levels in WT and EphB1-deficient primary peritoneal macrophages following LPS stimulation."
-      cn: "通过 qPCR 检测 WT 与 EphB1 缺失原代腹腔巨噬细胞在 LPS 刺激后的 Tnf、Il6 与 Il1b mRNA 水平，以评估转录性 priming。"
+      en: "Transcriptional priming was assessed by qPCR analysis of Tnf, Il6, and Il-1β mRNA levels in WT and EphB1-deficient primary peritoneal macrophages following LPS stimulation."
+      cn: "通过 qPCR 检测 WT 与 EphB1 缺失原代腹腔巨噬细胞在 LPS 刺激后的 Tnf、Il6 与 Il-1β mRNA 水平，以评估转录性 priming。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il1b transcripts in WT and EphB1-deficient macrophages across all examined time points."
-      cn: "在所有检测时间点，LPS 刺激均在 WT 与 EphB1 缺失巨噬细胞中诱导了幅度相当的 Tnf、Il6 与 Il1b 转录上调。"
+      en: "LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il-1β mRNA in WT and EphB1-deficient macrophages across all examined time points."
+      cn: "在所有检测时间点，LPS 刺激均在 WT 与 EphB1 缺失巨噬细胞中诱导了幅度相当的 Tnf、Il6 与 Il-1β 转录上调。"
       logic_source: "results.data_direction"
 
     M4_robustness:
@@ -147,6 +147,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these data indicate that EphB1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming, excluding defective first-signal activation as the cause of reduced inflammasome output."
+      en: "Together, these data indicate that EphB1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming, arguing against defective first-signal activation as the cause of reduced inflammasome output."
       cn: "综上，这些结果表明 EphB1 缺失并不影响 TLR4–NF-κB 依赖的转录性 priming，从而排除了第一信号受损导致炎症小体输出降低的可能性。"
       logic_source: "results.group_difference_statement"      

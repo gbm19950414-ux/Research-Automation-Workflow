@@ -41,7 +41,7 @@ question:
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: "使用 WT 与 Ephb1−/− 原代腹腔巨噬细胞，其对 LPS+nigericin 的响应可稳定诱导 ROS 动力学与 Δψm 改变。"
+  model_and_system: "使用 WT 与 EphB1-deficient 原代腹腔巨噬细胞，其对 LPS+nigericin 的响应可稳定诱导 ROS 动力学与 Δψm 改变。"
   key_variables: "比较基因型差异下的细胞质 ROS（H2DCHA）、线粒体 ROS（MitoSOX）、线粒体膜电位（TMRM）。"
   control_logic: >
     "统一使用 LPS priming + nigericin 的时间梯度；所有指标归一化到加药前基线以比较动力学差异。"
@@ -51,8 +51,8 @@ rationale:
 # ---------- 3. Methods（差异性信息）：只写本 panel 特有的 ----------
 methods:
   inherits_from_protocol: "default_peritoneal_macrophage_NLRP3_activation"
-  biological_material: "8–12 周龄 C57BL/6 WT 与 Ephb1−/− 原代腹腔巨噬细胞。"
-  experimental_groups: "WT vs Ephb1−/−；均进行 LPS priming 后进行 nigericin 时间梯度激活。"
+  biological_material: "8–12 周龄 C57BL/6 WT 与 EphB1-deficient 原代腹腔巨噬细胞。"
+  experimental_groups: "WT vs EphB1-deficient；均进行 LPS priming 后进行 nigericin 时间梯度激活。"
   stimuli_and_treatment: "LPS 100 ng/mL 4 h；刺激结束前 30 min 加入 H2DCHA 或 MitoSOX 或 TMRM；随后加入 nigericin 并连续读数 120 min。"
   time_points: "0–120 min，间隔 1–2.5 min（根据 plate reader 设置），结果最终求平均聚合为5分钟间隔。"
   dose_info: "Nigericin 10 μM；荧光探针按说明书标准浓度使用。"
@@ -69,7 +69,7 @@ methods:
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
-  data_direction: "Ephb1−/− 细胞在 nigericin 激活后 120 min 内的细胞质 ROS（H2DCHA）上升减缓，并表现为 TMRM 信号维持更高（去极化幅度更小）；MitoSOX 的 AUC 未见显著差异（ns），但 HO 组在部分时间段呈更高/更波动的趋势。基线条件下（G/H）TMRM 两组差异不大（ns）。"
+  data_direction: "EphB1-deficient 细胞在 nigericin 激活后 120 min 内的细胞质 ROS（H2DCHA）上升减缓，并表现为 TMRM 信号维持更高（去极化幅度更小）；MitoSOX 的 AUC 未见显著差异（ns），但 HO 组在部分时间段呈更高/更波动的趋势。基线条件下（G/H）TMRM 两组差异不大（ns）。"
   stats_summary: "H2DCHA：AUC KO 低于 WT（**）；TMRM（激活条件）：AUC KO 高于 WT（**）；MitoSOX：ns；基线 TMRM（G/H）：ns。"
   key_numbers: "H2DCHA AUC：KO 低于 WT；TMRM AUC（激活）：KO 高于 WT；MitoSOX AUC：ns（存在趋势）；基线 TMRM AUC：ns。"
   group_difference_statement: "与 WT 相比，KO 在炎症小体激活期间呈现更弱的细胞质 ROS 累积与更小的膜电位下降；线粒体 ROS（MitoSOX）整体差异未达显著。"
@@ -107,7 +107,7 @@ figure_legend:
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
-    genotype_or_groups: "WT versus Ephb1−/−"
+    genotype_or_groups: "WT versus EphB1-deficient"
     key_treatments: >
       LPS priming (100 ng/mL, 4 h) followed by nigericin stimulation (10 μM),
       or unstimulated conditions for baseline measurements
@@ -186,13 +186,13 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "WT and Ephb1−/− primary peritoneal macrophages were LPS-primed and activated with Nigericin, and time-resolved changes in cytosolic ROS (H2DCHA), mitochondrial ROS (MitoSOX), and mitochondrial membrane potential (TMRM) were continuously monitored and normalized to pre-stimulation baselines."
-      cn: "在 WT 与 Ephb1−/− 原代腹腔巨噬细胞中进行 LPS 预激并以 Nigericin 激活后，连续监测并归一化分析细胞质 ROS（H2DCHA）、线粒体 ROS（MitoSOX）及线粒体膜电位（TMRM）的时间动态变化。"
+      en: "WT and EphB1-deficient primary peritoneal macrophages were LPS-primed and activated with Nigericin, and time-resolved changes in cytosolic ROS (H2DCHA), mitochondrial ROS (MitoSOX), and mitochondrial membrane potential (TMRM) were continuously monitored and normalized to pre-stimulation baselines."
+      cn: "在 WT 与 EphB1-deficient 原代腹腔巨噬细胞中进行 LPS 预激并以 Nigericin 激活后，连续监测并归一化分析细胞质 ROS（H2DCHA）、线粒体 ROS（MitoSOX）及线粒体膜电位（TMRM）的时间动态变化。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Upon inflammasome activation, Ephb1−/− macrophages exhibited attenuated accumulation of cytosolic ROS and a smaller loss of mitochondrial membrane potential compared with WT cells, whereas mitochondrial ROS signals measured by MitoSOX showed no significant genotype-dependent difference in overall magnitude."
-      cn: "在炎症小体激活过程中，与 WT 相比，Ephb1−/− 巨噬细胞表现出更弱的细胞质 ROS 累积以及更小幅度的线粒体膜电位下降；而以 MitoSOX 检测的线粒体 ROS 整体强度未显示显著的基因型差异。"
+      en: "Upon inflammasome activation, EphB1-deficient macrophages exhibited reduced accumulation of cytosolic ROS and a smaller loss of mitochondrial membrane potential compared with WT cells. In contrast, mitochondrial ROS levels measured by MitoSOX showed no significant genotype-dependent difference "
+      cn: "在炎症小体激活过程中，与 WT 相比，EphB1-deficient 巨噬细胞表现出更弱的细胞质 ROS 累积以及更小幅度的线粒体膜电位下降；而以 MitoSOX 检测的线粒体 ROS 整体强度未显示显著的基因型差异。"
       logic_source: "results.data_direction"
 
     M4_robustness:
@@ -201,6 +201,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results indicate that EphB1 deficiency does not cause an intrinsic alteration in mitochondrial membrane potential at baseline but limits ROS accumulation and membrane depolarization during inflammasome activation, supporting a model in which mitochondrial damage is attenuated during the execution phase."
+      en: "Together, these results indicate that EphB1 deficiency does not cause an intrinsic alteration in mitochondrial membrane potential at baseline but limits ROS accumulation and mitochondrial depolarization during inflammasome activation, suggesting reduced mitochondrial damage."
       cn: "综上，这些结果表明 EphB1 缺失并未在静息条件下引起线粒体膜电位的固有改变，但在炎症小体激活过程中可限制 ROS 累积与膜去极化，支持执行阶段线粒体损伤受限的模型。"
       logic_source: "results.group_difference_statement"

@@ -1,25 +1,10 @@
 manuscript:
   section: Introduction
-  target_journals:
-  - "Nature"
-  - "Nature Immunology"
-  - "Nature Communications"
-  language: en
-  writing_style:
-    tone: "concise, mechanistic, non-overclaiming"
-    paragraph_units: "each paragraph has a topic sentence + logical progression +
-      take-home bridge"
-    constraint: "no results disclosed; only background, gap, rationale, objectives,
-      hypotheses"
-  figures_mentioned:
-  - id: "Fig. 1.1"
-    note: "NLRP3 inflammasome-triggered pyroptosis schematic (as in source text)"
-  - id: "Fig. 1.2"
-    note: "Mitochondrial CL binding by GSDMD as an early step (as in source text)"
 
   outline:
   - id: "1.1"
-    title: "Inflammasome output imbalance and immunopathological burden"
+    title: "Inflammasome output imbalance and immunopathological burden" #
+
     children:
     - "1.1.1"
     - "1.1.2"
@@ -41,7 +26,7 @@ manuscript:
     - "1.3.4"
   sections:
 
-  - id: "1.1"
+  - id: "1.1.1"
     heading: "Inflammasome output imbalance and immunopathological consequences"
     narrative_role: "Set the public-health and translational motivation; motivate
       the need for amplitude-limiting control of inflammatory outputs."

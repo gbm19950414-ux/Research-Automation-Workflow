@@ -207,7 +207,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Among all axes, the Membrane context axis showed the strongest negative association with sum_CL, with higher combined Z scores corresponding to lower total cardiolipin levels, whereas all other axes displayed weak or near-zero correlations."
+      en: "Among all axes, the membrane context axis showed the strongest negative association with sum_CL, with higher combined Z scores corresponding to lower total cardiolipin levels, whereas all other axes displayed weak or near-zero correlations."
       cn: "在所有机制轴中，Membrane context 轴与 sum_CL 呈现出最强的负相关趋势，即 combined Z 越高，总心磷脂水平越低；而其余机制轴的相关性均较弱或接近于零。"
       logic_source: "results.data_direction"
 
@@ -217,6 +217,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results indicate that total cardiolipin abundance (sum_CL) is not a sensitive or robust readout for capturing mechanistic axis effects across batches, thereby excluding sum_CL as a primary quantitative proxy for axis-level perturbations and motivating the use of more informative cardiolipin accessibility or composition-based metrics."
-      cn: "综上，这些结果表明心磷脂总量（sum_CL）并非捕捉机制轴效应的敏感或稳健读数，从而排除了其作为轴级扰动主要量化指标的适用性，并提示应优先采用更具信息量的心磷脂可及性或组成相关指标。"
+      en: "These results indicate that total cardiolipin abundance (sum_CL) consistently capture membrane context axis perturbations across batches."
       logic_source: "results.group_difference_statement"

@@ -176,7 +176,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Caspase-1–dependent cleavage of GSDMD and pro–IL-1β occurred efficiently in EphB1-deficient macrophages, yielding cleavage and maturation degree comparable to those in WT cells."
+      en: "Caspase-1–dependent cleavage of GSDMD and pro–IL-1β occurred efficiently in EphB1-deficient macrophages, yielding levels of cleavage and maturation comparable to those in WT cells"
       cn: "在 EphB1 缺失巨噬细胞中，caspase-1 依赖的 GSDMD 与 pro–IL-1β 切割可有效发生。"
       logic_source: "results.data_direction"
 

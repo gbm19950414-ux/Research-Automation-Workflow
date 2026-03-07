@@ -24,15 +24,15 @@ assets:
 
 question:
   context_from_previous: "Fig6A-C已经介绍多组学整合的概念图、指标选择与数据处理流程。"
-  core_question: "EphB1 缺失是否在 RNA 与脂质组中呈现一致且可重复的机制轴效应？"
+  core_question: "Ephb1 缺失是否在 RNA 与脂质组中呈现一致且可重复的机制轴效应？"
   hypothesis_or_expectation: "预期找到一个在多个批次、两种组学中方向一致的机制轴。"
   importance_reason: "判断哪些机制轴具有跨批次、组学一致性，是后续提出最终机制模型的前提。"
 
 rationale:
   model_and_system: "整合 RNA-seq（3 批次）与脂质组学 LC–MS（4 批次）的机制轴效应。"
-  key_variables: "对比 EphB1 KO vs WT 在六条机制轴上的 batch-level effect_z。"
+  key_variables: "对比 Ephb1 KO vs WT 在六条机制轴上的 batch-level effect_z。"
   control_logic: "同一机制轴在不同组学/不同批次的方向是否一致，是判断其生物学稳健性的核心。"
-  core_justification: "若某机制轴是 EphB1 缺失的主要受影响路径，则应在不同组学、不同批次中呈现一致方向的 effect_z。"
+  core_justification: "若某机制轴是 Ephb1 缺失的主要受影响路径，则应在不同组学、不同批次中呈现一致方向的 effect_z。"
 
 methods:
   inherits_from_protocol: "default_transcriptomic_lipidomic_mechanistic_axis_pipeline"
@@ -80,10 +80,10 @@ results:
 
 interpretation:
   minimal_bio_interpretation: >
-    跨组学效应矩阵表明，EphB1 缺失并未引发广泛、非特异性的代谢或合成程序改变，
+    跨组学效应矩阵表明，Ephb1 缺失并未引发广泛、非特异性的代谢或合成程序改变，
     而是选择性地扰动了与膜环境相关的机制轴。
     Membrane context 轴在 RNA 与脂质组中均表现出最大的效应幅度和最高的批次一致性，
-    指示其为 EphB1 缺失条件下最主要、最稳健的受影响机制轴。
+    指示其为 Ephb1 缺失条件下最主要、最稳健的受影响机制轴。
 
   alternative_explanations: >
 
@@ -91,7 +91,7 @@ interpretation:
     条件依赖性调控或较弱的真实生物学效应。
 
   claim_supported: >
-    这些结果支持如下结论：EphB1 缺失主要与膜环境相关机制轴的稳定扰动相关，
+    这些结果支持如下结论：Ephb1 缺失主要与膜环境相关机制轴的稳定扰动相关，
     而非直接作用于心磷脂的合成或供给能力。
 
   link_to_previous: >
@@ -101,7 +101,7 @@ interpretation:
   transition_to_next: >
     基于 Membrane context 轴在跨组学与跨批次中的突出稳健性，
     后续分析将进一步合并多组学效应，检测绝对效应值是否具有显著性，
-    以构建 EphB1 缺失影响膜环境的整合机制模型。
+    以构建 Ephb1 缺失影响膜环境的整合机制模型。
 aio_hints:
   target_section: ["Results", "Discussion_mini", "Methods_diff"]
   tone: "neutral"
@@ -115,7 +115,7 @@ figure_legend:
   panel_title_cn: "跨 RNA 与脂质组的机制轴效应矩阵"
 
   one_sentence_en: >
-    Batch-level effect_z matrix summarizing the direction and magnitude of EphB1 deficiency–associated
+    Batch-level effect_z matrix summarizing the direction and magnitude of Ephb1 deficiency–associated
     changes across six mechanistic axes in RNA-seq and lipidomics datasets.
 
   system_and_design:
@@ -159,17 +159,17 @@ results_skeleton_en:
 
   modules:
     M1_motivation:
-      en: "Building on the mechanistic axis framework and data-processing pipeline established in Fig. 6A–C, we next asked whether EphB1 deficiency produces consistent and reproducible axis-level effects across RNA-seq and lipidomics datasets."
-      cn: "在 Fig.6A–C 已建立机制轴框架与数据处理流程的基础上，我们进一步检验 EphB1 缺失是否在 RNA-seq 与脂质组学中产生一致且可重复的机制轴层级效应。"
+      en: "Building on the mechanistic axis framework and data-processing pipeline established in Fig. 6A–C, we next asked whether Ephb1 deficiency produces consistent and reproducible axis-level effects across RNA-seq and lipidomics datasets."
+      cn: "在 Fig.6A–C 已建立机制轴框架与数据处理流程的基础上，我们进一步检验 Ephb1 缺失是否在 RNA-seq 与脂质组学中产生一致且可重复的机制轴层级效应。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "For each RNA-seq and lipidomics batch, we computed batch-specific effect_z scores representing the directional difference between EphB1-deficient and WT macrophages for each of the six mechanistic axes, and assembled these values into a cross-omics axis-by-batch effect matrix."
-      cn: "针对每一个 RNA-seq 与脂质组学批次，我们分别计算 EphB1 缺失相对于 WT 的机制轴效应值（effect_z），并将其整合为跨组学的 axis×batch 效应矩阵。"
+      en: "For each RNA-seq and lipidomics batch, we computed batch-specific effect_z scores representing the directional difference between Ephb1-deficient and WT macrophages for each of the six mechanistic axes, and assembled these values into a cross-omics axis-by-batch effect matrix."
+      cn: "针对每一个 RNA-seq 与脂质组学批次，我们分别计算 Ephb1 缺失相对于 WT 的机制轴效应值（effect_z），并将其整合为跨组学的 axis×batch 效应矩阵。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across three RNA-seq batches and four lipidomics batches, only the Membrane context axis displayed a consistent positive effect in both omics layers, with stable directionality and the largest absolute effect sizes among all axes."
+      en: "Across three RNA-seq batches and four lipidomics batches, only the membrane context axis displayed a consistent positive effect in both omics layers, with stable directionality."
       cn: "在 RNA-seq 的三个批次与脂质组学的四个批次中，仅 Membrane context 轴在两种组学中均表现出方向一致的正向效应，且其绝对效应值在所有机制轴中最大。"
       logic_source: "results.data_direction"
 
@@ -179,6 +179,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, this cross-omics effect matrix identifies Membrane context as the only mechanistic axis that is robustly and reproducibly perturbed by EphB1 deficiency, distinguishing it from other axes that are variably influenced by batch or omics-specific factors."
-      cn: "综上，该跨组学效应矩阵表明，Membrane context 是唯一在不同组学与不同批次中均稳定受 EphB1 缺失影响的机制轴，从而将其与受批次或组学特异性因素影响的其他轴区分开来。"
+      en: "These results identify the membrane context axis as the only axis consistently perturbed by Ephb1 deficiency across omics layers."
+      cn: "综上，该跨组学效应矩阵表明，Membrane context 是唯一在不同组学与不同批次中均稳定受 Ephb1 缺失影响的机制轴，从而将其与受批次或组学特异性因素影响的其他轴区分开来。"
       logic_source: "results.group_difference_statement"

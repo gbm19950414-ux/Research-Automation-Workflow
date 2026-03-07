@@ -11,7 +11,7 @@ meta:
   figure: "Figure 6"              # 如 "Figure 3"
   figure_id: "6d"   
   experiment_id: "RNA_only_XMZ_ranking_MembraneContext"
-  short_title: "EphB1 状态驱动的下游通路变化（ΔM）及其与 Membrane context 轴（Z）的耦合与稳健性"
+  short_title: "Ephb1 状态驱动的下游通路变化（ΔM）及其与 Membrane context 轴（Z）的耦合与稳健性"
   claim: 
   evidence_level: #existence / association / positioning / necessity / sufficiency / rescue
   causal_strength: #correlational / suggestive / causal
@@ -36,14 +36,14 @@ assets:
 # ---------- 1. Scientific Question：本节要回答什么 ----------
 question:
   context_from_previous: "前述多组学一致性分析指向 membrane context 相关机制轴存在显著障碍，需要进一步定位可能的上游信号输入。"
-  core_question: "EphB1 缺失关联的下游信号模块（M）中，哪些在跨批次上呈现一致变化，并与 membrane context 轴分数（Z）在样本层面耦合？"
+  core_question: "Ephb1 缺失关联的下游信号模块（M）中，哪些在跨批次上呈现一致变化，并与 membrane context 轴分数（Z）在样本层面耦合？"
   hypothesis_or_expectation: "若某下游通路参与驱动 membrane context 障碍，则其在 KO 中应出现跨批次一致的ΔM，并与 Z 在批内呈可重复的方向性耦合。"
   importance_reason: "在缺乏同一样本跨组学配对的情况下，跨批次RNA足迹提供了可复现的候选通路优先级排序依据，用于后续湿实验验证。"
 
 # ---------- 2. Rationale / Design Logic：为什么这样设计 ----------
 rationale:
-  model_and_system: "使用三批次转录组样本（WT vs Ephb1 KO）计算EphB1已知下游通路的转录足迹分数（M），并在同一RNA数据内计算机制轴分数（Z=Membrane context）。"
-  key_variables: "X：基因型（WT/KO）；M：EphB1 下游信号模块分数；Z：Membrane context 轴分数（障碍强度，分数越高=障碍越重）。"
+  model_and_system: "使用三批次转录组样本（WT vs Ephb1 KO）计算Ephb1已知下游通路的转录足迹分数（M），并在同一RNA数据内计算机制轴分数（Z=Membrane context）。"
+  key_variables: "X：基因型（WT/KO）；M：Ephb1 下游信号模块分数；Z：Membrane context 轴分数（障碍强度，分数越高=障碍越重）。"
   control_logic: "在每个批次内分别比较 HO−WT 得到ΔM，并在批内拟合 Z 与 M 的耦合（控制 X），以降低批次间基线差异带来的偏移。"
   core_justification: "用“跨批次ΔM一致性 + 批内M↔Z耦合 + LOO稳健性”合成证据链，对候选下游通路进行优先级排序（用于机制筛选，而非严格因果中介检验）。"
 
@@ -58,24 +58,24 @@ methods:
   readout_and_assay: "从 RNA-seq 计算通路足迹：对预定义基因集按gene_effect_sign聚合得到每样本的 M 分数；对机制轴基因集同法得到 Z（Membrane context）。"
   replicates: "RNA-seq 共 3 个批次（总 n≈19；每批 WT/KO 数量不等）。"
   analysis_notes: "(A) 计算每批ΔM=mean(KO)−mean(WT)，再对批次取中位数汇总；(B) 在批内拟合 Z ~ M + X（X为组别）得到 β_M；(C) 对 pooled 数据做 leave-one-out（逐样本剔除）重复拟合，输出 β_M_loo 矩阵评估稳健性。"
-  minimal_methods_summary: "基于三批 RNA-seq 数据计算 EphB1 下游通路分数（M）与 Membrane context 轴分数（Z）。用跨批次ΔM评估X→M一致性；在批内以 Z ~ M + X 回归刻画M↔Z耦合；通过 pooled LOO 重复拟合评估耦合稳健性。"
+  minimal_methods_summary: "基于三批 RNA-seq 数据计算 Ephb1 下游通路分数（M）与 Membrane context 轴分数（Z）。用跨批次ΔM评估X→M一致性；在批内以 Z ~ M + X 回归刻画M↔Z耦合；通过 pooled LOO 重复拟合评估耦合稳健性。"
 
 # ---------- 4. Results：把图变成结构化文字 ----------
 results:
-  data_direction: "跨批次汇总显示，多数 EphB1 下游模块在 KO 中呈负向ΔM（HO−WT<0），其中 PI3K–AKT–mTOR 与 JAK–STAT 的下降幅度最大；细胞骨架/黏附模块（FAK–Src–Rho）呈正向ΔM。以 Z=Membrane context 为结局时，PI3K–AKT–mTOR 与 JAK–STAT 的 M 分数与 Z 呈负向耦合，而 FAK–Src–Rho 与 Z 呈正向耦合。"
+  data_direction: "跨批次汇总显示，多数 Ephb1 下游模块在 KO 中呈负向ΔM（HO−WT<0），其中 PI3K–AKT–mTOR 与 JAK–STAT 的下降幅度最大；细胞骨架/黏附模块（FAK–Src–Rho）呈正向ΔM。以 Z=Membrane context 为结局时，PI3K–AKT–mTOR 与 JAK–STAT 的 M 分数与 Z 呈负向耦合，而 FAK–Src–Rho 与 Z 呈正向耦合。"
   stats_summary: "M↔Z 采用批内线性回归 Z ~ M + X；稳健性通过 pooled LOO 逐样本剔除重复拟合评估（报告 β_M_loo 的符号一致性与波动范围）。"
   key_numbers: "ΔM（跨批次中位数，约值）：PI3K≈−1.1，JAK–STAT≈−1.0，MAPK≈−0.8；FAK–Src–Rho≈+0.7。LOO：PI3K/JAK 的 β_M_loo 多为负值区间；FAK–Src–Rho 多为正值区间。"
-  group_difference_statement: "EphB1 缺失在转录足迹层面系统性降低 PI3K–AKT–mTOR 与 JAK–STAT 等模块分数，并且这些模块在批内与 Membrane context 轴呈方向一致的耦合；相对地，骨架/黏附模块虽在 KO 中上调，但其与 Membrane context 的耦合方向相反。"
+  group_difference_statement: "Ephb1 缺失在转录足迹层面系统性降低 PI3K–AKT–mTOR 与 JAK–STAT 等模块分数，并且这些模块在批内与 Membrane context 轴呈方向一致的耦合；相对地，骨架/黏附模块虽在 KO 中上调，但其与 Membrane context 的耦合方向相反。"
   robustness_and_qc: "X→M 的方向在多个批次间一致（以ΔM符号投票）；M↔Z 的耦合通过 pooled LOO 检验，优先关注在多数剔除情形下 β_M_loo 符号保持一致的模块。"
   anomalies_or_limits: "不同批次的效应大小存在波动，且样本量有限导致单样本对回归斜率的影响仍不可忽视；因此该分析用于候选通路排序而非严格因果证明。"
 
 # ---------- 5. Interpretation & Role in Chapter：怎么理解 + 在整章中的作用 ----------
 interpretation:
-  minimal_bio_interpretation: "这些结果支持：在收样状态下，EphB1 缺失与 PI3K–AKT–mTOR、JAK–STAT 等下游信号足迹的降低相伴，并与 membrane context 障碍分数的升高呈一致的方向性关系（通路越弱，障碍越重）。"
+  minimal_bio_interpretation: "这些结果支持：在收样状态下，Ephb1 缺失与 PI3K–AKT–mTOR、JAK–STAT 等下游信号足迹的降低相伴，并与 membrane context 障碍分数的升高呈一致的方向性关系（通路越弱，障碍越重）。"
   alternative_explanations: "M 分数为转录足迹，未直接测量蛋白磷酸化/瞬时活性；M 与 Z 的耦合可能反映共同上游因素或细胞状态差异，而非单一路径驱动。"
   summary_type: "supportive, exploratory"
   claim_supported: "PI3K–AKT–mTOR 与 JAK–STAT 等模块为解释 membrane context 障碍的优先候选通路（用于后续功能验证）。"
-  link_to_previous: "在确定 membrane context 相关机制轴存在稳定障碍后，本节进一步利用 RNA-only 的跨批次足迹在 EphB1 已知下游通路中进行候选排序。"
+  link_to_previous: "在确定 membrane context 相关机制轴存在稳定障碍后，本节进一步利用 RNA-only 的跨批次足迹在 Ephb1 已知下游通路中进行候选排序。"
   transition_to_next: "下一步将把该候选排序与脂质表型方向一致性（concordance）整合，并在关键候选通路上进行靶向生化/药理验证以测试其对 membrane context 与 CL 可及性的因果贡献。"
 # ---------- 6. figure_legend（每个 panel 一份：用于最终拼接 Figure Legends） ----------
 # 设计原则：
@@ -90,7 +90,7 @@ figure_legend:
   panel_title_cn: "跨批次 ΔM 排序与 M–Z 耦合稳健性"
 
   one_sentence_en: >
-    Cross-batch ranking of EphB1 downstream signaling modules by genotype-associated
+    Cross-batch ranking of Ephb1 downstream signaling modules by genotype-associated
     transcriptional shifts (ΔM) and assessment of their coupling robustness with the
     Membrane context axis using within-batch regression and pooled leave-one-out refitting.
 
@@ -102,7 +102,7 @@ figure_legend:
 
   readouts_and_assays:
     primary_readout: >
-      Batch-level ΔM (KO−WT) for EphB1 downstream signaling modules and corresponding
+      Batch-level ΔM (KO−WT) for Ephb1 downstream signaling modules and corresponding
       M↔Z coupling coefficients (β_M) with robustness evaluated by leave-one-out refitting
     assay: >
       RNA-seq–based pathway footprint scoring followed by batch-wise aggregation of ΔM,
@@ -148,18 +148,18 @@ results_skeleton_en:
 
   modules:
     M1_motivation:
-      en: "Following the identification of a stable membrane context–related mechanistic axis, we next asked which EphB1 downstream signaling modules exhibit cross-batch consistent transcriptional changes and show reproducible coupling to the Membrane context axis at the sample level."
-      cn: "在确认 membrane context 相关机制轴存在稳定障碍之后，我们进一步检验哪些 EphB1 下游信号模块在转录足迹层面呈现跨批次一致变化，并在样本层面与 Membrane context 轴分数表现出可重复的耦合关系。"
+      en: "Following the identification of a stable membrane context–related mechanistic axis, we next asked which Ephb1 downstream signaling modules exhibit cross-batch consistent transcriptional changes and show reproducible coupling to the Membrane context axis at the sample level."
+      cn: "在确认 membrane context 相关机制轴存在稳定障碍之后，我们进一步检验哪些 Ephb1 下游信号模块在转录足迹层面呈现跨批次一致变化，并在样本层面与 Membrane context 轴分数表现出可重复的耦合关系。"
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "Using three independent RNA-seq batches of WT and Ephb1-deficient macrophages, we computed pathway footprint scores (M) for predefined EphB1 downstream gene sets and Membrane context axis scores (Z), summarized genotype effects as batch-level ΔM (KO−WT), and quantified within-batch coupling by linear regression of Z on M while controlling for genotype."
-      cn: "基于三批独立的 WT 与 Ephb1 缺失巨噬细胞 RNA-seq 数据，我们计算预定义 EphB1 下游基因集的通路足迹分数（M）及 Membrane context 轴分数（Z），以批次内 KO−WT 的 ΔM 汇总基因型效应，并在批内通过回归 Z ~ M + X（控制基因型）刻画 M↔Z 的耦合关系。"
+      en: "Using three independent RNA-seq batches of WT and Ephb1-deficient macrophages, we computed pathway footprint scores (M) for predefined Ephb1 downstream gene sets and Membrane context axis scores (Z), summarized genotype effects as batch-level ΔM (KO−WT), and quantified within-batch coupling by linear regression of Z on M while controlling for genotype."
+      cn: "基于三批独立的 WT 与 Ephb1 缺失巨噬细胞 RNA-seq 数据，我们计算预定义 Ephb1 下游基因集的通路足迹分数（M）及 Membrane context 轴分数（Z），以批次内 KO−WT 的 ΔM 汇总基因型效应，并在批内通过回归 Z ~ M + X（控制基因型）刻画 M↔Z 的耦合关系。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Cross-batch aggregation revealed that most EphB1 downstream modules showed negative ΔM in EphB1-deficient cells, with the largest decreases observed for PI3K–AKT–mTOR and JAK–STAT, whereas cytoskeleton/adhesion modules (FAK–Src–Rho) displayed positive ΔM; correspondingly, PI3K–AKT–mTOR and JAK–STAT scores were negatively coupled to the Membrane context axis, while FAK–Src–Rho showed a positive coupling."
-      cn: "跨批次汇总显示，多数 EphB1 下游模块在 Ephb1 缺失中呈负向 ΔM，其中 PI3K–AKT–mTOR 与 JAK–STAT 的下降幅度最大；相对地，骨架/黏附模块（FAK–Src–Rho）呈正向 ΔM。相应地，PI3K–AKT–mTOR 与 JAK–STAT 的通路分数与 Membrane context 轴呈负向耦合，而 FAK–Src–Rho 与其呈正向耦合。"
+      en: "Across pathways, PI3K–AKT–mTOR and JAK–STAT modules showed the largest decreases in EphB1-deficient macrophages, whereas cytoskeleton/adhesion pathways (FAK–Src–Rho) displayed positive shifts."
+      cn: "跨批次汇总显示，多数 Ephb1 下游模块在 Ephb1 缺失中呈负向 ΔM，其中 PI3K–AKT–mTOR 与 JAK–STAT 的下降幅度最大；相对地，骨架/黏附模块（FAK–Src–Rho）呈正向 ΔM。相应地，PI3K–AKT–mTOR 与 JAK–STAT 的通路分数与 Membrane context 轴呈负向耦合，而 FAK–Src–Rho 与其呈正向耦合。"
       logic_source: "results.data_direction"
 
     M4_robustness:
@@ -168,6 +168,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these analyses prioritize PI3K–AKT–mTOR and JAK–STAT as the most robust EphB1 downstream candidates whose transcriptional attenuation is consistently associated with increased membrane context barrier scores, while distinguishing cytoskeleton/adhesion modules as oppositely coupled pathways."
-      cn: "综上，这些分析将 PI3K–AKT–mTOR 与 JAK–STAT 确立为最稳健的 EphB1 下游候选通路，其转录足迹降低与 membrane context 障碍分数升高呈一致关联；同时也将骨架/黏附模块区分为与之方向相反耦合的通路。"
+      en: "Together, these results prioritize PI3K–AKT–mTOR as the most robust EphB1 downstream signaling candidate."
+      cn: "综上，这些分析将 PI3K–AKT–mTOR 与 JAK–STAT 确立为最稳健的 Ephb1 下游候选通路，其转录足迹降低与 membrane context 障碍分数升高呈一致关联；同时也将骨架/黏附模块区分为与之方向相反耦合的通路。"
       logic_source: "results.group_difference_statement"

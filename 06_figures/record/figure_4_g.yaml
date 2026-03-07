@@ -150,7 +150,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "AD treatment markedly suppressed LPS- and Nigericin-induced IL-1β release in macrophages in a dose- and time-dependent manner."
+      en: "AD treatment markedly suppressed LPS and Nigericin induced IL-1β release in macrophages."
       cn: "AD 处理以剂量与时间依赖的方式显著抑制 LPS+nigericin 诱导的 IL-1β 释放。"
       logic_source: "results.data_direction"
 
@@ -160,6 +160,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results demonstrate that pharmacological reduction of cardiolipin availability is sufficient to suppress inflammasome-mediated IL-1β release, supporting a causal role for cardiolipin accessibility in controlling inflammasome output."
-      cn: "综上，这些结果表明，通过药理学方式降低心磷脂可及性本身即可抑制炎症小体介导的 IL-1β 释放，支持心磷脂可及性在调控炎症小体输出中的因果作用。"
+      en: "These results indicate that pharmacological reduction of cardiolipin abundant suppresses inflammasome-induced IL-1β release."
       logic_source: "results.group_difference_statement"

@@ -244,7 +244,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Among the six axes, the Membrane context axis exhibited the strongest and most pronounced deviation from zero, with a positive multi-omics Z score of approximately +2.6, representing the largest absolute effect across all mechanistic axes."
+      en: "Among the six axes, the membrane context axis showed the largest deviation from zero, with a multi-omics Z score of approximately +2.6 "
       cn: "在六条机制轴中，Membrane context 轴表现出最强、最显著的偏移，其跨组学综合 Z 值约为 +2.6，是所有机制轴中绝对值最大的效应。"
       logic_source: "results.data_direction"
 
@@ -254,6 +254,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results identify Membrane context as the sole mechanistic axis that is robustly and significantly perturbed by EphB1 deficiency at the integrated multi-omics level, supporting the presence of a dominant membrane-related bottleneck rather than a distributed multi-axis imbalance."
+      en: "These results identify membrane context as the primary axis perturbed by EphB1 deficiency."
       cn: "综上，这些结果在跨组学整合层面将 Membrane context 明确识别为唯一显著受 Ephb1 缺失影响的机制轴，支持一种以膜环境相关瓶颈为主导、而非多轴分布式失衡的生物学模式。"
       logic_source: "results.group_difference_statement"

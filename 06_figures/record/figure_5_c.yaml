@@ -290,7 +290,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "For each omics layer, raw data underwent modality-specific quality control, normalization, and batch-aware modeling, followed by feature aggregation into predefined mechanistic indicators and axis-level Z scores that serve as standardized inputs for multi-omics integration."
+      en: "For each omics layer, raw data underwent quality control, normalization, and batch-aware modeling, followed by aggregation into predefined axis-level Z scores used for multi-omics integration"
       cn: "针对每一条组学数据线，原始数据分别经历特异性的质量控制、归一化及批次感知建模，随后被聚合为预先定义的机制指标与轴级 Z 分数，作为多组学整合的标准化输入。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
@@ -305,6 +305,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, this processing pipeline provides a transparent and reproducible foundation for deriving mechanistic axis scores and cardiolipin phenotypes from heterogeneous multi-omics datasets, thereby enabling the integrative analyses presented in subsequent panels."
-      cn: "综上，该数据处理流程为从异质的多组学数据中提取机制轴分数与心磷脂表型提供了透明且可复现的基础，从而支撑后续各 panel 中呈现的多组学整合分析。"
+      en: # "Together, this processing pipeline provides a transparent and reproducible foundation for deriving mechanistic axis scores and cardiolipin phenotypes from heterogeneous multi-omics datasets, thereby enabling the integrative analyses presented in subsequent panels."
       logic_source: "results.group_difference_statement"

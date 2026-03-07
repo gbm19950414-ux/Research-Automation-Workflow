@@ -156,7 +156,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across three RNA-seq batches, EphB1 deficiency induced reproducible directional shifts in multiple signaling modules: PI3K–AKT–mTOR pathways showed consistent negative responses (KO < WT), NF-κB/ROS and JAK–STAT was overall reduced with batch-dependent reversals, cytoskeleton-related modules were shifted in a positive direction, and other pathways exhibited weaker or inconsistent effects."
+      en: "Across three RNA-seq batches, EphB1 deficiency induced consistent decreases in PI3K–AKT–mTOR pathway scores (KO < WT). NF-κB/ROS and JAK–STAT modules showed weaker or batch-dependent reductions, whereas cytoskeleton-related pathways displayed positive shifts"
       cn: "在三个独立 RNA 批次中，EphB1 缺失在多条信号模块中引起可重复的方向性偏移：PI3K–AKT–mTOR 在各批次中总体呈负向改变（KO < WT）；NF-κB/ROS 与 JAK–STAT 总体下移但存在批次依赖的反向；Cytoskeleton 相关模块总体呈正向偏移；其余通路效应较弱或方向不一致。"
       logic_source: "results.data_direction"
 
@@ -166,6 +166,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these analyses provide an overview of the transcriptional response state of EphB1 downstream signaling at the time of sampling, identifying PI3K–AKT–mTOR and JAK–STAT as the most consistently downregulated modules and prioritizing them as candidate pathways for subsequent coupling analyses with membrane context perturbation."
-      cn: "综上，这些分析刻画了收样时刻 EphB1 下游信号网络的转录响应状态，确定 PI3K–AKT–mTOR 与 JAK–STAT 是跨批次最一致受抑的模块，并将其优先作为后续与 membrane context 机制轴耦合分析的候选通路。"
+      en: # "These results identify PI3K–AKT–mTOR as the most consistently downregulated EphB1-associated signaling pathways."
       logic_source: "results.group_difference_statement"

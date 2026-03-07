@@ -186,7 +186,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "This framework defines six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—and assigns to each axis representative genes and lipid readouts that can, in principle, be extracted from transcriptomic and lipidomic datasets."
+      en: "This framework defines six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—and assigns to each axis representative genes and lipid readouts derived from transcriptomic and lipidomic datasets"
       cn: "该框架定义了六条功能轴——合成、重塑、转运、供给、氧化和膜环境——并为每条轴指定了可在原则上从转录组与脂质组数据中提取的代表性基因与脂质读数。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
@@ -201,6 +201,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, this conceptual model serves as a mechanistic coordinate system for organizing cardiolipin-related pathways and readouts, providing a common reference for the multi-omics analyses presented in subsequent figures."
-      cn: "综上，该概念模型作为一个机制坐标系，用于组织心磷脂相关通路与读数，并为后续图中呈现的多组学分析提供统一的参照框架。"
+      en: # "Together, this conceptual model serves as a mechanistic coordinate system for organizing cardiolipin-related pathways and readouts, providing a common reference for the multi-omics analyses presented in subsequent figures."
       logic_source: "results.group_difference_statement"

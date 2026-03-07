@@ -182,6 +182,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These data indicate that EphB1 deficiency does not disrupt ASC oligomerization during NLRP3 inflammasome activation, excluding defective inflammasome assembly as the basis for reduced downstream outputs."
+      en: "These data indicate that EphB1 deficiency does not disrupt ASC oligomerization during NLRP3 inflammasome activation, arguing against defective inflammasome assembly as the basis for reduced downstream outputs."
       cn: "综上，这些结果表明 EphB1 缺失并不影响 NLRP3 炎症小体激活过程中的 ASC 装配，从而排除了炎症小体组装缺陷作为下游输出降低原因的可能性。"
       logic_source: "results.group_difference_statement"

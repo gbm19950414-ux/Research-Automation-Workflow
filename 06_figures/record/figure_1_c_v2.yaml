@@ -174,7 +174,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across all three activation routes, Ephb1 pb/pb macrophages released significantly less IL-1β than WT controls."
+      en: "Across all three activation routes, Ephb1-deficient macrophages released significantly less IL-1β than WT controls."
       cn: "在三种通路的第二信号激活条件下，Ephb1 pb/pb 巨噬细胞的 IL-1β 释放均显著低于 WT 对照。"
       logic_source: "results.data_direction"
 
@@ -184,6 +184,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These data indicate that the diminished IL-1β output in Ephb1 pb/pb macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 in receptor downstream pathway."
+      en: "These data indicate that the diminished IL-1β output in EphB1-deficient macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 at a receptor-downstream step."
       cn: "综上，Ephb1 pb/pb 细胞 IL-1β 输出受限并非局限于单一感受器通路，支持 EphB1 作用于炎症小体下游的共同执行过程。"
       logic_source: "results.group_difference_statement"

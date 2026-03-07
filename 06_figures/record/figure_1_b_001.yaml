@@ -166,7 +166,7 @@ results_skeleton_en:
       cn: "以 IL-1β 释放作为炎症小体激活的功能性读出，在多个 pb 遗传背景中于各自品系内比较 WT 与 HO 细胞。"
       logic_source: "methods.readout_and_assay + rationale.key_variables + rationale.control_logic"
     M3_directional_result:
-      en: "Across the 10 screened strains, most genetic backgrounds showed little or no genotype-dependent difference in IL-1β release following Nigericin stimulation, whereas only two strains reached nominal statistical significance in within-strain comparisons."
+      en: "Across the 10 screened strains, most genetic backgrounds showed little or no genotype-dependent difference in IL-1β release following Nigericin stimulation, whereas only two strains reached statistical significance in within-strain comparisons."
       cn: "在所筛选的10个遗传背景中，大多数品系在 Nigericin 刺激后 WT 与 HO 之间的 IL-1β 释放差异较小或未达到统计学显著，仅有两个品系在品系内比较中达到名义统计学显著水平。"
       logic_source: "results.data_direction + results.stats_summary"
 
@@ -175,6 +175,6 @@ results_skeleton_en:
       cn: "其中，Ephb1 对应的 081230020-HRB 品系在具有充分生物学重复的前提下，于品系内统计分析中显示出显著且可重复的 IL-1β 释放降低。"
       logic_source: "results.stats_summary + results.key_numbers + results.robustness_and_qc"
     M5_panel_conclusion:
-      en: "Notably, the Ephb1-associated strain (081230020-HRB) exhibited a pronounced reduction in IL-1β release in HO cells (~41% decrease relative to WT; P≈0.034), representing the strongest statistically significant genotype-dependent phenotype observed in the screen and prioritizing Ephb1 for subsequent mechanistic investigation."
+      en: "Notably, the Ephb1-associated strain (081230020-HRB) exhibited a pronounced reduction in IL-1β release in EphB1-deficient macrophages (~41% decrease relative to WT; P≈0.034), representing  the most statistically significant reduction observed in the screen and prioritizing Ephb1 for subsequent mechanistic investigation."
       cn: "其中，Ephb1 对应的 081230020-HRB 品系在 HO 细胞中表现出明显的 IL-1β 释放降低（约下降 41%，P≈0.034），在所有检测背景中形成最为突出的统计学显著基因型依赖表型之一，从而将 Ephb1 确立为后续机制研究的优先候选基因。"
       logic_source: "results.key_numbers + results.group_difference_statement + interpretation.claim_supported"

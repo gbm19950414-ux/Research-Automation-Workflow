@@ -1,0 +1,138 @@
+
+# ---------- Paragraph 1 ----------
+# Field importance (problem space)
+field_importance:
+  focus_node: n2, n4
+  focus_label: [IL-1β release, pyrotosis]
+  sentences:
+    topic_sentence:
+      role: topic
+      logic_source: end_node
+      description: >
+        Introduce inflammasome activation and IL-1β release as a central inflammatory output.
+      sentence:
+        - 1.1.1.p1
+      cn:
+        这段在讲全球慢性炎症相关疾病负担，属于“为什么 inflammatory output 重要”
+    impact_sentence:
+      role: impact
+      logic_source: end_node
+      description: >
+        Explain why dysregulated IL-1β release and pyroptosis are important for disease or physiology.
+      sentence:
+        - 1.1.1.p2
+    transition_sentence:
+      role: transition
+      logic_source: end_node → known_mechanism
+      description: >
+        Transition from inflammatory outcome to the molecular pathway that generates this output.
+
+
+# ---------- Paragraph 2 ----------
+# Known mechanism
+known_mechanism:
+  path: p3
+  evidence_level: established biology
+  sentences:
+    mechanism_overview:
+      role: overview
+      logic_source: established biology edges
+      description: >
+        Summarize the canonical inflammasome execution pathway.
+
+    mechanism_details:
+      role: detail
+      logic_source: n5 → n7 → n6 → n4 → n2
+      description: >
+        Describe caspase-1 activation, GSDMD cleavage, mitochondrial damage, pyroptosis, and IL-1β release.
+
+    transition:
+      role: transition
+      logic_source: known_mechanism → mechanistic_focus
+      description: >
+        Highlight that the efficiency of this execution pathway depends on mitochondrial membrane state.
+
+# ---------- Paragraph 3 ----------
+# Mechanistic focus
+mechanistic_focus:
+
+  focus_node: n8
+  focus_label: "Cardiolipin level"
+
+  sentences:
+
+    highlight_key_step:
+      role: key_step
+      logic_source: focus_node
+      description: >
+        Introduce cardiolipin as a mitochondrial membrane lipid potentially involved in inflammasome execution.
+
+    supporting_literature:
+      role: literature
+      logic_source: focus_node
+      description: >
+        Cite studies suggesting cardiolipin regulates mitochondrial stress or inflammasome signaling.
+
+    transition_to_gap:
+      role: transition
+      logic_source: focus_node → knowledge_gap
+      description: >
+        Emphasize that the upstream regulation of cardiolipin during inflammasome activation remains poorly understood.
+
+# ---------- Paragraph 4 ----------
+# Knowledge gap
+knowledge_gap:
+
+  upstream_unknown:
+    target_path: p4
+    description: >
+      Unknown upstream mechanisms controlling cardiolipin abundance or accessibility in inflammasome activation.
+
+  sentences:
+
+    state_unknown:
+      role: gap_statement
+      logic_source: upstream_unknown
+      description: >
+        Explicitly state that upstream regulators of cardiolipin dynamics remain unclear.
+
+    mention_candidate_regulation:
+      role: candidate
+      logic_source: n1
+      description: >
+        Introduce EphB1 signaling as a potential regulator connected to membrane signaling pathways.
+
+    lead_to_hypothesis:
+      role: bridge
+      logic_source: candidate → hypothesis
+      description: >
+        Suggest that EphB1 may influence mitochondrial membrane state and thereby affect inflammasome execution.
+
+# ---------- Paragraph 5 ----------
+# Hypothesis
+hypothesis:
+
+  path: p5
+
+  hypothesis_path:
+    ath: p5
+
+  sentences:
+
+    hypothesis_statement:
+      role: hypothesis
+      logic_source: start_node → focus_node
+      description: >
+        Propose that EphB1 regulates cardiolipin state through downstream signaling pathways.
+
+    approach:
+      role: approach
+      logic_source: narrative figures
+      description: >
+        Briefly state that genetic, biochemical, and multi-omics approaches were used to test this mechanism.
+
+    overview:
+      role: study_overview
+      logic_source: narrative
+      description: >
+        Summarize that the study identifies an EphB1–PI3K–membrane context–cardiolipin axis controlling inflammasome execution.

@@ -90,9 +90,20 @@ def load_results_policy(manuscript_dir: Path) -> Dict[str, Any]:
 # Opening sentence loader
 # -----------------------------
 
+# Shared helper for opening_and_trans.yaml location
+def resolve_opening_and_trans_yaml(record_dir: Path) -> Optional[Path]:
+    """Resolve opening/transition YAML source.
+
+    Source: 08_manuscript/yaml/opening_and_trans.yaml
+    """
+    manuscript_yaml = Path(__file__).resolve().parents[2] / "yaml" / "opening_and_trans.yaml"
+    if manuscript_yaml.exists():
+        return manuscript_yaml
+    return None
+
 def load_opening_sentences(record_dir: Path) -> Dict[str, str]:
     """Load optional figure opening sentences from
-    06_figures/record/opening_and_trans.yaml.
+    08_manuscript/yaml/opening_and_trans.yaml.
 
     Expected minimal structure:
 
@@ -104,16 +115,8 @@ def load_opening_sentences(record_dir: Path) -> Dict[str, str]:
 
     Returns mapping: {"Figure 1": "sentence", ...}
     """
-    # Preferred location: 08_manuscript/yaml/opening_and_trans.yaml
-    manuscript_yaml = Path(__file__).resolve().parents[2] / "yaml" / "opening_and_trans.yaml"
-
-    if manuscript_yaml.exists():
-        p = manuscript_yaml
-    else:
-        # Backward compatibility: allow legacy location in 06_figures/record
-        p = record_dir / "opening_and_trans.yaml"
-
-    if not p.exists():
+    p = resolve_opening_and_trans_yaml(record_dir)
+    if p is None:
         return {}
 
     data = load_yaml(p)
@@ -264,6 +267,97 @@ def pick_figure_display_title(
 # -----------------------------
 # Transition helpers
 # -----------------------------
+
+# Loader for transitions from opening_and_trans.yaml
+def build_transition_maps_from_opening_yaml(record_dir: Path) -> Tuple[Dict[Tuple[str, str], Dict[str, str]], Dict[Tuple[str, str], Dict[str, str]]]:
+    """Load transitions from opening_and_trans.yaml.
+
+    Expected structure examples:
+
+    figures:
+      Figure 1:
+        opening_en: "..."
+
+    panel_transitions:
+      between_panels:
+        - from: "3a/b"
+          to: "3c"
+          en: "..."
+          cn: "..."
+
+    section_transitions:
+      between_figures:
+        - from: "Figure 1"
+          to: "Figure 2"
+          en: "..."
+          cn: "..."
+
+    Also supports top-level `between_panels` and top-level `between_figures`.
+    """
+    panel_map: Dict[Tuple[str, str], Dict[str, str]] = {}
+    fig_map: Dict[Tuple[str, str], Dict[str, str]] = {}
+
+    p = resolve_opening_and_trans_yaml(record_dir)
+    if p is None:
+        return panel_map, fig_map
+
+    data = load_yaml(p)
+    if not isinstance(data, dict):
+        return panel_map, fig_map
+
+    # panel transitions under panel_transitions
+    pt = data.get("panel_transitions") or {}
+    if isinstance(pt, dict):
+        for it in (pt.get("between_panels") or []):
+            if not isinstance(it, dict):
+                continue
+            a = normalize_panel_id((it.get("from") or "").strip())
+            b = normalize_panel_id((it.get("to") or "").strip())
+            if a and b:
+                panel_map[(a, b)] = {
+                    "en": (it.get("en") or "").strip(),
+                    "cn": (it.get("cn") or "").strip(),
+                }
+
+    # backward-compatible top-level between_panels
+    for it in (data.get("between_panels") or []):
+        if not isinstance(it, dict):
+            continue
+        a = normalize_panel_id((it.get("from") or "").strip())
+        b = normalize_panel_id((it.get("to") or "").strip())
+        if a and b:
+            panel_map[(a, b)] = {
+                "en": (it.get("en") or "").strip(),
+                "cn": (it.get("cn") or "").strip(),
+            }
+
+    # figure transitions under section_transitions
+    st = data.get("section_transitions") or {}
+    if isinstance(st, dict):
+        for it in (st.get("between_figures") or []):
+            if not isinstance(it, dict):
+                continue
+            a = normalize_figure_group((it.get("from") or "").strip())
+            b = normalize_figure_group((it.get("to") or "").strip())
+            if a and b:
+                fig_map[(a, b)] = {
+                    "en": (it.get("en") or "").strip(),
+                    "cn": (it.get("cn") or "").strip(),
+                }
+
+    # backward-compatible top-level between_figures
+    for it in (data.get("between_figures") or []):
+        if not isinstance(it, dict):
+            continue
+        a = normalize_figure_group((it.get("from") or "").strip())
+        b = normalize_figure_group((it.get("to") or "").strip())
+        if a and b:
+            fig_map[(a, b)] = {
+                "en": (it.get("en") or "").strip(),
+                "cn": (it.get("cn") or "").strip(),
+            }
+
+    return panel_map, fig_map
 
 # ---- ID normalization helpers ----
 
@@ -898,11 +992,12 @@ def main() -> int:
     policy = load_results_policy(manuscript_dir)
     cfg = apply_policy_to_cfg(cfg, policy)
 
-    panel_tr_map, figure_tr_map = build_transition_maps(logic)
+    # Load transitions from opening_and_trans.yaml.
+    record_dir = resolve_record_dir(paper_logic, cfg)
+    panel_tr_map, figure_tr_map = build_transition_maps_from_opening_yaml(record_dir)
 
     fig_title_map = build_figure_title_maps(logic)
 
-    record_dir = resolve_record_dir(paper_logic, cfg)
     opening_map = load_opening_sentences(record_dir)
     mapping_path = resolve_mapping_path(record_dir, cfg)
     primary_lang = (cfg.get("language") or "en").strip().lower()
@@ -1006,7 +1101,7 @@ def main() -> int:
                     "panel_id": "",
                 })
             # Avoid carrying a transition across figure boundaries in IR.
-            pending_transition_en = ""
+            # pending_transition_en = ""
 
         panels = extract_panels(y, source_name=fpath.name)
         if not panels:
@@ -1109,10 +1204,21 @@ def main() -> int:
             if transition_text:
                 if debug_transitions:
                     print(f"[DEBUG] inserted transition ({'panel' if curr_fig_group==next_fig_group else 'figure'})")
-                # --- IR: merge transition into the NEXT panel paragraph (Nature-style flow) ---
+                # --- IR: place transition ---
                 en_tr = (transition_text.get("en", "") or "").strip()
                 if en_tr:
-                    pending_transition_en = en_tr
+                    # If moving across figures, emit the transition immediately
+                    # so it appears at the END of the previous figure section.
+                    if curr_fig_group and next_fig_group and curr_fig_group != next_fig_group:
+                        append_ir_block(results_ir, {
+                            "type": "paragraph",
+                            "text": en_tr,
+                            "source": "opening_and_trans.yaml",
+                            "panel_id": "",
+                        })
+                    else:
+                        # Same-figure panel transition: merge into next paragraph as before
+                        pending_transition_en = en_tr
             elif debug_transitions:
                 print("[DEBUG] no transition inserted for this pair")
 

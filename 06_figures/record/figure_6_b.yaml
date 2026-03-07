@@ -474,7 +474,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "Each table row corresponds to one EphB1 downstream signaling gene set. Columns specify a unique pathway ID, a human-readable module label, network category (EphB1_signaling), the targeted cardiolipin mechanistic axes, module size (n_genes), and the full gene list annotated with gene_effect_sign to standardize directionality for module scoring."
+      en: "Each gene set represents an EphB1-associated signaling pathway with predefined gene members and scoring directionality "
       cn: "表中每一行对应一个 EphB1 下游信号模块（基因集）。列信息包括模块 ID、模块名称、网络归属（EphB1_signaling）、预期作用的心磷脂机制轴、基因数（n_genes），以及带 gene_effect_sign 标注的基因列表，用于统一模块得分方向。"
       logic_source: "methods.readout_and_assay + question.core_question"
 
@@ -489,6 +489,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, this module dictionary provides the standardized building blocks used in Fig. 7A–7D, allowing readers and reviewers to trace how each EphB1 downstream pathway was defined and how it was linked to cardiolipin axes for subsequent quantitative analyses."
-      cn: "综上，该“模块字典”为 Fig.7A–7D 提供标准化组件，使读者与评审能够追溯每个 EphB1 下游通路的定义来源及其与心磷脂机制轴的对应关系，并支撑后续的定量分析。"
+      en: # "Together, this module dictionary provides the standardized building blocks used in Fig. 7A–7D, allowing readers and reviewers to trace how each EphB1 downstream pathway was defined and how it was linked to cardiolipin axes for subsequent quantitative analyses."
       logic_source: "results.group_difference_statement"

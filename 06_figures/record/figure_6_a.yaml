@@ -7,10 +7,10 @@ meta:
   panel_type: "model"
   figure: "Figure 6"              # 如 "Figure 3"
   figure_id: "6a"             # 如 "A"
-  short_title: "RNA-first X–M–Z framework linking EphB1 downstream modules to membrane context"
+  short_title: "RNA-first X–M–Z framework linking Ephb1 downstream modules to membrane context"
   chapter: "S4"
   role_in_paper: >
-    以 X–M–Z 概念图形式，定义 EphB1 状态（X）、Eph 下游信号模块（M）与
+    以 X–M–Z 概念图形式，定义 Ephb1 状态（X）、Eph 下游信号模块（M）与
     RNA membrane context 轴（Z）之间的分析框架；
     在脂质组配对样本受限的前提下，以 RNA 内机制耦合为主计算（回归/相关），
     并以脂质表型方向一致性作为独立验证层，支撑 Figure 7 后续的通路优先级筛选。
@@ -22,23 +22,23 @@ meta:
 # ---------- 1. Conceptual Goal（这张图要解释什么？） ----------
 concept_goal:
   core_message: >
-    将 EphB1 缺失对膜环境机制轴的影响，组织为“X→M（跨批次ΔM一致性）+ M↔Z（批内回归/相关）
+    将 Ephb1 缺失对膜环境机制轴的影响，组织为“X→M（跨批次ΔM一致性）+ M↔Z（批内回归/相关）
     + Z↔lipid（方向一致性验证）”的 RNA-first 框架，用于排序最可能解释 membrane context 扰动的候选通路。
   problem_being_explained: >
     在严格配对的 RNA–lipid 样本量有限、跨组学中介回归不稳定的前提下，
-    如何以可复现的证据链识别哪些 EphB1 下游信号模块最可能与 membrane context（Z）耦合，
+    如何以可复现的证据链识别哪些 Ephb1 下游信号模块最可能与 membrane context（Z）耦合，
     并与独立脂质表型方向保持一致，从而为后续湿实验验证提供优先级候选？
 
 # ---------- 2. Mechanistic Elements（机制组成部分） ----------
 mechanism:
   key_nodes:
-    - name: "X: EphB1 status"
+    - name: "X: Ephb1 status"
       description: >
-        遗传或处理层面的 EphB1 状态（WT vs KO / HO），被视为外生处理变量 X，
+        遗传或处理层面的 Ephb1 状态（WT vs KO / HO），被视为外生处理变量 X，
         是整个中介模型的起点。
     - name: "M: Eph downstream signaling modules"
       description: >
-        由预先定义的 EphB1 下游信号/转录模块构成的候选集合（M₁…M_k），
+        由预先定义的 Ephb1 下游信号/转录模块构成的候选集合（M₁…M_k），
         以 RNA-seq 转录足迹（gene set scores）量化其“长期配置/转录状态”（capacity/footprint），
         包括 PI3K–AKT–mTOR、mito stress/cell death、AMPK energy sensing、
         PGC1–NRF mitochondrial biogenesis、MAPK (ERK/p38/JNK)、integrin/caveolae microdomains、
@@ -58,11 +58,11 @@ mechanism:
 
 
   key_edges:
-    - from: "X: EphB1 status"
+    - from: "X: Ephb1 status"
       to: "M: Eph downstream signaling modules"
       type: "associate"
       evidence: >
-        在每个 RNA 批次内比较 EphB1 WT 与 KO/HO 的通路分数差异（ΔM = KO−WT），
+        在每个 RNA 批次内比较 Ephb1 WT 与 KO/HO 的通路分数差异（ΔM = KO−WT），
         并汇总跨批次方向投票与效应量，用于评估 X→M 的一致性与稳健性（不依赖配对脂质组学）。
     - from: "M: Eph downstream signaling modules"
       to: "Z: RNA membrane context axis score"
@@ -78,14 +78,14 @@ mechanism:
         以批次为单位比较 Z 的 HO−WT 效应方向/大小与脂质表型的 HO−WT 效应方向/大小，
         计算方向一致性（direction concordance）作为独立验证层；
         该步骤用于检验 RNA proxy（Z）是否能在方向上重复映射到脂质变化，而非用于中介因果量化。
-    - from: "X: EphB1 status"
+    - from: "X: Ephb1 status"
       to: "Z: RNA membrane context axis score"
       type: "associate"
       evidence: >
         X 与 Z 的总体差异（HO−WT）在多批次 RNA 中可重复评估，
-        作为“EphB1 缺失与 membrane context 转录代理改变”的主效应证据。
+        作为“Ephb1 缺失与 membrane context 转录代理改变”的主效应证据。
         本框架不要求估计或强调 c/c'，重点在于可重复的通路优先级筛选。
-    - from: "X: EphB1 status"
+    - from: "X: Ephb1 status"
       to: "lipid: key lipid readouts"
       type: "associate"
       evidence: >
@@ -95,10 +95,10 @@ mechanism:
 # ---------- 3. Evidence Mapping（每条机制对应论文证据） ----------
 evidence_mapping:
   supported_links:
-    - mechanism_step: "X → Z：EphB1 缺失与 RNA membrane context 轴（Z）的跨批次主效应"
+    - mechanism_step: "X → Z：Ephb1 缺失与 RNA membrane context 轴（Z）的跨批次主效应"
       supported_by: ["Fig6C", "Fig6D", "Fig6E"]
       confidence: "high"
-    - mechanism_step: "X → M：EphB1 缺失对候选通路模块的跨批次ΔM一致性"
+    - mechanism_step: "X → M：Ephb1 缺失对候选通路模块的跨批次ΔM一致性"
       supported_by: ["Fig7B", "Fig7C"]
       confidence: "medium"
     - mechanism_step: "M ↔ Z：批内通路分数与 Z 的耦合（相关/回归，控制X可选）"
@@ -120,10 +120,10 @@ evidence_mapping:
 # ---------- 4. Graphical Logic（图要怎么讲故事） ----------
 visual_logic:
   flow_direction: "left-to-right"
-  entry_point: "EphB1 status (WT vs KO/HO) 作为外生处理变量 X"
+  entry_point: "Ephb1 status (WT vs KO/HO) 作为外生处理变量 X"
   exit_point: "Z（RNA membrane context 轴）作为主结果，脂质 readouts 作为方向一致性验证层"
   causal_chain:
-    - "EphB1 status (X)"
+    - "Ephb1 status (X)"
     - "Eph downstream signaling modules (M)"
     - "RNA membrane context axis score (Z)"
   parallel_paths:
@@ -135,15 +135,15 @@ visual_logic:
 interpretation:
   what_is_certain: >
     该框架可以稳定地回答三个可重复问题：
-    (1) EphB1 缺失是否在多批次 RNA 中一致改变候选通路分数（X→M, ΔM一致性）；
+    (1) Ephb1 缺失是否在多批次 RNA 中一致改变候选通路分数（X→M, ΔM一致性）；
     (2) 候选通路分数是否在批内与 membrane context 轴（Z）保持耦合（M↔Z, 相关/回归）；
     (3) Z 的效应方向是否与独立脂质表型方向一致（Z↔lipid concordance）。
   what_is_plausible: >
     若某条通路同时满足“X→M 方向稳定”与“ M↔Z 耦合稳定”，且 Z 与脂质表型方向一致，
-    则该通路可作为解释 EphB1 对膜环境长期扰动的优先候选，用于后续湿实验验证。
+    则该通路可作为解释 Ephb1 对膜环境长期扰动的优先候选，用于后续湿实验验证。
   what_is_unknown: >
     在当前配对多组学样本量下，无法对跨组学因果中介份额（a×b）给出稳健量化；
-    同时也无法排除 EphB1 通过非转录机制或未纳入模块的通路影响膜环境。
+    同时也无法排除 Ephb1 通过非转录机制或未纳入模块的通路影响膜环境。
   why_model_needed: >
     该图将 Figure 7 的计算目标从“形式化中介显著性”转为“可复现的候选通路优先级排序”，
     使读者清楚理解：ΔM、批内回归/相关、以及与脂质表型的方向一致性分别在证据链中承担何种角色。
@@ -152,14 +152,14 @@ interpretation:
 transition:
   how_it_summarizes_previous: >
     基于 Figure 6 已确立的 membrane context 机制轴优先级，
-    本图把后续分析的目标明确为：在多个 RNA 批次中筛选与 Z 最一致耦合的 EphB1 下游候选通路，
+    本图把后续分析的目标明确为：在多个 RNA 批次中筛选与 Z 最一致耦合的 Ephb1 下游候选通路，
     并用独立脂质表型的方向一致性对 Z 的生物学对应关系进行验证。
   how_it_leads_next_section: >
     接下来将依次展示：
     (i) 各通路模块在不同 RNA 批次的 ΔM（X→M）与方向投票；
     (ii) 各通路与 Z 的批内耦合强度与稳健性（M↔Z）；
     (iii) Z 与脂质表型在批次层面的方向一致性（Z↔lipid）。
-    这些结果共同用于输出“最值得优先验证的 EphB1 下游通路候选”。
+    这些结果共同用于输出“最值得优先验证的 Ephb1 下游通路候选”。
 
 # ---------- 7. AI Writing Hints（写作提示，可选） ----------
 ai_hints:
@@ -182,19 +182,19 @@ figure_legend:
   panel_title_cn: "RNA-first 的 X–M–Z 分析框架"
 
   one_sentence_en: >
-    Conceptual diagram illustrating an RNA-first X–M–Z framework that links EphB1 status (X),
+    Conceptual diagram illustrating an RNA-first X–M–Z framework that links Ephb1 status (X),
     downstream signaling modules (M), and an RNA membrane context axis (Z), with independent
     lipid phenotypes used for directional concordance validation.
 
   system_and_design:
     model: "Conceptual framework (no experimental data shown)"
-    genotype_or_groups: "WT versus EphB1-deficient (KO/HO) as abstract variable X"
+    genotype_or_groups: "WT versus Ephb1-deficient (KO/HO) as abstract variable X"
     key_treatments: "Not applicable"
     time_window: "Not applicable"
 
   readouts_and_assays:
     primary_readout: >
-      Relationships among X (EphB1 status), M (RNA-based pathway module scores),
+      Relationships among X (Ephb1 status), M (RNA-based pathway module scores),
       and Z (RNA membrane context axis score), and their directional alignment with
       independent lipid readouts
     assay: "Schematic representation of analytical logic"
@@ -232,8 +232,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "In this framework, EphB1 status is treated as an exogenous variable (X), downstream Eph-related signaling modules are quantified as RNA-based pathway scores (M), and the RNA membrane context axis score serves as a transcriptional proxy (Z) for lipid membrane phenotypes, while lipid readouts are used only for direction-concordance validation."
-      cn: "在该框架中，EphB1 状态被视为外生变量（X），其下游信号模块以 RNA 层面的通路分数进行量化（M），RNA membrane context 轴得分作为脂质膜表型的转录代理（Z），而脂质读出仅用于方向一致性验证。"
+      en: "We applied an RNA-based analysis framework in which Ephb1 status was treated as the upstream variable and downstream signaling pathway scores were evaluated for association with the membrane context axis (Fig. 6a)."
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
@@ -242,11 +241,10 @@ results_skeleton_en:
       logic_source: "results.data_direction"
 
     M4_robustness:
-      en: "By separating consistency, coupling, and concordance into distinct evaluation layers, the X–M–Z framework reduces sensitivity to sample pairing limitations and batch noise, enabling stable prioritization of candidate EphB1 downstream pathways across datasets."
-      cn: "通过将一致性、耦合与方向验证划分为彼此独立的评估层级，X–M–Z 框架降低了对样本配对限制与批次噪音的敏感性，从而实现跨数据集稳定的 EphB1 下游候选通路排序。"
+      en: "By separating consistency, coupling, and concordance into distinct evaluation layers, the X–M–Z framework reduces sensitivity to sample pairing limitations and batch noise, enabling stable prioritization of candidate Ephb1 downstream pathways across datasets."
+      cn: "通过将一致性、耦合与方向验证划分为彼此独立的评估层级，X–M–Z 框架降低了对样本配对限制与批次噪音的敏感性，从而实现跨数据集稳定的 Ephb1 下游候选通路排序。"
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, this RNA-first X–M–Z framework provides a transparent and reproducible strategy for ranking EphB1 downstream signaling modules most likely coupled to membrane context perturbation, thereby guiding subsequent experimental validation without over-interpreting limited cross-omics mediation."
-      cn: "综上，该 RNA-first 的 X–M–Z 框架为在不过度解读有限跨组学中介结果的前提下，对最可能与膜环境扰动耦合的 EphB1 下游信号模块进行排序，提供了一种透明且可复现的分析策略，并用于指导后续实验验证。"
+      en: # "Together, this RNA-first X–M–Z framework provides a transparent and reproducible strategy for ranking Ephb1 downstream signaling modules most likely coupled to membrane context perturbation, thereby guiding subsequent experimental validation without over-interpreting limited cross-omics mediation."
       logic_source: "results.group_difference_statement"
