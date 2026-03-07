@@ -37,7 +37,7 @@ manuscript:
       - "original_text:1.1.1"
       topic_sentence: "Over the past two decades, the global disease landscape has
         shifted toward chronic inflammation-associated non-communicable diseases (NCDs),
-        making immune imbalance a central public-health challenge."
+        making immune an important public-health challenge."
       sentences:
       - "Cardiovascular diseases, cancer, chronic respiratory diseases, and diabetes
         together accounted for approximately 43 million deaths in 2021, representing
@@ -45,16 +45,17 @@ manuscript:
       - "A substantial fraction of these deaths occurred before age 70 and disproportionately
         affected low- and middle-income countries, highlighting the societal burden
         of chronic inflammation and immune dysregulation."
-      citations:
-      - 10.5334/aogh.4649
+      sentence_citations_list:
+      - []
+      - [10.5334/aogh.4649]
+      - [10.5334/aogh.4649]
       bridge: "These trends motivate interventions that can modulate inflammatory
         pathways with translational precision."
 
     - pid: "1.1.1.p2"
       source_trace:
       - "original_text:1.1.1"
-      topic_sentence: "Acute systemic inflammation remains a major source of mortality,
-        exemplified by sepsis."
+      topic_sentence: "Severe systemic inflammatory syndromes such as sepsis remain major contributors to global mortality."
       sentences:
       - "A Global Burden of Disease (GBD) 2017 systematic analysis estimated approximately
         48.9 million sepsis events and 11.0 million sepsis-related deaths in 2017,
@@ -63,9 +64,10 @@ manuscript:
         even higher (on the order of 166 million events and 21.4 million deaths),
         emphasizing the potential rebound or worsening of systemic inflammatory risk
         in the context of pandemics and aging."
-      citations:
-      - 10.1016/s0140-6736(19
-      - 10.1016/s2214-109x(25
+      sentence_citations_list:
+      - [10.1016/s0140-6736(19)32989-7, 10.1016/s2214-109x(25)00356-0]
+      - [10.1016/s0140-6736(19)32989-7]
+      - [10.1016/s2214-109x(25)00356-0]
       bridge: "Together, chronic and acute inflammatory states impose high costs and
         create demand for actionable control points in immune pathways."
 
@@ -76,20 +78,18 @@ manuscript:
         inflammation and metabolic imbalance, suggesting value in identifying true
         rate-limiting steps that enable amplitude-limited immune control."
       sentences:
-      - "GBD 2023 highlighted that a substantial proportion of deaths and disability
-        are attributable to modifiable risk factors, many of which intersect with
-        inflammation, metabolic dysregulation, and immune imbalance."
+      - "GBD 2023 highlighted that a substantial proportion of deaths and disability are attributable to modifiable risk factors, many of which intersect with inflammation."
       - "At the molecular level, the NLRP3 inflammasome is often viewed as a convergence
         node for diverse acute and chronic inflammatory pathologies."
       - "While extensive frameworks and regulatory networks have been developed for
         NLRP3 priming, assembly, and execution, many therapeutic strategies continue
         to focus on suppressing activation or upstream steps."
-      citations:
-      - 10.1016/s0140-6736(25
-      - 10.1038/s41577-019-0165-0
-      - 10.1038/nrd.2018.97
-      bridge: "This therapeutic emphasis raises a key mechanistic question: can inflammatory
-        outputs be constrained without simply shutting the pathway off?"
+      sentence_citations_list:
+      - [10.1016/s0140-6736(25)01637-x]
+      - [10.1016/s0140-6736(25)01637-x]
+      - [10.1038/s41577-019-0165-0]
+      - [10.1038/s41577-019-0165-0, 10.1038/nrd.2018.97]
+      bridge: "This therapeutic emphasis raises an important mechanistic question: can inflammatory outputs be constrained without fully suppressing inflammasome activation?"
 
   - id: "1.1.2"
     heading: "Layered thresholds and membrane-environment constraints"
@@ -127,9 +127,11 @@ manuscript:
         IL-1β/IL-18 release and alter ionic and water flux."
       - "As pore burden and osmotic imbalance accumulate, cells progress toward lytic
         death."
-      citations:
-      - 10.1038/nature15514
-      - 10.1038/nature15541
+      sentence_citations_list:
+      - [10.1038/nature15514, 10.1038/nature15541]
+      - [10.1038/nature15514, 10.1038/nature15541]
+      - [10.1038/nature15514, 10.1038/nature15541]
+      - [10.1038/nature15514, 10.1038/nature15541]
       figure_refs:
       - "Fig. 1.1"
       bridge: "Therefore, pore formation is positioned as a mechanistic bottleneck
@@ -138,17 +140,16 @@ manuscript:
     - pid: "1.1.2.p3"
       source_trace:
       - "original_text:1.1.2"
-      topic_sentence: "Structural and functional studies indicate that pore-forming
-        efficiency of GSDMD-NT is a decisive step that can switch outputs from controlled
-        release to uncontrolled lysis once a threshold is crossed."
+      topic_sentence: "Structural and functional studies suggest that the efficiency of GSDMD-NT pore formation strongly influences whether inflammatory outputs remain controlled or progress toward lytic rupture once a threshold is crossed."
       sentences:
       - "Once the execution stage crosses a threshold, outputs can rapidly transition
         from regulated release to uncontrolled lytic rupture."
       - "Accordingly, pore formation can be viewed as a core bottleneck of terminal
         pyroptotic execution."
-      citations:
-      - 10.1038/nature18629
-      - 10.1073/pnas.1607769113
+      sentence_citations_list:
+      - [10.1038/nature18629, 10.1073/pnas.1607769113]
+      - [10.1038/nature18629, 10.1073/pnas.1607769113]
+      - [10.1038/nature18629, 10.1073/pnas.1607769113]
       bridge: "A critical implication is that execution is not only ‘protein-coded’
         but also constrained by the protein–membrane interface."
 
@@ -157,18 +158,18 @@ manuscript:
       - "original_text:1.1.2"
       topic_sentence: "GSDMD-NT does not insert indiscriminately into all lipid membranes;
         it preferentially targets negatively charged phospholipids, particularly membranes
-        enriched in phosphoinositides (PIPs) and cardiolipin (CL)."
+        enriched in cardiolipin (CL)."
       sentences:
       - "In model-membrane systems, inclusion of such anionic lipids can markedly
         enhance pore formation and membrane leakage."
       - "Thus, the same GSDMD-NT fragment can exhibit different execution outcomes
         depending on lipid context, with membrane composition functioning as an adjustable
         ‘execution-gain’ knob that shapes amplitude and timing."
-      citations:
-      - 10.1038/nature18629
-      - 10.1038/nature18590
-      bridge: "This lipid dependence elevates membrane environment from a passive
-        backdrop to an active determinant of execution thresholds."
+      sentence_citations_list:
+      - [10.1038/nature18629, 10.1038/nature18590]
+      - [10.1038/nature18590]
+      - [10.1038/nature18629, 10.1038/nature18590]
+      bridge: "This lipid dependence suggests that membrane environment may influence the threshold behavior of pyroptotic execution."
 
     - pid: "1.1.2.p5"
       source_trace:
@@ -177,14 +178,17 @@ manuscript:
         damage targets during pyroptosis but can act as a regulatory hub for terminal
         execution."
       sentences:
-      - "Beyond the plasma membrane, GSDMD-NT can rapidly damage both inner and outer
+      - "Before the plasma membrane, GSDMD-NT can rapidly damage both inner and outer
         mitochondrial membranes."
       - "Mitochondrial injury can occur after GSDMD cleavage but before overt plasma-membrane
         rupture, promoting early changes in membrane potential, ROS, release of mitochondrial
         contents, and quality-control responses."
       - "These events can accelerate and amplify the overall pyroptotic process."
-      citations:
-      - 10.1016/j.immuni.2023.10.004
+      sentence_citations_list:
+      - [10.1016/j.immuni.2023.10.004]
+      - [10.1016/j.immuni.2023.10.004]
+      - [10.1016/j.immuni.2023.10.004]
+      - [10.1016/j.immuni.2023.10.004]
       figure_refs:
       - "Fig. 1.2"
       bridge: "Mitochondrial membrane environment may therefore both receive direct
@@ -194,16 +198,16 @@ manuscript:
     - pid: "1.1.2.p6"
       source_trace:
       - "original_text:1.1.2"
-      topic_sentence: "Mitochondria can also amplify inflammasome signaling, as mitochondrial
-        functional states modulate sensitivity to NLRP3 activation cues."
+      topic_sentence: "Mitochondria may also feed back to amplify inflammasome signaling, as mitochondrial functional states influence sensitivity to NLRP3 activation cues."
       sentences:
       - "Mitochondria-associated events such as ROS, changes in membrane permeability,
         and mtDNA release can promote inflammasome assembly and IL-1β production."
       - "Conversely, enhancing mitochondrial renewal/clearance capacity or maintaining
         respiratory-chain function can alter inflammasome flux and output intensity."
-      citations:
-      - 10.1016/j.immuni.2012.01.009
-      - 10.1038/s41590-022-01185-3
+      sentence_citations_list:
+      - [10.1038/s41590-022-01185-3]
+      - [10.1016/j.immuni.2012.01.009]
+      - [10.1038/s41590-022-01185-3]
       bridge: "These observations motivate a testable question: can altering the membrane–mitochondrial
         environment reshape the output threshold and dynamics of an otherwise identical
         execution pathway?"
@@ -211,9 +215,7 @@ manuscript:
     - pid: "1.1.2.p7"
       source_trace:
       - "original_text:1.1.2"
-      topic_sentence: "If pore formation is highly sensitive to lipid context, key
-        mitochondrial-coupled and remodelable lipids are prime candidates for translating
-        upstream signals into execution-stage divergence."
+      topic_sentence: "If pore formation is sensitive to lipid context, mitochondrial membrane lipids with dynamic remodeling capacity become plausible mediators linking upstream signals to execution-stage divergence."
       sentences:
       - "Among such lipids, cardiolipin (CL) emerges as a particularly prominent candidate."
       citations: []
@@ -229,51 +231,46 @@ manuscript:
     - pid: "1.1.3.p1"
       source_trace:
       - "original_text:1.1.3"
-      topic_sentence: "Cardiolipin is a signature tetra-acyl phospholipid enriched
-        in the mitochondrial inner membrane and widely viewed as a key structural–functional
-        coupling factor linking membrane architecture to bioenergetic performance."
+      topic_sentence: "Cardiolipin is a signature tetra-acyl phospholipid enriched in the mitochondrial inner membrane and is widely viewed as a structural–functional coupling factor linking membrane architecture to bioenergetic performance."
       sentences:
       - "At the molecular level, CL contributes to stabilization and organization
         of respiratory-chain complexes and supercomplexes."
       - "CL also influences ATP synthase oligomerization and maintenance of high-curvature
         cristae structures."
-      - "In addition, CL provides a lipid environment supporting assembly and membrane
-        association of inner-membrane protein complexes, including membrane-proximal
-        processes such as mitoribosome association and insertion/formation of nascent
-        respiratory-chain components."
+      - " In addition, CL provides a lipid environment that supports the assembly and membrane association of inner-membrane protein complexes, including processes involved in respiratory-chain biogenesis. "
       - "Accordingly, shifts in CL abundance, acyl-chain composition, or oxidation
         state can jointly rewrite metabolic efficiency, membrane structural stability,
         and permeability thresholds, a view that has reached a relatively stable consensus
         at the review level."
-      citations:
-      - 10.1074/jbc.m308366200
-      - 10.1016/j.bpj.2011.03.031
-      - 10.1242/jcs.240374
-      - 10.3390/cells8070728
+      sentence_citations_list:
+      - [10.3390/cells8070728]
+      - [10.1074/jbc.m308366200]
+      - [10.1016/j.bpj.2011.03.031]
+      - [10.1242/jcs.240374]
+      - [10.3390/cells8070728]
       bridge: "CL therefore represents a plausible lever through which mitochondrial
         state can be integrated into membrane-interface behavior."
 
     - pid: "1.1.3.p2"
       source_trace:
       - "original_text:1.1.3"
-      topic_sentence: "Importantly, CL is not a static background lipid: it undergoes
-        observable and regulatable dynamics under stress and immune activation, interfacing
-        with inflammatory signaling."
+      topic_sentence: "CL is not a static background lipid but undergoes regulated changes under stress and immune activation, linking mitochondrial membrane state to inflammatory signaling."
       sentences:
       - "Mitochondrial CL has been reported to participate directly in NLRP3 recruitment
         and activation, including CL–NLRP3 binding and effects of perturbing CL synthesis
         on inflammasome activation."
       - "In damage contexts, CL externalization can serve as a quality-control ‘tag’,
         for example via LC3 binding to trigger mitophagy."
-      - "CL oxidation and membrane damage/inflammatory amplification are frequently
-        co-observed."
+      - "CL oxidation has been associated with membrane damage and inflammatory amplification in relevant stress contexts."
       - "Closer to the execution layer, GSDMD-N has been suggested in specific pathological
         contexts to recognize CL to form mitochondrial pores, amplifying mitochondrial
         ROS and inflammatory cascades."
-      citations:
-      - 10.1016/j.immuni.2013.08.001
-      - 10.4161/auto.27191
-      - 10.1016/j.celrep.2024.114237
+      sentence_citations_list:
+      - [10.1016/j.immuni.2013.08.001, 10.4161/auto.27191, 10.1016/j.celrep.2024.114237]
+      - [10.1016/j.immuni.2013.08.001]
+      - [10.4161/auto.27191]
+      - [10.1016/j.celrep.2024.114237]
+      - [10.1016/j.celrep.2024.114237]
       bridge: "These lines of evidence position CL as both a mitochondrial-status
         indicator and a potential determinant of ‘whether/when/how strongly’ inflammasome
         outputs proceed to lytic execution."
@@ -281,25 +278,16 @@ manuscript:
     - pid: "1.1.3.p3"
       source_trace:
       - "original_text:1.1.3"
-      topic_sentence: "A working inference follows: rather than treating mitochondrial
-        status as a collection of dispersed signals (ROS, mtDNA, membrane potential),
-        CL state may act as a more execution-proximal integrated readout that helps
-        translate mitochondrial conditions into pore-forming efficiency and thresholds."
+      topic_sentence: "Rather than treating mitochondrial status as a collection of dispersed signals such as ROS, mtDNA, and membrane potential, CL state may provide a more execution-proximal readout linking mitochondrial conditions to pore-forming efficiency and threshold behavior."
       sentences:
-      - "Current consensus more robustly supports coupling between CL and inflammatory
-        execution and the plasticity of CL dynamics."
-      - "By contrast, the major knowledge gap lies upstream: which receptors or recognition
-        signals, through which downstream pathways and mechanistic axes, can transmit
-        extracellular cues to mitochondrial membrane lipids to systematically reshape
-        CL state and thereby alter terminal outputs."
+      - "Current evidence supports a connection between CL dynamics and inflammatory execution."
+      - "By contrast, an unresolved question lies upstream: which receptor-level signals, through which downstream pathways or mechanistic axes, reshape CL state and thereby alter terminal inflammatory outputs?"
       - "In other words, the mid-to-early segment of a chain—‘receptor signal → downstream
         pathway/mechanistic axis → CL metabolism → mitochondrial inflammatory features
         → pore threshold and lytic cytokine release’—still lacks a broadly accepted
         systems model."
       citations: []
-      bridge: "This gap motivates searching for an upstream receptor-level entry point
-        that can plausibly couple extracellular context to CL-dependent execution
-        thresholds."
+      bridge: "This gap motivates the search for an upstream receptor-level mechanism that could link extracellular messages to CL-dependent execution thresholds."
 
     - pid: "1.1.3.p4"
       source_trace:
@@ -324,11 +312,12 @@ manuscript:
         cues into deeper cellular homeostasis modules, including mitochondrial-related
         processes and membrane environment, albeit in a context-dependent manner across
         members, cell types, and stimuli."
-      citations:
-      - 10.1016/s1357-2725(02
-      - 10.3389/fimmu.2019.01473
-      - 10.1016/j.ccr.2009.04.009
-      - 10.4161/cc.9.11.11925
+      sentence_citations_list:
+      - [10.1016/s1357-2725(02)00096-1, 10.3389/fimmu.2019.01473]
+      - [10.1016/s1357-2725(02)00096-1]
+      - [10.3389/fimmu.2019.01473]
+      - [10.1016/j.ccr.2009.04.009, 10.4161/cc.9.11.11925]
+      - [10.1016/j.ccr.2009.04.009, 10.4161/cc.9.11.11925]
       bridge: "This reasoning nominates EphB1 as a plausible upstream candidate that
         could reshape mitochondrial membrane environment (CL) and thereby tune pyroptotic
         execution thresholds."
@@ -376,16 +365,11 @@ manuscript:
         cooperate to amplify death and content release."
       - "In apoptotic pathways, caspase-3 cleavage of GSDME can similarly induce plasma-membrane
         permeabilization and strong inflammatory responses."
-      citations:
-      - 10.1038/nature15514
-      - 10.1038/nature15541
-      - 10.1038/nature18629
-      - 10.1038/nrmicro2070
-      - 10.1038/s41586-021-03478-3
-      - 10.1016/j.celrep.2021.108998
-      - 10.1038/s41586-021-03218-7
-      - 10.1038/ncomms14128
-      - 10.1038/nature22393
+      sentence_citations_list:
+      - [10.1038/nrmicro2070, 10.1038/s41586-021-03478-3, 10.1016/j.celrep.2021.108998, 10.1038/s41586-021-03218-7, 10.1038/ncomms14128, 10.1038/nature22393]
+      - [10.1038/nature15514, 10.1038/nature15541]
+      - [10.1038/s41586-021-03478-3, 10.1016/j.celrep.2021.108998, 10.1038/s41586-021-03218-7]
+      - [10.1038/ncomms14128, 10.1038/nature22393]
       bridge: "These findings support execution as a regulated continuum rather than
         an all-or-none endpoint."
 
@@ -410,29 +394,12 @@ manuscript:
       - "As a pro-inflammatory signaling hub, mitochondria can integrate pyroptosis,
         necroptosis, and ferroptosis-related processes, including gasdermin–CL interactions
         that promote mitochondrial permeabilization and release of inflammatory mediators."
-      citations:
-      - 10.1101/cshperspect.a006080
-      - 10.1038/cdd.2017.186
-      - 10.1038/nchembio727
-      - 10.1371/journal.pbio.1000298
-      - 10.1126/science.1219855
-      - 10.1016/j.bbamcr.2010.11.011
-      - 10.1091/mbc.e09-07-0649
-      - 10.15252/embj.201899238
-      - 10.1126/science.aao6047
-      - 10.1038/s41467-023-37146-z
-      - 10.1038/s41586-018-0363-0
-      - 10.1016/j.cell.2014.11.036
-      - 10.1016/j.cell.2014.11.037
-      - 10.1038/ncb3596
-      - 10.1016/j.molcel.2015.01.018
-      - 10.1016/j.cell.2007.03.045
-      - 10.1073/pnas.1417253111
-      - 10.1016/j.immuni.2023.10.004
-      - 10.1016/j.celrep.2018.09.071
-      - 10.1096/fj.202100085r
-      - 10.1016/j.jbc.2023.102908
-      - 10.1016/j.cell.2022.06.038
+      sentence_citations_list:
+      - [10.1101/cshperspect.a006080, 10.1038/cdd.2017.186]
+      - [10.1038/s41586-018-0363-0, 10.1016/j.cell.2014.11.036, 10.1016/j.cell.2014.11.037]
+      - [10.1038/nchembio727, 10.1371/journal.pbio.1000298, 10.1126/science.1219855, 10.1016/j.bbamcr.2010.11.011, 10.1091/mbc.e09-07-0649, 10.15252/embj.201899238, 10.1126/science.aao6047, 10.1038/ncb3596, 10.1016/j.molcel.2015.01.018, 10.1016/j.cell.2007.03.045, 10.1073/pnas.1417253111]
+      - [10.15252/embj.201899238, 10.1016/j.molcel.2015.01.018, 10.1016/j.cell.2007.03.045]
+      - [10.1016/j.immuni.2023.10.004, 10.1016/j.celrep.2018.09.071, 10.1096/fj.202100085r, 10.1016/j.jbc.2023.102908, 10.1016/j.cell.2022.06.038]
       bridge: "This context underscores that ‘permeabilization/pore formation’ has
         thresholds and is likely constrained by membrane environment."
 
@@ -452,16 +419,11 @@ manuscript:
       - "GSDMD/E N-terminal fragments can induce mitochondrial rupture and cytochrome
         c release, and BAX/BAK-mediated MOMP can in turn activate NLRP3 inflammasomes
         and GSDME, amplifying inflammatory cascades."
-      citations:
-      - 10.1016/j.str.2014.07.014
-      - 10.1016/j.immuni.2023.10.004
-      - 10.1016/j.celrep.2018.09.071
-      - 10.1096/fj.202100085r
-      - 10.1016/j.jbc.2023.102908
-      - 10.1038/s41467-019-09397-2
-      - 10.1016/j.immuni.2021.04.012
-      - 10.1016/j.celrep.2018.10.103
-      - 10.1016/j.celrep.2018.10.087
+      sentence_citations_list:
+      - [10.1016/j.str.2014.07.014, 10.1016/j.immuni.2023.10.004, 10.1016/j.celrep.2018.09.071, 10.1096/fj.202100085r, 10.1016/j.jbc.2023.102908, 10.1038/s41467-019-09397-2, 10.1016/j.immuni.2021.04.012, 10.1016/j.celrep.2018.10.103, 10.1016/j.celrep.2018.10.087]
+      - [10.1016/j.str.2014.07.014]
+      - [10.1016/j.immuni.2023.10.004, 10.1016/j.celrep.2018.09.071, 10.1096/fj.202100085r, 10.1016/j.jbc.2023.102908]
+      - [10.1038/s41467-019-09397-2, 10.1016/j.immuni.2021.04.012, 10.1016/j.celrep.2018.10.103, 10.1016/j.celrep.2018.10.087]
       bridge: "These observations reinforce that execution efficiency is not equivalent
         across lipid contexts and that CL-enriched mitochondrial membranes can provide
         a high-efficiency interface."
@@ -483,21 +445,11 @@ manuscript:
         and ATP decline in relevant contexts."
       - "Targeting mitochondria with antioxidants can suppress ferroptosis only in
         specific cellular settings, implying context-dependent mitochondrial contributions."
-      citations:
-      - 10.1016/j.cell.2009.05.021
-      - 10.1073/pnas.1408987111
-      - 10.1038/s41467-018-04714-7
-      - 10.1016/j.molcel.2014.03.003
-      - 10.1038/cddis.2013.531
-      - 10.1038/s41419-021-03418-z
-      - 10.1016/j.immuni.2013.06.018
-      - 10.1016/j.celrep.2013.10.034
-      - 10.1016/j.str.2014.07.014
-      - 10.1016/j.cell.2012.03.042
-      - 10.1083/jcb.202105043
-      - 10.1038/ncb3064
-      - 10.1016/j.molcel.2018.10.042
-      - 10.1016/j.freeradbiomed.2018.01.019
+      sentence_citations_list:
+      - [10.1016/j.cell.2009.05.021, 10.1073/pnas.1408987111, 10.1038/s41467-018-04714-7, 10.1016/j.molcel.2014.03.003, 10.1038/cddis.2013.531, 10.1038/s41419-021-03418-z, 10.1016/j.immuni.2013.06.018, 10.1016/j.celrep.2013.10.034, 10.1016/j.str.2014.07.014, 10.1016/j.cell.2012.03.042, 10.1083/jcb.202105043, 10.1038/ncb3064, 10.1016/j.molcel.2018.10.042, 10.1016/j.freeradbiomed.2018.01.019]
+      - [10.1016/j.cell.2009.05.021, 10.1073/pnas.1408987111, 10.1038/s41467-018-04714-7, 10.1016/j.molcel.2014.03.003, 10.1038/cddis.2013.531, 10.1038/s41419-021-03418-z, 10.1016/j.immuni.2013.06.018, 10.1016/j.celrep.2013.10.034, 10.1016/j.str.2014.07.014]
+      - [10.1016/j.cell.2012.03.042, 10.1083/jcb.202105043, 10.1038/ncb3064, 10.1016/j.molcel.2018.10.042]
+      - [10.1016/j.freeradbiomed.2018.01.019]
       bridge: "Collectively, these examples motivate a unifying view: terminal execution
         is a protein–membrane interfacial reaction whose energetics and thresholds
         are tuned by lipid composition and oxidation state."
@@ -535,9 +487,12 @@ manuscript:
         limited perturbations may support assembly or cytokine release, whereas accumulation
         beyond thresholds is more likely to promote widespread permeabilization and
         lytic death."
-      citations:
-      - 10.1016/j.immuni.2013.08.001
-      - 10.4049/jimmunol.1301490
+      sentence_citations_list:
+      - [10.1016/j.immuni.2013.08.001, 10.4049/jimmunol.1301490]
+      - [10.1016/j.immuni.2013.08.001]
+      - [10.1016/j.immuni.2013.08.001, 10.4049/jimmunol.1301490]
+      - [10.1016/j.immuni.2013.08.001, 10.4049/jimmunol.1301490]
+      - [10.1016/j.immuni.2013.08.001, 10.4049/jimmunol.1301490]
       bridge: "This framing highlights the need for a quantifiable, execution-proximal
         mitochondrial readout that can connect mitochondrial state to execution thresholds."
 
@@ -554,10 +509,10 @@ manuscript:
         BAX, cytochrome c, and gasdermins), shaping curvature and pore formation/stability."
       - "CL externalization has been proposed as a membrane-interface signal relevant
         to inflammasome-associated pathways."
-      citations:
-      - 10.1126/science.aao6047
-      - 10.1016/j.bbalip.2016.08.005
-      - 10.1016/j.immuni.2013.08.001
+      sentence_citations_list:
+      - [10.1126/science.aao6047, 10.1016/j.bbalip.2016.08.005, 10.1016/j.immuni.2013.08.001]
+      - [10.1126/science.aao6047, 10.1016/j.bbalip.2016.08.005]
+      - [10.1016/j.immuni.2013.08.001]
       bridge: "This dual role—mitochondrial status signal and membrane-interface determinant—makes
         CL attractive as an integrated variable linking mitochondria to execution-layer
         outcomes."
@@ -579,20 +534,12 @@ manuscript:
         to a single death modality."
       - "At the same time, evidence strength varies across putative receptor–CL axes,
         leaving mechanistic chains to be systematically established."
-      citations:
-      - 10.1016/j.immuni.2023.10.004
-      - 10.1016/j.celrep.2018.09.071
-      - 10.1096/fj.202100085r
-      - 10.1016/j.jbc.2023.102908
-      - 10.1016/j.cell.2022.06.038
-      - 10.1038/s41467-019-09397-2
-      - 10.1038/2503
-      - 10.1016/j.neuron.2023.02.019
-      - 10.1016/j.immuni.2021.04.012
-      - 10.1016/j.celrep.2018.10.103
-      - 10.1016/j.celrep.2018.10.087
-      - 10.1016/j.chemphyslip.2013.12.002
-      - 10.1016/j.bbrc.2008.01.055
+      sentence_citations_list:
+      - [10.1016/j.immuni.2023.10.004, 10.1016/j.celrep.2018.09.071, 10.1096/fj.202100085r, 10.1016/j.jbc.2023.102908, 10.1016/j.cell.2022.06.038]
+      - [10.1016/j.immuni.2023.10.004, 10.1016/j.celrep.2018.09.071, 10.1096/fj.202100085r, 10.1016/j.jbc.2023.102908, 10.1016/j.cell.2022.06.038]
+      - [10.1016/j.immuni.2023.10.004, 10.1016/j.celrep.2018.09.071, 10.1096/fj.202100085r, 10.1016/j.jbc.2023.102908, 10.1016/j.cell.2022.06.038]
+      - [10.1038/2503, 10.1016/j.neuron.2023.02.019, 10.1016/j.chemphyslip.2013.12.002, 10.1016/j.bbrc.2008.01.055]
+      - [10.1038/s41467-019-09397-2, 10.1016/j.immuni.2021.04.012, 10.1016/j.celrep.2018.10.103, 10.1016/j.celrep.2018.10.087]
       bridge: "Thus, the critical missing link is not whether an interface exists,
         but how upstream signaling rewires CL state to tune execution-layer thresholds."
 
@@ -604,10 +551,7 @@ manuscript:
         positioning them at key immune interfaces relevant to inflammatory output
         control."
       sentences:
-      - "Eph–ephrin activation occurs at cell–cell contact interfaces and triggers
-        both forward (receptor-side) and reverse (ligand-side) signaling cascades,
-        coupling spatial proximity and localization to migration, adhesion, cytoskeletal
-        remodeling, and microenvironmental organization."
+      - "Because Eph–ephrin signaling translates cell–cell contact into downstream programs controlling adhesion, cytoskeletal organization, and microenvironmental responses, it provides a plausible receptor-level entry point for linking extracellular context to intracellular execution states."
       - "In immunopathological contexts, Eph–ephrin signaling has been repeatedly
         implicated in immune-cell migration, tissue entry, adhesion coordination,
         and spatial organization of intercellular communication within inflammatory
@@ -639,20 +583,20 @@ manuscript:
         span ‘plasma-membrane spatial cues → mitochondrial homeostasis/membrane structure
         → fate thresholds and output forms’, with strong dependency on subtype, cell
         type, and microenvironment."
-      citations:
-      - 10.1016/j.lfs.2021.119954
-      - 10.1016/j.fct.2019.110960
-      - 10.18632/oncotarget.12838
-      - 10.4103/1673-5374.369118
+      sentence_citations_list:
+      - [10.1016/j.lfs.2021.119954, 10.1016/j.fct.2019.110960, 10.18632/oncotarget.12838, 10.4103/1673-5374.369118]
+      - [10.1016/j.lfs.2021.119954]
+      - [10.1016/j.fct.2019.110960]
+      - [10.18632/oncotarget.12838]
+      - [10.4103/1673-5374.369118]
+      - [10.1016/j.lfs.2021.119954, 10.1016/j.fct.2019.110960, 10.18632/oncotarget.12838, 10.4103/1673-5374.369118]
       bridge: "However, these clues do not yet resolve the specific stratification
         question relevant to inflammasome execution outputs."
 
     - pid: "1.2.5.p3"
       source_trace:
       - "original_text:1.2.5"
-      topic_sentence: "Major gaps remain in mapping EphB1 to inflammasome/pyroptosis
-        execution, and in coupling EphB1-driven mitochondrial effects to quantifiable
-        membrane-environment readouts such as CL state."
+      topic_sentence: "Important gaps remain in understanding how EphB1 relates to inflammasome and pyroptotic execution, and whether EphB1-associated mitochondrial effects can be linked to quantifiable membrane-environment readouts such as CL state."
       sentences:
       - "First, much of the literature emphasizes ‘Eph–mitochondria–apoptosis/metabolism’
         rather than inflammasome–pyroptosis execution, and mitochondrial readouts
@@ -668,9 +612,7 @@ manuscript:
         GSDMD pore threshold and efficiency, culminating in reshaped IL-1β release
         and lytic permeabilization."
       citations: []
-      bridge: "This motivates a falsifiable chain centered on EphB1 → downstream pathway/mechanistic
-        axis → CL state → pyroptotic execution outputs, tested with stratified localization
-        and genetic×pharmacologic masking/rescue logic."
+      bridge: "These gaps motivate a falsifiable model in which EphB1 influences pyroptotic execution through downstream pathways that reshape CL state."
 
   - id: "1.3"
     heading: "Scientific question, hypotheses, and study objectives"
@@ -695,8 +637,11 @@ manuscript:
       - "Thus, rather than generalizing differences as ‘inflammasome activation’,
         a more explanatory and translationally aligned question is why execution outputs
         diverge in amplitude and form under similar activation contexts."
-      citations:
-      - 10.1038/s41586-023-05991-z
+      sentence_citations_list:
+      - [10.1038/s41586-023-05991-z]
+      - []
+      - [10.1038/s41586-023-05991-z]
+      - [10.1038/s41586-023-05991-z]
       bridge: "This framing elevates membrane environment as a key determinant of
         execution efficiency."
 
@@ -717,8 +662,11 @@ manuscript:
       - "Disease and review literature (for example, Barth syndrome as a CL paradigm)
         underscores CL as a metabolic–structural–functional hub whose network-level
         changes can coordinate mitochondrial function with cell-fate decisions."
-      citations:
-      - 10.1016/j.febslet.2006.07.022
+      sentence_citations_list:
+      - [10.1016/j.febslet.2006.07.022]
+      - [10.1016/j.febslet.2006.07.022]
+      - [10.1016/j.febslet.2006.07.022]
+      - [10.1016/j.febslet.2006.07.022]
       bridge: "Accordingly, CL is positioned here as both a candidate mechanistic
         interface and a quantifiable multi-dimensional readout."
 
@@ -741,33 +689,33 @@ manuscript:
         site, but whether reproducible CL-state changes align in direction and time
         with execution-output differences in pore formation/permeabilization/cytokine
         release."
-      citations:
-      - 10.1111/j.1432-1033.1992.tb17285.x
+      sentence_citations_list:
+      - [10.1111/j.1432-1033.1992.tb17285.x]
+      - [10.1111/j.1432-1033.1992.tb17285.x]
+      - [10.1111/j.1432-1033.1992.tb17285.x]
+      - [10.1111/j.1432-1033.1992.tb17285.x]
       bridge: "This defines a pragmatic but stringent test of whether CL-state modulation
         is sufficient to explain execution divergence."
 
     - pid: "1.3.p4"
       source_trace:
       - "original_text:1.3.1"
-      topic_sentence: "The central gap can therefore be stated as a falsifiable linkage:
-        how an upstream receptor signal engages downstream pathways/mechanistic axes
-        to reshape CL metabolism and membrane environment, and thereby translates
-        into terminal inflammasome execution-output differences."
+      topic_sentence: "The central question is whether an upstream receptor signal can engage downstream pathways that reshape CL state and membrane environment, thereby altering terminal inflammasome execution outputs."
       sentences:
       - "Existing literature provides interface clues that gasdermins can interact
         with CL-related membrane environments to affect mitochondrial integrity, mtDNA
         release, and inflammatory amplification, coupling mitochondria to inflammasome
         outputs."
-      - "Yet evidence largely remains at the level of ‘interface exists’ and ‘correlated
-        coupling’, lacking a systems framework for how an upstream entry signal drives
-        integrated CL metabolic changes."
+      - "However, current evidence remains largely descriptive and lacks a systems-level framework explaining how upstream signals drive integrated changes in CL state."
       - "For EphB1 specifically, the key unknown is not whether it affects a single
         enzyme or event, but whether EphB1 signaling can, via downstream pathways/mechanistic
         axes, produce reproducible CL-state changes that are sufficient to explain
         changes in execution thresholds and efficiency."
-      citations:
-      - 10.1016/j.immuni.2023.10.004
-      - 10.1038/s41467-019-09397-2
+      sentence_citations_list:
+      - []
+      - [10.1016/j.immuni.2023.10.004, 10.1038/s41467-019-09397-2]
+      - []
+      - []
       bridge: "These considerations motivate a discovery–localize–validate workflow
         aligned to the proposed chain."
 
@@ -775,9 +723,7 @@ manuscript:
       source_trace:
       - "original_text:1.3.2"
       - "logic_yaml:1.3.2"
-      topic_sentence: "To address this question, the study adopts a closed-loop ‘discover–localize–validate’
-        design that decomposes the chain into three executable and falsifiable task
-        modules with aligned readouts throughout."
+      topic_sentence: "To address this question, we use a discover–localize–validate strategy to test the proposed chain with aligned readouts across each layer."
       sentences:
       - "Input: genetic manipulation of EphB1 (e.g., KO/intervention) as the receptor-level
         entry variable under a unified inflammasome activation model and time-resolved
@@ -797,17 +743,12 @@ manuscript:
     - pid: "1.3.p6"
       source_trace:
       - "original_text:1.3.3"
-      topic_sentence: "Conceptually, this work contributes a layered causal narrative
-        that reorganizes ‘signal–membrane environment–execution output’ with EphB1
-        as a candidate upstream entry and CL metabolic state as an integrated mitochondrial
-        membrane readout."
+      topic_sentence: "This study is framed around a layered model linking receptor signaling, membrane environment, and execution output, with EphB1 as a candidate upstream entry point and CL state as an integrated mitochondrial readout."
       sentences:
       - "Rather than equating phenotypic differences with upstream inflammasome activation
         strength, the study emphasizes identifying which layer differs and whether
         execution thresholds and amplitude-limiting behavior can be tuned."
-      - "The model is framed as evidence-bounded and falsifiable: it aims to test
-        whether CL metabolic state is sufficient to account for execution-output divergence,
-        without overclaiming complete molecular detail."
+      - "Accordingly, the study tests whether changes in CL state are sufficient to explain execution-output divergence without assuming complete molecular resolution of every intermediate step."
       - "The Results are organized as: downstream pathway/mechanistic axis prioritization
         → CL metabolic and membrane-environment phenotyping → stratified attribution
         and causal validation of execution outputs."

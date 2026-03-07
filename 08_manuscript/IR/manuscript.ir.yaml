@@ -17,47 +17,95 @@ document:
     title: Introduction
     blocks:
     - type: paragraph
-      text: Pyroptosis can be conceptualized as three connected but differentially regulatable stages—priming, inflammasome assembly/caspase activation, and terminal execution—each of which can shape phenotypic outputs. Priming determines the preparedness of inflammasome components, assembly determines whether inflammasomes form and caspases activate, and execution determines the magnitude and form of inflammatory output. Thus, even with comparable NLRP3 activation, final phenotypes such as IL-1β/IL-18 release, membrane permeability, and lytic rupture are not necessarily equivalent, suggesting that divergence may largely reside in execution thresholds.
-      pid: 1.1.2.p1
+      text: 'Over the past two decades, the global disease landscape has shifted toward chronic inflammation-associated non-communicable diseases (NCDs), making immune an important public-health challenge. Cardiovascular diseases, cancer, chronic respiratory diseases, and diabetes together accounted for approximately 43 million deaths in 2021, representing roughly three quarters of non-pandemic-related deaths. {doi:10.5334/aogh.4649} Severe systemic inflammatory syndromes such as sepsis remain major contributors to global mortality. {doi:10.1016/s0140-6736(19)32989-7} {doi:10.1016/s2214-109x(25)00356-0} At the molecular level, the NLRP3 inflammasome is often viewed as a convergence node for diverse acute and chronic inflammatory pathologies. {doi:10.1038/s41577-019-0165-0} While extensive frameworks and regulatory networks have been developed for NLRP3 priming, assembly, and execution, many therapeutic strategies continue to focus on suppressing activation or upstream steps. {doi:10.1038/s41577-019-0165-0}
+        {doi:10.1038/nrd.2018.97} This therapeutic emphasis raises an important mechanistic question: can inflammatory outputs be constrained without fully suppressing inflammasome activation?'
+      paragraph_group: field_importance
+      section_heading: Inflammasome output imbalance and immunopathological consequences
+      source_pids:
+      - 1.1.1.p1
+      - 1.1.1.p2
+      - 1.1.1.p3
+      selected_sids:
+      - 1.1.1.p1s1
+      - 1.1.1.p1s2
+      - 1.1.1.p2s1
+      - 1.1.1.p3s3
+      - 1.1.1.p3s4
+      - 1.1.1.p3.bridge
+    - type: paragraph
+      text: Pyroptosis can be conceptualized as three connected but differentially regulatable stages—priming, inflammasome assembly/caspase activation, and terminal execution—each of which can shape phenotypic outputs. Priming determines the preparedness of inflammasome components, assembly determines whether inflammasomes form and caspases activate, and execution determines the magnitude and form of inflammatory output. In canonical pathways, inflammatory caspases cleave GSDMD to expose an N-terminal fragment that oligomerizes to form pores, enabling cytokine release and driving osmotic imbalance toward lytic death. {doi:10.1038/nature15514} {doi:10.1038/nature15541} Structural and functional studies suggest that the efficiency of GSDMD-NT pore formation strongly influences whether inflammatory outputs remain controlled or progress toward lytic rupture once a threshold is crossed. {doi:10.1038/nature18629} {doi:10.1073/pnas.1607769113} GSDMD-NT does not insert indiscriminately into all
+        lipid membranes; it preferentially targets negatively charged phospholipids, particularly membranes enriched in cardiolipin (CL). {doi:10.1038/nature18629} {doi:10.1038/nature18590} This lipid dependence suggests that membrane environment may influence the threshold behavior of pyroptotic execution.
+      paragraph_group: known_mechanism
       section_heading: Layered thresholds and membrane-environment constraints
+      source_pids:
+      - 1.1.2.p1
+      - 1.1.2.p2
+      - 1.1.2.p3
+      - 1.1.2.p4
+      selected_sids:
+      - 1.1.2.p1s1
+      - 1.1.2.p1s2
+      - 1.1.2.p2s1
+      - 1.1.2.p3s1
+      - 1.1.2.p4s1
+      - 1.1.2.p4.bridge
     - type: paragraph
-      text: Structural and functional studies indicate that pore-forming efficiency of GSDMD-NT is a decisive step that can switch outputs from controlled release to uncontrolled lysis once a threshold is crossed. Once the execution stage crosses a threshold, outputs can rapidly transition from regulated release to uncontrolled lytic rupture. Accordingly, pore formation can be viewed as a core bottleneck of terminal pyroptotic execution. {doi:10.1038/nature18629} {doi:10.1073/pnas.1607769113}
-      pid: 1.1.2.p3
+      text: Before the plasma membrane, GSDMD-NT can rapidly damage both inner and outer mitochondrial membranes. {doi:10.1016/j.immuni.2023.10.004} Mitochondria may also feed back to amplify inflammasome signaling, as mitochondrial functional states influence sensitivity to NLRP3 activation cues. {doi:10.1038/s41590-022-01185-3} If pore formation is sensitive to lipid context, mitochondrial membrane lipids with dynamic remodeling capacity become plausible mediators linking upstream signals to execution-stage divergence. Cardiolipin is a signature tetra-acyl phospholipid enriched in the mitochondrial inner membrane and is widely viewed as a structural–functional coupling factor linking membrane architecture to bioenergetic performance. {doi:10.3390/cells8070728} At the molecular level, CL contributes to stabilization and organization of respiratory-chain complexes and supercomplexes. {doi:10.1074/jbc.m308366200} In addition, CL provides a lipid environment that supports the assembly and
+        membrane association of inner-membrane protein complexes, including processes involved in respiratory-chain biogenesis. {doi:10.1242/jcs.240374} CL is not a static background lipid but undergoes regulated changes under stress and immune activation, linking mitochondrial membrane state to inflammatory signaling. {doi:10.1016/j.immuni.2013.08.001} {doi:10.4161/auto.27191} {doi:10.1016/j.celrep.2024.114237} In damage contexts, CL externalization can serve as a quality-control ‘tag’, for example via LC3 binding to trigger mitophagy. {doi:10.4161/auto.27191} CL oxidation has been associated with membrane damage and inflammatory amplification in relevant stress contexts. {doi:10.1016/j.celrep.2024.114237} Rather than treating mitochondrial status as a collection of dispersed signals such as ROS, mtDNA, and membrane potential, CL state may provide a more execution-proximal readout linking mitochondrial conditions to pore-forming efficiency and threshold behavior. This gap motivates the
+        search for an upstream receptor-level mechanism that could link extracellular messages to CL-dependent execution thresholds.
+      paragraph_group: mechanistic_focus
       section_heading: Layered thresholds and membrane-environment constraints
+      source_pids:
+      - 1.1.2.p5
+      - 1.1.2.p6
+      - 1.1.2.p7
+      - 1.1.3.p1
+      - 1.1.3.p2
+      - 1.1.3.p3
+      selected_sids:
+      - 1.1.2.p5s2
+      - 1.1.2.p6s1
+      - 1.1.2.p7s1
+      - 1.1.3.p1s1
+      - 1.1.3.p1s2
+      - 1.1.3.p1s4
+      - 1.1.3.p2s1
+      - 1.1.3.p2s3
+      - 1.1.3.p2s4
+      - 1.1.3.p3s1
+      - 1.1.3.p3.bridge
     - type: paragraph
-      text: GSDMD-NT does not insert indiscriminately into all lipid membranes; it preferentially targets negatively charged phospholipids, particularly membranes enriched in phosphoinositides (PIPs) and cardiolipin (CL). In model-membrane systems, inclusion of such anionic lipids can markedly enhance pore formation and membrane leakage. Thus, the same GSDMD-NT fragment can exhibit different execution outcomes depending on lipid context, with membrane composition functioning as an adjustable ‘execution-gain’ knob that shapes amplitude and timing. {doi:10.1038/nature18629} {doi:10.1038/nature18590}
-      pid: 1.1.2.p4
-      section_heading: Layered thresholds and membrane-environment constraints
-    - type: paragraph
-      text: If pore formation is highly sensitive to lipid context, key mitochondrial-coupled and remodelable lipids are prime candidates for translating upstream signals into execution-stage divergence. Among such lipids, cardiolipin (CL) emerges as a particularly prominent candidate.
-      pid: 1.1.2.p7
-      section_heading: Layered thresholds and membrane-environment constraints
-    - type: paragraph
-      text: 'Importantly, CL is not a static background lipid: it undergoes observable and regulatable dynamics under stress and immune activation, interfacing with inflammatory signaling. Mitochondrial CL has been reported to participate directly in NLRP3 recruitment and activation, including CL–NLRP3 binding and effects of perturbing CL synthesis on inflammasome activation. In damage contexts, CL externalization can serve as a quality-control ‘tag’, for example via LC3 binding to trigger mitophagy. CL oxidation and membrane damage/inflammatory amplification are frequently co-observed. Closer to the execution layer, GSDMD-N has been suggested in specific pathological contexts to recognize CL to form mitochondrial pores, amplifying mitochondrial ROS and inflammatory cascades. {doi:10.1016/j.immuni.2013.08.001} {doi:10.4161/auto.27191} {doi:10.1016/j.celrep.2024.114237}'
-      pid: 1.1.3.p2
+      text: 'Current evidence supports a connection between CL dynamics and inflammatory execution. By contrast, an unresolved question lies upstream: which receptor-level signals, through which downstream pathways or mechanistic axes, reshape CL state and thereby alter terminal inflammatory outputs? Because Eph–ephrin signaling translates cell–cell contact into downstream programs controlling adhesion, cytoskeletal organization, and microenvironmental responses, it provides a plausible receptor-level entry point for linking extracellular context to intracellular execution states. Important gaps remain in understanding how EphB1 relates to inflammasome and pyroptotic execution, and whether EphB1-associated mitochondrial effects can be linked to quantifiable membrane-environment readouts such as CL state. Second, Eph family functions are pleiotropic, and even closely related EphB subtypes can show opposing effects across tissues, limiting inference by family membership. These gaps motivate
+        a falsifiable model in which EphB1 influences pyroptotic execution through downstream pathways that reshape CL state.'
+      paragraph_group: knowledge_gap
       section_heading: Cardiolipin as a membrane-environment readout and interface
+      source_pids:
+      - 1.1.3.p3
+      - 1.2.5.p1
+      - 1.2.5.p3
+      selected_sids:
+      - 1.1.3.p3s2
+      - 1.1.3.p3s3
+      - 1.2.5.p1s2
+      - 1.2.5.p3s1
+      - 1.2.5.p3s3
+      - 1.2.5.p3.bridge
     - type: paragraph
-      text: 'A working inference follows: rather than treating mitochondrial status as a collection of dispersed signals (ROS, mtDNA, membrane potential), CL state may act as a more execution-proximal integrated readout that helps translate mitochondrial conditions into pore-forming efficiency and thresholds. Current consensus more robustly supports coupling between CL and inflammatory execution and the plasticity of CL dynamics. By contrast, the major knowledge gap lies upstream: which receptors or recognition signals, through which downstream pathways and mechanistic axes, can transmit extracellular cues to mitochondrial membrane lipids to systematically reshape CL state and thereby alter terminal outputs. In other words, the mid-to-early segment of a chain—‘receptor signal → downstream pathway/mechanistic axis → CL metabolism → mitochondrial inflammatory features → pore threshold and lytic cytokine release’—still lacks a broadly accepted systems model.'
-      pid: 1.1.3.p3
-      section_heading: Cardiolipin as a membrane-environment readout and interface
-    - type: paragraph
-      text: Eph receptors and their ephrin ligands form a contact-dependent bidirectional signaling system and constitute the largest receptor tyrosine kinase subfamily, making them conceptually suitable candidates for translating spatial microenvironmental context into intracellular state and effector outputs. The Eph/ephrin system was originally recognized for roles in development and spatial patterning, with a core feature of shaping adhesion, morphology, and migration through contact-dependent signal exchange. Increasing evidence extends Eph/ephrin biology into immune contexts, including immune-cell development, activation, migration, and tissue residence, and modulation of how immune cells communicate with endothelium/stroma or neighboring immune cells within inflammatory microenvironments. From a signaling architecture perspective, Eph downstream outputs are not a single linear pathway and can intersect major metabolic/growth networks, with mechanistic support for interactions and
-        feedback with PI3K–Akt–mTOR signaling in multiple family members. Thus, Eph family signaling is positioned to extend plasma-membrane contact cues into deeper cellular homeostasis modules, including mitochondrial-related processes and membrane environment, albeit in a context-dependent manner across members, cell types, and stimuli. {doi:10.1016/s1357-2725(02} {doi:10.3389/fimmu.2019.01473} {doi:10.1016/j.ccr.2009.04.009} {doi:10.4161/cc.9.11.11925}
-      pid: 1.1.3.p4
-      section_heading: Cardiolipin as a membrane-environment readout and interface
-    - type: paragraph
-      text: 'If EphB1 signaling can engage downstream pathways or mechanistic axes that alter mitochondrial membrane environment—captured by CL abundance, species composition, or oxidation—it may shift the threshold and efficiency of pore formation and thereby achieve amplitude-limiting control of inflammasome outputs. A potential advantage of this strategy is that it targets output form and intensity (for example, a threshold window for lytic cytokine release) rather than being equivalent to fully disabling the inflammasome, which may better balance tissue protection with host defense in principle. Accordingly, this work adopts a working framework: receptor kinase (EphB1) → downstream pathway/mechanistic axis → mitochondrial membrane environment/CL readouts → terminal inflammasome execution outputs.'
-      pid: 1.1.3.p5
-      section_heading: Cardiolipin as a membrane-environment readout and interface
-    - type: paragraph
-      text: 'The central gap can therefore be stated as a falsifiable linkage: how an upstream receptor signal engages downstream pathways/mechanistic axes to reshape CL metabolism and membrane environment, and thereby translates into terminal inflammasome execution-output differences. Existing literature provides interface clues that gasdermins can interact with CL-related membrane environments to affect mitochondrial integrity, mtDNA release, and inflammatory amplification, coupling mitochondria to inflammasome outputs. Yet evidence largely remains at the level of ‘interface exists’ and ‘correlated coupling’, lacking a systems framework for how an upstream entry signal drives integrated CL metabolic changes. For EphB1 specifically, the key unknown is not whether it affects a single enzyme or event, but whether EphB1 signaling can, via downstream pathways/mechanistic axes, produce reproducible CL-state changes that are sufficient to explain changes in execution thresholds and efficiency.
-        {doi:10.1016/j.immuni.2023.10.004} {doi:10.1038/s41467-019-09397-2}'
-      pid: 1.3.p4
+      text: The central question is whether an upstream receptor signal can engage downstream pathways that reshape CL state and membrane environment, thereby altering terminal inflammasome execution outputs. However, current evidence remains largely descriptive and lacks a systems-level framework explaining how upstream signals drive integrated changes in CL state. To address this question, we use a discover–localize–validate strategy to test the proposed chain with aligned readouts across each layer. This study is framed around a layered model linking receptor signaling, membrane environment, and execution output, with EphB1 as a candidate upstream entry point and CL state as an integrated mitochondrial readout. Rather than equating phenotypic differences with upstream inflammasome activation strength, the study emphasizes identifying which layer differs and whether execution thresholds and amplitude-limiting behavior can be tuned. Accordingly, the study tests whether changes in CL state
+        are sufficient to explain execution-output divergence without assuming complete molecular resolution of every intermediate step.
+      paragraph_group: hypothesis
       section_heading: Scientific question, hypotheses, and study objectives
-    - type: paragraph
-      text: 'To address this question, the study adopts a closed-loop ‘discover–localize–validate’ design that decomposes the chain into three executable and falsifiable task modules with aligned readouts throughout. Input: genetic manipulation of EphB1 (e.g., KO/intervention) as the receptor-level entry variable under a unified inflammasome activation model and time-resolved sampling for comparability. Process: identify candidate downstream pathways from multi-omics/bioinformatics and prioritize ‘pathway/mechanistic axis as mediator’ using statistical mediation logic; then quantify CL-state and execution outputs in parallel with stratified priming/assembly markers to localize the layer of divergence. Output: complete causal tests with genetic plus pharmacologic masking/rescue or equivalent stratified strategies to validate whether perturbing a candidate pathway or correcting a candidate metabolic state coherently shifts CL readouts and execution outputs.'
-      pid: 1.3.p5
-      section_heading: Scientific question, hypotheses, and study objectives
+      source_pids:
+      - 1.3.p4
+      - 1.3.p5
+      - 1.3.p6
+      selected_sids:
+      - 1.3.p4s1
+      - 1.3.p4s3
+      - 1.3.p5s1
+      - 1.3.p6s1
+      - 1.3.p6s2
+      - 1.3.p6s3
   - id: methods
     title: Methods
     blocks:
