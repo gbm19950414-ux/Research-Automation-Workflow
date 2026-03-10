@@ -1,62 +1,14 @@
 discussion_outline:
-  version: "T8_skeleton_v1"
-  goal:
-    deliverables:
-      - "Discussion_T8_working.md (traceable master)"
-      - "Discussion_for_review.docx (clean for supervisor)"
-    constraints:
-      paragraph_count: 5
-      style: "journal_discussion"
-      principle: "not translation; compile+compress from CN logic"
-  mapping_rule:
-    cn_to_en:
-      - "Use CN sections as content library; compile into D1–D5 functional paragraphs."
-      - "Each D paragraph must declare: purpose, claim spine, evidence interfaces, boundaries, CN trace."
-      - "Avoid repeating Results; convert to interpretation + adjudication language."
 
   paragraphs:
     - id: D1
-      title_en: "Opening: Decoupling and the central question (activation ≠ lytic output)"
-      purpose:
-        - "Establish the structural paradox in the field: similar upstream readouts but divergent lytic outputs."
-        - "Shift the question from 'whether inflammasome activates' to 'how execution output is capped/thresholded'."
-        - "State the minimal testable causal chain as the Discussion anchor."
-      verdict_level: "main_text"
-      cn_source_sections:
-        primary:
-          - "4.1.1 科学问题与总结"
-        secondary:
-          - "4.1.3 概念与方法创新（概念部分可借一句）"
-      claim_spine_en_skeleton:
-        - "Field default equivalence (upstream readouts ≈ inflammation strength) is incomplete."
-        - "A recurring paradox: activation/assembly can be similar, yet IL-1β lytic release and rupture diverge."
-        - "Therefore, an execution-layer threshold/cap exists after assembly/activation."
-        - "Minimal testable chain: signal input → membrane-environment mediator → pore functional output."
       sentences_en:
         - "The inflammasome field often treats upstream readouts—priming-dependent transcription, ASC speck formation, and caspase-1 activation—as near-equivalent proxies for “inflammatory strength.”"
         - "In practice, a recurring structural paradox appears across models: upstream activation/assembly can look similar, yet lytic IL-1β release and membrane rupture diverge markedly."
-        - "This activation–output decoupling implies an execution-layer threshold/cap that operates after assembly, deciding how much can be released, when rupture occurs, and whether rupture occurs at all."
-        - "Accordingly, our Discussion shifts the question from “does NLRP3 activate?” to “how is the terminal output capped/thresholded when activation is comparable?”"
-        - "To make the paradox adjudicable, we compress the gap into a falsifiable minimal chain: signal input → membrane-environment mediator → pore functional output."
+        - "This activation–output decoupling is consistent with an execution-layer threshold or cap operating after assembly, shaping how much output is released, when rupture occurs, and whether rupture occurs at all."
+        - "Accordingly, the central question is not simply whether NLRP3 activates, but how terminal output is capped or thresholded when upstream activation appears comparable."
+        - "This paradox can be reduced to a falsifiable minimal chain in which signal input is translated through a membrane-environment mediator into pore functional output."
         - "In this framing, upstream activation remains necessary, but it is not sufficient to predict the magnitude of lytic output."
-      cn_source_key_points:
-        - "活化≠输出：装配读出相近但裂解性输出分叉（核心矛盾）"
-        - "阈值层：排多少、何时破、是否破"
-        - "压缩缺口为可检验路径：信号输入→膜环境中介→孔功能输出"
-      evidence_interfaces_to_reference:
-        - type: "Results bridge (no data re-listing)"
-          note: "Only 1–2 sentences: phenotype anchor + why it requires execution-threshold framing."
-      boundary_statements_en_skeleton:
-        - "We do not claim upstream is irrelevant; we claim it is necessary but not sufficient to predict lytic output strength."
-      compression_rule:
-        max_sentences: 6
-        must_include:
-          - "activation≠output decoupling"
-          - "execution threshold/cap framing"
-          - "minimal causal chain statement"
-        must_avoid:
-          - "long background literature review"
-          - "repeating Results paragraph-by-paragraph"
 
     - id: D2
       title_en: "Evidence-chain synopsis: from localization to a threshold model"
@@ -76,13 +28,13 @@ discussion_outline:
         - "ESCRT repair can cap membrane catastrophe; rupture is separable (e.g., NINJ1)."
         - "Thus, a threshold/cap model is structurally plausible and testable."
       sentences_en:
-        - "Our evidence can be read as a compact chain from phenotype to layer-localization to a threshold model."
+        - "Our findings support this framework by linking the phenotype to execution-layer localization and, in turn, to a threshold model of terminal output."
         - "Across a canonical LPS-priming–nigericin NLRP3 paradigm (and additional inflammasome settings), Ephb1-deficient macrophages show blunted lytic outputs and reduced IL-1β release, yet these output changes do not automatically imply that priming, assembly, or caspase activation is globally disabled."
         - "Instead, the divergence is better localized to the execution layer: pyroptosis is not a binary switch, but a parameterized process shaped by pore formation efficiency, pore stability and conductance, and a sub-lytic ceiling imposed by membrane repair."
-        - "Mechanistically, ESCRT-mediated repair can cap membrane catastrophe and keep cells in a sub-lytic regime, altering the ratio between cytokine release and terminal lysis."
+        - "The execution-threshold model can be mechanistically interpreted through repair, rupture, and membrane-environment mediation."
         - "Conversely, terminal rupture is separable from pore formation and can be amplified by dedicated rupture factors (e.g., NINJ1), creating structural space for activation without proportional rupture."
         - "On this basis, an execution-threshold/cap model is both plausible and testable."
-        - "To move beyond correlation, we organize causal adjudication around three criteria: hierarchical masking (downstream membrane-environment manipulations should override upstream differences), same-level rescue (planned; restoring the membrane mediator should partially recover output in Ephb1 loss), and dose–response (graded membrane shifts should produce graded or threshold-like output changes)."
+        - "To move beyond correlation, this model can be evaluated through three criteria: hierarchical masking, same-level rescue, and dose–response behavior."
         - "At present, our strongest support is for necessity and layer-localization; sufficiency requires dedicated rescue and pathway-validation experiments."
       cn_source_key_points:
         - "定位：差异发生在激活之后的输出环节"
@@ -105,50 +57,14 @@ discussion_outline:
           - "detailing every assay; keep as logic synopsis"
 
     - id: D3
-      title_en: "Mediator and pathway organization: CL/membrane environment + mechanism axes + mediation roadmap"
-      purpose:
-        - "Define the mediator layer: membrane lipid environment (CL metabolic state as quantifiable proxy)."
-        - "Explain why 'mechanism axes + mediation decomposition' is used to avoid premature single-enzyme convergence."
-        - "Position Ephb1 as upstream signal input that propagates through network → membrane environment → pore output."
-      verdict_level: "main_text"
-      cn_source_sections:
-        primary:
-          - "4.1.1（膜环境/CL中介缺口与Ephb1组织方式）"
-          - "4.1.5 路径定位与中介"
-        secondary:
-          - "4.1.3（方法创新：机制轴+中介分解）"
-      claim_spine_en_skeleton:
-        - "Membrane lipid environment is not background; it is a mediator controlling pore permissiveness."
-        - "CL metabolic state (amount/remodeling/oxidation/accessibility pool) serves as a quantifiable mediator proxy."
-        - "Ephb1 is positioned as signal input; its effects are organized as network-driven membrane remodeling."
-        - "Mechanism axes provide cross-batch reproducible phenotype coordinates; mediation yields prioritized pathways (roadmap)."
       sentences_en:
         - "We place the membrane lipid environment—not upstream assembly—as the mediator layer that translates signal input into execution output."
-        - "Within this layer, cardiolipin (CL) is treated not as an abstract “binding-site” concept but as a quantifiable metabolic and biophysical state (amount, remodeling spectrum, oxidation state, and an operationally defined accessibility pool) that can shift pore permissiveness."
+        - "Within this mediator layer, cardiolipin (CL) is considered a quantifiable metabolic and biophysical state—rather than merely an abstract binding-site concept—that can shift pore permissiveness."
         - "In this organization, Ephb1 is an upstream signal entry point whose loss propagates through downstream signaling networks to remodel the mitochondrial/membrane environment, thereby shifting the functional threshold and ceiling of GSDMD pore output."
-        - "Because complex systems often yield modest, distributed omics shifts, we avoid prematurely converging on a single enzyme node; instead, we use cross-batch “mechanism axes” to summarize supply/transport/synthesis/remodeling/oxidation/membrane-environment coordinates as reproducible phenotype endpoints."
-        - "We then use mediation decomposition (X–M–Y) to prioritize candidate downstream pathways that best explain how Ephb1 perturbs these axes, producing a testable roadmap rather than a mechanistic proof."
-        - "Crucially, mediation here is a ranking tool: it nominates pathways for targeted perturbation along a three-step logic (pathway → CL/axis state → pore/output) without claiming direct biochemical sufficiency."
+        - "Because complex systems often yield modest and distributed omics shifts, we avoid prematurely converging on a single enzyme node and instead use cross-batch mechanism axes to capture reproducible membrane-environment phenotypes."
+        - "We then use mediation decomposition to prioritize candidate downstream pathways that best explain how Ephb1 perturbs these axes, yielding a testable roadmap rather than direct mechanistic proof."
+        - "Here, mediation is used as a ranking tool: it prioritizes pathways for targeted perturbation along a pathway → CL/axis state → pore/output logic without implying direct biochemical sufficiency."
         - "This mediator-first framework provides an interpretable way to rationalize activation–output decoupling: similar upstream activation can yield divergent lytic outputs if membrane-environment thresholds are shifted."
-      cn_source_key_points:
-        - "CL从‘结合位点想象’回落到‘可量化代谢与膜环境状态’"
-        - "避免单一酶节点叙事：机制轴稳定表征+中介分解给优先级"
-        - "Ephb1→下游通路网络→膜环境/CL表型→孔功能输出"
-      evidence_interfaces_to_reference:
-        - type: "omics integration"
-          note: "Only state what the framework enables (reproducible coordinates + prioritization), not list all pathways."
-      boundary_statements_en_skeleton:
-        - "Mediation analysis is a prioritization roadmap, not a substitute for mechanistic proof."
-        - "We discuss CL metabolic state as mediator proxy; not in situ binding constants."
-      compression_rule:
-        max_sentences: 7
-        must_include:
-          - "CL/membrane environment as mediator"
-          - "Ephb1 as upstream input via network"
-          - "mechanism axes + mediation = roadmap"
-        must_avoid:
-          - "naming too many candidate enzymes/pathways in the main text"
-
     - id: D4
       title_en: "Strength of claims, alternatives, and limitations (what we can and cannot conclude)"
       purpose:
@@ -172,10 +88,10 @@ discussion_outline:
         - "Our central claim is deliberately scoped: the data most strongly support an execution-threshold model with membrane environment/CL as a high-priority mediator, whereas full sufficiency of the entire Ephb1→pathway→CL→pore loop remains to be closed."
         - "We do not claim that upstream activation is irrelevant; we claim it is necessary but insufficient to predict lytic output magnitude, and that execution-layer parameters (pore efficiency/stability, repair engagement, and rupture probability) provide the missing explanatory degrees of freedom."
         - "We also do not claim a direct Ephb1–GSDMD structural interaction or precise in situ CL accessibility/binding constants; our framework is built to explain relative threshold shifts using experimentally aligned readouts rather than absolute physical constants."
-        - "Key alternative explanations remain adjudicable: (i) ROS-first causality (Ephb1→ROS→CL) versus CL-first or ROS-independent CL remodeling can be separated by ROS-clamping versus CL rescue in Ephb1-deficient cells; (ii) dominance of repair/rupture axes (ESCRT/NINJ1) can be tested by perturbing repair or rupture factors and asking whether they override the CL–output association; (iii) tool/energetic confounds (e.g., BEL stereochemistry, off-target hydrolase inhibition, ΔΨm effects influencing NAO) require enantiomer-aware dosing, covariate control (ΔΨm/mitochondrial mass), and orthogonal lipidomics validation."
-        - "Internal validity is therefore bounded by measurement specificity (NAO vs LC–MS, ΔΨm covariates), tool specificity, and batch structure, while external validity is bounded by species/cell type (C57 peritoneal macrophages), stimulation paradigm (acute LPS+nigericin), and metabolic/ROS regimes where nonlinearity may dominate."
+        - "Several alternative explanations remain testable, including ROS-first versus CL-first causality, dominance of repair or rupture pathways, and tool- or energetics-related confounds affecting CL-linked readouts."
+        - "Accordingly, internal validity is constrained by measurement specificity, tool specificity, and batch structure, whereas external validity is limited by cell type, stimulation paradigm, and metabolic contexts in which nonlinear behavior may dominate."
         - "Importantly, these boundaries do not negate the model; they define where the model should be expected to hold and what falsifiable predictions would overturn it."
-        - "Thus, the Discussion aims to be maximally informative without over-claiming: we provide a layer-localized, mediator-based explanation for decoupling and specify the concrete experiments that can confirm or refute sufficiency and pathway priority."
+        - "Taken together, the model provides a layer-localized, mediator-based explanation for decoupling while defining concrete experiments to test sufficiency and pathway priority."
       key_alternatives_to_list (as adjudication bullets):
         - "ROS-first vs CL-first causality (Ephb1→ROS→CL vs Ephb1→CL independent of ROS)"
         - "ESCRT/NINJ1 dominance (repair/rupture axis may dominate terminal lysis)"
@@ -218,11 +134,11 @@ discussion_outline:
         - "Implication (brief): execution-layer capping offers finer control than shutting down upstream activation."
         - "Next step 1: test causal sufficiency of CL rescue vs ROS lowering in KO."
         - "Next step 2: validate mediation-prioritized pathways with 'pathway → axis/CL → pore/output' three-step logic."
-        - "Take-home: Ephb1 shapes membrane environment (CL state) to shift execution threshold, explaining activation–output decoupling."
+        - "Ephb1 acts as an upstream signal input that remodels the membrane environment, captured here by CL metabolic state, to shift the functional threshold and ceiling of GSDMD pore output, thereby explaining why activation readouts can remain similar while lytic outputs diverge."
       sentences_en:
         - "A practical implication of an execution-layer cap is that inflammatory signaling could, in principle, be modulated without fully shutting down upstream inflammasome activation—potentially preserving host defense while keeping lytic damage below a pathological threshold."
-        - "To close the causal loop, the first priority is to test sufficiency at the mediator level: in Ephb1-deficient macrophages, compare ROS lowering versus direct CL restoration (with matched covariate control) and ask whether CL rescue can recover early GSDMD-NT membrane engagement and IL-1β lytic release even when ROS is not the sole driver."
-        - "Second, we need to validate the mediation-prioritized downstream pathways using a strict hierarchy-consistent workflow: pathway perturbation should first shift CL/axis coordinates, then shift early pore/output readouts, while minimally affecting priming/assembly metrics."
+        - "To close the causal loop, a first priority is to test mediator-level sufficiency by comparing ROS lowering with direct CL restoration in Ephb1-deficient macrophages and asking whether CL rescue can recover early GSDMD-NT engagement and lytic IL-1β release."
+        - "A second priority is to test mediation-prioritized pathways by asking whether pathway perturbation first shifts CL/axis states and then alters early pore/output readouts while minimally affecting priming and assembly metrics."
         - "Together, these experiments will determine whether the proposed chain is merely a correlated scaffold or a mechanistically sufficient route."
         - "Take-home, in two sentences: Ephb1 acts as an upstream signal input that remodels the membrane environment (captured by CL metabolic state) to shift the functional threshold and ceiling of GSDMD pore output, thereby explaining why activation readouts can be similar while lytic outputs diverge."
         - "Framing pyroptosis in threshold terms—pore formation, repair capping, and rupture separability—turns activation–output decoupling from an empirical observation into a testable, portable model for interpreting inflammasome outputs."
@@ -236,17 +152,3 @@ discussion_outline:
           - "disease-by-disease long mapping"
           - "grant-style future work expansion"
 
-  doc_build_hints:
-    md_master:
-      filename: "Discussion_T8_working.md"
-      include_html_comments_for_trace: true
-      comment_fields:
-        - "role"
-        - "logic_ids (optional)"
-        - "cn_source_sections"
-        - "verdict_level"
-    docx_for_review:
-      filename: "Discussion_for_review.docx"
-      rule:
-        - "strip all trace comments and CN anchors"
-        - "keep only headings + English paragraphs"

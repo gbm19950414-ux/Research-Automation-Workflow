@@ -19,6 +19,15 @@ methods:
         text: >
           Ephb1 mutant mice and wild-type littermates were used in this study.
 
+      - id: ani_06
+        role: mutant_line_origin
+        required: true
+        text: >
+          Ephb1 mutant mice were obtained from the piggyBac (PB) transposon-based
+          mouse mutant library at the Institute of Developmental Biology and
+          Molecular Medicine, Fudan University.
+
+
       - id: ani_03
         role: housing_conditions
         required: true
@@ -40,13 +49,6 @@ methods:
           Animals had ad libitum access to sterilized standard chow and
           acidified drinking water.
 
-      - id: ani_06
-        role: mutant_line_origin
-        required: true
-        text: >
-          Ephb1 mutant mice were obtained from the piggyBac (PB) transposon-based
-          mouse mutant library at the Institute of Developmental Biology and
-          Molecular Medicine, Fudan University.
 
       - id: ani_07
         role: genotyping_and_age_selection
@@ -69,64 +71,64 @@ methods:
     sources:
       - "2.2.1 原代腹腔巨噬细胞分离与纯化"
     sentences:
-    - id: pmi_01
-      role: animal_source
-      required: true
-      text: >
-        Primary peritoneal macrophages were isolated from 6–10-week-old
-        C57BL/6J wild-type and Ephb1-deficient mice.
+      - id: pmi_01
+        role: animal_source
+        required: true
+        text: >
+          Primary peritoneal macrophages were isolated from 6–10-week-old
+          C57BL/6J wild-type and Ephb1-deficient mice.
 
-    - id: pmi_02
-      role: induction_or_pretreatment
-      required: true
-      text: >
-        To elicit macrophage recruitment, mice were intraperitoneally injected
-        with 1–2 mL of sterile 4% thioglycollate medium.
+      - id: pmi_02
+        role: induction_or_pretreatment
+        required: true
+        text: >
+          To elicit macrophage recruitment, mice were intraperitoneally injected
+          with 1–2 mL of sterile 4% thioglycollate medium.
 
-    - id: pmi_03
-      role: cell_harvesting
-      required: true
-      text: >
-        Three days after injection, peritoneal exudate cells were harvested
-        by lavage with pre-warmed phosphate-buffered saline (PBS).
+      - id: pmi_03
+        role: cell_harvesting
+        required: true
+        text: >
+          Three days after injection, peritoneal exudate cells were harvested
+          by lavage with pre-warmed phosphate-buffered saline (PBS).
 
-    - id: pmi_04
-      role: purification_and_handling
-      required: true
-      text: >
-        Recovered cells were collected by centrifugation and subjected to
-        red blood cell lysis when necessary.
+      - id: pmi_04
+        role: purification_and_handling
+        required: true
+        text: >
+          Recovered cells were collected by centrifugation and subjected to
+          red blood cell lysis when necessary.
 
-    - id: pmi_05
-      role: seeding_and_stabilization
-      required: true
-      text: >
-        Cells were resuspended in RPMI 1640 medium supplemented with 10%
-        fetal bovine serum and antibiotics, counted, and seeded at the
-        indicated densities.
+      - id: pmi_05
+        role: seeding_and_stabilization
+        required: true
+        text: >
+          Cells were resuspended in RPMI 1640 medium supplemented with 10%
+          fetal bovine serum and antibiotics, counted, and seeded at the
+          indicated densities.
 
-    - id: pmi_06
-      role: seeding_and_stabilization
-      required: true
-      text: >
-        After 1–2 h of incubation, non-adherent cells were removed by gentle
-        washing with PBS, and adherent macrophages were cultured overnight
-        prior to subsequent experiments.
-        
-  - id: cell_culture_and_treatments
-    title: Cell culture and treatments
+      - id: pmi_06
+        role: seeding_and_stabilization
+        required: true
+        text: >
+          After 1–2 h of incubation, non-adherent cells were removed by gentle
+          washing with PBS, and adherent macrophages were cultured overnight
+          before downstream stimulation and assay procedures.
+
+  - id: Cell culture and inflammasome stimulation
+    title: Cell culture and inflammasome stimulation
     assay_type: cell_treatment_and_stimulation
     sources:
       - "2.2.2 炎症小体激活"
       - "2.2.3 Ephb1-FC 处理"
     sentences:
-
       - id: cct_01
         role: cell_source_context
-        required: false
+        required: true
         text: >
-          Primary peritoneal macrophages prepared as described above were used
-          for all stimulation experiments.
+          Primary peritoneal macrophages were subjected to defined inflammasome
+          priming and activation protocols, with Ephb1-Fc perturbation applied
+          where indicated.
 
       - id: cct_02
         role: priming_step
@@ -202,13 +204,12 @@ methods:
           on ice, and supernatants and cell lysates were collected for
           downstream analyses.
 
-  - id: inflammasome_activation_assays
-    title: Inflammasome activation assays
+  - id: Inflammasome assembly assays
+    title: Inflammasome assembly assays
     assay_type: inflammasome_assembly_detection
     sources:
       - "2.3.4 ASC speck 交联"
     sentences:
-
       - id: iaa_01
         role: assay_scope_definition
         required: true
@@ -221,7 +222,7 @@ methods:
         required: true
         text: >
           Primary peritoneal macrophages were stimulated to activate the
-          NLRP3 inflammasome as described above.
+          NLRP3 inflammasome under the indicated stimulation conditions.
 
       - id: iaa_03
         role: lysis_and_fractionation_strategy
@@ -265,12 +266,127 @@ methods:
           ASC oligomerization patterns in crosslinked insoluble fractions were
           compared with corresponding soluble lysate fractions.
 
+  - id: Inflammasome output and cell death assays
+    title: Inflammasome output and cell death assays
+    assay_type: cell_death_quantification
+    sources:
+      - "2.2.8 细胞焦亡检测"
+      - "2.2.9 细胞凋亡检测"
+      - "2.3.4 分泌蛋白 ELISA 检测"
+    sentences:
+      - id: cda_01
+        role: assay_scope_definition
+        required: true
+        text: >
+          Inflammasome-associated cell death and cytokine release were
+          quantitatively assessed following pharmacological or genetic
+          perturbations.
+
+      - id: cda_02
+        role: cell_seeding_context
+        required: true
+        text: >
+          Primary peritoneal macrophages were seeded in 96-well plates at
+          a density of 1 × 10^5 cells per well and cultured overnight
+          to allow metabolic stabilization.
+
+      - id: cda_03
+        role: treatment_execution
+        required: true
+        text: >
+          Cells were subjected to inflammasome activation or control treatments
+          as described above under a final volume of 100 µL per well.
+
+      - id: cda_04
+        role: positive_control_definition
+        required: true
+        text: >
+          For maximal LDH release controls, cells were treated with lysis
+          solution 45 min prior to sample collection.
+
+      - id: cda_05
+        role: sample_collection
+        required: true
+        text: >
+          Following treatment, culture supernatants were collected for
+          lactate dehydrogenase (LDH) release measurements.
+
+      - id: cda_06
+        role: signal_detection
+        required: true
+        text: >
+          LDH activity in culture supernatants was determined using the
+          CytoTox 96® Non-Radioactive Cytotoxicity Assay according to
+          the manufacturer’s instructions.
+
+      - id: cda_07
+        role: measurement_parameters
+        required: true
+        text: >
+          Absorbance was measured at 490–492 nm using a multimode microplate reader.
+
+      - id: cda_08
+        role: quantification_formula
+        required: true
+        text: >
+          Percent cytotoxicity was calculated by normalizing LDH release from
+          treated samples to maximal LDH release controls after background
+          subtraction.
+
+      - id: cda_12
+        role: cytokine_readout_definition
+        required: true
+        text: >
+          Levels of secreted cytokines in culture supernatants were measured
+          using mouse TNF-α, IL-6, and IL-1β uncoated ELISA kits.
+
+      - id: cda_13
+        role: elisa_execution
+        required: false
+        text: >
+          ELISA assays were performed according to the manufacturer’s
+          instructions using 96-well high-binding plates.
+
+      - id: cda_14
+        role: standard_curve_and_readout
+        required: true
+        text: >
+          Cytokine concentrations were calculated from standard curves
+          generated using serially diluted recombinant standards.
+      - id: cda_15
+        role: control_assay_transition
+        required: true
+        text: >
+          To distinguish inflammasome-associated output from non-pyroptotic
+          cell death, apoptosis control assays were performed separately under
+          matched culture conditions.
+
+      - id: cda_09
+        role: apoptosis_induction_definition
+        required: true
+        text: >
+          Apoptosis was induced by treating cells with staurosporine at a final
+          concentration of 1 µM for 4 h, with vehicle-treated cells serving
+          as controls.
+
+      - id: cda_10
+        role: apoptosis_readout_definition
+        required: true
+        text: >
+          Apoptotic signaling was evaluated by immunoblot detection of
+          cleaved caspase-3.
+
+      - id: cda_11
+        role: data_analysis_context
+        required: true
+        text: >
+          Data were obtained from at least three independent experiments and analyzed using the statistical procedures described below.
+
   - id: mitochondrial_functional_assays
     title: Mitochondrial functional assays
     assay_type: mitochondrial_functional_fluorescence
     sources:
       - "2.2.4 ROS 及膜电位染色与检测"
-      - "2.2.5 CL 染色"
     sentences:
       - id: mfa_01
         role: assay_scope_definition
@@ -342,299 +458,67 @@ methods:
         role: data_quantification_context
         required: true
         text: >
-          Fluorescence signals were analyzed to evaluate changes in cellular
-          and mitochondrial ROS levels and mitochondrial membrane potential
-          under the indicated experimental conditions.
-      - id: mfa_11
+          Fluorescence signals were quantified and compared across experimental conditions to assess changes in cellular ROS, mitochondrial superoxide, and mitochondrial membrane potential.
+
+  - id: Cardiolipin accessibility and imaging assays
+    title: Cardiolipin accessibility and imaging assays
+    assay_type: fluorescence_imaging_and_quantification
+    sources:
+      - "2.2.5 CL 染色"
+      - "2.2.7 显微成像数据处理"
+    sentences:
+      - id: cai_01
         role: assay_scope_definition
         required: true
         text: >
           Mitochondrial cardiolipin content was assessed using
           10-N-nonyl acridine orange (NAO) staining.
 
-      - id: mfa_12
+      - id: cai_02
         role: probe_definition
         required: true
         text: >
-          NAO was used at low nanomolar concentrations to semi-quantitatively
-          monitor cardiolipin abundance and oxidation status in mitochondria.
-
-      - id: mfa_13
+          NAO was used at low nanomolar concentrations to semi-quantitatively monitor cardiolipin-associated fluorescence signals in mitochondria.
+      - id: cai_03
         role: probe_loading
         required: true
         text: >
           Following experimental treatments, cells were incubated with NAO
           at a final concentration of 200 nM for 30 min at 37 °C.
 
-      - id: mfa_14
+      - id: cai_04
         role: signal_acquisition
         required: true
         text: >
           After staining, fluorescence signals were acquired using either a
           multimode microplate reader or fluorescence microscopy.
 
-      - id: mfa_15
+      - id: cai_05
         role: measurement_parameters
         required: true
         text: >
           NAO fluorescence was measured at excitation/emission wavelengths
           of approximately 519/555 nm.
 
-      - id: mfa_16
+      - id: cai_06
         role: data_quantification_context
         required: true
         text: >
-          Changes in NAO fluorescence intensity were used to evaluate dynamic
-          alterations in mitochondrial cardiolipin levels under different
-          experimental conditions.
-  - id: cell_death_assays
-    title: Cell death assays
-    assay_type: cell_death_quantification
-    sources:
-      - "2.2.8 细胞焦亡检测"
-      - "2.2.9 细胞凋亡检测"
-    sentences:
-      - id: cda_01
-        role: assay_scope_definition
+          Changes in NAO fluorescence intensity were used to compare cardiolipin-associated signals across experimental conditions.
+      - id: cai_07
+        role: imaging_transition
         required: true
         text: >
-          Pyroptotic cell death were quantitatively assessed
-          following pharmacological or genetic perturbations.
-
-      - id: cda_02
-        role: cell_seeding_context
-        required: true
-        text: >
-          Primary peritoneal macrophages were seeded in 96-well plates at
-          a density of 1 × 10^5 cells per well and cultured overnight
-          to allow metabolic stabilization.
-
-      - id: cda_03
-        role: treatment_execution
-        required: true
-        text: >
-          Cells were subjected to inflammasome activation or control treatments
-          as described above under a final volume of 100 µL per well.
-
-      - id: cda_04
-        role: positive_control_definition
-        required: true
-        text: >
-          For maximal LDH release controls, cells were treated with lysis
-          solution 45 min prior to sample collection.
-
-      - id: cda_05
-        role: sample_collection
-        required: true
-        text: >
-          Following treatment, culture supernatants were collected for
-          lactate dehydrogenase (LDH) release measurements.
-
-      - id: cda_06
-        role: signal_detection
-        required: true
-        text: >
-          LDH activity in culture supernatants was determined using the
-          CytoTox 96® Non-Radioactive Cytotoxicity Assay according to
-          the manufacturer’s instructions.
-
-      - id: cda_07
-        role: measurement_parameters
-        required: true
-        text: >
-          Absorbance was measured at 490–492 nm using a multimode microplate reader.
-
-      - id: cda_08
-        role: quantification_formula
-        required: true
-        text: >
-          Percent cytotoxicity was calculated by normalizing LDH release from
-          treated samples to maximal LDH release controls after background
-          subtraction.
-
-      - id: cda_09
-        role: apoptosis_induction_definition
-        required: true
-        text: >
-          Apoptosis was induced by treating cells with staurosporine at a final
-          concentration of 1 µM for 4 h, with vehicle-treated cells serving
-          as controls.
-
-      - id: cda_10
-        role: apoptosis_readout_definition
-        required: true
-        text: >
-          Apoptotic signaling was evaluated by immunoblot detection of
-          cleaved caspase-3.
-
-      - id: cda_11
-        role: data_analysis_context
-        required: true
-        text: >
-          Data were obtained from at least three independent experiments and
-          analyzed using standard statistical methods as described below.
-
-  - id: protein_analysis
-    title: Protein analysis
-    assay_type: protein_quantification_and_detection
-    sources:
-      - "2.3.3 蛋白提取与免疫印迹（Western Blot）"
-      - "2.3.4 分泌蛋白 ELISA 检测"
-    sentences:
-      - id: pa_01
-        role: assay_scope_definition
-        required: true
-        text: >
-          Protein expression and secretion were analyzed by Western blotting
-          and enzyme-linked immunosorbent assay (ELISA).
-
-      - id: pa_02
-        role: sample_preparation
-        required: true
-        text: >
-          Cells were lysed in Laemmli sample buffer supplemented with protease
-          and phosphatase inhibitors, followed by heat denaturation.
-
-      - id: pa_03
-        role: protein_separation
-        required: true
-        text: >
-          Protein samples were separated by SDS-PAGE using gels of appropriate
-          acrylamide concentrations based on target protein molecular weight.
-
-      - id: pa_04
-        role: protein_transfer
-        required: true
-        text: >
-          Separated proteins were transferred onto polyvinylidene fluoride
-          (PVDF) membranes under cold conditions.
-
-      - id: pa_05
-        role: antibody_incubation
-        required: true
-        text: >
-          Membranes were blocked and incubated with primary antibodies
-          overnight at 4 °C, followed by incubation with HRP-conjugated
-          secondary antibodies.
-
-      - id: pa_06
-        role: signal_detection
-        required: true
-        text: >
-          Protein signals were visualized using enhanced chemiluminescence
-          reagents and captured with a digital imaging system.
-
-      - id: pa_07
-        role: quantification_and_normalization
-        required: true
-        text: >
-          Band intensities were quantified by densitometric analysis and
-          normalized to GAPDH as loading controls.
-
-      - id: pa_08
-        role: secreted_protein_definition
-        required: true
-        text: >
-          Levels of secreted cytokines in culture supernatants were measured
-          using mouse TNF-α, IL-6, and IL-1β uncoated ELISA kits.
-
-      - id: pa_09
-        role: elisa_execution
-        required: true
-        text: >
-          ELISA assays were performed according to the manufacturer’s
-          instructions using 96-well high-binding plates.
-
-      - id: pa_10
-        role: standard_curve_and_readout
-        required: true
-        text: >
-          Cytokine concentrations were calculated from standard curves
-          generated using serially diluted recombinant standards.
-
-      - id: pa_11
-        role: data_processing_and_statistics
-        required: true
-        text: >
-          Protein quantification data were obtained from at least three
-          independent experiments and analyzed using appropriate statistical
-          methods as described below.
-  - id: rna_analysis
-    title: RNA analysis
-    sources:
-      - "2.3.2 RNA 提取与 qPCR"
-    sentences:
-      - id: rna_01
-        role: assay_scope_definition
-        required: true
-        text: >
-          Gene expression was quantified by real-time quantitative PCR (qPCR).
-
-      - id: rna_02
-        role: RNA_extraction_method
-        required: true
-        text: >
-          Total RNA was extracted from primary peritoneal macrophages using
-          TRIzol reagent according to standard protocols.
-
-      - id: rna_03
-        role: reverse_transcription
-        required: true
-        text: >
-          Complementary DNA (cDNA) was synthesized using a two-step reverse
-          transcription protocol with genomic DNA removal.
-
-      - id: rna_04
-        role: qPCR_chemistry_and_platform
-        required: true
-        text: >
-          Quantitative PCR was performed using SYBR Green-based detection
-          chemistry on a real-time PCR system.
-
-      - id: rna_05
-        role: reference_gene_definition
-        required: true
-        text: >
-          Gene expression levels were normalized to the geometric mean of
-          GAPDH and HPRT1 as reference genes.
-
-      - id: rna_06
-        role: data_quality_control
-        required: true
-        text: >
-          Amplification specificity was confirmed by melt curve analysis,
-          and technical replicates with excessive Ct variation were excluded.
-
-      - id: rna_07
-        role: relative_quantification_method
-        required: true
-        text: >
-          Relative gene expression was calculated using the ΔΔCt method with
-          wild-type samples serving as calibrators.
-
-      - id: rna_08
-        role: replicates_and_statistics_context
-        required: true
-        text: >
-          Each mouse was considered an independent biological replicate,
-          and statistical analyses were performed as described below.
-
-  - id: imaging_and_image_analysis
-    title: Confocal microscopy and image analysis
-    assay_type: fluorescence_imaging_and_quantification
-    sources:
-      - "2.2.5 CL 染色"
-      - "2.2.7 显微成像数据处理"
-    sentences:
+          In parallel with plate-based NAO quantification, microscopy-based
+          imaging was performed to assess the subcellular distribution of
+          cardiolipin-associated signals.
 
       - id: ima_01
         role: assay_scope_definition
         required: true
         text: >
-          Confocal microscopy was performed to examine the subcellular
-          distribution of cardiolipin using NAO staining in primary
-          macrophages.
-          
+          Confocal microscopy of NAO-stained primary macrophages was performed to visualize cardiolipin-associated subcellular signals.
+
       - id: ima_02
         role: sample_preparation_context
         required: true
@@ -652,9 +536,7 @@ methods:
         role: fluorescent_labeling_definition
         required: true
         text: >
-          Cells were stained with 10-N-nonyl acridine orange (NAO) to visualize
-          mitochondrial cardiolipin, with nuclei counterstained using DAPI where indicated.
-
+          For imaging, cells were stained with NAO to visualize cardiolipin-associated mitochondrial signals, with DAPI counterstaining applied where indicated.
       - id: ima_05
         role: microscopy_platform
         required: true
@@ -691,14 +573,13 @@ methods:
           Image quantification was performed using ImageJ software with
           consistent analysis parameters applied across all samples.
 
-  - id: mitochondrial_isolation_and_analysis
-    title: Mitochondrial isolation and analysis
+  - id: Mitochondrial isolation and mtDNA release analysis
+    title: Mitochondrial isolation and mtDNA release analysis
     assay_type: mitochondrial_fractionation_and_mtDNA_analysis
     sources:
       - "2.3.5 线粒体分离"
       - "2.3.6 线粒体数量检测与 mtDNA 释放"
     sentences:
-
       - id: mia_01
         role: assay_scope_definition
         required: true
@@ -769,10 +650,127 @@ methods:
         role: replicates_and_statistics_context
         required: true
         text: >
-          Analyses were performed using samples from at least three independent
-          biological replicates and evaluated using appropriate statistical
-          methods as described below.
-          
+          Analyses were performed using samples from at least three independent biological replicates and evaluated using the statistical procedures described below.
+
+  - id: Immunoblot analysis
+    title: Immunoblot analysis
+    assay_type: protein_quantification_and_detection
+    sources:
+      - "2.3.3 蛋白提取与免疫印迹（Western Blot）"
+    sentences:
+      - id: pa_01
+        role: assay_scope_definition
+        required: true
+        text: >
+          Protein expression was analyzed by Western blotting.
+
+      - id: pa_02
+        role: sample_preparation
+        required: true
+        text: >
+          Cells were lysed in Laemmli sample buffer supplemented with protease
+          and phosphatase inhibitors, followed by heat denaturation.
+
+      - id: pa_03
+        role: protein_separation
+        required: true
+        text: >
+          Protein samples were separated by SDS-PAGE using gels of appropriate
+          acrylamide concentrations based on target protein molecular weight.
+
+      - id: pa_04
+        role: protein_transfer
+        required: true
+        text: >
+          Separated proteins were transferred onto polyvinylidene fluoride
+          (PVDF) membranes under cold conditions.
+
+      - id: pa_05
+        role: antibody_incubation
+        required: true
+        text: >
+          Membranes were blocked and incubated with primary antibodies
+          overnight at 4 °C, followed by incubation with HRP-conjugated
+          secondary antibodies.
+
+      - id: pa_06
+        role: signal_detection
+        required: true
+        text: >
+          Protein signals were visualized using enhanced chemiluminescence
+          reagents and captured with a digital imaging system.
+
+      - id: pa_07
+        role: quantification_and_normalization
+        required: true
+        text: >
+          Band intensities were quantified by densitometric analysis and normalized to GAPDH as a loading control.
+
+      - id: pa_11
+        role: data_processing_and_statistics
+        required: true
+        text: >
+          Immunoblot quantification data were obtained from at least three independent experiments and analyzed using the statistical procedures described below.
+
+
+  - id: rna_analysis
+    title: Quantitative PCR analysis
+    sources:
+      - "2.3.2 RNA 提取与 qPCR"
+    sentences:
+      - id: rna_01
+        role: assay_scope_definition
+        required: true
+        text: >
+          Gene expression was quantified by real-time quantitative PCR (qPCR).
+
+      - id: rna_02
+        role: RNA_extraction_method
+        required: true
+        text: >
+          Total RNA was extracted from primary peritoneal macrophages using
+          TRIzol reagent according to standard protocols.
+
+      - id: rna_03
+        role: reverse_transcription
+        required: true
+        text: >
+          Complementary DNA (cDNA) was synthesized using a two-step reverse
+          transcription protocol with genomic DNA removal.
+
+      - id: rna_04
+        role: qPCR_chemistry_and_platform
+        required: true
+        text: >
+          Quantitative PCR was performed using SYBR Green-based detection
+          chemistry on a real-time PCR system.
+
+      - id: rna_05
+        role: reference_gene_definition
+        required: true
+        text: >
+          Gene expression levels were normalized to the geometric mean of
+          GAPDH and HPRT1 as reference genes.
+
+      - id: rna_06
+        role: data_quality_control
+        required: true
+        text: >
+          Amplification specificity was confirmed by melt curve analysis,
+          and technical replicates with excessive Ct variation were excluded.
+
+      - id: rna_07
+        role: relative_quantification_method
+        required: true
+        text: >
+          Relative gene expression was calculated using the ΔΔCt method with
+          wild-type samples serving as calibrators.
+
+      - id: rna_08
+        role: replicates_and_statistics_context
+        required: true
+        text: >
+          Each mouse was treated as an independent biological replicate, and data were analyzed using the statistical procedures described below.
 
   - id: lipidomics
     title: Lipidomics
@@ -857,13 +855,13 @@ methods:
           Quality control samples were included throughout the analytical
           workflow to monitor instrument stability, reproducibility, and
           data reliability.
+
   - id: rna_seq_analysis
-    title: RNA-seq analysis
+    title: Transcriptomics
     assay_type: transcriptome_profiling_and_differential_expression
     sources:
       - "2.4.2 转录组分析"
     sentences:
-
       - id: rna_seq_01
         role: assay_scope_definition
         required: true
@@ -929,19 +927,18 @@ methods:
     sources:
       - "2.5.1 统计学与数据分析"
     sentences:
-
       - id: stat_01
         role: analysis_scope_definition
         required: true
         text: >
-          Statistical analyses were performed to assess differences between
-          experimental groups and evaluate the reliability of observed effects.
+          Statistical analyses were performed to compare experimental groups
+          and evaluate the significance and consistency of observed effects.
 
       - id: stat_02
         role: software_and_environment
         required: true
         text: >
-          Data analysis and visualization were conducted using R and python statistical computing environment.
+          Data analysis and visualization were conducted using R and Python.
 
       - id: stat_03
         role: assumption_testing
@@ -986,17 +983,14 @@ methods:
         role: reproducibility_and_data_integrity
         required: true
         text: >
-          Detailed information on sample size, statistical tests, and
-          significance values is provided in the figure legends.
+          Detailed information on sample size, statistical tests, and significance values is provided in the corresponding figure legends.
 
-  - id: data_availability
-    title: Data availability
+  - id: Data availability and reproducibility
+    title: Data availability and reproducibility
     assay_type: data_management_and_reproducibility
     sources:
       - "2.5.2 数据管理与可重复性"
-
     sentences:
-
       - id: data_01
         role: data_management_scope
         required: true
@@ -1017,14 +1011,15 @@ methods:
         required: true
         text: >
           Data processing and statistical analyses were conducted using
-          documented workflows to enable reproducibility.
+          documented workflows, and analysis parameters were recorded to
+          support reproducibility.
 
       - id: data_04
         role: experimental_reproducibility
         required: true
         text: >
-          Key experimental findings were validated by independent biological
-          replicates.
+          Key experimental findings were validated using independent biological
+          replicates across separate experiments.
 
       - id: data_05
         role: data_access_statement

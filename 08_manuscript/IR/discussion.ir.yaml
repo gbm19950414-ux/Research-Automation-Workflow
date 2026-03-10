@@ -11,28 +11,78 @@ document:
     title: Discussion
     blocks:
     - type: paragraph
-      text: 'The inflammasome field often treats upstream readouts—priming-dependent transcription, ASC speck formation, and caspase-1 activation—as near-equivalent proxies for “inflammatory strength.” In practice, a recurring structural paradox appears across models: upstream activation/assembly can look similar, yet lytic IL-1β release and membrane rupture diverge markedly. This activation–output decoupling implies an execution-layer threshold/cap that operates after assembly, deciding how much can be released, when rupture occurs, and whether rupture occurs at all. Accordingly, our Discussion shifts the question from “does NLRP3 activate?” to “how is the terminal output capped/thresholded when activation is comparable?” To make the paradox adjudicable, we compress the gap into a falsifiable minimal chain: signal input → membrane-environment mediator → pore functional output. In this framing, upstream activation remains necessary, but it is not sufficient to predict the magnitude of lytic
-        output.'
+      text: 'The inflammasome field often treats upstream readouts—priming-dependent transcription, ASC speck formation, and caspase-1 activation—as near-equivalent proxies for “inflammatory strength.” In practice, a recurring structural paradox appears across models: upstream activation/assembly can look similar, yet lytic IL-1β release and membrane rupture diverge markedly. This activation–output decoupling is consistent with an execution-layer threshold or cap operating after assembly, shaping how much output is released, when rupture occurs, and whether rupture occurs at all. Accordingly, the central question is not simply whether NLRP3 activates, but how terminal output is capped or thresholded when upstream activation appears comparable. This paradox can be reduced to a falsifiable minimal chain in which signal input is translated through a membrane-environment mediator into pore functional output. In this framing, upstream activation remains necessary, but it is not sufficient to
+        predict the magnitude of lytic output. Our findings support this framework by linking the phenotype to execution-layer localization and, in turn, to a threshold model of terminal output. Across a canonical LPS-priming–nigericin NLRP3 paradigm (and additional inflammasome settings), Ephb1-deficient macrophages show blunted lytic outputs and reduced IL-1β release, yet these output changes do not automatically imply that priming, assembly, or caspase activation is globally disabled. Instead, the divergence is better localized to the execution layer: pyroptosis is not a binary switch, but a parameterized process shaped by pore formation efficiency, pore stability and conductance, and a sub-lytic ceiling imposed by membrane repair.'
       source: discussion_outline_en.yaml
-      para_id: D1
+      paragraph_group: study_summary
+      source_para_ids:
+      - D1
+      - D2
+      selected_sids:
+      - D1s1
+      - D1s2
+      - D1s3
+      - D1s4
+      - D1s5
+      - D1s6
+      - D2s1
+      - D2s2
+      - D2s3
     - type: paragraph
-      text: 'Our evidence can be read as a compact chain from phenotype to layer-localization to a threshold model. Across a canonical LPS-priming–nigericin NLRP3 paradigm (and additional inflammasome settings), Ephb1-deficient macrophages show blunted lytic outputs and reduced IL-1β release, yet these output changes do not automatically imply that priming, assembly, or caspase activation is globally disabled. Instead, the divergence is better localized to the execution layer: pyroptosis is not a binary switch, but a parameterized process shaped by pore formation efficiency, pore stability and conductance, and a sub-lytic ceiling imposed by membrane repair. Mechanistically, ESCRT-mediated repair can cap membrane catastrophe and keep cells in a sub-lytic regime, altering the ratio between cytokine release and terminal lysis. Conversely, terminal rupture is separable from pore formation and can be amplified by dedicated rupture factors (e.g., NINJ1), creating structural space for activation
-        without proportional rupture. On this basis, an execution-threshold/cap model is both plausible and testable. To move beyond correlation, we organize causal adjudication around three criteria: hierarchical masking (downstream membrane-environment manipulations should override upstream differences), same-level rescue (planned; restoring the membrane mediator should partially recover output in Ephb1 loss), and dose–response (graded membrane shifts should produce graded or threshold-like output changes). At present, our strongest support is for necessity and layer-localization; sufficiency requires dedicated rescue and pathway-validation experiments.'
+      text: 'The execution-threshold model can be mechanistically interpreted through repair, rupture, and membrane-environment mediation. Conversely, terminal rupture is separable from pore formation and can be amplified by dedicated rupture factors (e.g., NINJ1), creating structural space for activation without proportional rupture. On this basis, an execution-threshold/cap model is both plausible and testable. To move beyond correlation, this model can be evaluated through three criteria: hierarchical masking, same-level rescue, and dose–response behavior. At present, our strongest support is for necessity and layer-localization; sufficiency requires dedicated rescue and pathway-validation experiments. We place the membrane lipid environment—not upstream assembly—as the mediator layer that translates signal input into execution output. Within this mediator layer, cardiolipin (CL) is considered a quantifiable metabolic and biophysical state—rather than merely an abstract binding-site concept—that
+        can shift pore permissiveness. In this organization, Ephb1 is an upstream signal entry point whose loss propagates through downstream signaling networks to remodel the mitochondrial/membrane environment, thereby shifting the functional threshold and ceiling of GSDMD pore output.'
       source: discussion_outline_en.yaml
-      para_id: D2
+      paragraph_group: mechanistic_interpretation
+      source_para_ids:
+      - D2
+      - D3
+      selected_sids:
+      - D2s4
+      - D2s5
+      - D2s6
+      - D2s7
+      - D2s8
+      - D3s1
+      - D3s2
+      - D3s3
     - type: paragraph
-      text: 'We place the membrane lipid environment—not upstream assembly—as the mediator layer that translates signal input into execution output. Within this layer, cardiolipin (CL) is treated not as an abstract “binding-site” concept but as a quantifiable metabolic and biophysical state (amount, remodeling spectrum, oxidation state, and an operationally defined accessibility pool) that can shift pore permissiveness. In this organization, Ephb1 is an upstream signal entry point whose loss propagates through downstream signaling networks to remodel the mitochondrial/membrane environment, thereby shifting the functional threshold and ceiling of GSDMD pore output. Because complex systems often yield modest, distributed omics shifts, we avoid prematurely converging on a single enzyme node; instead, we use cross-batch “mechanism axes” to summarize supply/transport/synthesis/remodeling/oxidation/membrane-environment coordinates as reproducible phenotype endpoints. We then use mediation decomposition
-        (X–M–Y) to prioritize candidate downstream pathways that best explain how Ephb1 perturbs these axes, producing a testable roadmap rather than a mechanistic proof. Crucially, mediation here is a ranking tool: it nominates pathways for targeted perturbation along a three-step logic (pathway → CL/axis state → pore/output) without claiming direct biochemical sufficiency. This mediator-first framework provides an interpretable way to rationalize activation–output decoupling: similar upstream activation can yield divergent lytic outputs if membrane-environment thresholds are shifted.'
+      text: 'Because complex systems often yield modest and distributed omics shifts, we avoid prematurely converging on a single enzyme node and instead use cross-batch mechanism axes to capture reproducible membrane-environment phenotypes. We then use mediation decomposition to prioritize candidate downstream pathways that best explain how Ephb1 perturbs these axes, yielding a testable roadmap rather than direct mechanistic proof. Here, mediation is used as a ranking tool: it prioritizes pathways for targeted perturbation along a pathway → CL/axis state → pore/output logic without implying direct biochemical sufficiency. This mediator-first framework provides an interpretable way to rationalize activation–output decoupling: similar upstream activation can yield divergent lytic outputs if membrane-environment thresholds are shifted.'
       source: discussion_outline_en.yaml
-      para_id: D3
+      paragraph_group: integration_with_literature
+      source_para_ids:
+      - D3
+      selected_sids:
+      - D3s4
+      - D3s5
+      - D3s6
+      - D3s7
     - type: paragraph
-      text: 'Our central claim is deliberately scoped: the data most strongly support an execution-threshold model with membrane environment/CL as a high-priority mediator, whereas full sufficiency of the entire Ephb1→pathway→CL→pore loop remains to be closed. We do not claim that upstream activation is irrelevant; we claim it is necessary but insufficient to predict lytic output magnitude, and that execution-layer parameters (pore efficiency/stability, repair engagement, and rupture probability) provide the missing explanatory degrees of freedom. We also do not claim a direct Ephb1–GSDMD structural interaction or precise in situ CL accessibility/binding constants; our framework is built to explain relative threshold shifts using experimentally aligned readouts rather than absolute physical constants. Key alternative explanations remain adjudicable: (i) ROS-first causality (Ephb1→ROS→CL) versus CL-first or ROS-independent CL remodeling can be separated by ROS-clamping versus CL rescue in
-        Ephb1-deficient cells; (ii) dominance of repair/rupture axes (ESCRT/NINJ1) can be tested by perturbing repair or rupture factors and asking whether they override the CL–output association; (iii) tool/energetic confounds (e.g., BEL stereochemistry, off-target hydrolase inhibition, ΔΨm effects influencing NAO) require enantiomer-aware dosing, covariate control (ΔΨm/mitochondrial mass), and orthogonal lipidomics validation. Internal validity is therefore bounded by measurement specificity (NAO vs LC–MS, ΔΨm covariates), tool specificity, and batch structure, while external validity is bounded by species/cell type (C57 peritoneal macrophages), stimulation paradigm (acute LPS+nigericin), and metabolic/ROS regimes where nonlinearity may dominate. Importantly, these boundaries do not negate the model; they define where the model should be expected to hold and what falsifiable predictions would overturn it. Thus, the Discussion aims to be maximally informative without over-claiming: we provide
-        a layer-localized, mediator-based explanation for decoupling and specify the concrete experiments that can confirm or refute sufficiency and pathway priority.'
+      text: 'A practical implication of an execution-layer cap is that inflammatory signaling could, in principle, be modulated without fully shutting down upstream inflammasome activation—potentially preserving host defense while keeping lytic damage below a pathological threshold. Take-home, in two sentences: Ephb1 acts as an upstream signal input that remodels the membrane environment (captured by CL metabolic state) to shift the functional threshold and ceiling of GSDMD pore output, thereby explaining why activation readouts can be similar while lytic outputs diverge. Framing pyroptosis in threshold terms—pore formation, repair capping, and rupture separability—turns activation–output decoupling from an empirical observation into a testable, portable model for interpreting inflammasome outputs.'
       source: discussion_outline_en.yaml
-      para_id: D4
+      paragraph_group: biological_implication
+      source_para_ids:
+      - D5
+      selected_sids:
+      - D5s1
+      - D5s5
+      - D5s6
     - type: paragraph
-      text: 'A practical implication of an execution-layer cap is that inflammatory signaling could, in principle, be modulated without fully shutting down upstream inflammasome activation—potentially preserving host defense while keeping lytic damage below a pathological threshold. To close the causal loop, the first priority is to test sufficiency at the mediator level: in Ephb1-deficient macrophages, compare ROS lowering versus direct CL restoration (with matched covariate control) and ask whether CL rescue can recover early GSDMD-NT membrane engagement and IL-1β lytic release even when ROS is not the sole driver. Second, we need to validate the mediation-prioritized downstream pathways using a strict hierarchy-consistent workflow: pathway perturbation should first shift CL/axis coordinates, then shift early pore/output readouts, while minimally affecting priming/assembly metrics. Together, these experiments will determine whether the proposed chain is merely a correlated scaffold or
-        a mechanistically sufficient route. Take-home, in two sentences: Ephb1 acts as an upstream signal input that remodels the membrane environment (captured by CL metabolic state) to shift the functional threshold and ceiling of GSDMD pore output, thereby explaining why activation readouts can be similar while lytic outputs diverge. Framing pyroptosis in threshold terms—pore formation, repair capping, and rupture separability—turns activation–output decoupling from an empirical observation into a testable, portable model for interpreting inflammasome outputs.'
+      text: 'Our central claim is deliberately scoped: the data most strongly support an execution-threshold model with membrane environment/CL as a high-priority mediator, whereas full sufficiency of the entire Ephb1→pathway→CL→pore loop remains to be closed. We do not claim that upstream activation is irrelevant; we claim it is necessary but insufficient to predict lytic output magnitude, and that execution-layer parameters (pore efficiency/stability, repair engagement, and rupture probability) provide the missing explanatory degrees of freedom. We also do not claim a direct Ephb1–GSDMD structural interaction or precise in situ CL accessibility/binding constants; our framework is built to explain relative threshold shifts using experimentally aligned readouts rather than absolute physical constants. Several alternative explanations remain testable, including ROS-first versus CL-first causality, dominance of repair or rupture pathways, and tool- or energetics-related confounds affecting
+        CL-linked readouts. Accordingly, internal validity is constrained by measurement specificity, tool specificity, and batch structure, whereas external validity is limited by cell type, stimulation paradigm, and metabolic contexts in which nonlinear behavior may dominate. Importantly, these boundaries do not negate the model; they define where the model should be expected to hold and what falsifiable predictions would overturn it. Taken together, the model provides a layer-localized, mediator-based explanation for decoupling while defining concrete experiments to test sufficiency and pathway priority. To close the causal loop, a first priority is to test mediator-level sufficiency by comparing ROS lowering with direct CL restoration in Ephb1-deficient macrophages and asking whether CL rescue can recover early GSDMD-NT engagement and lytic IL-1β release. A second priority is to test mediation-prioritized pathways by asking whether pathway perturbation first shifts CL/axis states and
+        then alters early pore/output readouts while minimally affecting priming and assembly metrics. Together, these experiments will determine whether the proposed chain is merely a correlated scaffold or a mechanistically sufficient route.'
       source: discussion_outline_en.yaml
-      para_id: D5
+      paragraph_group: limitations_future
+      source_para_ids:
+      - D4
+      - D5
+      selected_sids:
+      - D4s1
+      - D4s2
+      - D4s3
+      - D4s4
+      - D4s5
+      - D4s6
+      - D4s7
+      - D5s2
+      - D5s3
+      - D5s4

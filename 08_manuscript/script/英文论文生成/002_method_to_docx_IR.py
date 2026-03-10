@@ -22,6 +22,9 @@ from typing import Any, Dict, List
 import yaml
 from docx import Document
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parents[2]
+
 
 def normalize_text(s: str) -> str:
     """Normalize YAML folded text into clean single-space sentences."""
@@ -144,25 +147,40 @@ def main() -> None:
     ap.add_argument(
         "-i",
         "--input",
-        default="08_manuscript/yaml/method.yaml",
+        default=str(PROJECT_ROOT / "08_manuscript/yaml/method.yaml"),
         help="Path to method.yaml (default: 08_manuscript/yaml/method.yaml)",
     )
     ap.add_argument(
         "-o",
         "--output",
-        default="08_manuscript/out/methods_export.docx",
+        default=str(PROJECT_ROOT / "08_manuscript/out/methods_export.docx"),
         help="Output .docx path (default: 08_manuscript/out/methods_export.docx)",
     )
     ap.add_argument(
         "--out_ir",
-        default="08_manuscript/IR/methods.ir.yaml",
+        default=str(PROJECT_ROOT / "08_manuscript/IR/methods.ir.yaml"),
         help="Output Methods IR YAML path (default: 08_manuscript/IR/methods.ir.yaml)",
     )
     args = ap.parse_args()
 
-    in_path = Path(args.input).expanduser().resolve()
-    out_path = Path(args.output).expanduser().resolve()
-    out_ir_path = Path(args.out_ir).expanduser().resolve()
+    in_path = Path(args.input).expanduser()
+    out_path = Path(args.output).expanduser()
+    out_ir_path = Path(args.out_ir).expanduser()
+
+    if not in_path.is_absolute():
+        in_path = (PROJECT_ROOT / in_path).resolve()
+    else:
+        in_path = in_path.resolve()
+
+    if not out_path.is_absolute():
+        out_path = (PROJECT_ROOT / out_path).resolve()
+    else:
+        out_path = out_path.resolve()
+
+    if not out_ir_path.is_absolute():
+        out_ir_path = (PROJECT_ROOT / out_ir_path).resolve()
+    else:
+        out_ir_path = out_ir_path.resolve()
 
     if not in_path.exists():
         raise FileNotFoundError(f"Input YAML not found: {in_path}")

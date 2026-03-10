@@ -14,11 +14,8 @@ Design:
 - Use paragraphs[*].sentences_en as source of main text.
 - Join sentences into a paragraph (space-separated).
 - Optionally include each D# title as a subheading block.
-
-Usage:
-  python 004_discussion_yaml_to_IR.py
-  python 004_discussion_yaml_to_IR.py --with-subheadings
-  python 004_discussion_yaml_to_IR.py --input /path/to/discussion_outline_en.yaml --output /path/to/discussion.ir.yaml
+- If policy contains `paragraph_groups`, Discussion is assembled from ordered paragraph groups instead of raw D1–D5 order.
+- In paragraph-groups mode, selectors can be full paragraphs (e.g. `D1`) or sentence ids (e.g. `D1s2`).
 """
 
 from __future__ import annotations
@@ -56,6 +53,187 @@ def _norm_str_list(x: Any) -> List[str]:
         if isinstance(it, str) and it.strip():
             out.append(it.strip())
     return out
+
+
+def _split_selector(selector: str) -> Tuple[str, Optional[int]]:
+    """Split a selector into base paragraph id and optional 1-based sentence index.
+
+    Examples:
+      D1    -> ("D1", None)
+      D1s2  -> ("D1", 2)
+    """
+    s = (selector or "").strip()
+    if not s:
+        return "", None
+    m = re.match(r"^(D\d+)(?:s(\d+))?$", s, flags=re.IGNORECASE)
+    if not m:
+        return s, None
+    base = (m.group(1) or "").strip()
+    idx = m.group(2)
+    return base, (int(idx) if idx is not None else None)
+
+
+def _selector_maps(values: Optional[List[str]]) -> Tuple[set, Dict[str, set]]:
+    """Return (paragraph_selectors, sentence_selectors_by_pid)."""
+    par_set: set = set()
+    sent_map: Dict[str, set] = {}
+    for raw in _norm_str_list(values):
+        base, sidx = _split_selector(raw)
+        if not base:
+            continue
+        if sidx is None:
+            par_set.add(base)
+        else:
+            sent_map.setdefault(base, set()).add(sidx)
+    return par_set, sent_map
+
+
+def _sentence_units(pid: str, sentences: Optional[List[Any]]) -> List[Dict[str, Any]]:
+    """Return ordered sentence units with stable sentence ids.
+
+    Convention:
+      sentences_en[0] -> <pid>s1
+      sentences_en[1] -> <pid>s2
+      ...
+    Supports both legacy string lists and future dict-based sentence items with a
+    `text` field.
+    """
+    units: List[Dict[str, Any]] = []
+    if not isinstance(sentences, list):
+        return units
+
+    idx = 1
+    for item in sentences:
+        text = ""
+        if isinstance(item, str):
+            text = item.strip()
+        elif isinstance(item, dict):
+            raw = item.get("text")
+            if isinstance(raw, str):
+                text = raw.strip()
+        else:
+            text = str(item).strip()
+
+        if text:
+            units.append({"sid": f"{pid}s{idx}" if pid else "", "index": idx, "text": text})
+            idx += 1
+    return units
+
+
+def _ordered_paragraphs(outline: Dict[str, Any]) -> List[Dict[str, Any]]:
+    doc = outline.get("discussion_outline") or {}
+    paragraphs = doc.get("paragraphs") or []
+    return [p for p in paragraphs if isinstance(p, dict)]
+
+
+def _pid_lookup(outline: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
+    lookup: Dict[str, Dict[str, Any]] = {}
+    for p in _ordered_paragraphs(outline):
+        pid = str(p.get("id", "")).strip()
+        if pid and pid not in lookup:
+            lookup[pid] = p
+    return lookup
+
+
+def _paragraph_groups_from_policy(policy: Dict[str, Any]) -> List[Tuple[str, List[str]]]:
+    """Return ordered paragraph groups as [(group_name, selectors), ...]."""
+    pg = policy.get("paragraph_groups") if isinstance(policy.get("paragraph_groups"), dict) else {}
+    out: List[Tuple[str, List[str]]] = []
+    for name, spec in pg.items():
+        if not isinstance(spec, dict):
+            continue
+        selectors = _norm_str_list(spec.get("include"))
+        if selectors:
+            out.append((str(name), selectors))
+    return out
+
+
+def _build_group_block(
+    *,
+    group_name: str,
+    selectors: List[str],
+    lookup: Dict[str, Dict[str, Any]],
+    with_subheadings: bool = False,
+    exclude_pars: Optional[set] = None,
+    exclude_sents: Optional[Dict[str, set]] = None,
+) -> List[Dict[str, Any]]:
+    """Assemble one discussion paragraph block from ordered selectors.
+
+    Selectors can be full paragraph ids (e.g. D1) or sentence ids (e.g. D1s2).
+    The final sentence order follows the selector order exactly.
+    """
+    exclude_pars = exclude_pars or set()
+    exclude_sents = exclude_sents or {}
+
+    sentence_texts: List[str] = []
+    source_para_ids: List[str] = []
+    selected_sids: List[str] = []
+    title_hint: str = ""
+
+    for raw in selectors:
+        base_pid, sidx = _split_selector(raw)
+        if not base_pid or base_pid in exclude_pars:
+            continue
+        p = lookup.get(base_pid)
+        if not p:
+            continue
+
+        if not title_hint:
+            title_hint = str(p.get("title_en", "")).strip()
+
+        units = _sentence_units(base_pid, p.get("sentences_en"))
+        if not units:
+            legacy_para = p.get("draft_paragraph_en", "")
+            units = _sentence_units(base_pid, split_sentences_fallback(legacy_para))
+        if not units:
+            continue
+
+        if sidx is None:
+            picked = list(units)
+        else:
+            picked = [u for u in units if int(u.get("index") or 0) == sidx]
+
+        if base_pid in exclude_sents:
+            banned = exclude_sents.get(base_pid, set())
+            picked = [u for u in picked if int(u.get("index") or 0) not in banned]
+
+        for u in picked:
+            txt = (u.get("text") or "").strip()
+            if not txt:
+                continue
+            sentence_texts.append(txt)
+            if u.get("sid"):
+                selected_sids.append(str(u.get("sid")))
+            if base_pid not in source_para_ids:
+                source_para_ids.append(base_pid)
+
+    blocks: List[Dict[str, Any]] = []
+    if not sentence_texts:
+        return blocks
+
+    if with_subheadings and title_hint:
+        blocks.append(
+            {
+                "type": "heading",
+                "level": 3,
+                "text": title_hint,
+                "source": "discussion_outline_en.yaml",
+                "paragraph_group": group_name,
+                "source_para_ids": source_para_ids,
+            }
+        )
+
+    blocks.append(
+        {
+            "type": "paragraph",
+            "text": " ".join(sentence_texts).strip(),
+            "source": "discussion_outline_en.yaml",
+            "paragraph_group": group_name,
+            "source_para_ids": source_para_ids,
+            "selected_sids": selected_sids,
+        }
+    )
+    return blocks
 
 
 def load_policy(path: Path) -> Dict[str, Any]:
@@ -102,6 +280,7 @@ def build_discussion_ir(
     outline: Dict[str, Any],
     with_subheadings: bool = False,
     *,
+    paragraph_groups: Optional[List[Tuple[str, List[str]]]] = None,
     include_para_ids: Optional[List[str]] = None,
     exclude_para_ids: Optional[List[str]] = None,
     include_verdict_levels: Optional[List[str]] = None,
@@ -113,11 +292,52 @@ def build_discussion_ir(
 
     blocks: List[Dict[str, Any]] = []
 
-    include_id_set = set(_norm_str_list(include_para_ids)) if include_para_ids else set()
-    exclude_id_set = set(_norm_str_list(exclude_para_ids)) if exclude_para_ids else set()
+    include_id_set, include_sent_map = _selector_maps(include_para_ids)
+    exclude_id_set, exclude_sent_map = _selector_maps(exclude_para_ids)
     include_v_set = set(_norm_str_list(include_verdict_levels)) if include_verdict_levels else set()
-    kept = 0
 
+    # Preferred mode: explicit paragraph assembly from paragraph_groups.
+    # In this mode, structure is controlled by policy paragraph_groups, not by
+    # raw source paragraph order.
+    if paragraph_groups:
+        lookup = _pid_lookup(outline)
+        kept = 0
+        for group_name, selectors in paragraph_groups:
+            group_blocks = _build_group_block(
+                group_name=group_name,
+                selectors=selectors,
+                lookup=lookup,
+                with_subheadings=with_subheadings,
+                exclude_pars=exclude_id_set,
+                exclude_sents=exclude_sent_map,
+            )
+            if group_blocks:
+                blocks.extend(group_blocks)
+                kept += 1
+                if max_paragraphs is not None and kept >= max_paragraphs:
+                    break
+
+        return {
+            "ir_version": "0.1",
+            "document": {
+                "meta": {
+                    "id": "ephb1_discussion",
+                    "language": "en",
+                    "title": "",
+                    "authors": [],
+                    "date": "",
+                },
+                "sections": [
+                    {
+                        "id": "discussion",
+                        "title": "Discussion",
+                        "blocks": blocks,
+                    }
+                ],
+            },
+        }
+
+    kept = 0
     for p in paragraphs:
         pid = str(p.get("id", "")).strip()
         title_en = str(p.get("title_en", "")).strip()
@@ -142,7 +362,17 @@ def build_discussion_ir(
         # normalize
         if not isinstance(sentences, list):
             sentences = []
-        sentences = [str(x).strip() for x in sentences if str(x).strip()]
+        normalized_sentences: List[str] = []
+        for x in sentences:
+            if isinstance(x, dict):
+                raw = x.get("text")
+                if isinstance(raw, str) and raw.strip():
+                    normalized_sentences.append(raw.strip())
+            else:
+                sx = str(x).strip()
+                if sx:
+                    normalized_sentences.append(sx)
+        sentences = normalized_sentences
 
         if apply_compression_rule:
             cr = p.get("compression_rule") if isinstance(p.get("compression_rule"), dict) else {}
@@ -242,6 +472,7 @@ def main() -> None:
     outline = load_yaml(in_path)
 
     policy = load_policy(policy_path)
+    paragraph_groups = _paragraph_groups_from_policy(policy)
 
     include_subheadings = bool(policy.get("include_subheadings", False))
     apply_compression_rule = bool(policy.get("apply_compression_rule", False))
@@ -265,6 +496,7 @@ def main() -> None:
     ir = build_discussion_ir(
         outline,
         with_subheadings=with_subheadings,
+        paragraph_groups=paragraph_groups,
         include_para_ids=include_para_ids,
         exclude_para_ids=exclude_para_ids,
         include_verdict_levels=include_verdict_levels,

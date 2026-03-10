@@ -288,7 +288,10 @@ def render_panel_legend(
     if one_sentence_only:
         label = lp.get("_panel_label") or f"({panel_key})"
         if one_sentence:
-            return f"{label} {one_sentence}."
+            sent = one_sentence.rstrip()
+            if sent.endswith((".", "!", "?")):
+                return f"{label} {sent}"
+            return f"{label} {sent}."
         return f"{label}."
 
     displayed_targets = panel_legend.get("displayed_targets") or panel_legend.get("displayed_target") or []
@@ -585,7 +588,7 @@ def main() -> None:
     ap.add_argument(
         "--legend-policy",
         type=str,
-        default="08_manuscript/yaml/legend_policy.yaml",
+        default="08_manuscript/yaml/policy_figure_legend_main.yaml",
         help="Optional legend policy YAML (e.g., mode: short) to control stitched legend verbosity",
     )
     args = ap.parse_args()
@@ -771,12 +774,7 @@ def main() -> None:
                         render_panel_legend(it.shared_legend, it.shared_legend, it.panel, legend_policy)
                     )
 
-        stitched = ""
-        if fig_title:
-            stitched += f"{fig} | {fig_title}\n"
-        else:
-            stitched += f"{fig}\n"
-        stitched += "\n".join(panel_texts).strip() + "\n"
+        stitched = "\n".join(panel_texts).strip()
 
         figures_ir.append(
             {

@@ -533,10 +533,20 @@ def main():
     # dirs
     figs_dir = Path(args.figs_dir).resolve() if args.figs_dir.strip() else (root / "06_figures" / "figs")
 
-    # IR is preferred: always try 08_manuscript/IR/results.ir.yaml
-    ir_path = (ms_dir / "IR" / "results.ir.yaml").resolve()
-    if not ir_path.exists():
-        raise FileNotFoundError(f"IR not found (required): {ir_path}")
+    # Prefer figure-specific IR first
+    fig_ir_path = (ms_dir / "IR" / "figures_ir.yaml").resolve()
+    results_ir_path = (ms_dir / "IR" / "results.ir.yaml").resolve()
+
+    if fig_ir_path.exists():
+        ir_path = fig_ir_path
+        print(f"[INFO] Using figure IR: {fig_ir_path}")
+    elif results_ir_path.exists():
+        ir_path = results_ir_path
+        print(f"[INFO] Using results IR (fallback): {results_ir_path}")
+    else:
+        raise FileNotFoundError(
+            f"Neither figures_ir.yaml nor results.ir.yaml found in {ms_dir / 'IR'}"
+        )
 
     # Output
     if args.out.strip():
@@ -545,7 +555,20 @@ def main():
         out_path = ms_dir / "out" / template.name / "figures.docx"
 
     ir = load_yaml_single_doc(ir_path)
-    figure_blocks = extract_fig_blocks_from_ir(ir)
+    # Normalize figure IR schema if using figures_ir.yaml
+    if ir_path.name == "figures_ir.yaml":
+        figs = ir.get("figures") or []
+        figure_blocks = []
+        for f in figs:
+            figure_blocks.append({
+                "type": "figure",
+                "id": f.get("figure_id") or f.get("id"),
+                "title": f.get("figure_title_en") or "",
+                "legend": f.get("figure_legend_en") or "",
+                "images": [f.get("render_png")] if f.get("render_png") else []
+            })
+    else:
+        figure_blocks = extract_fig_blocks_from_ir(ir)
     if not figure_blocks:
         if fig_cfg is None:
             raise ValueError(

@@ -5,7 +5,7 @@ meta:
   figs_dir: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs
 figures:
 - id: Figure 1
-  figure_title_en: EphB1 loss constrains inflammasome-triggered pyroptosis and IL-1β release
+  figure_title_en: EphB1 deficiency reduces inflammasome-triggered pyroptosis and IL-1β release
   assets:
     source_ai: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_1.ai
     render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_1_画板 1.png
@@ -26,21 +26,19 @@ figures:
     figure_id: 1d
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_1_d_v2.yaml
     is_multi_from_record: false
-  figure_legend_en: 'Figure 1 | EphB1 loss constrains inflammasome-triggered pyroptosis and IL-1β release
-
-    (a) Schematic overview of the genetic screening strategy used to identify regulators of inflammasome-associated pyroptotic
-    output..
+  figure_legend_en: '(a) Schematic overview of the genetic screening strategy used to identify regulators of inflammasome-associated
+    pyroptotic output.
 
     (b) Normalized IL-1β release across multiple pb genetic backgrounds following nigericin-induced inflammasome activation,
-    highlighting strains with pronounced genotype-dependent differences..
+    highlighting strains with pronounced genotype-dependent differences.
 
     (c) IL-1β release from primary peritoneal macrophages following activation of distinct inflammasome pathways via different
-    secondary stimuli..
+    secondary stimuli.
 
     (d) LDH release from WT and EphB1-deficient primary peritoneal macrophages following activation of NLRP3, NLRC4, or AIM2
-    inflammasomes under the indicated conditions..'
+    inflammasomes under the indicated conditions.'
 - id: Figure 2
-  figure_title_en: EphB1 loss preserves upstream NLRP3 activation yet constrains GSDMD pore–driven execution
+  figure_title_en: EphB1 deficiency reduces GSDMD-dependent pyroptotic execution
   assets:
     source_ai: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_2.ai
     render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_2_画板 1.png
@@ -73,26 +71,24 @@ figures:
     figure_id: 2g
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_g.yaml
     is_multi_from_record: false
-  figure_legend_en: 'Figure 2 | EphB1 loss preserves upstream NLRP3 activation yet constrains GSDMD pore–driven execution
-
-    (a,b) TNF-α and IL-1β Transcriptional priming responses to LPS stimulation in WT and EphB1-deficient primary peritoneal
-    macrophages..
+  figure_legend_en: '(a,b) TNF-α and IL-1β Transcriptional priming responses to LPS stimulation in WT and EphB1-deficient
+    primary peritoneal macrophages.
 
     (c) TNF-α and IL-1β secretion from WT and EphB1-deficient primary peritoneal macrophages following LPS stimulation at
-    defined time points..
+    defined time points.
 
     (d) IL-1β release from WT and EphB1-deficient primary peritoneal macrophages following NLRP3 activation with increasing
-    doses of nigericin..
+    doses of nigericin.
 
-    (e) ASC oligomerization in WT and EphB1-deficient primary peritoneal macrophages following NLRP3 inflammasome activation..
+    (e) ASC oligomerization in WT and EphB1-deficient primary peritoneal macrophages following NLRP3 inflammasome activation.
 
     (f) Pro-caspase-1 and cleaved caspase-1 p20 levels in total cell lysates from WT and EphB1-deficient primary peritoneal
-    macrophages following NLRP3 inflammasome activation..
+    macrophages following NLRP3 inflammasome activation.
 
     (g) GSDMD and IL-1β processing in total cell lysates from WT and Ephb1−/− primary peritoneal macrophages following NLRP3
-    inflammasome activation..'
+    inflammasome activation.'
 - id: Figure 3
-  figure_title_en: EphB1 loss diminishes GSDMD-NT engagement and enrichment on mitochondria
+  figure_title_en: EphB1 deficiency reduces mitochondrial enrichment of GSDMD-NT
   assets:
     source_ai: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_3.ai
     render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_3_画板 1.png
@@ -141,19 +137,17 @@ figures:
     figure_id: 3k+s3e
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_k+s3_e.yaml
     is_multi_from_record: true
-  figure_legend_en: 'Figure 3 | EphB1 loss diminishes GSDMD-NT engagement and enrichment on mitochondria
-
-    (a,b,c,d,e,f,g,h) Time-resolved changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane potential in WT
-    and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome activation and under unstimulated baseline
-    conditions..
+  figure_legend_en: '(a,b,c,d,e,f,g,h) Time-resolved changes in cytosolic ROS, mitochondrial ROS, and mitochondrial membrane
+    potential in WT and EphB1-deficient primary peritoneal macrophages during NLRP3 inflammasome activation and under unstimulated
+    baseline conditions.
 
     (i,j) Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary peritoneal macrophages following NLRP3 inflammasome
-    activation, quantified by rapid subcellular fractionation and qPCR..
+    activation, quantified by rapid subcellular fractionation and qPCR.
 
-    (k) Early mitochondrial enrichment of GSDMD-NT during NLRP3 inflammasome activation in WT and Ephb1−/− primary peritoneal
-    macrophages, with mitochondrial abundance controls assessed in parallel..'
+    (k) Early mitochondrial enrichment of GSDMD-NT during NLRP3 inflammasome activation in WT and Ephb1-deficient primary
+    peritoneal macrophages, with mitochondrial abundance controls assessed in parallel.'
 - id: Figure 4
-  figure_title_en: Cardiolipin availability mediates EphB1-dependent limitation of inflammasome output
+  figure_title_en: EphB1 deficiency reduces cardiolipin abundance
   assets:
     source_ai: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_4.ai
     render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_4_画板 1.png
@@ -198,24 +192,22 @@ figures:
     figure_id: s4c
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_sc.yaml
     is_multi_from_record: false
-  figure_legend_en: 'Figure 4 | Cardiolipin availability mediates EphB1-dependent limitation of inflammasome output
-
-    (a,b) Pharmacological inhibition of iPLA2 with BEL reduces NAO-associated fluorescence and collapses genotype-dependent
-    differences in WT and Ephb1−/− primary peritoneal macrophages..
+  figure_legend_en: '(a,b) Pharmacological inhibition of iPLA2 with BEL reduces NAO-associated fluorescence and collapses
+    genotype-dependent differences in WT and Ephb1-deficient primary peritoneal macrophages.
 
     (c,d) LC–MS/MS lipidomics quantification of total cardiolipin abundance and molecular species composition in resting WT
-    and Ephb1−/− primary peritoneal macrophages..
+    and Ephb1-deficient primary peritoneal macrophages.
 
     (e,f) Pharmacological inhibition with alexidine dihydrochloride (AD) reduces NAO-associated fluorescence and collapses
-    genotype-dependent differences in WT and Ephb1−/− primary peritoneal macrophages..
+    genotype-dependent differences in WT and Ephb1−/− primary peritoneal macrophages.
 
     (g) IL-1β release from WT and Ephb1−/− primary peritoneal macrophages following LPS and nigericin stimulation in the presence
-    of increasing doses and durations of alexidine dihydrochloride (AD)..
+    of increasing doses and durations of alexidine dihydrochloride (AD).
 
-    (s4c) IL-1β release from WT and Ephb1−/− primary peritoneal macrophages following LPS and nigericin stimulation under
-    increasing doses and durations of BEL treatment..'
+    (s4c) IL-1β release from WT and Ephb1-deficient primary peritoneal macrophages following LPS and nigericin stimulation
+    under increasing doses and durations of BEL treatment.'
 - id: Figure 5
-  figure_title_en: Multi-omics integration prioritizes the membrane-context axis as the dominant perturbation
+  figure_title_en: Membrane context is the dominant cardiolipin-related axis perturbed by EphB1 deficiency
   assets:
     source_ai: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_5.ai
     render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_5_画板 1.png
@@ -244,28 +236,26 @@ figures:
     figure_id: 5f
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_5_f.yaml
     is_multi_from_record: false
-  figure_legend_en: 'Figure 5 | Multi-omics integration prioritizes the membrane-context axis as the dominant perturbation
-
-    (a) Conceptual diagram illustrating six mechanistic axes of cardiolipin metabolism and their organization into an ER–mitochondria–centered
-    framework used to interpret EphB1-dependent multi-omics changes..
+  figure_legend_en: '(a) Conceptual diagram illustrating six mechanistic axes of cardiolipin metabolism and their organization
+    into an ER–mitochondria–centered framework used to interpret EphB1-dependent multi-omics changes.
 
     (b) Curated table of representative lipid readouts and key genes mapped to six cardiolipin-related mechanistic axes, including
-    explicit directionality conventions (bottleneck_sign) and within-axis weights to support axis-level scoring and interpretation..
+    explicit directionality conventions (bottleneck_sign) and within-axis weights to support axis-level scoring and interpretation.
 
     (c) Integrated workflow summarizing how multi-batch RNA-seq, untargeted lipidomics, and targeted cardiolipin panel datasets
     were quality-controlled, normalized, batch-modeled, and compressed into mechanistic axis Z scores and cardiolipin-related
-    indicators for downstream multi-omics integration..
+    indicators for downstream multi-omics integration.
 
-    (d) Batch-level effect_z matrix summarizing the direction and magnitude of EphB1 deficiency–associated changes across
-    six mechanistic axes in RNA-seq and lipidomics datasets..
+    (d) Batch-level effect_z matrix summarizing the direction and magnitude of Ephb1 deficiency–associated changes across
+    six mechanistic axes in RNA-seq and lipidomics datasets.
 
     (e) Overall multi-omics Z scores summarizing Ephb1−/− versus WT effects across six predefined mitochondrial-related mechanistic
-    axes by Stouffer meta-analysis of RNA-seq and lipidomics batches..
+    axes by Stouffer meta-analysis of RNA-seq and lipidomics batches.
 
     (f) Cross-batch linear regression linking mechanistic axis combined Z scores (HO–WT) to batch-matched HO–WT differences
-    in total cardiolipin abundance (sum_CL) to test whether axis-level effects predict cardiolipin content at the batch level..'
+    in total cardiolipin abundance (sum_CL) to test whether axis-level effects predict cardiolipin content at the batch level.'
 - id: Figure 6
-  figure_title_en: An RNA X–M–Z framework prioritizes EphB1-linked pathways with orthogonal lipid alignment
+  figure_title_en: PI3K–AKT–mTOR signaling correlates with the membrane-context axis
   assets:
     source_ai: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_6.ai
     render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_6_画板 1.png
@@ -288,22 +278,21 @@ figures:
     is_multi_from_record: false
   - panel: e
     figure_id: 6e
-    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_6_e.yaml
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_6_e_v2.yaml
     is_multi_from_record: false
-  figure_legend_en: 'Figure 6 | An RNA X–M–Z framework prioritizes EphB1-linked pathways with orthogonal lipid alignment
-
-    (a) Conceptual diagram illustrating an RNA-first X–M–Z framework that links EphB1 status (X), downstream signaling modules
-    (M), and an RNA membrane context axis (Z), with independent lipid phenotypes used for directional concordance validation..
+  figure_legend_en: '(a) Conceptual diagram illustrating an RNA-first X–M–Z framework that links Ephb1 status (X), downstream
+    signaling modules (M), and an RNA membrane context axis (Z), with independent lipid phenotypes used for directional concordance
+    validation.
 
     (b) Curated table defining EphB1 downstream signaling modules (gene sets) and mapping each module to the cardiolipin mechanistic
-    axes it is expected to influence..
+    axes it is expected to influence.
 
     (c) Pathway-level transcriptional response scores for curated EphB1 downstream signaling modules in WT and Ephb1−/− primary
     peritoneal macrophages across three independent RNA-seq batches, summarized as per-batch z_pathway shifts and cross-batch
-    meta Z effects..
+    meta Z effects.
 
-    (d) Cross-batch ranking of EphB1 downstream signaling modules by genotype-associated transcriptional shifts (ΔM) and assessment
-    of their coupling robustness with the Membrane context axis using within-batch regression and pooled leave-one-out refitting..
+    (d) Cross-batch ranking of Ephb1 downstream signaling modules by genotype-associated transcriptional shifts (ΔM) and assessment
+    of their coupling robustness with the Membrane context axis using within-batch regression and pooled leave-one-out refitting.
 
-    (e) Mediation analyses testing whether EphB1-dependent changes in five lipid indicators are transmitted through RNA-seq–derived
-    downstream signaling pathway scores, summarized as pathway-specific indirect effects (a×b) with bootstrap confidence intervals..'
+    (e) Sample-level Z–M scatter plots across independent RNA-seq batches reveal genotype-dependent clustering in joint (Z,
+    M) space, with pathway-specific separation patterns that prioritize PI3K_AKT_mTOR.'

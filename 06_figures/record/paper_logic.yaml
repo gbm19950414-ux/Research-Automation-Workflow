@@ -78,7 +78,7 @@ figures:
     title: "EphB1 缺失降低炎症小体激活诱导的巨噬细胞焦亡与 IL-1β 释放"
     title_en: "EphB1 deficiency reduces pyroptosis and IL-1β release"
     figure_title: "EphB1 缺失限幅炎症小体诱导的焦亡与 IL-1β 外排"
-    figure_title_en: "EphB1 loss constrains inflammasome-triggered pyroptosis and IL-1β release"
+    figure_title_en: "EphB1 deficiency reduces inflammasome-triggered pyroptosis and IL-1β release"
 
     section: "S1"
     role_in_story: "Phenotype establishment"
@@ -166,8 +166,7 @@ figures:
   - id: "Figure 2"
     title: "EphB1 缺失不影响 NLRP3 上游激活，差异集中于 GSDMD 执行层外排"
     title_en: "EphB1 deficiency reduces pyroptotic execution"
-    figure_title: "EphB1 缺失保留 NLRP3 上游激活但限制 GSDMD 孔驱动的执行输出"
-    figure_title_en: "EphB1 loss preserves upstream NLRP3 activation yet constrains GSDMD pore–driven execution"
+    figure_title_en: "EphB1 deficiency reduces GSDMD-dependent pyroptotic execution"
     section: "S1"
     role_in_story: "Level mapping: upstream intact, execution limited"
     one_sentence_purpose: >
@@ -289,7 +288,7 @@ figures:
     title: "EphB1 缺失降低 GSDMD 与线粒体膜的结合"
     title_en: "EphB1 deficiency reduces mitochondrial enrichment of GSDMD"
     figure_title: "EphB1 缺失削弱 GSDMD-NT 在线粒体膜上的对接与富集"
-    figure_title_en: "EphB1 loss diminishes GSDMD-NT engagement and enrichment on mitochondria"
+    figure_title_en: "EphB1 deficiency reduces mitochondrial enrichment of GSDMD-NT"
     section: "S2"
     role_in_story: "Execution interface: GSDMD–mitochondria engagement"
     one_sentence_purpose: >
@@ -394,7 +393,7 @@ figures:
     title: "心磷脂是EphB1 缺失降低炎症小体通路激活的重要因素"
     title_en: "EphB1 deficiency reduces cardiolipin abundance"
     figure_title: "心磷脂可及性介导 EphB1 依赖的炎症小体输出限幅"
-    figure_title_en: "Cardiolipin availability mediates EphB1-dependent limitation of inflammasome output"
+    figure_title_en: "EphB1 deficiency reduces cardiolipin abundance"
     section: "S3"
     role_in_story: "Lipid gate: cardiolipin abundance/accessibility and causality"
     one_sentence_purpose: >
@@ -502,7 +501,7 @@ figures:
     title: "多组学机制轴分析确定“膜环境轴”为优先异常轴"
     title_en: "Membrane context is the dominant cardiolipin-related axis perturbed by EphB1 deficiency"
     figure_title: "多组学整合优先锁定 membrane context 机制轴为主导扰动"
-    figure_title_en: "Multi-omics integration prioritizes the membrane-context axis as the dominant perturbation"
+    figure_title_en: "Membrane context is the dominant cardiolipin-related axis perturbed by EphB1 deficiency"
     section: ""   
     role_in_story: "Omics synthesis: define and prioritize a mechanistic axis"
     one_sentence_purpose: >
@@ -618,7 +617,7 @@ figures:
     title: "候选通路优先级排序：RNA 机制路径（X–M–Z）与 lipid 表型一致性验证"
     title_en: "PI3K–AKT–mTOR signaling correlates with the membrane-context axis"
     figure_title: "RNA X–M–Z 框架优选 EphB1 下游候选通路并与脂质表型对齐"
-    figure_title_en: "An RNA X–M–Z framework prioritizes EphB1-linked pathways with orthogonal lipid alignment"
+    figure_title_en: "PI3K–AKT–mTOR signaling correlates with the membrane-context axis"
     section: ""
     role_in_story: "Pathway prioritization: X–M–Z framework + validation hooks"
     one_sentence_purpose: >

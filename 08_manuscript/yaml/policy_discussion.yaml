@@ -1,18 +1,85 @@
-# 08_manuscript/yaml/policy_discussion.yaml
-# Nature submission–oriented policy: semantic filtering, not length caps
-
-# Discussion in Nature is usually a continuous narrative; hide D# subheadings
 include_subheadings: false
-
-# Enforce per-paragraph compression using each block's compression_rule.max_sentences
-apply_compression_rule: true
+apply_compression_rule: false
 
 filter:
-  # Include only core argumentative paragraphs and the brief take-home/implications close
-  include_verdict_levels:
-    - main_text
-    - brief
+  include_verdict_levels: []
+  include_para_ids: []
+  exclude_para_ids: []
 
-  # Do NOT hard-cap paragraph count; rely on semantic filters instead
-  # include_para_ids: []
-  # exclude_para_ids: []
+paragraph_groups:
+  study_summary:
+    include:
+      # literature reference / field framing
+      - "D1s1"
+      # summary sentence
+      - "D1s2"
+      # mechanism sentence
+      - "D1s3"
+      # summary sentence
+      - "D1s4"
+      - "D1s5"
+      - "D1s6"
+
+      # finding sentence (start evidence synopsis)
+      - "D2s1"
+      - "D2s2"
+      # mechanism sentence
+      - "D2s3"
+
+  mechanistic_interpretation:
+    include:
+      # literature / mechanism context
+      - "D2s4"
+      # comparison / interpretation
+      - "D2s5"
+      # interpretation
+      - "D2s6"
+      # mechanistic reasoning
+      - "D2s7"
+      # biological significance
+      - "D2s8"
+
+      # mediator framework (CL / membrane environment)
+      - "D3s1"
+      - "D3s2"
+      - "D3s3"
+
+  integration_with_literature:
+    include:
+      - "D3s4"
+
+      # mechanistic reasoning continuation
+      - "D3s5"
+      # biological significance
+      - "D3s6"
+      # conceptual extension
+      - "D3s7"
+
+  biological_implication:
+    include:
+      # biological implication
+      - "D5s1"
+      # disease relevance
+      - "D5s5"
+      # conceptual advance / take‑home
+      - "D5s6"
+
+  limitations_future:
+    include:
+      # limitation
+      - "D4s1"
+      - "D4s2"
+      - "D4s3"
+      - "D4s4"
+      - "D4s5"
+
+      # conceptual boundary
+      - "D4s6"
+      - "D4s7"
+
+      # future tests
+      - "D5s2"
+      - "D5s3"
+
+      # conceptual extension
+      - "D5s4"
