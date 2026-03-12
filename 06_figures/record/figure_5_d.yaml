@@ -115,8 +115,7 @@ figure_legend:
   panel_title_cn: "跨 RNA 与脂质组的机制轴效应矩阵"
 
   one_sentence_en: >
-    Batch-level effect_z matrix summarizing the direction and magnitude of Ephb1 deficiency–associated
-    changes across six mechanistic axes in RNA-seq and lipidomics datasets.
+    Batch-level effect_z matrix from RNA-seq and lipidomics datasets showing the direction and magnitude of EphB1 deficiency-associated changes across six mechanistic axes.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -169,7 +168,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across three RNA-seq batches and four lipidomics batches, only the membrane context axis displayed a consistent positive effect in both omics layers, with stable directionality."
+      en: "Across three RNA-seq batches and four lipidomics batches, only the membrane context axis showed a consistent positive effect across both omics layers."
       cn: "在 RNA-seq 的三个批次与脂质组学的四个批次中，仅 Membrane context 轴在两种组学中均表现出方向一致的正向效应，且其绝对效应值在所有机制轴中最大。"
       logic_source: "results.data_direction"
 
@@ -179,6 +178,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These results identify the membrane context axis as the only axis consistently perturbed by Ephb1 deficiency across omics layers."
+      en: "These results identify membrane context as the only axis consistently perturbed by Ephb1 deficiency across datasets."
       cn: "综上，该跨组学效应矩阵表明，Membrane context 是唯一在不同组学与不同批次中均稳定受 Ephb1 缺失影响的机制轴，从而将其与受批次或组学特异性因素影响的其他轴区分开来。"
       logic_source: "results.group_difference_statement"

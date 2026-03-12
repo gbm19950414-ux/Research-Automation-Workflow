@@ -242,10 +242,7 @@ figure_legend:
   panel_title_cn: "多组学数据处理流程图"
 
   one_sentence_en: >
-    Integrated workflow summarizing how multi-batch RNA-seq, untargeted lipidomics, and targeted cardiolipin
-    panel datasets were quality-controlled, normalized, batch-modeled, and compressed into mechanistic axis Z
-    scores and cardiolipin-related indicators for downstream multi-omics integration.
-
+    Integrated workflow summarizing batch-aware processing of RNA-seq, untargeted lipidomics, and targeted cardiolipin datasets into mechanistic axis scores and cardiolipin-related indicators for downstream multi-omics integration.
   system_and_design:
     model: "Conceptual pipeline schematic (no experimental data shown)"
     genotype_or_groups: "Not applicable"

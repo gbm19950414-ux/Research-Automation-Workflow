@@ -182,9 +182,7 @@ figure_legend:
   panel_title_cn: "RNA-first 的 X–M–Z 分析框架"
 
   one_sentence_en: >
-    Conceptual diagram illustrating an RNA-first X–M–Z framework that links Ephb1 status (X),
-    downstream signaling modules (M), and an RNA membrane context axis (Z), with independent
-    lipid phenotypes used for directional concordance validation.
+    Conceptual diagram illustrating an RNA-first X–M–Z framework linking Ephb1 status, downstream signaling module scores, and the membrane-context axis, with independent lipid phenotypes used for directional concordance validation.
 
   system_and_design:
     model: "Conceptual framework (no experimental data shown)"
@@ -232,7 +230,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "We applied an RNA-based analysis framework in which Ephb1 status was treated as the upstream variable and downstream signaling pathway scores were evaluated for association with the membrane context axis (Fig. 6a)."
+      en: "We used an RNA-based framework to evaluate how Ephb1-dependent pathway scores associate with the membrane context axis."
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:

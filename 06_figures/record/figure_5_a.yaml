@@ -136,9 +136,7 @@ figure_legend:
   panel_title_cn: "心磷脂代谢的概念机制框架"
 
   one_sentence_en: >
-    Conceptual diagram illustrating six mechanistic axes of cardiolipin metabolism and
-    their organization into an ER–mitochondria–centered framework used to interpret
-    EphB1-dependent multi-omics changes.
+    Conceptual diagram defining six cardiolipin-related mechanistic axes within an ER–mitochondria-centered framework for interpretation of transcriptomic and lipidomic changes.
 
   system_and_design:
     model: "Conceptual model (no experimental data)"
@@ -186,7 +184,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "This framework defines six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—and assigns to each axis representative genes and lipid readouts derived from transcriptomic and lipidomic datasets"
+      en: "The resulting framework comprised six functional axes—synthesis, remodeling, transport, supply, oxidation, and membrane context—each represented by genes and lipid readouts derived from transcriptomic and lipidomic datasets."
       cn: "该框架定义了六条功能轴——合成、重塑、转运、供给、氧化和膜环境——并为每条轴指定了可在原则上从转录组与脂质组数据中提取的代表性基因与脂质读数。"
       logic_source: "methods.readout_and_assay + question.core_question"
 

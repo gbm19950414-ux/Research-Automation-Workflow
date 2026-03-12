@@ -429,8 +429,7 @@ figure_legend:
   panel_title_cn: "EphB1 下游信号模块字典表"
 
   one_sentence_en: >
-    Curated table defining EphB1 downstream signaling modules (gene sets) and mapping each module to
-    the cardiolipin mechanistic axes it is expected to influence.
+    Curated reference table defining EphB1 downstream signaling modules and their expected relationships to cardiolipin-related mechanistic axes for pathway-level prioritization.
 
   system_and_design:
     model: "Primary murine peritoneal macrophage RNA-seq–derived module curation (table resource)"
@@ -474,7 +473,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "Each gene set represents an EphB1-associated signaling pathway with predefined gene members and scoring directionality "
+      en: "Each gene set represented an Ephb1-associated signaling pathway with predefined gene membership and scoring directionality."
       cn: "表中每一行对应一个 EphB1 下游信号模块（基因集）。列信息包括模块 ID、模块名称、网络归属（EphB1_signaling）、预期作用的心磷脂机制轴、基因数（n_genes），以及带 gene_effect_sign 标注的基因列表，用于统一模块得分方向。"
       logic_source: "methods.readout_and_assay + question.core_question"
 

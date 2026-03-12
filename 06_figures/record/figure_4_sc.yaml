@@ -95,8 +95,7 @@ figure_legend:
   panel_title_cn: "BEL 抑制 IL-1β 释放"
 
   one_sentence_en: >
-    IL-1β release from WT and Ephb1-deficient primary peritoneal macrophages following
-    LPS and nigericin stimulation under increasing doses and durations of BEL treatment.
+    IL-1β release in culture supernatants from primary peritoneal macrophages following BEL pretreatment, LPS priming, and nigericin stimulation, comparing WT and EphB1-deficient cells across the indicated doses and treatment durations.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -146,7 +145,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across these perturbations, reduced cardiolipin abundant consistently decreased LPS and Nigericin induced IL-1β release "
+      en: "Across both perturbation strategies, reduced cardiolipin availability consistently decreased LPS- and nigericin-induced IL-1β release."
       cn: "在上述多种干预条件下，心磷脂可及性的降低均伴随 LPS+nigericin 诱导的 IL-1β 释放显著下降，提示炎症小体终端输出出现一致性的抑制。"
       logic_source: "results.data_direction"
 

@@ -132,7 +132,7 @@ figure_legend:
   panel_title_cn: "遗传筛选流程示意"
 
   one_sentence_en: >
-    Schematic overview of the genetic screening strategy used to identify regulators of inflammasome-associated pyroptotic output.
+    Schematic overview of the genetic screening strategy used to identify regulators of inflammasome output.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -171,7 +171,7 @@ results_skeleton_en:
       logic_source: "meta.role_in_paper + concept_goal.core_message"
 
     M2_level_definition:
-      en: "Primary macrophages from multiple PiggyBac (PB) genetic backgrounds were subjected to standardized NLRP3 inflammasome activation, and IL-1β release was used as the functional screening readout "
+      en: "To identify regulators of inflammasome output, we subjected primary macrophages from multiple PiggyBac (PB) genetic backgrounds to standardized NLRP3 inflammasome activation and used IL-1β release as the screening readout."
       logic_source: "mechanism.key_nodes + visual_logic.causal_chain"
     M3_directional_result:
       en: "Within each genetic background, WT and EphB1-deficient macrophages were directly compared to quantify genotype-dependent differences in inflammasome-associated outputs."
@@ -182,5 +182,5 @@ results_skeleton_en:
       logic_source: "mechanism.key_nodes.significance and effect size"
 
     M5_panel_conclusion:
-      en: "Having outlined the genetic-screening strategy, we next sought to identify, a candidate strain to prioritize for mechanistic dissection."
-      logic_source: "evidence_mapping.speculative_links.boundary + transition.how_it_leads_next_section"
+      # en: "Having outlined the genetic-screening strategy, we next sought to identify, a candidate strain to prioritize for mechanistic dissection."
+      # logic_source: "evidence_mapping.speculative_links.boundary + transition.how_it_leads_next_section"

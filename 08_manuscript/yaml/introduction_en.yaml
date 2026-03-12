@@ -35,13 +35,9 @@ manuscript:
     - pid: "1.1.1.p1"
       source_trace:
       - "original_text:1.1.1"
-      topic_sentence: "Over the past two decades, the global disease landscape has
-        shifted toward chronic inflammation-associated non-communicable diseases (NCDs),
-        making immune an important public-health challenge."
+      topic_sentence: "Over the past two decades, the global disease burden has shifted increasingly toward chronic non-communicable diseases driven in part by persistent inflammation, making inflammatory dysregulation a major public-health challenge."
       sentences:
-      - "Cardiovascular diseases, cancer, chronic respiratory diseases, and diabetes
-        together accounted for approximately 43 million deaths in 2021, representing
-        roughly three quarters of non-pandemic-related deaths."
+      - "In 2021, cardiovascular diseases, cancer, chronic respiratory diseases, and diabetes together accounted for approximately 43 million deaths, representing nearly three quarters of all non-pandemic-related deaths."
       - "A substantial fraction of these deaths occurred before age 70 and disproportionately
         affected low- and middle-income countries, highlighting the societal burden
         of chronic inflammation and immune dysregulation."
@@ -55,7 +51,7 @@ manuscript:
     - pid: "1.1.1.p2"
       source_trace:
       - "original_text:1.1.1"
-      topic_sentence: "Severe systemic inflammatory syndromes such as sepsis remain major contributors to global mortality."
+      topic_sentence: "Beyond chronic inflammatory disease, severe systemic inflammatory syndromes such as sepsis also remain major contributors to global mortality."
       sentences:
       - "A Global Burden of Disease (GBD) 2017 systematic analysis estimated approximately
         48.9 million sepsis events and 11.0 million sepsis-related deaths in 2017,
@@ -79,17 +75,14 @@ manuscript:
         rate-limiting steps that enable amplitude-limited immune control."
       sentences:
       - "GBD 2023 highlighted that a substantial proportion of deaths and disability are attributable to modifiable risk factors, many of which intersect with inflammation."
-      - "At the molecular level, the NLRP3 inflammasome is often viewed as a convergence
-        node for diverse acute and chronic inflammatory pathologies."
-      - "While extensive frameworks and regulatory networks have been developed for
-        NLRP3 priming, assembly, and execution, many therapeutic strategies continue
-        to focus on suppressing activation or upstream steps."
+      - "At the molecular level, the NLRP3 inflammasome is widely regarded as a convergence point for diverse acute and chronic inflammatory pathologies."
+      - "Although regulatory frameworks have been described for NLRP3 priming, assembly, and execution, therapeutic strategies still largely focus on suppressing activation or other upstream steps."
       sentence_citations_list:
       - [10.1016/s0140-6736(25)01637-x]
       - [10.1016/s0140-6736(25)01637-x]
       - [10.1038/s41577-019-0165-0]
       - [10.1038/s41577-019-0165-0, 10.1038/nrd.2018.97]
-      bridge: "This therapeutic emphasis raises an important mechanistic question: can inflammatory outputs be constrained without fully suppressing inflammasome activation?"
+      bridge: "This therapeutic emphasis raises a central mechanistic question: can inflammatory output be limited without fully suppressing inflammasome activation?"
 
   - id: "1.1.2"
     heading: "Layered thresholds and membrane-environment constraints"
@@ -100,13 +93,9 @@ manuscript:
     - pid: "1.1.2.p1"
       source_trace:
       - "original_text:1.1.2"
-      topic_sentence: "Pyroptosis can be conceptualized as three connected but differentially
-        regulatable stages—priming, inflammasome assembly/caspase activation, and
-        terminal execution—each of which can shape phenotypic outputs."
+      topic_sentence: "Pyroptosis can be viewed as three linked but separably regulated stages—priming, inflammasome assembly/caspase activation, and terminal execution—each of which can independently influence inflammatory output."
       sentences:
-      - "Priming determines the preparedness of inflammasome components, assembly
-        determines whether inflammasomes form and caspases activate, and execution
-        determines the magnitude and form of inflammatory output."
+      - "Priming sets the readiness of inflammasome components, assembly governs whether inflammasomes form and caspases activate, and execution determines the magnitude and form of the ensuing inflammatory output."
       - "Thus, even with comparable NLRP3 activation, final phenotypes such as IL-1β/IL-18
         release, membrane permeability, and lytic rupture are not necessarily equivalent,
         suggesting that divergence may largely reside in execution thresholds."
@@ -117,9 +106,7 @@ manuscript:
     - pid: "1.1.2.p2"
       source_trace:
       - "original_text:1.1.2"
-      topic_sentence: "In canonical pathways, inflammatory caspases cleave GSDMD to
-        expose an N-terminal fragment that oligomerizes to form pores, enabling cytokine
-        release and driving osmotic imbalance toward lytic death."
+      topic_sentence: "In canonical pathways, inflammatory caspases cleave GSDMD to expose an N-terminal fragment that oligomerizes into pores, enabling cytokine release and promoting osmotic lysis."
       sentences:
       - "Inflammatory caspases (caspase-1/4/5/11) cleave GSDMD, generating the pore-forming
         GSDMD-NT fragment."
@@ -140,7 +127,7 @@ manuscript:
     - pid: "1.1.2.p3"
       source_trace:
       - "original_text:1.1.2"
-      topic_sentence: "Structural and functional studies suggest that the efficiency of GSDMD-NT pore formation strongly influences whether inflammatory outputs remain controlled or progress toward lytic rupture once a threshold is crossed."
+      topic_sentence: "Structural and functional studies suggest that the efficiency of GSDMD-NT pore formation helps determine the threshold at which inflammatory output shifts from a controlled state to lytic rupture."
       sentences:
       - "Once the execution stage crosses a threshold, outputs can rapidly transition
         from regulated release to uncontrolled lytic rupture."
@@ -169,7 +156,7 @@ manuscript:
       - [10.1038/nature18629, 10.1038/nature18590]
       - [10.1038/nature18590]
       - [10.1038/nature18629, 10.1038/nature18590]
-      bridge: "This lipid dependence suggests that membrane environment may influence the threshold behavior of pyroptotic execution."
+      bridge: "This lipid dependence suggests that membrane composition may help set the threshold for pyroptotic execution."
 
     - pid: "1.1.2.p5"
       source_trace:
@@ -198,7 +185,7 @@ manuscript:
     - pid: "1.1.2.p6"
       source_trace:
       - "original_text:1.1.2"
-      topic_sentence: "Mitochondria may also feed back to amplify inflammasome signaling, as mitochondrial functional states influence sensitivity to NLRP3 activation cues."
+      topic_sentence: "Mitochondria may also feed back to shape inflammasome signaling, because their functional state influences sensitivity to NLRP3 activation cues."
       sentences:
       - "Mitochondria-associated events such as ROS, changes in membrane permeability,
         and mtDNA release can promote inflammasome assembly and IL-1β production."
@@ -215,7 +202,7 @@ manuscript:
     - pid: "1.1.2.p7"
       source_trace:
       - "original_text:1.1.2"
-      topic_sentence: "If pore formation is sensitive to lipid context, mitochondrial membrane lipids with dynamic remodeling capacity become plausible mediators linking upstream signals to execution-stage divergence."
+      topic_sentence: "If pore formation is sensitive to lipid context, dynamically remodeled mitochondrial lipids become plausible mediators linking upstream signals to divergence at the execution stage."
       sentences:
       - "Among such lipids, cardiolipin (CL) emerges as a particularly prominent candidate."
       citations: []
@@ -231,10 +218,9 @@ manuscript:
     - pid: "1.1.3.p1"
       source_trace:
       - "original_text:1.1.3"
-      topic_sentence: "Cardiolipin is a signature tetra-acyl phospholipid enriched in the mitochondrial inner membrane and is widely viewed as a structural–functional coupling factor linking membrane architecture to bioenergetic performance."
+      topic_sentence: "Cardiolipin is a mitochondria-enriched phospholipid that links membrane architecture to bioenergetic function and is therefore a plausible mediator of execution-stage membrane behavior."
       sentences:
-      - "At the molecular level, CL contributes to stabilization and organization
-        of respiratory-chain complexes and supercomplexes."
+      - "At the molecular level, CL helps organize and stabilize respiratory-chain complexes and supercomplexes."
       - "CL also influences ATP synthase oligomerization and maintenance of high-curvature
         cristae structures."
       - " In addition, CL provides a lipid environment that supports the assembly and membrane association of inner-membrane protein complexes, including processes involved in respiratory-chain biogenesis. "
@@ -278,16 +264,16 @@ manuscript:
     - pid: "1.1.3.p3"
       source_trace:
       - "original_text:1.1.3"
-      topic_sentence: "Rather than treating mitochondrial status as a collection of dispersed signals such as ROS, mtDNA, and membrane potential, CL state may provide a more execution-proximal readout linking mitochondrial conditions to pore-forming efficiency and threshold behavior."
+      topic_sentence: "Rather than viewing mitochondrial status as a dispersed set of signals such as ROS, mtDNA, and membrane potential, CL state may offer a more execution-proximal link between mitochondrial condition and pore-forming efficiency."
       sentences:
       - "Current evidence supports a connection between CL dynamics and inflammatory execution."
-      - "By contrast, an unresolved question lies upstream: which receptor-level signals, through which downstream pathways or mechanistic axes, reshape CL state and thereby alter terminal inflammatory outputs?"
+      - "By contrast, a key unresolved question lies upstream: which receptor-level signals reshape CL state through downstream pathways and thereby alter terminal inflammatory output?"
       - "In other words, the mid-to-early segment of a chain—‘receptor signal → downstream
         pathway/mechanistic axis → CL metabolism → mitochondrial inflammatory features
         → pore threshold and lytic cytokine release’—still lacks a broadly accepted
         systems model."
       citations: []
-      bridge: "This gap motivates the search for an upstream receptor-level mechanism that could link extracellular messages to CL-dependent execution thresholds."
+      bridge: "This unresolved link motivates the search for an upstream receptor-level mechanism that connects extracellular cues to CL-dependent execution thresholds."
 
     - pid: "1.1.3.p4"
       source_trace:
@@ -551,7 +537,7 @@ manuscript:
         positioning them at key immune interfaces relevant to inflammatory output
         control."
       sentences:
-      - "Because Eph–ephrin signaling translates cell–cell contact into downstream programs controlling adhesion, cytoskeletal organization, and microenvironmental responses, it provides a plausible receptor-level entry point for linking extracellular context to intracellular execution states."
+      - "Because Eph–ephrin signaling converts cell–cell contact into downstream programs that shape adhesion, cytoskeletal organization, and microenvironmental responses, it offers a plausible receptor-level route linking extracellular context to pyroptotic execution."
       - "In immunopathological contexts, Eph–ephrin signaling has been repeatedly
         implicated in immune-cell migration, tissue entry, adhesion coordination,
         and spatial organization of intercellular communication within inflammatory
@@ -596,15 +582,13 @@ manuscript:
     - pid: "1.2.5.p3"
       source_trace:
       - "original_text:1.2.5"
-      topic_sentence: "Important gaps remain in understanding how EphB1 relates to inflammasome and pyroptotic execution, and whether EphB1-associated mitochondrial effects can be linked to quantifiable membrane-environment readouts such as CL state."
+      topic_sentence: "Important gaps remain in understanding how EphB1 influences inflammasome and pyroptotic execution, and whether its mitochondrial effects can be linked to measurable membrane-state readouts such as CL."
       sentences:
       - "First, much of the literature emphasizes ‘Eph–mitochondria–apoptosis/metabolism’
         rather than inflammasome–pyroptosis execution, and mitochondrial readouts
         (ΔΨm, ROS, dynamics) are often difficult to place causally as upstream triggers
         versus downstream amplification."
-      - "Second, Eph family functions are pleiotropic, and even closely related EphB
-        subtypes can show opposing effects across tissues, limiting inference by family
-        membership."
+      - "However, Eph family functions are pleiotropic, and even closely related EphB subtypes can have opposing effects across tissues, limiting inference from family membership alone."
       - "Third, and most directly relevant here, even if Eph signaling affects mitochondria,
         a mechanistic framework is missing that links EphB1 via downstream pathways/mechanistic
         axes to changes in mitochondrial membrane environment—especially CL abundance/remodeling/oxidation/externalization—and
@@ -700,13 +684,13 @@ manuscript:
     - pid: "1.3.p4"
       source_trace:
       - "original_text:1.3.1"
-      topic_sentence: "The central question is whether an upstream receptor signal can engage downstream pathways that reshape CL state and membrane environment, thereby altering terminal inflammasome execution outputs."
+      topic_sentence: "The central question is whether an upstream receptor signal can engage downstream pathways that reshape CL state and thereby alter terminal inflammasome execution output."
       sentences:
       - "Existing literature provides interface clues that gasdermins can interact
         with CL-related membrane environments to affect mitochondrial integrity, mtDNA
         release, and inflammatory amplification, coupling mitochondria to inflammasome
         outputs."
-      - "However, current evidence remains largely descriptive and lacks a systems-level framework explaining how upstream signals drive integrated changes in CL state."
+      - "Current evidence, however, remains largely descriptive and lacks a systems-level framework for explaining how upstream signals drive integrated changes in CL state."
       - "For EphB1 specifically, the key unknown is not whether it affects a single
         enzyme or event, but whether EphB1 signaling can, via downstream pathways/mechanistic
         axes, produce reproducible CL-state changes that are sufficient to explain
@@ -723,7 +707,7 @@ manuscript:
       source_trace:
       - "original_text:1.3.2"
       - "logic_yaml:1.3.2"
-      topic_sentence: "To address this question, we use a discover–localize–validate strategy to test the proposed chain with aligned readouts across each layer."
+      topic_sentence: "To address this question, we apply a discover–localize–validate strategy to test the proposed signaling-to-membrane-to-execution chain with aligned readouts at each layer."
       sentences:
       - "Input: genetic manipulation of EphB1 (e.g., KO/intervention) as the receptor-level
         entry variable under a unified inflammasome activation model and time-resolved
@@ -743,12 +727,10 @@ manuscript:
     - pid: "1.3.p6"
       source_trace:
       - "original_text:1.3.3"
-      topic_sentence: "This study is framed around a layered model linking receptor signaling, membrane environment, and execution output, with EphB1 as a candidate upstream entry point and CL state as an integrated mitochondrial readout."
+      topic_sentence: "The study is organized around a layered model linking receptor signaling, membrane state, and execution output, with EphB1 as the candidate upstream input and CL as the integrated mitochondrial readout."
       sentences:
-      - "Rather than equating phenotypic differences with upstream inflammasome activation
-        strength, the study emphasizes identifying which layer differs and whether
-        execution thresholds and amplitude-limiting behavior can be tuned."
-      - "Accordingly, the study tests whether changes in CL state are sufficient to explain execution-output divergence without assuming complete molecular resolution of every intermediate step."
+      - "Rather than equating phenotypic differences with stronger upstream inflammasome activation, the study asks which layer differs and whether execution thresholds or output amplitude can be tuned."
+      - "Accordingly, the study tests whether changes in CL state are sufficient to explain divergence in execution output without requiring complete molecular resolution of every intermediate step."
       - "The Results are organized as: downstream pathway/mechanistic axis prioritization
         → CL metabolic and membrane-environment phenotyping → stratified attribution
         and causal validation of execution outputs."

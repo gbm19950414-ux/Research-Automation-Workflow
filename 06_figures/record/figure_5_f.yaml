@@ -156,10 +156,7 @@ figure_legend:
   panel_title_cn: "机制轴效应与 CL 表型的跨批次回归"
 
   one_sentence_en: >
-    Cross-batch linear regression linking mechanistic axis combined Z scores (HO–WT) to batch-matched
-    HO–WT differences in total cardiolipin abundance (sum_CL) to test whether axis-level effects predict
-    cardiolipin content at the batch level.
-
+    Cross-batch regression relating mechanistic axis combined Z scores to batch-matched differences in total cardiolipin abundance to assess whether axis-level effects predict cardiolipin content across batches.
   system_and_design:
     model: "Primary murine peritoneal macrophages (multi-batch omics and CL panel datasets)"
     genotype_or_groups: "WT versus Ephb1−/− (batch-wise HO–WT contrasts)"
@@ -187,7 +184,7 @@ figure_legend:
     None of the axis–sum_CL associations reached statistical significance in the current batch range; the
     Membrane context axis showed the largest absolute correlation magnitude (r = −0.65, p = 0.35).
 
-    # ---------- 8. English ----------
+  # ---------- 8. English ----------
 
 results_skeleton_en:
   stage: T3
@@ -207,7 +204,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Among all axes, the membrane context axis showed the strongest negative association with sum_CL, with higher combined Z scores corresponding to lower total cardiolipin levels, whereas all other axes displayed weak or near-zero correlations."
+      en: "Among all axes, the membrane context axis showed the strongest negative association with sum_CL, such that higher combined Z scores corresponded to lower total cardiolipin levels, whereas all other axes showed weak or near-zero correlations."
       cn: "在所有机制轴中，Membrane context 轴与 sum_CL 呈现出最强的负相关趋势，即 combined Z 越高，总心磷脂水平越低；而其余机制轴的相关性均较弱或接近于零。"
       logic_source: "results.data_direction"
 
@@ -217,5 +214,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These results indicate that total cardiolipin abundance (sum_CL) consistently capture membrane context axis perturbations across batches."
+      en: "These results indicate that total cardiolipin abundance closely tracks membrane context axis perturbation across batches."
       logic_source: "results.group_difference_statement"

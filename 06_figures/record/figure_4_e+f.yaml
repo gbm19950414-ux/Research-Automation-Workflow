@@ -130,8 +130,8 @@ ai_hints:
 # ---------- 6. figure_legend (shared; Figure 4e/f) ----------
 figure_legend:
   one_sentence_en: >
-    Pharmacological inhibition with alexidine dihydrochloride (AD) reduces NAO-associated fluorescence
-    and collapses genotype-dependent differences in WT and Ephb1−/− primary peritoneal macrophages.
+    NAO-associated fluorescence measured by fixed-exposure imaging in primary peritoneal macrophages following alexidine dihydrochloride (AD) treatment, comparing WT and EphB1-deficient cells. 
+
 
   system_and_design:
     model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
@@ -198,7 +198,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "AD treatment markedly reduced NAO fluorescence in WT macrophages, pharmacological inhibition of cardiolipin biosynthesis decreases the cardiolipin abundance."
+      en: "AD treatment markedly reduced NAO fluorescence in WT macrophages, indicating that pharmacological inhibition of cardiolipin biosynthesis reduces the NAO-detectable cardiolipin pool."
       logic_source: "results.data_direction"
 
     M4_robustness:

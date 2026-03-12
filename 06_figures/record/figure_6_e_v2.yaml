@@ -145,8 +145,7 @@ figure_legend:
   panel_title_cn: "膜环境轴得分 (Z) 与通路 mediator 得分 (M) 的样本层关联"
 
   one_sentence_en: >
-    Sample-level Z–M scatter plots across independent RNA-seq batches reveal genotype-dependent clustering in joint (Z, M) space, with pathway-specific separation patterns that prioritize PI3K_AKT_mTOR.
-
+    Sample-level relationships between membrane-context axis scores and pathway mediator scores across independent RNA-seq batches, showing genotype-dependent clustering patterns for representative prioritized pathways.
   system_and_design:
     model: "Primary murine peritoneal macrophages (WT vs Ephb1−/−) profiled by RNA-seq across independent batches (batch1–3)"
     genotype_or_groups: "WT (X=0) versus Ephb1−/− (X=1)"
@@ -193,7 +192,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + rationale.control_logic"
 
     M3_directional_result:
-      en: "Notably, the PI3K–AKT–mTOR pathway shows coordinated shifts along both axes, with KO samples displaced toward lower M and higher Z values, whereas WT samples occupy the opposite quadrant. In contrast, JAK–STAT inflammatory and FAK–Src–Rho cytoskeleton pathways separate primarily along the Z axis while largely overlapping along the M axis."
+      en: "Notably, the PI3K–AKT–mTOR pathway showed coordinated shifts along both axes, with KO samples displaced toward lower M and higher Z values, whereas WT samples occupied the opposite quadrant. In contrast, the JAK–STAT and FAK–Src–Rho pathways separated primarily along the Z axis while largely overlapping along the M axis."
       cn: "在三条展示通路中，KO 与 WT 样本在 (Z, M) 联合空间中形成清晰聚集，提示该二维机制空间发生系统性的基因型相关重排。"
       logic_source: "results.data_direction"
 

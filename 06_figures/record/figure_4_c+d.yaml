@@ -123,9 +123,7 @@ ai_hints:
 # ---------- 6. figure_legend (shared; Figure 4c/d) ----------
 figure_legend:
   one_sentence_en: >
-    LC–MS/MS lipidomics quantification of total cardiolipin abundance and molecular species composition
-    in resting WT and Ephb1-deficient primary peritoneal macrophages.
-
+    Total cardiolipin abundance and cardiolipin molecular species measured by LC–MS/MS lipidomics in resting primary peritoneal macrophages, comparing WT and EphB1-deficient cells.
   system_and_design:
     model: "Primary murine peritoneal macrophages"
     genotype_or_groups: "WT versus Ephb1-deficient"
@@ -187,7 +185,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Compared with WT cells, Ephb1-deficient macrophages exhibited a significant reduction in total cardiolipin abundance(~70% of WT levels)."
+      en: "Compared with WT cells, Ephb1-deficient macrophages showed a significant reduction in total cardiolipin abundance, to approximately 70% of WT levels"
       cn: "与 WT 相比，Ephb1-deficient 巨噬细胞的心磷脂总量显著下降，约为 WT 的 70%，并伴随大多数心磷脂分子物种的整体下调。"
       logic_source: "results.data_direction"
 
@@ -197,7 +195,7 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these lipidomic data show that EphB1 deficiency not only reduces the NAO-accessible cardiolipin pool but also decreases total cardiolipin abundance, providing a quantitative membrane lipid basis for the attenuated mitochondrial damage observed in EphB1-deficient macrophages."
+      en: "Together, these data show that Ephb1 deficiency reduces both the NAO-accessible cardiolipin pool and total cardiolipin abundance."
       cn: "综上，这些脂质组学结果表明 EphB1 缺失不仅显著降低 NAO 可及的心磷脂池，还减少了心磷脂总量，为 EphB1 缺失腹腔巨噬细胞中线粒体损伤减弱的模型提供了定量的膜脂学基础。"
       logic_source: "results.group_difference_statement"
 

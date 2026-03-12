@@ -112,7 +112,7 @@ figure_legend:
   panel_title_cn: "跨通路炎症小体激活"
 
   one_sentence_en: >
-    IL-1β release from primary peritoneal macrophages following activation of distinct inflammasome pathways via different secondary stimuli.
+    IL-1β release in culture supernatants from primary peritoneal macrophages following activation of distinct inflammasome pathways with the indicated secondary stimuli, comparing WT and EphB1-deficient cells.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -184,6 +184,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These data indicate that the diminished IL-1β output in EphB1-deficient macrophages is not restricted to a single receptor pathway, supporting a role for EphB1 at a receptor-downstream step."
+      en: "These data indicate that the reduced IL-1β output in EphB1-deficient macrophages is not limited to a single activation route, supporting a role for EphB1 downstream of receptor-specific triggering."
       cn: "综上，Ephb1 pb/pb 细胞 IL-1β 输出受限并非局限于单一感受器通路，支持 EphB1 作用于炎症小体下游的共同执行过程。"
       logic_source: "results.group_difference_statement"

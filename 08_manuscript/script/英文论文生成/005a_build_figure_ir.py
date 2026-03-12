@@ -32,7 +32,7 @@ import argparse
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Set
+from typing import Any, Dict, List, Optional, Tuple, Set, Union
 
 import yaml
 
@@ -83,6 +83,75 @@ def load_legend_policy(path: Path) -> Dict[str, Any]:
     if not path or not Path(path).exists():
         return {}
     return load_yaml(Path(path))
+
+
+# --- Figure-level statistics loader ---
+def load_figure_level_statistics(path: Path) -> Dict[str, str]:
+    """Load figure-level statistic / display note blocks keyed by figure id.
+
+    Accepted YAML forms:
+      - figure_1: "..."
+      - figure_1:
+          text: "..."
+      - figure_1:
+          block: "..."
+      - Figure 1: "..."
+
+    Returns a normalized mapping like:
+      {"Figure 1": "...", "Figure 2": "..."}
+    Missing files return {} to preserve legacy behavior.
+    """
+    if not path or not Path(path).exists():
+        return {}
+
+    raw = load_yaml(Path(path))
+    out: Dict[str, str] = {}
+    if not isinstance(raw, dict):
+        return out
+
+    for k, v in raw.items():
+        key = norm_space(str(k))
+        m = re.fullmatch(r"figure_(\d+)", key, flags=re.IGNORECASE)
+        if m:
+            fig_key = f"Figure {m.group(1)}"
+        else:
+            m2 = re.fullmatch(r"Figure\s+(\d+)", key, flags=re.IGNORECASE)
+            if m2:
+                fig_key = f"Figure {m2.group(1)}"
+            else:
+                continue
+
+        text = ""
+        if isinstance(v, str):
+            text = v
+        elif isinstance(v, dict):
+            text = first_nonempty(
+                v.get("text"),
+                v.get("block"),
+                v.get("figure_level_statistics"),
+                v.get("figure_level_statistics_en"),
+                v.get("closing_block"),
+                v.get("display_note"),
+            )
+
+        text = str(text).strip()
+        if text:
+            out[fig_key] = text
+
+    return out
+
+
+def append_figure_level_statistics(panel_texts: List[str], figure_level_text: str) -> str:
+    """Append figure-level statistic/display-note block after panel-wise descriptions."""
+    parts: List[str] = []
+    for t in panel_texts:
+        s = str(t).strip()
+        if s:
+            parts.append(s)
+    stats_block = str(figure_level_text or "").strip()
+    if stats_block:
+        parts.append(stats_block)
+    return "\n\n".join(parts).strip()
 
 
 def norm_space(s: str) -> str:
@@ -591,6 +660,12 @@ def main() -> None:
         default="08_manuscript/yaml/policy_figure_legend_main.yaml",
         help="Optional legend policy YAML (e.g., mode: short) to control stitched legend verbosity",
     )
+    ap.add_argument(
+        "--figure-level-statistics",
+        type=str,
+        default="08_manuscript/yaml/lagend_figure_level_statistic.yaml",
+        help="Optional YAML containing figure-level statistics/display-note blocks keyed by figure_1 / Figure 1, etc.",
+    )
     args = ap.parse_args()
 
     # Default to current working directory if --root is not provided
@@ -601,6 +676,12 @@ def main() -> None:
     out_path = (root / args.out).resolve()
     legend_policy_path = (root / args.legend_policy).resolve() if args.legend_policy else None
     legend_policy = load_legend_policy(legend_policy_path) if legend_policy_path else {}
+    figure_level_stats_path = (
+        (root / args.figure_level_statistics).resolve() if args.figure_level_statistics else None
+    )
+    figure_level_statistics = (
+        load_figure_level_statistics(figure_level_stats_path) if figure_level_stats_path else {}
+    )
 
     paper_logic = load_yaml(paper_logic_path)
 
@@ -774,7 +855,8 @@ def main() -> None:
                         render_panel_legend(it.shared_legend, it.shared_legend, it.panel, legend_policy)
                     )
 
-        stitched = "\n".join(panel_texts).strip()
+        figure_level_stats_text = figure_level_statistics.get(fig, "")
+        stitched = append_figure_level_statistics(panel_texts, figure_level_stats_text)
 
         figures_ir.append(
             {
@@ -800,6 +882,7 @@ def main() -> None:
             "paper_logic": str(paper_logic_path),
             "record_dir": str(record_dir),
             "figs_dir": str(figs_dir),
+            "figure_level_statistics": str(figure_level_stats_path) if figure_level_stats_path else "",
         },
         "figures": figures_ir,
     }

@@ -55,7 +55,7 @@ methods:
         required: true
         text: >
           Genotypes were confirmed by PCR-based analysis, and mice aged
-          6 weeks or older were used for experiments.
+          6-10 weeks were used for experiments.
 
       - id: ani_08
         role: ethical_approval
@@ -83,7 +83,7 @@ methods:
         required: true
         text: >
           To elicit macrophage recruitment, mice were intraperitoneally injected
-          with 1–2 mL of sterile 4% thioglycollate medium.
+          with 2 mL of sterile 4% thioglycollate medium.
 
       - id: pmi_03
         role: cell_harvesting

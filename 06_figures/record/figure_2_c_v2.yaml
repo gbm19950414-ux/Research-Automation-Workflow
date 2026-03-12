@@ -84,7 +84,7 @@ figure_legend:
   panel_title_cn: "经典炎症因子的分泌"
 
   one_sentence_en: >
-    TNF-α and IL-1β secretion from WT and EphB1-deficient primary peritoneal macrophages following LPS stimulation at defined time points.
+    TNF-α and IL-6 secretion in supernatants from primary peritoneal macrophages at the indicated time points following LPS stimulation, comparing WT and EphB1-deficient cells.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -130,7 +130,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "LPS stimulation induced comparable increases in TNF-α and IL-6 in WT and EphB1-deficient macrophages, with no significant genotype-dependent differences"
+      en: "LPS stimulation induced comparable TNF-α and IL-6 release in WT and Ephb1-deficient macrophages, with no significant genotype-dependent differences."
       cn: "LPS 刺激在 WT 与 EphB1 缺失巨噬细胞中均诱导了显著的 TNF-α 与 IL-6 分泌，且未观察到基因型依赖的显著差异。"
       logic_source: "results.data_direction"
 
@@ -140,6 +140,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Thus, EphB1 deficiency does not measurably impair TLR4-driven secretion of TNF-α or IL-6, arguing against a generalized secretory defect as the basis for reduced inflammasome-associated outputs."
+      en: "Thus, Ephb1 deficiency does not measurably impair TLR4-driven secretion of TNF-α or IL-6, arguing against a generalized secretory defect as the basis for reduced inflammasome output."
       cn: "因此，EphB1 缺失并未显著影响 TLR4 介导的 TNF-α 或 IL-6 经典分泌，排除了普遍分泌缺陷作为炎症小体相关输出降低原因的可能性。"
       logic_source: "results.group_difference_statement"

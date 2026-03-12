@@ -502,9 +502,7 @@ figure_legend:
   panel_title_cn: "心磷脂六轴机制框架的 feature 表"
 
   one_sentence_en: >
-    Curated table of representative lipid readouts and key genes mapped to six cardiolipin-related
-    mechanistic axes, including explicit directionality conventions (bottleneck_sign) and within-axis
-    weights to support axis-level scoring and interpretation.
+    Curated reference table assigning representative lipid readouts and key genes to the six cardiolipin-related mechanistic axes, with predefined directionality conventions and within-axis weights for axis-level scoring.
 
   system_and_design:
     model: "Curation framework (no experimental measurements shown)"
@@ -550,7 +548,7 @@ results_skeleton_en:
       logic_source: "question.context_from_previous + question.core_question"
 
     M2_level_definition:
-      en: "For each axis, we defined representative genes and lipid features together with predefined weighting and inclusion rules"
+      en: "For each axis, representative genes and lipid features were specified using predefined weighting and inclusion rules."
       cn: "针对每条机制轴（供给、转运、合成、重塑、氧化与膜环境），我们以最小 feature 记录的方式明确其轴归属、生物学含义、脂质指标的计算公式、方向性定义（bottleneck_sign）与轴内权重，并给出分层纳入规则（Tier-1 核心执行、Tier-2 路径近邻、Tier-3 条件性贡献者）及跨轴统一排除原则。"
       logic_source: "methods.readout_and_assay + question.core_question"
 

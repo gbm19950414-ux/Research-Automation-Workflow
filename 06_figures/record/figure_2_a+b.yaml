@@ -78,7 +78,7 @@ ai_hints:
 figure_legend:
   one_sentence_en: 
     - panels: [a,b]
-      text: TNF-α and IL-1β Transcriptional priming responses to LPS stimulation in WT and EphB1-deficient primary peritoneal macrophages.
+      text: qPCR analysis of transcriptional priming markers in primary peritoneal macrophages at the indicated time points following LPS stimulation, comparing WT and EphB1-deficient cells.
     
 
   system_and_design:
@@ -137,7 +137,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il-1β mRNA in WT and EphB1-deficient macrophages across all examined time points."
+      en: "LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il1b mRNA in WT and Ephb1-deficient macrophages across all examined time points."
       cn: "在所有检测时间点，LPS 刺激均在 WT 与 EphB1 缺失巨噬细胞中诱导了幅度相当的 Tnf、Il6 与 Il-1β 转录上调。"
       logic_source: "results.data_direction"
 
@@ -147,6 +147,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these data indicate that EphB1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming, arguing against defective first-signal activation as the cause of reduced inflammasome output."
+      en: "Together, these data indicate that Ephb1 deficiency does not impair TLR4–NF-κB–dependent transcriptional priming."
       cn: "综上，这些结果表明 EphB1 缺失并不影响 TLR4–NF-κB 依赖的转录性 priming，从而排除了第一信号受损导致炎症小体输出降低的可能性。"
       logic_source: "results.group_difference_statement"      

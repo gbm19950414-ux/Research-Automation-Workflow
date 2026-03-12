@@ -18,7 +18,7 @@ meta:
 
 main_question:
   one_sentence: >
-    在 LPS 预激的原代小鼠腹腔巨噬细胞中，EphB1 是否通过调控线粒体心磷脂（CL）的
+    在 LPS 预激的原代小鼠腹腔巨噬细胞中，Ephb1 是否通过调控线粒体心磷脂（CL）的
     总量与可及池，重塑膜环境并平移 GSDMD 成孔阈值，从而限幅 NLRP3 炎症小体介导的
     IL-1β 裂解性外排与焦亡？
   background_gap: >
@@ -28,19 +28,19 @@ main_question:
     代谢与膜环境 → 线粒体炎症平台 → GSDMD 成孔/外排”这一可检验链条的上游调控模块
     仍缺乏系统阐明。
   central_claim: >
-    EphB1 作为上游信号输入，通过下游网络调控线粒体 CL 的总量与可及池，进而改变
+    Ephb1 作为上游信号输入，通过下游网络调控线粒体 CL 的总量与可及池，进而改变
     GSDMD-NT 的线粒体对接与成孔效率，最终限幅炎症小体的裂解性外排与焦亡强度；
-    多组学机制轴与通路级中介分析指向 PI3K–AKT–mTOR 为连接 EphB1 与膜环境重塑的
+    多组学机制轴与通路级中介分析指向 PI3K–AKT–mTOR 为连接 Ephb1 与膜环境重塑的
     关键中介模块。
 
 hypotheses:
   - id: H1
     one_sentence: >
-      EphB1 缺失通过降低线粒体 CL 总量/可及池，削弱 GSDMD-NT 的早期线粒体对接，导致
+      Ephb1 缺失通过降低线粒体 CL 总量/可及池，削弱 GSDMD-NT 的早期线粒体对接，导致
       IL-1β 裂解性外排与焦亡被限幅。
   - id: H2
     one_sentence: >
-      EphB1 对 CL–膜环境的调控主要经由 PI3K–AKT–mTOR 等下游信号模块中介。
+      Ephb1 对 CL–膜环境的调控主要经由 PI3K–AKT–mTOR 等下游信号模块中介。
 
 mechanistic_axes:
   - id: AX1
@@ -72,18 +72,18 @@ sections:
   - id: S3
     title: 膜脂阀门：CL 总量/可及池变化及其因果验证
   - id: S4
-    title: 多组学机制轴与通路中介：连接 EphB1 信号与膜环境重塑
+    title: 多组学机制轴与通路中介：连接 Ephb1 信号与膜环境重塑
 figures:
   - id: "Figure 1"
-    title: "EphB1 缺失降低炎症小体激活诱导的巨噬细胞焦亡与 IL-1β 释放"
-    title_en: "EphB1 deficiency reduces pyroptosis and IL-1β release"
-    figure_title: "EphB1 缺失限幅炎症小体诱导的焦亡与 IL-1β 外排"
-    figure_title_en: "EphB1 deficiency reduces inflammasome-triggered pyroptosis and IL-1β release"
+    title: "Ephb1 缺失降低炎症小体激活诱导的巨噬细胞焦亡与 IL-1β 释放"
+    title_en: "Ephb1 deficiency reduces pyroptosis and IL-1β release"
+    figure_title: "Ephb1 缺失限幅炎症小体诱导的焦亡与 IL-1β 外排"
+    figure_title_en: "Ephb1 deficiency reduces inflammasome-triggered pyroptosis and IL-1β release"
 
     section: "S1"
     role_in_story: "Phenotype establishment"
     one_sentence_purpose: >
-      建立 EphB1 缺失在多种炎症小体激活条件下“输出端被限幅”的稳健功能表型，并为后续机制层级定位提供起点。
+      建立 Ephb1 缺失在多种炎症小体激活条件下“输出端被限幅”的稳健功能表型，并为后续机制层级定位提供起点。
 
     key_message: >
       ephb1是维持炎症小体功能的关键因素
@@ -103,7 +103,7 @@ figures:
       
       - figure_id: "1b"
         experiment_id: "001"
-        story_role: "EphB1 在多品系中表现为显著候选基因"
+        story_role: "Ephb1 在多品系中表现为显著候选基因"
         micro_question: >
           ephb1在遗传筛选中的表现如何？
         micro_answer: >
@@ -113,7 +113,7 @@ figures:
 
       - figure_id: "1c"
         experiment_id: "figure_2_d"
-        story_role: "EphB1 表型不依赖单一 NLRP3 激动剂"
+        story_role: "Ephb1 表型不依赖单一 NLRP3 激动剂"
         micro_question: >
           ephb1的nlrp3炎症小体表型，是否与nigericin特异相关？
         micro_answer: >
@@ -123,25 +123,25 @@ figures:
 
       - figure_id: "1d"
         experiment_id: 2
-        story_role: "EphB1 缺失一致降低炎症小体相关膜裂解（LDH）"
+        story_role: "Ephb1 缺失一致降低炎症小体相关膜裂解（LDH）"
         micro_question: >
-          在不同炎症小体感受器被激活的条件下，EphB1 缺失是否一致降低焦亡相关的膜裂解/
+          在不同炎症小体感受器被激活的条件下，Ephb1 缺失是否一致降低焦亡相关的膜裂解/
           LDH 外排，确立其在炎症小体依赖性细胞裂解中的功能表型？
         micro_answer: >
           在 NLRP3、NLRC4 与 AIM2 被激活时，KO 巨噬细胞的 LDH 外排在早晚两个时间窗口内均
-          持续低于 WT，提示 EphB1 缺失在多条炎症小体通路下都压低焦亡强度，而非仅推迟裂解
+          持续低于 WT，提示 Ephb1 缺失在多条炎症小体通路下都压低焦亡强度，而非仅推迟裂解
           时间或只影响单一路径。
         focuses_on_axes: ["AX3"]
         depends_on_panels: ["1A_apoptosis_control"]
 
       - figure_id: "s1a"
         experiment_id: 1
-        story_role: "EphB1 缺失不改变经典凋亡敏感性（Staurosporine）"
+        story_role: "Ephb1 缺失不改变经典凋亡敏感性（Staurosporine）"
         micro_question: >
-          在解释炎症小体依赖性焦亡表型之前，是否需要排除 EphB1 缺失引起的“广义细胞死亡敏感性改变”
+          在解释炎症小体依赖性焦亡表型之前，是否需要排除 Ephb1 缺失引起的“广义细胞死亡敏感性改变”
           （例如经典凋亡通路的普遍耐受或易感），以避免将非特异性的存活差异误判为焦亡特异表型？
         micro_answer: >
-          设置一个与炎症小体无关的经典凋亡刺激作为阴性对照通路，用于检验 EphB1 缺失是否存在
+          设置一个与炎症小体无关的经典凋亡刺激作为阴性对照通路，用于检验 Ephb1 缺失是否存在
           “全局性死亡通路敏感性偏移”。该对照的逻辑目的在于：若凋亡通路并未显示系统性差异，
           则主文中观察到的差异更有理由被定位为炎症小体/焦亡相关执行环节的特异改变。
         focuses_on_axes: []
@@ -164,14 +164,14 @@ figures:
         depends_on_panels: []
 
   - id: "Figure 2"
-    title: "EphB1 缺失不影响 NLRP3 上游激活，差异集中于 GSDMD 执行层外排"
-    title_en: "EphB1 deficiency reduces pyroptotic execution"
-    figure_title_en: "EphB1 deficiency reduces GSDMD-dependent pyroptotic execution"
+    title: "Ephb1 缺失不影响 NLRP3 上游激活，差异集中于 GSDMD 执行层外排"
+    title_en: "Ephb1 deficiency reduces pyroptotic execution"
+    figure_title_en: "Ephb1 deficiency reduces GSDMD-dependent pyroptotic execution"
     section: "S1"
     role_in_story: "Level mapping: upstream intact, execution limited"
     one_sentence_purpose: >
-      通过逐层排除经典分泌、转录性 priming、关键蛋白丰度与 ASC 组装差异，将 EphB1 的作用定位到第二信号之后、GSDMD 孔介导的外排/膜裂解执行层。
-      EphB1 缺失不影响 LPS 诱导的 TNF-α/IL-6 经典分泌，也不削弱炎症小体相关基因的转录性
+      通过逐层排除经典分泌、转录性 priming、关键蛋白丰度与 ASC 组装差异，将 Ephb1 的作用定位到第二信号之后、GSDMD 孔介导的外排/膜裂解执行层。
+      Ephb1 缺失不影响 LPS 诱导的 TNF-α/IL-6 经典分泌，也不削弱炎症小体相关基因的转录性
       priming、pro-IL-1β/NLRP3 的胞内丰度或 ASC 寡聚化；在相同刺激下，caspase-1 激活及其对
       GSDMD/IL-1β 的切割基本保留，但成熟片段的胞外释放受限，提示瓶颈位于 GSDMD 孔与膜裂解
       步骤，而非炎症小体的组装或酶活本身。
@@ -179,37 +179,37 @@ figures:
     panels:
       - figure_id: "2a/b"
         experiment_id: "figure_2_b"
-        story_role: "EphB1 缺失未影响转录性 priming"
+        story_role: "Ephb1 缺失未影响转录性 priming"
         micro_question: >
-          在 TLR4–NF-κB 介导的第一信号阶段，EphB1 缺失是否改变了炎症小体相关细胞因子和
+          在 TLR4–NF-κB 介导的第一信号阶段，Ephb1 缺失是否改变了炎症小体相关细胞因子和
           Nlrp3 本身的转录性 priming？
         micro_answer: >
           LPS 诱导下 TNF-α、IL-1β mRNA 随时间上升，但 WT 与 KO 之间上升幅度一致，
-          表明 EphB1 缺失未明显影响第一信号驱动的转录性 priming。
+          表明 Ephb1 缺失未明显影响第一信号驱动的转录性 priming。
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "s2a"
         experiment_id: 2
-        story_role: "EphB1 缺失未影响转录性 priming的补充分析"
+        story_role: "Ephb1 缺失未影响转录性 priming的补充分析"
         micro_question: >
-          在 TLR4–NF-κB 介导的第一信号阶段，EphB1 缺失是否改变了炎症小体相关细胞因子和
+          在 TLR4–NF-κB 介导的第一信号阶段，Ephb1 缺失是否改变了炎症小体相关细胞因子和
           Nlrp3 本身的转录性 priming？
         micro_answer: >
           LPS 诱导下 IL-6 mRNA 随时间上升，但 WT 与 KO 之间上升幅度一致，
-          表明 EphB1 缺失未明显影响第一信号驱动的转录性 priming。
+          表明 Ephb1 缺失未明显影响第一信号驱动的转录性 priming。
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "2c"
         experiment_id: "figure_2_a"
-        story_role: "EphB1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷"
+        story_role: "Ephb1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷"
         micro_question: >
-          EphB1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（TNF-α/IL-6）的普遍释放缺陷，
+          Ephb1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（TNF-α/IL-6）的普遍释放缺陷，
           从而混淆对 IL-1β 变化的解读？
         micro_answer: >
           在 LPS 单独刺激下，WT 与 KO 巨噬细胞释放的 TNF-α 上升且幅度相近，
-          提示 EphB1 缺失并未普遍削弱细胞因子分泌途径，为后续将分泌差异特异性归因于炎症小体/
+          提示 Ephb1 缺失并未普遍削弱细胞因子分泌途径，为后续将分泌差异特异性归因于炎症小体/
           焦亡相关释放提供了基础。
         focuses_on_axes: []
         depends_on_panels: []
@@ -217,43 +217,43 @@ figures:
 
       - figure_id: "s2b"
         experiment_id: 1
-        story_role: "EphB1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷的补充分析"
+        story_role: "Ephb1 缺失未造成 LPS 诱导的经典细胞因子分泌缺陷的补充分析"
         micro_question: >
-          EphB1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（IL-6）的普遍释放缺陷，
+          Ephb1 缺失是否造成巨噬细胞对 LPS 诱导的经典分泌途径（IL-6）的普遍释放缺陷，
           从而混淆对 IL-1β 变化的解读？
         micro_answer: >
           在 LPS 单独刺激下，WT 与 KO 巨噬细胞释放的 IL-6 上升且幅度相近，
-          提示 EphB1 缺失并未普遍削弱细胞因子分泌途径，为后续将分泌差异特异性归因于炎症小体/
+          提示 Ephb1 缺失并未普遍削弱细胞因子分泌途径，为后续将分泌差异特异性归因于炎症小体/
           焦亡相关释放提供了基础.
 
       - figure_id: "2d"
         experiment_id: "figure_1_c_a"
-        story_role: "EphB1 缺失造成 炎症小体诱导的IL-1β 释放缺陷"
+        story_role: "Ephb1 缺失造成 炎症小体诱导的IL-1β 释放缺陷"
         micro_question: >
-          EphB1 缺失导致的 IL-1β 释放是否具有浓度依赖特性？
+          Ephb1 缺失导致的 IL-1β 释放是否具有浓度依赖特性？
         micro_answer: >
           在 LPS nigericin 刺激下，WT 与 KO 巨噬细胞释放的 IL-1β 上升，KO 幅度小于 WT，且具有浓度依赖特性，
-          提示 EphB1 缺失造成的分泌差异集中于炎症小体特异性通路。
+          提示 Ephb1 缺失造成的分泌差异集中于炎症小体特异性通路。
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "2e"
         experiment_id: "figure_2_e"
-        story_role: "EphB1 缺失未在炎症小体装配层面影响 ASC 寡聚化"
+        story_role: "Ephb1 缺失未在炎症小体装配层面影响 ASC 寡聚化"
         micro_question: >
-          在第二信号触发后，EphB1 缺失是否影响 ASC 的寡聚化和 speck 形成，从而在装配层面阻断
+          在第二信号触发后，Ephb1 缺失是否影响 ASC 的寡聚化和 speck 形成，从而在装配层面阻断
           炎症小体？
         micro_answer: >
-          DSS 交联结合亚细胞分级显示，EphB1 缺失并未明显改变 ASC 高分子复合物与单体在可溶/
+          DSS 交联结合亚细胞分级显示，Ephb1 缺失并未明显改变 ASC 高分子复合物与单体在可溶/
           不溶组分中的分布，提示炎症小体的装配步骤在 KO 中基本保留。
         focuses_on_axes: []
         depends_on_panels: []
 
       - figure_id: "2f"
         experiment_id: "figure_2_f"
-        story_role: "EphB1 缺失未在炎症小体功能层面影响 caspase-1 的激活及其成熟片段生成"
+        story_role: "Ephb1 缺失未在炎症小体功能层面影响 caspase-1 的激活及其成熟片段生成"
         micro_question: >
-          在 ASC 平台完好组装的前提下，EphB1 缺失对 caspase-1 的激活产生了怎样的影响，
+          在 ASC 平台完好组装的前提下，Ephb1 缺失对 caspase-1 的激活产生了怎样的影响，
           从而帮助定位差异所在的执行层级
         micro_answer: >
           全细胞裂解物中 cleaved caspase-1 p20 在 WT 与 KO 之间相近，
@@ -264,17 +264,17 @@ figures:
 
       - figure_id: "2g"
         experiment_id: "figure_2_g"
-        story_role: "EphB1 缺失未在炎症小体功能层面影响IL—1β 与 GSDMD 的切割"
+        story_role: "Ephb1 缺失未在炎症小体功能层面影响IL—1β 与 GSDMD 的切割"
         micro_question: >
-          在完成转录后，关键 priming 蛋白（pro-IL-1β）的胞内丰度是否受到 EphB1 缺失影响，
+          在完成转录后，关键 priming 蛋白（pro-IL-1β）的胞内丰度是否受到 Ephb1 缺失影响，
           从而在蛋白层面限制炎症小体装配？
           进一步，
-          在 ASC 平台完好组装、casp1激活完整保留的前提下，EphB1 缺失对 caspase-1 底物 GSDMD/pro-IL-1β 的
+          在 ASC 平台完好组装、casp1激活完整保留的前提下，Ephb1 缺失对 caspase-1 底物 GSDMD/pro-IL-1β 的
           切割产生了怎样的影响，从而帮助定位差异所在的执行层级
 
         micro_answer: >
           LPS 预激 4 h 后，WT 与 KO 巨噬细胞中 pro-IL-1β与gsdmd的胞内条带强度相当，说明在给定
-          条件下，EphB1 缺失并未通过降低 priming 蛋白含量来削弱炎症小体组装能力。
+          条件下，Ephb1 缺失并未通过降低 priming 蛋白含量来削弱炎症小体组装能力。
           进一步，
           全细胞裂解物中 GSDMD/IL-1β 的切割指数在 WT 与 KO 之间相近，
           说明 caspase-1 激活及底物加工基本保留；
@@ -285,16 +285,16 @@ figures:
         depends_on_panels: []
 
   - id: "Figure 3"
-    title: "EphB1 缺失降低 GSDMD 与线粒体膜的结合"
-    title_en: "EphB1 deficiency reduces mitochondrial enrichment of GSDMD"
-    figure_title: "EphB1 缺失削弱 GSDMD-NT 在线粒体膜上的对接与富集"
-    figure_title_en: "EphB1 deficiency reduces mitochondrial enrichment of GSDMD-NT"
+    title: "Ephb1 缺失降低 GSDMD 与线粒体膜的结合"
+    title_en: "Ephb1 deficiency reduces mitochondrial enrichment of GSDMD"
+    figure_title: "Ephb1 缺失削弱 GSDMD-NT 在线粒体膜上的对接与富集"
+    figure_title_en: "Ephb1 deficiency reduces mitochondrial enrichment of GSDMD-NT"
     section: "S2"
     role_in_story: "Execution interface: GSDMD–mitochondria engagement"
     one_sentence_purpose: >
       将执行瓶颈进一步细化到 GSDMD-NT 与线粒体膜的早期对接与富集阶段，并用线粒体功能/内容物外泄读数为后续追问“膜脂阀门如何设定该界面效率”建立逻辑前提。
       本图旨在区分 GSDMD 执行过程中的“剪切激活”与“线粒体结合/孔化”两个阶段，
-      并检验 EphB1 缺失是否将焦亡执行瓶颈定位于 GSDMD-NT 与线粒体膜的早期相互作用。
+      并检验 Ephb1 缺失是否将焦亡执行瓶颈定位于 GSDMD-NT 与线粒体膜的早期相互作用。
       通过并行评估线粒体功能状态与线粒体内容物外泄读数，
       为后续追问“线粒体膜环境因素如何决定该界面效率”提供逻辑依据。
     panels:
@@ -306,10 +306,10 @@ figures:
           在上个figure中我们将问题定位到了gsdmd执行功能环节。
           gsdmd切割后的第一步是与线粒体结合
           于是提出假设：
-          EphB1 缺失是否伴随炎症小体激活过程中更轻的线粒体损伤与 ROS 应激？
+          Ephb1 缺失是否伴随炎症小体激活过程中更轻的线粒体损伤与 ROS 应激？
         micro_answer: >
           通过对细胞质 ROS、线粒体 ROS 及线粒体膜电位的动力学监测，
-          用于判别 EphB1 缺失条件下线粒体在炎症小体激活过程中的应激响应方式，
+          用于判别 Ephb1 缺失条件下线粒体在炎症小体激活过程中的应激响应方式，
           以及这些变化是否更符合“线粒体内容物外泄受限”而非“上游激活不足”的模型。
         focuses_on_axes: []
         depends_on_panels: []
@@ -340,7 +340,7 @@ figures:
         experiment_id: figure_3_a
         story_role: "mtRNA释放"
         micro_question: >
-          在线粒体损伤更直接的 readout——胞质 mtRNA 脉冲释放上，EphB1 缺失是否同样表现为损伤减弱，
+          在线粒体损伤更直接的 readout——胞质 mtRNA 脉冲释放上，Ephb1 缺失是否同样表现为损伤减弱，
           并且这一减弱来自炎症小体激活而非细胞固有差异，
           从而进一步支持“线粒体阶段被限幅”的模型？
         micro_answer: >
@@ -355,7 +355,7 @@ figures:
         experiment_id: figure_3_a
         story_role: "mtRNA释放"
         micro_question: >
-          在线粒体损伤更直接的 readout——胞质 mtRNA 脉冲释放上，EphB1 缺失是否同样表现为损伤减弱，
+          在线粒体损伤更直接的 readout——胞质 mtRNA 脉冲释放上，Ephb1 缺失是否同样表现为损伤减弱，
           从而进一步支持“线粒体阶段被限幅”的模型？
         micro_answer: >
           分离胞质与线粒体组分后定量 mtRNA 显示，炎症小体激活7.5min时 WT 细胞胞质 mtRNA 标志物 nd1 迅速出现峰值，
@@ -379,37 +379,37 @@ figures:
         experiment_id: figure_3_c
         story_role: "gsdmd线粒体结合读数"
         micro_question: >
-          在炎症小体激活早期，EphB1 缺失是否削弱 GSDMD-NT 对线粒体的快速富集，从而在
+          在炎症小体激活早期，Ephb1 缺失是否削弱 GSDMD-NT 对线粒体的快速富集，从而在
           “GSDMD–线粒体界面”层面解释执行瓶颈？
         micro_answer: >
           通过时间梯度的线粒体分级与 Western blot，
           用于区分 GSDMD 的“剪切激活”与“线粒体定位/富集”两个阶段，
-          并检验 EphB1 缺失是否主要影响 GSDMD-NT 的线粒体结合效率，
+          并检验 Ephb1 缺失是否主要影响 GSDMD-NT 的线粒体结合效率，
           而非其上游剪切过程。
         focuses_on_axes: ["AX2"]
         depends_on_panels: []
 
   - id: "Figure 4"
-    title: "心磷脂是EphB1 缺失降低炎症小体通路激活的重要因素"
-    title_en: "EphB1 deficiency reduces cardiolipin abundance"
-    figure_title: "心磷脂可及性介导 EphB1 依赖的炎症小体输出限幅"
-    figure_title_en: "EphB1 deficiency reduces cardiolipin abundance"
+    title: "心磷脂是Ephb1 缺失降低炎症小体通路激活的重要因素"
+    title_en: "Ephb1 deficiency reduces cardiolipin abundance"
+    figure_title: "心磷脂可及性介导 Ephb1 依赖的炎症小体输出限幅"
+    figure_title_en: "Ephb1 deficiency reduces cardiolipin abundance"
     section: "S3"
     role_in_story: "Lipid gate: cardiolipin abundance/accessibility and causality"
     one_sentence_purpose: >
-      在排除线粒体数量与基础 ΔΨm 等混杂因素后，检验 EphB1 是否通过改变线粒体心磷脂（CL）的总量与可及/可结合池来重塑 GSDMD–线粒体界面，并用药理学操控建立“CL 可及性 → 炎症小体输出”的因果链。
-      本图的逻辑任务是把 EphB1 的效应从“线粒体界面瓶颈”（Figure 3）进一步上溯到“CL–膜脂环境”：
+      在排除线粒体数量与基础 ΔΨm 等混杂因素后，检验 Ephb1 是否通过改变线粒体心磷脂（CL）的总量与可及/可结合池来重塑 GSDMD–线粒体界面，并用药理学操控建立“CL 可及性 → 炎症小体输出”的因果链。
+      本图的逻辑任务是把 Ephb1 的效应从“线粒体界面瓶颈”（Figure 3）进一步上溯到“CL–膜脂环境”：
       （1）先用静息条件下的ΔΨm/线粒体数量对照排除基础线粒体状态差异；
       （2）再用 NAO 读出刻画“NAO 可染/可及的 CL 池”这一功能性脂质状态；
       （3）随后用脂质组学在独立测量层面检验 CL 总量/亚型的改变是否能支撑 NAO 所指向的脂质差异；
       （4）最后用两条独立药理轴（AD、BEL）分别在“脂质状态操控（NAO）”与“功能后果（IL-1β 释放）”层面建立因果关联与遮蔽关系，
-      从而将 EphB1 的主要作用阶层定位到 CL 可及性/可结合池这一膜脂阀门。
+      从而将 Ephb1 的主要作用阶层定位到 CL 可及性/可结合池这一膜脂阀门。
     panels:
       - figure_id: "4A_mito_potential_and_mass_baseline"
         experiment_id: 1
         story_role: "baseline_mito_state"
         micro_question: >
-          在未激活炎症小体时，EphB1 缺失是否导致线粒体膜电位或数量发生明显改变，从而成为后续
+          在未激活炎症小体时，Ephb1 缺失是否导致线粒体膜电位或数量发生明显改变，从而成为后续
           CL 读数的主要驱动因素？
         micro_answer: >
           以静息条件下的线粒体膜电位（TMRM 动力学）与线粒体数量（线粒体标志基因 qPCR）作为背景对照，
@@ -421,11 +421,11 @@ figures:
         experiment_id: 2
         story_role: "心磷脂nao染色示意图/量化统计"
         micro_question: >
-          在控制线粒体膜电位与数量后，EphB1 缺失是否仍然表现为 NAO 可染心磷脂池的下降，从而提示
+          在控制线粒体膜电位与数量后，Ephb1 缺失是否仍然表现为 NAO 可染心磷脂池的下降，从而提示
           CL 可及性/质量的改变？
         micro_answer: >
           在控制细胞当量与基础线粒体状态的前提下，使用 NAO 作为“NAO 可染/可及的 CL 池”的功能性读出，
-          用于检验 EphB1 缺失是否伴随 CL 可达性/可结合池层面的改变，并为解释 GSDMD–线粒体结合效率差异提供膜脂学线索。
+          用于检验 Ephb1 缺失是否伴随 CL 可达性/可结合池层面的改变，并为解释 GSDMD–线粒体结合效率差异提供膜脂学线索。
           同时强调 NAO 属于可及性读出，需与独立 CL 定量（脂质组学）共同解释。
         focuses_on_axes: []
         depends_on_panels: []
@@ -435,7 +435,7 @@ figures:
         story_role: "心磷脂含量脂质组学检测亚型/总量变化"
         micro_question: >
           为了进一步排除nao染色的非特异性影响，
-          非靶向脂质组学层面，EphB1 缺失是否确实导致 CL 总量下降，
+          非靶向脂质组学层面，Ephb1 缺失是否确实导致 CL 总量下降，
           从而支持NAO 信号差异反映的是 CL 池本身而非技术伪影？
         micro_answer: >
           采用脂质组学对 CL 总量与亚型谱进行独立测量，用于验证 NAO 所提示的“CL 池改变”是否能在化学定量层面得到支撑，
@@ -450,7 +450,7 @@ figures:
           通过ad，富集到线粒体心磷脂富含区域，起到占位作用，另一方面，抑制ptpmt1，阻断心磷脂合成通路，
           导致心磷脂含量减少、可结合性降低
           是否可以在人为条件下降低 NAO 可染 CL 池，并部分
-          重现 EphB1 缺失的 CL 表型？
+          重现 Ephb1 缺失的 CL 表型？
         micro_answer: >
           通过 AD 作为上游药理学操控，在脂质状态层面人为降低 NAO 可染/可及的 CL 池，
           用于检验“CL 可及性下降”是否可被外源手段复制，并为后续功能 readout（IL-1β）提供明确的上游操控起点。
@@ -462,11 +462,11 @@ figures:
         story_role: "ad处理后il1b释放"
         micro_question: >
           在功能 readout 上，AD 诱导的 CL 结合与合成障碍，
-          是否足以下调 IL-1β 释放，并与 EphB1 缺失形成遮蔽
-          关系，从而将 EphB1 作用路径定位到 CL 轴？
+          是否足以下调 IL-1β 释放，并与 Ephb1 缺失形成遮蔽
+          关系，从而将 Ephb1 作用路径定位到 CL 轴？
         micro_answer: >
           在功能 readout 上评估 AD 诱导的“CL 可及性下降”是否足以抑制 NLRP3 炎症小体输出（以 IL-1β 释放表征），
-          并进一步检验其与 EphB1 缺失之间是否呈现遮蔽/同阶关系，从而将 EphB1 的主要作用路径定位到 CL 轴。
+          并进一步检验其与 Ephb1 缺失之间是否呈现遮蔽/同阶关系，从而将 Ephb1 的主要作用路径定位到 CL 轴。
         focuses_on_axes: []
         depends_on_panels: []
 
@@ -477,7 +477,7 @@ figures:
           通过bel药理抑制 iPLA₂–介导的 CL 去酰基/重塑，
           导致的cl积累/氧化cl清除受阻
           是否可以在人为条件下降低 NAO 可染 CL 池，并部分
-          重现 EphB1 缺失的 CL 表型？
+          重现 Ephb1 缺失的 CL 表型？
         micro_answer: >
           通过 BEL 抑制 iPLA₂ 相关的脂质重塑过程，在脂质状态层面降低 NAO 可染/可及的 CL 池，
           作为第二条独立药理轴用于复现“CL 可及性操控”，并与 AD 轴形成相互印证，降低单一药物解释风险。
@@ -489,27 +489,27 @@ figures:
         story_role: "bel处理后il1b释放"
         micro_question: >
           在功能 readout 上，BEL 诱导的 CL 重塑障碍，导致的cl积累/氧化cl清除受阻
-          是否足以下调 IL-1β 释放，并与 EphB1 缺失形成遮蔽
-          关系，从而将 EphB1 作用路径定位到 CL 轴？
+          是否足以下调 IL-1β 释放，并与 Ephb1 缺失形成遮蔽
+          关系，从而将 Ephb1 作用路径定位到 CL 轴？
         micro_answer: >
           在功能 readout 上评估 BEL 诱导的“CL 可及性下降”是否足以限制 NLRP3 炎症小体输出（IL-1β 释放），
-          并检验其与 EphB1 缺失之间的遮蔽/同阶关系，从而巩固“CL 可及性 → GSDMD 孔/外排 → IL-1β 释放”的因果序列。
+          并检验其与 Ephb1 缺失之间的遮蔽/同阶关系，从而巩固“CL 可及性 → GSDMD 孔/外排 → IL-1β 释放”的因果序列。
         focuses_on_axes: []
         depends_on_panels: []
 
   - id: "Figure 5"
     title: "多组学机制轴分析确定“膜环境轴”为优先异常轴"
-    title_en: "Membrane context is the dominant cardiolipin-related axis perturbed by EphB1 deficiency"
+    title_en: "Membrane context is the dominant cardiolipin-related axis perturbed by Ephb1 deficiency"
     figure_title: "多组学整合优先锁定 membrane context 机制轴为主导扰动"
-    figure_title_en: "Membrane context is the dominant cardiolipin-related axis perturbed by EphB1 deficiency"
+    figure_title_en: "Membrane context is the dominant cardiolipin-related axis perturbed by Ephb1 deficiency"
     section: ""   
     role_in_story: "Omics synthesis: define and prioritize a mechanistic axis"
     one_sentence_purpose: >
-      在统一机制轴框架下整合多批次转录组与脂质组数据，量化 EphB1 缺失对各 CL/膜环境相关机制轴的方向一致性与稳健性，并据此确定最适合作为后续通路分解与中介建模锚点的优先机制轴（priority axis）。
+      在统一机制轴框架下整合多批次转录组与脂质组数据，量化 Ephb1 缺失对各 CL/膜环境相关机制轴的方向一致性与稳健性，并据此确定最适合作为后续通路分解与中介建模锚点的优先机制轴（priority axis）。
       本图的逻辑任务是：
       （1）在概念层面将复杂的 CL 代谢与膜环境过程拆分为若干可定量的机制轴；
       （2）用明确的特征方向与权重规则，将 RNA 与脂质特征压缩为轴级分数；
-      （3）在不同组学与批次中评估 EphB1 缺失对各轴的方向一致性与稳健性；
+      （3）在不同组学与批次中评估 Ephb1 缺失对各轴的方向一致性与稳健性；
       （4）据此确定一条在多证据维度上最适合作为后续通路级分析与中介建模的锚定机制轴。
             
 
@@ -566,7 +566,7 @@ figures:
         experiment_id: 4
         story_role: "（批次+组学）*机制轴z分数热图"
         micro_question: >
-          在每个 batch 内分别计算 RNA 与脂质层面的机制轴效应后，EphB1 缺失在这些轴上
+          在每个 batch 内分别计算 RNA 与脂质层面的机制轴效应后，Ephb1 缺失在这些轴上
           的方向是否在不同组学、不同批次之间保持一致，从而指向潜在的主导轴？
         micro_answer: >
           通过 axis × batch × omics 的效应热图，用于评估各机制轴在不同组学与批次中
@@ -587,11 +587,11 @@ figures:
         experiment_id: 5
         story_role: "（组学+批次）聚合z分数"
         micro_question: >
-          将各批次、各组学的轴级 Z 分数通过 Stouffer 等权合并后，EphB1 缺失是否在某一条
+          将各批次、各组学的轴级 Z 分数通过 Stouffer 等权合并后，Ephb1 缺失是否在某一条
           机制轴上形成统计学上显著的综合异常，还是呈现多轴温和偏移、缺乏单一主导瓶颈？
         micro_answer: >
           将各批次、各组学的轴级 Z 分数进行等权聚合（如 Stouffer 方法），
-          用于评估 EphB1 缺失在各机制轴上的综合偏移程度，
+          用于评估 Ephb1 缺失在各机制轴上的综合偏移程度，
           并判断是否呈现单一主导轴或多轴分布式扰动的情形。
 
         focuses_on_axes: []
@@ -616,15 +616,15 @@ figures:
   - id: "Figure 6"
     title: "候选通路优先级排序：RNA 机制路径（X–M–Z）与 lipid 表型一致性验证"
     title_en: "PI3K–AKT–mTOR signaling correlates with the membrane-context axis"
-    figure_title: "RNA X–M–Z 框架优选 EphB1 下游候选通路并与脂质表型对齐"
+    figure_title: "RNA X–M–Z 框架优选 Ephb1 下游候选通路并与脂质表型对齐"
     figure_title_en: "PI3K–AKT–mTOR signaling correlates with the membrane-context axis"
     section: ""
     role_in_story: "Pathway prioritization: X–M–Z framework + validation hooks"
     one_sentence_purpose: >
-      在 Figure 5 确定优先机制轴（Z）后，以文献支持的 EphB1 下游转录足迹作为候选中介（M），在多批次 RNA 内评估 X→M 的一致效应与 M↔Z 的耦合关系以形成候选通路优先级排序，并以 lipid 表型一致性作为方向性 sanity check。
+      在 Figure 5 确定优先机制轴（Z）后，以文献支持的 Ephb1 下游转录足迹作为候选中介（M），在多批次 RNA 内评估 X→M 的一致效应与 M↔Z 的耦合关系以形成候选通路优先级排序，并以 lipid 表型一致性作为方向性 sanity check。
       本图的逻辑任务是：
-      （1）将“EphB1 下游信号通路状态”操作化为一组有文献依据的转录足迹基因集（M），并明确计分方向；
-      （2）在多批次 RNA 中检验候选通路分数对 EphB1 缺失（X）的效应是否方向一致、可重复；
+      （1）将“Ephb1 下游信号通路状态”操作化为一组有文献依据的转录足迹基因集（M），并明确计分方向；
+      （2）在多批次 RNA 中检验候选通路分数对 Ephb1 缺失（X）的效应是否方向一致、可重复；
       （3）在 RNA 内部检验候选通路（M）与优先机制轴（Z；membrane context 的 RNA 代理）之间的耦合关系；
       （4）综合一致性、效应量与稳健性（如 LOO）形成候选通路排序，输出少数优先验证对象；
       （5）将 Z 与 lipid 表型作为独立重复的一致性对齐，用于支撑“RNA 机制轴可作为 lipid 表型的转录代理层”。
@@ -634,19 +634,19 @@ figures:
         experiment_id: 1
         story_role: "分析框架示意：X–M–Z（RNA-only） + lipid 一致性验证"
         micro_question: >
-          在配对组学样本量受限的前提下，如何以可辩护、可复现的方式连接 EphB1 缺失（X）、
+          在配对组学样本量受限的前提下，如何以可辩护、可复现的方式连接 Ephb1 缺失（X）、
           下游通路状态（M）与 membrane context 机制轴（Z），并将其与 lipid 表型建立一致性对齐？
         micro_answer: >
-          采用分层证据链：主分析在 RNA 内部进行，定义 X=EphB1 缺失、M=候选下游通路分数、
+          采用分层证据链：主分析在 RNA 内部进行，定义 X=Ephb1 缺失、M=候选下游通路分数、
           Z=membrane context 的 RNA 机制轴分数，评估 X→M 的跨批次一致效应及 M↔Z 的机制耦合；
           lipidomics 层面不作为回归中介的主要因果推断输入，而用于验证 Z 与 lipid 表型（如 CL/磷脂库）
           在独立重复中的方向一致性。
 
       - figure_id: "6b"
         experiment_id: 2
-        story_role: "EphB1 下游信号通路候选集与计分原则"
+        story_role: "Ephb1 下游信号通路候选集与计分原则"
         micro_question: >
-          如何从文献与通路知识中构建一组最小但可辩护的 EphB1 下游候选模块（M），并确保
+          如何从文献与通路知识中构建一组最小但可辩护的 Ephb1 下游候选模块（M），并确保
           这些模块的转录足迹计分具有明确方向与可解释性？
         micro_answer: >
           展示候选通路模块清单（例如 PI3K–AKT–mTOR、Rho/FAK/Src、Integrin/microdomain 等），
@@ -660,7 +660,7 @@ figures:
         experiment_id: 3
         story_role: "跨批次候选通路分数的一致性与稳健性评估（X→M）"
         micro_question: >
-          作为候选中介的 EphB1 下游通路分数（M），在不同 RNA 批次中对 EphB1 缺失（X）的
+          作为候选中介的 Ephb1 下游通路分数（M），在不同 RNA 批次中对 Ephb1 缺失（X）的
           方向与效应量是否一致，从而具备进入机制链条推断的基本可重复性？
         micro_answer: >
           对每个批次分别计算候选通路分数，并以批内标准化后的组间差异（KO−WT）作为效应量；
@@ -672,8 +672,8 @@ figures:
         experiment_id: 4
         story_role: "RNA 内部机制耦合：候选通路与 membrane context 轴（M↔Z）"
         micro_question: >
-          在 RNA 内部，哪些 EphB1 下游候选通路（M）与优先机制轴（Z；membrane context 的 RNA 代理）
-          表现出方向一致、稳健的耦合关系，从而更可能位于“EphB1 → 膜环境障碍”的上游解释链条中？
+          在 RNA 内部，哪些 Ephb1 下游候选通路（M）与优先机制轴（Z；membrane context 的 RNA 代理）
+          表现出方向一致、稳健的耦合关系，从而更可能位于“Ephb1 → 膜环境障碍”的上游解释链条中？
         micro_answer: >
           在每个批次内，以样本层面的相关/回归与稳健性检查刻画 M 与 Z 的耦合方向与强度，并与 X→M 的
           方向一致性共同用于优先级排序；该步骤强调“候选排序与机制连贯性”，而非在小样本条件下做严格中介推断。
@@ -697,12 +697,12 @@ figures:
 
       - figure_id: "6g/h"
         experiment_id: 6
-        story_role: "反向/正向信号区分的功能验证设计（EphB1–Fc 聚簇化）"
+        story_role: "反向/正向信号区分的功能验证设计（Ephb1–Fc 聚簇化）"
         micro_question: >
           考虑 Eph–ephrin 具备正向（Eph 受体）与反向（ephrin 配体）信号的双向特性，如何通过
-          外源操控设计区分“EphB1 受体下游”与“ephrin-B 反向信号”对 CL 可及性表型的贡献？
+          外源操控设计区分“Ephb1 受体下游”与“ephrin-B 反向信号”对 CL 可及性表型的贡献？
         micro_answer: >
-          使用可溶性 EphB1 胞外结构域融合蛋白（EphB1–Fc）并配合二抗聚簇化，在细胞表面富集/占位 ephrin-B，
+          使用可溶性 Ephb1 胞外结构域融合蛋白（Ephb1–Fc）并配合二抗聚簇化，在细胞表面富集/占位 ephrin-B，
           作为操控 Eph–ephrin 交互构型的手段；通过比较该操控对 NAO（CL 可及池代理）与炎症小体输出 readout 的影响方向，
           为区分正向/反向信号在膜脂阀门中的相对贡献提供可检验的实验设计。
         focuses_on_axes: []
@@ -726,7 +726,7 @@ figures:
 results_build:
   # 你的 paper_logic.yaml 所在目录就是 record_dir（默认自动推断）
   # 也可以显式写绝对路径：
-  # record_dir: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record"
+  # record_dir: "/Volumes/Samsung_SSD_990_PRO_2TB_Media/Ephb1/06_figures/record"
   debug_transitions: true
   output_path: "Results_v0.md"   # 相对 record_dir；也可写绝对路径
   language: "en"                # 目前只输出英文 Results v0

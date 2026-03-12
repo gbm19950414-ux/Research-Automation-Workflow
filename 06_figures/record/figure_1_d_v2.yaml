@@ -119,7 +119,7 @@ figure_legend:
   panel_title_cn: "多通路炎症小体诱导的焦亡裂解"
 
   one_sentence_en: >
-    LDH release from WT and EphB1-deficient primary peritoneal macrophages following activation of NLRP3, NLRC4, or AIM2 inflammasomes under the indicated conditions.
+    LDH release in culture supernatants from primary peritoneal macrophages following activation of the NLRP3, NLRC4, or AIM2 inflammasome under the indicated conditions, comparing WT and EphB1-deficient cells.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -169,7 +169,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across all inflammasome activation conditions, EphB1-deficient macrophages exhibited consistently reduced LDH release compared with WT controls."
+      en: "Across all inflammasome activation conditions, Ephb1-deficient macrophages consistently showed reduced LDH release relative to WT controls."
       cn: "在所有炎症小体激活条件下，EphB1 缺失巨噬细胞的 LDH 外排均持续低于 WT 对照。"
       logic_source: "results.data_direction"
 
@@ -179,6 +179,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These findings indicate that EphB1 deficiency broadly attenuates pyroptotic cell lysis downstream of distinct inflammasome receptors, consistent with a role in a shared execution step rather than pathway-specific signaling."
+      en: "These findings indicate that EphB1 deficiency broadly attenuates pyroptotic lysis downstream of distinct inflammasome receptors, consistent with a role in a shared execution step."
       cn: "上述结果表明，EphB1 缺失可在不同炎症小体感受器下普遍减弱焦亡裂解强度，符合其作用于共同执行步骤而非特异通路信号的模型。"
       logic_source: "results.group_difference_statement"

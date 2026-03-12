@@ -127,7 +127,7 @@ figure_legend:
   panel_title_cn: "ASC 寡聚化检测"
 
   one_sentence_en: >
-    ASC oligomerization in WT and EphB1-deficient primary peritoneal macrophages following NLRP3 inflammasome activation.
+    ASC oligomerization in soluble and insoluble fractions from primary peritoneal macrophages following LPS priming and NLRP3 activation, comparing WT and EphB1-deficient cells.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
@@ -172,7 +172,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Under NLRP3 activation conditions, EphB1-deficient macrophages displayed levels of ASC oligomers, dimers, and monomers comparable to those observed in WT controls."
+      en: "Under NLRP3 activation conditions, Ephb1-deficient macrophages showed ASC oligomer, dimer, and monomer levels comparable to those in WT controls."
       cn: "在 NLRP3 激活条件下，EphB1 缺失巨噬细胞中 ASC 寡聚体、二聚体及单体水平均与 WT 对照相当。"
       logic_source: "results.data_direction"
 
@@ -182,6 +182,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These data indicate that EphB1 deficiency does not disrupt ASC oligomerization during NLRP3 inflammasome activation, arguing against defective inflammasome assembly as the basis for reduced downstream outputs."
+      en: "These data indicate that Ephb1 deficiency does not disrupt ASC oligomerization during NLRP3 activation, arguing against defective inflammasome assembly as the cause of reduced downstream output.."
       cn: "综上，这些结果表明 EphB1 缺失并不影响 NLRP3 炎症小体激活过程中的 ASC 装配，从而排除了炎症小体组装缺陷作为下游输出降低原因的可能性。"
       logic_source: "results.group_difference_statement"

@@ -178,7 +178,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "BEL treatment led to a marked reduction in NAO fluorescence intensity, indicating that pharmacological interference with cardiolipin remodeling decrease the cardiolipin abundance."
+      en: "BEL treatment led to a marked reduction in NAO fluorescence intensity, indicating that pharmacological interference with cardiolipin remodeling reduces the NAO-detectable cardiolipin pool"
       cn: "BEL 处理显著降低 NAO 荧光强度，表明通过药理学干预心磷脂重塑过程即可减少 NAO 可及的心磷脂池。"
       logic_source: "results.data_direction"
 
@@ -188,6 +188,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together with perturbations targeting cardiolipin abundance, these results show that both manipulation of cardiolipin content and interference with cardiolipin remodeling can reduce NAO staining, indicating that changes in the NAO-accessible cardiolipin pool can arise through multiple mechanisms beyond alterations in total cardiolipin levels."
+      en: "Together, these results show that both reduced cardiolipin content and disrupted cardiolipin remodeling can lower NAO staining, indicating that the NAO-accessible cardiolipin pool can be altered through multiple mechanisms beyond changes in total cardiolipin levels."
       cn: "结合针对心磷脂含量的操控结果，这些数据表明，无论是改变心磷脂含量，还是干预心磷脂重塑过程，均可导致 NAO 染色水平下降，提示 NAO 可及心磷脂池的变化并不等同于心磷脂总量改变，而可由多种机制共同决定。"
       logic_source: "results.group_difference_statement"

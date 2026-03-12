@@ -54,8 +54,7 @@ figure_legend:
   panel_title_cn: "NLRP3 激活下 IL-1β 释放的剂量依赖性"
 
   one_sentence_en: >
-    IL-1β release from WT and EphB1-deficient primary peritoneal macrophages following
-    NLRP3 activation with increasing doses of nigericin.
+     IL-1β release in supernatants from primary peritoneal macrophages following LPS priming and NLRP3 activation with increasing doses of nigericin, comparing WT and EphB1-deficient cells.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -107,7 +106,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "While IL-1β release increased with higher nigericin doses in both genotypes, EphB1-deficient macrophages consistently released less IL-1β than WT controls at each stimulatory dose."
+      en: "While IL-1β release increased with higher nigericin doses in both genotypes, Ephb1-deficient macrophages consistently released less IL-1β than WT controls at each dose."
       cn: "尽管在两种基因型中 IL-1β 释放均随 nigericin 剂量升高而增加，但在每一个刺激剂量下，EphB1 缺失巨噬细胞的 IL-1β 释放水平均持续低于 WT 对照。"
       logic_source: "results.data_direction"
 
@@ -117,6 +116,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These results indicate that EphB1 deficiency limits mature IL-1β release across the tested range of NLRP3 activation, supporting a defect at a late inflammasome execution or export step rather than impaired priming."
+      en: "These results indicate that Ephb1 deficiency limits mature IL-1β release across the tested range of NLRP3 activation, consistent with a defect at a late execution or export step."
       cn: "综上，这些结果表明在所测试的 NLRP3 激活强度范围内，EphB1 缺失以剂量无关的方式限制成熟 IL-1β 的释放，支持差异发生于炎症小体特异的执行或外排层，而非 priming 过程受损。"
       logic_source: "results.group_difference_statement"

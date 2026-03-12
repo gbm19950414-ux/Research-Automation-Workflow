@@ -137,9 +137,7 @@ ai_hints:
 # ---------- 6. figure_legend (shared) ----------
 figure_legend:
   one_sentence_en: >
-    Cytosolic mtDNA release dynamics in WT and EphB1-deficient primary peritoneal macrophages
-    following NLRP3 inflammasome activation, quantified by rapid subcellular fractionation and qPCR.
-
+    Cytosolic mtDNA abundance measured by subcellular fractionation followed by qPCR in primary peritoneal macrophages at the indicated time points during NLRP3 inflammasome activation, comparing WT and EphB1-deficient cells.
   system_and_design:
     model: "Primary murine peritoneal macrophages"
     genotype_or_groups: "WT versus EphB1-deficient"
@@ -225,7 +223,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "In WT macrophages, inflammasome activation induced a rapid and transient pulse of cytosolic mtDNA, peaking at 7.5min, whereas this cytosolic mtDNA peak was markedly reduced in EphB1-deficient macrophages."
+      en: "In WT macrophages, inflammasome activation induced a rapid, transient pulse of cytosolic mtDNA that peaked at 7.5 min, whereas this peak was markedly reduced in Ephb1-deficient macrophages."
       cn: "在 WT 巨噬细胞中，炎症小体激活诱导胞质 mtDNA 在早期时间点出现快速而短暂的脉冲式升高；而在 EphB1-deficient 细胞中，该胞质 mtDNA 峰值显著降低。"
       logic_source: "results.data_direction"
 
@@ -235,6 +233,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results indicate that EphB1 deficiency reduces inflammasome-induced release of mitochondrial DNA into the cytosol without altering total mtDNA abundance."
+      en: "Together, these results indicate that Ephb1 deficiency reduces inflammasome-induced release of mitochondrial DNA into the cytosol without altering total mtDNA abundance."
       cn: "综上，这些结果表明 EphB1 缺失可在不降低 mtDNA 总量的前提下，选择性限制炎症小体激活诱导的线粒体 mtDNA 向胞质外泄，从而将效应定位于执行阶段线粒体膜破损程度的降低。"
       logic_source: "results.group_difference_statement"

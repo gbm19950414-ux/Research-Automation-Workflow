@@ -16,9 +16,9 @@ paragraph_groups:
       # mechanism sentence
       - "D1s3"
       # summary sentence
-      - "D1s4"
+      # - "D1s4"
       - "D1s5"
-      - "D1s6"
+      # - "D1s6"
 
       # finding sentence (start evidence synopsis)
       - "D2s1"
@@ -33,7 +33,7 @@ paragraph_groups:
       # comparison / interpretation
       - "D2s5"
       # interpretation
-      - "D2s6"
+      # - "D2s6"
       # mechanistic reasoning
       - "D2s7"
       # biological significance
@@ -51,7 +51,7 @@ paragraph_groups:
       # mechanistic reasoning continuation
       - "D3s5"
       # biological significance
-      - "D3s6"
+      # - "D3s6"
       # conceptual extension
       - "D3s7"
 

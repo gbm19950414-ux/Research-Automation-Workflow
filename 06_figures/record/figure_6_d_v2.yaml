@@ -90,9 +90,7 @@ figure_legend:
   panel_title_cn: "跨批次 ΔM 排序与 M–Z 耦合稳健性"
 
   one_sentence_en: >
-    Cross-batch ranking of Ephb1 downstream signaling modules by genotype-associated
-    transcriptional shifts (ΔM) and assessment of their coupling robustness with the
-    Membrane context axis using within-batch regression and pooled leave-one-out refitting.
+    Cross-batch ranking of Ephb1 downstream signaling modules based on genotype-associated transcriptional shifts and their coupling robustness with the membrane-context axis assessed by within-batch regression and pooled leave-one-out refitting.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -158,7 +156,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across pathways, PI3K–AKT–mTOR and JAK–STAT modules showed the largest decreases in EphB1-deficient macrophages, whereas cytoskeleton/adhesion pathways (FAK–Src–Rho) displayed positive shifts."
+      en: "Across pathways, PI3K–AKT–mTOR and JAK–STAT modules showed the largest downward shifts in Ephb1-deficient macrophages, whereas cytoskeleton/adhesion pathways (FAK–Src–Rho) showed positive shifts."
       cn: "跨批次汇总显示，多数 Ephb1 下游模块在 Ephb1 缺失中呈负向 ΔM，其中 PI3K–AKT–mTOR 与 JAK–STAT 的下降幅度最大；相对地，骨架/黏附模块（FAK–Src–Rho）呈正向 ΔM。相应地，PI3K–AKT–mTOR 与 JAK–STAT 的通路分数与 Membrane context 轴呈负向耦合，而 FAK–Src–Rho 与其呈正向耦合。"
       logic_source: "results.data_direction"
 
@@ -168,6 +166,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results prioritize PI3K–AKT–mTOR as the most robust EphB1 downstream signaling candidate."
+      en: "Together, these results prioritize PI3K–AKT–mTOR as the most robust Ephb1-associated downstream signaling candidate."
       cn: "综上，这些分析将 PI3K–AKT–mTOR 与 JAK–STAT 确立为最稳健的 Ephb1 下游候选通路，其转录足迹降低与 membrane context 障碍分数升高呈一致关联；同时也将骨架/黏附模块区分为与之方向相反耦合的通路。"
       logic_source: "results.group_difference_statement"

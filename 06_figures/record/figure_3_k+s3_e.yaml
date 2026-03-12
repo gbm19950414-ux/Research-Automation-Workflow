@@ -137,8 +137,7 @@ ai_hints:
 # ---------- 6. figure_legend (shared; multi-panel record: 3k + S3e) ----------
 figure_legend:
   one_sentence_en: >
-    Early mitochondrial enrichment of GSDMD-NT during NLRP3 inflammasome activation in WT and Ephb1-deficient
-    primary peritoneal macrophages, with mitochondrial abundance controls assessed in parallel.
+    GSDMD-NT abundance in mitochondrial fractions and total lysates from primary peritoneal macrophages at the indicated early time points during NLRP3 inflammasome activation, comparing WT and EphB1-deficient cells. Mitochondrial abundance controls were assessed in parallel.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1-deficient mice)"
@@ -210,7 +209,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "In WT macrophages, GSDMD-NT accumulated in the mitochondrial fraction at approximately 7.5 min after inflammasome activation, whereas this early mitochondrial enrichment of GSDMD-NT was markedly reduced in Ephb1-deficient macrophages."
+      en: "In WT macrophages, GSDMD-NT accumulated in the mitochondrial fraction at approximately 7.5 min after inflammasome activation, whereas this early mitochondrial enrichment was markedly reduced in Ephb1-deficient macrophages."
       cn: "在 WT 巨噬细胞中，炎症小体激活后约 7.5 min，GSDMD-NT 在线粒体分级中出现明显的瞬时富集峰值；而在 Ephb1-deficient 细胞中，该早期线粒体富集显著降低。"
       logic_source: "results.data_direction"
 

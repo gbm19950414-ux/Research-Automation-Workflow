@@ -105,9 +105,7 @@ figure_legend:
   panel_title_cn: "EphB1 下游通路转录响应状态（跨批次）"
 
   one_sentence_en: >
-    Pathway-level transcriptional response scores for curated EphB1 downstream signaling modules in
-    WT and Ephb1−/− primary peritoneal macrophages across three independent RNA-seq batches, summarized
-    as per-batch z_pathway shifts and cross-batch meta Z effects.
+    Pathway-level transcriptional response scores derived from RNA-seq across three independent batches, showing batch-specific z_pathway shifts and cross-batch meta Z effects for curated EphB1 downstream signaling modules.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -156,7 +154,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Across three RNA-seq batches, EphB1 deficiency induced consistent decreases in PI3K–AKT–mTOR pathway scores (KO < WT). NF-κB/ROS and JAK–STAT modules showed weaker or batch-dependent reductions, whereas cytoskeleton-related pathways displayed positive shifts"
+      en: "Across three RNA-seq batches, Ephb1 deficiency consistently reduced PI3K–AKT–mTOR pathway scores (KO < WT). NF-κB/ROS and JAK–STAT modules showed weaker or batch-dependent reductions, whereas cytoskeleton-related pathways showed positive shifts."
       cn: "在三个独立 RNA 批次中，EphB1 缺失在多条信号模块中引起可重复的方向性偏移：PI3K–AKT–mTOR 在各批次中总体呈负向改变（KO < WT）；NF-κB/ROS 与 JAK–STAT 总体下移但存在批次依赖的反向；Cytoskeleton 相关模块总体呈正向偏移；其余通路效应较弱或方向不一致。"
       logic_source: "results.data_direction"
 

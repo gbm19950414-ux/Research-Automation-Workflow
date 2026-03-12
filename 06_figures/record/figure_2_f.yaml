@@ -127,8 +127,7 @@ figure_legend:
   panel_title_cn: "caspase-1 激活与胞外释放的分离检测"
 
   one_sentence_en: >
-    Pro-caspase-1 and cleaved caspase-1 p20 levels in total cell lysates
-    from WT and EphB1-deficient primary peritoneal macrophages following NLRP3 inflammasome activation.
+    Pro-caspase-1 and cleaved caspase-1 p20 in total lysate and supernatant fractions from primary peritoneal macrophages following LPS priming and NLRP3 activation, comparing WT and EphB1-deficient cells.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1−/− mice)"
@@ -172,7 +171,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Caspase-1 activation, as reflected by intracellular p20 levels, was comparable between WT and EphB1-deficient macrophages."
+      en: "Caspase-1 activation, as reflected by intracellular p20 levels, was comparable between WT and Ephb1-deficient macrophages."
       cn: "以细胞内 p20 水平衡量的 caspase-1 激活在 WT 与 EphB1 缺失巨噬细胞中保持相当。"
       logic_source: "results.data_direction"
 
@@ -182,6 +181,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These results localize the EphB1-dependent defect to a step downstream of caspase-1 activation."
+      en: "These results localize the Ephb1-dependent defect to a step downstream of caspase-1 activation."
       cn: "综上，这些结果将 EphB1 缺失的作用定位于激活之后的步骤，表明 caspase-1 可被有效激活。"
       logic_source: "results.group_difference_statement"

@@ -96,10 +96,7 @@ figure_legend:
   panel_title_cn: "AD 抑制 IL-1β 释放并遮蔽基因型差异"
 
   one_sentence_en: >
-    IL-1β release from WT and Ephb1−/− primary peritoneal macrophages following
-    LPS and nigericin stimulation in the presence of increasing doses and durations
-    of alexidine dihydrochloride (AD).
-
+    IL-1β release in culture supernatants from primary peritoneal macrophages following AD pretreatment, LPS priming, and nigericin stimulation, comparing WT and EphB1-deficient cells across the indicated doses and treatment durations.
   system_and_design:
     model: "Primary murine peritoneal macrophages"
     genotype_or_groups: "WT versus Ephb1−/−"
@@ -150,7 +147,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "AD treatment markedly suppressed LPS and Nigericin induced IL-1β release in macrophages."
+      en: "AD treatment markedly suppressed LPS- and nigericin-induced IL-1β release in macrophages."
       cn: "AD 处理以剂量与时间依赖的方式显著抑制 LPS+nigericin 诱导的 IL-1β 释放。"
       logic_source: "results.data_direction"
 
@@ -160,5 +157,5 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "These results indicate that pharmacological reduction of cardiolipin abundant suppresses inflammasome-induced IL-1β release."
+      en: "These results indicate that pharmacological reduction of cardiolipin is sufficient to suppress inflammasome-induced IL-1β release."
       logic_source: "results.group_difference_statement"
