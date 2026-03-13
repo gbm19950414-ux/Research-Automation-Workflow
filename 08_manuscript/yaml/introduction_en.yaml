@@ -304,14 +304,14 @@ manuscript:
       - [10.3389/fimmu.2019.01473]
       - [10.1016/j.ccr.2009.04.009, 10.4161/cc.9.11.11925]
       - [10.1016/j.ccr.2009.04.009, 10.4161/cc.9.11.11925]
-      bridge: "This reasoning nominates EphB1 as a plausible upstream candidate that
+      bridge: "This reasoning nominates Ephb1 as a plausible upstream candidate that
         could reshape mitochondrial membrane environment (CL) and thereby tune pyroptotic
         execution thresholds."
 
     - pid: "1.1.3.p5"
       source_trace:
       - "original_text:1.1.3"
-      topic_sentence: "If EphB1 signaling can engage downstream pathways or mechanistic
+      topic_sentence: "If Ephb1 signaling can engage downstream pathways or mechanistic
         axes that alter mitochondrial membrane environment—captured by CL abundance,
         species composition, or oxidation—it may shift the threshold and efficiency
         of pore formation and thereby achieve amplitude-limiting control of inflammasome
@@ -321,18 +321,18 @@ manuscript:
         intensity (for example, a threshold window for lytic cytokine release) rather
         than being equivalent to fully disabling the inflammasome, which may better
         balance tissue protection with host defense in principle."
-      - "Accordingly, this work adopts a working framework: receptor kinase (EphB1)
+      - "Accordingly, this work adopts a working framework: receptor kinase (Ephb1)
         → downstream pathway/mechanistic axis → mitochondrial membrane environment/CL
         readouts → terminal inflammasome execution outputs."
       citations: []
       bridge: "The following sections therefore summarize the state of the field across
-        terminal execution, CL biology, mitochondria–inflammation coupling, and EphB1-related
+        terminal execution, CL biology, mitochondria–inflammation coupling, and Ephb1-related
         immunometabolic clues, and motivate falsifiable tests along the proposed chain."
 
   - id: "1.2"
     heading: "Consensus and gaps in inflammasome output control"
     narrative_role: "Broaden mechanistic consensus (pore formation, membrane lipids,
-      mitochondrial context), then sharpen the specific gap and why EphB1–CL–execution
+      mitochondrial context), then sharpen the specific gap and why Ephb1–CL–execution
       is testable."
     paragraphs:
 
@@ -544,7 +544,7 @@ manuscript:
         microenvironments."
       citations: []
       bridge: "The central question is therefore not whether Eph signaling matters,
-        but whether a specific Eph subtype such as EphB1 connects contact cues to
+        but whether a specific Eph subtype such as Ephb1 connects contact cues to
         downstream layers that determine output form."
 
     - pid: "1.2.5.p2"
@@ -582,7 +582,7 @@ manuscript:
     - pid: "1.2.5.p3"
       source_trace:
       - "original_text:1.2.5"
-      topic_sentence: "Important gaps remain in understanding how EphB1 influences inflammasome and pyroptotic execution, and whether its mitochondrial effects can be linked to measurable membrane-state readouts such as CL."
+      topic_sentence: "Whether Ephb1 participates in inflammasome and pyroptotic execution is itself unresolved, and, if so, whether its mitochondrial effects can be linked to measurable membrane-state readouts such as CL remains unknown."
       sentences:
       - "First, much of the literature emphasizes ‘Eph–mitochondria–apoptosis/metabolism’
         rather than inflammasome–pyroptosis execution, and mitochondrial readouts
@@ -590,13 +590,13 @@ manuscript:
         versus downstream amplification."
       - "However, Eph family functions are pleiotropic, and even closely related EphB subtypes can have opposing effects across tissues, limiting inference from family membership alone."
       - "Third, and most directly relevant here, even if Eph signaling affects mitochondria,
-        a mechanistic framework is missing that links EphB1 via downstream pathways/mechanistic
+        a mechanistic framework is missing that links Ephb1 via downstream pathways/mechanistic
         axes to changes in mitochondrial membrane environment—especially CL abundance/remodeling/oxidation/externalization—and
         further translates these changes into execution-layer differences such as
         GSDMD pore threshold and efficiency, culminating in reshaped IL-1β release
         and lytic permeabilization."
       citations: []
-      bridge: "These gaps motivate a falsifiable model in which EphB1 influences pyroptotic execution through downstream pathways that reshape CL state."
+      bridge: "These gaps motivate a falsifiable model in which Ephb1 influences pyroptotic execution through downstream pathways that reshape CL state."
 
   - id: "1.3"
     heading: "Scientific question, hypotheses, and study objectives"
@@ -684,15 +684,15 @@ manuscript:
     - pid: "1.3.p4"
       source_trace:
       - "original_text:1.3.1"
-      topic_sentence: "The central question is whether an upstream receptor signal can engage downstream pathways that reshape CL state and thereby alter terminal inflammasome execution output."
+      topic_sentence: "A central question is whether Ephb1 itself participates in terminal inflammasome execution and, if so, whether it does so through downstream pathways that reshape CL state."
       sentences:
       - "Existing literature provides interface clues that gasdermins can interact
         with CL-related membrane environments to affect mitochondrial integrity, mtDNA
         release, and inflammatory amplification, coupling mitochondria to inflammasome
         outputs."
-      - "Current evidence, however, remains largely descriptive and lacks a systems-level framework for explaining how upstream signals drive integrated changes in CL state."
-      - "For EphB1 specifically, the key unknown is not whether it affects a single
-        enzyme or event, but whether EphB1 signaling can, via downstream pathways/mechanistic
+      - "Current evidence does not yet establish Ephb1 as a regulator of inflammasome or pyroptotic execution, nor does it provide a systems-level framework for linking receptor-level signals to integrated changes in CL state."
+      - "For Ephb1 specifically, the key unknown is not whether it affects a single
+        enzyme or event, but whether Ephb1 signaling can, via downstream pathways/mechanistic
         axes, produce reproducible CL-state changes that are sufficient to explain
         changes in execution thresholds and efficiency."
       sentence_citations_list:
@@ -707,9 +707,9 @@ manuscript:
       source_trace:
       - "original_text:1.3.2"
       - "logic_yaml:1.3.2"
-      topic_sentence: "To address this question, we apply a discover–localize–validate strategy to test the proposed signaling-to-membrane-to-execution chain with aligned readouts at each layer."
+      topic_sentence: "We therefore approached the problem in a staged manner: first asking whether Ephb1 alters inflammasome output, then localizing the point of divergence within the pathway, and finally testing whether membrane-state changes could account for the phenotype."
       sentences:
-      - "Input: genetic manipulation of EphB1 (e.g., KO/intervention) as the receptor-level
+      - "Input: genetic manipulation of Ephb1 (e.g., KO/intervention) as the receptor-level
         entry variable under a unified inflammasome activation model and time-resolved
         sampling for comparability."
       - "Process: identify candidate downstream pathways from multi-omics/bioinformatics
@@ -727,9 +727,9 @@ manuscript:
     - pid: "1.3.p6"
       source_trace:
       - "original_text:1.3.3"
-      topic_sentence: "The study is organized around a layered model linking receptor signaling, membrane state, and execution output, with EphB1 as the candidate upstream input and CL as the integrated mitochondrial readout."
+      topic_sentence: "Rather than assuming that phenotypic differences simply reflect stronger or weaker upstream activation, we asked which layer differs and whether execution thresholds or output amplitude can be tuned."
       sentences:
-      - "Rather than equating phenotypic differences with stronger upstream inflammasome activation, the study asks which layer differs and whether execution thresholds or output amplitude can be tuned."
+      - "This strategy led us to examine a membrane-mediated explanation in which CL state functions as an integrated mitochondrial readout linking upstream signaling to execution output."
       - "Accordingly, the study tests whether changes in CL state are sufficient to explain divergence in execution output without requiring complete molecular resolution of every intermediate step."
       - "The Results are organized as: downstream pathway/mechanistic axis prioritization
         → CL metabolic and membrane-environment phenotyping → stratified attribution
@@ -747,25 +747,25 @@ manuscript:
         correlational storytelling."
       hypotheses:
       - hid: "H1"
-        statement: "EphB1 modulates terminal inflammasome execution outputs primarily
+        statement: "Ephb1 modulates terminal inflammasome execution outputs primarily
           via one or more downstream signaling pathways/mechanistic axes, rather than
           solely through priming or assembly differences."
         support_if:
         - "pathway/mechanistic-axis metrics change concordantly with execution outputs"
-        - "statistical mediation supports EphB1 → axis → execution-output linkage"
+        - "statistical mediation supports Ephb1 → axis → execution-output linkage"
         refute_if:
         - "axis metrics are unrelated to execution outputs or no mediation evidence
           is obtained"
         readouts:
         - "pathway enrichment/axis scoring/activation indices"
-        - "mediation analysis: EphB1 → axis → phenotype/output"
+        - "mediation analysis: Ephb1 → axis → phenotype/output"
         - "execution outputs: GSDMD pore/permeabilization and cytokine release"
       - hid: "H2"
-        statement: "EphB1 signaling reshapes integrated CL metabolic state, including
+        statement: "Ephb1 signaling reshapes integrated CL metabolic state, including
           supply, synthesis, remodeling, and oxidation, yielding reproducible CL phenotypes."
         support_if:
         - "at least one CL metric (abundance, species pattern, or oxidation-related
-          index) shifts consistently under EphB1 manipulation"
+          index) shifts consistently under Ephb1 manipulation"
         refute_if:
         - "CL readouts remain globally stable across conditions"
         readouts:

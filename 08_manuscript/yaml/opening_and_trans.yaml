@@ -243,3 +243,17 @@ panel_transitions: #可以适当减少
     cn: >
       在明确操控设计逻辑后，我们进一步将其膜脂后果投影回末端炎症小体输出 readout，以闭合“信号—膜环境—输出端”的可检验因果环。
 
+paragraph_breaks:
+  by_figure:
+    "Figure 1":
+      break_after_panels: ["1b"]
+    "Figure 2":
+      break_after_panels: ["2c", "2g"]
+    "Figure 3":
+      break_after_panels: ["3/i/j/s3/d/f/g"]
+    "Figure 4":
+      break_after_panels: ["4c/d", "4g"]
+    "Figure 5":
+      break_after_panels: ["5C"]
+    "Figure 6":
+      break_after_panels: ["6c", "6e"]
