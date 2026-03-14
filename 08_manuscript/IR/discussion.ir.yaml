@@ -27,8 +27,8 @@ document:
       - D2s2
       - D2s3
     - type: paragraph
-      text: 'The execution-threshold model can be interpreted mechanistically in terms of membrane repair, terminal rupture, and membrane-environment mediation. Notably, terminal rupture is separable from pore formation and can be amplified by dedicated rupture factors such as NINJ1, creating scope for activation without proportional rupture. To move beyond correlation, the model can be evaluated using three criteria: hierarchical masking, same-level rescue, and dose–response behavior. At present, our strongest support is for necessity and layer-localization; sufficiency requires dedicated rescue and pathway-validation experiments. In this framework, the membrane lipid environment—not upstream assembly—serves as the mediator layer translating signal input into execution output. Within this mediator layer, cardiolipin (CL) is best viewed as a quantifiable metabolic and biophysical state, rather than merely a binding-site concept, that can shift pore permissiveness. In this framework, Ephb1
-        acts as an upstream signal entry point whose loss propagates through downstream signaling networks to remodel the mitochondrial membrane environment, thereby shifting the threshold and ceiling of GSDMD pore output.'
+      text: The execution-threshold model can be interpreted mechanistically in terms of membrane repair, terminal rupture, and membrane-environment mediation. Notably, terminal rupture is separable from pore formation and can be amplified by dedicated rupture factors such as NINJ1, creating scope for activation without proportional rupture. At present, our strongest support is for necessity and layer-localization; sufficiency requires dedicated rescue and pathway-validation experiments. In this framework, the membrane lipid environment—not upstream assembly—serves as the mediator layer translating signal input into execution output. Within this mediator layer, cardiolipin (CL) is best viewed as a quantifiable metabolic and biophysical state, rather than merely a binding-site concept, that can shift pore permissiveness. In this framework, Ephb1 acts as an upstream signal entry point whose loss propagates through downstream signaling networks to remodel the mitochondrial membrane environment,
+        thereby shifting the threshold and ceiling of GSDMD pore output.
       source: discussion_outline_en.yaml
       paragraph_group: mechanistic_interpretation
       source_para_ids:
@@ -37,7 +37,6 @@ document:
       selected_sids:
       - D2s4
       - D2s5
-      - D2s7
       - D2s8
       - D3s1
       - D3s2

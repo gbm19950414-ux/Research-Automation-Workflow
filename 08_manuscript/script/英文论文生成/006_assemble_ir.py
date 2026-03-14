@@ -88,7 +88,16 @@ def assemble_irs(ir_files: List[Path]) -> Dict[str, Any]:
             meta = ir.get("document", {}).get("meta", {}).copy()
 
         sections = extract_sections(ir)
-        all_sections.extend(sections)
+
+        # Exclude figure list sections from manuscript IR.
+        # Figures and supplementary figures are rendered separately
+        # from figures_ir.yaml / supplement_figures_ir.yaml.
+        filtered_sections = [
+            s for s in sections
+            if s.get("id") not in {"figures", "supplement_figures"}
+        ]
+
+        all_sections.extend(filtered_sections)
 
     # Sort sections by predefined order; unknown sections go last
     def section_sort_key(sec: Dict[str, Any]) -> int:
