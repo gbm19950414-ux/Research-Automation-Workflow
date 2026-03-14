@@ -9,7 +9,7 @@
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
   figure: "Figure 4"              # 如 "Figure 3"
-  figure_id: "s4c"             # 如 "A"
+  figure_id: "s3c"             # 如 "A"
   short_title: "降低心磷脂可及性抑制炎症小体介导的 IL-1β 释放"
   chapter: "3.5 线粒体心磷脂可及性与重塑的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_5_b"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
@@ -155,6 +155,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results show that perturbations affecting cardiolipin abundance or remodeling consistently reduce inflammasome-mediated IL-1β release."
+      en: "These results suggest that cardiolipin abundance and state are important determinants of inflammasome-mediated IL-1β release."
       cn: "综上，这些结果表明，无论是影响心磷脂含量还是干预心磷脂重塑，不同机制层面的心磷脂调控均汇聚于炎症小体介导的 IL-1β 释放减弱，支持心磷脂可及性作为限制炎症小体终端输出的共同关键因素。"
       logic_source: "results.group_difference_statement"

@@ -77,8 +77,8 @@ ai_hints:
 # ---------- Figure 2: shared legend ----------
 figure_legend:
   one_sentence_en: 
-    - panels: [a,b]
-      text: qPCR analysis of transcriptional priming markers in primary peritoneal macrophages at the indicated time points following LPS stimulation, comparing WT and EphB1-deficient cells.
+    - panels: [a,b,s1a]
+      text: qPCR analysis of transcriptional priming markers in primary peritoneal macrophages following LPS stimulation, comparing WT and EphB1-deficient cells.
     
 
   system_and_design:
@@ -119,7 +119,13 @@ panel_overrides:
     displayed_targets:
       - "Il-1β mRNA"
       
+  s1_a:
+    belongs_to: "S1"
+    one_sentence_en: "qPCR analysis of transcriptional priming markers in primary peritoneal macrophages at the indicated time points following LPS stimulation, comparing WT and EphB1-deficient cells."
+      
 results_skeleton_en:
+  extra_figure_refs:
+    - "s1a"
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
   panel_level: results
@@ -137,7 +143,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il1b mRNA in WT and Ephb1-deficient macrophages across all examined time points."
+      en: "LPS stimulation induced robust and comparable increases in Tnf, Il6, and Il1b mRNA in WT and Ephb1-deficient macrophages."
       cn: "在所有检测时间点，LPS 刺激均在 WT 与 EphB1 缺失巨噬细胞中诱导了幅度相当的 Tnf、Il6 与 Il-1β 转录上调。"
       logic_source: "results.data_direction"
 

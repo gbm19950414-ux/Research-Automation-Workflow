@@ -256,7 +256,6 @@ def find_rendered_figure_image(figs_dir: Path, figure_num: str, prefer_ext: List
 
 
 
-
 def normalize_supplement_tag(tag: str) -> str:
     t = norm_space(str(tag or ""))
     if not t:
@@ -265,25 +264,6 @@ def normalize_supplement_tag(tag: str) -> str:
     if not m:
         return ""
     return f"S{m.group(1)}"
-
-
-# --- Panel label supplement-like filter ---
-def is_supplement_like_panel_label(panel: str) -> bool:
-    """Return True for panel labels that are actually supplement-style placeholders.
-
-    Examples treated as supplement-like:
-      - s2_a
-      - s3b
-      - S4_c
-      - s2a
-
-    This is used only to suppress such labels from MAIN figure legend assembly,
-    while still allowing supplement-mode reuse of the same source YAML files.
-    """
-    p = norm_space(str(panel or ""))
-    if not p:
-        return False
-    return bool(re.fullmatch(r"s\d+_?[a-z]", p, flags=re.IGNORECASE))
 
 
 def normalize_figure_key(label: str) -> str:
@@ -834,12 +814,6 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
     for fig in figures_sorted:
         items = by_figure[fig]
         items_sorted = sorted(items, key=lambda x: parse_panel_label(x.panel))
-        if mode == "main":
-            items_sorted = [
-                it for it in items_sorted
-                if not is_supplement_like_panel_label(it.panel)
-                and not normalize_supplement_tag(get_panel_belongs_to(it))
-            ]
 
         pf = legend_policy.get("panel_filter") or {}
         include_bt = pf.get("include_belongs_to")
@@ -873,7 +847,7 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
 
         if mode == "supplement":
             supp_meta = supplement_figure_meta.get(fig, {})
-            fig_title = norm_space(str(supp_meta.get("figure_title_en") or fig_title))
+            fig_title = norm_space(str(supp_meta.get("figure_title_en") or fig_title or fig))
             main_file = supp_meta.get("main_figure_file") or ""
             assets = build_assets_from_explicit_main_file(main_file)
         else:

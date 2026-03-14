@@ -5,7 +5,7 @@
 MVP: Run sheet timeline table generator
 
 Usage:
-  python visualize_run_sheet_timeline.py /path/to/run_sheet_temp.yaml
+  python '/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/09_records/visualize_run_sheet_time_line.py' '/Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/09_records/20260314_runsheet.yaml'
 
 Behavior:
 - Each step has a base 'day' (int).
@@ -16,6 +16,8 @@ Behavior:
 Outputs:
 - <yaml_basename>_timeline.tsv
 - <yaml_basename>_timeline_by_run.tsv
+- <yaml_basename>_timeline.csv  (UTF-8 with BOM; Excel-friendly)
+- <yaml_basename>_timeline_by_run.csv  (UTF-8 with BOM; Excel-friendly)
 """
 
 import os
@@ -70,10 +72,17 @@ def main(yaml_path: str):
     with open(yaml_path, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
 
-    if not isinstance(data, dict) or "run_sheet" not in data:
-        raise ValueError("YAML missing top-level key: run_sheet")
+    # Support two YAML styles:
+    # 1) { run_sheet: { steps: [...] } }
+    # 2) { steps: [...] }
+    if not isinstance(data, dict):
+        raise ValueError(f"Invalid YAML structure: {yaml_path}")
 
-    rs = data["run_sheet"]
+    if "run_sheet" in data:
+        rs = data["run_sheet"]
+    else:
+        rs = data
+
     steps = rs.get("steps", [])
     if not isinstance(steps, list):
         raise ValueError("run_sheet.steps must be a list")
@@ -104,6 +113,8 @@ def main(yaml_path: str):
 
         # If offset days exists, it should shift THIS action and all subsequent actions for these runs.
         offset = step.get("offset days", 0)
+        if offset in (None, ""):
+            offset = 0
         try:
             offset = int(offset)
         except Exception:
@@ -124,6 +135,8 @@ def main(yaml_path: str):
 
         # Optional duration (days) for block width
         duration = step.get("duration_days", 1)
+        if duration in (None, ""):
+            duration = 1
         try:
             duration = float(duration)
         except Exception:
@@ -152,9 +165,14 @@ def main(yaml_path: str):
 
     # output paths
     base = os.path.splitext(os.path.basename(yaml_path))[0]
-    out_dir = os.path.dirname(os.path.abspath(yaml_path))
+    records_dir = os.path.dirname(os.path.abspath(yaml_path))
+    project_root = os.path.dirname(records_dir)
+    out_dir = os.path.join(project_root, "07_results")
+    os.makedirs(out_dir, exist_ok=True)
     out1 = os.path.join(out_dir, f"{base}_timeline.tsv")
     out2 = os.path.join(out_dir, f"{base}_timeline_by_run.tsv")
+    out1_csv = os.path.join(out_dir, f"{base}_timeline.csv")
+    out2_csv = os.path.join(out_dir, f"{base}_timeline_by_run.csv")
 
     # write out1 (sorted by effective day then seq)
     records_sorted = sorted(records, key=lambda x: (x["day"], x["seq"], x["run"]))
@@ -162,11 +180,21 @@ def main(yaml_path: str):
         w = csv.DictWriter(f, fieldnames=list(records_sorted[0].keys()), delimiter="\t")
         w.writeheader()
         w.writerows(records_sorted)
+    # write out1_csv (Excel-friendly UTF-8 BOM CSV)
+    with open(out1_csv, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(records_sorted[0].keys()))
+        w.writeheader()
+        w.writerows(records_sorted)
 
     # write out2 (sorted by run then effective day)
     records_by_run = sorted(records, key=lambda x: (x["run"], x["day"], x["seq"]))
     with open(out2, "w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(records_by_run[0].keys()), delimiter="\t")
+        w.writeheader()
+        w.writerows(records_by_run)
+    # write out2_csv (Excel-friendly UTF-8 BOM CSV)
+    with open(out2_csv, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(records_by_run[0].keys()))
         w.writeheader()
         w.writerows(records_by_run)
 
@@ -261,10 +289,49 @@ def main(yaml_path: str):
     print("[OK] Wrote:")
     print(" -", out1)
     print(" -", out2)
+    print(" -", out1_csv)
+    print(" -", out2_csv)
     print(" -", png_path)
+
+
+# Batch processing helper
+def batch_process_records(records_dir: str):
+    """
+    Scan a directory for YAML files containing 'runsheet' in the filename
+    and generate timelines for each.
+    """
+    files = []
+    for fn in os.listdir(records_dir):
+        if "runsheet" in fn.lower() and fn.lower().endswith((".yaml", ".yml")):
+            files.append(os.path.join(records_dir, fn))
+
+    if not files:
+        print(f"[WARN] No runsheet YAML files found in: {records_dir}")
+        return
+
+    for f in sorted(files):
+        try:
+            print(f"[RUN] Processing: {f}")
+            main(f)
+        except Exception as e:
+            print(f"[ERROR] Failed for {f}: {e}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python visualize_run_sheet_timeline.py /path/to/run_sheet_temp.yaml")
+        print("Usage:")
+        print("  python visualize_run_sheet_time_line.py <runsheet.yaml>")
+        print("  python visualize_run_sheet_time_line.py <records_directory>")
         sys.exit(1)
-    main(sys.argv[1])
+
+    input_path = os.path.expanduser(sys.argv[1])
+
+    if os.path.isdir(input_path):
+        batch_process_records(input_path)
+        sys.exit(0)
+
+    if not os.path.isfile(input_path):
+        print(f"[ERROR] Path not found: {input_path}")
+        sys.exit(1)
+
+    main(input_path)

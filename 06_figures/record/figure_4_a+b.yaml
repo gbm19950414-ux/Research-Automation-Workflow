@@ -125,7 +125,7 @@ ai_hints:
 # ---------- 6. figure_legend (shared; Figure 4a/b) ----------
 figure_legend:
   one_sentence_en: >
-    NAO-associated fluorescence measured by fixed-exposure imaging and time-resolved plate-reader analysis in primary peritoneal macrophages under unstimulated conditions, comparing WT and EphB1-deficient cells.
+    NAO-associated fluorescence measured by imaging analysis in primary peritoneal macrophages under unstimulated conditions, comparing WT and EphB1-deficient cells.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1-deficient mice)"

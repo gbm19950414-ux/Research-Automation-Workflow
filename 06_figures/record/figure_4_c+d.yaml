@@ -123,7 +123,7 @@ ai_hints:
 # ---------- 6. figure_legend (shared; Figure 4c/d) ----------
 figure_legend:
   one_sentence_en: >
-    Total cardiolipin abundance and cardiolipin molecular species measured by LC–MS/MS lipidomics in resting primary peritoneal macrophages, comparing WT and EphB1-deficient cells.
+    Total cardiolipin abundance measured by LC–MS lipidomics in resting primary peritoneal macrophages, comparing WT and EphB1-deficient cells.
   system_and_design:
     model: "Primary murine peritoneal macrophages"
     genotype_or_groups: "WT versus Ephb1-deficient"

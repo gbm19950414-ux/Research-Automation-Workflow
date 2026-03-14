@@ -10,7 +10,7 @@ Read an argument YAML (nodes/edges/paths/narrative) and export:
   03_narrative.html         (figure flow diagram)
 
 Usage:
-  python 08_manuscript/script/论文层级/visualize_argument.py --yaml 06_figures/record/lyout_2_argument.yaml --outdir 07_results/argument_viz
+  python 08_manuscript/script/论文层级/001_visualize_argument.py --yaml 06_figures/record/lyout_2_argument.yaml --outdir 07_results/argument_viz
 """
 
 from __future__ import annotations

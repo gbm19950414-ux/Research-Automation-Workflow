@@ -9,7 +9,7 @@
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
   figure: "Figure 3"              # 如 "Figure 3"
-  figure_id: "3_i+j+s3_d+f+g"              # 如 "Figure 3"
+  figure_id: "3_i+j"              # 如 "Figure 3"
   short_title: "EphB1 缺失减少炎症小体激活诱导的胞质 mtDNA 释放"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.3 EphB1 缺失降低 GSDMD 的线粒体结合"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_3_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
@@ -137,7 +137,7 @@ ai_hints:
 # ---------- 6. figure_legend (shared) ----------
 figure_legend:
   one_sentence_en: >
-    Cytosolic mtDNA abundance measured by subcellular fractionation followed by qPCR in primary peritoneal macrophages at the indicated time points during NLRP3 inflammasome activation, comparing WT and EphB1-deficient cells.
+    Total and cytosolic mtDNA abundance measured by subcellular fractionation followed by qPCR in primary peritoneal macrophages during NLRP3 inflammasome activation, comparing WT and EphB1-deficient cells.
   system_and_design:
     model: "Primary murine peritoneal macrophages"
     genotype_or_groups: "WT versus EphB1-deficient"
@@ -145,6 +145,7 @@ figure_legend:
       LPS priming (100 ng/mL, 4 h) followed by nigericin (10 μM) and rapid fractionation
       at 0, 7.5, 15, 30, and 60 min after stimulation
     time_window: "0–60 min time course with early peak comparison at 7.5 min"
+
 
   readouts_and_assays:
     primary_readout: "mtDNA abundance (16S and ND1) in cytosolic, mitochondrial, and total fractions"
@@ -182,30 +183,25 @@ panel_overrides:
     displayed_targets:
       - "Cytosolic ND1 mtDNA (time course; peak at 7.5 min)"
 
-  s3_d:
-    belongs_to: "S3"
-    panel_title_en: "Total mtDNA control (16S)"
-    panel_title_cn: "全细胞 mtDNA 对照（16S）"
-    displayed_targets:
-      - "Total 16S mtDNA (time course control)"
+  s2_a:
+    belongs_to: "S2"
+    one_sentence_en: "Cytosolic mtDNA abundance measured by subcellular fractionation followed by qPCR in primary peritoneal macrophages at the indicated time points during NLRP3 inflammasome activation."
+  s2_b:
+    belongs_to: "S2"
+    one_sentence_en: "GSDMD abundance in mitochondrial fractions and total lysates from primary peritoneal macrophages at different time points during NLRP3 inflammasome activation."
+  c,d:
 
-  s3_f:
-    belongs_to: "S3"
-    panel_title_en: "Total mtDNA control (ND1)"
-    panel_title_cn: "全细胞 mtDNA 对照（ND1）"
-    displayed_targets:
-      - "Total ND1 mtDNA (time course control)"
+    belongs_to: "S2"
 
-  s3_g:
-    belongs_to: "S3"
-    panel_title_en: "Mitochondrial fraction mtDNA (control)"
-    panel_title_cn: "线粒体组分 mtDNA（对照）"
-    displayed_targets:
-      - "Mitochondrial fraction mtDNA (16S/ND1; time course control)"
+    one_sentence_en: "Total and cytosolic mtDNA abundance measured by subcellular fractionation followed by qPCR in primary peritoneal macrophages at the indicated time points during NLRP3 inflammasome activation, comparing WT and EphB1-deficient cells."
 
     # ---------- 8. English ----------
 
 results_skeleton_en:
+  extra_figure_refs:
+    - "s2a"
+    - "s2c"
+    - "s2d"
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
   panel_level: results

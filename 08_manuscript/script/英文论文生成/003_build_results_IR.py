@@ -137,6 +137,59 @@ def load_opening_sentences(record_dir: Path) -> Dict[str, str]:
     return out
 
 
+# -----------------------------
+# Panel-level paragraph break loader
+# -----------------------------
+def load_paragraph_breaks(record_dir: Path) -> Dict[str, set[str]]:
+    """Load optional panel-level paragraph breaks from opening_and_trans.yaml.
+
+    Expected structure:
+
+    paragraph_breaks:
+      by_figure:
+        "Figure 2":
+          break_after_panels: ["2c", "2g"]
+
+    Returns mapping:
+      {
+        "Figure 2": {"2c", "2g"},
+        ...
+      }
+    """
+    p = resolve_opening_and_trans_yaml(record_dir)
+    if p is None:
+        return {}
+
+    data = load_yaml(p)
+    if not isinstance(data, dict):
+        return {}
+
+    pb = data.get("paragraph_breaks") or {}
+    if not isinstance(pb, dict):
+        return {}
+
+    by_figure = pb.get("by_figure") or {}
+    if not isinstance(by_figure, dict):
+        return {}
+
+    out: Dict[str, set[str]] = {}
+    for fig_key, fig_cfg in by_figure.items():
+        if not isinstance(fig_cfg, dict):
+            continue
+        norm_fig = normalize_figure_group(fig_key) or fig_key
+        raw_panels = fig_cfg.get("break_after_panels") or []
+        if not isinstance(raw_panels, list):
+            continue
+        panel_set = {
+            normalize_panel_id(str(x))
+            for x in raw_panels
+            if isinstance(x, str) and normalize_panel_id(str(x))
+        }
+        if panel_set:
+            out[norm_fig] = panel_set
+    return out
+
+
 def apply_policy_to_cfg(cfg: Dict[str, Any], policy: Dict[str, Any]) -> Dict[str, Any]:
     """Return a shallow-merged cfg where policy values override cfg.
 
@@ -578,7 +631,36 @@ def format_fig_ref(panel_id: str) -> str:
 
     return f"Fig. {fig_label}"
 
+def format_fig_refs(panel_id: str, extra_refs: Optional[List[str]] = None) -> str:
+    """Format main panel ref plus optional extra refs.
 
+    Example:
+      panel_id='2a/b', extra_refs=['s1a'] -> 'Fig. 2a,b; Fig. S1a'
+    """
+    refs: List[str] = []
+
+    main_ref = format_fig_ref(panel_id)
+    if main_ref:
+        refs.append(main_ref)
+
+    for x in (extra_refs or []):
+        if not isinstance(x, str):
+            continue
+        ref = format_fig_ref(x)
+        if ref and ref not in refs:
+            refs.append(ref)
+
+    return "; ".join(refs)
+
+
+def has_any_same_fig_ref(text: str, panel_id: str, extra_refs: Optional[List[str]] = None) -> bool:
+    """Return True if the main ref or any extra ref is already present."""
+    if has_same_fig_ref(text, panel_id):
+        return True
+    for x in (extra_refs or []):
+        if isinstance(x, str) and has_same_fig_ref(text, x):
+            return True
+    return False
 def has_same_fig_ref(text: str, panel_id: str) -> bool:
     """Return True only if the SAME panel is already cited (e.g., Fig. 1a / Figure 1a).
 
@@ -611,22 +693,25 @@ def has_same_fig_ref(text: str, panel_id: str) -> bool:
     return bool(re.search(pat, t))
 
 
-def append_fig_ref(text: str, panel_id: str) -> str:
-    """Append a figure reference as '(Fig. 1a)' before terminal punctuation."""
+def append_fig_ref(text: str, panel_id: str, extra_refs: Optional[List[str]] = None) -> str:
+    """Append combined figure references before terminal punctuation.
+
+    Example output:
+      '(Fig. 2a,b; Fig. S1a)'
+    """
     if not isinstance(text, str):
         return text
     t = text.strip()
     if not t:
         return text
 
-    if has_same_fig_ref(t, panel_id):
+    if has_any_same_fig_ref(t, panel_id, extra_refs):
         return text
 
-    ref = format_fig_ref(panel_id)
+    ref = format_fig_refs(panel_id, extra_refs)
     if not ref:
         return text
 
-    # Insert before terminal punctuation if present
     if t.endswith("."):
         return t[:-1] + f" ({ref})."
     if t.endswith("?"):
@@ -638,19 +723,22 @@ def append_fig_ref(text: str, panel_id: str) -> str:
 
 
 # Helper: inject fig ref into a single sentence string
-def inject_fig_ref_into_sentence(sentence: str, panel_id: str) -> str:
-    """Inject '(Fig. X)' into the given sentence before terminal punctuation.
+def inject_fig_ref_into_sentence(sentence: str, panel_id: str, extra_refs: Optional[List[str]] = None) -> str:
+    """Inject combined figure references into a sentence.
 
-    Only inject if the SAME panel ref is not already present.
+    Example output:
+      '(Fig. 2a,b; Fig. S1a)'
     """
     if not isinstance(sentence, str):
         return sentence
     s = sentence.strip()
     if not s:
         return sentence
-    if has_same_fig_ref(s, panel_id):
+
+    if has_any_same_fig_ref(s, panel_id, extra_refs):
         return sentence
-    ref = format_fig_ref(panel_id)
+
+    ref = format_fig_refs(panel_id, extra_refs)
     if not ref:
         return sentence
 
@@ -660,8 +748,8 @@ def inject_fig_ref_into_sentence(sentence: str, panel_id: str) -> str:
         return s[:-1] + f" ({ref})?"
     if s.endswith("!"):
         return s[:-1] + f" ({ref})!"
-    return s + f" ({ref})."
 
+    return s + f" ({ref})."
 
 def build_transition_maps(
     logic: Dict[str, Any]
@@ -784,11 +872,16 @@ def extract_panels(y: Any, source_name: str) -> List[Dict[str, Any]]:
         if not isinstance(modules, dict):
             modules = {}
 
+        extra_figure_refs = b.get("extra_figure_refs") or []
+        if not isinstance(extra_figure_refs, list):
+            extra_figure_refs = []
+
         panels.append({
             "panel_key": f"{source_name}::block{idx+1}",
             "panel_level": panel_level if isinstance(panel_level, str) else "",
             "results_logic_type": logic_type if isinstance(logic_type, str) else "",
             "modules": modules,
+            "extra_figure_refs": extra_figure_refs,
         })
     return panels
 
@@ -999,6 +1092,7 @@ def main() -> int:
     fig_title_map = build_figure_title_maps(logic)
 
     opening_map = load_opening_sentences(record_dir)
+    paragraph_break_map = load_paragraph_breaks(record_dir)
     mapping_path = resolve_mapping_path(record_dir, cfg)
     primary_lang = (cfg.get("language") or "en").strip().lower()
     if primary_lang not in ("en", "cn"):
@@ -1010,6 +1104,30 @@ def main() -> int:
         # show a small sample of keys to confirm normalization
         print(f"[DEBUG] sample panel keys: {list(panel_tr_map.keys())[:10]}")
         print(f"[DEBUG] sample figure keys: {list(figure_tr_map.keys())[:10]}")
+
+    current_paragraph_parts: List[str] = []
+    current_paragraph_sources: List[str] = []
+    current_paragraph_panels: List[str] = []
+
+    def flush_current_paragraph() -> None:
+        nonlocal current_paragraph_parts, current_paragraph_sources, current_paragraph_panels
+        if not current_paragraph_parts:
+            return
+        text = " ".join(part.strip() for part in current_paragraph_parts if part and part.strip()).strip()
+        if not text:
+            current_paragraph_parts = []
+            current_paragraph_sources = []
+            current_paragraph_panels = []
+            return
+        append_ir_block(results_ir, {
+            "type": "paragraph",
+            "text": text,
+            "source": ",".join(current_paragraph_sources),
+            "panel_id": ",".join(current_paragraph_panels),
+        })
+        current_paragraph_parts = []
+        current_paragraph_sources = []
+        current_paragraph_panels = []
 
     # Figure reference emission (Nature style): append '(Fig. 1a)' at paragraph end
     fig_ref_cfg = cfg.get("figure_ref") if isinstance(cfg.get("figure_ref"), dict) else {}
@@ -1077,6 +1195,7 @@ def main() -> int:
 
         # Section range == figure: emit a section header once per figure group.
         if curr_fig_group and curr_fig_group != current_fig_group:
+            flush_current_paragraph()
             display_title = pick_figure_display_title(
                 curr_fig_group,
                 fig_title_map,
@@ -1113,6 +1232,9 @@ def main() -> int:
         for p in panels:
             pl = (p.get("panel_level") or "").strip()
             lt = (p.get("results_logic_type") or "").strip()
+            extra_figure_refs = p.get("extra_figure_refs") or []
+            if not isinstance(extra_figure_refs, list):
+                extra_figure_refs = []
 
             if pl and pl not in allowed_panel_levels:
                 continue
@@ -1138,8 +1260,7 @@ def main() -> int:
             })
             any_panel_written = True
 
-            # --- IR: add paragraph block for panel body ---
-            # Assemble paragraph while preserving module boundaries so we can attach (Fig. X)
+            # --- IR: buffer panel body, then flush only at configured paragraph breaks ---
             anchor_mk = pick_figref_anchor_module(pl, cfg)
             out_parts: List[str] = []
             injected = False
@@ -1148,7 +1269,7 @@ def main() -> int:
                 if not t:
                     continue
                 if emit_fig_refs and (not injected) and mk == anchor_mk:
-                    t = inject_fig_ref_into_sentence(t, curr_panel_id)
+                    t = inject_fig_ref_into_sentence(t, curr_panel_id, extra_figure_refs)
                     injected = True
                 out_parts.append(t)
 
@@ -1159,13 +1280,15 @@ def main() -> int:
                     pending_transition_en = ""
                 # Fallback: if anchor module was not present, append at paragraph end
                 if emit_fig_refs and (not injected):
-                    para = append_fig_ref(para, curr_panel_id)
-                append_ir_block(results_ir, {
-                    "type": "paragraph",
-                    "text": para,
-                    "source": fpath.name,
-                    "panel_id": curr_panel_id,
-                })
+                    para = append_fig_ref(para, curr_panel_id, extra_figure_refs)
+
+                current_paragraph_parts.append(para)
+                current_paragraph_sources.append(fpath.name)
+                current_paragraph_panels.append(curr_panel_id)
+
+                break_after = paragraph_break_map.get(curr_fig_group, set())
+                if curr_panel_id in break_after:
+                    flush_current_paragraph()
 
         # Insert smooth transition to the next section (panel-to-panel or figure-to-figure)
         if next_panel_id:
@@ -1210,6 +1333,7 @@ def main() -> int:
                     # If moving across figures, emit the transition immediately
                     # so it appears at the END of the previous figure section.
                     if curr_fig_group and next_fig_group and curr_fig_group != next_fig_group:
+                        flush_current_paragraph()
                         append_ir_block(results_ir, {
                             "type": "paragraph",
                             "text": en_tr,
@@ -1222,6 +1346,7 @@ def main() -> int:
             elif debug_transitions:
                 print("[DEBUG] no transition inserted for this pair")
 
+    flush_current_paragraph()
     # Write mapping TSV
     mapping_path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [

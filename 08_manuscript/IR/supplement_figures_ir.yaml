@@ -1,0 +1,127 @@
+meta:
+  source: 005a_build_figure_ir.py
+  mode: supplement
+  paper_logic: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/paper_logic.yaml
+  record_dir: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record
+  figs_dir: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs
+  legend_policy: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript/yaml/policy_supplement_figure.yaml
+  figure_level_statistics: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript/yaml/supplement_lagend_figure_level_statistic.yaml
+  supplement_figures: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript/yaml/supplement_figures.yaml
+figures:
+- id: Figure S1
+  figure_title_en: ''
+  assets:
+    render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_2_画板 2.png
+    main_figure_file: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_2_画板 2.png
+  panels_included:
+  - panel: s1_a
+    figure_id: 2a/b
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_a+b.yaml
+    is_multi_from_record: true
+    belongs_to: S1
+  - panel: s1_b
+    figure_id: 2c
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_c_v2.yaml
+    is_multi_from_record: true
+    belongs_to: S1
+  figure_legend_en: '(s1_a) qPCR analysis of transcriptional priming markers in primary peritoneal macrophages at the indicated
+    time points following LPS stimulation, comparing WT and EphB1-deficient cells.
+
+
+    (s1_b) Cytokines release in supernatants from primary peritoneal macrophages following LPS priming and NLRP3 activation
+    with increasing doses of nigericin, comparing WT and EphB1-deficient cells.
+
+
+    Data are presented as mean ± SD unless otherwise indicate. n denotes biologically independent samples. For panels (a,b),
+    n ≥ 3 per group, and results were reproduced in ≥3 independent experiments; Statistical significance was assessed using
+    two-tailed unpaired t-tests. In panels (a), transcript levels were normalized to GAPDH and expressed relative to unstimulated
+    controls; in panel (b), ELISA signals were background-subtracted and normalized to cell number. *P < 0.05, **P < 0.01,
+    ***P < 0.001; ns, not significant.'
+- id: Figure S2
+  figure_title_en: ''
+  assets:
+    render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_3_画板 2.png
+    main_figure_file: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_3_画板 2.png
+  panels_included:
+  - panel: s2_a
+    figure_id: 3_i+j
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_i+j+s3_d+f+g.yaml
+    is_multi_from_record: true
+    belongs_to: S2
+  - panel: s2_b
+    figure_id: 3_i+j
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_i+j+s3_d+f+g.yaml
+    is_multi_from_record: true
+    belongs_to: S2
+  - panel: s2e
+    figure_id: 3k
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_k+s3_e.yaml
+    is_multi_from_record: true
+    belongs_to: S2
+  - panel: c,d
+    figure_id: 3_i+j
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_i+j+s3_d+f+g.yaml
+    is_multi_from_record: true
+    belongs_to: S2
+  figure_legend_en: '(s2_a) Cytosolic mtDNA abundance measured by subcellular fractionation followed by qPCR in primary peritoneal
+    macrophages at the indicated time points during NLRP3 inflammasome activation.
+
+
+    (s2_b) GSDMD abundance in mitochondrial fractions and total lysates from primary peritoneal macrophages at different time
+    points during NLRP3 inflammasome activation.
+
+
+    (s2e) GSDMD-NT abundance in mitochondrial fractions and total lysates from primary peritoneal macrophages at the indicated
+    early time points during NLRP3 inflammasome activation, comparing WT and EphB1-deficient cells. Mitochondrial abundance
+    controls were assessed in parallel.
+
+
+    (c,d) Cytosolic mtDNA abundance measured by subcellular fractionation followed by qPCR in primary peritoneal macrophages
+    at the indicated time points during NLRP3 inflammasome activation, comparing WT and EphB1-deficient cells.
+
+
+    Data are presented as mean ± SD unless otherwise indicate. n denotes biologically independent samples. For panels (a–g),
+    n ≥ 3 per group, and results were reproduced in ≥3 independent experiments. Statistical significance was assessed using
+    two-tailed unpaired t-tests. In panels (a,b), transcript levels were normalized to GAPDH and expressed relative to unstimulated
+    controls; in panel (c), ELISA signals were background-subtracted and normalized to cell number; and in panels (e–g), lysate
+    and supernatant or soluble and insoluble fractions were analyzed in parallel. *P < 0.05, **P < 0.01, ***P < 0.001; ns,
+    not significant.'
+- id: Figure S3
+  figure_title_en: ''
+  assets:
+    render_png: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_4_画板 2.png
+    main_figure_file: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs/figure_4_画板 2.png
+  panels_included:
+  - panel: a
+    figure_id: s3a/b
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_sa+b.yaml
+    is_multi_from_record: true
+    belongs_to: S3
+  - panel: b
+    figure_id: s3a/b
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_sa+b.yaml
+    is_multi_from_record: true
+    belongs_to: S3
+  - panel: c
+    figure_id: s3a/b
+    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_sa+b.yaml
+    is_multi_from_record: true
+    belongs_to: S3
+  figure_legend_en: '(a) NAO-associated fluorescence measured by fixed-exposure imaging and time-resolved plate-reader analysis
+    in primary peritoneal macrophages under unstimulated conditions, comparing WT and EphB1-deficient cells.
+
+
+    (b) Pharmacological inhibition of iPLA2 with BEL reduces NAO-associated fluorescence and collapses genotype-dependent
+    differences in WT and Ephb1-deficient primary peritoneal macrophages.
+
+
+    (c) IL-1β release in culture supernatants from primary peritoneal macrophages following AD pretreatment, LPS priming,
+    and nigericin stimulation, comparing WT and EphB1-deficient cells across the indicated doses and treatment durations.
+
+
+    Data are presented as mean ± SD unless otherwise indicate. n denotes biologically independent samples. For panels (a–g),
+    n ≥ 3 per group, and results were reproduced in ≥3 independent experiments. Statistical significance was assessed using
+    two-tailed unpaired t-tests. In panels (a,b), transcript levels were normalized to GAPDH and expressed relative to unstimulated
+    controls; in panel (c), ELISA signals were background-subtracted and normalized to cell number; and in panels (e–g), lysate
+    and supernatant or soluble and insoluble fractions were analyzed in parallel. *P < 0.05, **P < 0.01, ***P < 0.001; ns,
+    not significant.'

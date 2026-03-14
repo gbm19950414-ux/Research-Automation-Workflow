@@ -90,12 +90,15 @@ def load_figure_level_statistics(path: Path) -> Dict[str, str]:
     """Load figure-level statistic / display note blocks keyed by figure id.
 
     Accepted YAML forms:
-      - figure_1 / figure_s2
-      - Figure 1 / Figure S2
-      - values can be plain strings or dicts with text/block-like fields
+      - figure_1: "..."
+      - figure_1:
+          text: "..."
+      - figure_1:
+          block: "..."
+      - Figure 1: "..."
 
     Returns a normalized mapping like:
-      {"Figure 1": "...", "Figure S2": "..."}
+      {"Figure 1": "...", "Figure 2": "..."}
     Missing files return {} to preserve legacy behavior.
     """
     if not path or not Path(path).exists():
@@ -108,20 +111,15 @@ def load_figure_level_statistics(path: Path) -> Dict[str, str]:
 
     for k, v in raw.items():
         key = norm_space(str(k))
-        fig_key = ""
-
-        m = re.fullmatch(r"figure_(s?\d+)", key, flags=re.IGNORECASE)
+        m = re.fullmatch(r"figure_(\d+)", key, flags=re.IGNORECASE)
         if m:
-            token = m.group(1)
-            fig_key = f"Figure {token.upper()}" if token.lower().startswith("s") else f"Figure {token}"
+            fig_key = f"Figure {m.group(1)}"
         else:
-            m2 = re.fullmatch(r"Figure\s+(S?\d+)", key, flags=re.IGNORECASE)
+            m2 = re.fullmatch(r"Figure\s+(\d+)", key, flags=re.IGNORECASE)
             if m2:
-                token = m2.group(1)
-                fig_key = f"Figure {token.upper()}" if token.lower().startswith("s") else f"Figure {token}"
-
-        if not fig_key:
-            continue
+                fig_key = f"Figure {m2.group(1)}"
+            else:
+                continue
 
         text = ""
         if isinstance(v, str):
@@ -141,6 +139,7 @@ def load_figure_level_statistics(path: Path) -> Dict[str, str]:
             out[fig_key] = text
 
     return out
+
 
 def append_figure_level_statistics(panel_texts: List[str], figure_level_text: str) -> str:
     """Append figure-level statistic/display-note block after panel-wise descriptions."""
@@ -253,94 +252,6 @@ def find_rendered_figure_image(figs_dir: Path, figure_num: str, prefer_ext: List
 
     candidates.sort(key=rank)
     return str(candidates[0].resolve())
-
-
-
-
-def normalize_supplement_tag(tag: str) -> str:
-    t = norm_space(str(tag or ""))
-    if not t:
-        return ""
-    m = re.fullmatch(r"S?(\d+)", t, flags=re.IGNORECASE)
-    if not m:
-        return ""
-    return f"S{m.group(1)}"
-
-
-# --- Panel label supplement-like filter ---
-def is_supplement_like_panel_label(panel: str) -> bool:
-    """Return True for panel labels that are actually supplement-style placeholders.
-
-    Examples treated as supplement-like:
-      - s2_a
-      - s3b
-      - S4_c
-      - s2a
-
-    This is used only to suppress such labels from MAIN figure legend assembly,
-    while still allowing supplement-mode reuse of the same source YAML files.
-    """
-    p = norm_space(str(panel or ""))
-    if not p:
-        return False
-    return bool(re.fullmatch(r"s\d+_?[a-z]", p, flags=re.IGNORECASE))
-
-
-def normalize_figure_key(label: str) -> str:
-    t = norm_space(str(label or ""))
-    if not t:
-        return ""
-    m = re.fullmatch(r"Figure\s+(S?\d+)", t, flags=re.IGNORECASE)
-    if m:
-        token = m.group(1)
-        return f"Figure {token.upper()}" if token.lower().startswith("s") else f"Figure {token}"
-    return t
-
-
-def load_supplement_figures(path: Path) -> Dict[str, Dict[str, Any]]:
-    """Load supplement figure metadata keyed by Figure S#."""
-    if not path or not Path(path).exists():
-        return {}
-
-    raw = load_yaml(Path(path))
-    if not isinstance(raw, dict):
-        return {}
-
-    sf = raw.get("supplement_figures") or {}
-    if not isinstance(sf, dict):
-        return {}
-
-    out: Dict[str, Dict[str, Any]] = {}
-    for k, v in sf.items():
-        tag = normalize_supplement_tag(str(k))
-        if not tag or not isinstance(v, dict):
-            continue
-        fig_key = normalize_figure_key(v.get("figure_id") or f"Figure {tag}")
-        out[fig_key] = v
-    return out
-
-
-def build_assets_from_explicit_main_file(main_file: str) -> Dict[str, str]:
-    """Build asset dict from an explicitly declared supplement main figure file."""
-    p = Path(str(main_file)).expanduser()
-    out: Dict[str, str] = {}
-    if not str(main_file).strip():
-        return out
-
-    suffix = p.suffix.lower()
-    if suffix == ".ai":
-        out["source_ai"] = str(p)
-    elif suffix == ".pdf":
-        out["render_pdf"] = str(p)
-    elif suffix == ".svg":
-        out["render_svg"] = str(p)
-    elif suffix in {".png", ".jpg", ".jpeg", ".tif", ".tiff", ".webp"}:
-        out["render_png"] = str(p)
-    else:
-        out["main_figure_file"] = str(p)
-
-    out.setdefault("main_figure_file", str(p))
-    return out
 
 
 # -----------------------------
@@ -679,15 +590,10 @@ def build_docx_figure_blocks(figures_ir: List[Dict[str, Any]]) -> List[Dict[str,
     return blocks
 
 
-def upsert_figures_section_into_results_ir(
-    results_ir_path: Path,
-    figure_blocks: List[Dict[str, Any]],
-    section_id: str = "figures",
-    section_title: str = "Figures",
-) -> None:
-    """Insert or replace a figures-like section in results.ir.yaml.
+def upsert_figures_section_into_results_ir(results_ir_path: Path, figure_blocks: List[Dict[str, Any]]) -> None:
+    """Insert or replace a `figures` section in results.ir.yaml.
 
-    Keeps all existing sections; only upserts the target section id.
+    Keeps all existing sections; only upserts the section with id 'figures'.
     """
     results = load_yaml(results_ir_path)
     doc = results.get("document", {}) or {}
@@ -696,15 +602,15 @@ def upsert_figures_section_into_results_ir(
         sections = []
 
     figures_section = {
-        "id": section_id,
-        "title": section_title,
+        "id": "figures",
+        "title": "Figures",
         "blocks": figure_blocks,
     }
 
     replaced = False
     new_sections: List[Dict[str, Any]] = []
     for s in sections:
-        if isinstance(s, dict) and norm_space(str(s.get("id", ""))) == section_id:
+        if isinstance(s, dict) and norm_space(str(s.get("id", ""))) == "figures":
             new_sections.append(figures_section)
             replaced = True
         else:
@@ -735,48 +641,57 @@ def get_panel_belongs_to(it: PanelItem) -> str:
             return norm_space(str(v))
     return ""
 
-def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
+# -----------------------------
+# Main build
+# -----------------------------
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--root", type=str, default=".", help="Project root (default: current working directory)")
+    ap.add_argument("--paper-logic", type=str, default="06_figures/record/paper_logic.yaml")
+    ap.add_argument("--record-dir", type=str, default="06_figures/record")
+    ap.add_argument("--figs-dir", type=str, default="06_figures/figs")
+    ap.add_argument("--out", type=str, default="08_manuscript/IR/figures_ir.yaml")
+    ap.add_argument("--strict", action="store_true", help="Fail if any listed record is missing")
+    ap.add_argument("--results-ir", type=str, default="08_manuscript/IR/results.ir.yaml", help="Target results.ir.yaml to upsert a figures section")
+    ap.add_argument("--no-write-results-ir", action="store_true", help="Do NOT update results.ir.yaml (default: update)")
+    ap.add_argument(
+        "--legend-policy",
+        type=str,
+        default="08_manuscript/yaml/policy_figure_legend_main.yaml",
+        help="Optional legend policy YAML (e.g., mode: short) to control stitched legend verbosity",
+    )
+    ap.add_argument(
+        "--figure-level-statistics",
+        type=str,
+        default="08_manuscript/yaml/lagend_figure_level_statistic.yaml",
+        help="Optional YAML containing figure-level statistics/display-note blocks keyed by figure_1 / Figure 1, etc.",
+    )
+    args = ap.parse_args()
+
+    # Default to current working directory if --root is not provided
     root = Path(args.root).expanduser().resolve()
     paper_logic_path = (root / args.paper_logic).resolve()
     record_dir = (root / args.record_dir).resolve()
     figs_dir = (root / args.figs_dir).resolve()
-
-    mode = (mode or "main").strip().lower()
-    if mode not in {"main", "supplement"}:
-        raise ValueError(f"Unsupported figure mode: {mode}")
-
-    if mode == "supplement":
-        out_path = (root / args.supplement_out).resolve()
-        legend_policy_path = (root / args.supplement_legend_policy).resolve() if args.supplement_legend_policy else None
-        figure_level_stats_path = (
-            (root / args.supplement_figure_level_statistics).resolve()
-            if args.supplement_figure_level_statistics else None
-        )
-        supplement_figures_path = (
-            (root / args.supplement_figures).resolve() if args.supplement_figures else None
-        )
-    else:
-        out_path = (root / args.out).resolve()
-        legend_policy_path = (root / args.legend_policy).resolve() if args.legend_policy else None
-        figure_level_stats_path = (
-            (root / args.figure_level_statistics).resolve() if args.figure_level_statistics else None
-        )
-        supplement_figures_path = None
-
+    out_path = (root / args.out).resolve()
+    legend_policy_path = (root / args.legend_policy).resolve() if args.legend_policy else None
     legend_policy = load_legend_policy(legend_policy_path) if legend_policy_path else {}
+    figure_level_stats_path = (
+        (root / args.figure_level_statistics).resolve() if args.figure_level_statistics else None
+    )
     figure_level_statistics = (
         load_figure_level_statistics(figure_level_stats_path) if figure_level_stats_path else {}
-    )
-    supplement_figure_meta = (
-        load_supplement_figures(supplement_figures_path) if supplement_figures_path else {}
     )
 
     paper_logic = load_yaml(paper_logic_path)
 
+    # 1) Figure order = inclusion list (single source of truth)
+    # Prefer top-level `figure_order`, but also support `results_build.figure_order`
     figure_order = paper_logic.get("figure_order")
     if not figure_order:
         rb = paper_logic.get("results_build", {}) or {}
         figure_order = rb.get("figure_order")
+        # Fallback to results_build.include_files if user keeps the inclusion list there
         if not figure_order:
             figure_order = rb.get("include_files")
     if not isinstance(figure_order, list) or not figure_order:
@@ -785,14 +700,18 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
             f"Expected: figure_order: [figure_1_a_000.yaml, figure_1_b_000.yaml, ...]"
         )
 
+    # 2) Titles map
     figure_titles = load_paper_logic_titles(paper_logic)
 
+    # 3) Load each listed record yaml, extract panel items
     all_panels: List[PanelItem] = []
     missing: List[str] = []
     for name in figure_order:
         rel = Path(str(name))
+        # allow list entries to be full path or relative
         candidate = rel if rel.is_absolute() else (record_dir / rel)
         if not candidate.exists():
+            # also try direct under record_dir by basename
             candidate2 = record_dir / rel.name
             if candidate2.exists():
                 candidate = candidate2
@@ -800,6 +719,7 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
                 missing.append(str(name))
                 continue
 
+        # Only process YAML files
         if candidate.suffix.lower() not in [".yaml", ".yml"]:
             continue
 
@@ -812,35 +732,31 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
         else:
             print("[WARN]", msg)
 
+    # 4) Group by figure (e.g., "Figure 6")
     by_figure: Dict[str, List[PanelItem]] = {}
     for p in all_panels:
-        if mode == "supplement":
-            bt = normalize_supplement_tag(get_panel_belongs_to(p))
-            fig = f"Figure {bt}" if bt else (p.figure or "Figure ?")
-        else:
-            fig = p.figure or "Figure ?"
+        fig = p.figure or "Figure ?"
         by_figure.setdefault(fig, []).append(p)
 
-    def fig_sort_key(fig_name: str) -> Tuple[int, int, str]:
-        m = re.match(r"^Figure\s+(S)?(\d+)$", fig_name, flags=re.IGNORECASE)
-        if m:
-            is_supp = 1 if m.group(1) else 0
-            return (is_supp, int(m.group(2)), fig_name)
-        return (999, 999, fig_name)
+    # 5) Sort figures by numeric order from key (Figure 1..)
+    def fig_sort_key(fig_name: str) -> Tuple[int, str]:
+        m = re.match(r"^Figure\s+(\d+)", fig_name)
+        return (int(m.group(1)) if m else 999, fig_name)
 
     figures_sorted = sorted(by_figure.keys(), key=fig_sort_key)
 
+    # 6) Build output IR object
     figures_ir: List[Dict[str, Any]] = []
     for fig in figures_sorted:
         items = by_figure[fig]
-        items_sorted = sorted(items, key=lambda x: parse_panel_label(x.panel))
-        if mode == "main":
-            items_sorted = [
-                it for it in items_sorted
-                if not is_supplement_like_panel_label(it.panel)
-                and not normalize_supplement_tag(get_panel_belongs_to(it))
-            ]
 
+        # sort panels by label
+        items_sorted = sorted(items, key=lambda x: parse_panel_label(x.panel))
+
+        # Optional policy-driven panel filtering (scheme B): route panels by `belongs_to`.
+        # Example policy:
+        #   panel_filter:
+        #     include_belongs_to: ["F3"]
         pf = legend_policy.get("panel_filter") or {}
         include_bt = pf.get("include_belongs_to")
         exclude_bt = pf.get("exclude_belongs_to")
@@ -865,32 +781,31 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
             if exclude_set:
                 items_sorted = [it for it in items_sorted if get_panel_belongs_to(it) not in exclude_set]
 
+        # If filtering removes all panels for a figure, skip emitting that figure.
         if not items_sorted:
             continue
 
+        # determine figure number for asset lookup
+        m = re.match(r"^Figure\s+(\d+)", fig)
+        fig_num = m.group(1) if m else ""
+        assets = find_figure_asset(figs_dir, fig_num) if fig_num else {}
+        # Ensure we capture exported images with variant names (e.g., figure_1_画板 1.png)
+        if fig_num:
+            img_any = find_rendered_figure_image(figs_dir, fig_num)
+            if img_any:
+                assets.setdefault("render_png", img_any)
+
         fig_title = figure_titles.get(fig, "")
-        assets: Dict[str, str] = {}
-
-        if mode == "supplement":
-            supp_meta = supplement_figure_meta.get(fig, {})
-            fig_title = norm_space(str(supp_meta.get("figure_title_en") or fig_title))
-            main_file = supp_meta.get("main_figure_file") or ""
-            assets = build_assets_from_explicit_main_file(main_file)
-        else:
-            m = re.match(r"^Figure\s+(\d+)", fig)
-            fig_num = m.group(1) if m else ""
-            assets = find_figure_asset(figs_dir, fig_num) if fig_num else {}
-            if fig_num:
-                img_any = find_rendered_figure_image(figs_dir, fig_num)
-                if img_any:
-                    assets.setdefault("render_png", img_any)
-
+        # Build stitched legend text
         panel_texts: List[str] = []
+
+        # In short mode, optionally merge panels that share the same one_sentence_en.
         lp_mode = (legend_policy.get("mode") or legend_policy.get("legend_mode") or "").strip().lower()
         short_mode = bool(legend_policy.get("one_sentence_only")) or (lp_mode == "short")
         merge_shared = bool(legend_policy.get("merge_shared_panels"))
 
         if short_mode and merge_shared:
+            # 1) Resolve one_sentence per panel
             sent_by_panel: Dict[str, str] = {}
             shared_by_panel: Dict[str, Dict[str, Any]] = {}
             override_by_panel: Dict[str, Dict[str, Any]] = {}
@@ -900,11 +815,16 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
                 override_by_panel[p] = it.panel_override if it.is_multi else it.shared_legend
                 sent_by_panel[p] = norm_space(resolve_one_sentence(it.shared_legend, override_by_panel[p], p))
 
+            # 2) Group panels by sentence (non-empty). Empty sentences stay per-panel.
             groups: Dict[str, List[str]] = {}
+            empty_panels: List[str] = []
             for p, s in sent_by_panel.items():
                 if s:
                     groups.setdefault(s, []).append(p)
+                else:
+                    empty_panels.append(p)
 
+            # 3) Emit merged lines, ordered by first panel appearance in items_sorted
             seen: Set[str] = set()
             for it in items_sorted:
                 p = it.panel
@@ -916,6 +836,7 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
                     for pp in ps:
                         seen.add(pp)
                     label = format_panel_group_label(ps)
+                    # Pass a per-call label override via a private policy key
                     lp2 = dict(legend_policy)
                     lp2["_panel_label"] = label
                     panel_texts.append(render_panel_legend(shared_by_panel[p], override_by_panel[p], p, lp2))
@@ -923,6 +844,7 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
                     seen.add(p)
                     panel_texts.append(render_panel_legend(shared_by_panel[p], override_by_panel[p], p, legend_policy))
         else:
+            # Legacy behavior: one line per panel
             for it in items_sorted:
                 if it.is_multi:
                     panel_texts.append(
@@ -947,7 +869,6 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
                         "figure_id": it.figure_id,
                         "record": str(it.record_path),
                         "is_multi_from_record": it.is_multi,
-                        "belongs_to": get_panel_belongs_to(it),
                     }
                     for it in items_sorted
                 ],
@@ -958,114 +879,24 @@ def build_mode(args: argparse.Namespace, mode: str) -> List[Dict[str, Any]]:
     out_obj = {
         "meta": {
             "source": "005a_build_figure_ir.py",
-            "mode": mode,
             "paper_logic": str(paper_logic_path),
             "record_dir": str(record_dir),
             "figs_dir": str(figs_dir),
-            "legend_policy": str(legend_policy_path) if legend_policy_path else "",
             "figure_level_statistics": str(figure_level_stats_path) if figure_level_stats_path else "",
-            "supplement_figures": str(supplement_figures_path) if supplement_figures_path else "",
         },
         "figures": figures_ir,
     }
 
     dump_yaml(out_obj, out_path)
-    print(f"[OK] Wrote {mode} figures IR YAML: {out_path}")
-    return figures_ir
-
-
-# -----------------------------
-# Main build
-# -----------------------------
-def main() -> None:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--root", type=str, default=".", help="Project root (default: current working directory)")
-    ap.add_argument("--paper-logic", type=str, default="06_figures/record/paper_logic.yaml")
-    ap.add_argument("--record-dir", type=str, default="06_figures/record")
-    ap.add_argument("--figs-dir", type=str, default="06_figures/figs")
-    ap.add_argument("--out", type=str, default="08_manuscript/IR/figures_ir.yaml")
-    ap.add_argument("--supplement-out", type=str, default="08_manuscript/IR/supplement_figures_ir.yaml")
-    ap.add_argument("--strict", action="store_true", help="Fail if any listed record is missing")
-    ap.add_argument(
-        "--results-ir",
-        type=str,
-        default="08_manuscript/IR/results.ir.yaml",
-        help="Target results.ir.yaml to upsert figure sections",
-    )
-    ap.add_argument("--no-write-results-ir", action="store_true", help="Do NOT update results.ir.yaml (default: update)")
-    ap.add_argument(
-        "--legend-policy",
-        type=str,
-        default="08_manuscript/yaml/policy_figure_legend_main.yaml",
-        help="Legend policy YAML for main figures",
-    )
-    ap.add_argument(
-        "--supplement-legend-policy",
-        type=str,
-        default="08_manuscript/yaml/policy_supplement_figure.yaml",
-        help="Legend policy YAML for supplement figures",
-    )
-    ap.add_argument(
-        "--figure-level-statistics",
-        type=str,
-        default="08_manuscript/yaml/lagend_figure_level_statistic.yaml",
-        help="Figure-level statistics/display-note YAML for main figures",
-    )
-    ap.add_argument(
-        "--supplement-figure-level-statistics",
-        type=str,
-        default="08_manuscript/yaml/supplement_lagend_figure_level_statistic.yaml",
-        help="Figure-level statistics/display-note YAML for supplement figures",
-    )
-    ap.add_argument(
-        "--supplement-figures",
-        type=str,
-        default="08_manuscript/yaml/supplement_figures.yaml",
-        help="Supplement figure metadata YAML (titles + explicit main_figure_file)",
-    )
-    ap.add_argument(
-        "--figure-mode",
-        type=str,
-        choices=["main", "supplement", "all"],
-        default="all",
-        help="Build main figures, supplement figures, or both (default: all)",
-    )
-    args = ap.parse_args()
-
-    if args.figure_mode == "all":
-        modes = ["main", "supplement"]
-    else:
-        modes = [args.figure_mode]
-
-    all_mode_outputs: Dict[str, List[Dict[str, Any]]] = {}
-    for mode in modes:
-        all_mode_outputs[mode] = build_mode(args, mode)
+    print(f"[OK] Wrote figures IR YAML: {out_path}")
 
     if not args.no_write_results_ir:
-        root = Path(args.root).expanduser().resolve()
         results_ir_path = (root / args.results_ir).resolve()
         if not results_ir_path.exists():
             raise FileNotFoundError(f"results.ir.yaml not found for update: {results_ir_path}")
-
-        if "main" in all_mode_outputs:
-            figure_blocks = build_docx_figure_blocks(all_mode_outputs["main"])
-            upsert_figures_section_into_results_ir(
-                results_ir_path,
-                figure_blocks,
-                section_id="figures",
-                section_title="Figures",
-            )
-            print(f"[OK] Updated results IR with figures section: {results_ir_path}")
-
-        if "supplement" in all_mode_outputs:
-            supplement_blocks = build_docx_figure_blocks(all_mode_outputs["supplement"])
-            upsert_figures_section_into_results_ir(
-                results_ir_path,
-                supplement_blocks,
-                section_id="supplement_figures",
-                section_title="Supplementary Figures",
-            )
-            print(f"[OK] Updated results IR with supplementary figures section: {results_ir_path}")
+        figure_blocks = build_docx_figure_blocks(figures_ir)
+        upsert_figures_section_into_results_ir(results_ir_path, figure_blocks)
+        print(f"[OK] Updated results IR with figures section: {results_ir_path}")
 
 
 if __name__ == "__main__":

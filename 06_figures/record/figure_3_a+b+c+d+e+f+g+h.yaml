@@ -172,6 +172,7 @@ panel_overrides:
     # ---------- 8. English ----------
 
 results_skeleton_en:
+
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
   panel_level: results
@@ -189,7 +190,7 @@ results_skeleton_en:
       logic_source: "methods.readout_and_assay + question.core_question"
 
     M3_directional_result:
-      en: "Upon inflammasome activation, Ephb1-deficient macrophages showed reduced cytosolic ROS accumulation and less mitochondrial depolarization than WT cells. By contrast, mitochondrial ROS levels measured by MitoSOX did not differ significantly between genotypes."
+      en: "Upon inflammasome activation, Ephb1-deficient macrophages showed reduced cytosolic ROS accumulation and less mitochondrial depolarization than WT cells. By contrast, mitochondrial ROS levels measured by MitoSOX did not differ significantly between genotypes, and TMRM measurements showed comparable basal mitochondrial membrane potential prior to inflammasome activation, arguing against baseline mitochondrial differences as the source of the phenotype."
       cn: "在炎症小体激活过程中，与 WT 相比，EphB1-deficient 巨噬细胞表现出更弱的细胞质 ROS 累积以及更小幅度的线粒体膜电位下降；而以 MitoSOX 检测的线粒体 ROS 整体强度未显示显著的基因型差异。"
       logic_source: "results.data_direction"
 
@@ -199,6 +200,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results indicate that Ephb1 promotes early mitochondrial enrichment of GSDMD-NT during inflammasome activation."
+      en: "Together, these results indicate that Ephb1 promotes mitochondrial rupture."
       cn: "综上，这些结果表明 EphB1 缺失并未在静息条件下引起线粒体膜电位的固有改变，但在炎症小体激活过程中可限制 ROS 累积与膜去极化，支持执行阶段线粒体损伤受限的模型。"
       logic_source: "results.group_difference_statement"

@@ -228,7 +228,7 @@ edges:
   - id: e12
     from: n1
     to: n10
-    relation: inhibition
+    relation: promotion
     evidence_level: necessity
     perturbation: knockout
 
@@ -276,6 +276,11 @@ edges:
     to: n7
     relation: promote
     evidence_level: established biology
+  - id: e20
+    from: n10
+    to: n8
+    relation: promote
+    evidence_level: unverified
 
 # ---------- 3) Argument paths：论文要证明的“主论证路径” ----------
 paths:
@@ -299,6 +304,9 @@ paths:
     role: hypothesis
     edges: [e1, e10, e9, e8, e7, e19, e15, e16, e18]
 
+  - id: p6
+    role: 20260314_test_INTENSIFY
+    edges: [e12, e9, e11, e10, e20]
 
 # ---------- 4) Narrative：英文期刊论文的叙事顺序（按 Figure 排列） ----------
 narrative:

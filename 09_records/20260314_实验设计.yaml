@@ -1,0 +1,238 @@
+experiments:
+
+  - id: EX1
+    question: "Does EphB1 deficiency alter the PI3K–AKT–mTOR signaling axis?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: WT
+        treatment: vehicle
+        stimulus: basal, surmer refeed
+      - group_id: 2
+        genotype: EphB1_KO
+        treatment: vehicle
+        stimulus: basal, surmer refeed
+    readouts:
+      - PI3K
+      - p_PI3K
+      - AKT
+      - p_AKT_S473
+      - p_mTOR_optional
+      - p_S6_optional
+    sample_type:
+      - lysate
+      - live cells
+    edges_supported:
+      - e12
+    expected_result: >
+      EphB1 KO shows reduced signaling across the PI3K–AKT–mTOR axis,
+      with the most prominent reduction at AKT S473 phosphorylation.
+    interpretation: "Supports necessity of e12 (n1 → n10)."
+
+  - id: EX2
+    question: "Does EphB1 deficiency produce a TG–phospholipid turnover phenotype?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: WT
+        treatment: vehicle
+        stimulus: basal
+      - group_id: 2
+        genotype: EphB1_KO
+        treatment: vehicle
+        stimulus: basal
+    sample_type:
+      - fixed_cells
+    readouts:
+      - Nile_Red_staining
+
+    edges_supported:
+      - e9
+    expected_result: >
+      EphB1 KO shows decreased TG signal and increased phospholipid signal,
+      indicating imbalance in TG–phospholipid turnover and membrane environment axis.
+    interpretation: "Supports necessity of e9 (n1 → n9)."
+
+  - id: EX3A
+    question: "Does AKT inhibitor treatment effectively suppress AKT S473 phosphorylation in WT cells?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: WT
+        treatment: vehicle
+        stimulus: basal
+      - group_id: 2
+        genotype: WT
+        treatment: AKT_inhibitor
+        stimulus: basal
+    sample_type:
+      - lysate
+    readouts:
+      - p_AKT_S473
+    edges_supported:
+      - e11
+      - e20
+    expected_result: >
+      AKT inhibitor treatment reduces p-AKT S473 in WT cells compared with vehicle.
+    interpretation: >
+      Confirms that the AKT inhibitor is pharmacodynamically effective under the
+      current experimental conditions, providing upstream validation for EX3 and EX5.
+
+  - id: EX3
+    question: "Can AKT inhibition phenocopy the membrane phenotype seen in EphB1 KO?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: WT
+        treatment: vehicle
+        stimulus: basal
+      - group_id: 2
+        genotype: WT
+        treatment: AKT_inhibitor
+        stimulus: basal
+    sample_type:
+      - fixed_cells
+    readouts:
+      - Nile_Red_staining
+
+    edges_supported:
+      - e11
+    expected_result: >
+      AKT inhibition reduces p-AKT and produces KO-like TG decrease
+      and phospholipid increase.
+    interpretation: >
+      Pharmacologic suppression of AKT phenocopies the membrane phenotype,
+      functionally supporting e11 (n10 → n9).
+
+  - id: EX4A
+    question: "Does AKT activator treatment effectively restore AKT S473 phosphorylation in EphB1 KO cells?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: EphB1_KO
+        treatment: vehicle
+        stimulus: basal
+      - group_id: 2
+        genotype: EphB1_KO
+        treatment: AKT_activator
+        stimulus: basal
+    sample_type:
+      - lysate
+    readouts:
+      - p_AKT_S473
+    edges_supported:
+      - e11
+      - e20
+    expected_result: >
+      AKT activator treatment increases p-AKT S473 in EphB1 KO cells compared with vehicle.
+    interpretation: >
+      Confirms that the AKT activator is pharmacodynamically effective under the
+      current experimental conditions, providing upstream validation for EX4 and EX6.
+
+  - id: EX4
+    question: "Can AKT activation rescue the membrane phenotype in EphB1 KO cells?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: EphB1_KO
+        treatment: vehicle
+        stimulus: basal
+      - group_id: 2
+        genotype: EphB1_KO
+        treatment: AKT_activator
+        stimulus: basal
+    sample_type:
+      - fixed_cells
+    readouts:
+      - Nile_Red_staining
+    edges_supported:
+      - e11
+    expected_result: >
+      AKT activation restores p-AKT and shifts TG/phospholipid staining
+      toward WT-like levels.
+    interpretation: >
+      Restoration of AKT signaling rescues the membrane phenotype,
+      providing causal rescue evidence for e11.
+      
+  - id: EX5
+    question: "Does AKT inhibition induce cardiolipin-associated defects?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: WT
+        treatment: vehicle
+        stimulus: basal
+      - group_id: 2
+        genotype: WT
+        treatment: AKT_inhibitor
+        stimulus: basal
+    readouts:
+      - cardiolipin_readout
+    sample_type:
+      - live_cells
+    edges_supported:
+      - e20
+    expected_result: >
+      AKT inhibition reduces cardiolipin-associated signal,
+      mimicking the EphB1 KO phenotype.
+    interpretation: >
+      Supports functional linkage between AKT signaling and cardiolipin
+      regulation (e20 mimic evidence).
+
+  - id: EX6
+    question: "Can AKT activation rescue cardiolipin defects in EphB1 KO cells?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: EphB1_KO
+        treatment: vehicle
+        stimulus: basal
+      - group_id: 2
+        genotype: EphB1_KO
+        treatment: AKT_activator
+        stimulus: basal
+    readouts:
+      - cardiolipin_readout
+    sample_type:
+      - live_cells
+    edges_supported:
+      - e20
+    expected_result: >
+      AKT activation restores cardiolipin-associated signal toward WT levels.
+    interpretation: >
+      Provides rescue evidence that impaired AKT signaling mediates the
+      cardiolipin defect downstream of EphB1.
+
+  - id: EX7
+    question: "Do AKT–membrane–cardiolipin changes influence inflammasome output?"
+    biological_repetition: 3
+    groups:
+      - group_id: 1
+        genotype: WT
+        treatment: vehicle
+        stimulus: NLRP3_activation
+      - group_id: 2
+        genotype: WT
+        treatment: AKT_inhibitor
+        stimulus: NLRP3_activation
+      - group_id: 3
+        genotype: EphB1_KO
+        treatment: vehicle
+        stimulus: NLRP3_activation
+      - group_id: 4
+        genotype: EphB1_KO
+        treatment: AKT_activator
+        stimulus: NLRP3_activation
+    readouts:
+      - IL1B_release
+      - LDH_optional
+    sample_type:
+      - supernatant
+    edges_supported:
+      - downstream_functional_extension
+    expected_result: >
+      AKT inhibition mimics KO in reducing inflammasome output,
+      while AKT activation rescues the KO phenotype.
+    interpretation: >
+      Demonstrates functional consequences of the EphB1–AKT–membrane–cardiolipin axis
+      on inflammasome signaling output.

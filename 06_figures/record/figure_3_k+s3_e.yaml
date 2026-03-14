@@ -9,7 +9,7 @@
 # ---------- 0. Meta & Assets：基本信息 ----------
 meta:
   figure: "Figure 3"              # 如 "Figure 3"
-  figure_id: "3k+s3e"              # 如 "Figure 3"
+  figure_id: "3k"              # 如 "Figure 3"
   short_title: "EphB1 缺失降低 GSDMD-NT 在线粒体早期富集"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.3 EphB1 缺失降低 GSDMD 的线粒体结合"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_3_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
@@ -138,7 +138,6 @@ ai_hints:
 figure_legend:
   one_sentence_en: >
     GSDMD-NT abundance in mitochondrial fractions and total lysates from primary peritoneal macrophages at the indicated early time points during NLRP3 inflammasome activation, comparing WT and EphB1-deficient cells. Mitochondrial abundance controls were assessed in parallel.
-
   system_and_design:
     model: "Primary murine peritoneal macrophages (8–12-week-old C57BL/6 WT and Ephb1-deficient mice)"
     genotype_or_groups: "WT versus Ephb1-deficient"
@@ -182,16 +181,12 @@ panel_overrides:
       - "Mitochondrial-fraction GSDMD-NT time course (0, 7.5, 15, 30, 60 min)"
       - "Total-lysate GSDMD cleavage control (GSDMD-NT / FL)"
 
-  s3e:
-    belongs_to: "S3"
-    panel_title_en: "Mitochondrial abundance controls"
-    panel_title_cn: "线粒体数量对照"
-    displayed_targets:
-      - "HK2 protein abundance (immunoblot)"
-      - "Mitochondrial 16S rRNA content (qPCR)"
     # ---------- 8. English ----------
 
 results_skeleton_en:
+  extra_figure_refs:
+    - "s2b"
+
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
   panel_level: results

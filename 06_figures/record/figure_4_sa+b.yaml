@@ -1,7 +1,7 @@
 meta:
   figure: "Figure 4"              # 如 "Figure 3"
   # 推荐再加一个更稳的字段，避免未来你再改 figure 字段语义：
-  figure_id: "s4a/b"             # 如 "A"
+  figure_id: "s3a/b"             # 如 "A"
   short_title: "BEL 降低 NAO 可染心磷脂池并收敛基因型差异"         # 1 句以内，本 panel 做了什么（如："EphB1 缺失抑制 NLRP3 介导的 IL-1β 释放"）
   chapter: "3.5 线粒体心磷脂可及性与重塑的因果实验"             # 属于哪一章/小节，如 "3.2 Mitochondrial damage during pyroptosis"
   experiment_id: "figure_5_a"       # 选填，用于和你的实验记录/脚本对应，如 "2025-03-21_NLRP3_IL1b_ELISA"
@@ -111,6 +111,7 @@ ai_hints:
 
 # ---------- 6. figure_legend (shared; Figure S4a/b) ----------
 figure_legend:
+  
   one_sentence_en: >
     Pharmacological inhibition of iPLA2 with BEL reduces NAO-associated fluorescence and collapses
     genotype-dependent differences in WT and Ephb1-deficient primary peritoneal macrophages.
@@ -146,18 +147,24 @@ figure_legend:
 # ---------- panel-specific overrides ----------
 panel_overrides:
   a:
+    belongs_to: "S3"
     panel_title_en: "BEL reduces NAO fluorescence"
     panel_title_cn: "BEL 降低 NAO 荧光"
     displayed_targets:
       - "Representative NAO fluorescence images (±BEL) under fixed exposure"
       - "Imaging-based NAO intensity quantification in WT (±BEL)"
-
+    one_sentence_en: "NAO-associated fluorescence measured by imaging analysis in primary peritoneal macrophages under unstimulated conditions, comparing WT and EphB1-deficient cells."
   b:
+    belongs_to: "S3"
     panel_title_en: "BEL collapses genotype difference"
     panel_title_cn: "BEL 收敛基因型差异"
     displayed_targets:
       - "NAO intensity comparison across WT/KO × ±BEL"
       - "Genotype-wise difference in NAO signal before and after BEL treatment"
+    one_sentence_en: Pharmacological inhibition of iPLA2 with BEL reduces NAO-associated fluorescence and collapses genotype-dependent differences in WT and Ephb1-deficient primary peritoneal macrophages.
+  c:
+    belongs_to: "S3"
+    one_sentence_en: IL-1β release in culture supernatants from primary peritoneal macrophages following AD pretreatment, LPS priming, and nigericin stimulation, comparing WT and EphB1-deficient cells across the indicated doses and treatment durations.
 # ---------- 8. English ----------
 
 results_skeleton_en:
@@ -188,6 +195,6 @@ results_skeleton_en:
       logic_source: "results.robustness_and_qc + results.stats_summary"
 
     M5_panel_conclusion:
-      en: "Together, these results show that both reduced cardiolipin content and disrupted cardiolipin remodeling can lower NAO staining, indicating that the NAO-accessible cardiolipin pool can be altered through multiple mechanisms beyond changes in total cardiolipin levels."
+      en: "Together, these results show that both reduced cardiolipin content and disrupted cardiolipin remodeling can lower NAO staining."
       cn: "结合针对心磷脂含量的操控结果，这些数据表明，无论是改变心磷脂含量，还是干预心磷脂重塑过程，均可导致 NAO 染色水平下降，提示 NAO 可及心磷脂池的变化并不等同于心磷脂总量改变，而可由多种机制共同决定。"
       logic_source: "results.group_difference_statement"

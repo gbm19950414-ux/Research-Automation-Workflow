@@ -36,6 +36,7 @@ from typing import Dict, List, Tuple, Optional, Any
 import yaml
 from docx import Document
 from docx.shared import Pt, Inches
+from PIL import Image
 
 
 # -----------------------
@@ -196,6 +197,39 @@ def replace_tokens(
     text = RE_XREF.sub(repl_xref, text)
     return text
 
+# -----------------------
+# Supplement panel label normalization (render-time only)
+# -----------------------
+def normalize_supplement_panel_labels_in_text(text: str) -> str:
+    """Normalize supplement-style panel labels in rendered legend text.
+
+    Examples:
+      (s1_a) -> (a)
+      (S2_b) -> (b)
+      (s3c)  -> (c)
+
+    This is intentionally applied only at render time for supplement figure output,
+    so the underlying IR/YAML structure does not need to change.
+    """
+    if not isinstance(text, str) or not text:
+        return text
+
+    # Parenthesized labels: (s1_a) / (s2b) -> (a) / (b)
+    text = re.sub(r"\(([sS]\d+_?([a-zA-Z]))\)", lambda m: f"({m.group(2).lower()})", text)
+
+    # Also normalize comma-separated grouped labels if they ever appear, e.g. (s1_a,s1_b)
+    def _normalize_group(match: re.Match) -> str:
+        inner = match.group(1)
+        parts = [p.strip() for p in inner.split(",")]
+        out = []
+        for p in parts:
+            m = re.fullmatch(r"[sS]\d+_?([a-zA-Z])", p)
+            out.append(m.group(1).lower() if m else p)
+        return "(" + ",".join(out) + ")"
+
+    text = re.sub(r"\(((?:[sS]\d+_?[a-zA-Z]\s*,\s*)+[sS]\d+_?[a-zA-Z])\)", _normalize_group, text)
+    return text
+
 
 def add_paragraph_with_style(doc: Document, text: str, style_name: str, font_pt: Optional[int] = None):
     p = doc.add_paragraph(text or "")
@@ -208,6 +242,78 @@ def add_paragraph_with_style(doc: Document, text: str, style_name: str, font_pt:
         for run in p.runs:
             run.font.size = Pt(font_pt)
     return p
+
+
+# -----------------------
+# DOCX page/image sizing helpers
+# -----------------------
+def emu_to_inches(emu: int) -> float:
+    return float(emu) / 914400.0
+
+
+def get_writable_page_box_in(doc: Document) -> Tuple[float, float]:
+    """Return writable page width/height in inches for the first section."""
+    sec = doc.sections[0]
+    page_w = emu_to_inches(sec.page_width)
+    page_h = emu_to_inches(sec.page_height)
+    left = emu_to_inches(sec.left_margin)
+    right = emu_to_inches(sec.right_margin)
+    top = emu_to_inches(sec.top_margin)
+    bottom = emu_to_inches(sec.bottom_margin)
+    return max(page_w - left - right, 1.0), max(page_h - top - bottom, 1.0)
+
+
+def probe_image_size_in(img_path: Path) -> Tuple[float, float]:
+    """Read image size and return width/height in inches.
+
+    Uses embedded DPI if available; otherwise falls back to 72 DPI.
+    Aspect ratio remains correct either way.
+    """
+    with Image.open(str(img_path)) as im:
+        px_w, px_h = im.size
+        dpi = im.info.get("dpi", (72, 72))
+        if isinstance(dpi, tuple) and len(dpi) >= 2:
+            dpi_x = float(dpi[0] or 72)
+            dpi_y = float(dpi[1] or 72)
+        else:
+            dpi_x = dpi_y = 72.0
+        if dpi_x <= 0:
+            dpi_x = 72.0
+        if dpi_y <= 0:
+            dpi_y = 72.0
+        return px_w / dpi_x, px_h / dpi_y
+
+
+def fit_image_size_in(
+    img_path: Path,
+    preferred_width_in: float,
+    max_width_in: float,
+    max_height_in: float,
+) -> Tuple[float, float]:
+    """Return width/height in inches scaled to fit both width and height limits."""
+    nat_w, nat_h = probe_image_size_in(img_path)
+    if nat_w <= 0 or nat_h <= 0:
+        w = min(preferred_width_in, max_width_in)
+        return w, w
+
+    # Start from preferred width but never exceed writable width.
+    scale = min(preferred_width_in / nat_w, max_width_in / nat_w, 1.0e9)
+    w = nat_w * scale
+    h = nat_h * scale
+
+    # If still too tall, scale down by height.
+    if h > max_height_in:
+        h_scale = max_height_in / nat_h
+        w = nat_w * h_scale
+        h = nat_h * h_scale
+
+    # Final width clamp safety.
+    if w > max_width_in:
+        w_scale = max_width_in / nat_w
+        w = nat_w * w_scale
+        h = nat_h * w_scale
+
+    return max(w, 0.5), max(h, 0.5)
 
 
 # -----------------------
@@ -236,6 +342,7 @@ def extract_fig_blocks_from_ir(ir: dict) -> List[dict]:
 
 
 
+
 def normalize_figure_number(fig_id: str) -> Optional[int]:
     """
     Parse "Figure 1" / "Fig. 1" / "1" / "figure_1" -> 1
@@ -244,6 +351,30 @@ def normalize_figure_number(fig_id: str) -> Optional[int]:
         return None
     m = re.search(r"(\d+)", str(fig_id))
     return int(m.group(1)) if m else None
+
+
+# New helper for IR normalization
+from typing import List
+def normalize_ir_figures(figs: List[dict]) -> List[dict]:
+    """Normalize figures_ir.yaml / supplement_figures_ir.yaml entries to renderer blocks."""
+    figure_blocks: List[dict] = []
+    for f in figs:
+        assets = f.get("assets") or {}
+        img = (
+            f.get("render_png")
+            or assets.get("render_png")
+            or assets.get("main_figure_file")
+            or f.get("main_figure_file")
+        )
+        images = [img] if img else []
+        figure_blocks.append({
+            "type": "figure",
+            "id": f.get("figure_id") or f.get("id"),
+            "title": f.get("figure_title_en") or "",
+            "legend": f.get("figure_legend_en") or "",
+            "images": images,
+        })
+    return figure_blocks
 
 
 # -----------------------
@@ -380,6 +511,7 @@ def render_figures_docx(
     template: Template,
     out_path: Path,
     figs_dir: Path,
+    figure_mode: str = "main",
 ):
     doc = Document()
 
@@ -388,9 +520,22 @@ def render_figures_docx(
     h1_style = template.styles.get("h1", "Heading 1")
     normal_style = template.styles.get("normal", "Normal")
 
-    pref = template.rendering.get("figure_caption_prefix", "Figure")
+    if str(figure_mode).strip().lower() == "supplement":
+        pref = template.rendering.get("supplement_figure_caption_prefix", "Supplementary Figure")
+    else:
+        pref = template.rendering.get("figure_caption_prefix", "Figure")
     img_width_in = float(template.rendering.get("figure_image_width_in", 6.5))
     page_break_between_figures = bool(template.rendering.get("page_break_between_figures", True))
+    writable_width_in, writable_height_in = get_writable_page_box_in(doc)
+    # Reserve some vertical room for the figure heading and optional caption/legend.
+    # This keeps the image itself from overflowing a single page.
+    image_max_page_fraction = float(template.rendering.get("figure_image_max_page_fraction", 0.78))
+    image_max_height_in = template.rendering.get("figure_image_max_height_in", None)
+    if image_max_height_in is None:
+        max_img_height_in = writable_height_in * image_max_page_fraction
+    else:
+        max_img_height_in = float(image_max_height_in)
+    max_img_width_in = min(img_width_in, writable_width_in)
 
     # For token replacement readiness (citations/xrefs). For figures-only doc usually empty.
     # Build fig_map by order of blocks.
@@ -420,6 +565,8 @@ def render_figures_docx(
         title = replace_tokens(title, template, cite_num, fig_map, tbl_map)
         caption = replace_tokens(caption, template, cite_num, fig_map, tbl_map)
         legend = replace_tokens(legend, template, cite_num, fig_map, tbl_map)
+        if str(figure_mode).strip().lower() == "supplement":
+            legend = normalize_supplement_panel_labels_in_text(legend)
 
         # --- Figure heading line ---
         # Prefer: "Figure 1. <title>" (caption style)
@@ -475,7 +622,13 @@ def render_figures_docx(
             # NOTE: python-docx cannot embed .ai/.pdf as an image directly.
             # You already exported PNG -> best practice.
             try:
-                doc.add_picture(str(img_path), width=Inches(img_width_in))
+                fit_w_in, fit_h_in = fit_image_size_in(
+                    img_path=img_path,
+                    preferred_width_in=img_width_in,
+                    max_width_in=max_img_width_in,
+                    max_height_in=max_img_height_in,
+                )
+                doc.add_picture(str(img_path), width=Inches(fit_w_in), height=Inches(fit_h_in))
             except Exception as e:
                 add_paragraph_with_style(
                     doc,
@@ -496,20 +649,10 @@ def render_figures_docx(
     doc.save(str(out_path))
     print(f"[OK] Rendered FIGURES DOCX: {out_path}")
 
-
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--root", default="", help="Project root (contains 06_figures and 08_manuscript). Default: auto-detect from cwd.")
-    parser.add_argument("--template", default="", help="Template YAML. Default: 08_manuscript/templates/journal_short.yaml if exists.")
-    parser.add_argument("--fig-config", default="", help="Figures config YAML (fallback). Default: 08_manuscript/templates/figures.config.yaml")
-    parser.add_argument("--figs-dir", default="", help="06_figures/figs dir (images).")
-    parser.add_argument("--out", default="", help="Output DOCX path. Default: 08_manuscript/out/<template_name>/figures.docx")
-    args = parser.parse_args()
-
+def run_one_mode(args, figure_mode: str) -> None:
     # root
     root = Path(args.root).resolve() if args.root.strip() else find_project_root(Path.cwd())
     ms_dir = root / "08_manuscript"
-    ir_dir = ms_dir / "IR"
 
     # template
     if args.template.strip():
@@ -535,40 +678,55 @@ def main():
 
     # Prefer figure-specific IR first
     fig_ir_path = (ms_dir / "IR" / "figures_ir.yaml").resolve()
+    supplement_ir_path = (ms_dir / "IR" / "supplement_figures_ir.yaml").resolve()
     results_ir_path = (ms_dir / "IR" / "results.ir.yaml").resolve()
 
-    if fig_ir_path.exists():
-        ir_path = fig_ir_path
-        print(f"[INFO] Using figure IR: {fig_ir_path}")
-    elif results_ir_path.exists():
-        ir_path = results_ir_path
-        print(f"[INFO] Using results IR (fallback): {results_ir_path}")
+    if figure_mode == "supplement":
+        if supplement_ir_path.exists():
+            ir_path = supplement_ir_path
+            print(f"[INFO] Using supplement figure IR: {supplement_ir_path}")
+        elif results_ir_path.exists():
+            ir_path = results_ir_path
+            print(f"[INFO] Using results IR (fallback): {results_ir_path}")
+        else:
+            raise FileNotFoundError(
+                f"Neither supplement_figures_ir.yaml nor results.ir.yaml found in {ms_dir / 'IR'}"
+            )
     else:
-        raise FileNotFoundError(
-            f"Neither figures_ir.yaml nor results.ir.yaml found in {ms_dir / 'IR'}"
-        )
+        if fig_ir_path.exists():
+            ir_path = fig_ir_path
+            print(f"[INFO] Using figure IR: {fig_ir_path}")
+        elif results_ir_path.exists():
+            ir_path = results_ir_path
+            print(f"[INFO] Using results IR (fallback): {results_ir_path}")
+        else:
+            raise FileNotFoundError(
+                f"Neither figures_ir.yaml nor results.ir.yaml found in {ms_dir / 'IR'}"
+            )
 
     # Output
     if args.out.strip():
-        out_path = Path(args.out).resolve()
+        base_out = Path(args.out).resolve()
+        if str(base_out).lower().endswith(".docx"):
+            if figure_mode == "supplement":
+                out_path = base_out.with_name(base_out.stem + "_supplement" + base_out.suffix)
+            else:
+                out_path = base_out
+        else:
+            default_name = "supplement_figures.docx" if figure_mode == "supplement" else "figures.docx"
+            out_path = base_out / default_name
     else:
-        out_path = ms_dir / "out" / template.name / "figures.docx"
+        default_name = "supplement_figures.docx" if figure_mode == "supplement" else "figures.docx"
+        out_path = ms_dir / "out" / template.name / default_name
 
     ir = load_yaml_single_doc(ir_path)
-    # Normalize figure IR schema if using figures_ir.yaml
-    if ir_path.name == "figures_ir.yaml":
+    # Normalize figure IR schema if using figures_ir.yaml / supplement_figures_ir.yaml
+    if ir_path.name in {"figures_ir.yaml", "supplement_figures_ir.yaml"}:
         figs = ir.get("figures") or []
-        figure_blocks = []
-        for f in figs:
-            figure_blocks.append({
-                "type": "figure",
-                "id": f.get("figure_id") or f.get("id"),
-                "title": f.get("figure_title_en") or "",
-                "legend": f.get("figure_legend_en") or "",
-                "images": [f.get("render_png")] if f.get("render_png") else []
-            })
+        figure_blocks = normalize_ir_figures(figs)
     else:
         figure_blocks = extract_fig_blocks_from_ir(ir)
+
     if not figure_blocks:
         if fig_cfg is None:
             raise ValueError(
@@ -589,8 +747,25 @@ def main():
         template=template,
         out_path=out_path,
         figs_dir=figs_dir,
+        figure_mode=figure_mode,
     )
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", default="", help="Project root (contains 06_figures and 08_manuscript). Default: auto-detect from cwd.")
+    parser.add_argument("--template", default="", help="Template YAML. Default: 08_manuscript/templates/journal_short.yaml if exists.")
+    parser.add_argument("--fig-config", default="", help="Figures config YAML (fallback). Default: 08_manuscript/templates/figures.config.yaml")
+    parser.add_argument("--figs-dir", default="", help="06_figures/figs dir (images).")
+    parser.add_argument("--out", default="", help="Output DOCX path. Default: 08_manuscript/out/<template_name>/figures.docx")
+    parser.add_argument("--figure-mode", choices=["main", "supplement", "all"], default="all", help="Render main figures, supplement figures, or both (default: all)")
+    args = parser.parse_args()
 
+    if args.figure_mode == "all":
+        modes = ["main", "supplement"]
+    else:
+        modes = [args.figure_mode]
+
+    for mode in modes:
+        run_one_mode(args, mode)
 
 if __name__ == "__main__":
     try:

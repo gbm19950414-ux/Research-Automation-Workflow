@@ -1,9 +1,12 @@
 meta:
   source: 005a_build_figure_ir.py
+  mode: main
   paper_logic: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/paper_logic.yaml
   record_dir: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record
   figs_dir: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/figs
+  legend_policy: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript/yaml/policy_figure_legend_main.yaml
   figure_level_statistics: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/08_manuscript/yaml/lagend_figure_level_statistic.yaml
+  supplement_figures: ''
 figures:
 - id: Figure 1
   figure_title_en: Ephb1 deficiency reduces inflammasome-triggered pyroptosis and IL-1β release
@@ -15,18 +18,22 @@ figures:
     figure_id: 1a
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_1_a_000.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: b
     figure_id: 1b
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_1_b_001.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: c
     figure_id: 1c
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_1_c_v2.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: d
     figure_id: 1d
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_1_d_v2.yaml
     is_multi_from_record: false
+    belongs_to: ''
   figure_legend_en: '(a) Schematic overview of the genetic screening strategy used to identify regulators of inflammasome
     output.
 
@@ -57,40 +64,47 @@ figures:
     figure_id: 2a/b
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_a+b.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: b
     figure_id: 2a/b
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_a+b.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: c
     figure_id: 2c
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_c_v2.yaml
-    is_multi_from_record: false
+    is_multi_from_record: true
+    belongs_to: ''
   - panel: d
     figure_id: 2d
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_d.yaml
-    is_multi_from_record: false
+    is_multi_from_record: true
+    belongs_to: ''
   - panel: e
     figure_id: 2e
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_e.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: f
     figure_id: 2f
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_f.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: g
     figure_id: 2g
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_2_g.yaml
     is_multi_from_record: false
-  figure_legend_en: '(a,b) qPCR analysis of transcriptional priming markers in primary peritoneal macrophages at the indicated
-    time points following LPS stimulation, comparing WT and EphB1-deficient cells.
+    belongs_to: ''
+  figure_legend_en: '(a,b) qPCR analysis of transcriptional priming markers in primary peritoneal macrophages following LPS
+    stimulation, comparing WT and EphB1-deficient cells.
 
 
-    (c) TNF-α and IL-6 secretion in supernatants from primary peritoneal macrophages at the indicated time points following
-    LPS stimulation, comparing WT and EphB1-deficient cells.
+    (c) TNF-α secretion in supernatants from primary peritoneal macrophages following LPS stimulation, comparing WT and EphB1-deficient
+    cells.
 
 
-    (d) IL-1β release in supernatants from primary peritoneal macrophages following LPS priming and NLRP3 activation with
-    increasing doses of nigericin, comparing WT and EphB1-deficient cells.
+    (d) IL-1β secretion in supernatants from primary peritoneal macrophages following LPS and nigericin stimulation, comparing
+    WT and EphB1-deficient cells.
 
 
     (e) ASC oligomerization in soluble and insoluble fractions from primary peritoneal macrophages following LPS priming and
@@ -122,46 +136,57 @@ figures:
     figure_id: 3a+b+c+d+e+f+g+h
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: b
     figure_id: 3a+b+c+d+e+f+g+h
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: c
     figure_id: 3a+b+c+d+e+f+g+h
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: d
     figure_id: 3a+b+c+d+e+f+g+h
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: e
     figure_id: 3a+b+c+d+e+f+g+h
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: f
     figure_id: 3a+b+c+d+e+f+g+h
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: g
     figure_id: 3a+b+c+d+e+f+g+h
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: h
     figure_id: 3a+b+c+d+e+f+g+h
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_a+b+c+d+e+f+g+h.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: i
-    figure_id: 3_i+j+s3_d+f+g
+    figure_id: 3_i+j
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_i+j+s3_d+f+g.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: j
-    figure_id: 3_i+j+s3_d+f+g
+    figure_id: 3_i+j
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_i+j+s3_d+f+g.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: k
-    figure_id: 3k+s3e
+    figure_id: 3k
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_3_k+s3_e.yaml
     is_multi_from_record: true
+    belongs_to: ''
   figure_legend_en: '(a,b,c,d,e,f,g,h) Time-resolved measurements of cytosolic ROS, mitochondrial ROS, and mitochondrial membrane
     potential in primary peritoneal macrophages during NLRP3 inflammasome activation or under unstimulated baseline conditions,
     comparing WT and EphB1-deficient cells.
@@ -176,7 +201,7 @@ figures:
     controls were assessed in parallel.
 
 
-    Data are presented as mean ± SEM unless otherwise indicated. For panels (a–h), n ≥ 3 independent experiments, and fluorescence
+    Data are presented as mean ± SD unless otherwise indicated. For panels (a–h), n ≥ 3 independent experiments, and fluorescence
     signals were normalized to the pre-stimulation baseline; statistical significance was assessed using two-tailed unpaired
     t-tests on area-under-the-curve or endpoint values, as indicated. Panels (g,h) show unstimulated baseline TMRM measurements.
     For panels (i,j), n ≥ 2 independent experiments per group, reproduced in ≥3 independent batches; cytosolic mtDNA was quantified
@@ -194,44 +219,39 @@ figures:
     figure_id: 4a/b
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_a+b.yaml
     is_multi_from_record: true
-  - panel: a
-    figure_id: s4a/b
-    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_sa+b.yaml
-    is_multi_from_record: true
+    belongs_to: ''
   - panel: b
     figure_id: 4a/b
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_a+b.yaml
     is_multi_from_record: true
-  - panel: b
-    figure_id: s4a/b
-    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_sa+b.yaml
-    is_multi_from_record: true
+    belongs_to: ''
   - panel: c
     figure_id: 4c/d
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_c+d.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: d
     figure_id: 4c/d
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_c+d.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: e
     figure_id: 4e/f
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_e+f.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: f
     figure_id: 4e/f
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_e+f.yaml
     is_multi_from_record: true
+    belongs_to: ''
   - panel: g
     figure_id: 4g
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_g.yaml
     is_multi_from_record: false
-  - panel: s4c
-    figure_id: s4c
-    record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_4_sc.yaml
-    is_multi_from_record: false
-  figure_legend_en: '(a,b) Pharmacological inhibition of iPLA2 with BEL reduces NAO-associated fluorescence and collapses
-    genotype-dependent differences in WT and Ephb1-deficient primary peritoneal macrophages.
+    belongs_to: ''
+  figure_legend_en: '(a,b) NAO-associated fluorescence measured by fixed-exposure imaging and time-resolved plate-reader analysis
+    in primary peritoneal macrophages under unstimulated conditions, comparing WT and EphB1-deficient cells.
 
 
     (c,d) Total cardiolipin abundance and cardiolipin molecular species measured by LC–MS/MS lipidomics in resting primary
@@ -243,10 +263,6 @@ figures:
 
 
     (g) IL-1β release in culture supernatants from primary peritoneal macrophages following AD pretreatment, LPS priming,
-    and nigericin stimulation, comparing WT and EphB1-deficient cells across the indicated doses and treatment durations.
-
-
-    (s4c) IL-1β release in culture supernatants from primary peritoneal macrophages following BEL pretreatment, LPS priming,
     and nigericin stimulation, comparing WT and EphB1-deficient cells across the indicated doses and treatment durations.
 
 
@@ -268,26 +284,32 @@ figures:
     figure_id: 5a
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_5_a.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: b
     figure_id: 5b
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_5_b.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: c
     figure_id: 5c
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_5_c.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: d
     figure_id: 5d
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_5_d.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: e
     figure_id: 5e
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_5_e.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: f
     figure_id: 5f
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_5_f.yaml
     is_multi_from_record: false
+    belongs_to: ''
   figure_legend_en: '(a) Conceptual diagram defining six cardiolipin-related mechanistic axes within an ER–mitochondria-centered
     framework for interpretation of transcriptomic and lipidomic changes.
 
@@ -331,22 +353,27 @@ figures:
     figure_id: 6a
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_6_a.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: b
     figure_id: 6b
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_6_b.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: c
     figure_id: 6c
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_6_c_v2.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: d
     figure_id: 6d
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_6_d_v2.yaml
     is_multi_from_record: false
+    belongs_to: ''
   - panel: e
     figure_id: 6e
     record: /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/06_figures/record/figure_6_e_v2.yaml
     is_multi_from_record: false
+    belongs_to: ''
   figure_legend_en: '(a) Conceptual diagram illustrating an RNA-first X–M–Z framework linking Ephb1 status, downstream signaling
     module scores, and the membrane-context axis, with independent lipid phenotypes used for directional concordance validation.
 

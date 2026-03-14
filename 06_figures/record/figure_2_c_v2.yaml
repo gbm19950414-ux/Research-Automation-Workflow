@@ -83,8 +83,7 @@ figure_legend:
   panel_title_en: "Classical cytokine secretion"
   panel_title_cn: "经典炎症因子的分泌"
 
-  one_sentence_en: >
-    TNF-α and IL-6 secretion in supernatants from primary peritoneal macrophages at the indicated time points following LPS stimulation, comparing WT and EphB1-deficient cells.
+
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -111,8 +110,17 @@ figure_legend:
 
   extra_notes: ""
   # ---------- 8. English ----------
+panel_overrides: 
+  c:
+    one_sentence_en: TNF-α secretion in supernatants from primary peritoneal macrophages following LPS stimulation, comparing WT and EphB1-deficient cells.
 
+  s1_b:
+    belongs_to: "S1"
+    one_sentence_en: "Cytokines release in supernatants from primary peritoneal macrophages following LPS priming and NLRP3 activation with increasing doses of nigericin, comparing WT and EphB1-deficient cells."
+    
 results_skeleton_en:
+  extra_figure_refs:
+    - "s1b"
   stage: T3
   purpose: "panel-level Results skeleton (pre-reduction, bilingual)"
   panel_level: results

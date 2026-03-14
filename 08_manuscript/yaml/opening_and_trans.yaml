@@ -3,14 +3,14 @@ figures:
   Figure 1:
     claim: Ephb1 deficiency reduces IL-1β release
 
-    opening_en: >
-      To identify regulators of inflammasome,
+    # opening_en: >
+      # To identify regulators of inflammasome,
 
   Figure 2:
     claim: Ephb1 deficiency maps to the level of the inflammasome receptor downstream pathway
 
     opening_en: >
-      To localize the Ephb1-dependent defect within the inflammasome pathway, we compared responses triggered by NLRP3, AIM2, and NLRC4 in WT and Ephb1-deficient macrophages.
+      To localize the Ephb1-dependent defect within the inflammasome pathway, we compared responses triggered by NLRP3 in WT and Ephb1-deficient macrophages.
 
   Figure 3:
     claim: Ephb1 deficiency reduces mitochondrial rupture

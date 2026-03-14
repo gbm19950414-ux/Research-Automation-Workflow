@@ -49,12 +49,14 @@ interpretation:
   transition_to_next: "为将差异精确定位在‘上游装配/酶活’还是‘GSDMD 孔介导外排’层级，下一步需要比较 ASC 寡聚化、caspase-1/GSDMD/IL-1β 的切割及其在细胞内与上清中的分布。"
 
 figure_legend:
-  panel: "d"
+  panel: [c,d]
   panel_title_en: "Dose-dependent NLRP3-induced IL-1β release"
   panel_title_cn: "NLRP3 激活下 IL-1β 释放的剂量依赖性"
 
-  one_sentence_en: >
-     IL-1β release in supernatants from primary peritoneal macrophages following LPS priming and NLRP3 activation with increasing doses of nigericin, comparing WT and EphB1-deficient cells.
+  one_sentence_en: 
+    - panel: [c,d]
+      text: >
+        Cytokines release in supernatants from primary peritoneal macrophages following LPS priming and NLRP3 activation with increasing doses of nigericin, comparing WT and EphB1-deficient cells.
 
   system_and_design:
     model: "Primary murine peritoneal macrophages"
@@ -87,6 +89,9 @@ figure_legend:
 
 
 # ---------- 8. English ----------
+panel_overrides: 
+  d:
+    one_sentence_en: IL-1β secretion in supernatants from primary peritoneal macrophages following LPS and nigericin stimulation, comparing WT and EphB1-deficient cells.
 
 results_skeleton_en:
   stage: T3
