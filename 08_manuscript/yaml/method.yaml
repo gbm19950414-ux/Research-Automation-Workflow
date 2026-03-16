@@ -969,7 +969,7 @@ methods:
         role: data_presentation
         required: true
         text: >
-          Data are presented as mean ± SEM unless otherwise indicated, with
+          Data are presented as mean ± SD unless otherwise indicated, with
           individual data points shown where appropriate.
 
       - id: stat_07

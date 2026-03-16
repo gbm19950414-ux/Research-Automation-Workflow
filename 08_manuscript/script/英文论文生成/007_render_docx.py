@@ -35,6 +35,7 @@ import sys
 import yaml
 from docx import Document
 from docx.shared import Pt
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 
 # -----------------------
@@ -295,6 +296,154 @@ def add_paragraph_with_style(doc: Document, text: str, style_name: str, font_pt:
     return p
 
 
+# --- Front matter helpers ---
+
+def _meta_list(val):
+    return val if isinstance(val, list) else []
+
+
+def _meta_dict(val):
+    return val if isinstance(val, dict) else {}
+
+
+def format_author_name(author: object) -> str:
+    if isinstance(author, str):
+        return author.strip()
+    if not isinstance(author, dict):
+        return ""
+    name = str(author.get("name") or "").strip()
+    if not name:
+        return ""
+    marks: List[str] = []
+    if author.get("equal_contribution"):
+        marks.append("†")
+    if author.get("corresponding"):
+        marks.append("*")
+    return name + ("".join(marks) if marks else "")
+
+
+def format_authors_line(meta: dict) -> str:
+    authors = _meta_list(meta.get("authors"))
+    parts = [format_author_name(a) for a in authors]
+    parts = [p for p in parts if p]
+    return ", ".join(parts)
+
+
+def collect_affiliation_lines(meta: dict) -> List[str]:
+    lines: List[str] = []
+
+    affs = _meta_list(meta.get("affiliations"))
+    if affs:
+        for aff in affs:
+            if isinstance(aff, str):
+                t = aff.strip()
+                if t:
+                    lines.append(t)
+            elif isinstance(aff, dict):
+                aff_id = aff.get("id")
+                text = str(aff.get("text") or "").strip()
+                if text:
+                    if aff_id not in (None, ""):
+                        lines.append(f"{aff_id}. {text}")
+                    else:
+                        lines.append(text)
+        return lines
+
+    # Fallback: derive affiliations from author entries if top-level affiliations are absent.
+    seen = set()
+    for author in _meta_list(meta.get("authors")):
+        if not isinstance(author, dict):
+            continue
+        aff = str(author.get("affiliation") or "").strip()
+        if aff and aff not in seen:
+            seen.add(aff)
+            lines.append(aff)
+    return lines
+
+
+def format_correspondence_line(meta: dict) -> str:
+    corr = meta.get("corresponding_author")
+
+    # Case 1: list of corresponding authors
+    if isinstance(corr, list):
+        parts = []
+        for item in corr:
+            if not isinstance(item, dict):
+                continue
+            name = str(item.get("name") or "").strip()
+            email = str(item.get("email") or "").strip()
+            if name and email:
+                parts.append(f"{name} ({email})")
+            elif email:
+                parts.append(email)
+            elif name:
+                parts.append(name)
+        if parts:
+            return "Correspondence: " + "; ".join(parts)
+        return ""
+
+    # Case 2: single corresponding author dict
+    if isinstance(corr, dict):
+        name = str(corr.get("name") or "").strip()
+        email = str(corr.get("email") or "").strip()
+        if name and email:
+            return f"Correspondence: {name} ({email})"
+        if email:
+            return f"Correspondence: {email}"
+        if name:
+            return f"Correspondence: {name}"
+
+    return ""
+
+def collect_footnote_lines(meta: dict) -> List[str]:
+    foot = _meta_dict(meta.get("footnotes"))
+    out: List[str] = []
+    for _, v in foot.items():
+        txt = str(v or "").strip()
+        if txt:
+            out.append(txt)
+    return out
+
+
+def render_front_matter(doc: Document, template: Template, meta: dict):
+    """Render title-page metadata in a plain, submission-style layout.
+
+    Layout:
+    - Title (centered, existing title style)
+    - Author line (centered, normal style)
+    - Affiliation lines (centered, normal style)
+    - Correspondence line (centered, normal style)
+    - Footnotes (left-aligned, normal style)
+    """
+    normal_style = template.styles.get("normal", "Normal")
+    normal_font_pt = int(template.typography.get("normal_font_pt", 11))
+
+    title = str(meta.get("title") or "").strip()
+    if title:
+        p = add_paragraph_with_style(doc, title, template.styles.get("title_style", "Title"), font_pt=None)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    authors_line = format_authors_line(meta)
+    if authors_line:
+        p = add_paragraph_with_style(doc, authors_line, normal_style, font_pt=normal_font_pt)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    for aff_line in collect_affiliation_lines(meta):
+        p = add_paragraph_with_style(doc, aff_line, normal_style, font_pt=normal_font_pt)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    corr_line = format_correspondence_line(meta)
+    if corr_line:
+        p = add_paragraph_with_style(doc, corr_line, normal_style, font_pt=normal_font_pt)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    for foot_line in collect_footnote_lines(meta):
+        add_paragraph_with_style(doc, foot_line, normal_style, font_pt=normal_font_pt)
+
+    if title or authors_line or collect_affiliation_lines(meta) or corr_line or collect_footnote_lines(meta):
+        doc.add_paragraph("")
+
+
 def render(ir_path: Path, template_path: Path, out_path: Path, ref_db_path: Path):
     print(f"[INFO] Using IR: {ir_path}")
     ir = load_yaml(ir_path)
@@ -310,10 +459,9 @@ def render(ir_path: Path, template_path: Path, out_path: Path, ref_db_path: Path
 
     normal_font_pt = int(template.typography.get("normal_font_pt", 11))
 
-    # Optional title
-    title = (ir.get("document", {}) or {}).get("meta", {}).get("title", "") or ""
-    if title:
-        add_paragraph_with_style(doc, title, template.styles.get("title_style", "Title"), font_pt=None)
+    # Manuscript front matter from document.meta
+    meta = (ir.get("document", {}) or {}).get("meta", {}) or {}
+    render_front_matter(doc, template, meta)
 
     # render sections
     for sec in sections:
@@ -327,7 +475,9 @@ def render(ir_path: Path, template_path: Path, out_path: Path, ref_db_path: Path
         display_title = map_entry.get("title", sec_title)
 
         # Section heading (H1)
-        add_paragraph_with_style(doc, display_title, template.styles.get("h1", "Heading 1"), font_pt=None)
+        # Skip a visible heading for the title section because front matter is rendered above.
+        if sec_id != "title":
+            add_paragraph_with_style(doc, display_title, template.styles.get("h1", "Heading 1"), font_pt=None)
 
         for b in sec.get("blocks", []) or []:
             btype = b.get("type")

@@ -35,6 +35,7 @@ OUT_PATH = IR_DIR / "manuscript.ir.yaml"
 # =========================
 
 SECTION_ORDER = [
+    "title",
     "abstract",
     "introduction",
     "methods",
@@ -72,6 +73,40 @@ def extract_sections(ir: Dict[str, Any]) -> List[Dict[str, Any]]:
     return sections
 
 
+def merge_meta(base: Dict[str, Any], incoming: Dict[str, Any]) -> Dict[str, Any]:
+    """Shallow-merge manuscript metadata.
+
+    Rules:
+    - Scalar values in `incoming` overwrite empty/missing values in `base`
+    - Dict values are merged one level deep, with incoming keys overriding base keys
+    - List values in `incoming` replace empty/missing base lists, or overwrite when non-empty
+
+    This is designed so `title.ir.yaml` can supply manuscript-front metadata
+    without disturbing the rest of the assembler.
+    """
+    out = dict(base or {})
+    for k, v in (incoming or {}).items():
+        if isinstance(v, dict):
+            prev = out.get(k)
+            if isinstance(prev, dict):
+                merged = dict(prev)
+                merged.update(v)
+                out[k] = merged
+            else:
+                out[k] = dict(v)
+        elif isinstance(v, list):
+            if v:
+                out[k] = v
+            elif k not in out:
+                out[k] = v
+        else:
+            if v not in (None, ""):
+                out[k] = v
+            elif k not in out:
+                out[k] = v
+    return out
+
+
 # =========================
 # Assemble logic
 # =========================
@@ -80,12 +115,12 @@ def assemble_irs(ir_files: List[Path]) -> Dict[str, Any]:
     all_sections: List[Dict[str, Any]] = []
     meta: Dict[str, Any] = {}
 
-    for idx, path in enumerate(ir_files):
+    for path in ir_files:
         ir = load_yaml(path)
 
-        if idx == 0:
-            # Use meta from the first IR
-            meta = ir.get("document", {}).get("meta", {}).copy()
+        doc_meta = ir.get("document", {}).get("meta", {})
+        if isinstance(doc_meta, dict):
+            meta = merge_meta(meta, doc_meta)
 
         sections = extract_sections(ir)
 

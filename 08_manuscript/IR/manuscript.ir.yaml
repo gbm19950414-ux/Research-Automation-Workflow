@@ -1,11 +1,36 @@
 ir_version: '0.1'
 document:
   meta:
-    id: ephb1_abstract
+    id: ephb1_results
     language: en
-    title: ''
-    authors: []
+    title: Ephb1 regulates mitochondrial cardiolipin to limit NLRP3 inflammasome–induced pyroptosis
+    authors:
+    - name: Baoming Gong
+      affiliation: School of Life Sciences, Fudan University, Shanghai 200438, China
+      email: 22110700022@m.fudan.edu.cn
+      equal_contribution: false
+      corresponding: false
+    - name: Lei Sun
+      affiliation: School of Life Sciences, Fudan University, Shanghai 200438, China
+      email: lei_sun@fudan.edu.cn
+      equal_contribution: false
+      corresponding: true
+    - name: Xiaohui Wu
+      affiliation: School of Life Sciences, Fudan University, Shanghai 200438, China
+      email: xiaohui_wu@fudan.edu.cn
+      equal_contribution: false
+      corresponding: true
     date: ''
+    corresponding_author:
+    - name: Lei Sun
+      email: lei_sun@fudan.edu.cn
+    - name: Xiaohui Wu
+      email: xiaohui_wu@fudan.edu.cn
+    affiliations:
+    - id: 1
+      text: School of Life Sciences, Fudan University, Shanghai 200438, China
+    footnotes:
+      equal_contribution: ''
   sections:
   - id: abstract
     title: Abstract
@@ -177,7 +202,7 @@ document:
       level: 2
       text: Statistical analysis
     - type: paragraph
-      text: Statistical analyses were performed to compare experimental groups and evaluate the significance and consistency of observed effects. Data analysis and visualization were conducted using R and Python. Data distributions were assessed for normality prior to statistical testing, and appropriate parametric or non-parametric tests were selected accordingly. Two-group comparisons were performed using two-tailed Student’s t-tests or non-parametric alternatives, while multi-group comparisons were analyzed using analysis of variance (ANOVA) with appropriate post hoc tests. Data are presented as mean ± SEM unless otherwise indicated, with individual data points shown where appropriate. All statistical tests were two-sided, and P values less than 0.05 were considered statistically significant. Detailed information on sample size, statistical tests, and significance values is provided in the corresponding figure legends.
+      text: Statistical analyses were performed to compare experimental groups and evaluate the significance and consistency of observed effects. Data analysis and visualization were conducted using R and Python. Data distributions were assessed for normality prior to statistical testing, and appropriate parametric or non-parametric tests were selected accordingly. Two-group comparisons were performed using two-tailed Student’s t-tests or non-parametric alternatives, while multi-group comparisons were analyzed using analysis of variance (ANOVA) with appropriate post hoc tests. Data are presented as mean ± SD unless otherwise indicated, with individual data points shown where appropriate. All statistical tests were two-sided, and P values less than 0.05 were considered statistically significant. Detailed information on sample size, statistical tests, and significance values is provided in the corresponding figure legends.
     - type: heading
       level: 2
       text: Data availability and reproducibility
