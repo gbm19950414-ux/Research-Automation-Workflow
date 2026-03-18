@@ -1,0 +1,22 @@
+treatment_plan:
+  JR-AB2-011:
+    catalog_no: HY-122022
+    concentration: 10_uM
+    timepoints:
+      pAKT_validation: 1_h
+      TG_PL_readout: 8_h
+      cardiolipin_readout: 24_h
+
+  NSC45586_sodium:
+    catalog_no: HY-19820
+    concentration: 20_uM
+    timepoints:
+      pAKT_validation: 1_h
+      TG_PL_readout: 8_h
+      cardiolipin_readout: 24_h
+
+primary_macrophage_notes:
+  - "allow adherence/stabilization before treatment"
+  - "match vehicle exactly and keep final DMSO <= 0.1%"
+  - "collect phospho-protein lysates rapidly with phosphatase inhibitors"
+  - "use separate plates for 1 h, 8 h, and 24 h collections"

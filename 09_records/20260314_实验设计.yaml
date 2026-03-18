@@ -28,6 +28,8 @@ experiments:
       EphB1 KO shows reduced signaling across the PI3K–AKT–mTOR axis,
       with the most prominent reduction at AKT S473 phosphorylation.
     interpretation: "Supports necessity of e12 (n1 → n10)."
+    
+
 
   - id: EX2
     question: "Does EphB1 deficiency produce a TG–phospholipid turnover phenotype?"
@@ -64,6 +66,7 @@ experiments:
       - group_id: 2
         genotype: WT
         treatment: AKT_inhibitor
+        
         stimulus: basal
     sample_type:
       - lysate
