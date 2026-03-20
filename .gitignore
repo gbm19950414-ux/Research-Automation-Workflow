@@ -11,3 +11,26 @@
 !*.py
 !*.R
 .DS_Store
+!README.md
+
+04_data/
+00_admin/
+06_figures/
+08_manuscript/
+
+
+# 👇 关键：先放行目录本身
+!06_figures/
+!08_manuscript/
+
+# 👇 再放行子目录
+!06_figures/script/
+!06_figures/style/
+!08_manuscript/script/
+!08_manuscript/yaml/
+
+# 👇 再放行子目录中的内容
+!06_figures/script/**
+!06_figures/style/**
+!08_manuscript/script/**
+!08_manuscript/yaml/**
