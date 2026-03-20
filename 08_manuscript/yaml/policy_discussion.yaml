@@ -8,6 +8,27 @@ filter:
 
 paragraph_groups:
   study_summary:
+    logic_chain:
+      - id: D1
+        paragraph: 1
+        function: "提出领域中的核心悖论：upstream activation/assembly readouts相近，但lytic IL-1β release和membrane rupture可明显分离，说明activation与output之间存在decoupling。"
+        lead_to: "需要一个能够解释这种activation–output decoupling的最小机制框架。"
+
+      - id: D2
+        paragraph: 1
+        function: "将上述悖论收束为一个可证伪的最小链条：signal input通过某种membrane-state mediator被翻译为最终的pore/output差异。"
+        lead_to: "需要把本文结果定位到这一框架中的具体层级。"
+
+      - id: D3
+        paragraph: 1
+        function: "用本文结果支持该框架：Ephb1缺失降低lytic output和IL-1β release，但并未整体破坏priming、assembly或caspase activation，因此差异被定位在execution layer。"
+        lead_to: "既然差异位于execution layer，就需要进一步提出execution层面的机制解释。"
+
+      - id: D4
+        paragraph: 1
+        function: "将pyroptosis解释为一个graded process，而非binary switch；其输出由pore formation efficiency、pore stability/conductance以及membrane repair设定的sublytic ceiling共同决定。"
+        lead_to: "需要把这一execution-threshold model进一步机制化。"
+
     include:
       # literature reference / field framing
       - "D1s1"
@@ -27,6 +48,32 @@ paragraph_groups:
       - "D2s3"
 
   mechanistic_interpretation:
+    logic_chain:
+      - id: D5
+        paragraph: 2
+        function: "从mechanistic层面展开execution-threshold model：membrane repair、terminal rupture以及membrane environment共同决定最终输出，因此activation不必然等于proportional rupture。"
+        lead_to: "需要明确本文证据在这一机制模型中的支持强度与边界。"
+
+      - id: D6
+        paragraph: 2
+        function: "限定本文当前支持的范围：最强证据在于necessity和layer-localization，而不是完整的sufficiency。"
+        lead_to: "因此需要在当前框架中明确哪一层被定义为核心mediator层。"
+
+      - id: D7
+        paragraph: 2
+        function: "提出membrane lipid environment而非upstream assembly才是signal input到execution output之间的mediator layer。"
+        lead_to: "需要在该mediator layer中进一步确定最关键、最可量化的状态变量。"
+
+      - id: D8
+        paragraph: 2
+        function: "将cardiolipin界定为一个可量化的metabolic/biophysical state，而不仅是binding-site概念；它可以改变pore permissiveness。"
+        lead_to: "需要把Ephb1纳入这一框架，形成从上游信号到膜环境再到output的链条。"
+
+      - id: D9
+        paragraph: 2
+        function: "提出Ephb1是上游signal entry point，其缺失通过下游网络重塑线粒体membrane environment，从而改变GSDMD pore output的threshold和ceiling。"
+        lead_to: "需要说明在复杂系统中如何方法学上识别这种mediator层扰动。"
+
     include:
       # literature / mechanism context
       - "D2s4"
@@ -45,6 +92,23 @@ paragraph_groups:
       - "D3s3"
 
   integration_with_literature:
+    logic_chain:
+      - id: D10
+        paragraph: 3
+        function: "说明方法学策略：面对分散且幅度有限的omics变化，不预先锁定单一enzyme node，而采用cross-batch mechanism axes来捕捉可重复的membrane-environment phenotype。"
+        lead_to: "需要进一步解释如何从这些axes中优先筛选下游候选通路。"
+
+      - id: D11
+        paragraph: 3
+        function: "提出使用mediation decomposition来优先排序最能解释Ephb1如何扰动这些axes的candidate downstream pathways，并形成可检验的验证路线图。"
+        lead_to: "需要回到整体理论意义，说明这一mediator-first framework能解释什么。"
+
+      - id: D12
+        paragraph: 3
+        function: "总结该mediator-first framework的解释力：当membrane-environment threshold发生变化时，相似的upstream activation可以产生不同的lytic output。"
+        lead_to: "需要进一步讨论这一模型的实际意义与理论价值。"
+
+
     include:
       - "D3s4"
 
@@ -56,6 +120,22 @@ paragraph_groups:
       - "D3s7"
 
   biological_implication:
+    logic_chain:
+      - id: D13
+        paragraph: 4
+        function: "提出execution-layer cap的实践意义：炎症信号可能在不完全关闭upstream inflammasome activation的情况下被调节，从而保留host defense并限制lytic damage。"
+        lead_to: "需要把这一实践意义重新锚定到本文提出的Ephb1–CL框架。"
+
+      - id: D14
+        paragraph: 4
+        function: "重申本文模型：Ephb1通过重塑以CL state表征的membrane environment，上移或下移GSDMD pore output的threshold和ceiling，从而解释activation readouts相近而lytic outputs分离。"
+        lead_to: "需要将这一模型提升为更一般的理论表述。"
+
+      - id: D15
+        paragraph: 4
+        function: "将pyroptosis表述为threshold process（由pore formation、repair capping和rupture separability共同决定），把activation–output decoupling从经验现象转化为可检验模型。"
+        lead_to: "需要明确这一中心主张的边界、限制和可证伪性。"
+
     include:
       # biological implication
       - "D5s1"
@@ -65,6 +145,51 @@ paragraph_groups:
       - "D5s6"
 
   limitations_future:
+    logic_chain:
+      - id: D16
+        paragraph: 5
+        function: "限定中心主张的scope：当前数据最强支持的是execution-threshold model以及membrane environment/CL作为high-priority mediator，而非完整证明Ephb1→pathway→CL→pore链条的充分性。"
+        lead_to: "需要进一步澄清该模型并不否定upstream activation的重要性。"
+
+      - id: D17
+        paragraph: 5
+        function: "澄清模型边界：upstream activation是必要但不足以预测lytic output，output还取决于execution-layer parameters。"
+        lead_to: "需要继续澄清本文没有做出的过度推断。"
+
+      - id: D18
+        paragraph: 5
+        function: "排除过度推断：本文并不主张直接的Ephb1–GSDMD structural interaction，也不声称精确解析了CL accessibility/binding constants，而是解释相对threshold shifts。"
+        lead_to: "需要指出仍待检验的替代解释与潜在混杂因素。"
+
+      - id: D19
+        paragraph: 5
+        function: "提出仍可检验的alternative explanations，包括ROS-first vs CL-first causality、repair/rupture dominance，以及tool- or energetics-related confounds。"
+        lead_to: "需要进一步定义模型的internal validity和external validity边界。"
+
+      - id: D20
+        paragraph: 5
+        function: "明确模型的有效性边界：internal validity受measurement/tool/batch structure限制，external validity受cell type、stimulation paradigm和metabolic context限制。"
+        lead_to: "需要说明这些限制并不否定模型本身，而是界定其适用条件与可证伪预测。"
+
+      - id: D21
+        paragraph: 5
+        function: "强调这些边界是模型的适用范围和可证伪条件，而不是对模型的否定。"
+        lead_to: "需要将discussion收束到下一步最关键的验证实验。"
+
+      - id: D22
+        paragraph: 5
+        function: "总结模型价值：该模型为activation–output decoupling提供了layer-localized explanation，并提出了可以检验sufficiency与pathway priority的具体实验。"
+        lead_to: "首先需要设计实验闭合mediator-level causal loop。"
+
+      - id: D23
+        paragraph: 5
+        function: "提出第一优先实验：比较ROS lowering与direct CL restoration，检验CL rescue是否能恢复early GSDMD-NT engagement和lytic IL-1β release。"
+        lead_to: "在mediator sufficiency之外，还需要验证下游pathway是否真的通过CL/axis状态起作用。"
+
+      - id: D24
+        paragraph: 5
+        function: "提出第二优先实验：检验mediation-prioritized pathways是否先改变CL/axis states，再改变early pore/output readouts，而不实质改变priming或assembly。"
+        lead_to: "这些实验将决定该模型只是相关性脚手架，还是mechanistically sufficient route。"
     include:
       # limitation
       - "D4s1"
@@ -83,3 +208,7 @@ paragraph_groups:
 
       # conceptual extension
       - "D5s4"
+
+
+
+

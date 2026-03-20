@@ -1,12 +1,31 @@
 mode: submission
 include_subheadings: false
 keep_hypotheses: false
+科学问题: 
+  Does Ephb1 participate in terminal inflammasome (pyroptotic) execution, 
+  and if so, 
+  does it regulate execution output through downstream pathways that reshape cardiolipin (CL) state?
 paragraph_groups:
   # =========================
   # Paragraph 1
   # Field importance
   # =========================
+
   field_importance:
+    logic_chain:
+      - id: L1
+        function: "建立炎症失调的重要性与公共卫生背景，说明研究炎症调控机制具有广泛意义。"
+        leads_to: "NLRP3 inflammasome是多种急慢性炎症病理的汇聚点，因此需要进一步思考其调控逻辑。"
+      - id: L2
+        function: "目前主流认为炎症小体激活是2步模型，药物开发也集中在上游干预，执行层作为独立调控层级证据逐年增强,除了对gsdm激活/降解的调控，孔形成、膜修复、最终破裂 也可以被分层调控。"
+        message: 
+          
+          - doi: 10.1038/s41392-024-01801-8
+            figure: 5
+            describe: 对gsdm激活/降解的调控，以及 孔形成、膜修复、最终破裂 也可以被分层调控的候选靶点
+            
+        leads_to: "提出核心机制问题：是否可以在不完全抑制inflammasome activation的情况下限制炎症输出。"
+
     include:
       # topic_sentence
       - "1.1.1.p1s1"
@@ -23,6 +42,21 @@ paragraph_groups:
   # Known mechanism
   # =========================
   known_mechanism:
+    logic_chain:
+      - id: L3
+        function: "建立全文的分析框架，把execution单独作为一个可调控层级提出。"
+        message: 
+          举出例子，
+          Rühl 等在 Science 2018 证明 ESCRT-III 介导的膜修复发生在 GSDMD 孔形成之后，并能抑制 pyroptosis 和 IL-1β 释放；
+          Kayagaki 等在 Nature 2021 以及后续结构研究显示，NINJ1 介导的是更靠后的 plasma membrane rupture，而不是 inflammasome assembly 本身。
+        leads_to: "既然execution本身可调控，那么需要寻找决定execution output的直接机制。"
+      - id: L4
+        function: "把terminal execution具体落实到GSDMD-NT pore formation efficiency和output threshold。"
+        leads_to: "如果pore formation efficiency决定输出阈值，那么需要寻找决定这种效率的因素。"
+
+      - id: L5
+        function: "引入膜脂组成，尤其是CL，作为execution threshold的潜在决定因素。"
+        leads_to: "由此提出：membrane composition，尤其线粒体相关脂质环境，可能决定pyroptotic execution。"
     include:
       # mechanism_overview
       - "1.1.2.p1s1"
@@ -48,6 +82,16 @@ paragraph_groups:
   # Mechanistic focus (cardiolipin)
   # =========================
   mechanistic_focus:
+    logic_chain:
+      - id: L6
+        function: "把execution-stage membrane behavior与线粒体联系起来，说明线粒体不仅是受损靶点，也可能反向调节炎症小体信号。"
+        leads_to: "需要寻找一种比ROS、mtDNA、膜电位更整合、更靠近execution层的线粒体状态指标。"
+
+      - id: L7
+        function: "将CL从单纯脂质背景提升为一个动态、可被调控、能够整合线粒体状态并影响炎症执行的核心变量。"
+        leads_to: "因此，CL state可能是连接线粒体状态与pore-forming efficiency/ execution output的execution-proximal mediator。"
+
+
     include:
       # from paragraph 2 ending, trans to paragraph 3
       - "1.1.2.p5s2"
@@ -71,6 +115,22 @@ paragraph_groups:
   # Knowledge gap
   # =========================
   knowledge_gap:
+    logic_chain:
+      - id: L8
+        function: "把问题从CL本身继续向上游推进，明确真正未解决的问题在于receptor-level regulation。"
+        leads_to: "需要寻找一个能够把extracellular context转化为CL state变化的受体级信号。"
+      - id: L9
+        function: "提出Eph–ephrin，特别是Ephb1，作为上游候选受体通路。"
+        leads_to: "进一步聚焦到Ephb1是否参与inflammasome/pyroptotic execution，以及其线粒体效应是否与CL有关。"
+
+      - id: L10
+        function: "明确针对Ephb1的直接知识空白。"
+        leads_to: "在家族成员功能多效且不可简单类推的背景下，需要提出可证伪模型。"
+
+      - id: L11
+        function: "把上面的背景、机制与gap收束为本文的工作模型。"
+        leads_to: "接下来需要将该模型具体化为中心问题与研究路径。"
+
     include:
       # state_unknown
       - "1.1.3.p3s2"
@@ -91,6 +151,15 @@ paragraph_groups:
   # Hypothesis
   # =========================
   hypothesis:
+    logic_chain:
+
+      - id: L12
+        function: "正式定义本文的中心科学问题。"
+        leads_to: "为实验设计与研究策略提供直接导向。"
+
+      - id: L13
+        function: "说明研究策略不是直接假定上游activation增强/减弱，而是分层定位差异发生在哪一层，并检验CL state是否足以解释execution output差异。"
+        leads_to: "完成从introduction到results部分的逻辑过渡。"
     include:
       # hypothesis_statement
       # - "1.1.3.p5s2"

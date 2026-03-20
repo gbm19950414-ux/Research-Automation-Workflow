@@ -54,3 +54,125 @@ module_rules:
       include_modules:
         - M3_directional_result
         - M5_panel_conclusion
+
+logic_chain:
+result_logic_chain:
+  - id: R1
+    figure_id: "Fig. 1a,b"
+    function: "通过多PB背景巨噬细胞的筛选，以IL-1β release为readout，确定Ephb1是影响inflammasome output的候选调控因子。"
+    lead_to: "需要验证Ephb1相关表型是否仅限于单一刺激条件，还是具有更广泛的适用性。"
+
+  - id: R2
+    figure_id: "Fig. 1c"
+    function: "证明Ephb1缺失导致的IL-1β release下降并不局限于单一NLRP3激活方式，而是跨多种activation route存在。"
+    lead_to: "需要进一步判断Ephb1缺失是否不仅影响IL-1β输出，也影响pyroptotic lysis本身。"
+
+  - id: R3
+    figure_id: "Fig. 1d"
+    function: "证明Ephb1 deficiency在不同inflammasome activation条件下均降低LDH release，提示其影响shared execution step而非特定上游受体。"
+    lead_to: "需要定位该缺陷究竟发生在priming/assembly阶段，还是terminal GSDMD-dependent execution阶段。"
+
+  - id: R4
+    figure_id: "Fig. 2a,b; Fig. S1a"
+    function: "证明Ephb1 deficiency不影响TLR4–NF-κB dependent transcriptional priming。"
+    lead_to: "既然priming未受损，需要检验是否存在更广义的secretion defect。"
+
+  - id: R5
+    figure_id: "Fig. 2c; Fig. S1b"
+    function: "证明Ephb1 deficiency不影响LPS驱动的常规TNF-α和IL-6 secretion，排除general secretory defect。"
+    lead_to: "既然不是普遍分泌缺陷，需要检验IL-1β reduction是否在不同强度inflammasome activation下仍然存在。"
+
+  - id: R6
+    figure_id: "Fig. 2d"
+    function: "证明在不同nigericin剂量下，Ephb1-deficient macrophages始终释放更少IL-1β，说明缺陷稳定存在于tested activation range内。"
+    lead_to: "需要进一步定位该差异是否来源于ASC inflammasome assembly。"
+
+  - id: R7
+    figure_id: "Fig. 2e"
+    function: "证明Ephb1 deficiency不影响ASC oligomerization，排除assembly defect。"
+    lead_to: "需要继续判断caspase-1 activation是否正常。"
+
+  - id: R8
+    figure_id: "Fig. 2f"
+    function: "证明Ephb1 deficiency不影响caspase-1 activation，从而将缺陷进一步定位到caspase-1下游。"
+    lead_to: "需要检验canonical caspase-1 substrates是否仍被正常切割。"
+
+  - id: R9
+    figure_id: "Fig. 2g"
+    function: "证明GSDMD和pro-IL-1β cleavage在Ephb1-deficient macrophages中仍然正常，说明缺陷不在substrate processing，而在late execution/export step。"
+    lead_to: "既然缺陷位于late execution/export step，需要进一步考察GSDMD-NT与线粒体的早期相互作用是否受影响。"
+
+  - id: R10
+    figure_id: "Fig. 3a,b,c,d,e,f,g,h"
+    function: "证明Ephb1 deficiency降低cytosolic ROS accumulation和mitochondrial depolarization，但不改变basal mitochondrial state，提示Ephb1促进inflammasome-induced mitochondrial rupture。"
+    lead_to: "需要进一步检验线粒体破裂相关的mtDNA释放是否也被削弱。"
+
+  - id: R11
+    figure_id: "Fig. 3i,j; Fig. S2a; Fig. S2c; Fig. S2d"
+    function: "证明Ephb1 deficiency降低inflammasome-induced cytosolic mtDNA pulse，而不改变total mtDNA abundance，进一步支持线粒体损伤被削弱。"
+    lead_to: "需要直接检验Ephb1是否影响GSDMD-NT对线粒体的早期富集。"
+
+  - id: R12
+    figure_id: "Fig. 3k; Fig. S2b"
+    function: "证明Ephb1促进inflammasome activation早期GSDMD-NT在线粒体组分中的富集。"
+    lead_to: "既然GSDMD-NT的线粒体engagement受影响，需要寻找决定这种engagement差异的线粒体膜因素。"
+
+  - id: R13
+    figure_id: "Fig. 4a,b"
+    function: "证明Ephb1 deficiency降低NAO-detectable cardiolipin pool，提示线粒体膜cardiolipin availability下降。"
+    lead_to: "需要进一步确认这种变化是否不仅体现在NAO readout上，也体现在total cardiolipin abundance上。"
+
+  - id: R14
+    figure_id: "Fig. 4c,d"
+    function: "证明Ephb1 deficiency同时降低total cardiolipin abundance，确认CL减少是实质性改变而非单一染色现象。"
+    lead_to: "需要测试降低cardiolipin本身是否足以造成inflammasome output下降。"
+
+  - id: R15
+    figure_id: "Fig. 4e,f"
+    function: "证明药理性抑制cardiolipin biosynthesis可降低NAO-detectable cardiolipin pool。"
+    lead_to: "需要进一步测试这种CL降低是否会抑制IL-1β release。"
+
+  - id: R16
+    figure_id: "Fig. 4g"
+    function: "证明药理性降低cardiolipin abundance足以抑制inflammasome-induced IL-1β release。"
+    lead_to: "需要进一步判断不仅是CL含量，CL remodeling/state的扰动是否也会产生类似结果。"
+
+  - id: R17
+    figure_id: "Fig. S3a,b,c"
+    function: "证明干扰cardiolipin remodeling同样降低NAO staining并减少IL-1β release，说明CL abundance/state均与inflammasome output密切相关。"
+    lead_to: "既然CL相关变化可以解释execution phenotype，需要进一步系统化识别Ephb1 deficiency主要扰动的是哪一类CL-related axis。"
+
+  - id: R18
+    figure_id: "Fig. 5a,b,c"
+    function: "构建以cardiolipin为中心的六个biological process axes，并建立multi-omics integration framework以系统评估Ephb1 deficiency相关扰动。"
+    lead_to: "需要比较不同axes在多批次、多组学数据中的一致性变化。"
+
+  - id: R19
+    figure_id: "Fig. 5d"
+    function: "证明在六个CL-related axes中，只有membrane context axis在RNA-seq和lipidomics中均表现出一致方向的扰动。"
+    lead_to: "需要进一步判断该axis是否也是整体偏移幅度最大的主导扰动轴。"
+
+  - id: R20
+    figure_id: "Fig. 5e"
+    function: "证明membrane context是Ephb1 deficiency下偏离最显著的cardiolipin-related axis。"
+    lead_to: "需要进一步检验该axis与total cardiolipin abundance之间的关系强度。"
+
+  - id: R21
+    figure_id: "Fig. 5f"
+    function: "证明membrane context axis与sum_CL呈最强负相关，提示total cardiolipin abundance closely tracks membrane context perturbation。"
+    lead_to: "既然membrane context是主导CL-related perturbation，需要追问哪些Ephb1下游信号通路与该axis最相关。"
+
+  - id: R22
+    figure_id: "Fig. 6a,b,c"
+    function: "构建Ephb1-associated downstream pathway gene sets并比较其batch-level transcriptional shifts，初步筛选与Ephb1 deficiency相关的候选信号通路。"
+    lead_to: "需要比较这些候选通路中哪些在整体上最稳定、最显著地下调。"
+
+  - id: R23
+    figure_id: "Fig. 6d"
+    function: "证明PI3K–AKT–mTOR在多个候选通路中表现为最稳健的下调通路之一，优先成为Ephb1 downstream signaling candidate。"
+    lead_to: "需要进一步判断该通路是否与membrane context axis呈最紧密的关联。"
+
+  - id: R24
+    figure_id: "Fig. 6e"
+    function: "证明PI3K–AKT–mTOR signaling与membrane context axis表现出最协调的位移关系，支持其作为连接Ephb1与membrane-context/CL perturbation的候选下游通路。"
+    lead_to: "形成当前结果部分的阶段性模型：Ephb1 deficiency通过降低PI3K–AKT–mTOR相关信号并扰动membrane context/CL state，削弱GSDMD-mediated mitochondrial engagement与terminal pyroptotic execution。"

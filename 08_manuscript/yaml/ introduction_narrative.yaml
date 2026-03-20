@@ -1,0 +1,87 @@
+introduction_narrative:
+  topic: "Ephb1是否通过影响cardiolipin state来调控NLRP3 inflammasome的terminal execution与inflammatory output"
+
+  core_question: "Ephb1是否参与terminal inflammasome/pyroptotic execution，并且是否通过下游途径重塑cardiolipin state，从而改变execution output"
+
+  logic_chain:
+    - id: L1
+      role: background_problem
+      claim: "全球疾病负担 increasingly shifted toward chronic non-communicable diseases driven in part by persistent inflammation; severe systemic inflammatory syndromes such as sepsis also remain major contributors to mortality."
+      function: "建立炎症失调的重要性与公共卫生背景，说明研究炎症调控机制具有广泛意义。"
+      leads_to: "NLRP3 inflammasome是多种急慢性炎症病理的汇聚点，因此需要进一步思考其调控逻辑。"
+
+    - id: L2
+      role: field_gap
+      claim: "Although regulatory frameworks for NLRP3 priming, assembly, and execution have been described, therapeutic strategies still largely focus on suppressing activation or upstream steps."
+      function: "指出现有研究/干预重心主要放在activation之前或之中，而对output层调控的机制关注不足。"
+      leads_to: "提出核心机制问题：是否可以在不完全抑制inflammasome activation的情况下限制炎症输出。"
+
+    - id: L3
+      role: conceptual_framework
+      claim: "Pyroptosis consists of three linked but separably regulated stages—priming, inflammasome assembly/caspase activation, and terminal execution—and each stage can independently influence inflammatory output."
+      function: "建立全文的分析框架，把execution单独作为一个可调控层级提出。"
+      leads_to: "既然execution本身可调控，那么需要寻找决定execution output的直接机制。"
+
+    - id: L4
+      role: execution_mechanism
+      claim: "In canonical pathways, inflammatory caspases cleave GSDMD to generate GSDMD-NT, which forms pores and drives cytokine release and lysis; the efficiency of pore formation helps determine the threshold from controlled output to lytic rupture."
+      function: "把terminal execution具体落实到GSDMD-NT pore formation efficiency和output threshold。"
+      leads_to: "如果pore formation efficiency决定输出阈值，那么需要寻找决定这种效率的因素。"
+
+    - id: L5
+      role: lipid_dependency
+      claim: "GSDMD-NT does not insert indiscriminately into membranes; it preferentially targets negatively charged phospholipids, especially cardiolipin-enriched membranes."
+      function: "引入膜脂组成，尤其是CL，作为execution threshold的潜在决定因素。"
+      leads_to: "由此提出：membrane composition，尤其线粒体相关脂质环境，可能决定pyroptotic execution。"
+
+    - id: L6
+      role: mitochondrial_link
+      claim: "Before the plasma membrane, GSDMD-NT can rapidly damage inner and outer mitochondrial membranes; mitochondria may also feed back to shape inflammasome signaling."
+      function: "把execution-stage membrane behavior与线粒体联系起来，说明线粒体不仅是受损靶点，也可能反向调节炎症小体信号。"
+      leads_to: "需要寻找一种比ROS、mtDNA、膜电位更整合、更靠近execution层的线粒体状态指标。"
+
+    - id: L7
+      role: cardiolipin_as_integrator
+      claim: "Cardiolipin is a mitochondria-enriched phospholipid linking membrane architecture to bioenergetic function; it is dynamically remodeled during stress and immune activation, and CL oxidation is associated with membrane damage and inflammatory amplification."
+      function: "将CL从单纯脂质背景提升为一个动态、可被调控、能够整合线粒体状态并影响炎症执行的核心变量。"
+      leads_to: "因此，CL state可能是连接线粒体状态与pore-forming efficiency/ execution output的execution-proximal mediator。"
+
+    - id: L8
+      role: upstream_gap
+      claim: "Current evidence supports a connection between CL dynamics and inflammatory execution, but it remains unresolved which receptor-level signals reshape CL state and thereby alter terminal inflammatory output."
+      function: "把问题从CL本身继续向上游推进，明确真正未解决的问题在于receptor-level regulation。"
+      leads_to: "需要寻找一个能够把extracellular context转化为CL state变化的受体级信号。"
+
+    - id: L9
+      role: candidate_introduction
+      claim: "Eph–ephrin signaling converts cell–cell contact into downstream programs affecting adhesion, cytoskeletal organization, and microenvironmental responses, making it a plausible receptor-level route linking extracellular context to pyroptotic execution."
+      function: "提出Eph–ephrin，特别是Ephb1，作为上游候选受体通路。"
+      leads_to: "进一步聚焦到Ephb1是否参与inflammasome/pyroptotic execution，以及其线粒体效应是否与CL有关。"
+
+    - id: L10
+      role: candidate_gap
+      claim: "Whether Ephb1 participates in inflammasome and pyroptotic execution is unresolved; whether its mitochondrial effects can be linked to measurable membrane-state readouts such as CL also remains unknown."
+      function: "明确针对Ephb1的直接知识空白。"
+      leads_to: "在家族成员功能多效且不可简单类推的背景下，需要提出可证伪模型。"
+
+    - id: L11
+      role: model_statement
+      claim: "These gaps motivate a falsifiable model in which Ephb1 influences pyroptotic execution through downstream pathways that reshape CL state."
+      function: "把上面的背景、机制与gap收束为本文的工作模型。"
+      leads_to: "接下来需要将该模型具体化为中心问题与研究路径。"
+
+    - id: L12
+      role: central_question
+      claim: "A central question is whether Ephb1 itself participates in terminal inflammasome execution and, if so, whether it does so through downstream pathways that reshape CL state."
+      function: "正式定义本文的中心科学问题。"
+      leads_to: "为实验设计与研究策略提供直接导向。"
+
+    - id: L13
+      role: study_strategy
+      claim: "The study approaches the problem in stages: first asking whether Ephb1 alters inflammasome output, then localizing the point of divergence within the pathway, and finally testing whether membrane-state changes could account for the phenotype."
+      function: "说明研究策略不是直接假定上游activation增强/减弱，而是分层定位差异发生在哪一层，并检验CL state是否足以解释execution output差异。"
+      leads_to: "完成从introduction到results部分的逻辑过渡。"
+
+  hypothesis_bridge: "本文提出一个可证伪模型：Ephb1通过下游通路重塑cardiolipin state，从而调节pyroptotic execution threshold与inflammatory output。"
+
+  approach_bridge: "因此，研究依次检验三个层面：Ephb1是否改变inflammasome output；差异发生在pathway的哪一层；CL state变化是否足以解释execution output的分歧。"

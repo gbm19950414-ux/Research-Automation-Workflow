@@ -1,0 +1,178 @@
+开篇:
+
+- id: 1
+
+  figure:
+  notes:
+  message: 
+    答辩人：龚宝铭
+    导师：吴晓晖
+  type: title
+  title:  Ephb1调控线粒体心磷脂含量减轻NLRP3炎症小体引发的焦亡
+  doi: 
+- id: 2
+
+  notes: 非传染性疾病（NCDs）-炎症（慢性、急性）- 
+  message:
+  type: intro
+  title: 炎症相关疾病负担与机制研究
+  figure: 
+    - /Volumes/Samsung_SSD_990_PRO_2TB_Media/EphB1/01_background/ppt/total-disease-burden-by-cause.svg
+    - 01_background/ppt/gr1_lrg.jpg
+- id: 3
+  figure:
+  notes:
+  message:
+  type: intro
+  title:  焦亡执行作为独立的调控层级
+
+- id: 4
+  figure:
+  notes:
+  message:
+  type: intro
+  title:  心磷脂是执行调控的候选靶点
+
+- id: 5
+  figure:
+  notes:
+  message:
+  type: intro
+  title:  细胞外空间信息翻译为炎症小体执行强度的可能性
+
+- id: 6
+  figure:
+  notes:
+  message: Eph蛋白家族是否通过调节心磷脂含量调控NLRP3炎症小体引发的焦亡？
+  type: intro
+  title:  科学问题
+
+
+结果 第一部分:
+
+- id: 7
+  figure:
+  notes:
+  message:
+  type: result
+  title:  遗传筛选鉴定出 Ephb1 是炎症小体输出的候选调节因子
+
+- id: 8
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Ephb1 缺陷降低了所有激活途径的 IL-1β 释放
+
+- id: 9
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Ephb1 缺陷广泛减弱了细胞焦亡的裂解
+
+
+结果 第二部分:
+
+- id: 10
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Ephb1 缺陷不影响转录启动
+
+- id: 11
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Ephb1 缺陷不会导致广泛性分泌缺陷
+- id: 12
+  figure:
+  notes:
+  message:
+  type: result
+  title:  IL-1β 释放减少在不同激活强度下持续存在
+- id: 13
+  figure:
+  notes:
+  message:
+  type: result
+  title:  ASC 寡聚化在 Ephb1 缺陷的巨噬细胞中保持完整
+- id: 14
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Caspase-1 激活和底物裂解保持完整
+
+
+结果第3部分:
+- id: 16
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Ephb1缺陷减少炎症小体激活过程中的线粒体损伤
+- id: 17
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Ephb1缺陷减少胞质mtDNA释放
+- id: 18
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Ephb1缺陷减少早期线粒体富集GSDMD-NT
+
+结果第4部分:
+- id: 20
+  figure:
+  notes:
+  message:
+  type: result
+  title:  Ephb1缺乏会降低心磷脂含量
+
+- id: 22
+  figure:
+  notes:
+  message:
+  type: result
+  title:  减少心磷脂合成抑制炎症小体诱导的 IL-1β 释放
+- id: 23
+  figure:
+  notes:
+  message:
+  type: result
+  title:  破坏心磷脂重塑也能抑制炎症输出
+
+
+结果第5部分:
+- id: 25
+  figure:
+  notes:
+  message:
+  type: result
+  title:  以心磷脂为中心的多组学分析
+- id: 26
+  figure:
+  notes:
+  message:
+  type: result
+  title:  膜环境轴变化剧烈且可预测心磷脂含量变化
+- id: 27
+  figure:
+  notes:
+  message:
+  type: result
+  title:  PI3K–AKT–mTOR 信号传导是与膜环境最密切相关的途径
+
+结局:
+- id: 30
+  figure:
+  notes:
+  message:
+  type: model
+  title:  要点：Ephb1 调节执行层而不是激活层的炎症输出
